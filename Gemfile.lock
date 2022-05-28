@@ -68,6 +68,9 @@ GEM
       tzinfo (~> 2.0)
     addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
+    argon2 (2.1.1)
+      ffi (~> 1.14)
+      ffi-compiler (~> 1.0)
     bindex (0.8.1)
     bootsnap (1.11.1)
       msgpack (~> 1.2)
@@ -91,6 +94,10 @@ GEM
       reline (>= 0.2.7)
     digest (3.1.0)
     erubi (1.10.0)
+    ffi (1.15.5)
+    ffi-compiler (1.0.1)
+      ffi (>= 1.0.0)
+      rake
     globalid (1.0.0)
       activesupport (>= 5.0)
     i18n (1.10.0)
@@ -103,6 +110,9 @@ GEM
       activesupport (>= 5.0.0)
     jsbundling-rails (1.0.2)
       railties (>= 6.0.0)
+    kredis (1.2.0)
+      activesupport (>= 6.0.0)
+      redis (~> 4.2)
     loofah (2.18.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -166,6 +176,7 @@ GEM
       thor (~> 1.0)
       zeitwerk (~> 2.5)
     rake (13.0.6)
+    redis (4.6.0)
     regexp_parser (2.5.0)
     reline (0.3.1)
       io-console (~> 0.5)
@@ -215,15 +226,18 @@ PLATFORMS
   arm64-darwin-21
 
 DEPENDENCIES
+  argon2 (~> 2.1.1)
   bootsnap
   capybara
   cssbundling-rails
   debug
   jbuilder
   jsbundling-rails
+  kredis
   pg (~> 1.1)
   puma (~> 5.0)
   rails (~> 7.0.3)
+  redis (~> 4.0)
   selenium-webdriver
   sprockets-rails
   stimulus-rails
