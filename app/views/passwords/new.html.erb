@@ -1,0 +1,20 @@
+<!-- app/views/passwords/new.html.erb -->
+<div class="sm:mx-auto sm:max-w-lg sm:rounded-lg sm:px-10">
+  <div class="flex flex-col items-center pt-28">
+    <h1>
+      Password Reset
+    </h1>
+    <span class="text-sm">Enter your email address, click "Reset Password" and check your email for further instructions.</span>
+  </div>
+  <div class="p-4 border border-neutral-content rounded-lg">
+    <%= form_with url: passwords_path, scope: :user do |form| %>
+      <div class="flex flex-col space-y-4 w-full max-w-xs">
+        <%= form.email_field :email, required: true, autocomplete: "email", autofocus: :on, placeholder: "your_email@address.com", class: "input input-bordered w-full max-w-xs" %>
+        <%= form.submit "Reset Password", class: "btn btn-primary ml-4" %>
+      </div>
+    <% end %>
+  </div>
+  <div class="pt-3">
+    <%= link_to "Return to the Login screen", login_path, class: "link link-accent" %>
+  </div>
+</div>

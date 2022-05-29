@@ -1,0 +1,12 @@
+<!-- app/views/passwords/edit.html.erb -->
+<%= form_with url: password_path(params[:password_reset_token]), scope: :user, method: :put do |form| %>
+  <div class="flex-1 space-x-2 py-4">
+    <%= form.label :current_password %>
+    <%= form.password_field :current_password, required: true, autocomplete: "current-password", class: "input input-bordered w-full max-w-xs" %>
+  </div>
+  <div class="flex-1 space-x-2 py-4">
+    <%= form.label :password %>
+    <%= form.password_field :password, required: true, autocomplete: "new-password", class: "input input-bordered w-full max-w-xs" %>
+  </div>
+  <%= form.submit "Update Password", class: "btn btn-primary" %>
+<% end %>
