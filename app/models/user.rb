@@ -14,17 +14,13 @@ class User < ApplicationRecord
 
   # Relations
   has_many :active_sessions, dependent: :destroy
-  has_one :profile, dependent: :destroy
+  has_one  :profile,         dependent: :destroy
+  accepts_nested_attributes_for :profile
 
-  # Active Storage & Action Text
-  has_rich_text    :bio
-  has_one_attached :avatar
 
   # Validations
   validates :email, presence: true, uniqueness: { case_sensitive: false }, format: {with: URI::MailTo::EMAIL_REGEXP}
   validates :password, presence: true, length: { minimum: 6, maximum: 35 }, on: :create
-  validates :avatar, content_type: ['image/png', 'image/jpeg', 'image/jpg', 'image/gif'], 
-                    size: { between: 1.kilobyte..5.megabytes , message: 'is not given between size' }
 
   ## Functions
 

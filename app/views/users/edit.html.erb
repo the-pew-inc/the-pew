@@ -1,10 +1,12 @@
 <!-- app/views/users/edit.html.erb -->
 <%= form_with model: @user, url: account_path, method: :put do |form| %>
   <%= render partial: "shared/form_errors", locals: { object: form.object } %>
-  <div>
-    <%= form.label :nickname %>
-    <%= form.text_field :nickname %>
-  </div>
+  <%= form.fields_for :profile do |f| %>
+    <div>
+      <%= f.label :nickname %>
+      <%= f.text_field :nickname, required: true, autocomplete: "nickname" %>
+    </div>
+  <% end %>
   <div>
     <%= form.label :email, "Current Email" %>
     <%= form.email_field :email, disabled: true %>

@@ -25,6 +25,7 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
+    @user.build_profile
   end
 
   def update
@@ -65,11 +66,11 @@ class UsersController < ApplicationController
   private
 
   def create_user_params
-    params.require(:user).permit(:email, :password, :nickname, :remember_me)
+    params.require(:user).permit(:email, :password, :nickname, :remember_me, profile_attributes: [:id, :nickname])
   end
 
   def update_user_params
-    params.require(:user).permit(:email, :nickname, :current_password, :password, :avatar)
+    params.require(:user).permit(:email, :nickname, :current_password, :password, profile_attributes: [:id, :nickname])
   end
 
 end
