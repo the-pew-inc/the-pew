@@ -52,8 +52,15 @@ gem "bootsnap", require: false
 # Use Sass to process CSS
 # gem "sassc-rails"
 
+# Active storage validations [https://github.com/igorkasyanchuk/active_storage_validations]
+gem "active_storage_validations", "~> 0.9.8"
+
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 gem "image_processing", "~> 1.2"
+gem "ruby-vips", ">= 2.1.0"
+
+# Generate QRCode
+gem "rqrcode", "~> 2.0"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

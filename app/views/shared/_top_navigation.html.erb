@@ -1,0 +1,88 @@
+<nav class="bg-white shadow-lg">
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="flex justify-between">
+      <div class="flex space-x-7">
+        <div>
+          <!-- Website Logo -->
+          <%= link_to root_path, class: "flex items-center py-4 px-2" do %>
+            <%# <img src="logo.png" alt="Logo" class="h-8 w-8 mr-2"> %>
+            <span class="font-semibold text-gray-500 text-lg">ASK.me!</span>
+          <% end %>
+        </div>
+        <!-- Primary Navbar items -->
+        <div class="hidden md:flex items-center space-x-1">
+          <a href="" class="py-4 px-2 text-green-500 border-b-4 border-green-500 font-semibold ">Home</a>
+          <a href="" class="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300">Services</a>
+          <a href="" class="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300">About</a>
+          <a href="" class="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300">Contact Us</a>
+        </div>
+      </div>
+      <!-- Secondary Navbar items -->
+      <div class="hidden md:flex items-center space-x-3 ">
+        <% if user_signed_in? %>
+          <div data-controller="toggle" class="relative inline-block">
+            <button type="button" data-action="click->toggle#toggle">
+              <div class="w-10 rounded-full">
+                <%= image_tag current_user.profile.avatar.variant(resize_to_limit: [100, 100]),
+            width: 100, height: 100 if current_user.profile.avatar.attached? %>
+                <%= content_tag :img, nil, src: "http://tinygraphs.com/spaceinvaders/#{current_user.profile.nickname.strip}?theme=frogideas&numcolors=4&size=100&fmt=svg", width: 100, height: 100,
+            class: "rounded-full",
+            'data-image-uploader-target': 'preview' unless current_user.profile.avatar.attached? %>
+              </div>
+            </button>
+            <!-- Toggle menu (desktop) -->
+            <div class="hidden origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1" data-toggle-target="toggle">
+              <div class="py-1 divide-y" role="none">
+                <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
+                <div class="text-gray-700 block w-full text-left px-4 py-2 text-xs">
+                  Connected as<br>
+                  <span class="font-bold"><%= current_user.profile.nickname.strip %></span>
+                </div>
+                <div>
+                  <%= link_to "Account settings", account_path, class: "text-gray-700 block w-full text-left px-4 py-2 text-sm" %>
+                  <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-1">Support</a>
+                  <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-2">License</a>
+                </div>
+                <div>
+                  <%= link_to "Sign out", logout_path, data: { turbo_method: :delete }, class: "text-gray-700 block w-full text-left px-4 py-2 text-sm" %>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% else %>
+          <%= link_to "Login", login_path, class: "py-2 px-2 font-medium text-gray-500 rounded hover:bg-green-500 hover:text-white transition duration-300" %>
+          <%= link_to "Sign up", sign_up_path, class: "py-2 px-2 font-medium text-white bg-green-500 rounded hover:bg-green-400 transition duration-300" %>
+        <% end %>
+      </div>
+      <!-- Mobile menu button -->
+      <div class="md:hidden flex items-center">
+        <button class="outline-none mobile-menu-button">
+          <svg class=" w-6 h-6 text-gray-500 hover:text-green-500 "
+							x-show="!showMenu"
+							fill="none"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="2"
+							viewBox="0 0 24 24"
+							stroke="currentColor"
+						>
+            <path d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- mobile menu -->
+  <div class="hidden mobile-menu">
+    <ul class="">
+      <li class="active"><%= link_to "Home", root_path, class: "block text-sm px-2 py-4 text-white bg-green-500 font-semibold" %></li>
+      <% if user_signed_in? %>
+        <li><a href="#about" class="block text-sm px-2 py-4 hover:bg-green-500 transition duration-300">About</a></li>
+        <li><a href="#contact" class="block text-sm px-2 py-4 hover:bg-green-500 transition duration-300">Contact Us</a></li>
+      <% else %>
+        <li><%= link_to "Login", login_path, class: "block text-sm px-2 py-4 hover:bg-green-500 transition duration-300" %></li>
+        <li><%= link_to "Sign Up", login_path, class: "block text-sm px-2 py-4 hover:bg-green-500 transition duration-300" %></li>
+      <% end %>
+    </ul>
+  </div>
+</nav>
