@@ -8,19 +8,21 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   </head>
-  <body>
-    <div class="flex flex-col min-h-screen overflow-hidden">
+  <body class="antialiased">
+    <div class="flex flex-col min-h-screen bg-white overflow-hidden">
       <header>
         <%= render "shared/top_navigation" %>
       </header>
-      <main class="flex-grow mx-auto pt-2 lg:max-w-7xl max-w-6xl px-4">
-        <%= yield %>
+      <main class="flex-grow">
+        <div class="pt-4 lg:max-w-7xl max-w-6xl px-4 mx-auto">
+          <%= yield %>
+        </div>
       </main>
       <footer class="w-full bg-gray-200 border border-t-gray-300">
         <div class="mx-auto lg:max-w-7xl max-w-6xl px-4">
-          <div class="flex flex-row justify-between items-center">
-            <div>
-              Powered by <%= link_to 'ASK.me', root_path %>
+          <div class="flex flex-row justify-between items-center py-3">
+            <div class="text-sm text-gray-500">
+              <%= link_to 'thePew.io', root_path %>
             </div>
           </div>
         </div>
