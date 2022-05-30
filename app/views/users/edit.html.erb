@@ -4,25 +4,21 @@
   <%= form.fields_for :profile do |f| %>
     <div>
       <%= f.label :nickname %>
-      <%= f.text_field :nickname, required: true, autocomplete: "nickname" %>
+      <%= f.text_field :nickname, autocomplete: "nickname" %>
     </div>
   <% end %>
   <div>
     <%= form.label :email, "Current Email" %>
-    <%= form.email_field :email, disabled: true %>
-  </div>
-  <div>
-    <%= form.label :unconfirmed_email, "New Email" %>
-    <%= form.text_field :unconfirmed_email %>
+    <%= form.email_field :email, autocomplete: "email"  %>
   </div>
   <div>
     <%= form.label :password, "Password (leave blank if you don't want to change it)" %>
-    <%= form.password_field :password %>
+    <%= form.password_field :password, autocomplete: "new-password" %>
   </div>
   <hr/>
   <div>
     <%= form.label :current_password, "Current password (we need your current password to confirm your changes)" %>
-    <%= form.password_field :current_password, required: true %>
+    <%= form.password_field :current_password, autocomplete: "current-password" %>
   </div>
   <%= form.submit "Update Account" %>
 <% end %>
