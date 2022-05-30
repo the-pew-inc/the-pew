@@ -9,9 +9,22 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   </head>
   <body>
-    <header>
-      <%= render "shared/top_navigation" %>
-    </header>
-    <%= yield %>
+    <div class="flex flex-col min-h-screen overflow-hidden">
+      <header>
+        <%= render "shared/top_navigation" %>
+      </header>
+      <main class="flex-grow mx-auto pt-2 lg:max-w-7xl max-w-6xl px-4">
+        <%= yield %>
+      </main>
+      <footer class="w-full bg-gray-200 border border-t-gray-300">
+        <div class="mx-auto lg:max-w-7xl max-w-6xl px-4">
+          <div class="flex flex-row justify-between items-center">
+            <div>
+              Powered by <%= link_to 'ASK.me', root_path %>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
   </body>
 </html>

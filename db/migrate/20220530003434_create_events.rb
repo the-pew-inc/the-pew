@@ -8,11 +8,13 @@ class CreateEvents < ActiveRecord::Migration[7.0]
       t.integer    :duration
       t.integer    :event_type, null: false
       t.integer    :status,     null: false, default: 0
+      t.string     :short_code
 
       t.timestamps
     end
 
     add_index :events, :event_type
     add_index :events, :status
+    add_index :events, :short_code
   end
 end

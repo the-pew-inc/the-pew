@@ -61,8 +61,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_30_022036) do
     t.datetime "start_date", null: false
     t.datetime "stop_date", null: false
     t.integer "duration"
+    t.integer "event_type", null: false
+    t.integer "status", default: 0, null: false
+    t.string "short_code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["event_type"], name: "index_events_on_event_type"
+    t.index ["short_code"], name: "index_events_on_short_code"
+    t.index ["status"], name: "index_events_on_status"
     t.index ["user_id"], name: "index_events_on_user_id"
   end
 
