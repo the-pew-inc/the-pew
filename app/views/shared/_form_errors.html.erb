@@ -1,8 +1,11 @@
 <!-- app/views/shared/_form_errors.html.erb -->
 <% if object.errors.any? %>
-  <ul>
-    <% object.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-    <% end %>
-  </ul>
+  <div class="text-red-500 text-sm">
+    <h2><%= pluralize(object.errors.count, "error") %> prohibited this form comment from being saved:</h2>
+    <ul>
+      <% object.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
 <% end %>

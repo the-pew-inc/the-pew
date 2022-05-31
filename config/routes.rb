@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :questions
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
@@ -31,4 +30,10 @@ Rails.application.routes.draw do
       delete "destroy_all"
     end
   end
+
+  # Event routes
+  resources :events
+
+  # Question routes
+  resources :questions
 end

@@ -59,7 +59,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_30_022036) do
     t.bigint "user_id", null: false
     t.string "name", null: false
     t.datetime "start_date", null: false
-    t.datetime "stop_date", null: false
+    t.datetime "end_date", null: false
     t.integer "duration"
     t.integer "event_type", null: false
     t.integer "status", default: 0, null: false

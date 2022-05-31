@@ -4,7 +4,7 @@ class CreateEvents < ActiveRecord::Migration[7.0]
       t.belongs_to :user,       null: false, foreign_key: true 
       t.string     :name,       null: false
       t.datetime   :start_date, null: false
-      t.datetime   :stop_date,  null: false
+      t.datetime   :end_date,   null: false
       t.integer    :duration
       t.integer    :event_type, null: false
       t.integer    :status,     null: false, default: 0

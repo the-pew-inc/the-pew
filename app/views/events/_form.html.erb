@@ -1,0 +1,25 @@
+<%= form_with model: event,
+              id: dom_id(event),
+              target: :_top do |form| %>
+  <%= render partial: 'shared/form_errors', locals: { object: event } %>
+  <div>
+    <%= form.label :name %>
+    <%= form.text_field :name, required: true %>
+  </div>
+  <div>
+    <%= form.label :start_date %>
+    <%= form.date_field :start_date, min: 0.days.ago %>
+  </div>
+  <div>
+    <%= form.label :end_date %>
+    <%= form.date_field :end_date, min: 0.days.ago %>
+  </div>
+  <div>
+    <%= form.submit %>
+    <% unless form.object.new_record? %>
+      <%= link_to "Cancel", events_path,
+          class: "",
+          data: {turbo_frame: :events} unless event.new_record? %>
+    <% end %>
+  </div>
+<% end %>
