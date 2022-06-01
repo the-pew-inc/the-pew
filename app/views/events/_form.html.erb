@@ -11,10 +11,6 @@
     <%= form.date_field :start_date, min: 0.days.ago %>
   </div>
   <div>
-    <%= form.label :end_date %>
-    <%= form.date_field :end_date, min: 0.days.ago %>
-  </div>
-  <div>
     <%= form.submit %>
     <% unless form.object.new_record? %>
       <%= link_to "Cancel", events_path,

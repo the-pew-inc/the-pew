@@ -1,9 +1,6 @@
 Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  # Defines the root path route ("/")
-  root "welcome#index"
-
   # Account routes
   put "account", to: "users#update"
   get "account", to: "users#edit"
@@ -32,8 +29,22 @@ Rails.application.routes.draw do
   end
 
   # Event routes
-  resources :events
+  resources :events do
+    # Manage questions routes
+    get "manage_questions/index"
+  end
 
   # Question routes
-  resources :questions
+  resources :questions 
+
+  # Answer routes / ONLY accessible via the https://ask. domain
+  constraints subdomain: "ask" do
+    # get "/", to: "asks#index"
+    root to: "asks#index", as: :ask_root
+    post "/pin", to: "asks#validate_pin"
+  end
+
+  # Defines the main root path route ("/")
+  # Must be the last route in the file
+  root "welcome#index"
 end

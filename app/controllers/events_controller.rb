@@ -1,8 +1,9 @@
 class EventsController < ApplicationController
   before_action :authenticate_user!, only: [:edit, :destroy, :update, :new, :create]
+  before_action :redirect_if_unauthenticated
 
   def index
-
+    @events = Event.where(user_id: current_user.id).order(start_date: :desc)
   end
 
   def new
@@ -10,9 +11,13 @@ class EventsController < ApplicationController
   end
 
   def create
-    @event = Event.new(event_params)
-    @event.user = current_user
+    @event = current_user.events.new(create_event_params)
+    # @event.user_id = current_user.id
     if @event.save
+      # generate a default room.
+      room = @event.rooms.new
+      room.name = "__default__"
+      room.save!
       redirect_to @event
     else
       render :new
@@ -29,12 +34,29 @@ class EventsController < ApplicationController
 
   def update
     @event = Event.find(params[:id])
-    if @event.update(event_params)
+    if @event.update(update_event_params)
       redirect_to @event
     else
       render :edit
     end
   end
+
+  def destroy
+    @event = Event.find(params[:id])
+    if @event.user_id != current_user.id
+      flash[:error] = 'You are not the owner of this event'
+      redirect_to events_path
+      return
+    end
+    if @event.destroy
+      flash[:success] = 'Object was successfully deleted.'
+      redirect_to events_path
+    else
+      flash[:error] = 'Something went wrong'
+      redirect_to events_path
+    end
+  end
+  
 
   private
 

@@ -1,0 +1,12 @@
+<section>
+  <div>
+    <h1>Enter the Event PIN:</h1>
+  </div>
+  <div>
+    <%= form_with url: pin_path, method: :post do |form| %>
+      <%= form.label :pin %>
+      <%= form.text_field :pin %>
+      <%= form.submit 'GO!' %>
+    <% end %>
+  </div>
+</section>

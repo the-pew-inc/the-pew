@@ -32,6 +32,10 @@ module Authentication
     redirect_to root_path, alert: "You are already logged in." if user_signed_in?
   end
 
+  def redirect_if_unauthenticated
+    redirect_to root_path, alert: "You need to login to access that page." unless user_signed_in?
+  end
+
   def current_user
     Current.user = if session[:current_active_session_id].present?
       ActiveSession.find_by(id: session[:current_active_session_id])&.user

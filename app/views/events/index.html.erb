@@ -1,0 +1,11 @@
+<section>
+  <div>
+    <%= link_to "New Event", new_event_path, class: "px-3 py-2 rounded bg-green-500 text-white" %>
+  </div>
+</section>
+<section class="pt-4">
+  <h2 class="text-xl font-bold">Events: </h2>
+  <div class="pt-2 space-y-2">
+    <%= render @events %>
+  </div>
+</section>
