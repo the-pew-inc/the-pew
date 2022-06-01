@@ -7,5 +7,8 @@ import { application } from "./application"
 import ClipboardController from "./clipboard_controller.js"
 application.register("clipboard", ClipboardController)
 
+import PopperController from "./popper_controller.js"
+application.register("popper", PopperController)
+
 import ToggleController from "./toggle_controller.js"
 application.register("toggle", ToggleController)
