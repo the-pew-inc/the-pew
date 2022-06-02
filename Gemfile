@@ -59,7 +59,7 @@ gem "active_storage_validations", "~> 0.9.8"
 gem "image_processing", "~> 1.2"
 gem "ruby-vips", ">= 2.1.0"
 
-# Generate QRCode
+# Generate QRCode [https://github.com/whomwah/rqrcode]
 gem "rqrcode", "~> 2.0"
 
 group :development, :test do
