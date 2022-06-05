@@ -1,9 +1,14 @@
 class Event < ApplicationRecord
+  include Rails.application.routes.url_helpers
+
   before_save :set_duration
   before_validation :set_values
+  after_create :generate_qr_code
 
   belongs_to :user
   has_many :rooms, dependent: :destroy
+
+  has_one_attached :qr_code
 
   validates :name, presence: true, length: { minimum: 5, maximum: 250 }
   validates :start_date, presence: true
@@ -17,13 +22,25 @@ class Event < ApplicationRecord
   # Invite_only: seeing and asking questions require an account and an invitation
   enum event_type: { universal: 10, restricted: 20 , invite_only: 30 }, _default: 10
 
-
   private
 
   # TODO: remove this method once the system becomes more stable
   def set_values
     self.end_date = self.start_date
     self.short_code = generate_pin # should only be called when status is opened (or published) and removed for all otehr statuses
+  end
+
+  def generate_qr_code
+    qr_url = url_for(controller: 'events',
+            action: 'show',
+            id: self.id,
+            only_path: false,
+            host: 'localhost:3000',
+            protocol: 'https',
+            source: 'from_qr'
+            )
+
+    self.qr_code.attach(QrGenerator.call(qr_url))
   end
   
   def set_duration
