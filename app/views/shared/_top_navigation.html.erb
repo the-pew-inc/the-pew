@@ -55,7 +55,7 @@
           </div>
         <% else %>
           <%= link_to "Login", login_path, class: "py-2 px-2 font-medium text-gray-500 rounded hover:bg-green-500 hover:text-white transition duration-300" %>
-          <%= link_to "Sign up", sign_up_path, class: "py-2 px-2 font-medium text-white bg-green-500 rounded hover:bg-green-400 transition duration-300" %>
+          <%= link_to "Sign up", sign_up_path, class: "py-2 px-2 font-medium text-white bg-green-500 rounded hover:bg-green-400 transition duration-300 ease-in-out" %>
         <% end %>
       </div>
       <!-- Mobile menu button -->
@@ -83,7 +83,7 @@
               <%= link_to "Sign out", logout_path, data: { turbo_method: :delete }, class: "block text-sm px-2 py-4 hover:bg-green-500 transition duration-300" %>
             <% else %>
               <li><%= link_to "Login", login_path, class: "block text-sm px-2 py-4 hover:bg-green-500 transition duration-300" %></li>
-              <li><%= link_to "Sign Up", login_path, class: "block text-sm px-2 py-4 hover:bg-green-500 transition duration-300" %></li>
+              <li><%= link_to "Sign Up", sign_up_path, class: "block text-sm px-2 py-4 hover:bg-green-500 transition duration-300" %></li>
             <% end %>
           </ul>
         </div>

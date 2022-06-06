@@ -1,16 +1,37 @@
 <!-- app/views/sessions/new.html.erb -->
-<%= form_with url: login_path, scope: :user do |form| %>
-  <div>
-    <%= form.label :email %>
-    <%= form.email_field :email, required: true, autocomplete: "email" %>
+<div class="container pt-9">
+  <div class="m-auto md:w-8/12 lg:w-5/12">
+    <div class="text-center pb-9">
+      <!-- TODO: ADD LOGO HERE -->
+      <h1 class="font-bold text-4xl text-slate-800">Sign in to your account</h1>
+      <div class="text-sm text-slate-500 pt-2">Or <%= link_to 'create your account for free', sign_up_path, class: "text-green-500 hover:text-green-700" %></div>
+    </div>
+    <div class="mx-auto">
+      <%= form_with url: login_path, scope: :user do |form| %>
+        <div class="mb-4">
+          <%= form.email_field :email, required: true, autocomplete: "email", class: "form-input w-full block rounded-xl border-green-500 border-2", placeholder: "Your email address" %>
+        </div>
+        <div class="mb-6">
+          <%= form.password_field :password, required: true, autocomplete: "current-password", class: "form-input w-full block rounded-xl border-green-500 border-2", placeholder: "Password" %>
+        </div>
+        <div class="flex flex-row items-center justify-between mb-6">
+          <div>
+            <%= form.check_box :remember_me, class: "form-checkbox rounded border-green-500" %>
+            <%= form.label :remember_me %>
+          </div>
+          <div>
+            <%= link_to 'Forgot your password?', new_password_path, class: "text-green-500 hover:text-green-700" %>
+          </div>
+        </div>
+        <%= form.submit "Sign In", class: "w-full block py-3 font-medium text-white bg-green-500 rounded hover:bg-green-400 transition duration-300 ease-in-out" %>
+      <% end %>
+      <h4 class="text-center text-sm font-light text-green-500 py-3">-- Or --</h4>
+      <div class="text-center mb-4">
+        <%= link_to 'Google', new_password_path, class: "w-full block py-3 font-medium text-white bg-green-500 rounded hover:bg-green-400 transition duration-300 ease-in-out" %>
+      </div>
+      <div class="text-center">
+        <%= link_to 'Apple', new_password_path, class: "w-full block py-3 font-medium text-white bg-green-500 rounded hover:bg-green-400 transition duration-300 ease-in-out" %>
+      </div>
+    </div>
   </div>
-  <div>
-    <%= form.label :password %>
-    <%= form.password_field :password, required: true, autocomplete: "current-password" %>
-  </div>
-  <div>
-    <%= form.label :remember_me %>
-    <%= form.check_box :remember_me %>
-  </div>
-  <%= form.submit "Sign In" %>
-<% end %>
+</div>
