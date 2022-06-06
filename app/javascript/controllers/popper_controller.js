@@ -1,8 +1,5 @@
 import { Controller } from "@hotwired/stimulus";
 import { createPopper } from "@popperjs/core";
-// import { createPopper } from "@popperjs/core/lib/popper-lite.js";
-// import preventOverflow from "@popperjs/core/lib/modifiers/preventOverflow.js";
-// import flip from "@popperjs/core/lib/modifiers/flip.js";
 
 // Connects to data-controller="popper"
 export default class extends Controller {
