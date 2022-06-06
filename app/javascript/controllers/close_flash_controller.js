@@ -4,7 +4,7 @@ import { Controller } from "@hotwired/stimulus";
 export default class extends Controller {
   static targets = ["flash"];
   static values = {
-    delay: { type: Number, default: 1000 },
+    delay: { type: Number, default: 2500 },
   };
 
   connect() {

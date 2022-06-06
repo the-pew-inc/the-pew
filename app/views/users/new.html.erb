@@ -1,19 +1,50 @@
 <!-- app/views/users/new.html.erb -->
-<%= form_with model: @user, url: sign_up_path do |form| %>
-  <%= render partial: "shared/form_errors", locals: { object: form.object } %>
-  <div>
-    <%= form.label :email %>
-    <%= form.email_field :email, required: true, autofocus: true, autocomplete: "email" %>
-  </div>
-  <%= form.fields_for :profile do |f| %>
-    <div>
-      <%= f.label :nickname %>
-      <%= f.text_field :nickname, required: true, autocomplete: "nickname" %>
+<div class="container pt-9">
+  <div class="m-auto md:w-8/12 lg:w-5/12">
+    <div class="text-center pb-4">
+      <!-- TODO: ADD LOGO HERE -->
+      <h1 class="font-bold text-4xl text-slate-800">Create your account</h1>
+      <div class="text-slate-500 mt-9">Creating your account is free and let you ask questions on the platform.</div>
     </div>
-  <% end %>
-  <div>
-    <%= form.label :password %>
-    <%= form.password_field :password, required: true, autocomplete: "new-password" %>
-  </div>
-  <%= form.submit "Sign Up" %>
-<% end %>
+    <div class="mx-auto">
+      <%= form_with model: @user, url: sign_up_path do |form| %>
+        <%= render partial: "shared/form_errors", locals: { object: form.object } %>
+        <div class="mb-4">
+          <div class="relative flex w-full flex-wrap items-stretch mb-3">
+            <span class="z-10 h-full leading-snug font-normal absolute text-center text-slate-500 bg-transparent rounded text-base items-center justify-center w-8 pl-3 py-3">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+      stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round"
+        d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
+              </svg>
+            </span>
+            <%= form.email_field :email, required: true, autofocus: true, autocomplete: "email", placeholder: "Your email address", class: "form-input w-full block rounded-xl border-green-500 border-2 pl-10" %>
+          </div>
+        </div>
+        <%= form.fields_for :profile do |f| %>
+          <div class="mb-4">
+            <div class="relative flex w-full flex-wrap items-stretch mb-3">
+              <span class="z-10 h-full leading-snug font-normal absolute text-center text-slate-500 bg-transparent rounded text-base items-center justify-center w-8 pl-3 py-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
+              </span>
+              <%= f.text_field :nickname, required: true, autocomplete: "nickname", placeholder: "Your username or full name", class: "form-input w-full block rounded-xl border-green-500 border-2 pl-10" %>
+            </div>
+          </div>
+        <% end %>
+        <div class="mb-6">
+          <div class="relative flex w-full flex-wrap items-stretch mb-3">
+            <span class="z-10 h-full leading-snug font-normal absolute text-center text-slate-500 bg-transparent rounded text-base items-center justify-center w-8 pl-3 py-3">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+              </svg>
+            </span>
+            <%= form.password_field :password, required: true, autocomplete: "new-password", placeholder: "You secret password", class: "form-input w-full block rounded-xl border-green-500 border-2 pl-10" %>
+          </div>
+        </div>
+        <%= form.submit "Create my account", class: "w-full block py-3 font-medium text-white uppercase bg-green-500 rounded hover:bg-green-400 transition duration-300 ease-in-out" %>
+        <div class="text-sm text-slate-500 mt-2">By clicking on CREATE MY ACCOUNT, you agree to the Terms of Service and Privacy of ThePew and our code of conduct</div>
+        <div class="text-sm text-slate-500 mt-3">After clicking on CREATE MY ACCOUNT, you will receive an email to verify your email address. Unverified accounts cannot be used to ask questions.</div>
+      <% end %>
+    </div>

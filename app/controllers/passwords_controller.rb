@@ -10,12 +10,12 @@ class PasswordsController < ApplicationController
     if @user.present?
       if @user.confirmed?
         @user.send_password_reset_email!
-        redirect_to root_path, notice: "If that user exists we've sent instructions to their email."
+        redirect_to login_path, notice: "If that user exists we've sent instructions to their email."
       else
         redirect_to new_confirmation_path, alert: "Please confirm your email first."
       end
     else
-      redirect_to root_path, notice: "If that user exists we've sent instructions to their email."
+      redirect_to login_path, notice: "If that user exists we've sent instructions to their email."
     end
   end
 
