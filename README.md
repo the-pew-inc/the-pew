@@ -5,5 +5,7 @@
 Logos [https://www.svgrepo.com/vectors/google/]
 
 
+Icons [https://heroicons.com/]
+
 ## LICENSE
 To Read: [https://www.linkedin.com/pulse/how-we-picked-our-open-source-license-cloudkeeper-framework-kamp/]
