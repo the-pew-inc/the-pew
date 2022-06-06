@@ -1,20 +1,23 @@
 <!-- app/views/passwords/new.html.erb -->
-<div class="sm:mx-auto sm:max-w-lg sm:rounded-lg sm:px-10">
-  <div class="flex flex-col items-center pt-28">
-    <h1>
-      Password Reset
-    </h1>
-    <span class="text-sm">Enter your email address, click "Reset Password" and check your email for further instructions.</span>
+<div class="container pt-9">
+  <div class="m-auto md:w-8/12 lg:w-5/12">
+    <div class="text-center pb-4">
+      <!-- TODO: ADD LOGO HERE -->
+      <h1 class="font-bold text-4xl text-slate-800">Reset your password</h1>
+      <div class="text-sm text-slate-500 mt-9">Enter your email address below and follow the instructions you will receive on this email to reset your password.</div>
+    </div>
+    <div class="mx-auto">
+      <%= form_with url: passwords_path, scope: :user do |form| %>
+        <%= form.email_field :email, required: true, autocomplete: "email", autofocus: :on, placeholder: "Your email address", class: "form-input w-full block rounded-xl border-green-500 border-2 mb-6" %>
+        <%= form.submit "Reset Password", class: "w-full block py-3 font-medium text-white uppercase bg-green-500 rounded hover:bg-green-400 transition duration-300 ease-in-out" %>
+      <% end %>
+    </div>
+    <div class="pt-3">
+      <%= link_to login_path, class: "link link-accent flex flex-1 items-center text-green-500 hover:text-green-700" do %>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 pr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M11 19l-7-7 7-7m8 14l-7-7 7-7" />
+        </svg>
+        <span>Return to the Login screen</span>
+      <% end %>
+    </div>
   </div>
-  <div class="p-4 border border-neutral-content rounded-lg">
-    <%= form_with url: passwords_path, scope: :user do |form| %>
-      <div class="flex flex-col space-y-4 w-full max-w-xs">
-        <%= form.email_field :email, required: true, autocomplete: "email", autofocus: :on, placeholder: "your_email@address.com", class: "input input-bordered w-full max-w-xs" %>
-        <%= form.submit "Reset Password", class: "btn btn-primary ml-4" %>
-      </div>
-    <% end %>
-  </div>
-  <div class="pt-3">
-    <%= link_to "Return to the Login screen", login_path, class: "link link-accent" %>
-  </div>
-</div>

@@ -23,11 +23,13 @@
             <%= link_to 'Forgot your password?', new_password_path, class: "text-green-500 hover:text-green-700" %>
           </div>
         </div>
-        <%= form.submit "Sign In", class: "w-full block py-3 font-medium text-white bg-green-500 rounded hover:bg-green-400 transition duration-300 ease-in-out" %>
+        <%= form.submit "Sign In", class: "w-full block py-3 font-medium text-white uppercase bg-green-500 rounded hover:bg-green-400 transition duration-300 ease-in-out" %>
       <% end %>
-      <h4 class="text-center text-sm font-light text-green-500 py-3">-- Or --</h4>
-      <div class="text-center mb-4">
-        <%= link_to 'Google', new_password_path, class: "w-full block py-3 font-medium text-white bg-green-500 rounded hover:bg-green-400 transition duration-300 ease-in-out" %>
+      <h4 class="text-center text-sm font-light text-slate-500 py-3">-- Or continue with --</h4>
+      <div class="mb-4 text-center">
+        <%= link_to new_password_path, class: "w-full block py-3 font-medium text-white bg-green-500 rounded hover:bg-green-400 transition duration-300 ease-in-out" do %>
+          <span>Google</span>
+        <% end %>
       </div>
       <div class="text-center">
         <%= link_to 'Apple', new_password_path, class: "w-full block py-3 font-medium text-white bg-green-500 rounded hover:bg-green-400 transition duration-300 ease-in-out" %>
