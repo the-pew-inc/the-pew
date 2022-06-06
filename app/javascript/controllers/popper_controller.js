@@ -33,13 +33,7 @@ export default class extends Controller {
       this.tooltipTarget.setAttribute("data-show", "");
 
       // Enable the event listeners
-      this.popperInstance.setOptions((options) => ({
-        ...options,
-        modifiers: [
-          ...options.modifiers,
-          { name: "eventListeners", enabled: true },
-        ],
-      }));
+      eventListeners(true);
 
       // Update its position
       this.popperInstance.update();
@@ -54,11 +48,18 @@ export default class extends Controller {
     this.tooltipTarget.removeAttribute("data-show");
 
     // Disable the event listeners
+    eventListeners(false);
+  }
+
+  // Event listeners
+  // params: enable (boolean)
+  // Set to true to enable the event listeners, false to disable them
+  eventListeners(enabled) {
     this.popperInstance.setOptions((options) => ({
       ...options,
       modifiers: [
         ...options.modifiers,
-        { name: "eventListeners", enabled: false },
+        { name: "eventListeners", enabled: enabled },
       ],
     }));
   }
