@@ -13,7 +13,7 @@ namespace :clean_active_sessions do
 
     ActiveSession.where("active_sessions.created_at <= ?", 20.days.ago).find_each do |session|
       puts("Deleting Session: #{session.id}#{" (dry_run activated)" if dry_run}")
-      session.destroy unless dry_run
+      session.destroy! unless dry_run
     end
 
     puts("[#{Time.now}] Running clean session :: END#{" (dry_run activated)" if dry_run}")

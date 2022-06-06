@@ -1,6 +1,15 @@
 <!-- app/views/shared/_flash.html.erb -->
 <% flash.each do |flash_type, message| %>
-  <div class="">
-    <%= message %>
+  <div class="flex flex-row items-center justify-between bg-red-100 max-w-6xl lg:max-w-7xl lg:rounded-xl md:rounded mx-auto px-4 py-3 mt-1" data-controller="close-flash" data-close-flash-target="flash">
+    <div class="text-red-700 font-bold">
+      <%= message %>
+    </div>
+    <div>
+      <button class="text-red-700" data-action="close-flash#close">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+      </button>
+    </div>
   </div>
 <% end %>

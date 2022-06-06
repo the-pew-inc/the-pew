@@ -7,6 +7,9 @@ import { application } from "./application"
 import ClipboardController from "./clipboard_controller.js"
 application.register("clipboard", ClipboardController)
 
+import CloseFlashController from "./close_flash_controller.js"
+application.register("close-flash", CloseFlashController)
+
 import PopperController from "./popper_controller.js"
 application.register("popper", PopperController)
 
