@@ -1,0 +1,20 @@
+<section>
+  <div>
+    <h1 class="text-xl font-bold text-slate-800">
+      <%= @event.name %>
+    </h1>
+  </div>
+  <div>
+    Go to <span class="text-lg font-black">https://ask.thepew.io</span> and enter the following code:<br>
+    <span class="font-bold text-2xl"><%= @event.short_code %></span>
+  </div>
+  <div class="font-light text-lg italic">
+    -- or --
+  </div>
+  <div>
+    Open your phone camera and point to the following QR Code:
+  </div>
+  <div>
+    <%= image_tag @event.qr_code if @event.qr_code.present? %>
+  </div>
+</section>
