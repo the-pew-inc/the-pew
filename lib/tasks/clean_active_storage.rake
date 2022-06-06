@@ -47,4 +47,17 @@ namespace :clean_active_storage do
     puts("[#{Time.now}] Running remove_orphan_files :: END#{" (dry_run activated)" if dry_run}")
   end
 
+
+  # Description: looks like the new method of cleaning up the storage
+  # There is no `dry_run` option for this task
+  # Purge all blobs and attachments that are not associated with any record and older than 2 days
+  # Usage:
+  #   - rake clean_active_storage:remove_orphan_files
+  #   - rake "clean_active_storage:remove_orphan_files[false]"
+  desc "Purges unattached Active Storage blobs. Run regularly."
+  task purge_unattached: :environment do
+    ActiveStorage::Blob.unattached.where("active_storage_blobs.created_at <= ?", 2.days.ago).find_each(&:purge_later)
+  end
+
+
 end
