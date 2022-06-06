@@ -15,7 +15,7 @@
           <%= form.password_field :password, required: true, autocomplete: "current-password", class: "form-input w-full block rounded-xl border-green-500 border-2", placeholder: "Password" %>
         </div>
         <div class="flex flex-row items-center justify-between mb-6">
-          <div>
+          <div class="flex flex-1 items-center space-x-2">
             <%= form.check_box :remember_me, class: "form-checkbox rounded border-green-500" %>
             <%= form.label :remember_me %>
           </div>
