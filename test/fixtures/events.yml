@@ -3,11 +3,11 @@
 one:
   name: MyString
   start_date: 2022-05-29 17:34:34
-  stop_date: 2022-05-29 17:34:34
+  end_date: 2022-05-29 17:34:34
   duration: 1
 
 two:
   name: MyString
   start_date: 2022-05-29 17:34:34
-  stop_date: 2022-05-29 17:34:34
+  end_date: 2022-05-29 17:34:34
   duration: 1
