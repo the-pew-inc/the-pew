@@ -40,8 +40,14 @@ gem "kredis"
 # Replaced by argon2 and custom authentication solution based on [https://stevepolito.design/blog/rails-authentication-from-scratch/]
 # gem "bcrypt", "~> 3.1.7"
 
-# Used to hash passwords [https://github.com/technion/ruby-argon2]
+# User authentication
+# Use Argon2 to hash passwords [https://github.com/technion/ruby-argon2]
 gem "argon2", "~> 2.1.1"
+
+# Adding OAuth2 support [https://github.com/omniauth/omniauth]
+gem "omniauth"
+gem "omniauth-rails_csrf_protection" # Required when not using Devise
+gem "omniauth-google-oauth2" # Adding Google Sign-in support
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]

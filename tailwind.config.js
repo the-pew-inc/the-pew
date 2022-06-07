@@ -5,5 +5,5 @@ module.exports = {
     "./app/assets/stylesheets/**/*.css",
     "./app/javascript/**/*.js",
   ],
-  plugins: [require("@tailwindcss/forms")],
+  plugins: [require("@tailwindcss/line-clamp"), require("@tailwindcss/forms")],
 };
