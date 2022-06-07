@@ -124,7 +124,7 @@ GEM
       activesupport (>= 5.0.0)
     jsbundling-rails (1.0.2)
       railties (>= 6.0.0)
-    jwt (2.4.0)
+    jwt (2.4.1)
     kredis (1.2.0)
       activesupport (>= 6.0.0)
       redis (~> 4.2)
