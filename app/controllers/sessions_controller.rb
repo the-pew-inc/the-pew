@@ -51,7 +51,7 @@ class SessionsController < ApplicationController
 
   def from_omniauth(response)
     pp response
-    
+
     email = response[:info][:email]
     # Check if user exists with this email
     u = User.find_by(email: email)
@@ -62,17 +62,26 @@ class SessionsController < ApplicationController
     end
 
     # If the user does not exist with this email, then process
-    user = User.find_or_initialize_by(uid: response[:uid], provider: response[:provider])
-    user.email = email
-    user.profile.nickname = response[:info][:name]
-    user.password_digest = SecureRandom.hex(16)
+    user = User.find_by(uid: response[:uid], provider: response[:provider])
+    if user
+      # The user exists, so update the user's info
+      user.profile.nickname = response[:info][:name]
+    else
+      # The user does not exist, so create a new user
+      user = User.new(email: email, uid: response[:uid], provider: response[:provider])
+      user.build_profile
+      user.profile.nickname = response[:info][:name]
+      user.password = SecureRandom.hex(16)
+      user.confirmed = true
+      user.confirmed_at = Time.current
+    end
+
     # user.image_url = response["info"]["image"]
     # user.oauth_token = response["credentials"]["token"]
     # user.oauth_expires_at = response["credentials"]["expires_at"]
-    user.save
 
-    # As the user is signing in with Google, we do not need to confirm the email
-    user.confirm!
+    # Save the user
+    user.save!
 
     # Return the user
     user
