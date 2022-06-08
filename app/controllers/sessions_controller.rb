@@ -80,21 +80,25 @@ class SessionsController < ApplicationController
       end
     end
 
-    image_url = response[:info][:image]
-    # remove the size parameter at the end of the image url
-    pattern = /=s\d+/
+    # If there is no avatar, then try to get one from the response
+    if !user.profile.avatar.attached?
+      image_url = response[:info][:image]
+      # remove the size parameter at the end of the image url
+      pattern = /=s\d+/
 
-    last = image_url.rindex(pattern)
-    if last
-      image_url = image_url[0..last-1]
+      last = image_url.rindex(pattern)
+      if last
+        image_url = image_url[0..last-1]
+      end
+      
+      # Download the image from the url
+      tempavatar = Down.download(image_url)
+
+      # Generate a unique filename
+      filename = Time.current.to_s + SecureRandom.hex(16)
+      user.profile.avatar.attach(io: tempavatar, filename: filename, content_type: tempavatar.content_type)
+
     end
-    
-    tempavatar = Down.download(image_url)
-    filename = SecureRandom.hex(16)
-    user.profile.avatar.attach(io: tempavatar, filename: filename, content_type: tempavatar.content_type)
-
-    # user.oauth_token = response["credentials"]["token"]
-    # user.oauth_expires_at = response["credentials"]["expires_at"]
 
     # Save the user
     user.save!
