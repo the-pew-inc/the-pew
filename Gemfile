@@ -58,6 +58,9 @@ gem "bootsnap", require: false
 # Use Sass to process CSS
 # gem "sassc-rails"
 
+# Download
+gem "down", "~> 5.0"
+
 # Active storage validations [https://github.com/igorkasyanchuk/active_storage_validations]
 gem "active_storage_validations", "~> 0.9.8"
 
