@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_06_033225) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_07_232424) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -126,9 +126,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_06_033225) do
     t.integer "failed_attempts", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "uid"
+    t.string "provider"
     t.index ["blocked"], name: "index_users_on_blocked"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["locked"], name: "index_users_on_locked"
+    t.index ["provider"], name: "index_users_on_provider"
+    t.index ["uid"], name: "index_users_on_uid", unique: true
   end
 
   add_foreign_key "active_sessions", "users", on_delete: :cascade
