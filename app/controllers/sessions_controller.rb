@@ -97,7 +97,7 @@ class SessionsController < ApplicationController
   def get_image_from_google_oauth(user, response)
     image_url = response[:info][:image]
     # remove the size parameter at the end of the image url
-    pattern = /=s\d+/
+    pattern = / =s\d+ /
 
     last = image_url.rindex(pattern)
     if last
