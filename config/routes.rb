@@ -15,6 +15,9 @@ Rails.application.routes.draw do
   delete "logout", to: "sessions#destroy"
   get "login", to: "sessions#new"
 
+  # Google OAuth routes
+  get "/auth/:provider/callback", to:"sessions#omniauth"
+
   # Password routes
   resources :passwords, only: [:create, :edit, :new, :update], param: :password_reset_token
 

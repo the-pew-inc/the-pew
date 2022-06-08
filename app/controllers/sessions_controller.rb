@@ -34,4 +34,47 @@ class SessionsController < ApplicationController
 
   def new
   end
+
+  def omniauth
+    user = from_omniauth(request.env["omniauth.auth"])
+    if user.valid?
+      session[:user_id] = user.id
+      after_login_path = session[:user_return_to] || root_path
+      login user
+      redirect_to after_login_path, notice: "Signed in."
+    else
+      redirect_to login_path, alert: "There was an error while trying to authenticate you using Google."
+    end
+  end
+
+  private
+
+  def from_omniauth(response)
+    pp response
+    
+    email = response[:info][:email]
+    # Check if user exists with this email
+    u = User.find_by(email: email)
+    if u && u.provider == nil
+      # Return to the login page with an error
+      redirect_to login_path, alert: "This email is already registered with an account."
+      return
+    end
+
+    # If the user does not exist with this email, then process
+    user = User.find_or_initialize_by(uid: response[:uid], provider: response[:provider])
+    user.email = email
+    user.profile.nickname = response[:info][:name]
+    user.password_digest = SecureRandom.hex(16)
+    # user.image_url = response["info"]["image"]
+    # user.oauth_token = response["credentials"]["token"]
+    # user.oauth_expires_at = response["credentials"]["expires_at"]
+    user.save
+
+    # As the user is signing in with Google, we do not need to confirm the email
+    user.confirm!
+
+    # Return the user
+    user
+  end
 end
