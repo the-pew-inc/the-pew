@@ -50,7 +50,7 @@ class SessionsController < ApplicationController
   private
 
   def from_omniauth(response)
-    pp response
+    require "down"
 
     email = response[:info][:email]
     # Check if user exists with this email
@@ -72,11 +72,27 @@ class SessionsController < ApplicationController
       user.build_profile
       user.profile.nickname = response[:info][:name]
       user.password = SecureRandom.hex(16)
+      if response[:info][:email_verified]
       user.confirmed = true
       user.confirmed_at = Time.current
+      else
+        user.send_confirmation_email!
+      end
     end
 
-    # user.image_url = response["info"]["image"]
+    image_url = response[:info][:image]
+    # remove the size parameter at the end of the image url
+    pattern = /=s\d+/
+
+    last = image_url.rindex(pattern)
+    if last
+      image_url = image_url[0..last-1]
+    end
+    
+    tempavatar = Down.download(image_url)
+    filename = SecureRandom.hex(16)
+    user.profile.avatar.attach(io: tempavatar, filename: filename, content_type: tempavatar.content_type)
+
     # user.oauth_token = response["credentials"]["token"]
     # user.oauth_expires_at = response["credentials"]["expires_at"]
 
