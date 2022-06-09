@@ -4,6 +4,14 @@ class SessionsController < ApplicationController
 
   def create
     @user = User.find_by(email: params[:user][:email].downcase)
+    if @user.provider? && @user.uid?
+      # User used an OTP account to login (Google, Apple Sign in, etc.).
+      # Forcing user to login with the OTP account.
+      flash.now[:alert] = "Incorrect authentication method."
+      render :new, status: :unprocessable_entity
+      return
+    end
+
     if @user
       if !@user.confirmed
         redirect_to new_confirmation_path, alert: "You must confirm your email before being able to login."
