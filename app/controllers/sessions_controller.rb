@@ -71,7 +71,7 @@ class SessionsController < ApplicationController
       user = User.new(email: email, uid: response[:uid], provider: response[:provider])
       user.build_profile
       user.profile.nickname = response[:info][:name]
-      user.password = SecureRandom.hex(16)
+      user.password = SecureRandom.alphanumeric(16)
       if response[:info][:email_verified]
       user.confirmed = true
       user.confirmed_at = Time.current
