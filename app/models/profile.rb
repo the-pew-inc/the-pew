@@ -6,6 +6,6 @@ class Profile < ApplicationRecord
   has_one_attached :avatar
 
   validates :nickname, presence: true, length: { minimum: 3, maximum: 40 }
-  validates :avatar, content_type: ['image/png', 'image/jpeg', 'image/jpg', 'image/gif'], 
-                    size: { between: 1.kilobyte..5.megabytes , message: 'is not given between size' }
+  validates :avatar, content_type: ['image/png', 'image/jpeg', 'image/jpg', 'image/gif'],
+                     size: { between: 1.kilobyte..5.megabytes, message: 'is not given between size' }
 end

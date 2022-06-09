@@ -10,7 +10,7 @@ module Authentication
 
   def authenticate_user!
     store_location
-    redirect_to login_path, alert: "You need to login to access that page." unless user_signed_in?
+    redirect_to(login_path, alert: 'You need to login to access that page.') unless user_signed_in?
   end
 
   def login(user)
@@ -29,19 +29,19 @@ module Authentication
   end
 
   def redirect_if_authenticated
-    redirect_to root_path, alert: "You are already logged in." if user_signed_in?
+    redirect_to(root_path, alert: 'You are already logged in.') if user_signed_in?
   end
 
   def redirect_if_unauthenticated
-    redirect_to root_path, alert: "You need to login to access that page." unless user_signed_in?
+    redirect_to(root_path, alert: 'You need to login to access that page.') unless user_signed_in?
   end
 
   def current_user
     Current.user = if session[:current_active_session_id].present?
-      ActiveSession.find_by(id: session[:current_active_session_id])&.user
-    elsif cookies.permanent.encrypted[:remember_token].present?
-      ActiveSession.find_by(remember_token: cookies.permanent.encrypted[:remember_token])&.user
-    end
+                     ActiveSession.find_by(id: session[:current_active_session_id])&.user
+                   elsif cookies.permanent.encrypted[:remember_token].present?
+                     ActiveSession.find_by(remember_token: cookies.permanent.encrypted[:remember_token])&.user
+                   end
   end
 
   def user_signed_in?
@@ -50,7 +50,7 @@ module Authentication
 
   # Remember me feature
   def forget(user)
-    cookies.delete :remember_token
+    cookies.delete(:remember_token)
     user.regenerate_remember_token
   end
 
@@ -60,10 +60,8 @@ module Authentication
 
   # Active Session feature
   def forget_active_session
-    cookies.delete :remember_token
+    cookies.delete(:remember_token)
   end
-
-
 
   # Private methods
   private
@@ -71,5 +69,4 @@ module Authentication
   def store_location
     session[:user_return_to] = request.original_url if request.get? && request.local?
   end
-
 end

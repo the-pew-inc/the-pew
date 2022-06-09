@@ -8,7 +8,7 @@ class User < ApplicationRecord
   before_save :generate_password_digest
 
   # Mailer configuration
-  MAILER_FROM_EMAIL = "<Ask Me!> no-reply@ask.me"
+  MAILER_FROM_EMAIL = '<Ask Me!> no-reply@ask.me'
   CONFIRMATION_TOKEN_EXPIRATION = 1.day
   PASSWORD_RESET_TOKEN_EXPIRATION = 20.minutes
 
@@ -18,17 +18,16 @@ class User < ApplicationRecord
   has_many :events,          dependent: :destroy
   accepts_nested_attributes_for :profile
 
-
   # Validations
-  validates :email, presence: true, uniqueness: { case_sensitive: false }, format: {with: URI::MailTo::EMAIL_REGEXP}
+  validates :email, presence: true, uniqueness: { case_sensitive: false }, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :password, presence: true, length: { minimum: 6, maximum: 35 }, on: :create
 
   ## Functions
 
   # Authenticate the user (aka validates the password)
   def authenticate(password)
-    require 'argon2'
-    Argon2::Password.verify_password(password, self.password_digest)
+    require('argon2')
+    Argon2::Password.verify_password(password, password_digest)
   end
 
   # Update the confirmation status for this user
@@ -49,7 +48,7 @@ class User < ApplicationRecord
   end
 
   private
-  
+
   # Make sure we save all emails in lowercase
   def downcase_email
     self.email = email.downcase
@@ -57,10 +56,7 @@ class User < ApplicationRecord
 
   # Hash the password using Argon2
   def generate_password_digest
-    require 'argon2'
-    if password.present?
-      self.password_digest = Argon2::Password.create(password)
-    end
+    require('argon2')
+    self.password_digest = Argon2::Password.create(password) if password.present?
   end
-
 end

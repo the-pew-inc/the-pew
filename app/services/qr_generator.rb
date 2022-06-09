@@ -1,5 +1,5 @@
 class QrGenerator < ApplicationService
-  require "rqrcode"
+  require 'rqrcode'
 
   attr_reader :val
 
@@ -7,16 +7,16 @@ class QrGenerator < ApplicationService
     @val = val
   end
 
-  def call 
+  def call
     qrcode = RQRCode::QRCode.new(val)
 
     png = qrcode.as_png(
       bit_depth: 1,
       border_modules: 4,
       color_mode: ChunkyPNG::COLOR_GRAYSCALE,
-      color: "black",
+      color: 'black',
       file: nil,
-      fill: "white",
+      fill: 'white',
       module_px_size: 20,
       resize_exactly_to: false,
       resize_gte_to: false,
@@ -34,4 +34,4 @@ class QrGenerator < ApplicationService
       content_type: 'png'
     )
   end
-end 
+end
