@@ -6,21 +6,28 @@ require: rubocop-rails
 Style/Encoding:
   Enabled: false
 
-Layout/LineLength:
-  Max: 99
-
 AllCops:
   TargetRubyVersion: 3.0
   TargetRailsVersion: 7.0
+  NewCops: enable
+  SuggestExtensions: false
   Exclude:
-    - '**/db/migrate/*'
+    - 'bin/*'
+    - 'db/schema.rb'
+    - 'db/migrate/*'
+    - 'log/**/*'
+    - 'node_modules/**/*'
+    - 'public/**/*'
+    - 'script/**/*'
+    - 'vendor/**/*'
+    - 'tmp/**/*'
+    - '.git/**/*'
+    - 'app/views/**/*'
     - '**/Gemfile.lock'
     - '**/Rakefile'
     - '**/rails'
-    - '**/vendor/**/*'
-    - '**/spec_helper.rb'
-    - 'node_modules/**/*'
-    - 'bin/*'
+    - 'test/**/*'
+    - 'config/**/*'
 
 
 # ============== Layout =================
@@ -150,7 +157,7 @@ Lint/UselessMethodDefinition:
 # ============== Metric =================
 
 Metrics/AbcSize:
- Max: 45
+  Max: 45
 
 Metrics/BlockLength:
   CountComments: false

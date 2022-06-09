@@ -10,14 +10,14 @@ namespace :clean_active_storage do
   task :remove_orphan_blobs, [:dry_run] => :environment do |_t, args|
     dry_run = true unless args[:dry_run] == 'false'
 
-    puts("[#{Time.now}] Running remove_orphan_blobs :: INI#{' (dry_run activated)' if dry_run}")
+    puts("[#{Time.now.utc}] Running remove_orphan_blobs :: INI#{' (dry_run activated)' if dry_run}")
 
     ActiveStorage::Blob.where.not(id: ActiveStorage::Attachment.select(:blob_id)).find_each do |blob|
       puts("Deleting Blob: #{ActiveStorage::Blob.service.path_for(blob.key)}#{' (dry_run activated)' if dry_run}")
       blob.purge unless dry_run
     end
 
-    puts("[#{Time.now}] Running remove_orphan_blobs :: END#{' (dry_run activated)' if dry_run}")
+    puts("[#{Time.now.utc}] Running remove_orphan_blobs :: END#{' (dry_run activated)' if dry_run}")
   end
 
   # Usage:
@@ -28,7 +28,7 @@ namespace :clean_active_storage do
     include ActionView::Helpers::NumberHelper
     dry_run = true unless args.dry_run == 'false'
 
-    puts("[#{Time.now}] Running remove_orphan_files :: INI#{' (dry_run activated)' if dry_run}")
+    puts("[#{Time.now.utc}] Running remove_orphan_files :: INI#{' (dry_run activated)' if dry_run}")
 
     files = Dir['storage/??/??/*']
     orphan_files = files.select do |file|
@@ -44,7 +44,7 @@ namespace :clean_active_storage do
 
     puts "Size Liberated: #{number_to_human_size(sum)}#{' (dry_run activated)' if dry_run}"
 
-    puts("[#{Time.now}] Running remove_orphan_files :: END#{' (dry_run activated)' if dry_run}")
+    puts("[#{Time.now.utc}] Running remove_orphan_files :: END#{' (dry_run activated)' if dry_run}")
   end
 
   # Description: looks like the new method of cleaning up the storage

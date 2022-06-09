@@ -46,8 +46,10 @@ gem 'argon2', '~> 2.1.1'
 
 # Adding OAuth2 support [https://github.com/omniauth/omniauth]
 gem 'omniauth'
-gem 'omniauth-google-oauth2' # Adding Google Sign-in support
-gem 'omniauth-rails_csrf_protection' # Required when not using Devise
+# Adding Google Sign-in support
+gem 'omniauth-google-oauth2' 
+# Required when not using Devise
+gem 'omniauth-rails_csrf_protection' 
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
