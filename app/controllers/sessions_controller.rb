@@ -4,9 +4,9 @@ class SessionsController < ApplicationController
 
   def create
     @user = User.find_by(email: params[:user][:email].downcase)
-    if @user.provider? && @user.uid?
-      # User used an OTP account to login (Google, Apple Sign in, etc.).
-      # Forcing user to login with the OTP account.
+
+    # If the user exists but uses an OTP, then redirect to the login page with an error
+    if @user && (@user.provider? && @user.uid?)
       flash.now[:alert] = 'Incorrect authentication method.'
       render(:new, status: :unprocessable_entity)
       return
