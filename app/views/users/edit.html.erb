@@ -20,12 +20,12 @@
     <%= form.label :current_password, "Current password (we need your current password to confirm your changes)" %>
     <%= form.password_field :current_password, autocomplete: "current-password", class: "form-input w-full block rounded-xl border-slate-300 border-2 focus:outline-none focus:border-green-500 focus:ring-green-500" %>
   </div>
-  <%= form.submit "Update Account", class: "px-3 py-2 rounded bg-green-500 text-white" %>
+  <%= form.submit "Update Account", class: "mt-4 px-3 py-2 rounded bg-green-500 text-white" %>
 <% end %>
 <%# Current Sessions %>
-<h2>Current Logins</h2>
+<h2 class="font-bold text-lg my-3">Current Logins</h2>
 <% if @active_sessions %>
-  <%= button_to "Log out of all other sessions", destroy_all_active_sessions_path, method: :delete %>
+  <%= button_to "Log out of all sessions", destroy_all_active_sessions_path, method: :delete, class: "py-3 px-4 rounded-xl bg-red-200 text-red-900 hover:bg-red-900 hover:text-red-500" %>
   <table>
     <thead>
       <tr>
