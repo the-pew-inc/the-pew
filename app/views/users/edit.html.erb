@@ -1,30 +1,30 @@
 <!-- app/views/users/edit.html.erb -->
-<%= form_with model: @user, url: account_path, method: :put do |form| %>
+<%= form_with model: @user, url: update_account_path, method: :put do |form| %>
   <%= render partial: "shared/form_errors", locals: { object: form.object } %>
   <%= form.fields_for :profile do |f| %>
     <div>
       <%= f.label :nickname %>
-      <%= f.text_field :nickname, autocomplete: "nickname" %>
+      <%= f.text_field :nickname, autocomplete: "nickname", class: "form-input w-full block rounded-xl border-slate-300 border-2 focus:outline-none focus:border-green-500 focus:ring-green-500" %>
     </div>
   <% end %>
   <div>
     <%= form.label :email, "Current Email" %>
-    <%= form.email_field :email, autocomplete: "email"  %>
+    <%= form.email_field :email, autocomplete: "email", class: "form-input w-full block rounded-xl border-slate-300 border-2 focus:outline-none focus:border-green-500 focus:ring-green-500"  %>
   </div>
   <div>
     <%= form.label :password, "Password (leave blank if you don't want to change it)" %>
-    <%= form.password_field :password, autocomplete: "new-password" %>
+    <%= form.password_field :password, autocomplete: "new-password", class: "form-input w-full block rounded-xl border-slate-300 border-2 focus:outline-none focus:border-green-500 focus:ring-green-500" %>
   </div>
   <hr/>
   <div>
     <%= form.label :current_password, "Current password (we need your current password to confirm your changes)" %>
-    <%= form.password_field :current_password, autocomplete: "current-password" %>
+    <%= form.password_field :current_password, autocomplete: "current-password", class: "form-input w-full block rounded-xl border-slate-300 border-2 focus:outline-none focus:border-green-500 focus:ring-green-500" %>
   </div>
-  <%= form.submit "Update Account" %>
+  <%= form.submit "Update Account", class: "px-3 py-2 rounded bg-green-500 text-white" %>
 <% end %>
 <%# Current Sessions %>
 <h2>Current Logins</h2>
-<% if @active_sessions.any? %>
+<% if @active_sessions %>
   <%= button_to "Log out of all other sessions", destroy_all_active_sessions_path, method: :delete %>
   <table>
     <thead>

@@ -2,9 +2,9 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Account routes
-  put 'account', to: 'users#update'
-  get 'account', to: 'users#edit'
-  delete 'account', to: 'users#destroy'
+  put 'account/:id', to: 'users#update', as: 'update_account'
+  get 'account/:id', to: 'users#edit', as: 'edit_account'
+  delete 'account/:id', to: 'users#destroy', as: 'destroy_account'
 
   # User routes
   post 'sign_up', to: 'users#create'
