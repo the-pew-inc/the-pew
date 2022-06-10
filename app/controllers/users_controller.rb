@@ -16,7 +16,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     
     # make sure the user is not the current user
-    not_owner
+    not_owner and return
 
     # disconnect the user from the current session
     reset_session
@@ -31,7 +31,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
 
     # make sure the user is not the current user
-    not_owner
+    not_owner and return
 
     # retrieve the user's sessions
     @active_sessions = @user.active_sessions.order(created_at: :desc)
