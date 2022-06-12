@@ -9,10 +9,10 @@
     <div class="mx-auto">
       <%= form_with url: login_path, scope: :user do |form| %>
         <div class="mb-4">
-          <%= form.email_field :email, required: true, autocomplete: "email", class: "form-input w-full block rounded-xl border-green-500 border-2", placeholder: "Your email address" %>
+          <%= form.email_field :email, required: true, autocomplete: "email", class: "form-input w-full block rounded-xl border-slate-300 border-2 focus:outline-none focus:border-green-500 focus:ring-green-500", placeholder: "Your email address" %>
         </div>
         <div class="mb-6">
-          <%= form.password_field :password, required: true, autocomplete: "current-password", class: "form-input w-full block rounded-xl border-green-500 border-2", placeholder: "Password" %>
+          <%= form.password_field :password, required: true, autocomplete: "current-password", class: "form-input w-full block rounded-xl border-slate-300 border-2 focus:outline-none focus:border-green-500 focus:ring-green-500", placeholder: "Password" %>
         </div>
         <div class="flex flex-row items-center justify-between mb-6">
           <div class="flex flex-1 items-center space-x-2">

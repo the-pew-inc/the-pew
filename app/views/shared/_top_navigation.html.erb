@@ -43,7 +43,7 @@
                   <span class="font-bold"><%= current_user.profile.nickname.strip %></span>
                 </div>
                 <div>
-                  <%= link_to "Account settings", account_path, class: "text-gray-700 block w-full text-left px-4 py-2 text-sm" %>
+                  <%= link_to "Account settings", edit_account_path(current_user), class: "text-gray-700 block w-full text-left px-4 py-2 text-sm" %>
                   <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-1">Support</a>
                   <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-2">License</a>
                 </div>
@@ -78,7 +78,7 @@
           <ul class="">
             <li class="active"><%= link_to "Home", root_path, class: "block text-sm px-2 py-4 text-white bg-green-500 font-semibold" %></li>
             <% if user_signed_in? %>
-              <li><%= link_to "Account settings", account_path, class: "block text-sm px-2 py-4 hover:bg-green-500 transition duration-300" %></li>
+              <li><%= link_to "Account settings", edit_account_path(current_user), class: "block text-sm px-2 py-4 hover:bg-green-500 transition duration-300" %></li>
               <li><a href="#contact" class="block text-sm px-2 py-4 hover:bg-green-500 transition duration-300">Contact Us</a></li>
               <%= link_to "Sign out", logout_path, data: { turbo_method: :delete }, class: "block text-sm px-2 py-4 hover:bg-green-500 transition duration-300" %>
             <% else %>

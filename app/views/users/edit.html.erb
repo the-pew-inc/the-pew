@@ -1,31 +1,37 @@
 <!-- app/views/users/edit.html.erb -->
-<%= form_with model: @user, url: account_path, method: :put do |form| %>
+<%= form_with model: @user, url: update_account_path, method: :put do |form| %>
   <%= render partial: "shared/form_errors", locals: { object: form.object } %>
   <%= form.fields_for :profile do |f| %>
     <div>
       <%= f.label :nickname %>
-      <%= f.text_field :nickname, autocomplete: "nickname" %>
+      <%= f.text_field :nickname, autocomplete: "nickname", class: "form-input w-full block rounded-xl border-slate-300 border-2 focus:outline-none focus:border-green-500 focus:ring-green-500" %>
     </div>
   <% end %>
   <div>
     <%= form.label :email, "Current Email" %>
-    <%= form.email_field :email, autocomplete: "email"  %>
+    <%= form.email_field :email, autocomplete: "email", class: "form-input w-full block rounded-xl border-slate-300 border-2 focus:outline-none focus:border-green-500 focus:ring-green-500 mb-1"  %>
+    <% if @user.confirmed %>
+      <span class="bg-green-300 text-green-700 text-sm px-4 py-1 rounded-full">confirmed</span>
+    <% else %>
+      <span class="bg-orange-300 text-orange-700 text-sm px-4 py-1 rounded-full">unconfirmed</span> <%= link_to "resend confirmation", resend_confirmation_path(@user), data: { 'turbo-method': :put }, class: "ml-2 text-blue-700 text-sm hover:text-blue-800 ease-in-out duration-500 transition-colors" %>
+    <% end %>
   </div>
+  <h2 class="font-bold text-lg my-3">Change your password</h2>
   <div>
     <%= form.label :password, "Password (leave blank if you don't want to change it)" %>
-    <%= form.password_field :password, autocomplete: "new-password" %>
+    <%= form.password_field :password, autocomplete: "new-password", class: "form-input w-full block rounded-xl border-slate-300 border-2 focus:outline-none focus:border-green-500 focus:ring-green-500" %>
   </div>
   <hr/>
   <div>
     <%= form.label :current_password, "Current password (we need your current password to confirm your changes)" %>
-    <%= form.password_field :current_password, autocomplete: "current-password" %>
+    <%= form.password_field :current_password, autocomplete: "current-password", class: "form-input w-full block rounded-xl border-slate-300 border-2 focus:outline-none focus:border-green-500 focus:ring-green-500" %>
   </div>
-  <%= form.submit "Update Account" %>
+  <%= form.submit "Update Account", class: "mt-4 px-3 py-2 rounded bg-green-500 text-white" %>
 <% end %>
 <%# Current Sessions %>
-<h2>Current Logins</h2>
-<% if @active_sessions.any? %>
-  <%= button_to "Log out of all other sessions", destroy_all_active_sessions_path, method: :delete %>
+<h2 class="font-bold text-lg my-3">Current Logins</h2>
+<% if @active_sessions %>
+  <%= button_to "Log out of all sessions", destroy_all_active_sessions_path, method: :delete, class: "py-3 px-4 rounded-xl bg-red-200 text-red-900 hover:bg-red-900 hover:text-red-500" %>
   <table>
     <thead>
       <tr>
