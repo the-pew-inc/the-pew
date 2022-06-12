@@ -13,9 +13,7 @@ class SessionsController < ApplicationController
     end
 
     if @user
-      if !@user.confirmed
-        redirect_to(new_confirmation_path, alert: 'You must confirm your email before being able to login.')
-      elsif @user.locked
+      if @user.locked
         redirect_to(:new, alert: 'Your account is locked.')
       elsif @user.authenticate(params[:user][:password])
         after_login_path = session[:user_return_to] || root_path
