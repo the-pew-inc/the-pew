@@ -1,20 +1,17 @@
-<section>
+<section class="text-center">
   <div>
-    <h1 class="text-xl font-bold text-slate-800">
+    <h1 class="text-2xl font-bold text-slate-800">
       <%= @event.name %>
     </h1>
   </div>
   <div>
-    Go to <span class="text-lg font-black">https://ask.thepew.io</span> and enter the following code:<br>
-    <span class="font-bold text-2xl"><%= @event.short_code %></span>
+    Go to <span class="text-xl font-black">https://ask.thepew.io</span> and enter the following code:<br>
+    <span class="font-bold text-2xl">PIN: <%= @event.short_code %></span>
   </div>
   <div class="font-light text-lg italic">
-    -- or --
+    -- Or scan the following QR code --
   </div>
-  <div>
-    Open your phone camera and point to the following QR Code:
-  </div>
-  <div>
-    <%= image_tag @event.qr_code if @event.qr_code.present? %>
+  <div class="mx-auto w-3/5 border-2 border-green-500 border-spacing-1 rounded-2xl">
+    <%= image_tag @event.qr_code, class: 'mx-auto object-git w-full ' if @event.qr_code.present?  %>
   </div>
 </section>

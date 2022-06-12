@@ -1,5 +1,6 @@
 class QrGenerator < ApplicationService
   require 'rqrcode'
+  TRANSPARENT = ::ChunkyPNG::Color::TRANSPARENT
 
   attr_reader :val
 
@@ -12,11 +13,11 @@ class QrGenerator < ApplicationService
 
     png = qrcode.as_png(
       bit_depth: 1,
-      border_modules: 4,
+      border_modules: 0,
       color_mode: ChunkyPNG::COLOR_GRAYSCALE,
       color: 'black',
       file: nil,
-      fill: 'white',
+      fill: TRANSPARENT,
       module_px_size: 20,
       resize_exactly_to: false,
       resize_gte_to: false,
