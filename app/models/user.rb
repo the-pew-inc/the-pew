@@ -4,8 +4,9 @@ class User < ApplicationRecord
   attr_accessor :current_password
 
   # Callbacks
-  before_save :downcase_email, if: :will_save_change_to_email?
-  before_save :generate_password_digest
+  after_create :send_confirmation_email!
+  before_save  :downcase_email, if: :will_save_change_to_email?
+  before_save  :generate_password_digest
 
   # Mailer configuration
   MAILER_FROM_EMAIL = '<Ask Me!> no-reply@ask.me'
@@ -35,16 +36,16 @@ class User < ApplicationRecord
     update_columns(confirmed_at: Time.current, confirmed: true)
   end
 
-  # Send a confirmation email to the user
-  def send_confirmation_email!
-    confirmation_token = signed_id(purpose: :email_confirmation, expires_in: CONFIRMATION_TOKEN_EXPIRATION)
-    UserMailer.confirmation(self, confirmation_token).deliver_now
-  end
-
   # Send a password reset email to the user
   def send_password_reset_email!
     password_reset_token = signed_id(purpose: :reset_password, expires_in: PASSWORD_RESET_TOKEN_EXPIRATION)
     UserMailer.password_reset(self, password_reset_token).deliver_now
+  end
+
+  # Send a confirmation email to the user
+  def send_confirmation_email!
+    confirmation_token = signed_id(purpose: :email_confirmation, expires_in: CONFIRMATION_TOKEN_EXPIRATION)
+    UserMailer.confirmation(self, confirmation_token).deliver_now
   end
 
   private
@@ -59,4 +60,12 @@ class User < ApplicationRecord
     require('argon2')
     self.password_digest = Argon2::Password.create(password) if password.present?
   end
+
+  # Method called only when an existing user changes their email address.
+  def change_email
+    send_confirmation_email!
+    self.confirmed = false
+    self.confirmed_at = nil
+  end
+  
 end

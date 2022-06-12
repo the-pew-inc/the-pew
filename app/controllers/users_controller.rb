@@ -5,7 +5,6 @@ class UsersController < ApplicationController
   def create
     @user = User.new(create_user_params)
     if @user.save
-      @user.send_confirmation_email!
       redirect_to(root_path, notice: 'Please check your email for confirmation instructions.')
     else
       render(:new, status: :unprocessable_entity)
@@ -77,6 +76,22 @@ class UsersController < ApplicationController
     end
   end
 
+  def resend_confirmation
+    @user = User.find(params[:id])
+    
+    # Make sure the user is entitled to resend the confirmation email
+    not_owner and return
+
+    if @user.confirmed
+      # Make sure the user is not already confirmed
+      redirect_to(root_path, notice: 'Your account is already confirmed.')
+    else
+      # Otherwise, send the confirmation email
+      @user.send_confirmation_email!
+      redirect_to(edit_account_path, notice: 'Please check your email for confirmation instructions.')
+    end
+  end
+
   private
 
   def create_user_params
@@ -114,9 +129,6 @@ class UsersController < ApplicationController
   def user_updates_their_email(msg)
     # If the user is updating their email, send a confirmation email and adavise them to check their email
     if update_user_params[:email].present? && update_user_params[:email] != @user.email
-      @user.send_confirmation_email!
-      @user.confirmed = false
-      @user.confirmed_at = nil
       'Email & account updated successfully. Please check your mail for confirmation instructions.' 
     else
       msg

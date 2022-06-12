@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   put 'account/:id', to: 'users#update', as: 'update_account'
   get 'account/:id', to: 'users#edit', as: 'edit_account'
   delete 'account/:id', to: 'users#destroy', as: 'destroy_account'
+  put 'account/:id/resend_confirmation', to: 'users#resend_confirmation', as: 'resend_confirmation'
 
   # User routes
   post 'sign_up', to: 'users#create'
