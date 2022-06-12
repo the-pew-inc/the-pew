@@ -15,3 +15,6 @@ application.register("popper", PopperController)
 
 import ToggleController from "./toggle_controller.js"
 application.register("toggle", ToggleController)
+
+import ValidatePinController from "./validate_pin_controller.js"
+application.register("validate-pin", ValidatePinController)
