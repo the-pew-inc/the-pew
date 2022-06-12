@@ -13,7 +13,7 @@
     <% if @user.confirmed %>
       <span class="bg-green-300 text-green-700 text-sm px-4 py-1 rounded-full">confirmed</span>
     <% else %>
-      <span class="bg-blue-300 text-blue-700 text-sm px-4 py-1 rounded-full">unconfirmed</span> <%= link_to "resend confirmation", resend_confirmation_path(@user), data: { 'turbo-method': :put }, class: "ml-2 text-blue-700 text-sm hover:text-blue-800 ease-in-out duration-500 transition-colors" %>
+      <span class="bg-orange-300 text-orange-700 text-sm px-4 py-1 rounded-full">unconfirmed</span> <%= link_to "resend confirmation", resend_confirmation_path(@user), data: { 'turbo-method': :put }, class: "ml-2 text-blue-700 text-sm hover:text-blue-800 ease-in-out duration-500 transition-colors" %>
     <% end %>
   </div>
   <h2 class="font-bold text-lg my-3">Change your password</h2>

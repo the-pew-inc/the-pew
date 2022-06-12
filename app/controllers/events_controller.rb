@@ -7,10 +7,14 @@ class EventsController < ApplicationController
   end
 
   def new
+    is_confirmed? and return
+
     @event = current_user.events.new
   end
 
   def create
+    is_confirmed? and return
+
     @event = current_user.events.new(create_event_params)
     # @event.user_id = current_user.id
     if @event.save
@@ -33,6 +37,8 @@ class EventsController < ApplicationController
   end
 
   def update
+    is_confirmed? and return
+
     @event = Event.find(params[:id])
     if @event.update(update_event_params)
       redirect_to(@event)
@@ -42,6 +48,8 @@ class EventsController < ApplicationController
   end
 
   def destroy
+    is_confirmed? and return
+
     @event = Event.find(params[:id])
     if @event.user_id != current_user.id
       flash[:error] = 'You are not the owner of this event'
@@ -65,5 +73,13 @@ class EventsController < ApplicationController
 
   def update_event_params
     params.require(:event).permit(:name, :start_date, :stop_date, :event_type, :status, :short_code)
+  end
+
+  # Called to make sure a user's account is confirmed before they can create or edit an event.
+  def is_confirmed?
+    if !current_user.confirmed?
+      flash[:alert] = 'You must confirm your email address before you can create or edit an event.'
+      redirect_to(edit_account_path(current_user)) and return true
+    end
   end
 end
