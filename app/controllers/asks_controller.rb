@@ -1,5 +1,25 @@
 class AsksController < ApplicationController
-  def index 
+  # GET (/1)
+  def index
+    # If pin is present as a parameter
+    if params[:pin].present?
+      pin = params[:pin]
+
+      # Validate the PIN format first
+      validate_pin_format(pin) and return
+
+      # Search for the event with the given pin
+      @event = Event.find_by(short_code: pin)
+
+      # Redirect to the event if found
+    end
+  end
+
+  # GET /event/:event_id
+  # Used to ilst all public and active rooms on the platform 
+  def event_rooms
+    @event = Event.find(params[:event_id])
+    @rooms = @event.rooms
   end
 
   # POST /pin/1
@@ -7,11 +27,7 @@ class AsksController < ApplicationController
     pin = params[:pin]
 
     # Validate the PIN format first
-    if !is_pin_format_valid(pin)
-      flash[:alert] = "Invalid PIN format"
-      redirect_to ask_root_path, status: 406
-      return
-    end
+    validate_pin_format(pin) and return
     
     @event = Event.find_by(short_code: pin)
 
@@ -28,11 +44,10 @@ class AsksController < ApplicationController
 
   private
 
-  def is_pin_format_valid(pin)
-    return false if pin.blank?
-    return false if pin.length != 6
-    # return false if pin.match(/[^0-9]/)
-    return false if pin.is_a? Integer
-    return true
+  def validate_pin_format(pin)
+    if pin.blank? || pin.length != 6 || (pin.is_a? Integer)
+      flash.now[:alert] = "Invalid PIN format"
+      redirect_to ask_root_path, status: 406 and return true
+    end
   end
 end

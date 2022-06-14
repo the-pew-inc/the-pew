@@ -43,9 +43,9 @@ Rails.application.routes.draw do
 
   # Answer routes / ONLY accessible via the https://ask. domain
   constraints subdomain: 'ask' do
-    # get "/", to: "asks#index"
-    root to: 'asks#index', as: :ask_root
+    get '(/:pin)', to: "asks#index", as: :ask_root
     post '/pin', to: 'asks#validate_pin'
+    get '/event/:event_id', to: 'asks#event_rooms', as: :event_rooms
   end
 
   # Defines the main root path route ("/")
