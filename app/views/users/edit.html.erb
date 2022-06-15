@@ -31,7 +31,7 @@
 <%# Current Sessions %>
 <h2 class="font-bold text-lg my-3">Current Logins</h2>
 <% if @active_sessions %>
-  <%= button_to "Log out of all sessions", destroy_all_active_sessions_path, method: :delete, class: "py-3 px-4 rounded-xl bg-red-200 text-red-900 hover:bg-red-900 hover:text-red-500" %>
+  <%= button_to "Log out of all sessions", destroy_all_active_sessions_path, method: :delete, form: { data: { turbo_confirm: 'Are you sure you want to log out of all sessions including this one?' } }, class: "py-3 px-4 rounded-xl bg-red-200 text-red-900 hover:bg-red-800 hover:text-red-200" %>
   <table>
     <thead>
       <tr>
