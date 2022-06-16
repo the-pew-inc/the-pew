@@ -10,6 +10,9 @@ application.register("clipboard", ClipboardController)
 import CloseFlashController from "./close_flash_controller.js"
 application.register("close-flash", CloseFlashController)
 
+import NavbarController from "./navbar_controller.js"
+application.register("navbar", NavbarController)
+
 import PopperController from "./popper_controller.js"
 application.register("popper", PopperController)
 
