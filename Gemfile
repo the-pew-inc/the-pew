@@ -53,6 +53,8 @@ gem 'omniauth'
 gem 'omniauth-google-oauth2' 
 # Required when not using Devise
 gem 'omniauth-rails_csrf_protection' 
+# Apple Sign-in support
+gem 'apple_id'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
