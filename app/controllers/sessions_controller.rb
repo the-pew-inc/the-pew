@@ -1,6 +1,7 @@
 class SessionsController < ApplicationController
   before_action :redirect_if_authenticated, only: %i[create new]
   before_action :authenticate_user!, only: [:destroy]
+  before_action :setup_apple_client, only: [:apple_callback]
 
   def create
     @user = User.find_by(email: params[:user][:email].downcase)
@@ -47,6 +48,72 @@ class SessionsController < ApplicationController
       redirect_to(after_login_path, notice: 'Signed in.')
     else
       redirect_to(login_path, alert: 'There was an error while trying to authenticate you using Google.')
+    end
+  end
+
+  # Apple Sign In
+  def apple_callback
+    # return unprocessable_entity unless params[:code].present? && params[:identity_token].present?
+    if !params[:code].present? || !params[:identity_token].present?
+      flash.now[:alert] = 'Error: authentication param missing.'
+      render(:new, status: :unprocessable_entity)
+      return
+    end
+    
+    @client.authorization_code = params[:code]
+    
+    begin
+      token_response = @client.access_token!
+    rescue AppleID::Client::Error => e
+      # gives useful messages from apple on failure
+      # puts e
+      return unauthorized
+    end
+    
+    id_token_back_channel = token_response.id_token
+    id_token_back_channel.verify!(
+      client: @client,
+      access_token: token_response.access_token)
+
+    id_token_front_channel = AppleID::IdToken.decode(params[:identity_token])
+    id_token_front_channel.verify!(
+      client: @client,
+      code: params[:code],
+    )
+    
+    id_token = token_response.id_token
+    
+    # Start New code
+    
+    email = response[:info][:email]
+    # Check if user exists with this email
+    u = User.find_by(email: email)
+    if u && u.provider.nil?
+      # Return to the login page with an error
+      redirect_to(login_path, alert: 'This email is already registered with an account.')
+      return
+    end
+
+    # If the user does not exist with this email, then process
+    user = User.find_by(uid: response[:uid], provider: response[:provider])
+
+    # End New Code
+
+    # You may want to change the "find_by" method to a less time consuming method.
+    # id_token.sub, a.k.a apple_uid is unique per user, no matter how many times you perform the same request.
+    @user = User.find_by(apple_uid: id_token.sub)
+    
+    return sign_in_and_return if @user.present?
+    
+    @user = User.find_by_email(id_token.email)
+    
+    if @user.present
+      # Enable apple login to existing user
+      @user.update_column(:apple_uid, id_token.sub)
+      return sign_in_and_return
+    else
+      @user = User.register_user_from_apple(id_token.sub, id_token.email)
+      return created
     end
   end
 
@@ -107,5 +174,26 @@ class SessionsController < ApplicationController
     # Generate a unique filename
     filename = Time.current.to_s + SecureRandom.hex(16)
     user.profile.avatar.attach(io: tempavatar, filename: filename, content_type: tempavatar.content_type)
+  end
+
+  # Apple sign in private methods
+  def setup_apple_client
+    if Rails.env.production?
+      @client ||= AppleID::Client.new(
+        identifier: ENV['APPLE_CLIENT_ID'],
+        team_id: ENV['APPLE_TEAM_ID'],
+        key_id: ENV['APPLE_KEY'],
+        private_key: OpenSSL::PKey::EC.new(ENV['APPLE_PRIVATE_KEY']),
+        redirect_uri: ENV['APPLE_REDIRECT_URI']
+        )
+    else
+      @client ||= AppleID::Client.new(
+        identifier: Rails.application.credentials.apple[:apple_client_id],
+        team_id: Rails.application.credentials.apple[:apple_team_id],
+        key_id: Rails.application.credentials.apple[:apple_key],
+        private_key: OpenSSL::PKey::EC.new(Rails.application.credentials.apple[:apple_private_key]),
+        redirect_uri: Rails.application.credentials.apple[:apple_redirect_uri]
+      )
+    end
   end
 end

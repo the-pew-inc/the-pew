@@ -19,6 +19,9 @@ Rails.application.routes.draw do
   # Google OAuth routes
   get '/auth/:provider/callback', to: 'sessions#omniauth'
 
+  # Apple Sign In routes
+  post 'auth/apple' => 'sessions#apple_callback'
+
   # Password routes
   resources :passwords, only: %i[create edit new update], param: :password_reset_token
 
