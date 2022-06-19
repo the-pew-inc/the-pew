@@ -16,18 +16,22 @@ class SessionsController < ApplicationController
     if @user
       if @user.locked
         redirect_to(:new, alert: 'Your account is locked.')
+        return
       elsif @user.authenticate(params[:user][:password])
         after_login_path = session[:user_return_to] || root_path
         active_session = login(@user)
         remember(active_session) if params[:user][:remember_me] == '1'
         redirect_to(after_login_path, notice: 'Signed in.')
+        return
       else
         flash.now[:alert] = 'Incorrect email or password.'
         render(:new, status: :unprocessable_entity)
+        return
       end
     else
       flash.now[:alert] = 'Incorrect email or password.'
       render(:new, status: :unprocessable_entity)
+      return
     end
   end
 
@@ -55,6 +59,7 @@ class SessionsController < ApplicationController
   def apple_callback
     # return unprocessable_entity unless params[:code].present? && params[:identity_token].present?
     if !params[:code].present? || !params[:identity_token].present?
+      logger.error "Error: Apple Sign in failed. Missing code or identity_token"
       flash.now[:alert] = 'Error: authentication param missing.'
       render(:new, status: :unprocessable_entity)
       return
@@ -65,9 +70,10 @@ class SessionsController < ApplicationController
     begin
       token_response = @client.access_token!
     rescue AppleID::Client::Error => e
-      # gives useful messages from apple on failure
-      # puts e
-      return unauthorized
+      logger.error "Error: #{e.message}"
+      flash.now[:alert] = "Error: #{e.message}"
+      render(:new, status: :unprocessable_entity)
+      return
     end
     
     id_token_back_channel = token_response.id_token
@@ -81,11 +87,10 @@ class SessionsController < ApplicationController
       code: params[:code],
     )
     
+    # Extract Apple ID_Token
     id_token = token_response.id_token
-    
-    # Start New code
-    
-    email = response[:info][:email]
+        
+    email = id_token.email
     # Check if user exists with this email
     u = User.find_by(email: email)
     if u && u.provider.nil?
@@ -95,26 +100,36 @@ class SessionsController < ApplicationController
     end
 
     # If the user does not exist with this email, then process
-    user = User.find_by(uid: response[:uid], provider: response[:provider])
-
-    # End New Code
-
-    # You may want to change the "find_by" method to a less time consuming method.
-    # id_token.sub, a.k.a apple_uid is unique per user, no matter how many times you perform the same request.
-    @user = User.find_by(apple_uid: id_token.sub)
+    user = User.find_by(apple_uid: id_token.sub, provider: response[:provider])
     
-    return sign_in_and_return if @user.present?
-    
-    @user = User.find_by_email(id_token.email)
-    
-    if @user.present
-      # Enable apple login to existing user
-      @user.update_column(:apple_uid, id_token.sub)
-      return sign_in_and_return
+    if user.present?
+      # The user exists, make sure the account is not locked
+      user.profile.nickname = id_token.name
+      if user.locked
+        redirect_to(:new, alert: 'Your account is locked.')
+        return
+      end
     else
-      @user = User.register_user_from_apple(id_token.sub, id_token.email)
-      return created
+      # The user does not exist, so create a new user
+      user = User.new(
+        apple_uid: uid,
+        email: email,
+        provider: :apple,
+        uid: email,
+        confirmed: true,
+        confirmed_at: Time.current.utc,
+      )
+      user.build_profile
+      user.profile.nickname = id_token.name
+      user.password = SecureRandom.alphanumeric(16)
+      user.save!
     end
+    
+    # Create a new session for the user
+    session[:user_id] = user.id
+    after_login_path = session[:user_return_to] || root_path
+    login(user)
+    redirect_to(after_login_path, notice: 'Signed in.')
   end
 
   private
@@ -144,7 +159,7 @@ class SessionsController < ApplicationController
       user.password = SecureRandom.alphanumeric(16)
       if response[:info][:email_verified]
         user.confirmed = true
-        user.confirmed_at = Time.current
+        user.confirmed_at = Time.current.utc
       else
         user.send_confirmation_email!
       end
@@ -172,7 +187,7 @@ class SessionsController < ApplicationController
     tempavatar = Down.download(image_url)
 
     # Generate a unique filename
-    filename = Time.current.to_s + SecureRandom.hex(16)
+    filename = Time.current.utc.to_s + SecureRandom.hex(16)
     user.profile.avatar.attach(io: tempavatar, filename: filename, content_type: tempavatar.content_type)
   end
 
