@@ -203,11 +203,11 @@ class SessionsController < ApplicationController
         )
     else
       @client ||= AppleID::Client.new(
-        identifier: Rails.application.credentials.apple[:apple_client_id],
-        team_id: Rails.application.credentials.apple[:apple_team_id],
-        key_id: Rails.application.credentials.apple[:apple_key],
-        private_key: OpenSSL::PKey::EC.new(Rails.application.credentials.apple[:apple_private_key]),
-        redirect_uri: Rails.application.credentials.apple[:apple_redirect_uri]
+        identifier: Rails.application.credentials.apple[:client_id],
+        team_id: Rails.application.credentials.apple[:team_id],
+        key_id: Rails.application.credentials.apple[:key],
+        private_key: OpenSSL::PKey::EC.new(Rails.application.credentials.apple[:private_key]),
+        redirect_uri: Rails.application.credentials.apple[:redirect_uri]
       )
     end
   end

@@ -20,7 +20,8 @@ Rails.application.routes.draw do
   get '/auth/:provider/callback', to: 'sessions#omniauth'
 
   # Apple Sign In routes
-  post 'auth/apple' => 'sessions#apple_callback'
+  post 'auth/apple', to: 'sessions#apple_callback'
+  post 'webhooks/apple', to: 'webhooks#apple'
 
   # Password routes
   resources :passwords, only: %i[create edit new update], param: :password_reset_token
