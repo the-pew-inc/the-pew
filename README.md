@@ -15,3 +15,5 @@ TMP: [https://blog.saeloun.com/2019/10/10/rails-6-adds-support-for-multi-environ
 TMP - return from method in controller [https://blog.arkency.com/2014/07/4-ways-to-early-return-from-a-rails-controller/]
 
 TMP - better flash? [https://petr.codes/blog/rails/modern-rails-flash-messages/part-1/]
+
+TMP - Apple Authentication Notification v2 [https://developer.apple.com/documentation/appstoreservernotifications/app_store_server_notifications_v2]
