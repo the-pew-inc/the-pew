@@ -6,7 +6,7 @@ export default class extends Controller {
 
   change(event) {
     const pin = this.pinTarget.value;
-    console.debug("pin", pin);
+
     if (pin.length > 6) {
       this.pinErrorTarget.classList.remove("hidden");
       this.pinTarget.value = pin.substring(0, 6);
