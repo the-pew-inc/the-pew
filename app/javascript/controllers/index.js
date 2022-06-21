@@ -18,3 +18,4 @@ application.register("toggle", ToggleController);
 
 import ValidatePinController from "./validate_pin_controller.js";
 application.register("validate-pin", ValidatePinController);
+
