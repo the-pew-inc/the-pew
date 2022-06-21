@@ -56,6 +56,9 @@ gem 'omniauth-rails_csrf_protection'
 # Apple Sign-in support
 gem 'apple_id'
 
+# Adding Pundit to manage authorization(s) [https://github.com/varvet/pundit]
+gem 'pundit'
+
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
