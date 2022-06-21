@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/faker-ruby/faker.git
-  revision: e5268b34200009baab3ae5f21b454f7ffd5e61b7
+  revision: 9e54d590f9ba5009e345aacd6d04555831ac3c99
   branch: master
   specs:
     faker (2.21.0)
@@ -127,6 +127,8 @@ GEM
       rake
     globalid (1.0.0)
       activesupport (>= 5.0)
+    groupdate (6.1.0)
+      activesupport (>= 5.2)
     hashie (5.0.0)
     httpclient (2.8.3)
     i18n (1.10.0)
@@ -160,7 +162,7 @@ GEM
     method_source (1.0.0)
     mini_magick (4.11.0)
     mini_mime (1.1.2)
-    minitest (5.16.0)
+    minitest (5.16.1)
     msgpack (1.5.2)
     multi_json (1.15.0)
     multi_xml (0.6.0)
@@ -358,6 +360,7 @@ DEPENDENCIES
   debug
   down (~> 5.0)
   faker!
+  groupdate
   image_processing (~> 1.2)
   jbuilder
   jsbundling-rails
