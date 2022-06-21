@@ -19,6 +19,10 @@ class User < ApplicationRecord
   has_many :events,          dependent: :destroy
   accepts_nested_attributes_for :profile
 
+  # Relations for Roles & Assignments
+  has_many :assignments
+  has_many :roles, through: :assignments
+
   # Validations
   validates :email, presence: true, uniqueness: { case_sensitive: false }, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :password, presence: true, length: { minimum: 6, maximum: 35 }, on: :create
@@ -46,6 +50,11 @@ class User < ApplicationRecord
   def send_confirmation_email!
     confirmation_token = signed_id(purpose: :email_confirmation, expires_in: CONFIRMATION_TOKEN_EXPIRATION)
     UserMailer.confirmation(self, confirmation_token).deliver_now
+  end
+
+  # Valid if a user has a certain role in the application
+  def role?(role)
+    roles.any? { |r| r.name.underscore.to_sym == role }
   end
 
   private

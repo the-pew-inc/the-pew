@@ -11,4 +11,17 @@ class UserTest < ActiveSupport::TestCase
       assert_not @user.valid?
     end
   end
+
+  test "roles and assignments" do
+    should have_many(:assignments)
+    should have_many(:roles).through(:assignments)
+  end
+
+  test 'user should have role' do
+    assert_not(@subject.role? :admin)
+
+    @subject.roles << Role.new(name: 'admin')
+
+    assert(@subject.role? :admin)
+  end
 end
