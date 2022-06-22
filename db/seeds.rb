@@ -7,6 +7,14 @@
 #   Character.create(name: "Luke", movie: movies.first)
 require 'faker'
 
+Role.create([
+  {name: "owner"},
+  {name: "admin"},
+  {name: "moderator"},
+  {name: "guest"},
+  {name: "billing"}
+  ])
+
 users = User.create([
   { email: "test@test.com", password: "passpass"},
   { email: "test2@test.com", password: "passpass"},
