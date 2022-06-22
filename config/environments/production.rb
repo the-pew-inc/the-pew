@@ -94,6 +94,9 @@ Rails.application.configure do
   # Mailer configuration
   # Heroku / Mailgun
   config.action_mailer.delivery_method = :smtp
+  config.action_mailer.default_charset = 'utf-8' 
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
   config.action_mailer.smtp_settings = {
   address:              ENV['MAILGUN_SMTP_SERVER'],
   port:                 ENV['MAILGUN_SMTP_PORT'],
