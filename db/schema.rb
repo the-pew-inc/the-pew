@@ -10,9 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_21_202054) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_22_183029) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "accounts", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "name"
+    t.string "website"
+    t.string "country"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["country"], name: "index_accounts_on_country"
+    t.index ["user_id"], name: "index_accounts_on_user_id"
+  end
 
   create_table "active_sessions", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -94,6 +105,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_21_202054) do
     t.index ["user_id"], name: "index_events_on_user_id"
   end
 
+  create_table "members", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "account_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_members_on_account_id"
+    t.index ["user_id"], name: "index_members_on_user_id"
+  end
+
   create_table "profiles", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "nickname"
@@ -152,6 +172,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_21_202054) do
     t.index ["uid"], name: "index_users_on_uid", unique: true
   end
 
+  add_foreign_key "accounts", "users"
   add_foreign_key "active_sessions", "users", on_delete: :cascade
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
@@ -160,6 +181,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_21_202054) do
   add_foreign_key "attendances", "events"
   add_foreign_key "attendances", "users"
   add_foreign_key "events", "users"
+  add_foreign_key "members", "accounts"
+  add_foreign_key "members", "users"
   add_foreign_key "profiles", "users"
   add_foreign_key "questions", "rooms"
   add_foreign_key "questions", "users"
