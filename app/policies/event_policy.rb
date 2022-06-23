@@ -1,8 +1,12 @@
 class EventPolicy < ApplicationPolicy
   class Scope < Scope
-    # NOTE: Be explicit about which records you allow access to!
-    # def resolve
-    #   scope.all
-    # end
+    def update?
+      user.id == current_user.id
+    end
+
+    def destroy?
+      user.id == current_user.id
+    end
+
   end
 end
