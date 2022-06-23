@@ -1,0 +1,12 @@
+# inside config/sidekiq.yml
+development:
+  :concurrency: 2
+
+production:
+  :concurrency: 5
+
+:max_retries: 1
+
+:queues:
+  - default
+  - mailer

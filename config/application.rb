@@ -15,6 +15,9 @@ module Ask
     # See [https://guides.rubyonrails.org/configuring.html#actiondispatch-hostauthorization] for more details
     config.hosts = nil unless Rails.env.production?
 
+    # Configure ActiveJob to use Sidekiq
+    config.active_job.queue_adapter = :sidekiq
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
