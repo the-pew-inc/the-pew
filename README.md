@@ -19,3 +19,5 @@ TMP - better flash? [https://petr.codes/blog/rails/modern-rails-flash-messages/p
 TMP - Apple Authentication Notification v2 [https://developer.apple.com/documentation/appstoreservernotifications/app_store_server_notifications_v2]
 
 TMP - Roles, permissions and assignments (+ pundit) [https://www.culttt.com/2016/01/20/implementing-roles-and-permissions-in-ruby-on-rails]
+
+TMP - Turbo Stream [https://www.colby.so/posts/turbo-streams-on-rails]

@@ -384,7 +384,7 @@ DEPENDENCIES
   pundit
   rails (~> 7.0.3)
   redis (~> 4.0)
-  rolify
+  rolify (~> 6.0.0)
   rqrcode (~> 2.0)
   rubocop (~> 1.30)
   rubocop-rails
