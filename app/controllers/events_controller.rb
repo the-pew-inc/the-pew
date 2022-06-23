@@ -71,10 +71,12 @@ class EventsController < ApplicationController
     end
     if @event.destroy
       flash[:success] = 'Object was successfully deleted.'
-      redirect_to(events_path)
+      # redirect_to(events_path)
+      format.turbo_stream
     else
       flash[:error] = 'Something went wrong'
-      redirect_to(events_path)
+      # redirect_to(events_path)
+      format.turbo_stream
     end
   end
 
