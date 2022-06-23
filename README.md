@@ -21,3 +21,5 @@ TMP - Apple Authentication Notification v2 [https://developer.apple.com/document
 TMP - Roles, permissions and assignments (+ pundit) [https://www.culttt.com/2016/01/20/implementing-roles-and-permissions-in-ruby-on-rails]
 
 TMP - Turbo Stream [https://www.colby.so/posts/turbo-streams-on-rails]
+
+TMP - Good tutorial [https://www.hotrails.dev/]

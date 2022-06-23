@@ -13,7 +13,7 @@ class Event < ApplicationRecord
   validates :name, presence: true, length: { minimum: 5, maximum: 250 }
   validates :start_date, presence: true
   validates :end_date, presence: true
-  validate :end_date_is_after_start_date
+  validate  :end_date_is_after_start_date
 
   enum status: { draft: 0, published: 10, opened: 20, closed: 30, archived: 40 }
 
@@ -24,15 +24,17 @@ class Event < ApplicationRecord
 
   # Set of triggers to broadcast CRUD to the display
   after_create_commit do
-    broadcast_prepend_to :events, target: "events", partial: "events/event", locals: { event: self }
+    # broadcast_prepend_to :events, target: "events", partial: "events/event", locals: { event: self }
+    # broadcast_prepend_to "events:users_#{self.user_id}", target: "events", partial: "events/event", locals: { event: self }
+    broadcast_prepend_to [Current.user.id, :events], target: "events", partial: "events/event", locals: { event: self }
   end
 
   after_update_commit do
-    broadcast_update_to :events, partial: "events/event", locals: { event: self }
+    broadcast_update_to [Current.user.id, :events], partial: "events/event", locals: { event: self }
   end
 
   after_destroy_commit do
-    broadcast_remove_to :events
+    broadcast_remove_to [Current.user.id, :events]
   end
 
   private
