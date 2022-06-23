@@ -400,12 +400,13 @@ DEPENDENCIES
   down (~> 5.0)
   faker!
   groupdate
-  honeybadger
+  honeybadger (~> 4.0)
   image_processing (~> 1.2)
   jbuilder
   jsbundling-rails
   kredis
   mailgun-ruby (~> 1.2.5)
+  nokogiri (~> 1.13.6)
   omniauth
   omniauth-google-oauth2
   omniauth-rails_csrf_protection

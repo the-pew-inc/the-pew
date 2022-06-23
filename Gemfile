@@ -77,10 +77,13 @@ gem 'mailgun-ruby', '~>1.2.5'
 gem 'sidekiq', '~> 6.5.1'
 
 # Monitoring - Honeybadger []
-gem 'honeybadger'
+gem 'honeybadger', '~> 4.0'
 
 # Use Sass to process CSS
 # gem "sassc-rails"
+
+# Nokogiri to parse HTML and more [https://github.com/sparklemotion/nokogiri]
+gem 'nokogiri', '~> 1.13.6'
 
 # Download
 gem 'down', '~> 5.0'
