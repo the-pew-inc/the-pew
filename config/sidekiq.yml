@@ -3,10 +3,15 @@ development:
   :concurrency: 2
 
 production:
+  :concurrency: 10
+
+staging:
   :concurrency: 5
 
 :max_retries: 1
 
 :queues:
+  - [critical, 2]
   - default
   - mailer
+  - low

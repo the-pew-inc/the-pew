@@ -44,13 +44,13 @@ class User < ApplicationRecord
   # Send a password reset email to the user
   def send_password_reset_email!
     password_reset_token = signed_id(purpose: :reset_password, expires_in: PASSWORD_RESET_TOKEN_EXPIRATION)
-    UserMailer.password_reset(self, password_reset_token).deliver_now
+    UserMailer.password_reset(self, password_reset_token).deliver_later
   end
 
   # Send a confirmation email to the user
   def send_confirmation_email!
     confirmation_token = signed_id(purpose: :email_confirmation, expires_in: CONFIRMATION_TOKEN_EXPIRATION)
-    UserMailer.confirmation(self, confirmation_token).deliver_now
+    UserMailer.confirmation(self, confirmation_token).deliver_later
   end
 
   # Valid if a user has a certain role in the application
