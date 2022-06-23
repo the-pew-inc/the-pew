@@ -8,15 +8,15 @@
 require 'faker'
 
 Role.create([
-  {name: "owner"},
-  {name: "admin"},
-  {name: "moderator"},
-  {name: "guest"},
-  {name: "billing"}
+  {name: "owner"}, # Owner of an account (there is only one owner per account)
+  {name: "admin"}, # Admin of an account (there can be multiple admins in an account)
+  {name: "moderator"}, # Moderate the questions in a room or event (when defined at event level, moderate all the rooms under the given event)
+  {name: "guest"}, # Guest
+  {name: "billing"} # Manage the billing for a given account (there can be multiple billing users)
   ])
 
 users = User.create([
-  { email: "test@test.com", password: "passpass"},
+  { email: "test@test.com", password: "passpass", confirmed: true, confirmed_at: Time.current.utc},
   { email: "test2@test.com", password: "passpass"},
   { email: "test3@test.com", password: "passpass"}])
 
@@ -24,7 +24,7 @@ users.each do |user|
   Profile.create(user: user, nickname: "User #{user.id}")
 end
 
-50.times do
+20.times do
   Event.create(
     name: Faker::App.name,
     user: users.sample,

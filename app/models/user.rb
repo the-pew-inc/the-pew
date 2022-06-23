@@ -17,7 +17,7 @@ class User < ApplicationRecord
   has_many :active_sessions, dependent: :destroy
   has_one  :profile,         dependent: :destroy
   has_many :events,          dependent: :destroy
-  has_one  :account,         required: false
+  has_one  :account,         through:   :members,   required: false
   accepts_nested_attributes_for :profile
 
   # Relations for Roles & Assignments

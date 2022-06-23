@@ -1,7 +1,10 @@
 class Account < ApplicationRecord
-  belongs_to :user, optional: true
+  has_many :members
+  has_many :users,   through: :members
 
   has_one_attached :logo
+
+  has_rich_text    :description
 
   validates :website, url: { allow_nil: true, schemes: ['https'] }
   validates :name,   presence: true, length: { minimum: 3, maximum: 120 }
