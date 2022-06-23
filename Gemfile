@@ -73,6 +73,9 @@ gem 'bootsnap', require: false
 # Sidekiq [https://github.com/mperham/sidekiq]
 gem 'sidekiq', '~> 6.5.1'
 
+# Monitoring - Honeybadger []
+gem 'honeybadger'
+
 # Use Sass to process CSS
 # gem "sassc-rails"
 
