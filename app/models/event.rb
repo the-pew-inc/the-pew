@@ -25,7 +25,6 @@ class Event < ApplicationRecord
   # Set of triggers to broadcast CRUD to the display
   after_create_commit do
     # broadcast_prepend_to :events, target: "events", partial: "events/event", locals: { event: self }
-    # broadcast_prepend_to "events:users_#{self.user_id}", target: "events", partial: "events/event", locals: { event: self }
     broadcast_prepend_to [Current.user.id, :events], target: "events", partial: "events/event", locals: { event: self }
   end
 
