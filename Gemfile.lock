@@ -107,6 +107,7 @@ GEM
     childprocess (4.1.0)
     chunky_png (1.4.0)
     concurrent-ruby (1.1.10)
+    connection_pool (2.2.5)
     countries (5.0.2)
       i18n_data (~> 0.16.0)
       sixarm_ruby_unaccent (~> 1.1)
@@ -303,6 +304,10 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
+    sidekiq (6.5.1)
+      connection_pool (>= 2.2.2)
+      rack (~> 2.0)
+      redis (>= 4.2.0)
     simple_po_parser (1.1.6)
     sixarm_ruby_unaccent (1.2.0)
     sprockets (4.0.3)
@@ -390,6 +395,7 @@ DEPENDENCIES
   rubocop-rails
   ruby-vips (>= 2.1.0)
   selenium-webdriver
+  sidekiq (~> 6.5.1)
   sprockets-rails
   stimulus-rails
   turbo-rails

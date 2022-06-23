@@ -70,6 +70,9 @@ gem 'groupdate'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', require: false
 
+# Sidekiq [https://github.com/mperham/sidekiq]
+gem 'sidekiq', '~> 6.5.1'
+
 # Use Sass to process CSS
 # gem "sassc-rails"
 
