@@ -6,5 +6,6 @@
 /spec
 /node_modules
 /log
+/storage
 
 *.md
