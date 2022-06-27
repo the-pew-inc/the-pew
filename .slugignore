@@ -1,0 +1,10 @@
+# The Pew
+# Heroku Slug ignore
+
+/tmp
+/test
+/spec
+/node_modules
+/log
+
+*.md
