@@ -1,4 +1,7 @@
 class Account < ApplicationRecord
+  # enable rolify on the Account class
+  resourcify
+
   has_many :members
   has_many :users,   through: :members
 

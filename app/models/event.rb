@@ -1,6 +1,9 @@
 class Event < ApplicationRecord
   include Rails.application.routes.url_helpers
 
+  # enable rolify on the Event class
+  resourcify
+
   before_validation :set_values
   before_save :set_duration
   after_create :generate_qr_code
