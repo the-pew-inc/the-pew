@@ -56,14 +56,34 @@ gem 'omniauth-rails_csrf_protection'
 # Apple Sign-in support
 gem 'apple_id'
 
+# Adding Pundit to manage authorizations [https://github.com/varvet/pundit]
+gem 'pundit'
+# Adding Rolify to manage roles [https://github.com/RolifyCommunity/rolify]
+gem 'rolify', '~> 6.0.0'
+
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
+
+# GroupDate to group date in SQL queries [https://github.com/ankane/groupdate]
+gem 'groupdate'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', require: false
 
+# Mailer - Mailgun
+gem 'mailgun-ruby', '~>1.2.5'
+
+# Sidekiq [https://github.com/mperham/sidekiq]
+gem 'sidekiq', '~> 6.5.1'
+
+# Monitoring - Honeybadger []
+gem 'honeybadger', '~> 4.0'
+
 # Use Sass to process CSS
 # gem "sassc-rails"
+
+# Nokogiri to parse HTML and more [https://github.com/sparklemotion/nokogiri]
+gem 'nokogiri', '~> 1.13.6'
 
 # Download
 gem 'down', '~> 5.0'
@@ -77,6 +97,12 @@ gem 'ruby-vips', '>= 2.1.0'
 
 # Generate QRCode [https://github.com/whomwah/rqrcode]
 gem 'rqrcode', '~> 2.0'
+
+# Countries [https://github.com/countries/countries]
+gem 'countries', '~> 5.0.2', require: 'countries/global'
+
+# Validate URL format [https://github.com/perfectline/validates_url]
+gem 'validate_url'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

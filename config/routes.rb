@@ -1,6 +1,13 @@
 Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
+  # Adding the sidekiq UI
+  require 'sidekiq/web'
+  mount Sidekiq::Web => '/sidekiq'
+
+  # Cookie acceptance
+  get 'cookies', to: 'cookies#index'
+
   # Account routes
   put 'account/:id', to: 'users#update', as: 'update_account'
   get 'account/:id', to: 'users#edit', as: 'edit_account'

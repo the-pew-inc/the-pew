@@ -17,7 +17,12 @@ class User < ApplicationRecord
   has_many :active_sessions, dependent: :destroy
   has_one  :profile,         dependent: :destroy
   has_many :events,          dependent: :destroy
+  has_one  :account,         through:   :members,   required: false
   accepts_nested_attributes_for :profile
+
+  # Relations for Roles & Assignments
+  has_many :assignments
+  has_many :roles, through: :assignments
 
   # Validations
   validates :email, presence: true, uniqueness: { case_sensitive: false }, format: { with: URI::MailTo::EMAIL_REGEXP }
@@ -39,13 +44,18 @@ class User < ApplicationRecord
   # Send a password reset email to the user
   def send_password_reset_email!
     password_reset_token = signed_id(purpose: :reset_password, expires_in: PASSWORD_RESET_TOKEN_EXPIRATION)
-    UserMailer.password_reset(self, password_reset_token).deliver_now
+    UserMailer.password_reset(self, password_reset_token).deliver_later
   end
 
   # Send a confirmation email to the user
   def send_confirmation_email!
     confirmation_token = signed_id(purpose: :email_confirmation, expires_in: CONFIRMATION_TOKEN_EXPIRATION)
-    UserMailer.confirmation(self, confirmation_token).deliver_now
+    UserMailer.confirmation(self, confirmation_token).deliver_later
+  end
+
+  # Valid if a user has a certain role in the application
+  def role?(role)
+    roles.any? { |r| r.name.underscore.to_sym == role }
   end
 
   private

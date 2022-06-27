@@ -7,8 +7,9 @@
 #   Character.create(name: "Luke", movie: movies.first)
 require 'faker'
 
-users = User.create([
-  { email: "test@test.com", password: "passpass"},
+User.destroy_all
+users = User.create!([
+  { email: "test@test.com", password: "passpass", confirmed: true, confirmed_at: Time.current.utc},
   { email: "test2@test.com", password: "passpass"},
   { email: "test3@test.com", password: "passpass"}])
 
@@ -16,8 +17,9 @@ users.each do |user|
   Profile.create(user: user, nickname: "User #{user.id}")
 end
 
-50.times do
-  Event.create(
+Event.destroy_all
+20.times do
+  Event.create!(
     name: Faker::App.name,
     user: users.sample,
     start_date: Faker::Date.forward(days: 30)

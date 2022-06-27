@@ -5,6 +5,7 @@ class CreateEvents < ActiveRecord::Migration[7.0]
       t.string     :name,       null: false
       t.datetime   :start_date, null: false
       t.datetime   :end_date,   null: false
+      t.boolean    :always_on,  null: false, default: false
       t.integer    :duration
       t.integer    :event_type, null: false
       t.integer    :status,     null: false, default: 0
@@ -16,5 +17,6 @@ class CreateEvents < ActiveRecord::Migration[7.0]
     add_index :events, :event_type
     add_index :events, :status
     add_index :events, :short_code
+    add_index :events, :always_on
   end
 end

@@ -16,15 +16,26 @@ class EventsController < ApplicationController
     is_confirmed? and return
 
     @event = current_user.events.new(create_event_params)
-    # @event.user_id = current_user.id
-    if @event.save
-      # generate a default room.
-      room = @event.rooms.new
-      room.name = '__default__'
-      room.save!
-      redirect_to(@event)
-    else
-      render(:new)
+    
+    respond_to do |format|
+      if @event.save
+        # When a new event is create we attach a default room.
+        room = @event.rooms.new
+        room.name = '__default__'
+        if room.save
+          # format.html { redirect_to events_path, notice: "Event was successfully created." }
+          format.turbo_stream {
+            render turbo_stream: turbo_stream.replace("new_event",
+                                                      partial: "events/form",
+                                                      locals: { event: Event.new }
+            )
+          }
+        else
+          format.html { render :new, status: :unprocessable_entity }
+        end
+      else
+        format.html { render :new, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -40,10 +51,12 @@ class EventsController < ApplicationController
     is_confirmed? and return
 
     @event = Event.find(params[:id])
-    if @event.update(update_event_params)
-      redirect_to(@event)
-    else
-      render(:edit)
+    respond_to do |format|
+      if @event.update(update_event_params)
+        format.turbo_stream
+      else
+        format.turbo_stream
+      end
     end
   end
 
@@ -58,10 +71,12 @@ class EventsController < ApplicationController
     end
     if @event.destroy
       flash[:success] = 'Object was successfully deleted.'
-      redirect_to(events_path)
+      # redirect_to(events_path)
+      format.turbo_stream
     else
       flash[:error] = 'Something went wrong'
-      redirect_to(events_path)
+      # redirect_to(events_path)
+      format.turbo_stream
     end
   end
 

@@ -90,4 +90,25 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  # Mailer configuration
+  # Heroku / Mailgun
+  config.action_mailer.delivery_method = :mailgun
+  config.action_mailer.mailgun_settings = {
+    api_key: ENV['MAILGUN_API_KEY'],
+    domain: ENV['MAILGUN_DOMAIN'],
+    # api_host: 'api.eu.mailgun.net'  # Uncomment this line for EU region domains
+  }
+  # config.action_mailer.delivery_method = :smtp
+  # config.action_mailer.perform_deliveries = true
+  # config.action_mailer.raise_delivery_errors = true
+  # config.action_mailer.smtp_settings = {
+  #   address:              ENV['MAILGUN_SMTP_SERVER'],
+  #   port:                 ENV['MAILGUN_SMTP_PORT'],
+  #   domain:               'thepew.co',
+  #   user_name:            ENV['MAILGUN_SMTP_LOGIN'],
+  #   password:             ENV['MAILGUN_SMTP_PASSWORD'],
+  #   authentication:       'plain'
+  # }
+  config.action_mailer.default_url_options = { host: ENV['DEFAULT_URL'] }
 end
