@@ -3,8 +3,10 @@
     <section class="bg-blue-100 rounded-lg mx-6 p-4">
       <h1 class="text-lg font-bold text-blue-700">Cookies policy</h1>
       <p class="font-light text-blue-500">We use cookies to provide a better browsing experience</p>
-      <%= link_to "Accept", cookies_path(cookies_accepted: true), class: "px-3 py-2 bg-blue-500 text-blue-100 rounded-xl" %>
-      <%= link_to "Reject", cookies_path(cookies_accepted: false), class: "px-3 py-2 text-blue-500 rounded-xl border border-blue-500" %>
+      <div class="flex flex-row justify-start space-x-4 mt-2">
+        <%= link_to "Accept", cookies_path(cookies_accepted: true), class: "px-3 py-2 bg-blue-500 text-blue-100 rounded-xl" %>
+        <%= link_to "Reject", cookies_path(cookies_accepted: false), class: "px-3 py-2 text-blue-500 rounded-xl border border-blue-500" %>
+      </div>
     </section>
   <% end %>
-<% end %> 
+<% end %>
