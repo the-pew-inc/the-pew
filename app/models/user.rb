@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  rolify
   # We do not save the password, but the password diget after generating it using Argon2
   attr_accessor :password
   attr_accessor :current_password
@@ -9,7 +10,7 @@ class User < ApplicationRecord
   before_save  :generate_password_digest
 
   # Mailer configuration
-  MAILER_FROM_EMAIL = '<Ask Me!> no-reply@ask.me'
+  MAILER_FROM_EMAIL = '<The Pew!> no-reply@thepew.co'
   CONFIRMATION_TOKEN_EXPIRATION = 1.day
   PASSWORD_RESET_TOKEN_EXPIRATION = 20.minutes
 
