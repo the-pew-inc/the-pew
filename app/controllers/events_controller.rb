@@ -24,6 +24,11 @@ class EventsController < ApplicationController
         room.name = '__default__'
         if room.save
           # format.html { redirect_to events_path, notice: "Event was successfully created." }
+
+          # Set the current user as admin for the event and the room
+          current_user.add_role :admin, @event.id
+          current_user.add_role :admin, room.id
+
           format.turbo_stream {
             render turbo_stream: turbo_stream.replace("new_event",
                                                       partial: "events/form",
