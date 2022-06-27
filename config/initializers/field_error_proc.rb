@@ -1,7 +1,7 @@
 # Form Error
 # Description: custom class applied to the form fields that are containing an
 # incorrect or missing value.
-ActionView::Base.field_error_proc = proc do |html_tag, instance|
+ActionView::Base.field_error_proc = proc do |html_tag, instance_tag|
   fragment = Nokogiri::HTML.fragment(html_tag)
   field = fragment.at('input,select,textarea')
 
