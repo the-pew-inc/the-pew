@@ -1,10 +1,10 @@
 <%= turbo_frame_tag :cookies_modal do %>
   <% if session[:cookies_accepted].nil? %>
-    <section class="cookies-modal">
-      <h1>Cookies policy</h1>
-      <p>We use cookies to provide a better browsing experience</p>
-      <%= link_to "✅ Accept", cookies_path(cookies_accepted: true) %>
-      <%= link_to "⛔ Reject", cookies_path(cookies_accepted: false) %>
+    <section class="bg-blue-100 rounded-lg mx-6 p-4">
+      <h1 class="text-lg font-bold text-blue-700">Cookies policy</h1>
+      <p class="text-blue-500 font-light">We use cookies to provide a better browsing experience</p>
+      <%= link_to "Accept", cookies_path(cookies_accepted: true), class: "px-3 py-2 bg-blue-500 text-blue-100 rounded-xl" %>
+      <%= link_to "Reject", cookies_path(cookies_accepted: false), class: "px-3 py-2 text-blue-500 rounded-xl border border-blue-500" %>
     </section>
   <% end %>
 <% end %> 
