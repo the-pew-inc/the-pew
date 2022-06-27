@@ -14,18 +14,21 @@ module Authentication
   end
 
   def login(user)
+    cookies_accepted = are_cookies_accepted?
     reset_session
     active_session = user.active_sessions.create!(user_agent: request.user_agent, ip_address: request.ip)
     session[:current_active_session_id] = active_session.id
+    session[:cookies_accepted] = cookies_accepted
 
     active_session
   end
 
   def logout
-    # reset_session
+    cookies_accepted = are_cookies_accepted?
     active_session = ActiveSession.find_by(id: session[:current_active_session_id])
     reset_session
     active_session.destroy! if active_session.present?
+    session[:cookies_accepted] = cookies_accepted
   end
 
   def redirect_if_authenticated
@@ -68,5 +71,13 @@ module Authentication
 
   def store_location
     session[:user_return_to] = request.original_url if request.get? && request.local?
+  end
+
+  def are_cookies_accepted?
+    if session[:cookies_accepted]
+      return true
+    end
+
+    return false
   end
 end
