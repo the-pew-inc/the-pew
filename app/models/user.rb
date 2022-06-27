@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  rolify
+  rolify strict: true
   # We do not save the password, but the password diget after generating it using Argon2
   attr_accessor :password
   attr_accessor :current_password
