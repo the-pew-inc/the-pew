@@ -23,6 +23,7 @@
           <%= yield %>
         </div>
       </main>
+      <%= turbo_frame_tag :cookies_modal, src: cookies_path if session[:cookies_accepted].nil? %>
       <footer class="w-full bg-gray-200 border border-t-gray-300">
         <div class="mx-auto lg:max-w-7xl max-w-6xl px-4">
           <div class="flex flex-row justify-between items-center py-3">
