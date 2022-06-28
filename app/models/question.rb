@@ -13,4 +13,18 @@ class Question < ApplicationRecord
     answered: 20,
     rejected: 30
   }
+
+  # Set of triggers to broadcast CRUD to the display
+  after_create_commit do
+    broadcast_prepend_to [self.room.id, :questions], target: "rooms", partial: "room/question", locals: { question: self } if Current.user
+  end
+
+  after_update_commit do
+    broadcast_update_to [self.room.id, :questions], partial: "room/question", locals: { question: self }
+  end
+
+  after_destroy_commit do
+    broadcast_remove_to [self.room.id, :questions]
+  end
+
 end

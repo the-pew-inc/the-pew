@@ -13,7 +13,7 @@ class Event < ApplicationRecord
 
   has_one_attached :qr_code
 
-  validates :name, presence: true, length: { minimum: 5, maximum: 250 }
+  validates :name, presence: true, length: { minimum: 3, maximum: 250 }
   validates :start_date, presence: true
   validates :end_date, presence: true
   validate  :end_date_is_after_start_date

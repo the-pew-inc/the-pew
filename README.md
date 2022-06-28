@@ -23,3 +23,5 @@ TMP - Roles, permissions and assignments (+ pundit) [https://www.culttt.com/2016
 TMP - Turbo Stream [https://www.colby.so/posts/turbo-streams-on-rails]
 
 TMP - Good tutorial [https://www.hotrails.dev/]
+
+TMP - Conside Ahoy for analytics [https://github.com/ankane/ahoy]
