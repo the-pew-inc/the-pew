@@ -19,16 +19,14 @@ class EventsController < ApplicationController
     
     respond_to do |format|
       if @event.save
+        # Make the user the admin of the event
+        current_user.add_role :admin, @event
+
         # When a new event is create we attach a default room.
         room = @event.rooms.new
         room.name = '__default__'
         if room.save
           # format.html { redirect_to events_path, notice: "Event was successfully created." }
-
-          # Set the current user as admin for the event and the room
-          current_user.add_role :admin, @event.id
-          current_user.add_role :admin, room.id
-
           format.turbo_stream {
             render turbo_stream: turbo_stream.replace("new_event",
                                                       partial: "events/form",
@@ -88,11 +86,11 @@ class EventsController < ApplicationController
   private
 
   def create_event_params
-    params.require(:event).permit(:user_id, :name, :start_date, :stop_date, :event_type, :status)
+    params.require(:event).permit(:user_id, :name, :start_date, :stop_date, :event_type, :status, :always_on)
   end
 
   def update_event_params
-    params.require(:event).permit(:name, :start_date, :stop_date, :event_type, :status, :short_code)
+    params.require(:event).permit(:name, :start_date, :stop_date, :event_type, :status, :short_code, :always_on)
   end
 
   # Called to make sure a user's account is confirmed before they can create or edit an event.

@@ -28,7 +28,7 @@ class Event < ApplicationRecord
   # Set of triggers to broadcast CRUD to the display
   after_create_commit do
     # broadcast_prepend_to :events, target: "events", partial: "events/event", locals: { event: self }
-    broadcast_prepend_to [Current.user.id, :events], target: "events", partial: "events/event", locals: { event: self }
+    broadcast_prepend_to [Current.user.id, :events], target: "events", partial: "events/event", locals: { event: self } if Current.user
   end
 
   after_update_commit do
