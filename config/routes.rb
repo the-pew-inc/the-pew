@@ -50,7 +50,9 @@ Rails.application.routes.draw do
   end
 
   # Question routes
-  resources :questions
+  resources :rooms do
+    resources :questions
+  end
 
   # Answer routes / ONLY accessible via the https://ask. domain
   constraints subdomain: 'ask' do

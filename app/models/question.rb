@@ -14,6 +14,8 @@ class Question < ApplicationRecord
     rejected: 30
   }
 
+  scope :questions_for_room, -> (room) { where('room_id = ?', room).order(:created_at) }
+
   # Set of triggers to broadcast CRUD to the display
   after_create_commit do
     broadcast_prepend_to [self.room.id, :questions], target: "rooms", partial: "room/question", locals: { question: self } if Current.user
