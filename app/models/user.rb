@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  rolify strict: true
+  
   # We do not save the password, but the password diget after generating it using Argon2
   attr_accessor :password
   attr_accessor :current_password
@@ -9,7 +11,7 @@ class User < ApplicationRecord
   before_save  :generate_password_digest
 
   # Mailer configuration
-  MAILER_FROM_EMAIL = '<Ask Me!> no-reply@ask.me'
+  MAILER_FROM_EMAIL = '<The Pew!> no-reply@thepew.co'
   CONFIRMATION_TOKEN_EXPIRATION = 1.day
   PASSWORD_RESET_TOKEN_EXPIRATION = 20.minutes
 
@@ -19,10 +21,6 @@ class User < ApplicationRecord
   has_many :events,          dependent: :destroy
   has_one  :account,         through:   :members,   required: false
   accepts_nested_attributes_for :profile
-
-  # Relations for Roles & Assignments
-  has_many :assignments
-  has_many :roles, through: :assignments
 
   # Validations
   validates :email, presence: true, uniqueness: { case_sensitive: false }, format: { with: URI::MailTo::EMAIL_REGEXP }
@@ -53,11 +51,7 @@ class User < ApplicationRecord
     UserMailer.confirmation(self, confirmation_token).deliver_later
   end
 
-  # Valid if a user has a certain role in the application
-  def role?(role)
-    roles.any? { |r| r.name.underscore.to_sym == role }
-  end
-
+  # PRIVATE METHODS #
   private
 
   # Make sure we save all emails in lowercase

@@ -1,4 +1,7 @@
 class Question < ApplicationRecord
+  # enable rolify on the Question class
+  resourcify
+
   belongs_to :user
   belongs_to :room
 

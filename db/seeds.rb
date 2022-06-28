@@ -7,20 +7,28 @@
 #   Character.create(name: "Luke", movie: movies.first)
 require 'faker'
 
+p "Deleting existing users"
 User.destroy_all
+
+p "Generating default test users"
 users = User.create!([
   { email: "test@test.com", password: "passpass", confirmed: true, confirmed_at: Time.current.utc},
   { email: "test2@test.com", password: "passpass"},
   { email: "test3@test.com", password: "passpass"}])
 
+
+p "Generating default test user's profiles"
 users.each do |user|
   Profile.create(user: user, nickname: "User #{user.id}")
 end
 
+p "Deleting existing events"
 Event.destroy_all
+
+p "Generating a set of randome events"
 20.times do
   Event.create!(
-    name: Faker::App.name,
+    name: Faker::App.name[6..20],
     user: users.sample,
     start_date: Faker::Date.forward(days: 30)
   )
