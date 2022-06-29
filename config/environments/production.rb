@@ -92,6 +92,7 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   # Supported domains
+  config.action_dispatch.tld_length = 2
   config.hosts << "app.thepew.io"
   config.hosts << "ask.thepew.io"
   config.hosts << "staging.thepew.io"
