@@ -25,11 +25,14 @@ class QuestionsController < ApplicationController
 
     respond_to do |format|
       if @question.save
-        format.html { redirect_to(question_url(@question), notice: 'Question was successfully created.') }
-        format.json { render(:show, status: :created, location: @question) }
+        format.turbo_stream {
+          render turbo_stream: turbo_stream.replace("new_question",
+                                                    partial: "questions/form",
+                                                    locals: { question: @room.questions.build }
+          )
+        }
       else
-        format.html { render(:new, status: :unprocessable_entity) }
-        format.json { render(json: @question.errors, status: :unprocessable_entity) }
+        format.html { render :new, status: :unprocessable_entity }
       end
     end
   end
