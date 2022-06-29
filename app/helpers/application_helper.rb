@@ -22,4 +22,10 @@ module ApplicationHelper
       'text-green-700'
     end
   end
+
+  # Return the first letter of the current user's nickname
+  # aka initial ;-)
+  def initial(user)
+    user.profile.nickname[0,1].upcase
+  end
 end

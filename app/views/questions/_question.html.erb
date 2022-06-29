@@ -1,6 +1,10 @@
 <%= turbo_frame_tag dom_id(question), class: "card mb-3" do %>
-  <p>
-    <strong>Title:</strong>
-    <%= question.title %>
-  </p>
+  <div class="flex flex-row items-center">
+    <div>
+    </div>
+    <div>
+      <div class="font-bold text-sm"><%= question.user.profile.nickname %></div>
+      <%= question.title %>
+    </div>
+  </div>
 <% end %>

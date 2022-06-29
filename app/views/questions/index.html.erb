@@ -1,7 +1,10 @@
 <%= turbo_stream_from :questions %>
 <section class="pt-4">
   <% if user_signed_in? %>
-    <%= turbo_frame_tag :new_question, src: new_room_question_path %>
+    <div class="md:px-2 py-2 bg-blue-100 rounded-lg">
+      <h2 class="text-xl font-bold text-blue-600">Ask your question: </h2>
+      <%= turbo_frame_tag :new_question, src: new_room_question_path %>
+    </div>
   <% else %>
     <div>
       <h3>You need to be logged in to ask a question</h3>
@@ -10,11 +13,18 @@
   <% end %>
 </section>
 <section class="pt-4">
-  <h2 class="text-xl font-bold">Question: </h2>
-  <div class="pt-2 space-y-2">
-    <%= turbo_stream_from [@room.id, :questions] %>
-    <div id="questions">
-      <%= render @questions %>
+  <% if @questions.count == 0 %>
+    <h3>Be the first to ask a question!</h3>
+  <% else %>
+    <h2 class="text-xl font-bold"><%= 'Question'.pluralize(@questions.count) %>: </h2>
+    <div class="text-sm font-thin text-slate-800">
+      There are <%= pluralize(@questions.count, 'question') %>
     </div>
-  </div>
+    <div class="pt-2 space-y-2">
+      <%= turbo_stream_from [@room.id, :questions] %>
+      <div id="questions">
+        <%= render @questions %>
+      </div>
+    </div>
+  <% end %>
 </section>
