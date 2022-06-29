@@ -94,6 +94,8 @@ gem 'active_storage_validations', '~> 0.9.8'
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 gem 'image_processing', '~> 1.2'
 gem 'ruby-vips', '>= 2.1.0'
+gem 'aws-sdk-s3', require: false
+
 
 # Generate QRCode [https://github.com/whomwah/rqrcode]
 gem 'rqrcode', '~> 2.0'
