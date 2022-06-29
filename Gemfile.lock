@@ -90,6 +90,22 @@ GEM
       ffi-compiler (~> 1.0)
     ast (2.4.2)
     attr_required (1.0.1)
+    aws-eventstream (1.2.0)
+    aws-partitions (1.602.0)
+    aws-sdk-core (3.131.2)
+      aws-eventstream (~> 1, >= 1.0.2)
+      aws-partitions (~> 1, >= 1.525.0)
+      aws-sigv4 (~> 1.1)
+      jmespath (~> 1, >= 1.6.1)
+    aws-sdk-kms (1.57.0)
+      aws-sdk-core (~> 3, >= 3.127.0)
+      aws-sigv4 (~> 1.1)
+    aws-sdk-s3 (1.114.0)
+      aws-sdk-core (~> 3, >= 3.127.0)
+      aws-sdk-kms (~> 1)
+      aws-sigv4 (~> 1.4)
+    aws-sigv4 (1.5.0)
+      aws-eventstream (~> 1, >= 1.0.2)
     bindata (2.4.10)
     bindex (0.8.1)
     bootsnap (1.12.0)
@@ -154,6 +170,7 @@ GEM
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
+    jmespath (1.6.1)
     jsbundling-rails (1.0.3)
       railties (>= 6.0.0)
     json-jwt (1.13.0)
@@ -392,6 +409,7 @@ DEPENDENCIES
   active_storage_validations (~> 0.9.8)
   apple_id
   argon2 (~> 2.1.1)
+  aws-sdk-s3
   bootsnap
   capybara
   countries (~> 5.0.2)
