@@ -9,7 +9,7 @@
           <%= form.text_field :pin, placeholder: "Enter the event PIN (6 digits)", data: {"validate-pin-target": "pin", action: "keyup->validate-pin#change"}, required: true, class: "form-input w-full block rounded-xl border-slate-300 border-2 focus:outline-none focus:border-green-500 focus:ring-green-500" %>
           <span class="text-sm text-red-500 hidden", data-validate-pin-target="pinError">PIN is 6 digits</span>
         </div>
-        <%= form.submit 'GO!', class: "mt-6 w-full block py-3 font-medium text-white uppercase bg-green-500 rounded-xl hover:bg-green-400 transition duration-300 ease-in-out" %>
+        <%= form.submit 'ENTER!', class: "mt-6 w-full block py-3 font-medium text-white uppercase bg-green-500 rounded-xl hover:bg-green-400 transition duration-300 ease-in-out" %>
       <% end %>
     </div>
   </div>

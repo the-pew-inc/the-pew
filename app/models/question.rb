@@ -12,21 +12,21 @@ class Question < ApplicationRecord
     approved: 10,
     answered: 20,
     rejected: 30
-  }
+  }, _default: :asked
 
   scope :questions_for_room, -> (room) { where('room_id = ?', room).order(:created_at) }
 
   # Set of triggers to broadcast CRUD to the display
   after_create_commit do
-    broadcast_prepend_to [self.room.id, :questions], target: "rooms", partial: "room/question", locals: { question: self } if Current.user
+    broadcast_prepend_to [self.room_id, :questions], target: "rooms", partial: "room/question", locals: { question: self } if Current.user
   end
 
   after_update_commit do
-    broadcast_update_to [self.room.id, :questions], partial: "room/question", locals: { question: self }
+    broadcast_update_to [self.room_id, :questions], partial: "room/question", locals: { question: self }
   end
 
   after_destroy_commit do
-    broadcast_remove_to [self.room.id, :questions]
+    broadcast_remove_to [self.room_id, :questions]
   end
 
 end

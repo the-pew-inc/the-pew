@@ -1,25 +1,27 @@
 class QuestionsController < ApplicationController
   before_action :set_question, only: %i[show edit update destroy]
+  before_action :set_room
 
-  # GET /questions or /questions.json
+  # GET /rooms/:room_id/questions
   def index
     @questions = Question.questions_for_room(params[:room_id])
   end
 
-  # GET /questions/1 or /questions/1.json
+  # GET /rooms/:room_id/questions/1
   def show; end
 
-  # GET /questions/new
+  # GET /rooms/:room_id/questions/new
   def new
-    @question = Question.new
+    @question = @room.questions.build
   end
 
-  # GET /questions/1/edit
+  # GET /rooms/:room_id/questions/1/edit
   def edit; end
 
-  # POST /questions or /questions.json
+  # POST /rooms/:room_id/questions
   def create
-    @question = Question.new(question_params)
+    @question = @room.questions.build(question_params)
+    @question.user_id = current_user.id
 
     respond_to do |format|
       if @question.save
@@ -32,7 +34,7 @@ class QuestionsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /questions/1 or /questions/1.json
+  # PATCH/PUT /rooms/:room_id/questions/1
   def update
     respond_to do |format|
       if @question.update(question_params)
@@ -45,7 +47,7 @@ class QuestionsController < ApplicationController
     end
   end
 
-  # DELETE /questions/1 or /questions/1.json
+  # DELETE /rooms/:room_id/questions/1
   def destroy
     @question.destroy
 
@@ -62,8 +64,12 @@ class QuestionsController < ApplicationController
     @question = Question.find(params[:id])
   end
 
+  def set_room
+    @room = Room.find(params[:room_id])
+  end
+
   # Only allow a list of trusted parameters through.
   def question_params
-    params.require(:question).permit(:title)
+    params.require(:question).permit(:title, :user_id)
   end
 end

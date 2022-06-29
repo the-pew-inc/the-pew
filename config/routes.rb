@@ -44,10 +44,7 @@ Rails.application.routes.draw do
   end
 
   # Event routes
-  resources :events do
-    # Manage questions routes
-    get 'manage_questions/index'
-  end
+  resources :events
 
   # Question routes
   resources :rooms do

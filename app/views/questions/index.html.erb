@@ -1,14 +1,20 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Questions</h1>
-
-<div id="questions">
-  <% @questions.each do |question| %>
-    <%= render question %>
-    <p>
-      <%= link_to "Show this question", question %>
-    </p>
+<%= turbo_stream_from :questions %>
+<section class="pt-4">
+  <% if user_signed_in? %>
+    <%= turbo_frame_tag :new_question, src: new_room_question_path %>
+  <% else %>
+    <div>
+      <h3>You need to be logged in to ask a question</h3>
+      <%= link_to 'Sign up', sign_up_path %> or <%= link_to 'Login', login_path %>
+    </div>
   <% end %>
-</div>
-
-<%= link_to "New question", new_question_path %>
+</section>
+<section class="pt-4">
+  <h2 class="text-xl font-bold">Question: </h2>
+  <div class="pt-2 space-y-2">
+    <%= turbo_stream_from [@room.id, :questions] %>
+    <div id="questions">
+      <%= render @questions %>
+    </div>
+  </div>
+</section>

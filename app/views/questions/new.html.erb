@@ -1,9 +1,6 @@
-<h1>New question</h1>
-
-<%= render "form", question: @question %>
-
-<br>
-
-<div>
-  <%= link_to "Back to questions", questions_path %>
-</div>
+<%= turbo_frame_tag dom_id(@question) do %>
+  <div class="md:px-2 py-2 bg-blue-100 rounded-lg">
+    <h2 class="text-xl font-bold text-blue-600">Ask your question: </h2>
+    <%= render "form", question: @question %>
+  </div>
+<% end %>
