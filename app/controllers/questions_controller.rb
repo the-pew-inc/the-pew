@@ -40,23 +40,31 @@ class QuestionsController < ApplicationController
   # PATCH/PUT /rooms/:room_id/questions/1
   def update
     respond_to do |format|
-      if @question.update(question_params)
-        format.html { redirect_to(question_url(@question), notice: 'Question was successfully updated.') }
-        format.json { render(:show, status: :ok, location: @question) }
+      if @comment.update(update_question_params)
+        format.turbo_stream
       else
-        format.html { render(:edit, status: :unprocessable_entity) }
-        format.json { render(json: @question.errors, status: :unprocessable_entity) }
+        format.turbo_stream
       end
     end
   end
 
   # DELETE /rooms/:room_id/questions/1
   def destroy
-    @question.destroy
+    @event = Event.find(params[:id])
 
-    respond_to do |format|
-      format.html { redirect_to(questions_url, notice: 'Question was successfully destroyed.') }
-      format.json { head(:no_content) }
+    if @question.user_id != current_user.id
+      flash[:error] = 'You are not the owner of this event'
+      redirect_to(events_path)
+      return
+    end
+    if @question.destroy
+      flash[:success] = 'Object was successfully deleted.'
+      # redirect_to(events_path)
+      # format.turbo_stream
+    else
+      flash[:error] = 'Something went wrong'
+      # redirect_to(events_path)
+      # format.turbo_stream
     end
   end
 
@@ -73,6 +81,10 @@ class QuestionsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def question_params
-    params.require(:question).permit(:title, :user_id)
+    params.require(:question).permit(:title)
+  end
+
+  def update_question_params 
+    params.require(:question).permit(:title, :status)
   end
 end
