@@ -11,10 +11,6 @@ module Ask
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults(7.0)
 
-    # Remove limitation when in DEVELOPMENT mode ONLY
-    # See [https://guides.rubyonrails.org/configuring.html#actiondispatch-hostauthorization] for more details
-    config.hosts = nil unless Rails.env.production?
-
     # Configure ActiveJob to use Sidekiq
     config.active_job.queue_adapter = :sidekiq
 

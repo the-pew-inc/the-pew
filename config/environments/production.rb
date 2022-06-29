@@ -91,6 +91,12 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
+  # Supported domains
+  config.hosts << "app.thepew.io"
+  config.hosts << "ask.thepew.io"
+  config.hosts << "staging.thepew.io"
+  config.hosts << "ask.staging.thepew.io"
+
   # Mailer configuration
   # Heroku / Mailgun
   config.action_mailer.delivery_method = :mailgun
