@@ -29,3 +29,7 @@ TMP - Conside Ahoy for analytics [https://github.com/ankane/ahoy]
 TMP - Rails on DO [https://www.digitalocean.com/community/tutorials/how-to-create-nested-resources-for-a-ruby-on-rails-application]
 
 TMP - Boring Rails [https://boringrails.com/articles/rails-dom-id-the-most-underrated-helper/]
+
+TMP - Dynamic sorting with streams [https://github.com/hotwired/turbo/issues/109]
+
+TMP - EL Transition [https://github.com/mmccall10/el-transition]
