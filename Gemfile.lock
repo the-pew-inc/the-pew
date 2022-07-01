@@ -426,7 +426,7 @@ DEPENDENCIES
   mailgun-ruby (~> 1.2.5)
   nokogiri (~> 1.13.6)
   omniauth (~> 2.1.0)
-  omniauth-google-oauth2
+  omniauth-google-oauth2 (~> 1.0.1)
   omniauth-rails_csrf_protection
   pagy (~> 5.10.1)
   pg (~> 1.4)
