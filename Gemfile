@@ -48,9 +48,9 @@ gem "view_component"
 gem 'argon2', '~> 2.1.1'
 
 # Adding OAuth2 support [https://github.com/omniauth/omniauth]
-gem 'omniauth'
+gem 'omniauth', '~> 2.1.0'
 # Adding Google Sign-in support
-gem 'omniauth-google-oauth2' 
+gem 'omniauth-google-oauth2' , '~> 1.0.1'
 # Required when not using Devise
 gem 'omniauth-rails_csrf_protection' 
 # Apple Sign-in support
