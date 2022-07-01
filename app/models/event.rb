@@ -4,6 +4,9 @@ class Event < ApplicationRecord
   # enable rolify on the Event class
   resourcify
 
+  # Tracking changes
+  has_paper_trail
+
   before_validation :set_values
   before_save :set_duration
   after_create :generate_qr_code

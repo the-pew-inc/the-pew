@@ -2,6 +2,9 @@ class Question < ApplicationRecord
   # enable rolify on the Question class
   resourcify
 
+  # Tracking changes
+  has_paper_trail
+
   belongs_to :user
   belongs_to :room
 

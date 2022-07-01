@@ -1,6 +1,9 @@
 class Profile < ApplicationRecord
   belongs_to :user
 
+  # Tracking changes
+  has_paper_trail
+
   # Active Storage & Action Text
   has_rich_text    :bio
   has_one_attached :avatar

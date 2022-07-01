@@ -2,6 +2,8 @@ class ApplicationController < ActionController::Base
   include Authentication
   include Pundit::Authorization
 
+  before_action :set_paper_trail_whodunnit
+
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   private
