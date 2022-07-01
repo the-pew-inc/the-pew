@@ -1,9 +1,9 @@
 <%= turbo_stream_from :events %>
 <section>
   <div>
-  <% if user_signed_in? %>
-    <%= link_to "New Event", new_event_path, data: {turbo_frame: "modal"}, class: "px-3 py-2 rounded bg-green-500 text-white" %>
-  <% end %>
+    <% if user_signed_in? %>
+      <%= link_to "New Event", new_event_path, data: {turbo_frame: "modal"}, class: "px-3 py-2 rounded bg-green-500 text-white" %>
+    <% end %>
     <%= turbo_frame_tag "modal" %>
   </div>
 </section>
@@ -12,7 +12,7 @@
   <div class="pt-2 space-y-2">
     <%# turbo_stream_from :events %>
     <%= turbo_stream_from [current_user.id, :events] %>
-    <div id="events">
+    <div id="events" class="overflow-y-scroll">
       <%= render @events %>
     </div>
   </div>

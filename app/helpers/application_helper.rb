@@ -28,4 +28,8 @@ module ApplicationHelper
   def initial(user)
     user.profile.nickname[0,1].upcase
   end
+
+  def random_background
+    ['blue','red','orange','pink','green','slate','purple','amber','yellow','lime','emerald','teal','cyan','sky','indigo','violet','fuchsia'].sample
+  end
 end
