@@ -1,4 +1,4 @@
-<%= turbo_frame_tag dom_id(question), class: "" do %>
+<%= turbo_frame_tag dom_id(question), class: "", "data-empty-state-target": "item" do %>
   <div class="flex flex-row items-center justify-start w-full space-x-2 rounded-full border border-gray-300 pl-4 my-3">
     <div class="h-14 w-14">
       <% if question.anonymous %>
