@@ -61,7 +61,8 @@ class EventsController < ApplicationController
       if @event.update(update_event_params)
         format.turbo_stream
       else
-        format.turbo_stream
+        # format.turbo_stream
+        render :edit, status: :unprocessable_entity
       end
     end
   end

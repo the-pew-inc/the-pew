@@ -12,7 +12,7 @@ class Event < ApplicationRecord
   after_create :generate_qr_code
 
   belongs_to :user
-  has_many :rooms, dependent: :destroy
+  has_many   :rooms, dependent: :destroy
 
   has_one_attached :qr_code
 
@@ -30,15 +30,15 @@ class Event < ApplicationRecord
 
   # Set of triggers to broadcast CRUD to the display
   after_create_commit do
-    broadcast_prepend_later_to [Current.user.id, :events], target: "events", partial: "events/event", locals: { event: self } if Current.user
+    broadcast_prepend_later_to [self.user_id, :events], target: "events", partial: "events/event", locals: { event: self }
   end
 
   after_update_commit do
-    broadcast_update_later_to [Current.user.id, :events], partial: "events/event", locals: { event: self }
+    broadcast_update_later_to [self.user_id, :events], partial: "events/event", locals: { event: self }
   end
 
   after_destroy_commit do
-    broadcast_remove_to [Current.user.id, :events]
+    broadcast_remove_later_to [self.user_id, :events]
   end
 
   private

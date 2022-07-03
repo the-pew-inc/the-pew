@@ -1,4 +1,4 @@
-<%= turbo_stream_from :questions %>
+<%= turbo_stream_from @room.id :questions %>
 <section class="pt-4">
   <% if user_signed_in? %>
     <div class="md:px-2 py-2 bg-blue-100 rounded-lg">
@@ -13,18 +13,12 @@
   <% end %>
 </section>
 <section class="pt-4">
-  <% if @questions.count == 0 %>
-    <h3>Be the first to ask a question!</h3>
-  <% else %>
-    <h2 class="text-xl font-bold"><%= 'Question'.pluralize(@questions.count) %>: </h2>
-    <div class="text-sm font-thin text-slate-800">
-      There are <%= pluralize(@questions.count, 'question') %>
-    </div>
-    <div class="pt-2 space-y-2">
-      <%= turbo_stream_from [@room.id, :questions] %>
-      <div id="questions">
-        <%= render @questions %>
-      </div>
-    </div>
+  <%= turbo_frame_tag Question.new do %>
+    <% if @questions.none? %>
+      <%= render "questions/empty_state" %>
+    <% end %>
+  <% end %>
+  <%= turbo_frame_tag "questions" do %>
+    <%= render @questions %>
   <% end %>
 </section>
