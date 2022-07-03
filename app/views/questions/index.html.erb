@@ -1,4 +1,4 @@
-<%= turbo_stream_from @room.id :questions %>
+<%= turbo_stream_from [@room.id, :questions] %>
 <section class="pt-4">
   <% if user_signed_in? %>
     <div class="md:px-2 py-2 bg-blue-100 rounded-lg">
