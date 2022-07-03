@@ -38,7 +38,7 @@ Rails.application.configure do
   # config.action_dispatch.x_sendfile_header = "X-Accel-Redirect" # for NGINX
 
   # Store uploaded files on the local file system (see config/storage.yml for options).
-  config.active_storage.service = :local
+  config.active_storage.service = :digitalocean
 
   # Mount Action Cable outside main process or domain.
   # config.action_cable.mount_path = nil
@@ -90,6 +90,13 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  # Supported domains
+  config.action_dispatch.tld_length = 2
+  config.hosts << "app.thepew.io"
+  config.hosts << "ask.thepew.io"
+  config.hosts << "staging.thepew.io"
+  config.hosts << "ask.staging.thepew.io"
 
   # Mailer configuration
   # Heroku / Mailgun

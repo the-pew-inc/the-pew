@@ -1,57 +1,70 @@
 class QuestionsController < ApplicationController
   before_action :set_question, only: %i[show edit update destroy]
+  before_action :set_room
 
-  # GET /questions or /questions.json
+  # GET /rooms/:room_id/questions
   def index
-    @questions = Question.all
+    @questions = Question.questions_for_room(params[:room_id])
   end
 
-  # GET /questions/1 or /questions/1.json
+  # GET /rooms/:room_id/questions/1
   def show; end
 
-  # GET /questions/new
+  # GET /rooms/:room_id/questions/new
   def new
-    @question = Question.new
+    @question = @room.questions.build
   end
 
-  # GET /questions/1/edit
+  # GET /rooms/:room_id/questions/1/edit
   def edit; end
 
-  # POST /questions or /questions.json
+  # POST /rooms/:room_id/questions
   def create
-    @question = Question.new(question_params)
+    @question = @room.questions.build(question_params)
+    @question.user_id = current_user.id
 
     respond_to do |format|
       if @question.save
-        format.html { redirect_to(question_url(@question), notice: 'Question was successfully created.') }
-        format.json { render(:show, status: :created, location: @question) }
+        format.turbo_stream {
+          render turbo_stream: turbo_stream.replace("new_question",
+                                                    partial: "questions/form",
+                                                    locals: { question: @room.questions.build }
+          )
+        }
       else
-        format.html { render(:new, status: :unprocessable_entity) }
-        format.json { render(json: @question.errors, status: :unprocessable_entity) }
+        format.html { render :new, status: :unprocessable_entity }
       end
     end
   end
 
-  # PATCH/PUT /questions/1 or /questions/1.json
+  # PATCH/PUT /rooms/:room_id/questions/1
   def update
     respond_to do |format|
-      if @question.update(question_params)
-        format.html { redirect_to(question_url(@question), notice: 'Question was successfully updated.') }
-        format.json { render(:show, status: :ok, location: @question) }
+      if @comment.update(update_question_params)
+        format.turbo_stream
       else
-        format.html { render(:edit, status: :unprocessable_entity) }
-        format.json { render(json: @question.errors, status: :unprocessable_entity) }
+        format.turbo_stream
       end
     end
   end
 
-  # DELETE /questions/1 or /questions/1.json
+  # DELETE /rooms/:room_id/questions/1
   def destroy
-    @question.destroy
+    @event = Event.find(params[:id])
 
-    respond_to do |format|
-      format.html { redirect_to(questions_url, notice: 'Question was successfully destroyed.') }
-      format.json { head(:no_content) }
+    if @question.user_id != current_user.id
+      flash[:error] = 'You are not the owner of this event'
+      redirect_to(events_path)
+      return
+    end
+    if @question.destroy
+      flash[:success] = 'Object was successfully deleted.'
+      # redirect_to(events_path)
+      # format.turbo_stream
+    else
+      flash[:error] = 'Something went wrong'
+      # redirect_to(events_path)
+      # format.turbo_stream
     end
   end
 
@@ -62,8 +75,16 @@ class QuestionsController < ApplicationController
     @question = Question.find(params[:id])
   end
 
+  def set_room
+    @room = Room.find(params[:room_id])
+  end
+
   # Only allow a list of trusted parameters through.
   def question_params
     params.require(:question).permit(:title)
+  end
+
+  def update_question_params 
+    params.require(:question).permit(:title, :status)
   end
 end

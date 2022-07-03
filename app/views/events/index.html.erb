@@ -1,19 +1,18 @@
-<%= turbo_stream_from :events %>
+<%= turbo_stream_from [current_user.id, :events] %>
 <section>
   <div>
-  <% if user_signed_in? %>
-    <%= link_to "New Event", new_event_path, data: {turbo_frame: "modal"}, class: "px-3 py-2 rounded bg-green-500 text-white" %>
-  <% end %>
-    <%= turbo_frame_tag "modal" %>
+    <% if user_signed_in? %>
+      <%= link_to "New Event", new_event_path, data: {turbo_frame: "modal"}, class: "px-3 py-2 rounded bg-green-500 text-white" %>
+      <%= turbo_frame_tag "modal" %>
+    <% end %>
   </div>
 </section>
 <section class="pt-4">
   <h2 class="text-xl font-bold">Events: </h2>
-  <div class="pt-2 space-y-2">
-    <%# turbo_stream_from :events %>
-    <%= turbo_stream_from [current_user.id, :events] %>
-    <div id="events">
-      <%= render @events %>
+  <div id="events" data-controller="empty-state" class="pt-2 space-y-2">
+    <div data-empty-state-target="emptyState">
+      <%= render "empty_state" %>
     </div>
+    <%= render @events %>
   </div>
 </section>

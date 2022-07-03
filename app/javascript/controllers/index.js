@@ -10,12 +10,11 @@ application.register("clipboard", ClipboardController);
 import CloseFlashController from "./close_flash_controller.js";
 application.register("close-flash", CloseFlashController);
 
-import PopperController from "./popper_controller.js";
-application.register("popper", PopperController);
+import EmptyStateController from "./empty_state_controller.js";
+application.register("empty-state", EmptyStateController);
 
 import ToggleController from "./toggle_controller.js";
 application.register("toggle", ToggleController);
 
 import ValidatePinController from "./validate_pin_controller.js";
 application.register("validate-pin", ValidatePinController);
-

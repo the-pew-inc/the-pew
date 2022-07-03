@@ -11,7 +11,13 @@ class AsksController < ApplicationController
       # Search for the event with the given pin
       @event = Event.find_by(short_code: pin)
 
-      # Redirect to the event if found
+      respond_to do |format|
+        if @event
+          format.html { redirect_to(room_questions_path(@event.rooms.first), notice: 'Welcome in!') }
+        else
+          format.html { redirect_to(ask_root_path(@event), alert: 'Invalid PIN', status: :unprocessable_entity) }
+        end
+      end
     end
   end
 
@@ -33,11 +39,9 @@ class AsksController < ApplicationController
 
     respond_to do |format|
       if @event
-        format.html { redirect_to(ask_root_path(@event), notice: 'Welcome in!') }
-        format.json { render(:show, status: :created, location: @event) }
+        format.html { redirect_to(room_questions_path(@event.rooms.first.id), notice: 'Welcome in!') }
       else
-        format.html { redirect_to(ask_root_path(@event), alert: 'Invalid PIN') }
-        format.json { render(json: @event.errors, status: :unprocessable_entity) }
+        format.html { redirect_to(ask_root_path(@event), alert: 'Invalid PIN', status: :unprocessable_entity) }
       end
     end
   end

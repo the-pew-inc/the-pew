@@ -10,20 +10,20 @@
     <%= form.text_field :name, required: true, class: "form-input w-full block rounded-xl border-slate-300 border-2 focus:outline-none focus:border-green-500 focus:ring-green-500" %>
   </div>
   <div class="mb-4">
-    <%= form.label :start_date, class: "flex items-center cursor-pointer relative mb-4" %>
+    <%= form.label :start_date, class: "flex items-center cursor-pointer relative" %>
     <%= form.date_field :start_date, min: 0.days.ago, required: true, class: "form-input w-full block rounded-xl border-slate-300 border-2 focus:outline-none focus:border-green-500 focus:ring-green-500" %>
   </div>
   <div class="mb-6">
     <%= form.label :always_on, class: "relative flex items-center cursor-pointer" do %>
       <%= form.check_box :always_on, id: "toggle", class: "sr-only peer" %>
       <div class="h-6 bg-gray-200 border-2 border-gray-200 rounded-full w-11 after:absolute after:top-0.5 after:left-0.5 after:bg-white after:border after:border-gray-300 after:h-5 after:w-5 after:shadow-sm after:rounded-full peer-checked:after:translate-x-full peer-checked:after:border-white peer-checked:bg-blue-600 peer-checked:border-blue-600 after:transition-all after:duration-300"></div>
-      <span class="ml-2 text-base text-gray-800">Toggle me</span>
+      <span class="ml-2 text-base text-gray-800">Always on</span>
     <% end %>
   </div>
   <div class="flex flex-row justify-between space-x-2 items-center">
     <%= form.submit class: "w-full block py-3 font-medium text-white uppercase bg-green-500 rounded-xl hover:bg-green-400 transition duration-300 ease-in-out" %>
     <%# unless form.object.new_record? %>
-      <%= link_to "Cancel", events_path,
+    <%= link_to "Cancel", events_path,
           class: "w-full block py-3 font-medium text-green-500 text-center uppercase border-2 border-green-500 rounded-xl hover:text-green-800 hover:border-green-800 transition duration-300 ease-in-out",
           data: {turbo_frame: :events}  %>
     <%# end %>

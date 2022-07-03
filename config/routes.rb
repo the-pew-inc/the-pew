@@ -44,13 +44,12 @@ Rails.application.routes.draw do
   end
 
   # Event routes
-  resources :events do
-    # Manage questions routes
-    get 'manage_questions/index'
-  end
+  resources :events
 
   # Question routes
-  resources :questions
+  resources :rooms do
+    resources :questions
+  end
 
   # Answer routes / ONLY accessible via the https://ask. domain
   constraints subdomain: 'ask' do

@@ -48,9 +48,9 @@ gem "view_component"
 gem 'argon2', '~> 2.1.1'
 
 # Adding OAuth2 support [https://github.com/omniauth/omniauth]
-gem 'omniauth'
+gem 'omniauth', '~> 2.1.0'
 # Adding Google Sign-in support
-gem 'omniauth-google-oauth2' 
+gem 'omniauth-google-oauth2' , '~> 1.0.1'
 # Required when not using Devise
 gem 'omniauth-rails_csrf_protection' 
 # Apple Sign-in support
@@ -88,18 +88,26 @@ gem 'nokogiri', '~> 1.13.6'
 # Download
 gem 'down', '~> 5.0'
 
+# Tracking changes using PaperTrail [https://github.com/paper-trail-gem/paper_trail]
+gem 'paper_trail'
+
 # Active storage validations [https://github.com/igorkasyanchuk/active_storage_validations]
 gem 'active_storage_validations', '~> 0.9.8'
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 gem 'image_processing', '~> 1.2'
 gem 'ruby-vips', '>= 2.1.0'
+gem 'aws-sdk-s3', require: false
+
 
 # Generate QRCode [https://github.com/whomwah/rqrcode]
 gem 'rqrcode', '~> 2.0'
 
+# Pagination [https://github.com/ddnexus/pagy]
+gem 'pagy', '~> 5.10.1'
+
 # Countries [https://github.com/countries/countries]
-gem 'countries', '~> 5.0.2', require: 'countries/global'
+gem 'countries', '~> 5.1.0', require: 'countries/global'
 
 # Validate URL format [https://github.com/perfectline/validates_url]
 gem 'validate_url'

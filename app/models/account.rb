@@ -2,6 +2,9 @@ class Account < ApplicationRecord
   # enable rolify on the Account class
   resourcify
 
+  # Tracking changes
+  has_paper_trail
+
   has_many :members
   has_many :users,   through: :members
 

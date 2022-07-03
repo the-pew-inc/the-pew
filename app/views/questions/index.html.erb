@@ -1,14 +1,27 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Questions</h1>
-
-<div id="questions">
-  <% @questions.each do |question| %>
-    <%= render question %>
-    <p>
-      <%= link_to "Show this question", question %>
-    </p>
+<%= turbo_stream_from [@room.id, :questions] %>
+<section class="pt-4">
+  <h2 class="font-extrabold text-2xl text-slate-800 text-center">
+    <%= @room.event.name %>
+  </h2>
+</section>
+<section class="pt-4">
+  <% if user_signed_in? %>
+    <div class="md:px-2 py-2 bg-blue-100 rounded-lg">
+      <h2 class="text-xl font-bold text-blue-600">Ask your question: </h2>
+      <%= turbo_frame_tag :new_question, src: new_room_question_path %>
+    </div>
+  <% else %>
+    <div>
+      <h3>You need to be logged in to ask a question</h3>
+      <%= link_to 'Sign up', sign_up_path %> or <%= link_to 'Login', login_path %>
+    </div>
   <% end %>
-</div>
-
-<%= link_to "New question", new_question_path %>
+</section>
+<section class="pt-4">
+  <div id="questions" data-controller="empty-state">
+    <div data-empty-state-target="emptyState">
+      <%= render "empty_state" %>
+    </div>
+    <%= render @questions %>
+  </div>
+</section>
