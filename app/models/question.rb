@@ -7,6 +7,7 @@ class Question < ApplicationRecord
 
   belongs_to :user
   belongs_to :room
+  has_many   :votes, as: :votable
 
   validates :title, presence: true, length: { minimum: 3, maximum: 250 }
 
