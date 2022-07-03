@@ -38,7 +38,7 @@ class Event < ApplicationRecord
   end
 
   after_destroy_commit do
-    broadcast_remove_later_to [self.user_id, :events]
+    broadcast_remove_to [self.user_id, :events]
   end
 
   private
