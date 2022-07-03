@@ -11,7 +11,13 @@ recommendations of [keepachangelog.com](http://keepachangelog.com/).
 
 ### Added
 
-- None
+- Paper Trail support to track who's making changes. Tracked objects: Events, Rooms, Accounts, Members and Profiles
+
+- Broadcasting Turbo Streams asynchronously
+
+- Upvote, Downvote a question
+
+- Dynamic refresh of total ques
 
 ### Fixed
 

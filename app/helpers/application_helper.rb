@@ -25,8 +25,8 @@ module ApplicationHelper
 
   # Return the first letter of the current user's nickname
   # aka initial ;-)
-  def initial(user)
-    user.profile.nickname[0,1].upcase
+  def initial(nickname)
+    nickname[0,1].upcase
   end
 
   def random_background
