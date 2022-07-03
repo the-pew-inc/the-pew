@@ -1,0 +1,8 @@
+<div class="bg-slate-100 rounded-xl px-2 pt-2 pb-4">
+  <div class="pb-2 font-light text-slate-700 text-sm">
+    No event created yet, just get started by creating one!
+  </div>
+  <div>
+    <%= link_to "Create an event", new_event_path, class: "px-3 py-2 rounded bg-green-500 text-white", data: { turbo_frame: dom_id(Event.new) } %>
+  </div>
+</div>
