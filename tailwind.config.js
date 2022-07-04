@@ -5,6 +5,7 @@ module.exports = {
     "./app/components/**/*.rb",
     "./app/components/**/*html.erb",
     "./app/helpers/**/*.rb",
+    "./app/presenters/**/*.rb",
     "./app/assets/stylesheets/**/*.css",
     "./app/javascript/**/*.js",
   ],

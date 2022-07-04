@@ -22,14 +22,4 @@ module ApplicationHelper
       'text-green-700'
     end
   end
-
-  # Return the first letter of the current user's nickname
-  # aka initial ;-)
-  def initial(nickname)
-    nickname[0,1].upcase
-  end
-
-  def random_background
-    ['blue','red','orange','pink','green','slate','purple','amber','yellow','lime','emerald','teal','cyan','sky','indigo','violet','fuchsia'].sample
-  end
 end
