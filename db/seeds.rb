@@ -25,10 +25,10 @@ end
 p "Deleting existing events"
 Event.destroy_all
 
-p "Generating a set of randome events"
+p "Generating a set of random events"
 20.times do
   Event.create!(
-    name: Faker::App.name[6..20],
+    name: Faker::App.name + " by " + Faker::App.author,
     user: users.sample,
     start_date: Faker::Date.forward(days: 30)
   )
