@@ -6,9 +6,7 @@
           An
         </div>
       <% else %>
-        <div class="font-bold text-gray-200 rounded-full bg-<%= random_background %>-400 flex items-center justify-center font-mono w-10 h-10">
-          <%= initial(question.user.profile.nickname) %>
-        </div>
+        <%= AvatarPresenter.call(question.user) %>
       <% end %>
     </div>
     <div>
