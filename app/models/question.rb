@@ -1,6 +1,9 @@
 class Question < ApplicationRecord
-  # enable rolify on the Question class
+  # Enable rolify on the Question class
   resourcify
+
+  # Add orderable_by_timestamp
+  include OrderableByTimestamp
 
   # Tracking changes
   has_paper_trail
@@ -18,7 +21,7 @@ class Question < ApplicationRecord
     rejected: 30
   }, _default: :asked
 
-  scope :questions_for_room, -> (room) { where('room_id = ?', room).order(:created_at) }
+  scope :questions_for_room, -> (room) { where('room_id = ?', room) }
 
   # Set of triggers to broadcast CRUD to the display
   after_create_commit do

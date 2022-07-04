@@ -4,7 +4,7 @@ class QuestionsController < ApplicationController
 
   # GET /rooms/:room_id/questions
   def index
-    @questions = Question.questions_for_room(params[:room_id])
+    @questions = Question.questions_for_room(params[:room_id]).approved.by_recently_created
   end
 
   # GET /rooms/:room_id/questions/1
