@@ -5,7 +5,10 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
-require 'faker'
+
+return unless Rails.env == "development"
+
+system 'clear'
 
 p "Deleting existing users"
 User.destroy_all
@@ -25,11 +28,21 @@ end
 p "Deleting existing events"
 Event.destroy_all
 
-p "Generating a set of random events"
+p "Generating a set of random events with default room"
 20.times do
-  Event.create!(
+  event = Event.create!(
     name: Faker::App.name + " by " + Faker::App.author,
     user: users.sample,
     start_date: Faker::Date.forward(days: 30)
   )
+
+  Room.create!(
+    name: '__default__',
+    event_id: event.id
+  )
+
+  print '.'
 end
+
+print ' '
+p "Seed completed"
