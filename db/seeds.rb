@@ -30,16 +30,21 @@ Event.destroy_all
 
 p "Generating a set of random events with default room"
 20.times do
+  user = users.sample
+
   event = Event.create!(
     name: Faker::App.name + " by " + Faker::App.author,
-    user: users.sample,
+    user: user,
     start_date: Faker::Date.forward(days: 30)
   )
 
-  Room.create!(
+  room = Room.create!(
     name: '__default__',
     event_id: event.id
   )
+
+  user.add_role :admin, event
+  user.add_role :admin, room
 
   print '.'
 end
