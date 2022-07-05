@@ -1,13 +1,17 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
-  start_date: 2022-05-29 17:34:34
-  end_date: 2022-05-29 17:34:34
+  name: Event number One
+  start_date: Time.current.utc
+  end_date: Time.current.utc + 1.day
   duration: 1
+  short_code: 123456
+  user: one
 
 two:
-  name: MyString
-  start_date: 2022-05-29 17:34:34
-  end_date: 2022-05-29 17:34:34
+  name: Super Event number two
+  start_date: Time.current.utc + 1.day
+  end_date: Time.current.utc + 2.day
   duration: 1
+  short_code: 098765
+  user: one

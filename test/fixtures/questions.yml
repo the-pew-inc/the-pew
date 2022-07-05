@@ -1,7 +1,12 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  title: MyString
+  title: This is question number 1
+  user: one
+  room: one
 
 two:
-  title: MyString
+  title: This is question number 2
+  user: one
+  room: two
+  anonymous: true
