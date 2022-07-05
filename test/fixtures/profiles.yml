@@ -2,8 +2,8 @@
 
 one:
   user: one
-  nickname: MyString
+  nickname: User1 NickaName
 
 two:
   user: two
-  nickname: MyString
+  nickname: User2 Simple
