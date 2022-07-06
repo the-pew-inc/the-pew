@@ -28,7 +28,7 @@ end
 p "Deleting existing events"
 Event.destroy_all
 
-p "Generating a set of random events with default room"
+p "Generating a set of random events with default room & questions"
 20.times do
   user = users.sample
 
@@ -43,11 +43,22 @@ p "Generating a set of random events with default room"
     event_id: event.id
   )
 
+  # Adding roles
   user.add_role :admin, event
   user.add_role :admin, room
 
+  # Adding questions
+  2.times do
+    Question.create!(
+      room: room,
+      user: users.sample,
+      title: Faker::ChuckNorris.fact
+    )
+  end
+
   print '.'
 end
+
 
 print ' '
 p "Seed completed"
