@@ -4,7 +4,7 @@ class QuestionsController < ApplicationController
 
   # GET /rooms/:room_id/questions
   def index
-    @questions = Question.questions_for_room(params[:room_id]).approved.by_recently_created
+    @questions = Question.questions_for_room(params[:room_id]).by_recently_created
   end
 
   # GET /rooms/:room_id/questions/1
@@ -40,7 +40,7 @@ class QuestionsController < ApplicationController
   # PATCH/PUT /rooms/:room_id/questions/1
   def update
     respond_to do |format|
-      if @comment.update(update_question_params)
+      if @question.update(update_question_params)
         format.turbo_stream
       else
         format.turbo_stream
@@ -85,6 +85,6 @@ class QuestionsController < ApplicationController
   end
 
   def update_question_params 
-    params.require(:question).permit(:title, :status)
+    params.require(:question).permit(:status)
   end
 end

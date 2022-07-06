@@ -22,6 +22,8 @@
     <div data-empty-state-target="emptyState">
       <%= render "empty_state" %>
     </div>
-    <%= render @questions %>
+    <div class="flex flex-col space-y-2">
+      <%= render @questions %>
+    </div>
   </div>
 </section>

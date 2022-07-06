@@ -37,7 +37,7 @@ gem 'redis', '~> 4.0'
 gem 'kredis'
 
 # Adding support to View Component (better than partials ;-) ) [https://github.com/github/view_component]
-gem "view_component"
+gem 'view_component'
 
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 # Replaced by argon2 and custom authentication solution based on [https://stevepolito.design/blog/rails-authentication-from-scratch/]
