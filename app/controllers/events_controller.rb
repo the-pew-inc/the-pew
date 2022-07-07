@@ -72,18 +72,21 @@ class EventsController < ApplicationController
 
     @event = Event.find(params[:id])
     if @event.user_id != current_user.id
-      flash[:error] = 'You are not the owner of this event'
+      flash[:alert] = 'You are not the owner of this event'
       redirect_to(events_path)
       return
     end
-    if @event.destroy
-      flash.now[:success] = 'Object was successfully deleted.'
-      # redirect_to(events_path)
-      # format.turbo_stream
-    else
-      flash.now[:error] = 'Something went wrong'
-      # redirect_to(events_path)
-      # format.turbo_stream
+
+    respond_to do |format|
+      if @event.destroy
+        flash.now[:success] = 'Object was successfully deleted.'
+        format.html { redirect_to events_path }
+        format.turbo_stream { render turbo_stream: turbo_stream.remove(@event) }
+      else
+        flash.now[:alert] = 'Something went wrong'
+        # redirect_to(events_path)
+        # format.turbo_stream
+      end
     end
   end
 
