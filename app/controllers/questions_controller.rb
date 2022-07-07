@@ -50,21 +50,25 @@ class QuestionsController < ApplicationController
 
   # DELETE /rooms/:room_id/questions/1
   def destroy
-    @event = Event.find(params[:id])
+    @question = Question.find(params[:id])
 
     if @question.user_id != current_user.id
       flash[:error] = 'You are not the owner of this event'
       redirect_to(events_path)
       return
     end
-    if @question.destroy
-      flash[:success] = 'Object was successfully deleted.'
-      # redirect_to(events_path)
-      # format.turbo_stream
-    else
-      flash[:error] = 'Something went wrong'
-      # redirect_to(events_path)
-      # format.turbo_stream
+
+    respond_to do |format|
+      if @question.destroy
+        flash[:success] = 'Object was successfully deleted.'
+        # redirect_to(events_path)
+        format.html { redirect_to room_questions_path } 
+        format.turbo_stream { render turbo_stream: turbo_stream.remove(@question) }
+      else
+        flash[:error] = 'Something went wrong'
+        # redirect_to(events_path)
+        # format.turbo_stream
+      end
     end
   end
 
