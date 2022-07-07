@@ -28,6 +28,6 @@
     <% end %>
   <% end %>
   <% if user_signed_in? && current_user.id == question.user_id || (user_signed_in? && (current_user.has_role? :admin, question.room)) %>
-    <%= button_to 'Delete', room_question_path(question.room_id, question.id), method: :delete %>
+    <%= link_to 'Delete', room_question_path(question.room_id, question.id), data: { turbo_method: :delete,  turbo_confirm: 'Are you sure?' } %>
   <% end %>
 <% end %>

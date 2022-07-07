@@ -8,7 +8,13 @@ class QuestionsController < ApplicationController
   end
 
   # GET /rooms/:room_id/questions/1
-  def show; end
+  def show 
+    if request.headers["turbo-frame"]
+      render partial: 'question', locals: { question: @question }
+    else
+      render 'show'
+    end
+  end
 
   # GET /rooms/:room_id/questions/new
   def new
@@ -53,8 +59,8 @@ class QuestionsController < ApplicationController
     @question = Question.find(params[:id])
 
     if @question.user_id != current_user.id
-      flash[:error] = 'You are not the owner of this event'
-      redirect_to(events_path)
+      flash[:alert] = 'You are not the owner of this question'
+      redirect_to room_questions_path, status: :unprocessable_entity
       return
     end
 

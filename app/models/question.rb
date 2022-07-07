@@ -25,11 +25,11 @@ class Question < ApplicationRecord
 
   # Set of triggers to broadcast CRUD to the display
   after_create_commit do
-    # broadcast_prepend_later_to [self.room_id, :questions], target: "questions", partial: "questions/question", locals: { question: self } if Current.user
+    broadcast_prepend_later_to [self.room_id, :questions], target: "questions", partial: "questions/question_frame", locals: { question: self } if Current.user
   end
 
   after_update_commit do
-    broadcast_update_later_to [self.room_id, :questions], partial: "questions/question", locals: { question: self }
+    broadcast_update_later_to [self.room_id, :questions], partial: "questions/question_frame", locals: { question: self }
   end
 
   after_destroy_commit do
