@@ -45,6 +45,7 @@ class QuestionsController < ApplicationController
 
   # PATCH/PUT /rooms/:room_id/questions/1
   def update
+
     respond_to do |format|
       if @question.update(update_question_params)
         format.turbo_stream
@@ -95,6 +96,6 @@ class QuestionsController < ApplicationController
   end
 
   def update_question_params 
-    params.require(:question).permit(:status)
+    params.require(:question).permit(:status, :rejection_cause)
   end
 end

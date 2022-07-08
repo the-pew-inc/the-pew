@@ -21,6 +21,14 @@ class Question < ApplicationRecord
     rejected: 30
   }, _default: :asked
 
+  enum rejection_cause: {
+    inapropriate: 10,
+    offensive: 20,
+    duplicate: 30,
+    explicit: 40,
+    other: 50
+  }
+
   scope :questions_for_room, -> (room) { where('room_id = ?', room) }
 
   # Set of triggers to broadcast CRUD to the display

@@ -1,33 +1,39 @@
-<%= turbo_frame_tag dom_id(question), class: "flex flex-row items-center justify-between w-full space-x-2 rounded-full border border-gray-300 px-4", "data-empty-state-target": "item" do %>
-  <div class="flex space-x-2">
-    <% if question.anonymous %>
-      <div class="rounded-full bg-sky-400 flex items-center justify-center w-10 h-10">
-        <div class="font-bold text-gray-200 font-mono ">
-          An
+<%= turbo_frame_tag dom_id(question) do %>
+  <div  class="flex flex-row items-center justify-between w-full space-x-2 rounded-full border border-gray-300 px-4", data-empty-state-target="item">
+    <div class="flex space-x-2">
+      <% if question.anonymous %>
+        <div class="rounded-full bg-sky-400 flex items-center justify-center w-10 h-10">
+          <div class="font-bold text-gray-200 font-mono ">
+            An
+          </div>
         </div>
+      <% else %>
+        <%= AvatarPresenter.call(question.user) %>
+      <% end %>
+      <div>
+        <div class="font-bold text-sm"><%= question.user.profile.nickname %></div>
+        <%= question.title %>
       </div>
-    <% else %>
-      <%= AvatarPresenter.call(question.user) %>
-    <% end %>
-    <div>
-      <div class="font-bold text-sm"><%= question.user.profile.nickname %></div>
-      <%= question.title %>
     </div>
+    <% if question.asked? %>
+      <% if user_signed_in? && current_user.id == question.user_id %>
+        <div>
+          Being reviewed
+        </div>
+      <% end %>
+      <% if user_signed_in? && (current_user.has_role? :admin, question.room) %>
+        <div>
+          <%= button_to 'Approve', room_question_path(question.room_id, question.id), method: :put, params: { question: {status: :approved} }  %> | 
+          <%= form_with model: question, url: room_question_path(question.room_id, question.id) do |form|  %>
+            <%= form.hidden_field :status, value: :rejected %>
+            <%= form.select :rejection_cause, options_for_select(Question.rejection_causes.keys, { selected: question.rejection_cause || Question.new.rejection_cause }), prompt: 'Reject', onchange: 'this.form.requestSubmit()' %>
+          <% end %>
+          |
+        </div>
+      <% end %>
+    <% end %>
+    <% if user_signed_in? && current_user.id == question.user_id || (user_signed_in? && (current_user.has_role? :admin, question.room)) %>
+      <%= link_to 'Delete', room_question_path(question.room_id, question.id), data: { turbo_method: :delete,  turbo_confirm: 'Are you sure?' } %>
+    <% end %>
   </div>
-  <% if question.asked? %>
-    <% if user_signed_in? && current_user.id == question.user_id %>
-      <div>
-        Being reviewed
-      </div>
-    <% end %>
-    <% if user_signed_in? && (current_user.has_role? :admin, question.room) %>
-      <div>
-        <%= button_to 'Approve', room_question_path(question.room_id, question.id), method: :put, params: { question: {status: :approved} }  %> | 
-        <%= button_to 'Reject', room_question_path(question.room_id, question.id), method: :put, params: { question: {status: :rejected} }  %> |
-      </div>
-    <% end %>
-  <% end %>
-  <% if user_signed_in? && current_user.id == question.user_id || (user_signed_in? && (current_user.has_role? :admin, question.room)) %>
-    <%= link_to 'Delete', room_question_path(question.room_id, question.id), data: { turbo_method: :delete,  turbo_confirm: 'Are you sure?' } %>
-  <% end %>
 <% end %>
