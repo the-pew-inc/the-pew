@@ -26,8 +26,7 @@ class QuestionsController < ApplicationController
 
   # POST /rooms/:room_id/questions
   def create
-    @question = @room.questions.build(question_params)
-    @question.user_id = current_user.id
+    @question = @room.questions.build(create_question_params)
 
     respond_to do |format|
       if @question.save
@@ -91,8 +90,8 @@ class QuestionsController < ApplicationController
   end
 
   # Only allow a list of trusted parameters through.
-  def question_params
-    params.require(:question).permit(:title)
+  def create_question_params
+    params.require(:question).permit(:title).with_defaults(user_id: current_user.id)
   end
 
   def update_question_params 
