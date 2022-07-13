@@ -24,11 +24,16 @@
       <% if user_signed_in? && (current_user.has_role? :admin, question.room) %>
         <div>
           <%= button_to 'Approve', room_question_path(question.room_id, question.id), method: :put, params: { question: {status: :approved} }  %> | 
-          <%= form_with model: question, url: room_question_path(question.room_id, question.id) do |form|  %>
+          <%= form_with model: question,
+                        url: room_question_path(question.room_id, question.id),
+                        format: :turbo_stream,
+                        html: { data: { controller: "auto-submit", action:"change->auto-submit#change" } } do |form|  %>
             <%= form.hidden_field :status, value: :rejected %>
-            <%= form.select :rejection_cause, options_for_select(Question.rejection_causes.keys, { selected: question.rejection_cause || Question.new.rejection_cause }), prompt: 'Reject', onchange: 'this.form.requestSubmit()' %>
+            <%= form.select :rejection_cause, 
+                            options_for_select(Question.rejection_causes.keys, 
+                            { selected: question.rejection_cause || Question.new.rejection_cause }), 
+                            prompt: 'Reject' %>
           <% end %>
-          |
         </div>
       <% end %>
     <% end %>
