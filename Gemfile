@@ -37,7 +37,7 @@ gem 'redis', '~> 4.0'
 gem 'kredis'
 
 # Adding support to View Component (better than partials ;-) ) [https://github.com/github/view_component]
-gem "view_component"
+gem 'view_component'
 
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 # Replaced by argon2 and custom authentication solution based on [https://stevepolito.design/blog/rails-authentication-from-scratch/]
@@ -133,6 +133,10 @@ group :development do
   # Add support to Rubocop [https://github.com/rubocop/rubocop]
   gem 'rubocop', '~> 1.30', require: false
   gem 'rubocop-rails', require: false
+
+  # Add support to Brakeman [https://github.com/presidentbeef/brakeman]
+  # Vulnerability scanner
+  gem 'brakeman'
 end
 
 group :test do

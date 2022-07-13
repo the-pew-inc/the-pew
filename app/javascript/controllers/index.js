@@ -2,19 +2,22 @@
 // Run that command whenever you add a new controller or create them with
 // ./bin/rails generate stimulus controllerName
 
-import { application } from "./application";
+import { application } from "./application"
 
-import ClipboardController from "./clipboard_controller.js";
-application.register("clipboard", ClipboardController);
+import AutoSubmitController from "./auto_submit_controller.js"
+application.register("auto-submit", AutoSubmitController)
 
-import CloseFlashController from "./close_flash_controller.js";
-application.register("close-flash", CloseFlashController);
+import ClipboardController from "./clipboard_controller.js"
+application.register("clipboard", ClipboardController)
 
-import EmptyStateController from "./empty_state_controller.js";
-application.register("empty-state", EmptyStateController);
+import CloseFlashController from "./close_flash_controller.js"
+application.register("close-flash", CloseFlashController)
 
-import ToggleController from "./toggle_controller.js";
-application.register("toggle", ToggleController);
+import EmptyStateController from "./empty_state_controller.js"
+application.register("empty-state", EmptyStateController)
 
-import ValidatePinController from "./validate_pin_controller.js";
-application.register("validate-pin", ValidatePinController);
+import ToggleController from "./toggle_controller.js"
+application.register("toggle", ToggleController)
+
+import ValidatePinController from "./validate_pin_controller.js"
+application.register("validate-pin", ValidatePinController)

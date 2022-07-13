@@ -51,6 +51,10 @@ Rails.application.routes.draw do
     resources :questions
   end
 
+  # Display the user's questions
+  get 'your-questions', to: 'your_questions#index'
+  get 'your-questions/:id', to: 'your_questions#show'
+
   # Answer routes / ONLY accessible via the https://ask. domain
   constraints subdomain: 'ask' do
     get '(/:pin)', to: "asks#index", as: :ask_root

@@ -1,0 +1,12 @@
+<h1>Your Questions</h1>
+<div>
+  You have <%= pluralize(@count, 'question') %>
+</div>
+<div>
+  <% @questions.each do |question| %>
+    <%= question.room.event.name %><br>
+    <%= question.title %><br>
+    <%= question.status %><br>
+    <%= question.created_at %><br>
+  <% end %>
+</div>

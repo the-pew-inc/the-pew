@@ -4,11 +4,17 @@ class QuestionsController < ApplicationController
 
   # GET /rooms/:room_id/questions
   def index
-    @questions = Question.questions_for_room(params[:room_id])
+    @questions = Question.questions_for_room(params[:room_id]).by_recently_created
   end
 
   # GET /rooms/:room_id/questions/1
-  def show; end
+  def show 
+    if request.headers["turbo-frame"]
+      render partial: 'question', locals: { question: @question }
+    else
+      render 'show'
+    end
+  end
 
   # GET /rooms/:room_id/questions/new
   def new
@@ -20,8 +26,7 @@ class QuestionsController < ApplicationController
 
   # POST /rooms/:room_id/questions
   def create
-    @question = @room.questions.build(question_params)
-    @question.user_id = current_user.id
+    @question = @room.questions.build(create_question_params)
 
     respond_to do |format|
       if @question.save
@@ -39,8 +44,9 @@ class QuestionsController < ApplicationController
 
   # PATCH/PUT /rooms/:room_id/questions/1
   def update
+
     respond_to do |format|
-      if @comment.update(update_question_params)
+      if @question.update(update_question_params)
         format.turbo_stream
       else
         format.turbo_stream
@@ -50,21 +56,25 @@ class QuestionsController < ApplicationController
 
   # DELETE /rooms/:room_id/questions/1
   def destroy
-    @event = Event.find(params[:id])
+    @question = Question.find(params[:id])
 
     if @question.user_id != current_user.id
-      flash[:error] = 'You are not the owner of this event'
-      redirect_to(events_path)
+      flash[:alert] = 'You are not the owner of this question'
+      redirect_to room_questions_path, status: :unprocessable_entity
       return
     end
-    if @question.destroy
-      flash[:success] = 'Object was successfully deleted.'
-      # redirect_to(events_path)
-      # format.turbo_stream
-    else
-      flash[:error] = 'Something went wrong'
-      # redirect_to(events_path)
-      # format.turbo_stream
+
+    respond_to do |format|
+      if @question.destroy
+        flash[:success] = 'Object was successfully deleted.'
+        # redirect_to(events_path)
+        format.html { redirect_to room_questions_path } 
+        format.turbo_stream { render turbo_stream: turbo_stream.remove(@question) }
+      else
+        flash[:error] = 'Something went wrong'
+        # redirect_to(events_path)
+        # format.turbo_stream
+      end
     end
   end
 
@@ -80,11 +90,11 @@ class QuestionsController < ApplicationController
   end
 
   # Only allow a list of trusted parameters through.
-  def question_params
-    params.require(:question).permit(:title)
+  def create_question_params
+    params.require(:question).permit(:title).with_defaults(user_id: current_user.id)
   end
 
   def update_question_params 
-    params.require(:question).permit(:title, :status)
+    params.require(:question).permit(:status, :rejection_cause)
   end
 end

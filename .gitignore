@@ -36,3 +36,6 @@
 /node_modules
 
 /config/credentials/development.key
+
+# Brakeman output
+output.html

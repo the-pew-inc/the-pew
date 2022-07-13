@@ -1,7 +1,22 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
+# User one is confirmed and unblocked/unlocked
 one:
-  email: MyString
+  email: test_user1@test.com
+  password_digest:
+  blocked:
+  confirmed: true
+  confirmed_at: Time.current.utc
 
+# User two is not confirmed and blocked but not locked
 two:
-  email: MyString
+  email: test_user2@test.com
+  password_digest:
+  blocked: true
+
+# User three is locked and not confirmed and not blocked
+three:
+  email: test_user3@test.com
+  password_digest:
+  locked: true
+  locked_at: Time.current.utc

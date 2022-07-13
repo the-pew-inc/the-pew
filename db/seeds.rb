@@ -28,21 +28,37 @@ end
 p "Deleting existing events"
 Event.destroy_all
 
-p "Generating a set of random events with default room"
+p "Generating a set of random events with default room & questions"
 20.times do
+  user = users.sample
+
   event = Event.create!(
     name: Faker::App.name + " by " + Faker::App.author,
-    user: users.sample,
+    user: user,
     start_date: Faker::Date.forward(days: 30)
   )
 
-  Room.create!(
+  room = Room.create!(
     name: '__default__',
     event_id: event.id
   )
 
+  # Adding roles
+  user.add_role :admin, event
+  user.add_role :admin, room
+
+  # Adding questions
+  2.times do
+    Question.create!(
+      room: room,
+      user: users.sample,
+      title: Faker::ChuckNorris.fact
+    )
+  end
+
   print '.'
 end
+
 
 print ' '
 p "Seed completed"
