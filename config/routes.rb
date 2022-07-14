@@ -51,6 +51,10 @@ Rails.application.routes.draw do
     resources :questions
   end
 
+  namespace :questions do
+    resource :votes, only: :show
+  end
+
   # Display the user's questions
   get 'your-questions', to: 'your_questions#index'
   get 'your-questions/:id', to: 'your_questions#show'
