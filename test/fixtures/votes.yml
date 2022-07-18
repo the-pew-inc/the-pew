@@ -2,10 +2,10 @@
 
 one:
   user: one
-  voteable: one
-  voteable_type: Voteable
+  votable: one
+  votable_type: votable
 
 two:
   user: two
-  voteable: two
-  voteable_type: Voteable
+  votable: two
+  votable_type: votable

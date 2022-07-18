@@ -22,6 +22,9 @@
     <div data-empty-state-target="emptyState">
       <%= render "empty_state" %>
     </div>
-    <%= render @questions %>
+    <div >
+      Number of questions: <span id="question_counter"><%= @room.approved_question_count %></span><br>
+      <%= render @questions %>
+    </div>
   </div>
 </section>

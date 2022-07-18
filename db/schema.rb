@@ -194,13 +194,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_08_163651) do
 
   create_table "votes", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.string "voteable_type", null: false
-    t.bigint "voteable_id", null: false
+    t.string "votable_type", null: false
+    t.bigint "votable_id", null: false
     t.integer "choice", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_votes_on_user_id"
-    t.index ["voteable_type", "voteable_id"], name: "index_votes_on_voteable"
+    t.index ["votable_type", "votable_id"], name: "index_votes_on_votable"
   end
 
   add_foreign_key "active_sessions", "users", on_delete: :cascade
