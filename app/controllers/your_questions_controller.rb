@@ -1,4 +1,7 @@
 class YourQuestionsController < ApplicationController
+  before_action :authenticate_user!
+  before_action :redirect_if_unauthenticated
+  
   def index
     # TODO: make sure the user is the only one enable to read the question
     # Pundit ;-)

@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :authenticate_user!, only: %i[edit destroy update new create]
+  before_action :authenticate_user!
   before_action :redirect_if_unauthenticated
 
   def index
