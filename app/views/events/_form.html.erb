@@ -11,7 +11,7 @@
   </div>
   <div class="mb-4">
     <%= form.label :start_date, class: "flex items-center cursor-pointer relative" %>
-    <%= form.date_field :start_date, min: 0.days.ago, required: true, class: "form-input w-full block rounded-xl border-slate-300 border-2 focus:outline-none focus:border-green-500 focus:ring-green-500" %>
+    <%= form.date_field :start_date, min: Date.current, required: true, class: "form-input w-full block rounded-xl border-slate-300 border-2 focus:outline-none focus:border-green-500 focus:ring-green-500" %>
   </div>
   <div class="mb-6">
     <%= form.label :always_on, class: "relative flex items-center cursor-pointer" do %>
