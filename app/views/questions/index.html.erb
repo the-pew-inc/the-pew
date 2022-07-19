@@ -1,4 +1,5 @@
 <%= turbo_stream_from [@room.id, :questions] %>
+<%= turbo_stream_from :upvotes %>
 <section class="pt-4">
   <h2 class="font-extrabold text-2xl text-slate-800 text-center">
     <%= @room.event.name %>
@@ -24,6 +25,7 @@
     </div>
     <div >
       Number of questions: <span id="question_counter"><%= @room.approved_question_count %></span><br>
+      Upvotes <span id="upvotes_1">0</span> <br>
       <%= render @questions %>
     </div>
   </div>
