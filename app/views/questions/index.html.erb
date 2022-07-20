@@ -19,14 +19,14 @@
   <% end %>
 </section>
 <section class="pt-4">
+  <div >
+    Number of questions: <span id="question_counter"><%= @room.approved_question_count %></span><br>
+    Upvotes <span id="upvotes_1">0</span> <br>
+  </div>
   <div id="questions" data-controller="empty-state" class="flex flex-col space-y-2">
     <div data-empty-state-target="emptyState">
       <%= render "empty_state" %>
     </div>
-    <div >
-      Number of questions: <span id="question_counter"><%= @room.approved_question_count %></span><br>
-      Upvotes <span id="upvotes_1">0</span> <br>
-      <%= render @questions %>
-    </div>
+    <%= render @questions %>
   </div>
 </section>
