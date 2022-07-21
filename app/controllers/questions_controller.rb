@@ -1,4 +1,6 @@
 class QuestionsController < ApplicationController
+  before_action :authenticate_user!, only: %i[edit destroy update new]
+  
   before_action :set_question, only: %i[show edit update destroy]
   before_action :set_room
 
