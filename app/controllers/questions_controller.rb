@@ -42,8 +42,6 @@ class QuestionsController < ApplicationController
                                                     locals: { question: @room.questions.build }
           )
         }
-        Turbo::StreamsChannel.broadcast_prepend_later_to [@question.room_id, :questions], target: "questions", partial: "questions/question_frame", locals: { question: @question } if Current.user
-        Turbo::StreamsChannel.broadcast_update_later_to [@question.room_id, :questions], target: "question_counter", html: Question.approved_questions_for_room(@question.room_id).count if @question.approved?
       else
         format.html { render :new, status: :unprocessable_entity }
       end
@@ -56,8 +54,6 @@ class QuestionsController < ApplicationController
     respond_to do |format|
       if @question.update(update_question_params)
         format.turbo_stream
-        Turbo::StreamsChannel.broadcast_update_later_to [@question.room_id, :questions], target: @question, partial: "questions/question_frame", locals: { question: @question }
-        Turbo::StreamsChannel.broadcast_update_later_to [@question.room_id, :questions], target: "question_counter", html: Question.approved_questions_for_room(@question.room_id).count if @question.approved?
       else
         format.turbo_stream
       end
@@ -74,23 +70,8 @@ class QuestionsController < ApplicationController
       return
     end
 
-    respond_to do |format|
-      if @question.destroy
-        flash[:success] = 'Object was successfully deleted.'
-        # redirect_to(events_path)
-        format.html { redirect_to room_questions_path } 
-        format.turbo_stream { render turbo_stream: [
-          turbo_stream.update('question_counter', html: "#{Question.approved_questions_for_room(@question.room_id).count}"),
-          turbo_stream.remove(@question)
-        ]}
-        Turbo::StreamsChannel.broadcast_remove_to [@question.room_id, :questions], target: @question
-        Turbo::StreamsChannel.broadcast_update_later_to [@question.room_id, :questions], target: "question_counter", html: Question.approved_questions_for_room(@question.room_id).count if @question.approved?
-      else
-        flash[:error] = 'Something went wrong'
-        # redirect_to(events_path)
-        # format.turbo_stream
-      end
-    end
+    @question.destroy
+    # TODO: better handle the error (need turbo stream flash support)
   end
 
   private

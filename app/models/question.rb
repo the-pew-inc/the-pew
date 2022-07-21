@@ -47,4 +47,19 @@ class Question < ApplicationRecord
     Vote.where(votable_id: self.id).down_vote.sum(:choice)
   end
 
+  after_create_commit do
+    broadcast_prepend_later_to [self.room_id, :questions], target: "questions", partial: "questions/question_frame", locals: { question: self } if Current.user
+    broadcast_update_later_to  [self.room_id, :questions], target: "question_counter", html: Question.approved_questions_for_room(self.room_id).count if self.approved?
+  end
+
+  after_update_commit do
+    broadcast_update_later_to [self.room_id, :questions], target: self, partial: "questions/question_frame", locals: { question: self }
+    broadcast_update_later_to [self.room_id, :questions], target: "question_counter", html: Question.approved_questions_for_room(self.room_id).count if self.approved?
+  end
+
+  after_destroy_commit do
+    broadcast_update_to [self.room_id, :questions], target: "question_counter", html: Question.approved_questions_for_room(self.room_id).count
+    broadcast_remove_to [self.room_id, :questions], target: self
+  end
+
 end
