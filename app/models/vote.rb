@@ -23,13 +23,13 @@ class Vote < ApplicationRecord
   after_create_commit do
     # target_name = [votable.room_id, votable.class.name.downcase.pluralize]
     # broadcast_update_later_to(target_name, target: "#{dom_id(votable)}_count", html: votable.vote_count)
-    broadcast_update_later_to('upvotes', target: "upvotes_1", html: votable.vote_count)
+    broadcast_update_later_to('upvotes', target: 'upvotes_1', html: votable.vote_count)
   end
 
   after_update_commit do
     # target_name = [votable.room_id, votable.class.name.downcase.pluralize]
     # broadcast_update_later_to(target_name, target: "#{dom_id(votable)}_count", html: votable.vote_count)
-    broadcast_update_later_to('upvotes', target: "upvotes_1", html: votable.vote_count)
+    broadcast_update_later_to('upvotes', target: 'upvotes_1', html: votable.vote_count)
   end
 
 end
