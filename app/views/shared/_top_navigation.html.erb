@@ -1,95 +1,68 @@
-<nav class="bg-white shadow-lg">
-  <div class="max-w-6xl lg:max-w-7xl mx-auto px-4">
-    <div class="flex justify-between">
-      <div class="flex space-x-7">
-        <div>
-          <!-- Website Logo -->
-          <%= link_to root_path, class: "flex items-center py-4 px-2" do %>
-            <%# <img src="logo.png" alt="Logo" class="h-8 w-8 mr-2"> %>
-            <span class="font-semibold text-gray-500 text-lg">ASK.me!</span>
-          <% end %>
-        </div>
-        <!-- Primary Navbar items -->
-        <div class="hidden md:flex items-center space-x-1">
-          <% if user_signed_in? %>
-            <%= link_to_unless_current 'Events', events_path, class: 'py-4 px-2 font-semibold text-gray-500 hover:text-green-500 transition duration-300' do %>
-              <%= link_to 'Events', events_path, class: 'py-4 px-2 font-semibold text-green-500 border-b-4 border-green-500' %>
-            <% end %>
-            <%= link_to_unless_current 'Your questions', your_questions_path, class: 'py-4 px-2 font-semibold text-gray-500 hover:text-green-500 transition duration-300' do %>
-              <%= link_to 'Your questions', your_questions_path, class: 'py-4 px-2 font-semibold text-green-500 border-b-4 border-green-500' %>
-            <% end %>
-          <% else %>
-            <%= link_to_unless_current 'Home', root_path, class: 'py-4 px-2 font-semibold text-gray-500 hover:text-green-500 transition duration-300' do %>
-              <%= link_to 'Home', root_path, class: 'py-4 px-2 font-semibold text-green-500 border-b-4 border-green-500' %>
-            <% end %>
-          <% end %>
-        </div>
-      </div>
-      <!-- Secondary Navbar items -->
-      <div class="hidden md:flex items-center space-x-3 ">
-        <% if user_signed_in? %>
-          <div data-controller="toggle" class="relative inline-block">
-            <button type="button" data-action="click->toggle#toggle">
-              <div class="w-10">
-                <%= image_tag current_user.profile.avatar.variant(resize_to_limit: [100, 100]),
-            width: 100, height: 100, class: "rounded-full" if current_user.profile.avatar.attached? %>
-                <%= AvatarPresenter.call(current_user) unless current_user.profile.avatar.attached?  %>
-              </div>
-            </button>
-            <!-- Toggle menu (desktop) -->
-            <div class="hidden origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1" data-toggle-target="toggle">
-              <div class="py-1 divide-y" role="none">
-                <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
-                <div class="text-gray-700 block w-full text-left px-4 py-2 text-xs">
-                  Connected as<br>
-                  <span class="font-bold"><%= current_user.profile.nickname.strip %></span>
-                </div>
-                <div>
-                  <%= link_to "Account settings", edit_account_path(current_user), class: "text-gray-700 block w-full text-left px-4 py-2 text-sm" %>
-                  <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-1">Support</a>
-                  <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-item-2">License</a>
-                </div>
-                <div>
-                  <%= link_to "Sign out", logout_path, data: { turbo_method: :delete }, class: "text-gray-700 block w-full text-left px-4 py-2 text-sm" %>
-                </div>
-              </div>
-            </div>
-          </div>
-        <% else %>
-          <%= link_to "Login", login_path, class: "py-2 px-2 font-medium text-gray-500 rounded hover:bg-green-500 hover:text-white transition duration-300" %>
-          <%= link_to "Sign up", sign_up_path, class: "py-2 px-2 font-medium text-white bg-green-500 rounded hover:bg-green-400 transition duration-300 ease-in-out" %>
-        <% end %>
-      </div>
-      <!-- Mobile menu button -->
-      <div class="md:hidden flex items-center static" data-controller="toggle">
-        <button class="outline-none mobile-menu-button" data-action="click->toggle#toggle">
-          <svg class=" w-6 h-6 text-gray-500 hover:text-green-500 "
-							x-show="!showMenu"
-							fill="none"
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-width="2"
-							viewBox="0 0 24 24"
-							stroke="currentColor"
-						>
-            <path d="M4 6h16M4 12h16M4 18h16"></path>
-          </svg>
+<nav class="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-900">
+  <div class="container flex flex-wrap justify-between items-center mx-auto">
+    <%= link_to root_path, class: "flex items-center" do %>
+      <%# <img src="/docs/images/logo.svg" class="mr-3 h-6 sm:h-9" alt="Flowbite Logo"> %>
+      <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Pew</span>
+    <% end %>
+    <div class="flex items-center md:order-2 md:space-x-3">
+      <% if user_signed_in? %>
+        <button type="button" class="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
+          <span class="sr-only">Open user menu</span>
+          <%= image_tag current_user.profile.avatar.variant(resize_to_limit: [100, 100]),
+            width: 100, height: 100, class: "w-8 h-8 rounded-full" if current_user.profile.avatar.attached? %>
+          <%= AvatarPresenter.call(current_user) unless current_user.profile.avatar.attached?  %>
         </button>
-        <!-- mobile menu -->
-        <div class="hidden absolute origin-top-left left-0 top-16 w-full bg-white mobile-menu" data-toggle-target="toggle">
-          <ul class="">
-            <li class="active"><%= link_to "Home", root_path, class: "block text-sm px-2 py-4 text-white bg-green-500 font-semibold" %></li>
-            <% if user_signed_in? %>
-              <li><%= link_to "Account settings", edit_account_path(current_user), class: "block text-sm px-2 py-4 hover:bg-green-500 transition duration-300" %></li>
-              <li><a href="#contact" class="block text-sm px-2 py-4 hover:bg-green-500 transition duration-300">Contact Us</a></li>
-              <%= link_to "Sign out", logout_path, data: { turbo_method: :delete }, class: "block text-sm px-2 py-4 hover:bg-green-500 transition duration-300" %>
-            <% else %>
-              <li><%= link_to "Login", login_path, class: "block text-sm px-2 py-4 hover:bg-green-500 transition duration-300" %></li>
-              <li><%= link_to "Sign Up", sign_up_path, class: "block text-sm px-2 py-4 hover:bg-green-500 transition duration-300" %></li>
-            <% end %>
+        <!-- Dropdown menu -->
+        <div class="hidden z-50 my-4 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600" id="user-dropdown">
+          <div class="py-3 px-4">
+            <span class="block text-sm text-gray-900 dark:text-white"><%= current_user.profile.nickname.strip %></span>
+            <span class="block text-sm font-medium text-gray-500 truncate dark:text-gray-400"><%= current_user.email %></span>
+          </div>
+          <ul class="py-1" aria-labelledby="user-menu-button">
+            <li>
+              <a href="#" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Dashboard</a>
+            </li>
+            <li>
+              <%= link_to "Settings", edit_account_path(current_user), class: "block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" %>
+            </li>
+            <li>
+              <a href="#" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Earnings</a>
+            </li>
+            <li>
+              <%= link_to "Sign out", logout_path, data: { turbo_method: :delete }, class:"block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" %>
+            </li>
           </ul>
         </div>
-      </div>
+      <% else %>
+        <%= link_to "Sign in", login_path, class: "py-2 pr-8 pl-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:text-sm md:font-medium dark:text-white" %>
+        <%= link_to "Get started", sign_up_path, type: "button", class: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" %>
+      <% end %>
+      <button data-collapse-toggle="navbar-cta" type="button" class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-cta" aria-expanded="false">
+        <span class="sr-only">Open main menu</span>
+        <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
+      </button>
+    </div>
+    <div class="hidden justify-between items-center w-full md:flex md:w-auto md:order-1" id="navbar-cta">
+      <ul class="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
+        <% if user_signed_in? %>
+          <li>
+            <%= link_to_unless_current 'Events', events_path, class: 'block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700' do %>
+              <%= link_to 'Events', events_path, class: 'block py-2 pr-4 pl-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white' %>
+            <% end %>
+          </li>
+          <li>
+            <%= link_to_unless_current 'Your questions', your_questions_path, class: 'block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700' do %>
+              <%= link_to 'Your questions', your_questions_path, class: 'block py-2 pr-4 pl-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white' %>
+            <% end %>
+          </li>
+        <% else %>
+          <li>
+            <%= link_to_unless_current 'Home', root_path, class: 'block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700' do %>
+              <%= link_to 'Home', root_path, class: 'block py-2 pr-4 pl-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white' %>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
     </div>
   </div>
 </nav>
