@@ -14,6 +14,13 @@
         <div class="font-bold text-sm"><%= question.user.profile.nickname %></div>
         <%= question.title %>
       </div>
+      <div>
+        <p id='<%= dom_id(question)%>_count'>
+          <%= question.vote_count %>
+        </p>
+        <%= link_to "Up Vote", question_votes_path(question, choice: :up_vote, format: :turbo_stream), class: "card-link" %>
+        <%= link_to "Down Vote", question_votes_path(question, choice: :down_vote, format: :turbo_stream), class: "card-link" %>
+      </div>
     </div>
     <% if question.asked? %>
       <% if user_signed_in? && current_user.id == question.user_id %>

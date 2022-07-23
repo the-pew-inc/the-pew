@@ -51,6 +51,8 @@ Rails.application.routes.draw do
     resources :questions
   end
 
+  get 'question/:votable_id/votes', to: 'votes#show', as: :question_votes,  votable_type: 'Question' 
+
   # Display the user's questions
   get 'your-questions', to: 'your_questions#index'
   get 'your-questions/:id', to: 'your_questions#show'

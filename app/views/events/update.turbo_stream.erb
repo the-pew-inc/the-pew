@@ -1,0 +1,13 @@
+<%# app/views/events/create.turbo_stream.erb %>
+<% if @event.errors.any? %>
+  <%# render_turbo_stream_flash_messages %>
+  <%= turbo_stream.replace( @event, 
+                          target: "events", 
+                          partial: "events/event",
+                          locals: { event: @event }) %>
+<% else %>
+  <%= turbo_stream.replace( @event, 
+                          target: "events", 
+                          partial: "events/event",
+                          locals: { event: @event }) %>
+<% end %>

@@ -1,10 +1,16 @@
 class QuestionsController < ApplicationController
+  before_action :authenticate_user!, only: %i[edit destroy update new]
+  
   before_action :set_question, only: %i[show edit update destroy]
   before_action :set_room
 
   # GET /rooms/:room_id/questions
   def index
-    @questions = Question.questions_for_room(params[:room_id]).by_recently_created
+    if @room.event.universal?
+      @questions = Question.questions_for_room(params[:room_id]).by_recently_created
+    else
+      redirect_to room_path, alert: "This event is private"
+    end
   end
 
   # GET /rooms/:room_id/questions/1
@@ -64,18 +70,8 @@ class QuestionsController < ApplicationController
       return
     end
 
-    respond_to do |format|
-      if @question.destroy
-        flash[:success] = 'Object was successfully deleted.'
-        # redirect_to(events_path)
-        format.html { redirect_to room_questions_path } 
-        format.turbo_stream { render turbo_stream: turbo_stream.remove(@question) }
-      else
-        flash[:error] = 'Something went wrong'
-        # redirect_to(events_path)
-        # format.turbo_stream
-      end
-    end
+    @question.destroy
+    # TODO: better handle the error (need turbo stream flash support)
   end
 
   private

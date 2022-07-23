@@ -10,7 +10,7 @@ class Question < ApplicationRecord
 
   belongs_to :user
   belongs_to :room
-  has_many   :votes, as: :votable
+  has_many   :votes, as: :votable, dependent: :destroy
 
   validates :title, presence: true, length: { minimum: 3, maximum: 250 }
 
@@ -30,18 +30,36 @@ class Question < ApplicationRecord
   }
 
   scope :questions_for_room, -> (room) { where('room_id = ?', room) }
+  scope :approved_questions_for_room, -> (room) { where('room_id = ?', room).approved }
 
-  # Set of triggers to broadcast CRUD to the display
+  # This is the sum of +1 and -1
+  def vote_count
+    Vote.where(votable_id: self.id).sum(:choice)
+  end
+
+  # This only sums the +1
+  def up_votes
+    Vote.where(votable_id: self.id).up_vote.sum(:choice)
+  end
+
+  # This only sums the -1
+  def down_votes
+    Vote.where(votable_id: self.id).down_vote.sum(:choice)
+  end
+
   after_create_commit do
     broadcast_prepend_later_to [self.room_id, :questions], target: "questions", partial: "questions/question_frame", locals: { question: self } if Current.user
+    broadcast_update_later_to  [self.room_id, :questions], target: "question_counter", html: Question.approved_questions_for_room(self.room_id).count if self.approved?
   end
 
   after_update_commit do
-    broadcast_update_later_to [self.room_id, :questions], partial: "questions/question_frame", locals: { question: self }
+    broadcast_update_later_to [self.room_id, :questions], target: self, partial: "questions/question_frame", locals: { question: self }
+    broadcast_update_later_to [self.room_id, :questions], target: "question_counter", html: Question.approved_questions_for_room(self.room_id).count if self.approved?
   end
 
   after_destroy_commit do
-    broadcast_remove_to [self.room_id, :questions]
+    broadcast_update_to [self.room_id, :questions], target: "question_counter", html: Question.approved_questions_for_room(self.room_id).count
+    broadcast_remove_to [self.room_id, :questions], target: self
   end
 
 end

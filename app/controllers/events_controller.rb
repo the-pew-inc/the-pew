@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :authenticate_user!, only: %i[edit destroy update new create]
+  before_action :authenticate_user!
   before_action :redirect_if_unauthenticated
 
   def index
@@ -29,13 +29,8 @@ class EventsController < ApplicationController
           # Make the user the admin of the default room
           current_user.add_role :admin, room
 
-          # format.html { redirect_to events_path, notice: "Event was successfully created." }
-          format.turbo_stream {
-            render turbo_stream: turbo_stream.replace("new_event",
-                                                      partial: "events/form",
-                                                      locals: { event: Event.new }
-            )
-          }
+          format.html { redirect_to events_path, notice: "Event was successfully created." }
+          format.turbo_stream
         else
           format.html { render :new, status: :unprocessable_entity }
         end
@@ -81,7 +76,7 @@ class EventsController < ApplicationController
       if @event.destroy
         flash.now[:success] = 'Object was successfully deleted.'
         format.html { redirect_to events_path }
-        format.turbo_stream { render turbo_stream: turbo_stream.remove(@event) }
+        format.turbo_stream 
       else
         flash.now[:alert] = 'Something went wrong'
         # redirect_to(events_path)

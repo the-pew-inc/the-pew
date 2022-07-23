@@ -28,19 +28,6 @@ class Event < ApplicationRecord
   # Invite_only: seeing and asking questions require an account and an invitation
   enum event_type: { universal: 10, restricted: 20, invite_only: 30 }, _default: 10
 
-  # Set of triggers to broadcast CRUD to the display
-  after_create_commit do
-    broadcast_prepend_later_to [self.user_id, :events], target: "events", partial: "events/event", locals: { event: self }
-  end
-
-  after_update_commit do
-    broadcast_update_later_to [self.user_id, :events], partial: "events/event", locals: { event: self }
-  end
-
-  after_destroy_commit do
-    broadcast_remove_to [self.user_id, :events]
-  end
-
   private
 
   # TODO: remove this method once the system becomes more stable

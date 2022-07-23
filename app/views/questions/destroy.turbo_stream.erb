@@ -1,8 +1,0 @@
-<%# app/views/questions/destroy.turbo_stream.erb %>
-<%= turbo_stream.remove @question %>
-<%# render_turbo_stream_flash_messages %>
-<% unless room.question.exists? %>
-  <%= turbo_stream.update Question.new do %>
-    <%= render "question/empty_state" %>
-  <% end %>
-<% end %>
