@@ -8,8 +8,8 @@
     </div>
     <div class="mx-auto">
       <%= form_with url: passwords_path, scope: :user do |form| %>
-        <%= form.email_field :email, required: true, autocomplete: "email", autofocus: :on, placeholder: "Your email address", class: "form-input w-full block rounded-xl border-green-500 border-2 mb-6" %>
-        <%= form.submit "Reset Password", class: "w-full block py-3 font-medium text-white uppercase bg-green-500 rounded hover:bg-green-400 transition duration-300 ease-in-out" %>
+        <%= form.email_field :email, required: true, autocomplete: "email", autofocus: :on, placeholder: "Your email address", class:"bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 mb-6" %>
+        <%= form.submit "Reset Password", class: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full  px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" %>
       <% end %>
     </div>
     <div class="pt-3">
@@ -17,7 +17,7 @@
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 pr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M11 19l-7-7 7-7m8 14l-7-7 7-7" />
         </svg>
-        <span>Return to the Login screen</span>
+        <span>Back to the Login</span>
       <% end %>
     </div>
   </div>
