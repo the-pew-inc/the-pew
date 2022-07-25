@@ -2,7 +2,7 @@
 <section>
   <div>
     <% if user_signed_in? %>
-      <%= link_to "New Event", new_event_path, data: {turbo_frame: "modal"}, class: "px-3 py-2 rounded bg-green-500 text-white" %>
+      <%= link_to "Create a new event", new_event_path, data: {turbo_frame: "modal"}, class: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full  px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" %>
       <%= turbo_frame_tag "modal" %>
     <% end %>
   </div>
