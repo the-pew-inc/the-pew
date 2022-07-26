@@ -111,8 +111,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_08_163651) do
   create_table "profiles", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "nickname"
+    t.integer "mode", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["mode"], name: "index_profiles_on_mode"
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 

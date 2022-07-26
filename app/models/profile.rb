@@ -11,4 +11,6 @@ class Profile < ApplicationRecord
   validates :nickname, presence: true, length: { minimum: 3, maximum: 40 }
   validates :avatar, content_type: ['image/png', 'image/jpeg', 'image/jpg', 'image/gif'],
                      size: { between: 1.kilobyte..5.megabytes, message: 'is not given between size' }
+
+  enum mode: { light: 0, dark: 1 }
 end
