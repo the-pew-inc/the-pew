@@ -9,9 +9,13 @@
       </h3>
       <div class="flex flex-col justify-start items-start space-y-2">
         <div class="text-slate-600 dark:text-slate-500 text-sm">
-          <p>To protect our user's privacy we require that event organizers have a verified email address. If you did not receive the confirmation email, please click on the following link to resend it.</p>
+          To protect our user's privacy we require that event organizers have a verified email address. If you did not receive the confirmation email, please click on the following link to resend it.
+        </div>
+        <div>
           <%= link_to "Resend confirmation", resend_confirmation_path(current_user), data: { 'turbo-method': :put }, class: "py-2 px-3 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" %>
-          <p class="text-xs">Do not forget to check your spam 😎</p>
+        </div>
+        <div>
+          <p class="text-slate-600 dark:text-slate-500 text-xs">Do not forget to check your spam 😎</p>
         </div>
       </div>
     </div>
