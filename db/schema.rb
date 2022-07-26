@@ -84,12 +84,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_08_163651) do
     t.datetime "start_date", null: false
     t.datetime "end_date", null: false
     t.boolean "always_on", default: false, null: false
+    t.boolean "allow_anonymous", default: false, null: false
     t.integer "duration"
     t.integer "event_type", null: false
     t.integer "status", default: 0, null: false
     t.string "short_code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["allow_anonymous"], name: "index_events_on_allow_anonymous"
     t.index ["always_on"], name: "index_events_on_always_on"
     t.index ["event_type"], name: "index_events_on_event_type"
     t.index ["short_code"], name: "index_events_on_short_code"
