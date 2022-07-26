@@ -15,7 +15,6 @@
     "build:css": "tailwindcss -i ./app/assets/stylesheets/application.tailwind.css -o ./app/assets/builds/application.css --minify"
   },
   "devDependencies": {
-    "@tailwindcss/forms": "0.5.2",
     "@tailwindcss/line-clamp": "0.4.0"
   }
 }

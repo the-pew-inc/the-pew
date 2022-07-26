@@ -14,9 +14,5 @@ module.exports = {
   theme: {
     extend: {},
   },
-  plugins: [
-    require("flowbite/plugin"),
-    require("@tailwindcss/line-clamp"),
-    require("@tailwindcss/forms"),
-  ],
+  plugins: [require("flowbite/plugin"), require("@tailwindcss/line-clamp")],
 };
