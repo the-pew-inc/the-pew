@@ -61,6 +61,7 @@ end
 
 print "\n"
 p "Generating a confirmed user with empty profile and event"
-User.create( email: "test1@test.com", password: "passpass", confirmed: true, confirmed_at: Time.current.utc )
+u1 = User.create( email: "test1@test.com", password: "passpass", confirmed: true, confirmed_at: Time.current.utc )
+Profile.create(user: u1, nickname: "User #{u1.id} / aka empty")
 
 p 'Seed completed'
