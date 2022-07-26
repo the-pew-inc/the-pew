@@ -2,13 +2,14 @@ class AvatarPresenter
   include ActionView::Context
   include ActionView::Helpers::AssetTagHelper
 
-  def self.call(user)
-    new(user).call
+  def self.call(user, size = 8)
+    new(user, size).call
   end
   
   attr_accessor :user
-  def initialize(user)
+  def initialize(user, size)
     @user = user
+    @size = size
   end
 
   def call
@@ -34,12 +35,12 @@ class AvatarPresenter
   def gravatar_image
     gravatar_id = Digest::MD5.hexdigest(email)
     gravatar_url = "https://secure.gravatar.com/avatar/#{gravatar_id}"
-    image_tag(gravatar_url, alt: nickname, class: 'rounded-full')
+    image_tag(gravatar_url, alt: nickname, class: "rounded-full h-#{@size} w-#{@size}")
   end
 
   def initials_element
     style = "background-color: #{avatar_color(initials.first)};"
-    content_tag :div, class: 'rounded-full flex items-center justify-center w-10 h-10', style: style do
+    content_tag :div, class: "rounded-full flex items-center justify-center w-#{@size} h-#{@size}", style: style do
       content_tag :div, initials, class: 'font-mono font-bold text-gray-100'
     end
   end
