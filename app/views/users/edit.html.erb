@@ -1,13 +1,21 @@
 <!-- app/views/users/edit.html.erb -->
 <div class="m-auto md:w-8/12 lg:w-5/12">
   <div class="text-center pb-4">
-    <h1 class="inline-block mb-2 font-extrabold text-3xl tracking-tight text-slate-800 dark:white">Settings</h1>
+    <h1 class="inline-block mb-2 font-extrabold text-3xl tracking-tight text-slate-800 dark:text-white">Settings</h1>
   </div>
 </div>
-<div class="mb-6 h-">
+<div class="mb-6 flex space-x-4 items-center">
   <%= image_tag current_user.profile.avatar.variant(resize_to_limit: [100, 100]),
             width: 100, height: 100, class: "w-16 h-16 rounded-full" if current_user.profile.avatar.attached? %>
-  <%= AvatarPresenter.call(current_user, 16) unless current_user.profile.avatar.attached?  %>
+  <%= AvatarPresenter.call(current_user, 16) unless current_user.profile.avatar.attached? %>
+  <div>
+    <h3 class="inline-block font-extrabold text-xl tracking-tight text-slate-800 dark:text-white">Gravatar</h3>
+    <p class="text-gray-500 dark:text-gray-400 font-light text-sm">We use Gravatar to display user's picture. Gravatar is a free service.</p>
+    <p class="text-blue-600 dark:text-blue-500 font-light text-sm hover:underline"><a href="https://en.gravatar.com/" target="_blank" rel="noopener noreferrer">Update your gravatar</a></p>
+  </div>
+</div>
+<div class="mb-6 text-gray-500 dark:text-gray-400 font-light text-sm tracking-tight">
+  Member since: <%= current_user.created_at.strftime("%b %Y") %>
 </div>
 <%= form_with model: @user, url: update_account_path, method: :put do |form| %>
   <%= render partial: "shared/form_errors", locals: { object: form.object } %>
@@ -26,7 +34,7 @@
       <span class="bg-yellow-100 text-yellow-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-yellow-200 dark:text-yellow-900">unconfirmed</span> <%= link_to "resend confirmation", resend_confirmation_path(@user), data: { 'turbo-method': :put }, class: "ml-2 text-blue-700 text-sm hover:text-blue-800 ease-in-out duration-500 transition-colors" %>
     <% end %>
   </div>
-  <h2 class="inline-block mb-2 font-extrabold text-2xl tracking-tight text-slate-800 dark:white">Change your password</h2>
+  <h2 class="inline-block mb-2 font-extrabold text-2xl tracking-tight text-slate-800 dark:text-white">Change your password</h2>
   <div class="mb-6">
     <%= form.label :password, "Password (leave blank if you don't want to change it)", class: "block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" %>
     <%= form.password_field :password, autocomplete: "new-password", class:"bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
@@ -40,16 +48,16 @@
   </div>
 <% end %>
 <%# Current Sessions %>
-<h2 class="inline-block mb-2 font-extrabold text-2xl tracking-tight text-slate-800 dark:white">Current Logins</h2>
+<h2 class="inline-block mb-2 font-extrabold text-2xl tracking-tight text-slate-800 dark:text-white">Current Logins</h2>
 <% if @active_sessions %>
   <%= button_to "Log out of all sessions", destroy_all_active_sessions_path, method: :delete, form: { data: { turbo_confirm: 'Are you sure you want to log out of all sessions including this one?' } }, class: "focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900" %>
   <table>
     <thead>
       <tr>
-        <th>User Agent</th>
-        <th>IP Address</th>
-        <th>Signed In At</th>
-        <th>Sign Out</th>
+        <th class="text-gray-500 dark:text-gray-400">User Agent</th>
+        <th class="text-gray-500 dark:text-gray-400">IP Address</th>
+        <th class="text-gray-500 dark:text-gray-400">Signed In At</th>
+        <th class="text-gray-500 dark:text-gray-400">Sign Out</th>
       </tr>
     </thead>
     <tbody>
