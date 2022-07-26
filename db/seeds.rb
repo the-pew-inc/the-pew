@@ -10,7 +10,7 @@ return unless Rails.env == "development"
 
 system 'clear'
 
-p "Deleting existing users"
+p 'Deleting existing users'
 User.destroy_all
 
 p "Generating default test users"
@@ -59,6 +59,8 @@ p "Generating a set of random events with default room & questions"
   print '.'
 end
 
+print "\n"
+p "Generating a confirmed user with empty profile and event"
+User.create( email: "test1@test.com", password: "passpass", confirmed: true, confirmed_at: Time.current.utc )
 
-print ' '
-p "Seed completed"
+p 'Seed completed'

@@ -7,8 +7,12 @@
     <% end %>
   </div>
 </section>
+<% if !current_user.confirmed %>
+  <section>
+    <%= render "shared/unconfirmed_account" %>
+  </section>
+<% end %>
 <section class="pt-4">
-  <h2 class="text-xl font-bold">Events: </h2>
   <div id="events" data-controller="empty-state" class="pt-2 space-y-2">
     <div data-empty-state-target="emptyState">
       <%= render "empty_state" %>
