@@ -2,29 +2,32 @@
               id: dom_id(event),
               target: :_top do |form| %>
   <%= render partial: 'shared/form_errors', locals: { object: event } %>
-  <div class="mb-4">
-    <div class="flex flex-col">
-      <%= form.label :name %>
-      <span class="text-sm font-light">Max 250 characters, but we recommend to keep it simple 😎</span>
-    </div>
-    <%= form.text_field :name, required: true, class: "form-input w-full block rounded-xl border-slate-300 border-2 focus:outline-none focus:border-green-500 focus:ring-green-500" %>
-  </div>
-  <div class="mb-4">
-    <%= form.label :start_date, class: "flex items-center cursor-pointer relative" %>
-    <%= form.date_field :start_date, min: Date.today, required: true, class: "form-input w-full block rounded-xl border-slate-300 border-2 focus:outline-none focus:border-green-500 focus:ring-green-500" %>
+  <div class="mb-6">
+    <%= form.label :name, class: "block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" %>
+    <%= form.text_field :name, required: true, class:"bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
+    <p id="helper-text-explanation" class="mt-2 text-sm text-gray-500 dark:text-gray-400">Max 250 characters, but we recommend to keep it simple 😎</p>
   </div>
   <div class="mb-6">
-    <%= form.label :always_on, class: "relative flex items-center cursor-pointer" do %>
-      <%= form.check_box :always_on, id: "toggle", class: "sr-only peer" %>
-      <div class="h-6 bg-gray-200 border-2 border-gray-200 rounded-full w-11 after:absolute after:top-0.5 after:left-0.5 after:bg-white after:border after:border-gray-300 after:h-5 after:w-5 after:shadow-sm after:rounded-full peer-checked:after:translate-x-full peer-checked:after:border-white peer-checked:bg-blue-600 peer-checked:border-blue-600 after:transition-all after:duration-300"></div>
-      <span class="ml-2 text-base text-gray-800">Always on</span>
-    <% end %>
+    <%= form.label :start_date, class: "block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" %>
+    <%= form.date_field :start_date, min: Date.today, required: true, class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
+  </div>
+  <div class="mb-6 flex flex-1 space-x-2 items-center justify-start">
+    <label for="always_on" class="inline-flex relative items-center cursor-pointer">
+      <%= form.check_box :always_on, value: "", id: "always_on", class: "sr-only peer" %>
+      <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+      <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Keep the event opened</span>
+    </label>
+    <label form.label for="allow_anonymous" class="inline-flex relative items-center cursor-pointer">
+      <%= form.check_box :allow_anonymous, value: "", id: :allow_anonymous, class: "sr-only peer" %>
+      <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+      <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Allow anonymous</span>
+    </label>
   </div>
   <div class="flex flex-row justify-between space-x-2 items-center">
-    <%= form.submit class: "w-full block py-3 font-medium text-white uppercase bg-green-500 rounded-xl hover:bg-green-400 transition duration-300 ease-in-out" %>
+    <%= form.submit class: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" %>
     <%# unless form.object.new_record? %>
     <%= link_to "Cancel", events_path,
-          class: "w-full block py-3 font-medium text-green-500 text-center uppercase border-2 border-green-500 rounded-xl hover:text-green-800 hover:border-green-800 transition duration-300 ease-in-out",
+          class: "w-full text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-800",
           data: {turbo_frame: :events}  %>
     <%# end %>
   </div>

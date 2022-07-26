@@ -95,11 +95,11 @@ class UsersController < ApplicationController
   private
 
   def create_user_params
-    params.require(:user).permit(:email, :password, :nickname, :remember_me, profile_attributes: %i[id nickname])
+    params.require(:user).permit(:email, :password, profile_attributes: [:nickname])
   end
 
   def update_user_params
-    params.require(:user).permit(:email, :nickname, :current_password, :password, profile_attributes: %i[id nickname])
+    params.require(:user).permit(:email, :current_password, :password, profile_attributes: [:nickname])
   end
 
   # Method to check if the user is changing their password
