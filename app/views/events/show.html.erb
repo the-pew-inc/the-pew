@@ -1,17 +1,21 @@
 <section class="text-center">
-  <div>
-    <h1 class="text-2xl font-bold text-slate-800">
+  <div class="mb-4">
+    <h1 class="inline-block mb-2 font-extrabold text-3xl tracking-tight text-slate-800 dark:text-white">
       <%= @event.name %>
     </h1>
   </div>
-  <div>
-    Go to <span class="text-xl font-black">https://ask.thepew.io</span> and enter the following code:<br>
-    <span class="font-bold text-2xl">PIN: <%= @event.short_code %></span>
+</section>
+<section class="mx-auto flex flex-row items-center justify-center space-x-1">
+  <div class="w-3/5 border-2 border-gray-500 border-spacing-1 rounded-2xl">
+    <%= image_tag @event.qr_code, class: 'mx-auto object-git w-full dark:invert' if @event.qr_code.present?  %>
   </div>
-  <div class="font-light text-lg italic">
-    -- Or scan the following QR code --
-  </div>
-  <div class="mx-auto w-3/5 border-2 border-green-500 border-spacing-1 rounded-2xl">
-    <%= image_tag @event.qr_code, class: 'mx-auto object-git w-full ' if @event.qr_code.present?  %>
-  </div>
+  <% if current_user&.id == @event.user_id %>
+    <%= link_to rails_blob_path(@event.qr_code, disposition: "attachment") do %>
+      <div class=" rounded-full border border-gray-500 hover:bg-gray-50 p-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500 dark:text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+        </svg>
+      </div>
+    <% end %>
+  <% end %>
 </section>

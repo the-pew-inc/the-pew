@@ -7,9 +7,30 @@ document.addEventListener("turbo:load", function () {
   console.log("Ready triggered!");
 });
 
+// Listen for dark/light mode system changes.
+window
+  .matchMedia("(prefers-color-scheme: dark)")
+  .addEventListener("change", (event) => {
+    const newColorScheme = event.matches ? "dark" : "light";
+  });
+
+if (window.matchMedia) {
+  // Check if the dark-mode Media-Query matches
+  if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+    // Dark
+    console.log("system prefers dark mode");
+  } else {
+    // Light
+    console.log("system prefers light mode");
+  }
+} else {
+  // Default (when Media-Queries are not supported)
+  console.log("system has no preference");
+}
+
 // Handle Dark and Light modes
-var themeToggleDarkIcon = document.getElementById("theme-toggle-dark-icon");
-var themeToggleLightIcon = document.getElementById("theme-toggle-light-icon");
+const themeToggleDarkIcon = document.getElementById("theme-toggle-dark-icon");
+const themeToggleLightIcon = document.getElementById("theme-toggle-light-icon");
 
 // Change the icons inside the button based on previous settings
 if (
@@ -22,7 +43,7 @@ if (
   themeToggleDarkIcon.classList.remove("hidden");
 }
 
-var themeToggleBtn = document.getElementById("theme-toggle");
+const themeToggleBtn = document.getElementById("theme-toggle");
 
 themeToggleBtn.addEventListener("click", function () {
   // toggle icons inside button
