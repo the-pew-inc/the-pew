@@ -7,6 +7,6 @@
     You have <%= pluralize(@count, 'question') %>
   </div>
   <% @questions.each do |question| %>
-    <%= render partial: "questions", locals: { question: question } %>
+    <%= render partial: "your_question", locals: { question: question } %>
   <% end %>
 </section>

@@ -54,14 +54,12 @@ Rails.application.routes.draw do
   get 'question/:votable_id/votes', to: 'votes#show', as: :question_votes,  votable_type: 'Question' 
 
   # Display the user's questions
-  get    'your-questions', to: 'your_questions#index'
-  get    'your-questions/:id', to: 'your_questions#show'
-  delete 'your-questions/:id', to: 'your_questions#destroy'
+  resources :your_questions, only: [:index, :show, :destroy]
 
   # Answer routes / ONLY accessible via the https://ask. domain
   constraints subdomain: 'ask' do
-    get '(/:pin)', to: "asks#index", as: :ask_root
-    post '/pin', to: 'asks#validate_pin'
+    get '(/:pin)',          to: "asks#index", as: :ask_root
+    post '/pin',            to: 'asks#validate_pin'
     get '/event/:event_id', to: 'asks#event_rooms', as: :event_rooms
   end
 
