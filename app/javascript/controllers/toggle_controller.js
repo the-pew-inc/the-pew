@@ -2,9 +2,9 @@ import { Controller } from "@hotwired/stimulus";
 
 // Connects to data-controller="toggle"
 export default class extends Controller {
-  static targets = ["toggle"];
+  static targets = ["dropdown"];
 
   toggle() {
-    this.toggleTarget.classList.toggle("hidden");
+    this.dropdownTarget.classList.toggle("hidden");
   }
 }
