@@ -24,7 +24,7 @@ class WelcomeController < ApplicationController
   def validate_pin_format(pin)
     if pin.blank? || pin.length != 6 || (pin.is_a? Integer)
       flash.now[:alert] = "Invalid PIN format"
-      redirect_to ask_root_path, status: 406 and return true
+      redirect_to root_path, status: 406 and return true
     end
   end
 

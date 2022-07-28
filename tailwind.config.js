@@ -9,9 +9,10 @@ module.exports = {
     "./app/presenters/**/*.rb",
     "./app/assets/stylesheets/**/*.css",
     "./app/javascript/**/*.js",
+    "./node_modules/flowbite/**/*.js",
   ],
   theme: {
     extend: {},
   },
-  plugins: [require("@tailwindcss/line-clamp")],
+  plugins: [require("@tailwindcss/line-clamp"), require("flowbite/plugin")],
 };

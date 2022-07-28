@@ -1,11 +1,11 @@
 // Entry point for the build script in your package.json
 import "@hotwired/turbo-rails";
 import "./controllers";
-// import "flowbite";
+import "flowbite";
 
-document.addEventListener("turbo:load", function () {
-  console.log("Ready triggered!");
-});
+// document.addEventListener("turbo:load", function () {
+//   console.log("Ready triggered!");
+// });
 
 // Listen for dark/light mode system changes.
 window
