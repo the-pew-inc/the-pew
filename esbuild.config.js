@@ -7,7 +7,7 @@ require("esbuild")
     bundle: true,
     outdir: path.join(process.cwd(), "app/assets/builds"),
     absWorkingDir: path.join(process.cwd(), "app/javascript"),
-    // watch: true,
+    watch: process.argv.includes("--watch"),
     // custom plugins will be inserted is this array
     plugins: [
       replace({
@@ -15,4 +15,7 @@ require("esbuild")
       }),
     ],
   })
-  .catch(() => process.exit(1));
+  .catch((error) => {
+    console.error(error);
+    process.exit(1);
+  });
