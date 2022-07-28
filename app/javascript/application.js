@@ -11,15 +11,15 @@ import "flowbite";
 // based on https://github.com/themesberg/flowbite/issues/88
 // https://discuss.rubyonrails.org/t/struggling-with-javascript-and-esbuild-rails-7/79698/3
 // https://github.com/naecoo/esbuild-plugin-replace
-window.document.addEventListener("turbo:load", (event) => {
-  // trigger flowbite events
-  window.document.dispatchEvent(
-    new Event("DOMContentLoaded", {
-      bubbles: true,
-      cancelable: true,
-    })
-  );
-});
+// window.document.addEventListener("turbo:load", (event) => {
+//   // trigger flowbite events
+//   window.document.dispatchEvent(
+//     new Event("DOMContentLoaded", {
+//       bubbles: true,
+//       cancelable: true,
+//     })
+//   );
+// });
 
 // Listen for dark/light mode system changes.
 window
