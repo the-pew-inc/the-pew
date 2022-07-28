@@ -41,7 +41,22 @@ class EventsController < ApplicationController
   end
 
   def show
-    @event = Event.find(params[:id])
+    pin = params[:id].strip
+
+    # Validate the PIN format first
+    validate_pin_format(pin) and return
+
+    # Search for the event with the given pin
+    @event = Event.find_by(short_code: pin)
+
+    respond_to do |format|
+      if @event
+        format.html { redirect_to(room_questions_path(@event.rooms.first), notice: 'Welcome in!') }
+      else
+        format.html { redirect_to(root_path(), alert: 'Invalid PIN', status: :unprocessable_entity) }
+      end
+    end
+
   end
 
   def edit
@@ -100,6 +115,15 @@ class EventsController < ApplicationController
     if !current_user.confirmed?
       flash[:alert] = 'You must confirm your email address before you can create or edit an event.'
       redirect_to(edit_account_path(current_user)) and return true
+    end
+  end
+
+  # Used to valide that the pin format is valid
+  # Used by the show method
+  def validate_pin_format(pin)
+    if pin.blank? || pin.length != 6 || (pin.is_a? Integer)
+      flash.now[:alert] = "Invalid PIN format"
+      redirect_to ask_root_path, status: 406 and return true
     end
   end
 end

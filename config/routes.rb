@@ -56,12 +56,8 @@ Rails.application.routes.draw do
   # Display the user's questions
   resources :your_questions, only: [:index, :show, :destroy]
 
-  # Answer routes / ONLY accessible via the https://ask. domain
-  constraints subdomain: 'ask' do
-    get '(/:pin)',          to: "asks#index", as: :ask_root
-    post '/pin',            to: 'asks#validate_pin'
-    get '/event/:event_id', to: 'asks#event_rooms', as: :event_rooms
-  end
+  # Validate event PIN
+  post '/', to: 'welcome#validate_pin', as: :pin
 
   # Defines the main root path route ("/")
   # Must be the last route in the file
