@@ -41,22 +41,7 @@ class EventsController < ApplicationController
   end
 
   def show
-    pin = params[:id].strip
-
-    # Validate the PIN format first
-    validate_pin_format(pin) and return
-
-    # Search for the event with the given pin
-    @event = Event.find_by(short_code: pin)
-
-    respond_to do |format|
-      if @event
-        format.html { redirect_to(room_questions_path(@event.rooms.first), notice: 'Welcome in!') }
-      else
-        format.html { redirect_to(root_path(), alert: 'Invalid PIN', status: :unprocessable_entity) }
-      end
-    end
-
+    @event = Event.find(params[:id])
   end
 
   def edit
