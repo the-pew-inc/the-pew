@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
-  before_action :authenticate_user!
-  before_action :redirect_if_unauthenticated
+  before_action :authenticate_user!, only: %i[index edit destroy update new]
+  before_action :redirect_if_unauthenticated, only: %i[index edit destroy update new]
 
   def index
     @events = Event.where(user_id: current_user.id).order(start_date: :desc)
