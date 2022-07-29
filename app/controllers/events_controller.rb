@@ -25,6 +25,8 @@ class EventsController < ApplicationController
         # When a new event is create we attach a default room.
         room = @event.rooms.new
         room.name = '__default__'
+        room.always_on = create_event_params[:always_on]
+        room.allow_anonymous = create_event_params[:allow_anonymous]
         if room.save
           # Make the user the admin of the default room
           current_user.add_role :admin, room
@@ -54,7 +56,16 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
     respond_to do |format|
       if @event.update(update_event_params)
-        format.turbo_stream
+        # Update the default room
+        @room = Room.where(event_id: @event.it, name: '__default__')
+        @room.always_on = create_event_params[:always_on]
+        @room.allow_anonymous = create_event_params[:allow_anonymous]
+        
+        if @room.update
+          format.turbo_stream
+        else 
+          render :edit, status: :unprocessable_entity
+        end
       else
         # format.turbo_stream
         render :edit, status: :unprocessable_entity
