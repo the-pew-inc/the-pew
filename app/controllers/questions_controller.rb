@@ -87,10 +87,11 @@ class QuestionsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def create_question_params
-    params.require(:question).permit(:title).with_defaults(user_id: current_user.id)
+    params.require(:question).permit(:title, :anonymous).with_defaults(user_id: current_user.id)
   end
 
   def update_question_params 
+    # TODO control anonymous depending on a user
     params.require(:question).permit(:status, :rejection_cause)
   end
 end
