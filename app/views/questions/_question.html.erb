@@ -76,6 +76,17 @@
             type: "button",
             class: "py-2 px-3 text-xs font-medium text-center text-white rounded-lg focus:ring-4 #{ question.answered? ? 'cursor-not-allowed bg-green-700/50 hover:bg-green-800/50 dark:bg-green-400/75 dark:hover:bg-green-500/75' : 'bg-green-700 hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-700'} focus:ring-green-300 dark:focus:ring-green-800",
             disabled: question.answered? %>
+          <%= form_with model: question,
+                        url: room_question_path(question.room_id, question.id),
+                        format: :turbo_stream,
+                        html: { data: { controller: "auto-submit", action:"change->auto-submit#change" } } do |form|  %>
+            <%= form.hidden_field :status, value: :rejected %>
+            <%= form.select :rejection_cause, 
+                            options_for_select(Question.rejection_causes.keys, { selected: question.rejection_cause || Question.new.rejection_cause }),
+                            {include_blank: "Reject"},
+                            { class: "bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full py-2 px-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" }
+                            %>
+          <% end %>
         </div>
       <% end %>
     </div>
