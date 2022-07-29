@@ -35,12 +35,17 @@ p "Generating a set of random events with default room & questions"
   event = Event.create!(
     name: Faker::App.name + " by " + Faker::App.author,
     user: user,
+    status: Event.statuses.to_a.sample[1],
+    always_on: [true, false].sample,
+    allow_anonymous: [true, false].sample,
     start_date: Faker::Date.forward(days: 30)
   )
 
   room = Room.create!(
     name: '__default__',
-    event_id: event.id
+    event_id: event.id,
+    always_on: event.always_on,
+    allow_anonymous: event.allow_anonymous
   )
 
   # Adding roles
@@ -48,12 +53,19 @@ p "Generating a set of random events with default room & questions"
   user.add_role :admin, room
 
   # Adding questions
-  2.times do
-    Question.create!(
+  3.times do
+    question = Question.create!(
       room: room,
       user: users.sample,
-      title: Faker::ChuckNorris.fact
+      title: Faker::ChuckNorris.fact,
+      status: Question.statuses.to_a.sample[1]
     )
+
+    if question.rejected?
+      question.rejection_cause = Question.rejection_cause.to_a.sample[1]
+      question.update!
+    end
+
   end
 
   print '.'

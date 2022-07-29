@@ -150,8 +150,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_08_163651) do
     t.bigint "event_id", null: false
     t.string "name", null: false
     t.boolean "always_on", default: false, null: false
+    t.boolean "allow_anonymous", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["allow_anonymous"], name: "index_rooms_on_allow_anonymous"
     t.index ["always_on"], name: "index_rooms_on_always_on"
     t.index ["event_id"], name: "index_rooms_on_event_id"
   end
