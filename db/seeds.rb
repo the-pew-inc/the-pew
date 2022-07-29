@@ -45,7 +45,8 @@ p "Generating a set of random events with default room & questions"
     name: '__default__',
     event_id: event.id,
     always_on: event.always_on,
-    allow_anonymous: event.allow_anonymous
+    allow_anonymous: event.allow_anonymous,
+    start_date: event.start_date
   )
 
   # Adding roles

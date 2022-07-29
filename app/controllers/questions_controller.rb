@@ -9,6 +9,7 @@ class QuestionsController < ApplicationController
     if @room.event.universal?
       @questions = Question.questions_for_room(params[:room_id]).by_recently_created
     else
+      # TODO: make it more real ;-)
       redirect_to room_path, alert: "This event is private"
     end
   end
