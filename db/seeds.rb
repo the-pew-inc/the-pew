@@ -54,7 +54,7 @@ p "Generating a set of random events with default room & questions"
 
   # Adding questions
   3.times do
-    question = Question.create!(
+    question = Question.new(
       room: room,
       user: users.sample,
       title: Faker::ChuckNorris.fact,
@@ -62,9 +62,10 @@ p "Generating a set of random events with default room & questions"
     )
 
     if question.rejected?
-      question.rejection_cause = Question.rejection_cause.to_a.sample[1]
-      question.update!
+      question.rejection_cause = Question.rejection_causes.to_a.sample[1]
     end
+
+    question.save!
 
   end
 
