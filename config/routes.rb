@@ -45,6 +45,7 @@ Rails.application.routes.draw do
 
   # Event routes
   resources :events
+  get 'event/:pin', to: 'events#event', as: :join_event
 
   # Question routes
   resources :rooms do
@@ -57,7 +58,7 @@ Rails.application.routes.draw do
   resources :your_questions, only: [:index, :show, :destroy]
 
   # Validate event PIN
-  post '/', to: 'welcome#validate_pin', as: :pin
+  post '/', to: 'events#validate_pin', as: :pin
 
   # Defines the main root path route ("/")
   # Must be the last route in the file

@@ -38,8 +38,8 @@ class Event < ApplicationRecord
 
   def generate_qr_code
     qr_url = url_for(controller: 'events',
-                     action: 'show',
-                     id: id,
+                     action: 'event',
+                     id: short_code,
                      only_path: false,
                      host: 'localhost:3000',
                      protocol: 'https',
