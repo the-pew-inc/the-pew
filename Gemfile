@@ -36,6 +36,9 @@ gem 'redis', '~> 4.0'
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 gem 'kredis'
 
+# Add Noticed to support notifications [https://github.com/excid3/noticed]
+gem "noticed", "~> 1.5"
+
 # Adding support to View Component (better than partials ;-) ) [https://github.com/github/view_component]
 gem 'view_component'
 
@@ -145,3 +148,5 @@ group :test do
   gem 'selenium-webdriver'
   gem 'webdrivers'
 end
+
+
