@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_30_021732) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_30_203417) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -106,6 +106,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_30_021732) do
     t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_members_on_account_id"
     t.index ["user_id"], name: "index_members_on_user_id"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.text "content"
+    t.string "title"
+    t.bigint "user_id", null: false
+    t.integer "level", default: 10, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["level"], name: "index_messages_on_level"
+    t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
   create_table "notifications", force: :cascade do |t|
@@ -231,6 +242,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_30_021732) do
   add_foreign_key "events", "users"
   add_foreign_key "members", "accounts"
   add_foreign_key "members", "users"
+  add_foreign_key "messages", "users"
   add_foreign_key "profiles", "users"
   add_foreign_key "questions", "rooms"
   add_foreign_key "questions", "users"

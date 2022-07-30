@@ -16,7 +16,7 @@ class User < ApplicationRecord
   PASSWORD_RESET_TOKEN_EXPIRATION = 20.minutes
 
   # Relations
-  has_many :notifications,   as: :recipient
+  has_many :notifications,   as: :recipient, dependent: :destroy # enable Noticed
   has_many :active_sessions, dependent: :destroy
   has_one  :profile,         dependent: :destroy
   accepts_nested_attributes_for :profile, allow_destroy: true
