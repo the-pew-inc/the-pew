@@ -39,6 +39,7 @@ class UsersController < ApplicationController
   def new
     @user = User.new
     @user.build_profile
+    session[:user_return_to] = URI(request.referer || '').path
   end
 
   def update

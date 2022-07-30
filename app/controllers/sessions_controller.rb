@@ -41,7 +41,9 @@ class SessionsController < ApplicationController
     redirect_to(root_path, notice: 'Signed out.')
   end
 
-  def new; end
+  def new
+    session[:user_return_to] = URI(request.referer || '').path
+  end
 
   def omniauth
     user = from_omniauth(request.env['omniauth.auth'])
