@@ -73,8 +73,8 @@ gem 'groupdate'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', require: false
 
-# Mailer - Mailgun
-gem 'mailgun-ruby', '~>1.2.5'
+# Mailer - Sendgrid [https://github.com/sendgrid/sendgrid-ruby]
+gem 'sendgrid-ruby'
 
 # Sidekiq [https://github.com/mperham/sidekiq]
 gem 'sidekiq', '~> 6.5.1'

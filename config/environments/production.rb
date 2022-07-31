@@ -97,13 +97,18 @@ Rails.application.configure do
   config.hosts << "staging.thepew.io"
 
   # Mailer configuration
-  # Heroku / Mailgun
-  config.action_mailer.delivery_method = :mailgun
-  config.action_mailer.mailgun_settings = {
-    api_key: ENV['MAILGUN_API_KEY'],
-    domain: ENV['MAILGUN_DOMAIN'],
-    # api_host: 'api.eu.mailgun.net'  # Uncomment this line for EU region domains
+  # Heroku / Sendgrid
+  config.action_mailer.delivery_method = :smtp
+  ActionMailer::Base.smtp_settings = {
+    :user_name => ENV['SENDGRID_USERNAME'], 
+    :password => ENV['SENDGRID_PASSWORD'], 
+    :domain => 'thepew.io',
+    :address => 'smtp.sendgrid.net',
+    :port => 587,
+    :authentication => :plain,
+    :enable_starttls_auto => true
   }
+  
   # config.action_mailer.delivery_method = :smtp
   # config.action_mailer.perform_deliveries = true
   # config.action_mailer.raise_delivery_errors = true
