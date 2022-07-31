@@ -74,7 +74,7 @@ gem 'groupdate'
 gem 'bootsnap', require: false
 
 # Mailer - Sendgrid [https://github.com/sendgrid/sendgrid-ruby]
-gem 'sendgrid-actionmailer', '~> 2.4.0'
+gem 'sendgrid-actionmailer', '~> 3.2.0'
 
 # Sidekiq [https://github.com/mperham/sidekiq]
 gem 'sidekiq', '~> 6.5.1'
