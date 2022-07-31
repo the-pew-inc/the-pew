@@ -16,8 +16,8 @@ application.register("close-flash", CloseFlashController)
 import EmptyStateController from "./empty_state_controller"
 application.register("empty-state", EmptyStateController)
 
-import NotificationController from "./notification_controller"
-application.register("notification", NotificationController)
+import ModeController from "./mode_controller"
+application.register("mode", ModeController)
 
 import ToggleController from "./toggle_controller"
 application.register("toggle", ToggleController)
