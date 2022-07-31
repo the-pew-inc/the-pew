@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_08_163651) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_30_203417) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -84,12 +84,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_08_163651) do
     t.datetime "start_date", null: false
     t.datetime "end_date", null: false
     t.boolean "always_on", default: false, null: false
+    t.boolean "allow_anonymous", default: false, null: false
     t.integer "duration"
     t.integer "event_type", null: false
     t.integer "status", default: 0, null: false
     t.string "short_code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["allow_anonymous"], name: "index_events_on_allow_anonymous"
     t.index ["always_on"], name: "index_events_on_always_on"
     t.index ["event_type"], name: "index_events_on_event_type"
     t.index ["short_code"], name: "index_events_on_short_code"
@@ -106,11 +108,36 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_08_163651) do
     t.index ["user_id"], name: "index_members_on_user_id"
   end
 
+  create_table "messages", force: :cascade do |t|
+    t.text "content"
+    t.string "title"
+    t.bigint "user_id", null: false
+    t.integer "level", default: 10, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["level"], name: "index_messages_on_level"
+    t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.string "recipient_type", null: false
+    t.bigint "recipient_id", null: false
+    t.string "type", null: false
+    t.jsonb "params"
+    t.datetime "read_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["read_at"], name: "index_notifications_on_read_at"
+    t.index ["recipient_type", "recipient_id"], name: "index_notifications_on_recipient"
+  end
+
   create_table "profiles", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "nickname"
+    t.integer "mode", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["mode"], name: "index_profiles_on_mode"
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
@@ -146,10 +173,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_08_163651) do
     t.bigint "event_id", null: false
     t.string "name", null: false
     t.boolean "always_on", default: false, null: false
+    t.boolean "allow_anonymous", default: false, null: false
+    t.datetime "start_date", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["allow_anonymous"], name: "index_rooms_on_allow_anonymous"
     t.index ["always_on"], name: "index_rooms_on_always_on"
     t.index ["event_id"], name: "index_rooms_on_event_id"
+    t.index ["start_date"], name: "index_rooms_on_start_date"
   end
 
   create_table "users", force: :cascade do |t|
@@ -211,6 +242,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_08_163651) do
   add_foreign_key "events", "users"
   add_foreign_key "members", "accounts"
   add_foreign_key "members", "users"
+  add_foreign_key "messages", "users"
   add_foreign_key "profiles", "users"
   add_foreign_key "questions", "rooms"
   add_foreign_key "questions", "users"

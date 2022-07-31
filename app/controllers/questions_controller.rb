@@ -9,6 +9,7 @@ class QuestionsController < ApplicationController
     if @room.event.universal?
       @questions = Question.questions_for_room(params[:room_id]).by_recently_created
     else
+      # TODO: make it more real ;-)
       redirect_to room_path, alert: "This event is private"
     end
   end
@@ -53,6 +54,11 @@ class QuestionsController < ApplicationController
 
     respond_to do |format|
       if @question.update(update_question_params)
+
+        if self.rejected?
+          Message.create(user_id: self.user_id, title: "Question Rejected", content: "Your question: #{self.title} has been rejected with status #{self.rejection_cause}", level: :alert)
+        end
+
         format.turbo_stream
       else
         format.turbo_stream
@@ -87,10 +93,11 @@ class QuestionsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def create_question_params
-    params.require(:question).permit(:title).with_defaults(user_id: current_user.id)
+    params.require(:question).permit(:title, :anonymous).with_defaults(user_id: current_user.id)
   end
 
   def update_question_params 
+    # TODO control anonymous depending on a user
     params.require(:question).permit(:status, :rejection_cause)
   end
 end

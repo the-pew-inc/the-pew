@@ -2,10 +2,30 @@
               id: dom_id(question),
               target: :_top) do |form| %>
   <%= render partial: 'shared/form_errors', locals: { object: question } %>
-  <div class="w-full px-1">
-    <%= form.text_field :title, class: "w-full" %>
-  </div>
-  <div>
-    <%= form.submit class: "py-3 px-2 font-medium text-blue-100 uppercase bg-blue-400 rounded-xl hover:bg-blue-500 transition duration-300 ease-in-out" %>
+  <div class="w-full">
+    <div>
+      <div class="mb-2">
+        <%= form.text_field :title, 
+        class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
+        placeholder: "Type your question and hit 'Enter'",
+        id: "helper-text",
+        "aria-describedby": "helper-text-explanation" %>
+        <p id="helper-text-explanation" class="mt-2 font-light text-xs text-gray-500 dark:text-gray-400">250 characters.</p>
+      </div>
+      <% if @room.allow_anonymous %>
+        <div class="flex space-x-3 items-center justify-start">
+          <div>
+            <label form.label for="anonymous" class="inline-flex relative items-center cursor-pointer">
+              <%= form.check_box :anonymous, value: "", id: :anonymous, class: "sr-only peer" %>
+              <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+              <span class="ml-3 text-sm font-medium text-gray-500 dark:text-gray-400">Ask anonymously</span>
+            </label>
+          </div>
+          <div>
+            <%= form.submit "Submit", class: "text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-800" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
   </div>
 <% end %>

@@ -1,0 +1,27 @@
+<li class="mb-4">
+  <div>
+    <h3 class="inline-block font-extrabold text-xl tracking-tight text-slate-800 dark:text-white"><%= notification.to_notification.title %></h3>
+    <p class="text-gray-500 dark:text-gray-400">
+      <%= notification.to_notification.message %>
+    </p>
+    <div class="flex flex-row justify-between items-center mt-1 text-gray-500 text-sm space-x-4">
+      <div class="flex flex-row justify-start items-center space-x-4">
+        <p>
+          Received on <span class="text-xs text-blue-600 dark:text-blue-500"><%= notification.created_at.to_date %></span>
+        </p>
+        <% if notification.unread? %>
+          <p>
+            <%= button_to "Mark as read", mark_as_read_path(notification.id), method: :put, class:"py-2 px-3 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" %>
+          </p>
+        <% end %>
+      </div>
+      <div>
+        <% if notification.read? %>
+          <span class="bg-green-100 text-green-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900">read</span>
+        <% else %>
+          <span class="bg-purple-100 text-purple-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-purple-200 dark:text-purple-900">unread</span>
+        <% end %>
+      </p>
+    </div>
+  </div>
+</li>

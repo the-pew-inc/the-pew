@@ -94,9 +94,7 @@ Rails.application.configure do
   # Supported domains
   config.action_dispatch.tld_length = 2
   config.hosts << "app.thepew.io"
-  config.hosts << "ask.thepew.io"
   config.hosts << "staging.thepew.io"
-  config.hosts << "ask.staging.thepew.io"
 
   # Mailer configuration
   # Heroku / Mailgun

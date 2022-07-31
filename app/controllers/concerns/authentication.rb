@@ -77,7 +77,7 @@ module Authentication
     if session[:cookies_accepted]
       return true
     end
-
     return false
   end
+
 end

@@ -45,6 +45,7 @@ Rails.application.routes.draw do
 
   # Event routes
   resources :events
+  get 'event/:pin', to: 'events#event', as: :join_event
 
   # Question routes
   resources :rooms do
@@ -53,16 +54,16 @@ Rails.application.routes.draw do
 
   get 'question/:votable_id/votes', to: 'votes#show', as: :question_votes,  votable_type: 'Question' 
 
-  # Display the user's questions
-  get 'your-questions', to: 'your_questions#index'
-  get 'your-questions/:id', to: 'your_questions#show'
+  # Notification routes
+  resources :notifications, only: [:index]
+  put 'notifications/:id', to: 'notifications#mark_as_read',     as: :mark_as_read
+  put 'notifications',     to: 'notifications#mark_all_as_read', as: :mark_as_read_all
 
-  # Answer routes / ONLY accessible via the https://ask. domain
-  constraints subdomain: 'ask' do
-    get '(/:pin)', to: "asks#index", as: :ask_root
-    post '/pin', to: 'asks#validate_pin'
-    get '/event/:event_id', to: 'asks#event_rooms', as: :event_rooms
-  end
+  # Display the user's questions
+  resources :your_questions, only: [:index, :show, :destroy]
+
+  # Validate event PIN
+  post '/', to: 'events#validate_pin', as: :pin
 
   # Defines the main root path route ("/")
   # Must be the last route in the file

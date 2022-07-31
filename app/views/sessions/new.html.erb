@@ -3,50 +3,43 @@
   <div class="m-auto md:w-8/12 lg:w-5/12">
     <div class="text-center pb-9">
       <!-- TODO: ADD LOGO HERE -->
-      <h1 class="font-bold text-4xl text-slate-800">Sign in to your account</h1>
-      <div class="text-sm text-slate-500 pt-2">Or <%= link_to 'create your account for free', sign_up_path, class: "text-green-500 hover:text-green-700" %></div>
+      <h1 class="inline-block mb-2 font-extrabold text-3xl tracking-tight text-slate-800 dark:text-white">Sign in to your account</h1>
     </div>
     <div class="mx-auto">
       <%= form_with url: login_path, scope: :user do |form| %>
-        <div class="mb-4">
-          <%= form.email_field :email, required: true, autocomplete: "email", class: "form-input w-full block rounded-xl border-slate-300 border-2 focus:outline-none focus:border-green-500 focus:ring-green-500", placeholder: "Your email address" %>
+        <div class="mb-6">
+          <%= form.label :email, "Your email", class: "block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" %>
+          <%= form.email_field :email, required: true, autocomplete: "email", class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500", placeholder:"your_email@example.com" %>
         </div>
         <div class="mb-6">
-          <%= form.password_field :password, required: true, autocomplete: "current-password", class: "form-input w-full block rounded-xl border-slate-300 border-2 focus:outline-none focus:border-green-500 focus:ring-green-500", placeholder: "Password" %>
+          <%= form.label :password, "Your password", class: "block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" %>
+          <%= form.password_field :password, required: true, autocomplete: "current-password", class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500", placeholder: "Enter your password" %>
         </div>
         <div class="flex flex-row items-center justify-between mb-6">
-          <div class="flex flex-1 items-center space-x-2">
-            <%= form.check_box :remember_me, class: "form-checkbox rounded border-green-500" %>
-            <%= form.label :remember_me %>
+          <div class="flex items-start mb-6">
+            <div class="flex items-center h-5">
+              <%= form.check_box :remember_me, class:"w-4 h-4 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800" %>
+            </div>
+            <%= form.label :remember_me, class: "ml-2 text-sm font-medium text-gray-900 dark:text-gray-300" %>
           </div>
           <div>
             <%= link_to 'Forgot your password?', new_password_path, class: "text-green-500 hover:text-green-700" %>
           </div>
         </div>
-        <%= form.submit "Sign In", class: "w-full block py-3 font-medium text-white uppercase bg-green-500 rounded-xl hover:bg-green-400 transition duration-300 ease-in-out" %>
+        <%= form.submit "Sign In", class: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full  px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" %>
       <% end %>
       <h4 class="text-center text-sm font-light text-slate-500 py-3">-- Or --</h4>
-      <div class="mb-4">
-        <%= button_to "/auth/google_oauth2", class: "w-full block py-3 font-medium text-white bg-green-400 rounded-xl", data: { turbo: false } do %>
-          <div class="flex flex-1 justify-center items-center">
-            <svg class="h-7 w-7 pr-2" fill="currentColor" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-              <path d="M11.99,13.9 L11.99,10.18 L21.35,10.18 C21.49,10.81 21.6,11.4 21.6,12.23 C21.6,17.94 17.77,22 12,22 C6.48,22 2,17.52 2,12 C2,6.48 6.48,2 12,2 C14.7,2 16.96,2.99 18.69,4.61 L15.85,7.37 C15.13,6.69 13.87,5.89 12,5.89 C8.69,5.89 5.99,8.64 5.99,12.01 C5.99,15.38 8.69,18.13 12,18.13 C15.83,18.13 17.24,15.48 17.5,13.91 L11.99,13.91 L11.99,13.9 Z" id="Shape"></path>
-            </svg>
-            <div>
-              Continue with Google
-            </div>
+      <div class="mb-4 flex flex-1 justify-between items-center space-x-1">
+        <%= button_to "/auth/google_oauth2", type: "button", class:"text-white bg-[#4285F4] hover:bg-[#4285F4]/90 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#4285F4]/55 mr-2 mb-2", data: { turbo: false } do %>
+          <svg class="mr-2 -ml-1 w-4 h-4" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="google" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488 512"><path fill="currentColor" d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"></path></svg>
+          <div>
+            Continue with Google
           </div>
         <% end %>
-      </div>
-      <div>
-        <%= button_to "/auth/apple", class: "w-full block py-3 font-medium text-white bg-green-700 rounded-xl" do %>
-          <div class="flex flex-1 justify-center items-center">
-            <svg class="h-7 w-7 pr-2" fill="currentColor" viewBox="-52.01 0 560.035 560.035" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-              <path d="M380.844 297.529c.787 84.752 74.349 112.955 75.164 113.314-.622 1.988-11.754 40.191-38.756 79.652-23.343 34.117-47.568 68.107-85.731 68.811-37.499.691-49.557-22.236-92.429-22.236-42.859 0-56.256 21.533-91.753 22.928-36.837 1.395-64.889-36.891-88.424-70.883-48.093-69.53-84.846-196.475-35.496-282.165 24.516-42.554 68.328-69.501 115.882-70.192 36.173-.69 70.315 24.336 92.429 24.336 22.1 0 63.59-30.096 107.208-25.676 18.26.76 69.517 7.376 102.429 55.552-2.652 1.644-61.159 35.704-60.523 106.559M310.369 89.418C329.926 65.745 343.089 32.79 339.498 0 311.308 1.133 277.22 18.785 257 42.445c-18.121 20.952-33.991 54.487-29.709 86.628 31.421 2.431 63.52-15.967 83.078-39.655"></path>
-            </svg>
-            <div>
-              Continue with Apple
-            </div>
+        <%= button_to "/auth/apple", type: "button", class: "text-white bg-[#050708] hover:bg-[#050708]/90 focus:ring-4 focus:outline-none focus:ring-[#050708]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#050708]/50 dark:hover:bg-[#050708]/30 mr-2 mb-2" do %>
+          <svg class="mr-2 -ml-1 w-5 h-5" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="apple" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path fill="currentColor" d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"></path></svg>
+          <div>
+            Continue with Apple
           </div>
         <% end %>
       </div>

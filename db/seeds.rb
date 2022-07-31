@@ -10,7 +10,7 @@ return unless Rails.env == "development"
 
 system 'clear'
 
-p "Deleting existing users"
+p 'Deleting existing users'
 User.destroy_all
 
 p "Generating default test users"
@@ -35,12 +35,18 @@ p "Generating a set of random events with default room & questions"
   event = Event.create!(
     name: Faker::App.name + " by " + Faker::App.author,
     user: user,
+    status: Event.statuses.to_a.sample[1],
+    always_on: [true, false].sample,
+    allow_anonymous: [true, false].sample,
     start_date: Faker::Date.forward(days: 30)
   )
 
   room = Room.create!(
     name: '__default__',
-    event_id: event.id
+    event_id: event.id,
+    always_on: event.always_on,
+    allow_anonymous: event.allow_anonymous,
+    start_date: event.start_date
   )
 
   # Adding roles
@@ -48,17 +54,28 @@ p "Generating a set of random events with default room & questions"
   user.add_role :admin, room
 
   # Adding questions
-  2.times do
-    Question.create!(
+  3.times do
+    question = Question.new(
       room: room,
       user: users.sample,
-      title: Faker::ChuckNorris.fact
+      title: Faker::ChuckNorris.fact,
+      status: Question.statuses.to_a.sample[1]
     )
+
+    if question.rejected?
+      question.rejection_cause = Question.rejection_causes.to_a.sample[1]
+    end
+
+    question.save!
+
   end
 
   print '.'
 end
 
+print "\n"
+p "Generating a confirmed user with empty profile and event"
+u1 = User.create( email: "test1@test.com", password: "passpass", confirmed: true, confirmed_at: Time.current.utc )
+Profile.create(user: u1, nickname: "User #{u1.id} / aka empty")
 
-print ' '
-p "Seed completed"
+p 'Seed completed'

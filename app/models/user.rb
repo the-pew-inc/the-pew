@@ -16,13 +16,14 @@ class User < ApplicationRecord
   PASSWORD_RESET_TOKEN_EXPIRATION = 20.minutes
 
   # Relations
+  has_many :notifications,   as: :recipient, dependent: :destroy # enable Noticed
   has_many :active_sessions, dependent: :destroy
   has_one  :profile,         dependent: :destroy
+  accepts_nested_attributes_for :profile, allow_destroy: true
   has_many :events,          dependent: :destroy
   has_many :questions,       dependent: :destroy
   has_many :votes,           dependent: :destroy
   has_one  :account,         through:   :members,   required: false
-  accepts_nested_attributes_for :profile
 
   # Validations
   validates :email, presence: true, uniqueness: { case_sensitive: false }, format: { with: URI::MailTo::EMAIL_REGEXP }

@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
-  before_action :authenticate_user!
-  before_action :redirect_if_unauthenticated
+  before_action :authenticate_user!, only: %i[index edit destroy update new]
+  before_action :redirect_if_unauthenticated, only: %i[index edit destroy update new]
 
   def index
     @events = Event.where(user_id: current_user.id).order(start_date: :desc)
@@ -25,6 +25,9 @@ class EventsController < ApplicationController
         # When a new event is create we attach a default room.
         room = @event.rooms.new
         room.name = '__default__'
+        room.always_on = @event.always_on
+        room.allow_anonymous = @event.allow_anonymous
+        room.start_date = @event.start_date
         if room.save
           # Make the user the admin of the default room
           current_user.add_role :admin, room
@@ -54,10 +57,60 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
     respond_to do |format|
       if @event.update(update_event_params)
-        format.turbo_stream
+        # Update the default room (if it exists)
+        @room = Room.where(event_id: @event.id, name: '__default__')
+        if @room
+          @room.always_on = create_event_params[:always_on]
+          @room.allow_anonymous = create_event_params[:allow_anonymous]
+          @room.start_date = @event.start_date
+
+          if @room.update
+            format.turbo_stream
+          else 
+            render :edit, status: :unprocessable_entity
+          end
+        else
+          format.turbo_stream
+        end
       else
         # format.turbo_stream
         render :edit, status: :unprocessable_entity
+      end
+    end
+  end
+
+  def event
+    pin = params[:pin].strip
+
+    # Validate the PIN format first
+    validate_pin_format(pin) and return
+
+    # Search for the event with the given pin
+    @event = Event.find_by(short_code: pin)
+
+    respond_to do |format|
+      if @event
+        format.html { redirect_to(room_questions_path(@event.rooms.first), notice: 'Welcome in!') }
+      else
+        format.html { redirect_to(root_path(), alert: 'Invalid PIN', status: :unprocessable_entity) }
+      end
+    end
+  end
+
+  # POST /
+  def validate_pin
+    pin = params[:pin].strip
+
+    # Validate the PIN format first
+    validate_pin_format(pin) and return
+    
+    @event = Event.find_by(short_code: pin)
+
+    respond_to do |format|
+      if @event
+        format.html { redirect_to(room_questions_path(@event.rooms.first.id), notice: 'Welcome in!') }
+      else
+        format.html { redirect_to(root_path(), alert: "No event matches this pin number: #{pin}.", status: :unprocessable_entity) }
       end
     end
   end
@@ -88,11 +141,11 @@ class EventsController < ApplicationController
   private
 
   def create_event_params
-    params.require(:event).permit(:user_id, :name, :start_date, :stop_date, :event_type, :status, :always_on)
+    params.require(:event).permit(:user_id, :name, :start_date, :stop_date, :event_type, :status, :always_on, :allow_anonymous)
   end
 
   def update_event_params
-    params.require(:event).permit(:name, :start_date, :stop_date, :event_type, :status, :short_code, :always_on)
+    params.require(:event).permit(:name, :start_date, :stop_date, :event_type, :status, :short_code, :always_on, :allow_anonymous)
   end
 
   # Called to make sure a user's account is confirmed before they can create or edit an event.
@@ -100,6 +153,15 @@ class EventsController < ApplicationController
     if !current_user.confirmed?
       flash[:alert] = 'You must confirm your email address before you can create or edit an event.'
       redirect_to(edit_account_path(current_user)) and return true
+    end
+  end
+
+  # Used to valide that the pin format is valid
+  # Used by the show method
+  def validate_pin_format(pin)
+    if pin.blank? || pin.length != 6 || (pin.is_a? Integer)
+      flash.now[:alert] = "Invalid PIN format"
+      redirect_to root_path, status: 406 and return true
     end
   end
 end

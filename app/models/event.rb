@@ -37,14 +37,15 @@ class Event < ApplicationRecord
   end
 
   def generate_qr_code
-    qr_url = url_for(controller: 'events',
-                     action: 'show',
-                     id: id,
-                     only_path: false,
-                     host: 'localhost:3000',
-                     protocol: 'https',
-                     source: 'from_qr'
-                    )
+    qr_url = url_for(
+      controller: 'events',
+      action: 'event',
+      host: ENV['DEFAULT_URL'] || 'localhost:3000',
+      pin: short_code,
+      only_path: false,
+      protocol: 'https',
+      source: 'from_qr'
+    )
 
     qr_code.attach(QrGenerator.call(qr_url))
   end

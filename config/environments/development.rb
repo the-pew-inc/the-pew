@@ -72,7 +72,9 @@ Rails.application.configure do
   # Removing domain constraints for development
   # Remove limitation when in DEVELOPMENT mode ONLY
   # See [https://guides.rubyonrails.org/configuring.html#actiondispatch-hostauthorization] for more details
-  config.hosts = nil unless Rails.env.production?
+  # config.hosts = nil unless Rails.env.production?
+  config.hosts << "127.0.0.1"
+  config.hosts << "localhost"
 
   # Mailcatcher configuration
   config.action_mailer.delivery_method = :smtp

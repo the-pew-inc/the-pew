@@ -1,25 +1,28 @@
 <%= turbo_stream_from [@room.id, :questions] %>
 <%= turbo_stream_from :upvotes %>
-<section class="pt-4">
-  <h2 class="font-extrabold text-2xl text-slate-800 text-center">
+<section class="mb-6 text-center">
+  <h1 class="inline-block mb-2 font-extrabold text-3xl tracking-tight text-slate-800 dark:text-white">
     <%= @room.event.name %>
-  </h2>
+  </h1>
+  <div class="text-gray-500 dark:text-gray-400 text-sm font-semibold tracking-tight mb-2">
+    <%= @room.start_date.strftime("%B %d, %Y") %>
+  </div>
 </section>
-<section class="pt-4">
+<section class="mb-6">
   <% if user_signed_in? %>
-    <div class="md:px-2 py-2 bg-blue-100 rounded-lg">
-      <h2 class="text-xl font-bold text-blue-600">Ask your question: </h2>
+    <div>
+      <div class="text-gray-500 dark:text-gray-400 text-sm font-semibold tracking-tight mb-2">Ask a question: </div>
       <%= turbo_frame_tag :new_question, src: new_room_question_path %>
     </div>
   <% else %>
     <div>
-      <h3>You need to be logged in to ask a question</h3>
+      <h3 class="inline-block font-extrabold text-xl tracking-tight text-slate-800 dark:text-white">You need to be logged in to ask a question</h3>
       <%= link_to 'Sign up', sign_up_path %> or <%= link_to 'Login', login_path %>
     </div>
   <% end %>
 </section>
-<section class="pt-4">
-  <div >
+<section class="mb-6">
+  <div class="text-gray-500 dark:text-gray-400 font-light text-sm mb-4">
     Number of questions: <span id="question_counter"><%= @room.approved_question_count %></span><br>
   </div>
   <div id="questions" data-controller="empty-state" class="flex flex-col space-y-2">

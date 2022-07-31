@@ -1,4 +1,16 @@
-<div class="">
-  <h1>Welcome#index</h1>
-  <p>Find me in app/views/welcome/index.html.erb</p>
-</div>
+<section class="w-full md:w-2/3 mx-auto h-full">
+  <div class="mx-auto">
+    <div class="text-center">
+      <h1 class="inline-block mb-2 font-extrabold text-3xl tracking-tight text-slate-800 dark:text-white">Enter the Event PIN</h1>
+    </div>
+    <div class="mt-8" data-controller="validate-pin">
+      <%= form_with url: pin_path, method: :post do |form| %>
+        <div class="mb-6">
+          <%= form.text_field :pin, placeholder: "Enter the event PIN (6 digits)", data: {"validate-pin-target": "pin", action: "keyup->validate-pin#change"}, required: true, class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
+          <span class="text-sm text-red-500 hidden", data-validate-pin-target="pinError">PIN is 6 digits</span>
+        </div>
+        <%= form.submit 'Enter!', class: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full  px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" %>
+      <% end %>
+    </div>
+  </div>
+</section>
