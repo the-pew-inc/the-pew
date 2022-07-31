@@ -13,5 +13,9 @@ class NotificationsController < ApplicationController
 
   def mark_as_read
     @notification = Notification.find(params[:id])
+    if @notification.present?
+      @notification.mark_as_read!
+    end
+    redirect_to notifications_path
   end
 end

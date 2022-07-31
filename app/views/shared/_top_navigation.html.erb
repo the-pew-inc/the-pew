@@ -14,61 +14,65 @@
         <!-- Setup Notification Websocket -->
         <%= turbo_stream_from current_user, :notifications %>
         <!-- Notifications -->
-        <button id="notificationBellButton" data-dropdown-toggle="dropdownNotification"  type="button" class="relative text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5" do %>
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
-          </svg>
-          <span id="notificationBellDot" class="hidden top-1 left-5 absolute w-3.5 h-3.5 bg-red-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
-        </button>
-        <!-- Notification dropdown -->
-        <div id="dropdownNotification" class="hidden z-20 w-full max-w-sm bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-800 dark:divide-gray-700" aria-labelledby="dropdownNotificationButton">
-          <div class="block py-2 px-4 font-medium text-center text-gray-700 bg-gray-50 dark:bg-gray-800 dark:text-white">
-            Notifications
-          </div>
-          <div class="divide-y divide-gray-100 dark:divide-gray-700">
-            <% current_user.notifications.newest_first.limit(3).each do |notification| %>
-              <%=link_to notifications_path, class: "flex py-3 px-4 hover:bg-gray-100 dark:hover:bg-gray-700" do %>
-                <div class="pl-3 w-full">
-                  <div class="text-gray-500 text-sm mb-1.5 dark:text-gray-400"><%= notification.to_notification.message %></div>
-                  <div class="text-xs text-blue-600 dark:text-blue-500"><%= time_ago_in_words notification.created_at %> ago</div>
-                </div>
+        <div class="relative inline-block" data-controller="toggle">
+          <button id="notificationBellButton" data-action="click->toggle#toggle" type="button" class="relative text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5" do %>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+            </svg>
+            <span id="notificationBellDot" class="hidden top-1 left-5 absolute w-3.5 h-3.5 bg-red-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
+          </button>
+          <!-- Notification dropdown -->
+          <div id="dropdownNotification" data-toggle-target="toggeable" class="hidden absolute top-14 -right-10 z-20 w-80 max-w-sm bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-800 dark:divide-gray-700" aria-labelledby="dropdownNotificationButton">
+            <div class="block py-2 px-4 font-medium text-center text-gray-700 bg-gray-50 dark:bg-gray-800 dark:text-white">
+              Notifications
+            </div>
+            <div class="divide-y divide-gray-100 dark:divide-gray-700">
+              <% current_user.notifications.newest_first.limit(3).each do |notification| %>
+                <%=link_to notifications_path, class: "flex py-3 px-4 hover:bg-gray-100 dark:hover:bg-gray-700" do %>
+                  <div class="pl-3 w-full">
+                    <div class="text-gray-500 text-sm mb-1.5 dark:text-gray-400"><%= notification.to_notification.message %></div>
+                    <div class="text-xs text-blue-600 dark:text-blue-500"><%= time_ago_in_words notification.created_at %> ago</div>
+                  </div>
+                <% end %>
               <% end %>
+            </div>
+            <%= link_to notifications_path, class: "block py-2 text-sm font-medium text-center text-gray-900 bg-gray-50 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-white" do %>
+              <div class="inline-flex items-center ">
+                <svg class="mr-2 w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path><path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"></path></svg>
+                View all
+              </div>
             <% end %>
           </div>
-          <%= link_to notifications_path, class: "block py-2 text-sm font-medium text-center text-gray-900 bg-gray-50 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-white" do %>
-            <div class="inline-flex items-center ">
-              <svg class="mr-2 w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path><path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"></path></svg>
-              View all
-            </div>
-          <% end %>
         </div>
         <!-- User Menu -->
-        <button type="button" class="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
-          <span class="sr-only">Open user menu</span>
-          <%= image_tag current_user.profile.avatar.variant(resize_to_limit: [100, 100]),
+        <div class="relative inline-block" data-controller="toggle">
+          <button type="button" data-action="click->toggle#toggle" class="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
+            <span class="sr-only">Open user menu</span>
+            <%= image_tag current_user.profile.avatar.variant(resize_to_limit: [100, 100]),
             width: 100, height: 100, class: "w-8 h-8 rounded-full" if current_user.profile.avatar.attached? %>
-          <%= AvatarPresenter.call(current_user, 8) unless current_user.profile.avatar.attached?  %>
-        </button>
-        <!-- Dropdown menu -->
-        <div class="hidden z-50 my-4 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600" id="user-dropdown">
-          <div class="py-3 px-4">
-            <span class="block text-sm text-gray-900 dark:text-white"><%= current_user.profile.nickname.strip %></span>
-            <span class="block text-sm font-medium text-gray-500 truncate dark:text-gray-400"><%= current_user.email %></span>
+            <%= AvatarPresenter.call(current_user, 8) unless current_user.profile.avatar.attached?  %>
+          </button>
+          <!-- Dropdown menu -->
+          <div data-toggle-target="toggeable" class="hidden absolute origin-top-right right-0 z-50 my-4 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600" id="user-dropdown">
+            <div class="py-3 px-4">
+              <span class="block text-sm text-gray-900 dark:text-white"><%= current_user.profile.nickname.strip %></span>
+              <span class="block text-sm font-medium text-gray-500 truncate dark:text-gray-400"><%= current_user.email %></span>
+            </div>
+            <ul class="py-1" aria-labelledby="user-menu-button">
+              <li>
+                <a href="#" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Dashboard</a>
+              </li>
+              <li>
+                <%= link_to "Profile", edit_account_path(current_user), class: "block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" %>
+              </li>
+              <li>
+                <a href="#" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Settings</a>
+              </li>
+              <li>
+                <%= link_to "Sign out", logout_path, data: { turbo_method: :delete }, class:"block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" %>
+              </li>
+            </ul>
           </div>
-          <ul class="py-1" aria-labelledby="user-menu-button">
-            <li>
-              <a href="#" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Dashboard</a>
-            </li>
-            <li>
-              <%= link_to "Profile", edit_account_path(current_user), class: "block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" %>
-            </li>
-            <li>
-              <a href="#" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Settings</a>
-            </li>
-            <li>
-              <%= link_to "Sign out", logout_path, data: { turbo_method: :delete }, class:"block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" %>
-            </li>
-          </ul>
         </div>
       <% else %>
         <%= link_to "Sign in", login_path, class: "py-2 pr-8 pl-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:text-sm md:font-medium dark:text-white" %>

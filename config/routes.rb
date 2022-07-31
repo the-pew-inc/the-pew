@@ -56,8 +56,8 @@ Rails.application.routes.draw do
 
   # Notification routes
   resources :notifications, only: [:index]
-  post 'notifications/read', to: 'notifications#mark_all_as_read'
-  post 'notifications/:id/read', to: 'notifications#mark_as_read'
+  put 'notifications/:id', to: 'notifications#mark_as_read',     as: :mark_as_read
+  put 'notifications',     to: 'notifications#mark_all_as_read', as: :mark_as_read_all
 
   # Display the user's questions
   resources :your_questions, only: [:index, :show, :destroy]
