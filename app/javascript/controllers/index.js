@@ -4,20 +4,23 @@
 
 import { application } from "./application"
 
-import AutoSubmitController from "./auto_submit_controller.js"
+import AutoSubmitController from "./auto_submit_controller"
 application.register("auto-submit", AutoSubmitController)
 
-import ClipboardController from "./clipboard_controller.js"
+import ClipboardController from "./clipboard_controller"
 application.register("clipboard", ClipboardController)
 
-import CloseFlashController from "./close_flash_controller.js"
+import CloseFlashController from "./close_flash_controller"
 application.register("close-flash", CloseFlashController)
 
-import EmptyStateController from "./empty_state_controller.js"
+import EmptyStateController from "./empty_state_controller"
 application.register("empty-state", EmptyStateController)
 
-import ToggleController from "./toggle_controller.js"
+import NotificationController from "./notification_controller"
+application.register("notification", NotificationController)
+
+import ToggleController from "./toggle_controller"
 application.register("toggle", ToggleController)
 
-import ValidatePinController from "./validate_pin_controller.js"
+import ValidatePinController from "./validate_pin_controller"
 application.register("validate-pin", ValidatePinController)

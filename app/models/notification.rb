@@ -5,12 +5,7 @@ class Notification < ApplicationRecord
   after_create_commit :broadcast_to_recipient
 
   def broadcast_to_recipient
-    broadcast_replace_later_to(
-      recipient,
-      :notifications,
-      target: 'notificationBellButton',
-      html: '<span id="notificationBellDot" class="top-1 left-5 absolute w-3.5 h-3.5 bg-red-400 border-2 border-white dark:border-gray-800 rounded-full"></span>'.html_safe
-    )
+    # todo: add the code to refresh notifications on the navigation bar
   end
 
 end
