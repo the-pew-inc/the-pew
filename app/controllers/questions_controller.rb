@@ -54,6 +54,11 @@ class QuestionsController < ApplicationController
 
     respond_to do |format|
       if @question.update(update_question_params)
+
+        if self.rejected?
+          Message.create(user_id: self.user_id, title: "Question Rejected", content: "Your question: #{self.title} has been rejected with status #{self.rejection_cause}", level: :alert)
+        end
+
         format.turbo_stream
       else
         format.turbo_stream

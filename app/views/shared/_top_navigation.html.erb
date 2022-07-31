@@ -20,6 +20,8 @@
           </svg>
           <% if current_user.notifications.unread.count > 0 %>
             <span id="notificationBellDot" class="top-1 left-5 absolute w-3.5 h-3.5 bg-red-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
+          <% else %>
+            <span id="notificationBellDot" class="hidden top-1 left-5 absolute w-3.5 h-3.5 bg-red-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
           <% end %>
         </button>
         <!-- Notification dropdown -->
@@ -32,7 +34,7 @@
               <%=link_to notifications_path, class: "flex py-3 px-4 hover:bg-gray-100 dark:hover:bg-gray-700" do %>
                 <div class="pl-3 w-full">
                   <div class="text-gray-500 text-sm mb-1.5 dark:text-gray-400"><%= notification.to_notification.message %></div>
-                  <div class="text-xs text-blue-600 dark:text-blue-500"><%= notification.created_at.to_date %></div>
+                  <div class="text-xs text-blue-600 dark:text-blue-500"><%= time_ago_in_words notification.created_at %> ago</div>
                 </div>
               <% end %>
             <% end %>
