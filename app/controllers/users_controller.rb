@@ -5,7 +5,9 @@ class UsersController < ApplicationController
   def create
     @user = User.new(create_user_params)
     if @user.save
-      redirect_to(root_path, notice: 'Please check your email for confirmation instructions.')
+      after_login_path = session[:user_return_to] || root_path
+      login(@user)
+      redirect_to(after_login_path, notice: 'You are successfully signed in. Please check your email for confirmation instructions.')
     else
       render(:new, status: :unprocessable_entity)
     end
