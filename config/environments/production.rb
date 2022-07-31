@@ -100,11 +100,11 @@ Rails.application.configure do
   # Heroku / Sendgrid
   config.action_mailer.delivery_method = :sendgrid_actionmailer
   config.action_mailer.sendgrid_actionmailer_settings = {
-    api_key: ENV['SENDGRID_API_KEY']
+    api_key: ENV['SENDGRID_API_KEY'],
+    raise_delivery_errors: true
   }
-  config.action_mailer.raise_delivery_errors = true
   config.action_mailer.default_url_options = { host: ENV['DEFAULT_URL'] }
-  
+
   # config.action_mailer.delivery_method = :smtp
   # config.action_mailer.perform_deliveries = true
   # config.action_mailer.raise_delivery_errors = true
