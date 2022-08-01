@@ -51,6 +51,10 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
   end
 
+  def stats
+    @event = Event.find(params[:id])
+  end
+
   def update
     is_confirmed? and return
 
