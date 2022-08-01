@@ -51,7 +51,7 @@ class User < ApplicationRecord
   # Send a confirmation email to the user
   def send_confirmation_email!
     confirmation_token = signed_id(purpose: :email_confirmation, expires_in: CONFIRMATION_TOKEN_EXPIRATION)
-    UserMailer.confirmation(self, confirmation_token).deliver_now
+    UserMailer.confirmation(self, confirmation_token).deliver_later
   end
 
   # PRIVATE METHODS #
