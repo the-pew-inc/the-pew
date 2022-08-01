@@ -11,7 +11,7 @@ class User < ApplicationRecord
   before_save  :generate_password_digest
 
   # Mailer configuration
-  MAILER_FROM_EMAIL = '<The Pew!> no-reply@thepew.co'
+  MAILER_FROM_EMAIL = '<The Pew!> no-reply@thepew.io'
   CONFIRMATION_TOKEN_EXPIRATION = 1.day
   PASSWORD_RESET_TOKEN_EXPIRATION = 20.minutes
 
