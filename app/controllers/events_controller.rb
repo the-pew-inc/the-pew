@@ -51,8 +51,10 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
   end
 
+  # GET /event/:id/stats
   def stats
     @event = Event.find(params[:id])
+    @questions = Question.where(event_id: @event.id)
   end
 
   def update
@@ -98,6 +100,16 @@ class EventsController < ApplicationController
       else
         format.html { redirect_to(root_path(), alert: 'Invalid PIN', status: :unprocessable_entity) }
       end
+    end
+  end
+
+  # GET /event/:id/export
+  def export
+
+    @event = Question.find(params[:id])
+
+    respond_to do |format|
+      format.csv { send_data Question.to_csv(@event.id), filename: "event-#{DateTime.now.strftime("%d%m%Y%H%M")}.csv"}
     end
   end
 
