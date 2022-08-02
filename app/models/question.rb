@@ -47,6 +47,36 @@ class Question < ApplicationRecord
     Vote.where(votable_id: self.id).down_vote.sum(:choice)
   end
 
+  # Export question to CSV
+  require 'csv'
+  def self.to_csv(room_id)
+    attributes = %w{title email name created_at updated_at status rejection_cause}
+
+    questions = where(room_id: room_id).order(created_at: :desc)
+    CSV.generate(headers: true) do |csv|
+      csv << attributes
+      questions.each do |question|
+        csv << attributes.map{ |attr| question.send(attr) }
+      end
+    end
+  end
+
+  def name
+    if anonymous
+      "User wished to remain anonymous"
+    else
+      "#{self.user.profile.nickname}"
+    end
+  end
+
+  def email
+    if anonymous
+      "User does not want to share their email"
+    else
+      "#{self.user.email}"
+    end
+  end
+
   after_create_commit do
     broadcast_prepend_later_to [self.room_id, :questions], target: "questions", partial: "questions/question_frame", locals: { question: self } if Current.user
     broadcast_update_later_to  [self.room_id, :questions], target: "question_counter", html: Question.approved_questions_for_room(self.room_id).count if self.approved?

@@ -3,12 +3,18 @@
     <section class="bg-blue-100 rounded-lg mx-6 p-4 mb-1">
       <div class="flex flex-row items-center justify-between">
         <div class="flex flex-col justify-start">
-          <h1 class="text-lg font-bold text-blue-700">Cookies policy</h1>
-          <p class="font-light text-blue-500">We use cookies to provide a better browsing experience</p>
+          <h1 class="inline-block mb-2 font-extrabold text-3xl tracking-tight text-blue-800">🍪 Cooky policy</h1>
+          <p class="text-sm tracking-tight text-blue-700">
+            We require cookies to save your preferences and operate our solution.
+          </p>
         </div>
         <div class="flex flex-row justify-start items-center space-x-4 mt-2">
-          <%= link_to "Accept", cookies_path(cookies_accepted: true), class: "px-3 py-2 bg-blue-500 text-blue-100 rounded-xl" %>
-          <%= link_to "Reject", cookies_path(cookies_accepted: false), class: "px-3 py-2 text-blue-500 rounded-xl border border-blue-500" %>
+          <%= link_to "Allow all", 
+              cookies_path(cookies_accepted: true), 
+              class: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" %>
+          <%= link_to "Bare minimum", 
+              cookies_path(cookies_accepted: false), 
+              class: "text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-800" %>
         </div>
       </div>
     </section>
