@@ -138,7 +138,7 @@ GEM
       unf (>= 0.0.5, < 1.0.0)
     down (5.3.1)
       addressable (~> 2.8)
-    erubi (1.10.0)
+    erubi (1.11.0)
     faraday (2.4.0)
       faraday-net_http (~> 2.0)
       ruby2_keywords (>= 0.0.4)
