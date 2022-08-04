@@ -54,7 +54,12 @@ class EventsController < ApplicationController
   # GET /event/:id/stats
   def stats
     @event = Event.find(params[:id])
-    @questions = Question.where(event_id: @event.id)
+    @questions = Question.where(room_id: @event.rooms.first.id).order(status: :desc).order(created_at: :desc)
+    @count = @questions.count
+    if @count > 0 
+      @approved_count = @questions.approved.count
+      @answered_count = @questions.answered.count
+    end
   end
 
   def update
