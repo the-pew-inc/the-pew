@@ -24,7 +24,8 @@ Rails.application.routes.draw do
   get 'login', to: 'sessions#new'
 
   # Google OAuth routes
-  get '/auth/:provider/callback', to: 'sessions#omniauth'
+  # get '/auth/:provider/callback', to: 'sessions#omniauth'
+  get '/auth/google_oauth2/callback', to: 'sessions#omniauth'
 
   # Apple Sign In routes
   post 'auth/apple', to: 'sessions#apple_callback'
