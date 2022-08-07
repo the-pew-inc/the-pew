@@ -24,10 +24,16 @@ class Vote < ApplicationRecord
     end
   end
 
+  def update_title(user)
+    broadcast_update_later_to([user, votable.class.name.downcase.pluralize], target: "#{dom_id(votable)}_count", html: votable.up_votes)
+  end
+
   # TODO: find a way to make the target independent from the object
   after_update_commit do
     target_name = [votable.room_id, votable.class.name.downcase.pluralize]
     broadcast_update_later_to(target_name, target: "#{dom_id(votable)}_count", html: votable.up_votes)
   end
+
+  
 
 end

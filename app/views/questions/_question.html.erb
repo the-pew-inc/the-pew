@@ -42,16 +42,16 @@
           <% end %>
         </div>
         <div class="flex flex-col space-y-2">
-          <%= button_to question_votes_path(question, format: :turbo_stream),
+          <%= button_to question_votes_path(question),
             params: {choice: :up_vote},
-            method: :get, 
-            class: "rounded-full border #{(question.votes.where(user_id: current_user&.id).first.up_vote?) ? "border-sky-500" : "border-slate-500"} px-2 py-1 hover:bg-slate-200 dark:hover:bg-slate-600",
+            method: :post, 
+            class: "rounded-full border #{(question.votes.where(user_id: current_user&.id).first&.up_vote?) ? "border-sky-500" : "border-slate-500"} px-2 py-1 hover:bg-slate-200 dark:hover:bg-slate-600",
             disabled: !(user_signed_in? && (question.approved? || question.answered?)) do %>
             <div class="flex flex-row justify-start items-center space-x-2">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 <%= (question.votes.where(user_id: current_user&.id).first.up_vote?) ? "text-sky-800 dark:text-sky-500" : "text-gray-500 dark:text-gray-400" %>" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 <%= (question.votes.where(user_id: current_user&.id).first&.up_vote?) ? "text-sky-800 dark:text-sky-500" : "text-gray-500 dark:text-gray-400" %>" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
               </svg>
-              <span id="<%= dom_id(question)%>_count" class="<%= (question.votes.where(user_id: current_user&.id).first.up_vote?) ? "text-sky-800 dark:text-sky-500" : "text-gray-500 dark:text-gray-400" %> font-light text-sm">
+              <span id="<%= dom_id(question)%>_count" class="<%= (question.votes.where(user_id: current_user&.id).first&.up_vote?) ? "text-sky-800 dark:text-sky-500" : "text-gray-500 dark:text-gray-400" %> font-light text-sm">
                 <%= question.up_votes %>
               </span>
             </div>
