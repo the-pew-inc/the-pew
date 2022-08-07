@@ -34,7 +34,7 @@ class PasswordsController < ApplicationController
     @user = User.find_signed(params[:password_reset_token], purpose: :reset_password)
     if @user
       if @user.unconfirmed?
-        redirect_to(new_confirmation_path, alert: 'You must confirm your email before you can sign in.')
+        redirect_to(new_confirmation_path, alert: 'You must confirm your email to update your profile.')
       elsif @user.update(password_params)
         redirect_to(login_path, notice: 'Sign in.')
       else
