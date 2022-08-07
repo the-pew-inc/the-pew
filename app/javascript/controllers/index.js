@@ -25,5 +25,8 @@ application.register("order-questions", OrderQuestionsController)
 import ToggleController from "./toggle_controller"
 application.register("toggle", ToggleController)
 
+import UserVoteController from "./user_vote_controller"
+application.register("user-vote", UserVoteController)
+
 import ValidatePinController from "./validate_pin_controller"
 application.register("validate-pin", ValidatePinController)
