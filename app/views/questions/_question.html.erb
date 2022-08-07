@@ -44,7 +44,7 @@
         <div class="flex flex-col space-y-2">
           <%= button_to question_votes_path(question),
             params: {choice: :up_vote},
-            method: :post, 
+            method: :post,
             disabled: !(user_signed_in? && (question.approved? || question.answered?)) do %>
             <%= render partial: 'button_count', locals: {question: question} %>
           <% end %>
