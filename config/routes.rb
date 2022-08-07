@@ -55,7 +55,8 @@ Rails.application.routes.draw do
     resources :questions
   end
 
-  get 'question/:votable_id/votes', to: 'votes#show', as: :question_votes,  votable_type: 'Question'
+  # Question routes / votes
+  post 'question/:votable_id/votes', to: 'votes#show', as: :question_votes,  votable_type: 'Question'
 
   # Notification routes
   resources :notifications, only: [:index]

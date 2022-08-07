@@ -30,4 +30,6 @@ class Vote < ApplicationRecord
     broadcast_update_later_to(target_name, target: "#{dom_id(votable)}_count", html: votable.up_votes)
   end
 
+  
+
 end

@@ -42,57 +42,13 @@
           <% end %>
         </div>
         <div class="flex flex-col space-y-2">
-          <%= button_to question_votes_path(question, format: :turbo_stream),
-            params: {choice: :up_vote},
-            method: :get, 
-            class: "rounded-full border #{(question.votes.where(user_id: current_user&.id).count > 0) ? "border-sky-500" : "border-slate-500"} px-2 py-1 hover:bg-slate-200 dark:hover:bg-slate-600",
-            disabled: !(user_signed_in? && (question.approved? || question.answered?)) do %>
-            <div class="flex flex-row justify-start items-center space-x-2">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 <%= (question.votes.where(user_id: current_user&.id).count > 0) ? "text-sky-800 dark:text-sky-500" : "text-gray-500 dark:text-gray-400" %>" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
-              </svg>
-              <span id="<%= dom_id(question)%>_count" class="<%= (question.votes.where(user_id: current_user&.id).count > 0) ? "text-sky-800 dark:text-sky-500" : "text-gray-500 dark:text-gray-400" %> font-light text-sm">
-                <%= question.up_votes %>
-              </span>
-            </div>
-          <% end %>
+          <%= render partial: 'upvote', locals: {question: question} %>
           <% if current_user&.id == question.user_id || ( current_user&.has_role? :admin, question.room ) %>
             <%= link_to 'delete', your_question_path(question.id), data: { turbo_method: :delete,  turbo_confirm: 'Are you sure?' }, class: "py-2 px-3 text-xs font-medium text-center rounded-lg text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800" %>
           <% end %>
         </div>
       </div>
-      <% if current_user&.has_role? :admin, question.room %>
-        <div class="flex justify-start items-center mt-4 space-x-4">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500 dark:text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
-          <%= button_to 'Approve', 
-            room_question_path(question.room_id, question.id), 
-            method: :put,
-            params: { question: {status: :approved} },
-            type: "button",
-            class: "py-2 px-3 text-xs font-medium text-center text-white rounded-lg focus:ring-4 #{ (question.approved? || question.answered?) ? 'cursor-not-allowed bg-green-700/50 hover:bg-green-800/50 dark:bg-green-400/75 dark:hover:bg-green-500/75' : 'bg-green-700 hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-700'} focus:ring-green-300 dark:focus:ring-green-800",
-            disabled: question.approved? || question.answered? %>
-          <%= button_to 'Answered', 
-            room_question_path(question.room_id, question.id), 
-            method: :put, 
-            params: { question: {status: :answered} },
-            type: "button",
-            class: "py-2 px-3 text-xs font-medium text-center text-white rounded-lg focus:ring-4 #{ question.answered? ? 'cursor-not-allowed bg-green-700/50 hover:bg-green-800/50 dark:bg-green-400/75 dark:hover:bg-green-500/75' : 'bg-green-700 hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-700'} focus:ring-green-300 dark:focus:ring-green-800",
-            disabled: question.answered? %>
-          <%= form_with model: question,
-                        url: room_question_path(question.room_id, question.id),
-                        format: :turbo_stream,
-                        html: { data: { controller: "auto-submit", action:"change->auto-submit#change" } } do |form|  %>
-            <%= form.hidden_field :status, value: :rejected %>
-            <%= form.select :rejection_cause, 
-                            options_for_select(Question.rejection_causes.keys, { selected: question.rejection_cause || Question.new.rejection_cause }),
-                            {include_blank: "Reject"},
-                            { class: "bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full py-2 px-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" }
-                            %>
-          <% end %>
-        </div>
-      <% end %>
+      <%= render partial: "control_buttons", locals: {question: question} %>
     </div>
   <% end %>
 <% end %>
