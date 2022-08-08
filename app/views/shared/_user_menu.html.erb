@@ -1,4 +1,4 @@
-<div class="relative inline-block" data-controller="toggle">
+<div class="hidden relative md:inline-block ml-3" data-controller="toggle">
   <button type="button" data-action="click->toggle#toggle" class="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
     <span class="sr-only">Open user menu</span>
     <%= image_tag current_user.profile.avatar.variant(resize_to_limit: [100, 100]),
