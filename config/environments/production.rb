@@ -92,6 +92,7 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   # Compress HTTP response
+  # Read more [https://pawelurbanek.com/rails-gzip-brotli-compression]
   config.middleware.use Rack::Deflater
 
   # Supported domains

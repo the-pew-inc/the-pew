@@ -115,13 +115,6 @@ gem 'countries', '~> 5.1.0', require: 'countries/global'
 # Validate URL format [https://github.com/perfectline/validates_url]
 gem 'validate_url'
 
-# Gem that are only used in production
-# group :production do
-  # Based on [https://github.com/jollygoodcode/jollygoodcode.github.io/issues/7]
-  # HTTP Compression using: [https://github.com/romanbsd/heroku-deflater]
-  # gem 'heroku-deflater'
-# end
-
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: %i[mri mingw x64_mingw]
