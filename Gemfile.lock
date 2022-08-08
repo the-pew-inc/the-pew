@@ -152,6 +152,8 @@ GEM
     groupdate (6.1.0)
       activesupport (>= 5.2)
     hashie (5.0.0)
+    heroku-deflater (0.6.3)
+      rack (>= 1.4.5)
     honeybadger (4.12.1)
     http (5.1.0)
       addressable (~> 2.8)
@@ -432,6 +434,7 @@ DEPENDENCIES
   down (~> 5.0)
   faker!
   groupdate
+  heroku-deflater
   honeybadger (~> 4.0)
   image_processing (~> 1.2)
   jbuilder
