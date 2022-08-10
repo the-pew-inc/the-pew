@@ -15,13 +15,13 @@ Rails.application.routes.draw do
   put 'account/:id/resend_confirmation', to: 'users#resend_confirmation', as: 'resend_confirmation'
 
   # User routes
-  post 'sign_up', to: 'users#create'
-  get 'sign_up', to: 'users#new'
+  resources :users, only: %i[create new ]
 
   # Session routes
   post 'login', to: 'sessions#create'
+  get  'login', to: 'sessions#new'
   delete 'logout', to: 'sessions#destroy'
-  get 'login', to: 'sessions#new'
+
 
   # Google OAuth routes
   # get '/auth/:provider/callback', to: 'sessions#omniauth'
