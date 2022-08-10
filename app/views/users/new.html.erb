@@ -7,7 +7,7 @@
       <div class="text-slate-500 mt-9">Creating your account is free and let you ask questions on the platform.</div>
     </div>
     <div class="mx-auto">
-      <%= form_with model: @user, url: sign_up_path, data: {turbo: false} do |form| %>
+      <%= form_with model: @user, url: sign_up_path, data: { turbo: false } do |form| %>
         <%= render partial: "shared/form_errors", locals: { object: form.object } %>
         <div class="mb-6">
           <%= form.label :email, "Your email", class: "block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" %>
