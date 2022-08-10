@@ -1,6 +1,15 @@
-@import 'popperjs.css';
-
 /* Tailwind CSS */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Custom animation used by Alert messages (aka Flash) */
+@keyframes notification-countdown {
+  from {
+    width: 100%;
+  }
+
+  to {
+    width: 0;
+  }
+}

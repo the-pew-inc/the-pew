@@ -91,6 +91,10 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
+  # Compress HTTP response
+  # Read more [https://pawelurbanek.com/rails-gzip-brotli-compression]
+  config.middleware.use Rack::Deflater
+
   # Supported domains
   # config.action_dispatch.tld_length = 2
   config.hosts << "app.thepew.io"

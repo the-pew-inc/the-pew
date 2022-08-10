@@ -4,14 +4,14 @@
 
 import { application } from "./application"
 
+import AlertController from "./alert_controller"
+application.register("alert", AlertController)
+
 import AutoSubmitController from "./auto_submit_controller"
 application.register("auto-submit", AutoSubmitController)
 
 import ClipboardController from "./clipboard_controller"
 application.register("clipboard", ClipboardController)
-
-import CloseFlashController from "./close_flash_controller"
-application.register("close-flash", CloseFlashController)
 
 import EmptyStateController from "./empty_state_controller"
 application.register("empty-state", EmptyStateController)
