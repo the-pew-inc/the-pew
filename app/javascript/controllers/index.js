@@ -16,6 +16,9 @@ application.register("clipboard", ClipboardController)
 import EmptyStateController from "./empty_state_controller"
 application.register("empty-state", EmptyStateController)
 
+import HamburgerController from "./hamburger_controller"
+application.register("hamburger", HamburgerController)
+
 import ModeController from "./mode_controller"
 application.register("mode", ModeController)
 
