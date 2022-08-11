@@ -18,6 +18,7 @@ class User < ApplicationRecord
   # Relations
   has_many :notifications,   as: :recipient, dependent: :destroy # enable Noticed
   has_many :active_sessions, dependent: :destroy
+  has_many :visits,          class_name: "Ahoy::Visit"
   has_one  :profile,         dependent: :destroy
   accepts_nested_attributes_for :profile, allow_destroy: true
   has_many :events,          dependent: :destroy
