@@ -6,7 +6,7 @@
 </div>
 <div class="mb-6 flex space-x-4 items-center">
   <%= image_tag current_user.profile.avatar.variant(resize_to_limit: [100, 100]),
-            width: 100, height: 100, class: "w-16 h-16 rounded-full" if current_user.profile.avatar.attached? %>
+            width: 100, height: 100, class: "flex-shrink-0 w-16 h-16 rounded-full" if current_user.profile.avatar.attached? %>
   <%= AvatarPresenter.call(current_user, 16) unless current_user.profile.avatar.attached? %>
   <div>
     <h3 class="inline-block font-extrabold text-xl tracking-tight text-slate-800 dark:text-white">Gravatar</h3>
