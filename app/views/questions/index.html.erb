@@ -16,7 +16,7 @@
   <% else %>
     <div>
       <h3 class="inline-block font-extrabold text-xl tracking-tight text-slate-800 dark:text-white">You need to be logged in to ask a question</h3>
-      <%= link_to 'Sign up', sign_up_path %> or <%= link_to 'Login', login_path %>
+      <%= link_to 'Sign up', new_user_path %> or <%= link_to 'Login', login_path %>
     </div>
   <% end %>
 </section>
@@ -28,6 +28,8 @@
     <div data-empty-state-target="emptyState">
       <%= render "empty_state" %>
     </div>
-    <%= render @questions %>
+    <div data-controller="order-questions">
+      <%= render @questions %>
+    </div>
   </div>
 </section>
