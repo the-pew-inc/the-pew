@@ -2,7 +2,7 @@ class QuestionsController < ApplicationController
   before_action :authenticate_user!, only: %i[edit destroy update new]
   
   before_action :set_question, only: %i[show edit update destroy]
-  before_action :set_room
+  before_action :set_room, only: %i[index new create]
 
   # GET /rooms/:room_id/questions
   def index
@@ -14,7 +14,7 @@ class QuestionsController < ApplicationController
     end
   end
 
-  # GET /rooms/:room_id/questions/1
+  # GET /questions/1
   def show 
     if request.headers["turbo-frame"]
       render partial: 'question', locals: { question: @question }
@@ -28,7 +28,7 @@ class QuestionsController < ApplicationController
     @question = @room.questions.build
   end
 
-  # GET /rooms/:room_id/questions/1/edit
+  # GET /questions/1/edit
   def edit; end
 
   # POST /rooms/:room_id/questions
@@ -52,14 +52,14 @@ class QuestionsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /rooms/:room_id/questions/1
+  # PATCH/PUT /questions/1
   def update
 
     respond_to do |format|
       if @question.update(update_question_params)
 
         if @question.rejected?
-          Message.create(user_id: self.user_id, title: "Question Rejected", content: "Your question: #{@question.title} has been rejected with status #{@question.rejection_cause}", level: :alert)
+          Message.create(user_id: @question.user_id, title: "Question Rejected", content: "Your question: #{@question.title} has been rejected with status #{@question.rejection_cause}", level: :alert)
         end
 
         track

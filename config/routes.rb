@@ -55,7 +55,7 @@ Rails.application.routes.draw do
 
   # Question routes
   resources :rooms do
-    resources :questions
+    resources :questions, shallow: true
   end
 
   # Question routes / votes
@@ -70,7 +70,7 @@ Rails.application.routes.draw do
   put 'notifications',     to: 'notifications#mark_all_as_read', as: :mark_as_read_all
 
   # Display the user's questions
-  resources :your_questions, only: [:index, :show, :destroy]
+  resources :your_questions, only: [:index]
 
   # Validate event PIN
   post '/', to: 'events#validate_pin', as: :pin
