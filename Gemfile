@@ -56,8 +56,6 @@ gem 'omniauth', '~> 2.1.0'
 gem 'omniauth-google-oauth2' , '~> 1.0.1'
 # Required when not using Devise
 gem 'omniauth-rails_csrf_protection' 
-# Apple Sign-in support
-gem 'apple_id'
 
 # Adding Pundit to manage authorizations [https://github.com/varvet/pundit]
 gem 'pundit'
