@@ -6,7 +6,7 @@ class PasswordsController < ApplicationController
   before_action :redirect_if_authenticated
 
   def create
-    @user = User.find_by(email: params[:user][:email].downcase)
+    @user = User.find_by(email: params[:user][:email].strip.downcase)
     if @user.present?
       if @user.confirmed?
         @user.send_password_reset_email!
