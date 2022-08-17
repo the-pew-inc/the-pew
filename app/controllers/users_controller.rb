@@ -50,31 +50,21 @@ class UsersController < ApplicationController
     # make sure the user is not the current user
     not_owner and return
 
-    if @user.id != current_user.id
-      flash.now[:alert] = 'You do not have permission to edit this user.'
-      render(:edit, status: :unprocessable_entity)
-      return
-    end
-
     # default success message
     msg = 'Account updated successfully.' 
 
     # If the user's account is locked, do nothing but warn them
-    if !@user.locked
+    is_locked and return 
       
-      # If the user is changing their password, check that the current password is correct & that the user provides a new password
-      update_password and return
+    # If the user is changing their password, check that the current password is correct & that the user provides a new password
+    update_password and return
 
-      msg = user_updates_their_email(msg)
+    msg = user_updates_their_email(msg)
 
-      # Save the user's changes
-      if @user.update(update_user_params)
-        redirect_to(root_path, notice: msg)
-      else
-        render(:edit, status: :unprocessable_entity)
-      end
+    # Save the user's changes
+    if @user.update(update_user_params)
+      redirect_to(root_path, notice: msg)
     else
-      flash.now[:alert] = 'Your account has been locked. Please contact support.'
       render(:edit, status: :unprocessable_entity)
     end
   end
@@ -102,7 +92,7 @@ class UsersController < ApplicationController
   end
 
   def update_user_params
-    params.require(:user).permit(:email, :current_password, :password, profile_attributes: [:nickname])
+    params.require(:user).permit(:email, :current_password, :password, profile_attributes: [:id, :nickname])
   end
 
   # Method to check if the user is changing their password
@@ -115,7 +105,6 @@ class UsersController < ApplicationController
     if current_password && new_password
       # Make sure the current and new passwords are not the same
       if current_password == new_password
-        p '#### NEW AND OLD PASSWORD ARE THE SAME! #####'
         flash.now[:alert] = 'New and current passwords must be different.'
         render(:edit, status: :unprocessable_entity) and return true
       end
@@ -142,6 +131,14 @@ class UsersController < ApplicationController
   def not_owner
     if @user.id != current_user.id
       flash.now[:alert] = 'You do not have permission to edit this user.'
+      render(:edit, status: :unprocessable_entity) and return true
+    end
+  end
+
+
+  def is_locked
+    if @user.locked
+      flash.now[:alert] = 'Your account has been locked. Please contact your admin.'
       render(:edit, status: :unprocessable_entity) and return true
     end
   end
