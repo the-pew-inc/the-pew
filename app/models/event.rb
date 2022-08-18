@@ -8,8 +8,6 @@ class Event < ApplicationRecord
   has_paper_trail
 
   before_validation :set_values
-  before_save :set_duration
-  after_create :generate_qr_code
 
   belongs_to :user
   has_many   :rooms, dependent: :destroy
@@ -34,9 +32,15 @@ class Event < ApplicationRecord
   def set_values
     self.end_date = start_date
     self.short_code = generate_pin # should only be called when status is opened (or published) and removed for all otehr statuses
+    logger.info "set_values / short_code: #{self.short_code}"
+
+    set_duration
+
+    generate_qr_code
   end
 
   def generate_qr_code
+    logger.info "generate_qr_code / short_code: #{self.short_code}"
     qr_url = url_for(
       controller: 'events',
       action: 'event',
