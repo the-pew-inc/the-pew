@@ -7,3 +7,5 @@ import "chartkick/chart.js";
 // document.addEventListener("turbo:load", function () {
 //   console.log("Ready triggered!");
 // });
+import "trix"
+import "@rails/actiontext"
