@@ -18,4 +18,20 @@ class UserMailer < ApplicationMailer
       to: @user.email, 
       subject: 'ThePew: Password Reset Instructions')
   end
+
+  def welcome(user)
+    @user = user
+    mail(
+      to: @user.email,
+      subject: 'ThePew: Welcome'
+    )
+  end
+
+  def password_change_confirmatiom(user)
+    @user = user
+    mail(
+      to: @user.email,
+      subject: 'ThePew: Password changed'
+    )
+  end
 end
