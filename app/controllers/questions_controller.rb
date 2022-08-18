@@ -7,7 +7,7 @@ class QuestionsController < ApplicationController
   # GET /rooms/:room_id/questions
   def index
     if @room.event.universal?
-      @questions = Question.questions_for_room(params[:room_id]).by_recently_created
+      @questions = Question.questions_for_room(params[:room_id]).order("id ASC")
     else
       # TODO: make it more real ;-)
       redirect_to room_path, alert: "This event is private"
