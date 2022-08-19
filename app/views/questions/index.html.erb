@@ -24,12 +24,10 @@
   <div class="text-gray-500 dark:text-gray-400 font-light text-sm mb-4">
     Number of questions: <span id="question_counter"><%= @room.approved_question_count %></span><br>
   </div>
-  <div id="questions" data-controller="empty-state" class="flex flex-col space-y-2">
+  <div id="questions" data-controller="empty-state order-questions" class="flex flex-col space-y-2">
     <div data-empty-state-target="emptyState">
       <%= render "empty_state" %>
     </div>
-    <div data-controller="order-questions">
-      <%= render @questions %>
-    </div>
+    <%= render @questions %>
   </div>
 </section>
