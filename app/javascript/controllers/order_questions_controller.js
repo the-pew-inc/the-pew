@@ -114,7 +114,24 @@ export default class extends Controller {
 
   refreshWithOrder(event) {
     this.orderingValue = event.params.order;
+    // Update the question list
     this.update();
+    // Update the tabs
+    this.updateTabs();
+  }
+
+  initTabs() {
+    this.tabs = this.tabTargets;
+    this.tabs.forEach((tab) => {
+      if (tab.ariaCurrent === "page") {
+        tab.classList.add(...this.activeClasses);
+      } else {
+        tab.classList.add(...this.inactiveClasses);
+      }
+    });
+  }
+
+  updateTabs() {
     this.tabs.forEach((tab) => {
       if (
         tab.getAttribute("data-order-questions-order-param") ===
@@ -143,17 +160,6 @@ export default class extends Controller {
         tab.classList.remove(...this.activeClasses);
         tab.classList.add(...this.inactiveClasses);
         tab.setAttribute("aria-current", "none");
-      }
-    });
-  }
-
-  initTabs() {
-    this.tabs = this.tabTargets;
-    this.tabs.forEach((tab) => {
-      if (tab.ariaCurrent === "page") {
-        tab.classList.add(...this.activeClasses);
-      } else {
-        tab.classList.add(...this.inactiveClasses);
       }
     });
   }
