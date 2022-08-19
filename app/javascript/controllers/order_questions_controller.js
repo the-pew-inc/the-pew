@@ -73,10 +73,17 @@ export default class extends Controller {
     });
   }
 
-  sortByTime() {
+  sortByTimeOldToNew() {
     this.listOfQuestions.sort((a, b) => {
       if (a.id < b.id) return -1;
       if (a.id > b.id) return 1;
+    });
+  }
+
+  sortByTimeNewToOld() {
+    this.listOfQuestions.sort((a, b) => {
+      if (a.id < b.id) return 1;
+      if (a.id > b.id) return -1;
     });
   }
 
