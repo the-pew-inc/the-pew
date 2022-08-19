@@ -3,6 +3,7 @@ import { Controller } from "@hotwired/stimulus";
 // Connects to data-controller="order-questions"
 export default class extends Controller {
   static targets = ["question"];
+  static values = { ordering: { type: String, default: "trending" } };
 
   connect() {
     this.listOfQuestions = [];
@@ -14,7 +15,7 @@ export default class extends Controller {
     this.observer.disconnect();
   }
 
-  update(event) {
+  update() {
     const questions = this.questionTargets;
     questions.forEach((element, index) => {
       const questionId = this.getQuestionId(element);
@@ -37,7 +38,24 @@ export default class extends Controller {
       }
     });
 
-    this.sortByVotes();
+    switch (this.orderingValue) {
+      case "trending":
+        console.debug("We are in trending mode");
+        this.trending();
+        break;
+      case "recent":
+        console.debug("We are in recent mode");
+        this.sortByTimeNewToOld();
+        break;
+      case "oldies":
+        console.debug("We are in oldies mode");
+        this.sortByTimeOldToNew();
+        break;
+      default:
+        console.debug("We are in trending mode, but by default");
+        this.trending();
+        break;
+    }
 
     // Disconnect the observer
     this.disconnect();
@@ -61,7 +79,7 @@ export default class extends Controller {
     return question.dataset.questionId || null;
   }
 
-  sortByVotes() {
+  trending() {
     this.listOfQuestions.sort((a, b) => {
       if (a.upvotes < b.upvotes) return 1;
       if (a.upvotes > b.upvotes) return -1;
@@ -94,5 +112,11 @@ export default class extends Controller {
       attributes: false,
       subtree: true,
     });
+  }
+
+  refreshWithOrder(event) {
+    console.debug(event.params.order);
+    this.orderingValue = event.params.order;
+    this.update();
   }
 }

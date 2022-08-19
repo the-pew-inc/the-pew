@@ -25,6 +25,19 @@
     Number of questions: <span id="question_counter"><%= @room.approved_question_count %></span><br>
   </div>
   <div id="questions" data-controller="empty-state order-questions" class="flex flex-col space-y-2">
+    <div class="text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
+      <ul class="flex flex-wrap -mb-px">
+        <li class="mr-2">
+          <button data-action="order-questions#refreshWithOrder" data-order-questions-order-param="trending" class="inline-block p-4 text-blue-600 rounded-t-lg border-b-2 border-blue-600 active dark:text-blue-500 dark:border-blue-500" aria-current="page">Trending</button>
+        </li>
+        <li class="mr-2">
+          <button data-action="order-questions#refreshWithOrder" data-order-questions-order-param="recent" class="inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">Recent</button>
+        </li>
+        <li class="mr-2">
+          <button data-action="order-questions#refreshWithOrder" data-order-questions-order-param="oldies" class="inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">Oldies</button>
+        </li>
+      </ul>
+    </div>
     <div data-empty-state-target="emptyState">
       <%= render "empty_state" %>
     </div>
