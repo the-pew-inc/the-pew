@@ -3,6 +3,11 @@ Rails.application.routes.draw do
 
   # Adding the sidekiq UI
   require 'sidekiq/web'
+  Sidekiq::Web.use Rack::Auth::Basic do |username, password|
+    ActiveSupport::SecurityUtils.secure_compare(::Digest::SHA256.hexdigest(username), ::Digest::SHA256.hexdigest(ENV["SIDEKIQ_AUTH_USERNAME"])) &
+    ActiveSupport::SecurityUtils.secure_compare(::Digest::SHA256.hexdigest(password), ::Digest::SHA256.hexdigest(ENV["SIDEKIQ_AUTH_PASSWORD"]))
+  end if Rails.env.production?
+  
   mount Sidekiq::Web => '/sidekiq'
 
   # Cookie acceptance
@@ -15,21 +20,17 @@ Rails.application.routes.draw do
   put 'account/:id/resend_confirmation', to: 'users#resend_confirmation', as: 'resend_confirmation'
 
   # User routes
-  post 'sign_up', to: 'users#create'
-  get 'sign_up', to: 'users#new'
+  resources :users, only: %i[create new ]
 
   # Session routes
   post 'login', to: 'sessions#create'
+  get  'login', to: 'sessions#new'
   delete 'logout', to: 'sessions#destroy'
-  get 'login', to: 'sessions#new'
+
 
   # Google OAuth routes
   # get '/auth/:provider/callback', to: 'sessions#omniauth'
   get '/auth/google_oauth2/callback', to: 'sessions#omniauth'
-
-  # Apple Sign In routes
-  post 'auth/apple', to: 'sessions#apple_callback'
-  post 'webhooks/apple', to: 'webhooks#apple'
 
   # Password routes
   resources :passwords, only: %i[create edit new update], param: :password_reset_token
@@ -44,6 +45,9 @@ Rails.application.routes.draw do
     end
   end
 
+  # Dashboard routes
+  resource :dashboard, only: [:show]
+
   # Event routes
   resources :events
   get 'event/:pin',       to: 'events#event', as: :join_event
@@ -52,11 +56,14 @@ Rails.application.routes.draw do
 
   # Question routes
   resources :rooms do
-    resources :questions
+    resources :questions, shallow: true
   end
 
   # Question routes / votes
   post 'question/:votable_id/votes', to: 'votes#show', as: :question_votes,  votable_type: 'Question'
+
+  # Settings routes
+  resources :settings, only: [:index]
 
   # Notification routes
   resources :notifications, only: [:index]
@@ -64,7 +71,7 @@ Rails.application.routes.draw do
   put 'notifications',     to: 'notifications#mark_all_as_read', as: :mark_as_read_all
 
   # Display the user's questions
-  resources :your_questions, only: [:index, :show, :destroy]
+  resources :your_questions, only: [:index]
 
   # Validate event PIN
   post '/', to: 'events#validate_pin', as: :pin

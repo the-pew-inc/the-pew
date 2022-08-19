@@ -45,7 +45,7 @@
       </div>
       <div class="text-slate-700 text-sm flex flex-row items-center pr-4" data-controller="clipboard">
         <div class="relative">
-          <input type="text" id="small_outlined" class="block px-2.5 pb-1.5 pt-3 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" value="<%= event.short_code %>" data-clipboard-target="source" size=7 readonly />
+          <input type="text" id="small_outlined" class="block px-2.5 pb-1.5 pt-3 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" value="<%= event.short_code %>" data-clipboard-target="source" size=9 readonly />
           <label for="small_outlined" class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-3 scale-75 top-1 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-1 peer-focus:scale-75 peer-focus:-translate-y-3 left-1">Event PIN</label>
         </div>
         <span class="text-slate-500 pl-2" data-clipboard-target="copy">
@@ -78,7 +78,7 @@
         <% end %>
       </div>
       <div>
-        <%= link_to event_path(event), data: { turbo_method: :delete,  turbo_confirm: 'Are you sure?' }, class: "h-6 w-6 text-red-600 hover:text-red-700 dark:text-red-500 dark:hover:text-red-400", "data-popper-target":"element" do %>
+        <%= link_to event_path(event), data: { turbo_method: :delete,  turbo_confirm: 'Are you sure? All the data associated with this event will be lost.' }, class: "h-6 w-6 text-red-600 hover:text-red-700 dark:text-red-500 dark:hover:text-red-400", "data-popper-target":"element" do %>
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-600 dark:text-red-500" viewBox="0 0 20 20" fill="currentColor">
             <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
           </svg>

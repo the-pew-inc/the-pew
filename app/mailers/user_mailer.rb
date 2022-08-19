@@ -7,7 +7,7 @@ class UserMailer < ApplicationMailer
 
     mail(
       to: @user.email, 
-      subject: 'Confirmation Instructions')
+      subject: 'ThePew: Account Confirmation Instructions')
   end
 
   def password_reset(user, password_reset_token)
@@ -16,6 +16,22 @@ class UserMailer < ApplicationMailer
 
     mail(
       to: @user.email, 
-      subject: 'Password Reset Instructions')
+      subject: 'ThePew: Password Reset Instructions')
+  end
+
+  def welcome(user)
+    @user = user
+    mail(
+      to: @user.email,
+      subject: 'ThePew: Welcome'
+    )
+  end
+
+  def password_change_confirmatiom(user)
+    @user = user
+    mail(
+      to: @user.email,
+      subject: 'ThePew: Password changed'
+    )
   end
 end

@@ -1,6 +1,6 @@
 <%= turbo_frame_tag dom_id(question) do %>
   <% if question.approved? || question.answered?  || current_user&.id == question.user_id || ( current_user&.has_role? :admin, question.room ) %>
-    <div class="mb-6 p-2 border-l-2 border-slate-500 hover:bg-slate-50 dark:hover:bg-slate-50/5", data-empty-state-target="item">
+    <div class="mb-6 p-2 border-l-2 border-slate-500 hover:bg-slate-50 dark:hover:bg-slate-50/5" data-empty-state-target="item" data-order-questions-target="question" data-question-id="<%= question.id %>">
       <div class="flex flex-row justify-between">
         <div class="flex flex-col space-y-1 justify-start">
           <div class="flex flex-row justify-start items-center space-x-4">
@@ -44,7 +44,7 @@
         <div class="flex flex-col space-y-2">
           <%= render partial: 'upvote', locals: {question: question} %>
           <% if current_user&.id == question.user_id || ( current_user&.has_role? :admin, question.room ) %>
-            <%= link_to 'delete', your_question_path(question.id), data: { turbo_method: :delete,  turbo_confirm: 'Are you sure?' }, class: "py-2 px-3 text-xs font-medium text-center rounded-lg text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800" %>
+            <%= link_to 'delete', question_path(question.id), data: { turbo_method: :delete,  turbo_confirm: 'Are you sure?' }, class: "py-2 px-3 text-xs font-medium text-center rounded-lg text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800" %>
           <% end %>
         </div>
       </div>

@@ -20,6 +20,8 @@ module Authentication
     session[:current_active_session_id] = active_session.id
     session[:cookies_accepted] = cookies_accepted
 
+    ahoy.authenticate(user)
+
     active_session
   end
 

@@ -4,21 +4,21 @@
       <path stroke-linecap="round" stroke-linejoin="round" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
     </svg>
     <%= button_to 'Approve', 
-            room_question_path(question.room_id, question.id), 
+            question_path(question.id), 
             method: :put,
             params: { question: {status: :approved} },
             type: "button",
             class: "py-2 px-3 text-xs font-medium text-center rounded-lg focus:ring-4 #{ (question.approved? || question.answered?) ? 'text-gray-400 cursor-not-allowed bg-green-700/40 dark:bg-green-300/50' : 'text-white bg-green-700 hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-700'} focus:ring-green-300 dark:focus:ring-green-800",
             disabled: question.approved? || question.answered? %>
     <%= button_to 'Answered', 
-            room_question_path(question.room_id, question.id), 
+            question_path(question.id), 
             method: :put, 
             params: { question: {status: :answered} },
             type: "button",
             class: "py-2 px-3 text-xs font-medium text-center text-white rounded-lg focus:ring-4 #{ question.answered? ? 'cursor-not-allowed bg-green-700/50 hover:bg-green-800/50 dark:bg-green-400/75 dark:hover:bg-green-500/75' : 'bg-green-700 hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-700'} focus:ring-green-300 dark:focus:ring-green-800",
             disabled: question.answered? %>
     <%= form_with model: question,
-                        url: room_question_path(question.room_id, question.id),
+                        url: question_path(question.id),
                         format: :turbo_stream,
                         html: { data: { controller: "auto-submit", action:"change->auto-submit#change" } } do |form|  %>
       <%= form.hidden_field :status, value: :rejected %>

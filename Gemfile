@@ -56,8 +56,6 @@ gem 'omniauth', '~> 2.1.0'
 gem 'omniauth-google-oauth2' , '~> 1.0.1'
 # Required when not using Devise
 gem 'omniauth-rails_csrf_protection' 
-# Apple Sign-in support
-gem 'apple_id'
 
 # Adding Pundit to manage authorizations [https://github.com/varvet/pundit]
 gem 'pundit'
@@ -66,9 +64,6 @@ gem 'rolify', '~> 6.0.0'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
-
-# GroupDate to group date in SQL queries [https://github.com/ankane/groupdate]
-gem 'groupdate'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', require: false
@@ -114,6 +109,16 @@ gem 'countries', '~> 5.1.0', require: 'countries/global'
 
 # Validate URL format [https://github.com/perfectline/validates_url]
 gem 'validate_url'
+
+# Tracking
+# Ahoy [https://github.com/ankane/ahoy]
+gem 'ahoy_matey'
+
+# Group date [https://github.com/ankane/groupdate]
+gem 'groupdate'
+
+# Chart [https://chartkick.com]
+gem 'chartkick'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
