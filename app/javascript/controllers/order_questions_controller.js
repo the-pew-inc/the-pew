@@ -2,12 +2,14 @@ import { Controller } from "@hotwired/stimulus";
 
 // Connects to data-controller="order-questions"
 export default class extends Controller {
-  static targets = ["question"];
+  static targets = ["question", "tab"];
+  static classes = ["active", "inactive"];
   static values = { ordering: { type: String, default: "trending" } };
 
   connect() {
     this.listOfQuestions = [];
     this.connectObserver();
+    this.initTabs();
     this.update();
   }
 
@@ -40,19 +42,15 @@ export default class extends Controller {
 
     switch (this.orderingValue) {
       case "trending":
-        console.debug("We are in trending mode");
         this.trending();
         break;
       case "recent":
-        console.debug("We are in recent mode");
         this.sortByTimeNewToOld();
         break;
       case "oldies":
-        console.debug("We are in oldies mode");
         this.sortByTimeOldToNew();
         break;
       default:
-        console.debug("We are in trending mode, but by default");
         this.trending();
         break;
     }
@@ -115,8 +113,48 @@ export default class extends Controller {
   }
 
   refreshWithOrder(event) {
-    console.debug(event.params.order);
     this.orderingValue = event.params.order;
     this.update();
+    this.tabs.forEach((tab) => {
+      if (
+        tab.getAttribute("data-order-questions-order-param") ===
+          this.orderingValue &&
+        tab.ariaCurrent === "page"
+      ) {
+        // already active - do nothing just exit the loop
+        return;
+      }
+      if (
+        tab.getAttribute("data-order-questions-order-param") ===
+          this.orderingValue &&
+        tab.ariaCurrent !== "page"
+      ) {
+        // make active and keep looping till the end
+        tab.classList.remove(...this.inactiveClasses);
+        tab.classList.add(...this.activeClasses);
+        tab.setAttribute("aria-current", "page");
+      }
+      if (
+        tab.getAttribute("data-order-questions-order-param") !==
+          this.orderingValue &&
+        tab.ariaCurrent === "page"
+      ) {
+        // make inactive and keep looping till the end
+        tab.classList.remove(...this.activeClasses);
+        tab.classList.add(...this.inactiveClasses);
+        tab.setAttribute("aria-current", "none");
+      }
+    });
+  }
+
+  initTabs() {
+    this.tabs = this.tabTargets;
+    this.tabs.forEach((tab) => {
+      if (tab.ariaCurrent === "page") {
+        tab.classList.add(...this.activeClasses);
+      } else {
+        tab.classList.add(...this.inactiveClasses);
+      }
+    });
   }
 }
