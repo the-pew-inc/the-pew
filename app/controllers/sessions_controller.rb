@@ -50,7 +50,11 @@ class SessionsController < ApplicationController
       session[:user_id] = user.id
       after_login_path = session[:user_return_to] || root_path
       login(user)
-      redirect_to(after_login_path, notice: 'Signed in.')
+      if user.profile.nickname == nil
+        redirect_to edit_profile_path(user), notice: "Let the other know your name"
+      else
+        redirect_to(after_login_path, notice: 'Signed in.')
+      end
     else
       redirect_to(login_path, alert: 'There was an error while trying to authenticate you using Google.')
     end

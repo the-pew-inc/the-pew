@@ -5,7 +5,10 @@ class ProfilesController < ApplicationController
   def edit; end
 
   def update
-    if !@profile.update(profile_params)
+    if @profile.update(profile_params)
+      after_login_path = session[:user_return_to] || root_path
+      redirect_to(after_login_path, notice: 'Signed in.')
+    else
       render(:edit, status: :unprocessable_entity)
     end
   end
