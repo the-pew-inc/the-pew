@@ -89,7 +89,7 @@ class QuestionsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_question
-    @question = Question.find(params[:id])
+    @question = Question.find_by(id: params[:id])
   end
 
   def set_room

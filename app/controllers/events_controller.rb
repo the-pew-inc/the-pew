@@ -44,16 +44,16 @@ class EventsController < ApplicationController
   end
 
   def show
-    @event = Event.find(params[:id])
+    @event = Event.find_by(id: params[:id])
   end
 
   def edit
-    @event = Event.find(params[:id])
+    @event = Event.find_by(id: params[:id])
   end
 
   # GET /event/:id/stats
   def stats
-    @event = Event.find(params[:id])
+    @event = Event.find_by(id: params[:id])
     @questions = Question.where(room_id: @event.rooms.first.id).order(status: :desc).order(created_at: :desc)
     @count = @questions.count
     if @count > 0 
