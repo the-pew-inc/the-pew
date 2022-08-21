@@ -74,12 +74,12 @@ class SessionsController < ApplicationController
     user = User.find_by(uid: response[:uid], provider: response[:provider])
     if user
       # The user exists, so update the user's info
-      user.profile.nickname = response[:info][:name]
+      user.profile.nickname = response[:info][:name] || nil
     else
       # The user does not exist, so create a new user
       user = User.new(email: email, uid: response[:uid], provider: response[:provider])
       user.build_profile
-      user.profile.nickname = response[:info][:name]
+      user.profile.nickname = response[:info][:name] || nil
       user.password = SecureRandom.alphanumeric(16)
       if response[:info][:email_verified]
         user.confirmed = true
