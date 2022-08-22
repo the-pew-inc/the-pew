@@ -20,7 +20,8 @@ Rails.application.routes.draw do
   put 'account/:id/resend_confirmation', to: 'users#resend_confirmation', as: 'resend_confirmation'
 
   # User routes
-  resources :users, only: %i[create new ]
+  resources :users,     only: %i[create new ]
+  resources :profiles,  only: %i[update edit]
 
   # Session routes
   post 'login', to: 'sessions#create'

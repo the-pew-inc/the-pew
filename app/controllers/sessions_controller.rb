@@ -50,7 +50,11 @@ class SessionsController < ApplicationController
       session[:user_id] = user.id
       after_login_path = session[:user_return_to] || root_path
       login(user)
-      redirect_to(after_login_path, notice: 'Signed in.')
+      if user.profile.nickname == nil
+        redirect_to edit_profile_path(user), notice: "Let the other know your name"
+      else
+        redirect_to(after_login_path, notice: 'Signed in.')
+      end
     else
       redirect_to(login_path, alert: 'There was an error while trying to authenticate you using Google.')
     end
@@ -74,12 +78,12 @@ class SessionsController < ApplicationController
     user = User.find_by(uid: response[:uid], provider: response[:provider])
     if user
       # The user exists, so update the user's info
-      user.profile.nickname = response[:info][:name]
+      user.profile.nickname = response[:info][:name] || nil
     else
       # The user does not exist, so create a new user
       user = User.new(email: email, uid: response[:uid], provider: response[:provider])
       user.build_profile
-      user.profile.nickname = response[:info][:name]
+      user.profile.nickname = response[:info][:name] || nil
       user.password = SecureRandom.alphanumeric(16)
       if response[:info][:email_verified]
         user.confirmed = true

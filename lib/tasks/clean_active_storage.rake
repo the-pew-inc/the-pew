@@ -26,11 +26,23 @@ namespace :clean_active_storage do
   desc 'Remove files not associated with any blob'
   task :remove_orphan_files, [:dry_run] => :environment do |_t, args|
     include ActionView::Helpers::NumberHelper
+    require 'aws-sdk-s3'
+
     dry_run = true unless args.dry_run == 'false'
 
     puts("[#{Time.now.utc}] Running remove_orphan_files :: INI#{' (dry_run activated)' if dry_run}")
 
-    files = Dir['storage/??/??/*']
+    files = Dir['storage/??/??/*'] if Rails.env.development?
+    if Rails.env.production?
+      client = Aws::S3::Client.new(
+        access_key_id: ENV['DO_ACCESS_KEY_ID'],
+        secret_access_key: ENV['DO_SECRET_ACCESS_KEY'],
+        endpoint: ENV['DO_ENDPOINT'],
+        region: 'us-east-1'
+      )
+      files = client.list_objects({bucket: ENV['DO_BUCKET']}) 
+    end
+    
     orphan_files = files.select do |file|
       !ActiveStorage::Blob.exists?(key: File.basename(file))
     end
