@@ -8,12 +8,12 @@ GIT
 
 GIT
   remote: https://github.com/mperham/sidekiq.git
-  revision: 09dacfed8f3f0b42833122b138639d22c71e3d56
+  revision: b666a6d67f341bb6253d3f181efd5bd7454c628a
   specs:
-    sidekiq (6.5.5)
+    sidekiq (6.5.6)
       connection_pool (>= 2.2.2)
       rack (~> 2.0)
-      redis (>= 4.5.0)
+      redis (>= 4.5.0, < 5)
 
 GEM
   remote: https://rubygems.org/
@@ -100,7 +100,7 @@ GEM
     ast (2.4.2)
     aws-eventstream (1.2.0)
     aws-partitions (1.621.0)
-    aws-sdk-core (3.133.0)
+    aws-sdk-core (3.135.0)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.525.0)
       aws-sigv4 (~> 1.1)
@@ -448,4 +448,4 @@ RUBY VERSION
    ruby 3.1.2p20
 
 BUNDLED WITH
-   2.3.20
+   2.3.21
