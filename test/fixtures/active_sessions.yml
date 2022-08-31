@@ -2,6 +2,12 @@
 
 one:
   user: one
+  user_agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:103.0) Gecko/20100101 Firefox/103.0
+  ip_address: 192.168.1.1
+  remember_token: KbiDE4Lze1TkoCx1ek1nGaU6
 
 two:
   user: two
+  user_agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:103.0) Gecko/20100101 Firefox/103.0
+  ip_address: 192.168.1.2
+  remember_token: TN23ZBEzJDTu6wUUHyjBnLkh

@@ -5,7 +5,7 @@ class Account < ApplicationRecord
   # Tracking changes
   has_paper_trail
 
-  has_many :members
+  # has_many :members
   has_many :users,   through: :members
 
   has_one_attached :logo

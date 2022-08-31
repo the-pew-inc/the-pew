@@ -4,7 +4,6 @@
 ## CREDITS
 Logos [https://www.svgrepo.com/vectors/google/]
 
-
 Icons [https://heroicons.com/]
 
 ## LICENSE
@@ -23,8 +22,6 @@ TMP - Roles, permissions and assignments (+ pundit) [https://www.culttt.com/2016
 TMP - Turbo Stream [https://www.colby.so/posts/turbo-streams-on-rails]
 
 TMP - Good tutorial [https://www.hotrails.dev/]
-
-TMP - Conside Ahoy for analytics [https://github.com/ankane/ahoy]
 
 TMP - Rails on DO [https://www.digitalocean.com/community/tutorials/how-to-create-nested-resources-for-a-ruby-on-rails-application]
 

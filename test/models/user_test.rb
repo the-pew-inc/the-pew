@@ -2,7 +2,7 @@ require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
   def setup
-    @user = users(:first)
+    @user = users(:one)
   end
 
   %i[email password].each do |attr|
@@ -17,7 +17,7 @@ class UserTest < ActiveSupport::TestCase
     should have_many(:roles).through(:assignments)
   end
 
-  test 'user should have role' do
+  test "user should have role" do
     assert_not(@subject.role? :admin)
 
     @subject.roles << Role.new(name: 'admin')

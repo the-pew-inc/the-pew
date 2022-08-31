@@ -2,16 +2,20 @@
 
 one:
   name: Event number One
-  start_date: Time.current.utc
-  end_date: Time.current.utc + 1.day
+  start_date: <%= Time.current.utc %>
+  end_date: <%= Time.current.utc + 1.day %>
   duration: 1
   short_code: 123456
   user: one
+  event_type: universal
+  status: opened
 
 two:
   name: Super Event number two
-  start_date: Time.current.utc + 1.day
-  end_date: Time.current.utc + 2.day
+  start_date: <%= Time.current.utc + 1.day %>
+  end_date: <%= Time.current.utc + 2.day %>
   duration: 1
   short_code: 098765
   user: one
+  event_type: universal
+  status: opened

@@ -3,13 +3,13 @@
 one:
   recipient: one
   recipient_type: Recipient
-  type: 
+  type: alert
   params: 
   read_at: 2022-07-29 19:17:32
 
 two:
   recipient: two
   recipient_type: Recipient
-  type: 
+  type: alert
   params: 
   read_at: 2022-07-29 19:17:32

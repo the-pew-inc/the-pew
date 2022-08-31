@@ -6,7 +6,8 @@ class Room < ApplicationRecord
   has_paper_trail
 
   belongs_to :event
-  has_many   :questions, dependent: :destroy
+  has_many   :attendances, dependent: :destroy
+  has_many   :questions,  dependent: :destroy
 
   validates  :name, presence: true
 
