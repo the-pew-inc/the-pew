@@ -34,10 +34,10 @@
   </div>
   <div class="mt-1 flex flex-row justify-start items-center space-x-2 mb-6">
     <span class="bg-blue-100 text-blue-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800">
-      Created by <%= event_creator(@event)  %> <%= @event.created_at ? time_ago_in_words @event.created_at : @event.created_at.strftime("%Y %b %d at %l%P : %M") %> ago
+      Created by <%= event_creator(@event)  %> <%= (@event.created_at < 1.day.ago) ? "on " + @event.created_at.strftime("%Y %b %d at %l%P : %M") : (time_ago_in_words @event.created_at) + "ago" %>
     </span>
     <span class="bg-gray-100 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded mr-2 dark:bg-gray-700 dark:text-gray-300">
-      Last updated: <%= @event.updated_at %>
+      Last updated: <%= @event.updated_at.strftime("%Y %b %d at %l%P : %M") %>
     </span>
   </div>
   <div>
