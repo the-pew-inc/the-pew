@@ -110,11 +110,17 @@ class EventsController < ApplicationController
 
   # GET /event/:id/export
   def export
+    @event = Event.find(params[:id])
+    @room  = @event.rooms.first
 
-    @event = Question.find(params[:id])
+    @questions = Question.where(room_id: @room.id)
 
     respond_to do |format|
-      format.csv { send_data Question.to_csv(@event.id), filename: "event-#{DateTime.now.strftime("%d%m%Y%H%M")}.csv"}
+      format.xlsx {
+        response.headers[
+          'Content-Disposition'
+        ] = "attachment; filename=event-#{DateTime.now.strftime("%d%m%Y%H%M")}.xlsx"
+      }
     end
   end
 

@@ -39,3 +39,5 @@
 
 # Brakeman output
 output.html
+
+/config/credentials/test.key

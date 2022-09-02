@@ -1,0 +1,21 @@
+wb = xlsx_package.workbook
+
+wb.add_worksheet(name: "Questions") do |sheet|
+  # Create the header row
+  sheet.add_row ["Question", "Up votes", "Asked by", "email", "Created at", "Updated at", "Status", "Rejection Cause" ]
+  # Create entries for each item
+  @questions.each do |question|
+    sheet.add_row [question.title, question.up_votes, question.user.profile.nickname, question.user.email, question.created_at, question.updated_at, question.status, question.rejection_cause]
+  end
+end
+
+wb.add_worksheet(name: "Upvoters") do |sheet|
+  # Create the header row
+  sheet.add_row ["Question", "Up voter", "email" ]
+  # Create entries for each item
+  @questions.each do |question|
+    question.votes.each do |vote|
+      sheet.add_row [question.title, vote.user.profile.nickname, vote.user.email] if vote.up_vote?
+    end
+  end
+end

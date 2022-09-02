@@ -34,7 +34,7 @@ gem 'jbuilder'
 gem 'redis', '~> 4.0'
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
-gem 'kredis'
+# gem 'kredis'
 
 # Add Noticed to support notifications [https://github.com/excid3/noticed]
 gem "noticed", "~> 1.5"
@@ -49,6 +49,12 @@ gem 'view_component'
 # User authentication
 # Use Argon2 to hash passwords [https://github.com/technion/ruby-argon2]
 gem 'argon2', '~> 2.1.1'
+
+# Export to Excel
+# [https://github.com/caxlsx/caxlsx_rails]
+# [https://dev.to/yarotheslav/export-from-database-table-to-excel-workbook-level-1-55jd]
+gem 'caxlsx'
+gem 'caxlsx_rails'
 
 # Adding OAuth2 support [https://github.com/omniauth/omniauth]
 gem 'omniauth', '~> 2.1.0'

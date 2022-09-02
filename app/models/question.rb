@@ -47,20 +47,6 @@ class Question < ApplicationRecord
     Vote.where(votable_id: self.id).down_vote.sum(:choice)
   end
 
-  # Export question to CSV
-  require 'csv'
-  def self.to_csv(room_id)
-    attributes = %w{title email name created_at updated_at status rejection_cause}
-
-    questions = where(room_id: room_id).order(created_at: :desc)
-    CSV.generate(headers: true) do |csv|
-      csv << attributes
-      questions.each do |question|
-        csv << attributes.map{ |attr| question.send(attr) }
-      end
-    end
-  end
-
   def name
     if anonymous
       "User wished to remain anonymous"

@@ -10,7 +10,8 @@ class Event < ApplicationRecord
   before_validation :set_values
 
   belongs_to :user
-  has_many   :rooms, dependent: :destroy
+  has_many   :attendances, dependent: :destroy
+  has_many   :rooms,       dependent: :destroy
 
   has_one_attached :qr_code
 

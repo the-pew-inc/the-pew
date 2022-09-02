@@ -123,9 +123,11 @@ export default class extends Controller {
   initTabs() {
     this.tabs = this.tabTargets;
     this.tabs.forEach((tab) => {
-      if (tab.ariaCurrent === "page") {
+      if (tab.getAttribute("aria-current") === "page") {
+        console.debug("We found the current page");
         tab.classList.add(...this.activeClasses);
       } else {
+        console.debug("This is not the current page");
         tab.classList.add(...this.inactiveClasses);
       }
     });
@@ -136,7 +138,7 @@ export default class extends Controller {
       if (
         tab.getAttribute("data-order-questions-order-param") ===
           this.orderingValue &&
-        tab.ariaCurrent === "page"
+        tab.getAttribute("aria-current") === "page"
       ) {
         // already active - do nothing just exit the loop
         return;
@@ -144,7 +146,7 @@ export default class extends Controller {
       if (
         tab.getAttribute("data-order-questions-order-param") ===
           this.orderingValue &&
-        tab.ariaCurrent !== "page"
+        tab.getAttribute("aria-current") !== "page"
       ) {
         // make active and keep looping till the end
         tab.classList.remove(...this.inactiveClasses);
@@ -154,7 +156,7 @@ export default class extends Controller {
       if (
         tab.getAttribute("data-order-questions-order-param") !==
           this.orderingValue &&
-        tab.ariaCurrent === "page"
+        tab.getAttribute("aria-current") === "page"
       ) {
         // make inactive and keep looping till the end
         tab.classList.remove(...this.activeClasses);

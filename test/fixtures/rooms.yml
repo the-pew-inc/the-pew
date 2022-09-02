@@ -4,12 +4,16 @@ one:
   name: __default__
   event: one
   always_on: false
-  created_at: Time.current.utc
-  updated_at: Time.current.utc
+  allow_anonymous: false
+  start_date: <%= DateTime.now.utc %>
+  created_at: <%= Time.current.utc %>
+  updated_at: <%= Time.current.utc %>
 
 two:
   name: __default__
   event: two
   always_on: true
-  created_at: Time.current.utc
-  updated_at: Time.current.utc
+  allow_anonymous: true
+  start_date: <%= DateTime.now.utc %>
+  created_at: <%= Time.current.utc %>
+  updated_at: <%= Time.current.utc %>

@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/faker-ruby/faker.git
-  revision: 4b17b5c2e576c47ac6f7821b81f4c5529fc03a13
+  revision: d113aabf335ca0bbea2223a8136c2161b7f43659
   branch: master
   specs:
     faker (2.22.0)
@@ -8,7 +8,7 @@ GIT
 
 GIT
   remote: https://github.com/mperham/sidekiq.git
-  revision: fee07b40d3003d28ca51094fbae0116bef0ae60c
+  revision: 7656c350ce923f7aa9e3d25db4bd5e457cf78964
   specs:
     sidekiq (6.5.6)
       connection_pool (>= 2.2.5)
@@ -99,8 +99,8 @@ GEM
       ffi-compiler (~> 1.0)
     ast (2.4.2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.622.0)
-    aws-sdk-core (3.136.0)
+    aws-partitions (1.624.0)
+    aws-sdk-core (3.138.0)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.525.0)
       aws-sigv4 (~> 1.1)
@@ -128,6 +128,14 @@ GEM
       rack-test (>= 0.6.3)
       regexp_parser (>= 1.5, < 3.0)
       xpath (~> 3.2)
+    caxlsx (3.2.0)
+      htmlentities (~> 4.3, >= 4.3.4)
+      marcel (~> 1.0)
+      nokogiri (~> 1.10, >= 1.10.4)
+      rubyzip (>= 1.3.0, < 3)
+    caxlsx_rails (0.6.3)
+      actionpack (>= 3.1)
+      caxlsx (>= 3.0)
     chartkick (4.2.1)
     childprocess (4.1.0)
     chunky_png (1.4.0)
@@ -163,6 +171,7 @@ GEM
       activesupport (>= 5.2)
     hashie (5.0.0)
     honeybadger (4.12.2)
+    htmlentities (4.3.4)
     http (5.1.0)
       addressable (~> 2.8)
       http-cookie (~> 1.0)
@@ -187,9 +196,6 @@ GEM
       railties (>= 6.0.0)
     json (2.6.2)
     jwt (2.5.0)
-    kredis (1.2.0)
-      activesupport (>= 6.0.0)
-      redis (~> 4.2)
     llhttp-ffi (0.4.0)
       ffi-compiler (~> 1.0)
       rake (~> 13.0)
@@ -370,7 +376,7 @@ GEM
     validate_url (1.0.15)
       activemodel (>= 3.0.0)
       public_suffix
-    view_component (2.70.0)
+    view_component (2.71.0)
       activesupport (>= 5.0.0, < 8.0)
       concurrent-ruby (~> 1.0)
       method_source (~> 1.0)
@@ -403,6 +409,8 @@ DEPENDENCIES
   bootsnap
   brakeman
   capybara
+  caxlsx
+  caxlsx_rails
   chartkick
   countries (~> 5.1.0)
   cssbundling-rails
@@ -414,7 +422,6 @@ DEPENDENCIES
   image_processing (~> 1.2)
   jbuilder
   jsbundling-rails
-  kredis
   nokogiri (~> 1.13.6)
   noticed (~> 1.5)
   omniauth (~> 2.1.0)
