@@ -1,14 +1,14 @@
 GIT
   remote: https://github.com/faker-ruby/faker.git
-  revision: d113aabf335ca0bbea2223a8136c2161b7f43659
+  revision: f54db334a271b22121e54de77a3a231b5f3c4ca9
   branch: master
   specs:
-    faker (2.22.0)
+    faker (2.23.0)
       i18n (>= 1.8.11, < 2)
 
 GIT
   remote: https://github.com/mperham/sidekiq.git
-  revision: 7656c350ce923f7aa9e3d25db4bd5e457cf78964
+  revision: ea9c86ff5052fff310e83cf51d020771795bb4b6
   specs:
     sidekiq (6.5.6)
       connection_pool (>= 2.2.5)
@@ -99,8 +99,8 @@ GEM
       ffi-compiler (~> 1.0)
     ast (2.4.2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.624.0)
-    aws-sdk-core (3.138.0)
+    aws-partitions (1.626.0)
+    aws-sdk-core (3.140.0)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.525.0)
       aws-sigv4 (~> 1.1)
@@ -316,7 +316,7 @@ GEM
       chunky_png (~> 1.0)
       rqrcode_core (~> 1.0)
     rqrcode_core (1.2.0)
-    rubocop (1.35.1)
+    rubocop (1.36.0)
       json (~> 2.3)
       parallel (~> 1.10)
       parser (>= 3.1.2.1)
