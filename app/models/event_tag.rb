@@ -2,7 +2,6 @@ class EventTag < ApplicationRecord
   before_save :clean_tag_name
 
   belongs_to :account
-  belongs_to :user
   belongs_to :event
   belongs_to :room
 
