@@ -11,6 +11,7 @@
     "esbuild": "0.15.7",
     "flowbite": "1.5.3",
     "postcss": "8.4.16",
+    "taggle": "1.15.0",
     "tailwindcss": "3.1.8",
     "trix": "2.0.0-beta.0"
   },

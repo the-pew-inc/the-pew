@@ -666,6 +666,11 @@ supports-preserve-symlinks-flag@^1.0.0:
   resolved "https://registry.yarnpkg.com/supports-preserve-symlinks-flag/-/supports-preserve-symlinks-flag-1.0.0.tgz#6eda4bd344a3c94aea376d4cc31bc77311039e09"
   integrity sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==
 
+taggle@1.15.0:
+  version "1.15.0"
+  resolved "https://registry.yarnpkg.com/taggle/-/taggle-1.15.0.tgz#d2efb65872886ea199f39c19ddb4f30b5e205ae9"
+  integrity sha512-NW/9NcXj8ZYk1kBojNB9svp4XvpnsS03ryyMLJ6BiHrbDtnL5x1Kf1ASlKsJvnp1bQNuulppo2xQtieu0Qh1yg==
+
 tailwindcss@3.1.8:
   version "3.1.8"
   resolved "https://registry.yarnpkg.com/tailwindcss/-/tailwindcss-3.1.8.tgz#4f8520550d67a835d32f2f4021580f9fddb7b741"
