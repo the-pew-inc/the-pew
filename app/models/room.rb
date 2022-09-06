@@ -7,7 +7,8 @@ class Room < ApplicationRecord
 
   belongs_to :event
   has_many   :attendances, dependent: :destroy
-  has_many   :questions,  dependent: :destroy
+  has_many   :questions,   dependent: :destroy
+  has_many   :tags,        dependent: :destroy
 
   validates  :name, presence: true
 
