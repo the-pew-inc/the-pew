@@ -6,9 +6,10 @@ class User < ApplicationRecord
   attr_accessor :current_password
 
   # Callbacks
-  after_create :send_confirmation_email!
-  before_save  :downcase_email, if: :will_save_change_to_email?
-  before_save  :generate_password_digest
+  after_create  :create_and_attach_to_default_account
+  after_create  :send_confirmation_email!
+  before_save   :downcase_email, if: :will_save_change_to_email?
+  before_save   :generate_password_digest
 
   # Mailer configuration
   MAILER_FROM_EMAIL = 'ThePew no-reply@thepew.io'
@@ -76,6 +77,18 @@ class User < ApplicationRecord
     send_confirmation_email!
     self.confirmed = false
     self.confirmed_at = nil
+  end
+
+  def create_and_attach_to_default_account
+    # Creating a default account
+    # TODO: connect users to existing account via SSO or other mechanisms to support invitation
+    @account = Account.create({name: '__default__'})
+
+    # Attach user to the default account
+    @member = Member.new()
+    @member.user = self
+    @member.account = @account
+    @member.save
   end
   
 end
