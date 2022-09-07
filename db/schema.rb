@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_18_005240) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_07_192723) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -130,6 +130,19 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_18_005240) do
     t.index ["user_id"], name: "index_attendances_on_user_id"
   end
 
+  create_table "event_tags", force: :cascade do |t|
+    t.bigint "account_id", null: false
+    t.bigint "event_id", null: false
+    t.bigint "room_id", null: false
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_event_tags_on_account_id"
+    t.index ["event_id"], name: "index_event_tags_on_event_id"
+    t.index ["name"], name: "index_event_tags_on_name"
+    t.index ["room_id"], name: "index_event_tags_on_room_id"
+  end
+
   create_table "events", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "name", null: false
@@ -202,7 +215,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_18_005240) do
     t.datetime "updated_at", null: false
     t.boolean "anonymous", default: false, null: false
     t.integer "rejection_cause"
+    t.bigint "parent_id"
     t.index ["anonymous"], name: "index_questions_on_anonymous"
+    t.index ["parent_id"], name: "index_questions_on_parent_id"
     t.index ["rejection_cause"], name: "index_questions_on_rejection_cause"
     t.index ["room_id"], name: "index_questions_on_room_id"
     t.index ["status"], name: "index_questions_on_status"
@@ -291,6 +306,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_18_005240) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "attendances", "events"
   add_foreign_key "attendances", "users"
+  add_foreign_key "event_tags", "accounts"
+  add_foreign_key "event_tags", "events"
+  add_foreign_key "event_tags", "rooms"
   add_foreign_key "events", "users"
   add_foreign_key "members", "accounts"
   add_foreign_key "members", "users"
