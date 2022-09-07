@@ -98,7 +98,7 @@ class QuestionsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def create_question_params
-    params.require(:question).permit(:title, :anonymous).with_defaults(user_id: current_user.id)
+    params.require(:question).permit(:title, :anonymous, :parent_id).with_defaults(user_id: current_user.id)
   end
 
   def update_question_params 
@@ -122,7 +122,7 @@ class QuestionsController < ApplicationController
     end
 
     # Hide the user (id and name)
-    if @question.anonymous 
+    if @question.anonymous
       question[:public_user_id] = nil
       question[:public_nickname] = nil
     else
