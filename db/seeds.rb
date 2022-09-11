@@ -68,6 +68,21 @@ p "Generating a set of random events with default room & questions"
 
     question.save!
 
+    # Adding a nested question (aka nested question)
+    nested_question = Question.new(
+      room: question.room,
+      user: users.sample,
+      title: Faker::Books::Dune.quote.truncate(250, separator: /\s/),
+      status: Question.statuses.to_a.sample[1],
+      parent_id: question.id
+    )
+
+    if nested_question.rejected?
+      nested_question.rejection_cause = Question.rejection_causes.to_a.sample[1]
+    end
+
+    nested_question.save!
+
   end
 
   print '.'
