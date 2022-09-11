@@ -436,7 +436,7 @@ DEPENDENCIES
   pg (~> 1.4)
   puma (~> 5.0)
   pundit
-  rails (~> 7.0.3)
+  rails (~> 7.0.4)
   redis (~> 4.0)
   rolify (~> 6.0.0)
   rqrcode (~> 2.0)
