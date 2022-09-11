@@ -12,6 +12,11 @@ class Question < ApplicationRecord
   belongs_to :room
   has_many   :votes, as: :votable, dependent: :destroy
 
+  # Self-reference
+  # Used to nest questions
+  belongs_to :parent, optional: true, class_name: "Question"
+  has_many   :questions, foreign_key: :parent_id, dependent: :destroy
+
   validates :title, presence: true, length: { minimum: 3, maximum: 250 }
 
   enum status: {
