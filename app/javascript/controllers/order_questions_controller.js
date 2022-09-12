@@ -89,14 +89,14 @@ export default class extends Controller {
     });
   }
 
-  sortByTimeOldToNew() {
+  sortByTimeNewToOld() {
     this.listOfQuestions.sort((a, b) => {
       if (a.id < b.id) return -1;
       if (a.id > b.id) return 1;
     });
   }
 
-  sortByTimeNewToOld() {
+  sortByTimeOldToNew() {
     this.listOfQuestions.sort((a, b) => {
       if (a.id < b.id) return 1;
       if (a.id > b.id) return -1;
