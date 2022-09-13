@@ -8,7 +8,7 @@ GIT
 
 GIT
   remote: https://github.com/mperham/sidekiq.git
-  revision: 1096df58a4f428d12b4b002f8f845f604073fdb1
+  revision: fafefc4a4793baa5984facef049455a50e10aaf8
   specs:
     sidekiq (6.5.6)
       connection_pool (>= 2.2.5)
@@ -100,7 +100,7 @@ GEM
     ast (2.4.2)
     aws-eventstream (1.2.0)
     aws-partitions (1.628.0)
-    aws-sdk-core (3.144.0)
+    aws-sdk-core (3.145.0)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.525.0)
       aws-sigv4 (~> 1.1)
