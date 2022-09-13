@@ -79,12 +79,10 @@ export default class extends Controller {
 
   trending() {
     this.listOfQuestions.sort((a, b) => {
-      if (a.upvotes < b.upvotes) return 1;
-      if (a.upvotes > b.upvotes) return -1;
       if (a.upvotes == b.upvotes) {
-        if (a.id < b.id) return -1;
+        return b.id - a.id;
       } else {
-        return 1;
+        return b.upvotes - a.upvotes;
       }
     });
   }
