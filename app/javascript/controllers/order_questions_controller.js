@@ -91,15 +91,13 @@ export default class extends Controller {
 
   sortByTimeNewToOld() {
     this.listOfQuestions.sort((a, b) => {
-      if (a.id < b.id) return -1;
-      if (a.id > b.id) return 1;
+      return b.id - a.id;
     });
   }
 
   sortByTimeOldToNew() {
     this.listOfQuestions.sort((a, b) => {
-      if (a.id < b.id) return 1;
-      if (a.id > b.id) return -1;
+      return a.id - b.id;
     });
   }
 
@@ -124,10 +122,8 @@ export default class extends Controller {
     this.tabs = this.tabTargets;
     this.tabs.forEach((tab) => {
       if (tab.getAttribute("aria-current") === "page") {
-        console.debug("We found the current page");
         tab.classList.add(...this.activeClasses);
       } else {
-        console.debug("This is not the current page");
         tab.classList.add(...this.inactiveClasses);
       }
     });

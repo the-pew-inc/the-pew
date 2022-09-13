@@ -69,18 +69,18 @@ class Question < ApplicationRecord
   end
 
   after_create_commit do
-    broadcast_prepend_later_to [self.room_id, :questions], target: "questions", partial: "questions/question_frame", locals: { question: self } if Current.user
-    broadcast_update_later_to  [self.room_id, :questions], target: "question_counter", html: Question.approved_questions_for_room(self.room_id).count if (self.approved? || self.answered?)
+    broadcast_prepend_later_to self.room_id, target: "questions", partial: "questions/question_frame", locals: { question: self } if Current.user
+    broadcast_update_later_to  self.room_id, target: "question_counter", html: Question.approved_questions_for_room(self.room_id).count if (self.approved? || self.answered?)
   end
 
   after_update_commit do
-    broadcast_update_later_to [self.room_id, :questions], target: self, partial: "questions/question_frame", locals: { question: self }
-    broadcast_update_later_to [self.room_id, :questions], target: "question_counter", html: Question.approved_questions_for_room(self.room_id).count if (self.approved? || self.answered?)
+    broadcast_update_later_to self.room_id, target: self, partial: "questions/question_frame", locals: { question: self }
+    broadcast_update_later_to self.room_id, target: "question_counter", html: Question.approved_questions_for_room(self.room_id).count if (self.approved? || self.answered?)
   end
 
   after_destroy_commit do
-    broadcast_update_to [self.room_id, :questions], target: "question_counter", html: Question.approved_questions_for_room(self.room_id).count
-    broadcast_remove_to [self.room_id, :questions], target: self
+    broadcast_update_to self.room_id, target: "question_counter", html: Question.approved_questions_for_room(self.room_id).count
+    broadcast_remove_to self.room_id, target: self
   end
 
 end
