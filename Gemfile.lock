@@ -8,7 +8,7 @@ GIT
 
 GIT
   remote: https://github.com/mperham/sidekiq.git
-  revision: fafefc4a4793baa5984facef049455a50e10aaf8
+  revision: d11c9c09f25a05db3d7bcf83a2e18d6b30007b51
   specs:
     sidekiq (6.5.6)
       connection_pool (>= 2.2.5)
@@ -99,8 +99,8 @@ GEM
       ffi-compiler (~> 1.0)
     ast (2.4.2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.629.0)
-    aws-sdk-core (3.146.0)
+    aws-partitions (1.630.0)
+    aws-sdk-core (3.147.0)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.525.0)
       aws-sigv4 (~> 1.1)
@@ -199,7 +199,7 @@ GEM
     llhttp-ffi (0.4.0)
       ffi-compiler (~> 1.0)
       rake (~> 13.0)
-    loofah (2.18.0)
+    loofah (2.19.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     mail (2.7.1)
@@ -375,12 +375,12 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.8.2)
-    unicode-display_width (2.2.0)
+    unicode-display_width (2.3.0)
     validate_url (1.0.15)
       activemodel (>= 3.0.0)
       public_suffix
     version_gem (1.1.0)
-    view_component (2.71.0)
+    view_component (2.72.0)
       activesupport (>= 5.0.0, < 8.0)
       concurrent-ruby (~> 1.0)
       method_source (~> 1.0)
