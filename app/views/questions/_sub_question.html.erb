@@ -1,6 +1,6 @@
 <%= turbo_frame_tag dom_id(question) do %>
   <% if question.approved? || question.answered?  || current_user&.id == question.user_id || ( current_user&.has_role? :admin, question.room ) %>
-    <div class="p-2 border-l-2 dark:border-red-500 border-red-300 hover:bg-slate-50 dark:hover:bg-slate-50/5 mb-2" data-empty-state-target="item" data-order-questions-target="sub-question" data-sub-question-id="<%= question.id %>" data-parent-id="<%= question.parent_id %>">
+    <div class="p-2 border-l-2 dark:border-slate-500 border-slate-300 hover:bg-slate-50 dark:hover:bg-slate-50/5 mb-2" data-empty-state-target="item" data-order-questions-target="sub-question" data-sub-question-id="<%= question.id %>" data-parent-id="<%= question.parent_id %>">
       <div class="flex flex-row justify-between">
         <div class="flex flex-col space-y-1 justify-start">
           <div class="flex flex-row justify-start items-center space-x-4">
