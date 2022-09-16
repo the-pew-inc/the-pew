@@ -36,6 +36,7 @@ class Question < ApplicationRecord
 
   scope :questions_for_room, -> (room) { where('room_id = ? AND parent_id IS NULL', room) }
   scope :approved_questions_for_room, -> (room) { where('room_id = ?', room).approved.or(where('room_id = ?', room).answered) }
+  scope :asked_questions_for_room, -> (room) { where('room_id = ?', room).asked }
 
   # This is the sum of +1 and -1
   def vote_count
@@ -71,14 +72,17 @@ class Question < ApplicationRecord
   after_create_commit do
     broadcast_prepend_later_to self.room_id, target: "questions", partial: "questions/question_frame", locals: { question: self } if Current.user
     broadcast_update_later_to  self.room_id, target: "question_counter", html: Question.approved_questions_for_room(self.room_id).count if (self.approved? || self.answered?)
+    broadcast_update_later_to  self.room_id, target: "asked_question_counter", html: Question.asked_questions_for_room(self.room_id).count
   end
 
   after_update_commit do
     broadcast_update_later_to self.room_id, target: self, partial: "questions/question_frame", locals: { question: self }
     broadcast_update_later_to self.room_id, target: "question_counter", html: Question.approved_questions_for_room(self.room_id).count if (self.approved? || self.answered?)
+    broadcast_update_later_to self.room_id, target: "asked_question_counter", html: Question.asked_questions_for_room(self.room_id).count
   end
 
   after_destroy_commit do
+    broadcast_update_to self.room_id, target: "asked_question_counter", html: Question.asked_questions_for_room(self.room_id).count
     broadcast_update_to self.room_id, target: "question_counter", html: Question.approved_questions_for_room(self.room_id).count
     broadcast_remove_to self.room_id, target: self
   end
