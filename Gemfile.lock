@@ -1,19 +1,10 @@
 GIT
   remote: https://github.com/faker-ruby/faker.git
-  revision: a4b077f0902df0d553c9dd192867f5379492cd5b
+  revision: d5c5c00f9e6ea5c5fd0d5ece21c45a03693e4f77
   branch: master
   specs:
     faker (2.23.0)
       i18n (>= 1.8.11, < 2)
-
-GIT
-  remote: https://github.com/mperham/sidekiq.git
-  revision: e2f92e8279d1947aa45eb86acc73f9ebe7a92c9c
-  specs:
-    sidekiq (6.5.6)
-      connection_pool (>= 2.2.5)
-      rack (~> 2.0)
-      redis (>= 4.5.0, < 5)
 
 GEM
   remote: https://rubygems.org/
@@ -99,8 +90,8 @@ GEM
       ffi-compiler (~> 1.0)
     ast (2.4.2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.631.0)
-    aws-sdk-core (3.149.0)
+    aws-partitions (1.632.0)
+    aws-sdk-core (3.150.0)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.525.0)
       aws-sigv4 (~> 1.1)
@@ -140,7 +131,6 @@ GEM
     childprocess (4.1.0)
     chunky_png (1.4.0)
     concurrent-ruby (1.1.10)
-    connection_pool (2.3.0)
     countries (5.1.2)
       sixarm_ruby_unaccent (~> 1.1)
     crass (1.0.6)
@@ -445,7 +435,6 @@ DEPENDENCIES
   ruby-vips (>= 2.1.0)
   selenium-webdriver
   sendgrid-actionmailer (~> 3.2.0)
-  sidekiq!
   sprockets-rails
   stimulus-rails
   turbo-rails
