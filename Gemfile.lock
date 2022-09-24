@@ -346,9 +346,9 @@ GEM
       rack (~> 2.0)
       redis (>= 4.5.0, < 5)
     sixarm_ruby_unaccent (1.2.0)
-    snaky_hash (2.0.0)
+    snaky_hash (2.0.1)
       hashie
-      version_gem (~> 1.1)
+      version_gem (~> 1.1, >= 1.1.1)
     sprockets (4.1.1)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
