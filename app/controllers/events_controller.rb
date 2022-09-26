@@ -69,13 +69,13 @@ class EventsController < ApplicationController
     respond_to do |format|
       if @event.update(update_event_params)
         # Update the default room (if it exists)
-        @room = Room.where(event_id: @event.id, name: '__default__')
+        @room = Room.where(event_id: @event.id, name: '__default__').first
         if @room
-          @room.always_on = create_event_params[:always_on]
-          @room.allow_anonymous = create_event_params[:allow_anonymous]
+          @room.always_on = update_event_params[:always_on]
+          @room.allow_anonymous = update_event_params[:allow_anonymous]
           @room.start_date = @event.start_date
 
-          if @room.update
+          if @room.save
             format.turbo_stream
           else 
             render :edit, status: :unprocessable_entity
@@ -168,7 +168,7 @@ class EventsController < ApplicationController
   private
 
   def create_event_params
-    params.require(:event).permit(:user_id, :name, :start_date, :stop_date, :event_type, :status, :always_on, :allow_anonymous)
+    params.require(:event).permit(:name, :start_date, :stop_date, :event_type, :status, :always_on, :allow_anonymous)
   end
 
   def update_event_params
