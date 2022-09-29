@@ -202,7 +202,7 @@ GEM
     minitest (5.16.3)
     msgpack (1.5.6)
     multi_xml (0.6.0)
-    net-imap (0.3.0)
+    net-imap (0.3.1)
       net-protocol
     net-pop (0.1.2)
       net-protocol
@@ -324,7 +324,7 @@ GEM
     rubyzip (2.3.2)
     safely_block (0.3.0)
       errbase (>= 0.1.1)
-    selenium-webdriver (4.4.0)
+    selenium-webdriver (4.5.0)
       childprocess (>= 0.5, < 5.0)
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
@@ -367,7 +367,7 @@ GEM
       activemodel (>= 3.0.0)
       public_suffix
     version_gem (1.1.1)
-    view_component (2.73.0)
+    view_component (2.74.0)
       activesupport (>= 5.0.0, < 8.0)
       concurrent-ruby (~> 1.0)
       method_source (~> 1.0)
