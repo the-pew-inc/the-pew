@@ -132,7 +132,7 @@ group :development, :test do
   gem 'debug', platforms: %i[mri mingw x64_mingw]
 
   # Faker, gem for generating fake data for testing [https://github.com/faker-ruby/faker]
-  gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
+  gem 'faker', :git => 'https://github.com/faker-ruby/faker.git'
 end
 
 group :development do
