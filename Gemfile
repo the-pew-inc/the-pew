@@ -97,7 +97,7 @@ gem 'down', '~> 5.0'
 gem 'paper_trail'
 
 # Active storage validations [https://github.com/igorkasyanchuk/active_storage_validations]
-gem 'active_storage_validations', '~> 0.9.8'
+gem 'active_storage_validations', '~> 1.0.0'
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 gem 'image_processing', '~> 1.2'
