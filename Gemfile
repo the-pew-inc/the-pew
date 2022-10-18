@@ -82,7 +82,7 @@ gem 'sidekiq', '6.5.7'
 # gem 'sidekiq', git: 'https://github.com/mperham/sidekiq.git'
 
 # Monitoring - Honeybadger []
-gem 'honeybadger', '~> 4.0'
+gem 'honeybadger', '~> 5.0'
 
 # Use Sass to process CSS
 # gem "sassc-rails"

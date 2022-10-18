@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/faker-ruby/faker.git
-  revision: 01b0270b02e40e48919bb77612979b54eeb70004
+  revision: c9532219a839ee8e760901a9f0ca736ddf92e33e
   specs:
     faker (2.23.0)
       i18n (>= 1.8.11, < 2)
@@ -89,8 +89,8 @@ GEM
       ffi-compiler (~> 1.0)
     ast (2.4.2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.646.0)
-    aws-sdk-core (3.160.0)
+    aws-partitions (1.647.0)
+    aws-sdk-core (3.161.0)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.525.0)
       aws-sigv4 (~> 1.1)
@@ -159,7 +159,7 @@ GEM
     groupdate (6.1.0)
       activesupport (>= 5.2)
     hashie (5.0.0)
-    honeybadger (4.12.2)
+    honeybadger (5.0.0)
     htmlentities (4.3.4)
     http (5.1.0)
       addressable (~> 2.8)
@@ -210,9 +210,9 @@ GEM
     net-smtp (0.3.2)
       net-protocol
     nio4r (2.5.8)
-    nokogiri (1.13.8-arm64-darwin)
+    nokogiri (1.13.9-arm64-darwin)
       racc (~> 1.4)
-    nokogiri (1.13.8-x86_64-linux)
+    nokogiri (1.13.9-x86_64-linux)
       racc (~> 1.4)
     noticed (1.6.0)
       http (>= 4.0.0)
@@ -408,7 +408,7 @@ DEPENDENCIES
   down (~> 5.0)
   faker!
   groupdate
-  honeybadger (~> 4.0)
+  honeybadger (~> 5.0)
   image_processing (~> 1.2)
   jbuilder
   jsbundling-rails
