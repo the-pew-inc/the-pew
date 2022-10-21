@@ -227,9 +227,9 @@ GEM
       net-protocol
       timeout
     nio4r (2.5.8)
-    nokogiri (1.13.8-arm64-darwin)
+    nokogiri (1.13.9-arm64-darwin)
       racc (~> 1.4)
-    nokogiri (1.13.8-x86_64-linux)
+    nokogiri (1.13.9-x86_64-linux)
       racc (~> 1.4)
     noticed (1.5.9)
       http (>= 4.0.0)
@@ -426,7 +426,7 @@ DEPENDENCIES
   image_processing (~> 1.2)
   jbuilder
   jsbundling-rails
-  nokogiri (~> 1.13.6)
+  nokogiri (~> 1.13.9)
   noticed (~> 1.5)
   omniauth (~> 2.1.0)
   omniauth-google-oauth2 (~> 1.1.1)
