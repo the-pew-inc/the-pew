@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/faker-ruby/faker.git
-  revision: b0bfcc559c9c17583e38dd4e0c4c059402ca624a
+  revision: adda481ac5bbc7f79893fb09de0f52bcb6099ba5
   specs:
     faker (2.23.0)
       i18n (>= 1.8.11, < 2)
@@ -89,7 +89,7 @@ GEM
       ffi-compiler (~> 1.0)
     ast (2.4.2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.653.0)
+    aws-partitions (1.654.0)
     aws-sdk-core (3.166.0)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.651.0)
@@ -288,7 +288,7 @@ GEM
     rainbow (3.1.1)
     rake (13.0.6)
     redis (4.8.0)
-    redis-client (0.10.0)
+    redis-client (0.11.0)
       connection_pool
     regexp_parser (2.6.0)
     reline (0.3.1)
@@ -301,7 +301,7 @@ GEM
       chunky_png (~> 1.0)
       rqrcode_core (~> 1.0)
     rqrcode_core (1.2.0)
-    rubocop (1.37.1)
+    rubocop (1.38.0)
       json (~> 2.3)
       parallel (~> 1.10)
       parser (>= 3.1.2.1)
@@ -388,7 +388,7 @@ GEM
     websocket-extensions (0.1.5)
     xpath (3.2.0)
       nokogiri (~> 1.8)
-    zeitwerk (2.6.2)
+    zeitwerk (2.6.3)
 
 PLATFORMS
   arm64-darwin-21
