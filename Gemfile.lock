@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/faker-ruby/faker.git
-  revision: adda481ac5bbc7f79893fb09de0f52bcb6099ba5
+  revision: c65641266132868410e80336ede27f87f14829ef
   specs:
     faker (2.23.0)
       i18n (>= 1.8.11, < 2)
@@ -388,7 +388,7 @@ GEM
     websocket-extensions (0.1.5)
     xpath (3.2.0)
       nokogiri (~> 1.8)
-    zeitwerk (2.6.3)
+    zeitwerk (2.6.4)
 
 PLATFORMS
   arm64-darwin-21
