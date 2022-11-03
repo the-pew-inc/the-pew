@@ -1,8 +1,8 @@
 GIT
   remote: https://github.com/faker-ruby/faker.git
-  revision: c65641266132868410e80336ede27f87f14829ef
+  revision: 32fcc145106e52e4dd3764c5a695d291071a118f
   specs:
-    faker (2.23.0)
+    faker (3.0.0)
       i18n (>= 1.8.11, < 2)
 
 GEM
@@ -89,7 +89,7 @@ GEM
       ffi-compiler (~> 1.0)
     ast (2.4.2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.654.0)
+    aws-partitions (1.655.0)
     aws-sdk-core (3.166.0)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.651.0)
@@ -369,7 +369,7 @@ GEM
       activemodel (>= 3.0.0)
       public_suffix
     version_gem (1.1.1)
-    view_component (2.74.1)
+    view_component (2.75.0)
       activesupport (>= 5.0.0, < 8.0)
       concurrent-ruby (~> 1.0)
       method_source (~> 1.0)
@@ -448,4 +448,4 @@ RUBY VERSION
    ruby 3.1.2p20
 
 BUNDLED WITH
-   2.3.24
+   2.3.25
