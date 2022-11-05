@@ -79,7 +79,7 @@ gem 'sendgrid-actionmailer', '~> 3.2.0'
 
 # Sidekiq [https://github.com/mperham/sidekiq]
 # gem 'sidekiq', '6.5.7'
-gem 'sidekiq', '7.0.0'
+gem 'sidekiq', '~>7.0.0'
 # gem 'sidekiq', git: 'https://github.com/mperham/sidekiq.git'
 
 # Monitoring - Honeybadger []
@@ -113,7 +113,7 @@ gem 'rqrcode', '~> 2.0'
 gem 'pagy', '~> 5.10.1'
 
 # Countries [https://github.com/countries/countries]
-gem 'countries', '~> 5.1.0', require: 'countries/global'
+gem 'countries', '~> 5.2.0', require: 'countries/global'
 
 # Validate URL format [https://github.com/perfectline/validates_url]
 gem 'validate_url'
