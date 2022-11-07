@@ -89,7 +89,7 @@ GEM
       ffi-compiler (~> 1.0)
     ast (2.4.2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.655.0)
+    aws-partitions (1.656.0)
     aws-sdk-core (3.166.0)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.651.0)
@@ -131,8 +131,8 @@ GEM
     chunky_png (1.4.0)
     concurrent-ruby (1.1.10)
     connection_pool (2.3.0)
-    countries (5.1.2)
-      sixarm_ruby_unaccent (~> 1.1)
+    countries (5.2.0)
+      unaccent (~> 0.3)
     crass (1.0.6)
     cssbundling-rails (1.1.1)
       railties (>= 6.0.0)
@@ -335,12 +335,11 @@ GEM
       sendgrid-ruby (~> 6.4)
     sendgrid-ruby (6.6.2)
       ruby_http_client (~> 3.4)
-    sidekiq (7.0.0)
+    sidekiq (7.0.1)
       concurrent-ruby (< 2)
       connection_pool (>= 2.3.0)
       rack (>= 2.2.4)
       redis-client (>= 0.9.0)
-    sixarm_ruby_unaccent (1.2.0)
     snaky_hash (2.0.1)
       hashie
       version_gem (~> 1.1, >= 1.1.1)
@@ -361,6 +360,7 @@ GEM
       railties (>= 6.0.0)
     tzinfo (2.0.5)
       concurrent-ruby (~> 1.0)
+    unaccent (0.4.0)
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.8.2)
@@ -405,7 +405,7 @@ DEPENDENCIES
   caxlsx
   caxlsx_rails
   chartkick
-  countries (~> 5.1.0)
+  countries (~> 5.2.0)
   cssbundling-rails
   debug
   down (~> 5.0)
@@ -434,7 +434,7 @@ DEPENDENCIES
   ruby-vips (>= 2.1.0)
   selenium-webdriver
   sendgrid-actionmailer (~> 3.2.0)
-  sidekiq (= 7.0.0)
+  sidekiq (~> 7.0.0)
   sprockets-rails
   stimulus-rails
   turbo-rails
