@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/faker-ruby/faker.git
-  revision: f13bd44b5a914c4435f475a94f70f41974ed8f8c
+  revision: 97af5a0f093138e717819e0df998ddd0cdb95d28
   specs:
     faker (3.0.0)
       i18n (>= 1.8.11, < 2)
@@ -89,7 +89,7 @@ GEM
       ffi-compiler (~> 1.0)
     ast (2.4.2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.659.0)
+    aws-partitions (1.660.0)
     aws-sdk-core (3.167.0)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.651.0)
@@ -149,7 +149,7 @@ GEM
     faraday (2.6.0)
       faraday-net_http (>= 2.0, < 3.1)
       ruby2_keywords (>= 0.0.4)
-    faraday-net_http (3.0.1)
+    faraday-net_http (3.0.2)
     ffi (1.15.5)
     ffi-compiler (1.0.1)
       ffi (>= 1.0.0)
@@ -255,7 +255,7 @@ GEM
       activesupport (>= 3.0.0)
     racc (1.6.0)
     rack (2.2.4)
-    rack-protection (3.0.2)
+    rack-protection (3.0.3)
       rack
     rack-test (2.0.2)
       rack (>= 1.3)
