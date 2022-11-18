@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/faker-ruby/faker.git
-  revision: d8b50a4cca2850c85d170b18744964f3a283304b
+  revision: 222b8e72d01e196b7746432cc87eecedb573db1b
   specs:
     faker (3.0.0)
       i18n (>= 1.8.11, < 2)
@@ -105,9 +105,9 @@ GEM
     aws-sigv4 (1.5.2)
       aws-eventstream (~> 1, >= 1.0.2)
     bindex (0.8.1)
-    bootsnap (1.13.0)
+    bootsnap (1.14.0)
       msgpack (~> 1.2)
-    brakeman (5.3.1)
+    brakeman (5.4.0)
     builder (3.2.4)
     capybara (3.38.0)
       addressable
@@ -146,7 +146,7 @@ GEM
       addressable (~> 2.8)
     errbase (0.2.2)
     erubi (1.11.0)
-    faraday (2.7.0)
+    faraday (2.7.1)
       faraday-net_http (>= 2.0, < 3.1)
       ruby2_keywords (>= 0.0.4)
     faraday-net_http (3.0.2)
@@ -288,7 +288,7 @@ GEM
     rainbow (3.1.1)
     rake (13.0.6)
     redis (4.8.0)
-    redis-client (0.11.1)
+    redis-client (0.11.2)
       connection_pool
     regexp_parser (2.6.1)
     reline (0.3.1)
