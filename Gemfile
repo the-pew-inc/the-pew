@@ -3,9 +3,9 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.1.2'
 
-# This must be the first gem listed
-
-gem 'appmap', :groups => [:development, :test]
+# IMPORTANT: This must be the first gem listed
+# Add support to appmap in development and test
+gem 'appmap', groups: %i[development test]
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem 'rails', '~> 7.0.3'
