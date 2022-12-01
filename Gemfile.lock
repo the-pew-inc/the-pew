@@ -84,6 +84,11 @@ GEM
       activesupport (>= 5.2)
       device_detector
       safely_block (>= 0.2.1)
+    appmap (0.94.1)
+      activesupport
+      method_source
+      rack
+      reverse_markdown
     argon2 (2.1.2)
       ffi (~> 1.14)
       ffi-compiler (~> 1.0)
@@ -295,6 +300,8 @@ GEM
       io-console (~> 0.5)
     request_store (1.5.1)
       rack (>= 1.4)
+    reverse_markdown (2.1.1)
+      nokogiri
     rexml (3.2.5)
     rolify (6.0.0)
     rqrcode (2.1.2)
@@ -397,6 +404,7 @@ PLATFORMS
 DEPENDENCIES
   active_storage_validations (~> 1.0.0)
   ahoy_matey
+  appmap
   argon2 (~> 2.1.1)
   aws-sdk-s3
   bootsnap
