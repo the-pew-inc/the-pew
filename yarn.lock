@@ -718,10 +718,10 @@ to-regex-range@^5.0.1:
   dependencies:
     is-number "^7.0.0"
 
-trix@2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/trix/-/trix-2.0.1.tgz#d4ade25250ecf3437ea8a3d8b8873e6be028cb14"
-  integrity sha512-oK3vGoI7dIXXc8dGoLWvQDWP2ZmxjxHiyy+ZGTkRvYL91u6Tl6YPdRR7l0aunt9qAivn7NnTqmUf+eF0ZI8D+g==
+trix@2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/trix/-/trix-2.0.2.tgz#0efb24fd3e047f209d13883abc2f2989e1c7d547"
+  integrity sha512-AecwSri5xwptYiaYgk+nNQAlsAhv8R/u3+T06eB50LoZir4tsa6No4PRVQHj92X0WI/lXAO6JCu19AmFUhOQNw==
 
 update-browserslist-db@^1.0.9:
   version "1.0.10"
