@@ -8,13 +8,13 @@
     "autoprefixer": "10.4.13",
     "chart.js": "4.0.1",
     "chartkick": "4.2.0",
-    "esbuild": "0.15.14",
+    "esbuild": "0.15.18",
     "flowbite": "1.5.4",
     "postcss": "8.4.19",
     "stimulus-autocomplete": "3.0.2",
     "taggle": "1.15.0",
     "tailwindcss": "3.2.4",
-    "trix": "2.0.2"
+    "trix": "2.0.3"
   },
   "scripts": {
     "build": "node esbuild.config.js",
