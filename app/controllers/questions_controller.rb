@@ -7,9 +7,10 @@ class QuestionsController < ApplicationController
   # GET /rooms/:room_id/questions
   def index
     if @room.event.universal?
+      @question = @room.questions.build
       @questions = Question.questions_for_room(params[:room_id]).order("id ASC").includes(:user, :room)
     else
-      # TODO: make it more real ;-)
+      # TODO: make it more real ;-) and move this logic to pundit
       redirect_to room_path, alert: "This event is private"
     end
   end
@@ -40,12 +41,7 @@ class QuestionsController < ApplicationController
 
         track
 
-        format.turbo_stream {
-          render turbo_stream: turbo_stream.replace("new_question",
-                                                    partial: "questions/form",
-                                                    locals: { question: @room.questions.build }
-          )
-        }
+        format.turbo_stream 
       else
         format.html { render :new, status: :unprocessable_entity }
       end

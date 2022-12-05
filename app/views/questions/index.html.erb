@@ -11,7 +11,8 @@
   <% if user_signed_in? %>
     <div>
       <div class="text-gray-500 dark:text-gray-400 text-sm font-semibold tracking-tight mb-2">Ask a question: </div>
-      <%= turbo_frame_tag :new_question, src: new_room_question_path %>
+      <%# turbo_frame_tag :new_question, src: new_room_question_path %>
+      <%= render "form", question: @question %>
     </div>
   <% else %>
     <div>

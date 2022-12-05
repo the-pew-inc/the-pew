@@ -1,6 +1,4 @@
-<%= form_with(model: [@room, question], 
-              id: dom_id(question),
-              target: :_top) do |form| %>
+<%= form_with model: question, url: room_questions_path, data: { controller: "reset-form", action: "turbo:submit-end->reset-form#reset"} do |form| %>
   <%= render partial: 'shared/form_errors', locals: { object: question } %>
   <div class="w-full">
     <div>
@@ -14,7 +12,7 @@
         "aria-describedby": "helper-text-explanation" %>
         <p id="helper-text-explanation" class="mt-2 font-light text-xs text-gray-500 dark:text-gray-400" data-maxchar-target="msg">Max: 250 characters.</p>
       </div>
-      <% if @room.allow_anonymous %>
+      <% if question.room.allow_anonymous %>
         <div class="flex space-x-3 items-center justify-start">
           <div>
             <label form.label for="anonymous" class="inline-flex relative items-center cursor-pointer">

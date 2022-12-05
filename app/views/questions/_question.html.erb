@@ -50,13 +50,5 @@
       </div>
       <%= render partial: "control_buttons", locals: {question: question} %>
     </div>
-    <div class="mt-1 mb-6 pl-4">
-      <div class="text-gray-500 dark:text-gray-400 font-bold tracking-tight">
-        Number of nested questions: <%= question.questions.count %>
-      </div>
-      <div>
-        <%= render partial: "sub_question", collection: question.questions, as: :question %>
-      </div>
-    </div>
   <% end %>
 <% end %>
