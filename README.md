@@ -7,4 +7,4 @@
 ## CREDITS
 
 ## LICENSE
-[License](../blob/master/LICENSE)
+[License](../master/LICENSE.md)
