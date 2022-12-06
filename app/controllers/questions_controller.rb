@@ -7,9 +7,10 @@ class QuestionsController < ApplicationController
   # GET /rooms/:room_id/questions
   def index
     if @room.event.universal?
-      @questions = Question.questions_for_room(params[:room_id]).order("id ASC")
+      @question = @room.questions.build
+      @questions = Question.questions_for_room(params[:room_id]).order("id ASC").includes(:user, :room)
     else
-      # TODO: make it more real ;-)
+      # TODO: make it more real ;-) and move this logic to pundit
       redirect_to room_path, alert: "This event is private"
     end
   end
@@ -40,12 +41,7 @@ class QuestionsController < ApplicationController
 
         track
 
-        format.turbo_stream {
-          render turbo_stream: turbo_stream.replace("new_question",
-                                                    partial: "questions/form",
-                                                    locals: { question: @room.questions.build }
-          )
-        }
+        format.turbo_stream 
       else
         format.html { render :new, status: :unprocessable_entity }
       end
@@ -98,7 +94,7 @@ class QuestionsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def create_question_params
-    params.require(:question).permit(:title, :anonymous).with_defaults(user_id: current_user.id)
+    params.require(:question).permit(:title, :anonymous, :parent_id).with_defaults(user_id: current_user.id)
   end
 
   def update_question_params 
@@ -122,7 +118,7 @@ class QuestionsController < ApplicationController
     end
 
     # Hide the user (id and name)
-    if @question.anonymous 
+    if @question.anonymous
       question[:public_user_id] = nil
       question[:public_nickname] = nil
     else

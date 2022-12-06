@@ -1,0 +1,8 @@
+---
+name: ask
+language: ruby
+appmap_dir: tmp/appmap
+packages:
+- path: app
+- path: lib
+exclude: []

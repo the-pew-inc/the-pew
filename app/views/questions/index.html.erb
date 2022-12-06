@@ -1,4 +1,4 @@
-<%= turbo_stream_from [@room.id, :questions] %>
+<%= turbo_stream_from @room.id %>
 <section class="mb-6 text-center">
   <h1 class="inline-block mb-2 font-extrabold text-3xl tracking-tight text-slate-800 dark:text-white">
     <%= @room.event.name %>
@@ -11,7 +11,8 @@
   <% if user_signed_in? %>
     <div>
       <div class="text-gray-500 dark:text-gray-400 text-sm font-semibold tracking-tight mb-2">Ask a question: </div>
-      <%= turbo_frame_tag :new_question, src: new_room_question_path %>
+      <%# turbo_frame_tag :new_question, src: new_room_question_path %>
+      <%= render "form", question: @question %>
     </div>
   <% else %>
     <div>
@@ -21,10 +22,17 @@
   <% end %>
 </section>
 <section class="mb-6">
-  <div class="text-gray-500 dark:text-gray-400 font-light text-sm mb-4">
-    Number of questions: <span id="question_counter"><%= @room.approved_question_count %></span><br>
+  <div class="flex items-center justify-start space-x-4 text-gray-500 dark:text-gray-400 font-light text-sm">
+    <div>
+      Number of questions: <span id="question_counter"><%= @room.approved_question_count %></span><br>
+    </div>
+    <% if (current_user&.has_role? :admin, @room) %>
+      <div>
+        New questions: <span id="asked_question_counter"><%= @room.asked_question_count %></span>
+      </div>
+    <% end %>
   </div>
-  <div id="questions" data-controller="empty-state order-questions" class="inline-block p-4 border-b-2" data-order-questions-active-class="text-blue-600 border-blue-600 active dark:text-blue-500 dark:border-blue-500" data-order-questions-inactive-class="border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">
+  <div id="questions" data-controller="empty-state order-questions" class="flex flex-col py-2" data-order-questions-active-class="text-blue-600 border-blue-600 active dark:text-blue-500 dark:border-blue-500" data-order-questions-inactive-class="border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">
     <div class="text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700 mb-2">
       <ul class="flex flex-wrap -mb-px">
         <li class="mr-2">

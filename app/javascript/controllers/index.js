@@ -19,11 +19,17 @@ application.register("empty-state", EmptyStateController)
 import HamburgerController from "./hamburger_controller"
 application.register("hamburger", HamburgerController)
 
+import MaxcharController from "./maxchar_controller"
+application.register("maxchar", MaxcharController)
+
 import ModeController from "./mode_controller"
 application.register("mode", ModeController)
 
 import OrderQuestionsController from "./order_questions_controller"
 application.register("order-questions", OrderQuestionsController)
+
+import ResetFormController from "./reset_form_controller"
+application.register("reset-form", ResetFormController)
 
 import ToggleController from "./toggle_controller"
 application.register("toggle", ToggleController)

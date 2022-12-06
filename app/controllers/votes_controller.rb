@@ -9,7 +9,7 @@ class VotesController < ApplicationController
   
     @vote.voted(params[:choice])
 
-    @vote.broadcast_update_later_to([@vote.votable.room.id, :questions], target: "#{dom_id(@vote.votable)}_count", html: @vote.votable.up_votes)
+    @vote.broadcast_update_later_to(@vote.votable.room.id, target: "#{dom_id(@vote.votable)}_count", html: @vote.votable.up_votes)
   end
 
 end

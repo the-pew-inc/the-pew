@@ -3,6 +3,10 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.1.2'
 
+# IMPORTANT: This must be the first gem listed
+# Add support to appmap in development and test
+gem 'appmap', groups: %i[development test]
+
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem 'rails', '~> 7.0.4'
 
@@ -13,7 +17,7 @@ gem 'sprockets-rails'
 gem 'pg', '~> 1.4'
 
 # Use the Puma web server [https://github.com/puma/puma]
-gem 'puma', '~> 5.0'
+gem 'puma', '~> 6.0'
 
 # Bundle and transpile JavaScript [https://github.com/rails/jsbundling-rails]
 gem 'jsbundling-rails'
@@ -78,11 +82,12 @@ gem 'bootsnap', require: false
 gem 'sendgrid-actionmailer', '~> 3.2.0'
 
 # Sidekiq [https://github.com/mperham/sidekiq]
-# gem 'sidekiq', '6.5.5'
-gem 'sidekiq', git: 'https://github.com/mperham/sidekiq.git'
+# gem 'sidekiq', '6.5.7'
+gem 'sidekiq', '~>7.0.0'
+# gem 'sidekiq', git: 'https://github.com/mperham/sidekiq.git'
 
 # Monitoring - Honeybadger []
-gem 'honeybadger', '~> 4.0'
+gem 'honeybadger', '~> 5.0'
 
 # Use Sass to process CSS
 # gem "sassc-rails"
@@ -97,7 +102,7 @@ gem 'down', '~> 5.0'
 gem 'paper_trail'
 
 # Active storage validations [https://github.com/igorkasyanchuk/active_storage_validations]
-gem 'active_storage_validations', '~> 0.9.8'
+gem 'active_storage_validations', '~> 1.0.0'
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 gem 'image_processing', '~> 1.2'
@@ -112,7 +117,7 @@ gem 'rqrcode', '~> 2.0'
 gem 'pagy', '~> 5.10.1'
 
 # Countries [https://github.com/countries/countries]
-gem 'countries', '~> 5.1.0', require: 'countries/global'
+gem 'countries', '~> 5.2.0', require: 'countries/global'
 
 # Validate URL format [https://github.com/perfectline/validates_url]
 gem 'validate_url'
@@ -132,7 +137,8 @@ group :development, :test do
   gem 'debug', platforms: %i[mri mingw x64_mingw]
 
   # Faker, gem for generating fake data for testing [https://github.com/faker-ruby/faker]
-  gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
+  gem 'faker', :git => 'https://github.com/faker-ruby/faker.git'
+  
 end
 
 group :development do

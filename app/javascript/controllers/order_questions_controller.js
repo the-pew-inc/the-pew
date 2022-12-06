@@ -79,27 +79,23 @@ export default class extends Controller {
 
   trending() {
     this.listOfQuestions.sort((a, b) => {
-      if (a.upvotes < b.upvotes) return 1;
-      if (a.upvotes > b.upvotes) return -1;
       if (a.upvotes == b.upvotes) {
-        if (a.id < b.id) return -1;
+        return b.id - a.id;
       } else {
-        return 1;
+        return b.upvotes - a.upvotes;
       }
-    });
-  }
-
-  sortByTimeOldToNew() {
-    this.listOfQuestions.sort((a, b) => {
-      if (a.id < b.id) return -1;
-      if (a.id > b.id) return 1;
     });
   }
 
   sortByTimeNewToOld() {
     this.listOfQuestions.sort((a, b) => {
-      if (a.id < b.id) return 1;
-      if (a.id > b.id) return -1;
+      return b.id - a.id;
+    });
+  }
+
+  sortByTimeOldToNew() {
+    this.listOfQuestions.sort((a, b) => {
+      return a.id - b.id;
     });
   }
 
@@ -124,10 +120,8 @@ export default class extends Controller {
     this.tabs = this.tabTargets;
     this.tabs.forEach((tab) => {
       if (tab.getAttribute("aria-current") === "page") {
-        console.debug("We found the current page");
         tab.classList.add(...this.activeClasses);
       } else {
-        console.debug("This is not the current page");
         tab.classList.add(...this.inactiveClasses);
       }
     });
