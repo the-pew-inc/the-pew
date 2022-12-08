@@ -93,7 +93,7 @@ gem 'honeybadger', '~> 5.0'
 # gem "sassc-rails"
 
 # Nokogiri to parse HTML and more [https://github.com/sparklemotion/nokogiri]
-gem 'nokogiri', '~> 1.13.6'
+gem 'nokogiri', '~> 1.13.10'
 
 # Download
 gem 'down', '~> 5.0'
