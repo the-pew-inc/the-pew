@@ -8,7 +8,7 @@
     "autoprefixer": "10.4.13",
     "chart.js": "4.0.1",
     "chartkick": "4.2.0",
-    "esbuild": "0.16.2",
+    "esbuild": "0.16.3",
     "flowbite": "1.5.5",
     "postcss": "8.4.19",
     "stimulus-autocomplete": "3.0.2",
