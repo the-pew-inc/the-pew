@@ -22,6 +22,7 @@ class Question < ApplicationRecord
   enum status: {
     asked: 0,
     approved: 10,
+    beinganswered: 15,
     answered: 20,
     rejected: 30
   }, _default: :asked
