@@ -1,6 +1,6 @@
 <br>
 <div>
-<img src="/images.png" alt="ThePew, know what your audiences want" title="ThePew, know what your audiences want" height="200px">
+<img src="/images/logo.png" alt="ThePew, know what your audiences want" title="ThePew, know what your audiences want" height="200px">
 </div>
 
 # ThePew
