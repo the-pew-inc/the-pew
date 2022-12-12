@@ -5,6 +5,7 @@ class RoomsController < ApplicationController
   def show
     @room = Room.find(params[:id])
     @question = @room.questions.beinganswered.first
+    @questions = @room.questions.approved
     render :layout => 'display'
   end
 
