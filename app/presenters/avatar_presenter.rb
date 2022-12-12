@@ -35,11 +35,13 @@ class AvatarPresenter
   def gravatar_image
     gravatar_id = Digest::MD5.hexdigest(email)
     gravatar_url = "https://secure.gravatar.com/avatar/#{gravatar_id}"
+
     image_tag(gravatar_url, alt: nickname, class: "rounded-full flex flex-shrink-0 h-#{@size} w-#{@size}")
   end
 
   def initials_element
     style = "background-color: #{avatar_color(initials.first)};"
+    
     content_tag :div, class: "rounded-full flex flex-shrink-0 items-center justify-center w-#{@size} h-#{@size}", style: style do
       content_tag :div, initials, class: 'font-mono font-bold text-gray-100'
     end
@@ -56,7 +58,6 @@ class AvatarPresenter
   def initials
     nickname.split.first(2).map(&:first).join
   end
-
 
   # Return a color based on the first letter of the initials
   def avatar_color(initial)

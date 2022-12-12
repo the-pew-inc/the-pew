@@ -1,7 +1,7 @@
 <div class="mt-4 flex flex-col items-center">
   <div class="flex flex-col items-center mb-16">
     <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white"><%= @room.event.name %></h1>
-    <h2 class="text-3xl font-extrabold tracking-tight leading-none text-gray-900 md:text-4xl dark:text-white"><%= @room.name %></h2>
+    <h2 class="text-3xl font-extrabold tracking-tight leading-none text-gray-900 md:text-4xl dark:text-white <%= @room.name == '__default__' ? 'invisible' : '' %>"><%= @room.name %></h2>
   </div>
   <div class="flex flex-col w-full items-center p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
     <div class="pb-6">
