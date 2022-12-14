@@ -54,6 +54,20 @@ class QuestionsController < ApplicationController
     respond_to do |format|
       if @question.update(update_question_params)
 
+        # There can not be more than ONE beinganswered question at any point in time
+        # In case there was an error leading to having more than one, the first steps are designed
+        # to remove all the previous questions with the status beinganswered.
+        if @question.beinganswered?
+          # 1. Look for any pre-existing question(s) in that room with the beinganswered status
+          questions = Question.where(room_id: @question.room_id, status: :beinganswered).where.not(id: @question.id)
+          if questions.count >= 1
+            #2. Reset all the previous question(s) with the being answered status
+            for question in questions do
+              question.answered!            
+            end
+          end
+        end
+
         if @question.rejected?
           Message.create(user_id: @question.user_id, title: "Question Rejected", content: "Your question: #{@question.title} has been rejected with status #{@question.rejection_cause}", level: :alert)
         end
