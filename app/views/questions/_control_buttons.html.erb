@@ -5,8 +5,15 @@
             method: :put,
             params: { question: {status: :approved} },
             type: "button",
-            class: "py-2 px-3 text-xs font-medium text-center rounded-lg focus:ring-4 #{ (question.approved? || question.answered?) ? 'text-gray-400 cursor-not-allowed bg-green-700/40 dark:bg-green-300/50' : 'text-white bg-green-700 hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-700'} focus:ring-green-300 dark:focus:ring-green-800",
-            disabled: question.approved? || question.answered? %>
+            class: "py-2 px-3 text-xs font-medium text-center rounded-lg focus:ring-4 #{ (question.approved? || question.answered? || question.beinganswered?) ? 'text-gray-400 cursor-not-allowed bg-green-700/40 dark:bg-green-300/50' : 'text-white bg-green-700 hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-700'} focus:ring-green-300 dark:focus:ring-green-800",
+            disabled: (question.approved? || question.answered? || question.beinganswered?) %>
+    <%= button_to 'Answering', 
+            question_path(question.id), 
+            method: :put, 
+            params: { question: {status: :beinganswered} },
+            type: "button",
+            class: "py-2 px-3 text-xs font-medium text-center text-white rounded-lg focus:ring-4 #{ question.beinganswered? ? 'cursor-not-allowed bg-green-700/50 hover:bg-green-800/50 dark:bg-green-400/75 dark:hover:bg-green-500/75' : 'bg-green-700 hover:bg-green-800 dark:bg-green-600 dark:hover:bg-green-700'} focus:ring-green-300 dark:focus:ring-green-800",
+            disabled: (question.beinganswered? || question.answered?) %>
     <%= button_to 'Answered', 
             question_path(question.id), 
             method: :put, 
