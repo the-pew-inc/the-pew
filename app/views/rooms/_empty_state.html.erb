@@ -1,1 +1,13 @@
-No Question
+<div class="mt-4 flex flex-col items-center">
+  <div id="question" data-controller="empty-state" class="w-full">
+    <div class="flex flex-col w-full items-center p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+      <h5 class="text-5xl font-extrabold dark:text-white text-center">
+        You can engage with the speaker or the topic by asking questions or dropping a comment here.
+      </h5>
+      <div class="mt-12">
+        <p class="text-2xl font-extrabold dark:text-white text-center">Join the conversation</p>
+        <%= image_tag @room.event.qr_code, class: 'pt-2 mx-auto object-git w-full dark:invert w-96 h-96' if @room.event.qr_code.present?  %>
+      </div>
+    </div>
+  </div>
+</div>
