@@ -78,6 +78,7 @@ class Question < ApplicationRecord
 
   after_update_commit do
     broadcast_update_later_to self.room_id, target: self, partial: "questions/question_frame", locals: { question: self }
+    broadcast_update_later_to "display_#{self.room_id}", target: "question", partial: "rooms/question", locals: { question: self } if self.beinganswered?
     broadcast_update_later_to self.room_id, target: "question_counter", html: Question.approved_questions_for_room(self.room_id).count if (self.approved? || self.answered?)
     broadcast_update_later_to self.room_id, target: "asked_question_counter", html: Question.asked_questions_for_room(self.room_id).count
   end

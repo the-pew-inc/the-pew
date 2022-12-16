@@ -1,0 +1,25 @@
+<%= turbo_frame_tag dom_id(question) do %>
+  <div class="flex flex-col w-full items-center p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+    <div class="pb-6">
+      <% if question.anonymous %>
+        <div class="overflow-hidden relative w-36 h-36 bg-gray-100 rounded-full dark:bg-gray-600">
+          <svg class="absolute w-36 h-36 text-gray-400 ring-2 ring-gray-300 dark:ring-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
+        </div>
+      <% else %>
+        <% if true %>
+          <img class="p-2 w-36 h-36 rounded-full dark:ring-2 dark:ring-gray-500" src="https://randomuser.me/api/portraits/men/45.jpg" alt="">
+        <% else %>
+          <div class="w-36 h-36 rounded-full flex items-center justify-center bg-slate-400">
+            <p class="font-bold text-slate-100" style="font-size: 8vh;">UP</p>
+          </div>
+        <% end %>
+      <% end %>
+      <div class="text-gray-500 dark:text-gray-400 font-medium tracking-tight text-3xl text-center pt-4">
+        <%= question.anonymous ? 'Anonymous' : question.user.profile.nickname.strip %>
+      </div>
+    </div>
+    <h5 class="text-4xl font-extrabold dark:text-white text-center">
+      <%= question.title %>
+    </h5>
+  </div>
+<% end %>
