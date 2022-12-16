@@ -4,7 +4,7 @@
     <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white"><%= @room.event.name %></h1>
     <h2 class="text-3xl font-extrabold tracking-tight leading-none text-gray-900 md:text-4xl dark:text-white <%= @room.name == '__default__' ? 'invisible' : '' %>"><%= @room.name %></h2>
   </div>
-  <div id="question" data-controller="empty-state">
+  <div id="question" data-controller="empty-state" class="w-full">
     <div data-empty-state-target="emptyState">
       <%= render "empty_state" %>
     </div>

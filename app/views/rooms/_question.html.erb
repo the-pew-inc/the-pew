@@ -1,5 +1,5 @@
 <%= turbo_frame_tag dom_id(question) do %>
-  <div class="flex flex-col w-full items-center p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+  <div data-empty-state-target="item" class="flex flex-col w-full items-center p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
     <div class="pb-6">
       <% if question.anonymous %>
         <div class="overflow-hidden relative w-36 h-36 bg-gray-100 rounded-full dark:bg-gray-600">
