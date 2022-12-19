@@ -60,7 +60,7 @@ class AvatarPresenter
   end
 
   # Return a color based on the first letter of the initials
-  def avatar_color(initial)
+  def avatar_color(initials)
     colors = [
       '#00AA55', '#009FD4', '#B381B3', '#939393', '#E3BC00',
       '#D47500', '#DC2A2A', '#696969', '#ff0000', '#ff80ed',
@@ -70,7 +70,7 @@ class AvatarPresenter
       '#800000'
     ]
 
-    colors[initial.first.to_s.downcase.ord - 97] || '#000000'
+    colors[initials.first.to_s.downcase.ord - 97] || '#000000'
   end
 
 end

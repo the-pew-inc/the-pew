@@ -6,11 +6,11 @@
           <svg class="absolute w-36 h-36 text-gray-400 ring-2 ring-gray-300 dark:ring-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
         </div>
       <% else %>
-        <% if true %>
+        <% if false %>
           <img class="p-2 w-36 h-36 rounded-full dark:ring-2 dark:ring-gray-500" src="https://randomuser.me/api/portraits/men/45.jpg" alt="">
         <% else %>
-          <div class="w-36 h-36 rounded-full flex items-center justify-center bg-slate-400">
-            <p class="font-bold text-slate-100" style="font-size: 8vh;">UP</p>
+          <div class="w-36 h-36 rounded-full flex items-center justify-center" style="background-color: <%= RandomBackground.background %>;">
+            <p class="font-bold text-slate-100" style="font-size: 8vh;"><%= question.user.profile.nickname.split.first(2).map(&:first).join %></p>
           </div>
         <% end %>
       <% end %>
