@@ -87,7 +87,7 @@ class QuestionsController < ApplicationController
 
     if @question.user_id != current_user.id
       flash[:alert] = 'You are not the owner of this question'
-      redirect_to room_questions_path, status: :unprocessable_entity
+      redirect_to room_questions_path(@question.room_id), status: :unprocessable_entity
       return
     end
 
