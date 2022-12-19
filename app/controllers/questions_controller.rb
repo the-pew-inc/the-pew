@@ -85,9 +85,10 @@ class QuestionsController < ApplicationController
   def destroy
     @question = Question.find(params[:id])
 
+    # TODO: admin should also be able to delete a question
     if @question.user_id != current_user.id
       flash[:alert] = 'You are not the owner of this question'
-      redirect_to room_questions_path, status: :unprocessable_entity
+      redirect_to room_questions_path(@question.room_id), status: :unauthorized
       return
     end
 

@@ -6,7 +6,7 @@
     "@hotwired/turbo-rails": "7.2.4",
     "@rails/actiontext": "7.0.4",
     "autoprefixer": "10.4.13",
-    "chart.js": "4.0.1",
+    "chart.js": "4.1.1",
     "chartkick": "4.2.0",
     "esbuild": "0.16.4",
     "flowbite": "1.5.5",
