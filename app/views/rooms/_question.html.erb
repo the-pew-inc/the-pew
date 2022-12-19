@@ -6,7 +6,7 @@
       </div>
     <% else %>
       <% if question.user.profile.avatar.attached? %>
-        <%= image_tag question.user.profile.avatar.variant(resize_to_limit: [144, 144]),
+        <%= image_tag question.user.profile.avatar,
             width: 144, height: 144, class: "p-2 w-36 h-36 rounded-full dark:ring-2 dark:ring-gray-500" %>
       <% else %>
         <div class="w-36 h-36 rounded-full flex items-center justify-center" style="background-color: <%= RandomBackground.background %>;">
