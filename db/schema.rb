@@ -292,7 +292,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_07_192723) do
   create_table "votes", force: :cascade do |t|
     t.uuid "user_id", null: false
     t.string "votable_type", null: false
-    t.bigint "votable_id", null: false
+    t.uuid "votable_id", null: false
     t.integer "choice", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
