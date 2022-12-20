@@ -21,11 +21,13 @@ export default class extends Controller {
     const questions = this.questionTargets;
     questions.forEach((element, index) => {
       const questionId = this.getQuestionId(element);
+      const questionCreatedAt = this.getCreatedAt(element);
       const upvotes = element.querySelector(
         `#question_${questionId}_count`
       ).innerText;
       const q = {
         id: questionId,
+        created_at: questionCreatedAt,
         upvotes: upvotes,
         cronoIndex: index,
         element: element.parentNode,
@@ -77,10 +79,14 @@ export default class extends Controller {
     return question.dataset.questionId || null;
   }
 
+  getCreatedAt(question) {
+    return question.dataset.questionCreated || null;
+  }
+
   trending() {
     this.listOfQuestions.sort((a, b) => {
       if (a.upvotes == b.upvotes) {
-        return b.id - a.id;
+        return b.created_at - a.created_at;
       } else {
         return b.upvotes - a.upvotes;
       }
@@ -89,13 +95,13 @@ export default class extends Controller {
 
   sortByTimeNewToOld() {
     this.listOfQuestions.sort((a, b) => {
-      return b.id - a.id;
+      return b.created_at - a.created_at;
     });
   }
 
   sortByTimeOldToNew() {
     this.listOfQuestions.sort((a, b) => {
-      return a.id - b.id;
+      return a.created_at - b.created_at;
     });
   }
 
