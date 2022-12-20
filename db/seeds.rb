@@ -22,7 +22,7 @@ users = User.create!([
 
 p "Generating default test user's profiles"
 users.each do |user|
-  Profile.create(user: user, nickname: "User #{user.id}")
+  Profile.create!(user: user, nickname: Faker::Name.name )
 end
 
 p "Deleting existing events"
