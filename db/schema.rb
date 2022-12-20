@@ -12,9 +12,10 @@
 
 ActiveRecord::Schema[7.0].define(version: 2022_09_07_192723) do
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
-  create_table "accounts", force: :cascade do |t|
+  create_table "accounts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.string "website"
     t.string "country"
@@ -23,18 +24,18 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_07_192723) do
     t.index ["country"], name: "index_accounts_on_country"
   end
 
-  create_table "action_text_rich_texts", force: :cascade do |t|
+  create_table "action_text_rich_texts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
     t.string "record_type", null: false
-    t.bigint "record_id", null: false
+    t.uuid "record_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["record_type", "record_id", "name"], name: "index_action_text_rich_texts_uniqueness", unique: true
   end
 
-  create_table "active_sessions", force: :cascade do |t|
-    t.bigint "user_id", null: false
+  create_table "active_sessions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id", null: false
     t.string "user_agent"
     t.string "ip_address"
     t.string "remember_token", null: false
@@ -46,17 +47,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_07_192723) do
     t.index ["user_id"], name: "index_active_sessions_on_user_id"
   end
 
-  create_table "active_storage_attachments", force: :cascade do |t|
+  create_table "active_storage_attachments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
-    t.bigint "record_id", null: false
-    t.bigint "blob_id", null: false
+    t.uuid "record_id", null: false
+    t.uuid "blob_id", null: false
     t.datetime "created_at", null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
 
-  create_table "active_storage_blobs", force: :cascade do |t|
+  create_table "active_storage_blobs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "key", null: false
     t.string "filename", null: false
     t.string "content_type"
@@ -68,8 +69,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_07_192723) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
-  create_table "active_storage_variant_records", force: :cascade do |t|
-    t.bigint "blob_id", null: false
+  create_table "active_storage_variant_records", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
@@ -116,9 +117,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_07_192723) do
     t.index ["visit_token"], name: "index_ahoy_visits_on_visit_token", unique: true
   end
 
-  create_table "attendances", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "event_id", null: false
+  create_table "attendances", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id", null: false
+    t.uuid "event_id", null: false
     t.bigint "room_id"
     t.integer "status", default: 0, null: false
     t.datetime "start_time", null: false
@@ -131,9 +132,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_07_192723) do
   end
 
   create_table "event_tags", force: :cascade do |t|
-    t.bigint "account_id", null: false
-    t.bigint "event_id", null: false
-    t.bigint "room_id", null: false
+    t.uuid "account_id", null: false
+    t.uuid "event_id", null: false
+    t.uuid "room_id", null: false
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -143,8 +144,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_07_192723) do
     t.index ["room_id"], name: "index_event_tags_on_room_id"
   end
 
-  create_table "events", force: :cascade do |t|
-    t.bigint "user_id", null: false
+  create_table "events", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id", null: false
     t.string "name", null: false
     t.datetime "start_date", null: false
     t.datetime "end_date", null: false
@@ -164,19 +165,19 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_07_192723) do
     t.index ["user_id"], name: "index_events_on_user_id"
   end
 
-  create_table "members", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "account_id", null: false
+  create_table "members", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id", null: false
+    t.uuid "account_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_members_on_account_id"
     t.index ["user_id"], name: "index_members_on_user_id"
   end
 
-  create_table "messages", force: :cascade do |t|
+  create_table "messages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.text "content"
     t.string "title"
-    t.bigint "user_id", null: false
+    t.uuid "user_id", null: false
     t.integer "level", default: 10, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -184,7 +185,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_07_192723) do
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
-  create_table "notifications", force: :cascade do |t|
+  create_table "notifications", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "recipient_type", null: false
     t.bigint "recipient_id", null: false
     t.string "type", null: false
@@ -197,7 +198,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_07_192723) do
   end
 
   create_table "profiles", force: :cascade do |t|
-    t.bigint "user_id", null: false
+    t.uuid "user_id", null: false
     t.string "nickname"
     t.integer "mode", default: 0, null: false
     t.datetime "created_at", null: false
@@ -206,16 +207,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_07_192723) do
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
-  create_table "questions", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "room_id", null: false
+  create_table "questions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id", null: false
+    t.uuid "room_id", null: false
     t.string "title", null: false
     t.integer "status", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "anonymous", default: false, null: false
     t.integer "rejection_cause"
-    t.bigint "parent_id"
+    t.uuid "parent_id"
     t.index ["anonymous"], name: "index_questions_on_anonymous"
     t.index ["parent_id"], name: "index_questions_on_parent_id"
     t.index ["rejection_cause"], name: "index_questions_on_rejection_cause"
@@ -229,15 +230,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_07_192723) do
   create_table "roles", force: :cascade do |t|
     t.string "name"
     t.string "resource_type"
-    t.bigint "resource_id"
+    t.uuid "resource_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
     t.index ["resource_type", "resource_id"], name: "index_roles_on_resource"
   end
 
-  create_table "rooms", force: :cascade do |t|
-    t.bigint "event_id", null: false
+  create_table "rooms", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "event_id", null: false
     t.string "name", null: false
     t.boolean "always_on", default: false, null: false
     t.boolean "allow_anonymous", default: false, null: false
@@ -250,7 +251,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_07_192723) do
     t.index ["start_date"], name: "index_rooms_on_start_date"
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "email", null: false
     t.string "password_digest"
     t.boolean "blocked", default: false, null: false
@@ -263,8 +264,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_07_192723) do
     t.datetime "updated_at", null: false
     t.string "uid"
     t.string "provider"
-    t.string "apple_uid"
-    t.index ["apple_uid"], name: "index_users_on_apple_uid", unique: true
     t.index ["blocked"], name: "index_users_on_blocked"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["locked"], name: "index_users_on_locked"
@@ -273,7 +272,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_07_192723) do
   end
 
   create_table "users_roles", id: false, force: :cascade do |t|
-    t.bigint "user_id"
+    t.uuid "user_id"
     t.bigint "role_id"
     t.index ["role_id"], name: "index_users_roles_on_role_id"
     t.index ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id"
@@ -291,7 +290,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_07_192723) do
   end
 
   create_table "votes", force: :cascade do |t|
-    t.bigint "user_id", null: false
+    t.uuid "user_id", null: false
     t.string "votable_type", null: false
     t.bigint "votable_id", null: false
     t.integer "choice", default: 0
