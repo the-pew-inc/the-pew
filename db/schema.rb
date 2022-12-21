@@ -197,7 +197,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_07_192723) do
     t.index ["recipient_type", "recipient_id"], name: "index_notifications_on_recipient"
   end
 
-  create_table "profiles", force: :cascade do |t|
+  create_table "profiles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "user_id", null: false
     t.string "nickname"
     t.integer "mode", default: 0, null: false
