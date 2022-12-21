@@ -22,7 +22,7 @@ users = User.create!([
 
 p "Generating default test user's profiles"
 users.each do |user|
-  Profile.create(user: user, nickname: "User #{user.id}")
+  Profile.create!(user: user, nickname: Faker::Name.name )
 end
 
 p "Deleting existing events"
@@ -43,7 +43,7 @@ p "Generating a set of random events with default room & questions"
 
   room = Room.create!(
     name: '__default__',
-    event_id: event.id,
+    event: event,
     always_on: event.always_on,
     allow_anonymous: event.allow_anonymous,
     start_date: event.start_date
@@ -69,19 +69,19 @@ p "Generating a set of random events with default room & questions"
     question.save!
 
     # Adding a nested question (aka nested question)
-    nested_question = Question.new(
-      room: question.room,
-      user: users.sample,
-      title: Faker::Books::Dune.quote.truncate(250, separator: /\s/),
-      status: Question.statuses.to_a.sample[1],
-      parent_id: question.id
-    )
+    # nested_question = Question.new(
+    #   room: question.room,
+    #   user: users.sample,
+    #   title: Faker::Books::Dune.quote.truncate(250, separator: /\s/),
+    #   status: Question.statuses.to_a.sample[1],
+    #   parent_id: question.id
+    # )
 
-    if nested_question.rejected?
-      nested_question.rejection_cause = Question.rejection_causes.to_a.sample[1]
-    end
+    # if nested_question.rejected?
+    #   nested_question.rejection_cause = Question.rejection_causes.to_a.sample[1]
+    # end
 
-    nested_question.save!
+    # nested_question.save!
 
   end
 

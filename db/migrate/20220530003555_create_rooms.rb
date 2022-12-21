@@ -1,7 +1,7 @@
 class CreateRooms < ActiveRecord::Migration[7.0]
   def change
-    create_table :rooms do |t|
-      t.belongs_to :event,           null: false, foreign_key: true
+    create_table :rooms, id: :uuid do |t|
+      t.belongs_to :event,           null: false, type: :uuid, foreign_key: true
       t.string     :name,            null: false
       t.boolean    :always_on,       null: false, default: false
       t.boolean    :allow_anonymous, null: false, default: false

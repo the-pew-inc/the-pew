@@ -1,7 +1,7 @@
 class CreateActiveSessions < ActiveRecord::Migration[7.0]
   def change
-    create_table :active_sessions do |t|
-      t.references :user,            null: false, foreign_key: {on_delete: :cascade}
+    create_table :active_sessions, id: :uuid do |t|
+      t.references :user,            null: false, type: :uuid, foreign_key: {on_delete: :cascade}
       t.string     :user_agent
       t.string     :ip_address
 

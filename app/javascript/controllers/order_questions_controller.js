@@ -21,11 +21,15 @@ export default class extends Controller {
     const questions = this.questionTargets;
     questions.forEach((element, index) => {
       const questionId = this.getQuestionId(element);
+      const questionCreatedAt = this.getCreatedAt(element);
+      const questionOwner = this.getOwner(element);
       const upvotes = element.querySelector(
         `#question_${questionId}_count`
       ).innerText;
       const q = {
         id: questionId,
+        created_at: questionCreatedAt,
+        owner: questionOwner,
         upvotes: upvotes,
         cronoIndex: index,
         element: element.parentNode,
@@ -42,15 +46,22 @@ export default class extends Controller {
 
     switch (this.orderingValue) {
       case "trending":
+        this.removeHidden();
         this.trending();
         break;
       case "recent":
+        this.removeHidden();
         this.sortByTimeNewToOld();
         break;
       case "oldies":
+        this.removeHidden();
         this.sortByTimeOldToNew();
         break;
+      case "justyours":
+        this.justyours();
+        break;
       default:
+        this.removeHidden();
         this.trending();
         break;
     }
@@ -77,10 +88,18 @@ export default class extends Controller {
     return question.dataset.questionId || null;
   }
 
+  getCreatedAt(question) {
+    return question.dataset.questionCreated || null;
+  }
+
+  getOwner(question) {
+    return question.dataset.questionOwner || null;
+  }
+
   trending() {
     this.listOfQuestions.sort((a, b) => {
       if (a.upvotes == b.upvotes) {
-        return b.id - a.id;
+        return b.created_at - a.created_at;
       } else {
         return b.upvotes - a.upvotes;
       }
@@ -89,13 +108,33 @@ export default class extends Controller {
 
   sortByTimeNewToOld() {
     this.listOfQuestions.sort((a, b) => {
-      return b.id - a.id;
+      return b.created_at - a.created_at;
     });
   }
 
   sortByTimeOldToNew() {
     this.listOfQuestions.sort((a, b) => {
-      return a.id - b.id;
+      return a.created_at - b.created_at;
+    });
+  }
+
+  // Displays the user's question(s)
+  justyours() {
+    this.listOfQuestions.map((a) => {
+      if (a.owner !== "you") {
+        document.querySelector(`#question_${a.id}`).classList.add("hidden");
+      }
+    });
+  }
+
+  // Removes hidden from an element only if this element is hidden
+  removeHidden() {
+    this.listOfQuestions.map((a) => {
+      if (
+        document.querySelector(`#question_${a.id}`).classList.contains("hidden")
+      ) {
+        document.querySelector(`#question_${a.id}`).classList.remove("hidden");
+      }
     });
   }
 
