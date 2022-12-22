@@ -47,9 +47,11 @@
         <li class="mr-2">
           <button data-action="order-questions#refreshWithOrder" data-order-questions-order-param="oldies" data-order-questions-target="tab" class="inline-block p-4 border-b-2">Oldies</button>
         </li>
-        <li class="mr-2">
-          <button data-action="order-questions#refreshWithOrder" data-order-questions-order-param="justyours" data-order-questions-target="tab" class="inline-block p-4 border-b-2">Yours</button>
-        </li>
+        <% if user_signed_in? %>
+          <li class="mr-2">
+            <button data-action="order-questions#refreshWithOrder" data-order-questions-order-param="justyours" data-order-questions-target="tab" class="inline-block p-4 border-b-2">Yours</button>
+          </li>
+        <% end %>
       </ul>
     </div>
     <div data-empty-state-target="emptyState">
