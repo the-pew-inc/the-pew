@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/faker-ruby/faker.git
-  revision: 328376115f951039578d2f1c65994be0158e16c3
+  revision: f6957edc28a336ca8ebd96e7bdba2a717e7dad2c
   specs:
     faker (3.0.0)
       i18n (>= 1.8.11, < 2)
@@ -248,8 +248,7 @@ GEM
     omniauth-rails_csrf_protection (1.0.1)
       actionpack (>= 4.2)
       omniauth (~> 2.0)
-    pagy (5.10.1)
-      activesupport
+    pagy (6.0.0)
     paper_trail (14.0.0)
       activerecord (>= 6.0)
       request_store (~> 1.4)
@@ -312,7 +311,7 @@ GEM
       chunky_png (~> 1.0)
       rqrcode_core (~> 1.0)
     rqrcode_core (1.2.0)
-    rubocop (1.41.0)
+    rubocop (1.41.1)
       json (~> 2.3)
       parallel (~> 1.10)
       parser (>= 3.1.2.1)
@@ -431,7 +430,7 @@ DEPENDENCIES
   omniauth (~> 2.1.0)
   omniauth-google-oauth2 (~> 1.1.1)
   omniauth-rails_csrf_protection
-  pagy (~> 5.10.1)
+  pagy (~> 6.0.0)
   paper_trail
   pg (~> 1.4)
   puma (~> 6.0.1)

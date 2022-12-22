@@ -116,7 +116,7 @@ gem 'aws-sdk-s3', require: false
 gem 'rqrcode', '~> 2.0'
 
 # Pagination [https://github.com/ddnexus/pagy]
-gem 'pagy', '~> 5.10.1'
+gem 'pagy', '~> 6.0.0'
 
 # Countries [https://github.com/countries/countries]
 gem 'countries', '~> 5.2.0', require: 'countries/global'
