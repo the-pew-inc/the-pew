@@ -1,8 +1,8 @@
 GIT
   remote: https://github.com/faker-ruby/faker.git
-  revision: 4e571bb4523d9ebbbcf44b77fbcf831d5be2b45d
+  revision: f3117a284104c18e8c81be76b827006b93170151
   specs:
-    faker (3.0.0)
+    faker (3.1.0)
       i18n (>= 1.8.11, < 2)
 
 GEM
@@ -209,7 +209,7 @@ GEM
     minitest (5.16.3)
     msgpack (1.6.0)
     multi_xml (0.6.0)
-    net-imap (0.3.3)
+    net-imap (0.3.4)
       date
       net-protocol
     net-pop (0.1.2)
