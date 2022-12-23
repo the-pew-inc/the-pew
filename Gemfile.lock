@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/faker-ruby/faker.git
-  revision: f6957edc28a336ca8ebd96e7bdba2a717e7dad2c
+  revision: 4e571bb4523d9ebbbcf44b77fbcf831d5be2b45d
   specs:
     faker (3.0.0)
       i18n (>= 1.8.11, < 2)
@@ -261,7 +261,7 @@ GEM
       nio4r (~> 2.0)
     pundit (2.3.0)
       activesupport (>= 3.0.0)
-    racc (1.6.1)
+    racc (1.6.2)
     rack (2.2.4)
     rack-protection (3.0.5)
       rack
