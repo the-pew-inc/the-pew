@@ -17,9 +17,9 @@ gem 'sprockets-rails'
 gem 'pg', '~> 1.4'
 
 # Use the Puma web server [https://github.com/puma/puma]
-# gem 'puma', '~> 6.0'
+gem 'puma', '~> 6.0.1'
 # Returning to 5.6.5 as the 6.0 seems to have some issues slowing down requests
-gem 'puma', '~>5.6.5'
+# gem 'puma', '~>5.6.5'
 
 # Bundle and transpile JavaScript [https://github.com/rails/jsbundling-rails]
 gem 'jsbundling-rails'
@@ -116,7 +116,7 @@ gem 'aws-sdk-s3', require: false
 gem 'rqrcode', '~> 2.0'
 
 # Pagination [https://github.com/ddnexus/pagy]
-gem 'pagy', '~> 5.10.1'
+gem 'pagy', '~> 6.0.0'
 
 # Countries [https://github.com/countries/countries]
 gem 'countries', '~> 5.2.0', require: 'countries/global'

@@ -36,7 +36,7 @@ class Question < ApplicationRecord
   }
 
   scope :questions_for_room, -> (room) { where('room_id = ? AND parent_id IS NULL', room) }
-  scope :approved_questions_for_room, -> (room) { where('room_id = ?', room).approved.or(where('room_id = ?', room).answered) }
+  scope :approved_questions_for_room, -> (room) { where('room_id = ?', room).approved.or(where('room_id = ?', room).answered).or(where('room_id = ?', room).beinganswered) }
   scope :asked_questions_for_room, -> (room) { where('room_id = ?', room).asked }
 
   # This is the sum of +1 and -1
