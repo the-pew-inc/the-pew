@@ -11,7 +11,7 @@ WORKDIR /app
 COPY Gemfile* package.json yarn.lock ./
 
 RUN gem install --no-document --no-user-install rails -v 7.0.4 \
-  gem install --no-document --no-user-install bundler \
+  && gem install --no-document --no-user-install bundler \
   && bundle config set --without "development test" \
   && bundle install \
   && yarn install
