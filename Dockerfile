@@ -4,7 +4,7 @@ ENV RAILS_ENV=production \
 
 RUN apk add --no-cache --update \
   build-base zlib-dev git yarn gcompat \
-  postgresql-dev libffi-dev vips-dev \
+  postgresql-dev libffi-dev vips-dev tzdata \
   && mkdir app
 
 WORKDIR /app
