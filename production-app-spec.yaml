@@ -1,6 +1,6 @@
 name: the-pew-dockerfile
 services:
-- name: web
+- name: the-pew
   git:
     repo_clone_url: https://github.com/the-pew-inc/the-pew.git
     branch: main
