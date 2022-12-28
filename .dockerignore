@@ -68,8 +68,6 @@ test
 
 config/deploy
 
-config/master.key
-
 public/packs
 
 public/packs-test
