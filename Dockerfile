@@ -15,8 +15,7 @@ RUN gem install --no-document --no-user-install rails -v 7.0.4 \
   && gem install --no-document --no-user-install bundler \
   && bundle config set --without "development test" \
   && bundle install \
-  && yarn install \
-  && rails assets:precompile
+  && yarn install 
 
 
 # Production image based on the build image
