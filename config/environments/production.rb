@@ -99,6 +99,8 @@ Rails.application.configure do
   # config.action_dispatch.tld_length = 2
   config.hosts << "app.thepew.io"
   config.hosts << "staging.thepew.io"
+  config.hosts << "demo.thepew.io"
+  config.hosts << "app.thepew.io"
 
   # Mailer configuration
   # Heroku / Sendgrid
@@ -108,17 +110,5 @@ Rails.application.configure do
     raise_delivery_errors: true
   }
   config.action_mailer.default_url_options = { host: ENV['DEFAULT_URL'] }
-
-  # config.action_mailer.delivery_method = :smtp
-  # config.action_mailer.perform_deliveries = true
-  # config.action_mailer.raise_delivery_errors = true
-  # config.action_mailer.smtp_settings = {
-  #   address:              ENV['MAILGUN_SMTP_SERVER'],
-  #   port:                 ENV['MAILGUN_SMTP_PORT'],
-  #   domain:               'thepew.co',
-  #   user_name:            ENV['MAILGUN_SMTP_LOGIN'],
-  #   password:             ENV['MAILGUN_SMTP_PASSWORD'],
-  #   authentication:       'plain'
-  # }
   
 end
