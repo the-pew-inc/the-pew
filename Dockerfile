@@ -9,13 +9,14 @@ RUN apk add --no-cache --update \
 
 WORKDIR /app
 COPY Gemfile* package.json yarn.lock ./
+COPY . /app
 
 RUN gem install --no-document --no-user-install rails -v 7.0.4 \
   && gem install --no-document --no-user-install bundler \
   && bundle config set --without "development test" \
   && bundle install \
   && yarn install \
-  && bundle exec rake assets:precompile
+  && rails assets:precompile
 
 
 # Production image based on the build image
@@ -51,7 +52,8 @@ WORKDIR /app
 
 # We copy over the entire gems directory for our builder image, containing the already built artifact
 COPY --from=builder /usr/local/bundle/ /usr/local/bundle/
-COPY . /app
+COPY --from=builder /app /app
+# COPY . /app
 
 EXPOSE 3000
 
