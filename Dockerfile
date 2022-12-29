@@ -10,7 +10,7 @@ RUN apk add --no-cache --update \
   && mkdir app
 
 WORKDIR /app
-COPY Gemfile* package.json yarn.lock ./
+COPY Gemfile* package.json yarn.lock esbuild.config.js ./
 
 # Add the Rails app
 ADD . /app
