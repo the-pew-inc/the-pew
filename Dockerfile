@@ -22,11 +22,11 @@ RUN gem install --no-document --no-user-install rails -v 7.0.4 \
   && bundle config set --local without 'development test' \
   && bundle config set path 'vendor/bundle' \
   && bundle install -j4 --retry 3 \
+  && yarn install \
   && bundle exec rake assets:precompile \
   && rm -rf /usr/local/bundle/cache/*.gem \
   && find /usr/local/bundle/gems/ -name "*.c" -delete \
   && find /usr/local/bundle/gems/ -name "*.o" -delete \
-  && yarn install \
   && rm -rf node_modules tmp/cache app/assets vendor/assets lib/assets spec \
   && apk del --rdepends --purge build-base 
 
