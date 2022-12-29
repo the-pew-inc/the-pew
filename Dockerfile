@@ -18,7 +18,8 @@ ADD . /app
 
 RUN gem install --no-document --no-user-install rails -v 7.0.4 \
   && gem install --no-document --no-user-install bundler \
-  && bundle install --without development test -j4 --retry 3 \
+  && bundle config set --local 'development test' \
+  && bundle install --without -j4 --retry 3 \
   && bundle exec rake assets:precompile \
   && rm -rf /usr/local/bundle/cache/*.gem \
   && find /usr/local/bundle/gems/ -name "*.c" -delete \
