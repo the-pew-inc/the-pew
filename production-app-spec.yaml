@@ -5,8 +5,3 @@ services:
     repo_clone_url: https://github.com/the-pew-inc/the-pew.git
     branch: main
   dockerfile_path: Dockerfile
-- name: sidekiq
-  git:
-    repo_clone_url: https://github.com/the-pew-inc/the-pew.git
-    branch: main
-  dockerfile_path: Dockerfile.sideqik
