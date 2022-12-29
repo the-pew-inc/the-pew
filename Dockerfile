@@ -19,7 +19,7 @@ ADD . /app
 RUN gem install --no-document --no-user-install rails -v 7.0.4 \
   && gem install --no-document --no-user-install bundler \
   && bundle config set deployment 'true' \
-  && bundle config set without 'development test' \
+  && bundle config set --local without 'development test' \
   && bundle config set path 'vendor/bundle' \
   && bundle install -j4 --retry 3 \
   && bundle exec rake assets:precompile \
