@@ -1,6 +1,5 @@
 FROM ruby:3.1.2-alpine AS builder
-ENV RAILS_ENV=production \
-  NODE_ENV=production
+ENV RAILS_ENV=production
 
 ARG RAILS_MASTER_KEY
 
