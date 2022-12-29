@@ -27,7 +27,7 @@ RUN gem install --no-document --no-user-install rails -v 7.0.4 \
   && rm -rf /usr/local/bundle/cache/*.gem \
   && find /usr/local/bundle/gems/ -name "*.c" -delete \
   && find /usr/local/bundle/gems/ -name "*.o" -delete \
-  && rm -rf node_modules tmp/cache app/assets vendor/assets lib/assets spec \
+  && rm -rf node_modules tmp/cache  \
   && apk del --rdepends --purge build-base 
 
 
