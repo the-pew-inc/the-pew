@@ -23,6 +23,7 @@ RUN gem install --no-document --no-user-install rails -v 7.0.4 \
   && bundle install -j4 --retry 3 \
   && yarn install \
   && bundle exec rake assets:precompile \
+  && bundle clean --force \
   && rm -rf /usr/local/bundle/cache/*.gem \
   && find /usr/local/bundle/gems/ -name "*.c" -delete \
   && find /usr/local/bundle/gems/ -name "*.o" -delete \
