@@ -1,0 +1,12 @@
+name: the-pew
+services:
+- name: web
+  git:
+    repo_clone_url: https://github.com/the-pew-inc/the-pew.git
+    branch: main
+  dockerfile_path: Dockerfile
+- name: worker
+  git:
+    repo_clone_url: https://github.com/the-pew-inc/the-pew.git
+    branch: main
+  dockerfile_path: Dockerfile
