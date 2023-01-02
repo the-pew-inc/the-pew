@@ -4,9 +4,9 @@ services:
   git:
     repo_clone_url: https://github.com/the-pew-inc/the-pew.git
     branch: main
-  dockerfile_path: Dockerfile
+  dockerfile_path: Dockerfile.webapp
 - name: worker
   git:
     repo_clone_url: https://github.com/the-pew-inc/the-pew.git
     branch: main
-  dockerfile_path: Dockerfile
+  dockerfile_path: Dockerfile.worker
