@@ -1,7 +1,0 @@
-name: the-pew-dockerfile
-services:
-- name: the-pew
-  git:
-    repo_clone_url: https://github.com/the-pew-inc/the-pew.git
-    branch: main
-  dockerfile_path: Dockerfile
