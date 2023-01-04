@@ -76,6 +76,6 @@ EXPOSE 3000
 # Save timestamp of image building
 RUN date -u > BUILD_TIME
 
-CMD ["bundle exec sidekiq -e production -C config/sidekiq.yml"]
+CMD ["bundle exec sidekiq", " -e production", " -C config/sidekiq.yml"]
 
 
