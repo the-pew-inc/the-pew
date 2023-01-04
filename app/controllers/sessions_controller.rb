@@ -20,6 +20,8 @@ class SessionsController < ApplicationController
         after_login_path = session[:user_return_to] || root_path
         active_session = login(@user)
         remember(active_session) if params[:user][:remember_me] == '1'
+        
+        # If everything is ok, redirect the user to where they were suppose to go.
         redirect_to(after_login_path, notice: 'Signed in.')
         return
       else
@@ -51,7 +53,7 @@ class SessionsController < ApplicationController
       after_login_path = session[:user_return_to] || root_path
       login(user)
       if user.profile.nickname == nil
-        redirect_to edit_profile_path(user), notice: "Let the other know your name"
+        redirect_to edit_profile_path(user), notice: "Let the others know your name"
       else
         redirect_to(after_login_path, notice: 'Signed in.')
       end
@@ -117,6 +119,5 @@ class SessionsController < ApplicationController
     # Generate a unique filename
     filename = Time.current.utc.to_s + SecureRandom.hex(16)
     user.profile.avatar.attach(io: tempavatar, filename: filename, content_type: tempavatar.content_type)
-  end
-
+  end  
 end
