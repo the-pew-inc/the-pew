@@ -59,7 +59,7 @@ ARG DATABASE_POOL \
 
 # Add Alpine packages
 RUN apk add --no-cache --update \
-  tzdata nodejs vips-dev \
+  tzdata nodejs vips-dev ca-certificates \
   libffi-dev postgresql-client \
   && rm -rf /var/cache/apk/* /tmp/* /var/tmp/*
 
