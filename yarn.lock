@@ -393,9 +393,9 @@ fast-glob@^3.2.12:
     micromatch "^4.0.4"
 
 fastq@^1.6.0:
-  version "1.14.0"
-  resolved "https://registry.yarnpkg.com/fastq/-/fastq-1.14.0.tgz#107f69d7295b11e0fccc264e1fc6389f623731ce"
-  integrity sha512-eR2D+V9/ExcbF9ls441yIuN6TI2ED1Y2ZcA5BmMtJsOkWOFRJQ0Jt0g1UwqXJJVAb+V+umH5Dfr8oh4EVP7VVg==
+  version "1.15.0"
+  resolved "https://registry.yarnpkg.com/fastq/-/fastq-1.15.0.tgz#d04d07c6a2a68fe4599fea8d2e103a937fae6b3a"
+  integrity sha512-wBrocU2LCXXa+lWBt8RoIRD89Fi8OdABODa/kEnyeyjS5aZO5/GNvI5sEINADqP/h8M29UHTHUb53sUu5Ihqdw==
   dependencies:
     reusify "^1.0.4"
 
@@ -406,10 +406,10 @@ fill-range@^7.0.1:
   dependencies:
     to-regex-range "^5.0.1"
 
-flowbite@1.5.5:
-  version "1.5.5"
-  resolved "https://registry.yarnpkg.com/flowbite/-/flowbite-1.5.5.tgz#0adb062e1c5b31dfd1e71bd1acfcda6cbc69e728"
-  integrity sha512-LWJteH6zO+6BrnerH6GEU9OFpjWmkCWi9BD3XnJdBOVevNnt7u8gW+S+4keqD5OGpHu+QU860pLzNKeNlhlf6g==
+flowbite@1.6.0:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/flowbite/-/flowbite-1.6.0.tgz#e68c552b00adaccc41ed10cf606a7fda612ce724"
+  integrity sha512-3+kd/Y5D55q+9M82VFb89SQcy7tkCD+vKtw97s49MLvELr5tTCqt+Qf3GWFvVEpHR9xPiI0xPXiCTQfYSEB1WA==
   dependencies:
     "@popperjs/core" "^2.9.3"
     mini-svg-data-uri "^1.4.3"
