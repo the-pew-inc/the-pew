@@ -120,7 +120,7 @@ gem 'rqrcode', '~> 2.0'
 gem 'pagy', '~> 6.0.0'
 
 # Countries [https://github.com/countries/countries]
-gem 'countries', '~> 5.2.0', require: 'countries/global'
+gem 'countries', '~> 5.3.0', require: 'countries/global'
 
 # Validate URL format [https://github.com/perfectline/validates_url]
 gem 'validate_url'

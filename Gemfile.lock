@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/faker-ruby/faker.git
-  revision: a037265ce0627612537b79f9b25e3da2141412b0
+  revision: 3e261964110dadeb6777778f147a8851743c3194
   specs:
     faker (3.1.0)
       i18n (>= 1.8.11, < 2)
@@ -94,7 +94,7 @@ GEM
       ffi-compiler (~> 1.0)
     ast (2.4.2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.686.0)
+    aws-partitions (1.687.0)
     aws-sdk-core (3.168.4)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.651.0)
@@ -135,7 +135,7 @@ GEM
     chunky_png (1.4.0)
     concurrent-ruby (1.1.10)
     connection_pool (2.3.0)
-    countries (5.2.1)
+    countries (5.3.0)
       unaccent (~> 0.3)
     crass (1.0.6)
     cssbundling-rails (1.1.2)
@@ -253,7 +253,7 @@ GEM
       activerecord (>= 6.0)
       request_store (~> 1.4)
     parallel (1.22.1)
-    parser (3.1.3.0)
+    parser (3.2.0.0)
       ast (~> 2.4.1)
     pg (1.4.5)
     public_suffix (5.0.1)
@@ -374,7 +374,7 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.8.2)
-    unicode-display_width (2.3.0)
+    unicode-display_width (2.4.2)
     validate_url (1.0.15)
       activemodel (>= 3.0.0)
       public_suffix
@@ -416,7 +416,7 @@ DEPENDENCIES
   caxlsx
   caxlsx_rails
   chartkick
-  countries (~> 5.2.0)
+  countries (~> 5.3.0)
   cssbundling-rails
   debug
   down (~> 5.0)
