@@ -11,9 +11,9 @@ class Room < ApplicationRecord
 
   validates  :name, presence: true
 
-  # Return the number of approved questions in this room
+  # Return the number of approved, being answered or answered questions in this room
   def approved_question_count
-    self.questions.where(status: :approved).or(self.questions.where(status: :beinganswered)).count
+    self.questions.where(status: :approved).or(self.questions.where(status: :beinganswered)).or(self.questions.where(status: :answered)).count
   end
 
   # Return the number of questions with the status "asked" in this room
