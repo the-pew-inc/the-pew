@@ -131,19 +131,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_07_192723) do
     t.index ["user_id"], name: "index_attendances_on_user_id"
   end
 
-  create_table "event_tags", force: :cascade do |t|
-    t.uuid "account_id", null: false
-    t.uuid "event_id", null: false
-    t.uuid "room_id", null: false
-    t.string "name", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["account_id"], name: "index_event_tags_on_account_id"
-    t.index ["event_id"], name: "index_event_tags_on_event_id"
-    t.index ["name"], name: "index_event_tags_on_name"
-    t.index ["room_id"], name: "index_event_tags_on_room_id"
-  end
-
   create_table "events", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "user_id", null: false
     t.string "name", null: false
@@ -168,9 +155,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_07_192723) do
   create_table "members", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "user_id", null: false
     t.uuid "account_id", null: false
+    t.boolean "owner", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_members_on_account_id"
+    t.index ["owner"], name: "index_members_on_owner"
     t.index ["user_id"], name: "index_members_on_user_id"
   end
 
@@ -305,12 +294,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_07_192723) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "attendances", "events"
   add_foreign_key "attendances", "users"
-  add_foreign_key "event_tags", "accounts"
-  add_foreign_key "event_tags", "events"
-  add_foreign_key "event_tags", "rooms"
   add_foreign_key "events", "users"
-  add_foreign_key "members", "accounts"
-  add_foreign_key "members", "users"
   add_foreign_key "messages", "users"
   add_foreign_key "profiles", "users"
   add_foreign_key "questions", "rooms"
