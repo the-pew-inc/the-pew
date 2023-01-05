@@ -1,4 +1,4 @@
-name: the-pew
+name: the-pew-demo
 services:
 - name: web
   git:
