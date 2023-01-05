@@ -7,7 +7,7 @@ namespace :clean_cache do
   # Usage:
   #   - rake clean_cache:clear
   desc "Clearing Rails cache"
-  task :clear do
+  task :clear => :environment do
     Rails.cache.clear
   end
 end
