@@ -7,8 +7,7 @@ class Account < ApplicationRecord
 
   # has_many :members
   has_many :users,   through: :members
-  has_many :tags,    dependent: :destroy
-
+  
   has_one_attached :logo
 
   has_rich_text    :description
