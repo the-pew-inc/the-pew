@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_07_192723) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_05_225145) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -144,6 +144,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_07_192723) do
     t.string "short_code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "account_id", null: false
+    t.index ["account_id"], name: "index_events_on_account_id"
     t.index ["allow_anonymous"], name: "index_events_on_allow_anonymous"
     t.index ["always_on"], name: "index_events_on_always_on"
     t.index ["event_type"], name: "index_events_on_event_type"
@@ -206,6 +208,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_07_192723) do
     t.boolean "anonymous", default: false, null: false
     t.integer "rejection_cause"
     t.uuid "parent_id"
+    t.uuid "account_id", null: false
+    t.index ["account_id"], name: "index_questions_on_account_id"
     t.index ["anonymous"], name: "index_questions_on_anonymous"
     t.index ["parent_id"], name: "index_questions_on_parent_id"
     t.index ["rejection_cause"], name: "index_questions_on_rejection_cause"
@@ -234,6 +238,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_07_192723) do
     t.datetime "start_date", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "account_id", null: false
+    t.index ["account_id"], name: "index_rooms_on_account_id"
     t.index ["allow_anonymous"], name: "index_rooms_on_allow_anonymous"
     t.index ["always_on"], name: "index_rooms_on_always_on"
     t.index ["event_id"], name: "index_rooms_on_event_id"
