@@ -98,9 +98,8 @@ Rails.application.configure do
   # Supported domains
   # config.action_dispatch.tld_length = 2
   config.hosts << "app.thepew.io"
-  config.hosts << "staging.thepew.io"
   config.hosts << "demo.thepew.io"
-  config.hosts << "app.thepew.io"
+  config.hosts << "staging.thepew.io"
 
   # Mailer configuration
   # Heroku / Sendgrid
