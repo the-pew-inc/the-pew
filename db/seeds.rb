@@ -36,6 +36,7 @@ p "Generating a set of random events with default room & questions"
     name: Faker::App.name + " by " + Faker::App.author,
     user: user,
     status: Event.statuses.to_a.sample[1],
+    account_id: Member.where(user_id: user.id).first.account_id,
     always_on: [true, false].sample,
     allow_anonymous: [true, false].sample,
     start_date: Faker::Date.forward(days: 30)
@@ -44,6 +45,7 @@ p "Generating a set of random events with default room & questions"
   room = Room.create!(
     name: '__default__',
     event: event,
+    account_id: Member.where(user_id: user.id).first.account_id,
     always_on: event.always_on,
     allow_anonymous: event.allow_anonymous,
     start_date: event.start_date
@@ -58,6 +60,7 @@ p "Generating a set of random events with default room & questions"
     question = Question.new(
       room: room,
       user: users.sample,
+      account_id: room.account_id,
       title: Faker::ChuckNorris.fact,
       status: Question.statuses.to_a.sample[1]
     )
@@ -91,6 +94,6 @@ end
 print "\n"
 p "Generating a confirmed user with empty profile and event"
 u1 = User.create( email: "test1@test.com", password: "passpass", confirmed: true, confirmed_at: Time.current.utc )
-Profile.create(user: u1.id, nickname: "User #{u1.id} / aka empty")
+Profile.create(user: u1, nickname: "User #{u1.id} / aka empty")
 
 p 'Seed completed'
