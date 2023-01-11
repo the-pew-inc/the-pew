@@ -345,7 +345,7 @@ GEM
       sendgrid-ruby (~> 6.4)
     sendgrid-ruby (6.6.2)
       ruby_http_client (~> 3.4)
-    sidekiq (7.0.2)
+    sidekiq (7.0.3)
       concurrent-ruby (< 2)
       connection_pool (>= 2.3.0)
       rack (>= 2.2.4)
