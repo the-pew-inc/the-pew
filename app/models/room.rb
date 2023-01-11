@@ -5,6 +5,9 @@ class Room < ApplicationRecord
   # Tracking changes
   has_paper_trail
 
+  # Set the account_id (value is taken from the event)
+  before_validation :set_account_id
+
   belongs_to :event
   has_many   :attendances, dependent: :destroy
   has_many   :questions,   dependent: :destroy
@@ -21,4 +24,9 @@ class Room < ApplicationRecord
     self.questions.where(status: :asked).count
   end
 
+  private
+
+  def set_account_id
+    self.account_id = self.event.account_id if self.account_id.nil?
+  end
 end

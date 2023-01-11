@@ -29,19 +29,17 @@ class Event < ApplicationRecord
 
   private
 
-  # TODO: remove this method once the system becomes more stable
   def set_values
     self.end_date = start_date
-    self.short_code = generate_pin # should only be called when status is opened (or published) and removed for all otehr statuses
-    logger.info "set_values / short_code: #{self.short_code}"
+    self.short_code = generate_pin if self.short_code.nil?
+    self.account_id = Member.where(user_id: self.user_id).first.account_id if self.account_id.nil?
 
     set_duration
 
-    generate_qr_code
+    generate_qr_code if self.short_code_changed?
   end
 
   def generate_qr_code
-    logger.info "generate_qr_code / short_code: #{self.short_code}"
     qr_url = url_for(
       controller: 'events',
       action: 'event',

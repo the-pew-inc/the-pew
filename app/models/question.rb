@@ -8,6 +8,9 @@ class Question < ApplicationRecord
   # Tracking changes
   has_paper_trail
 
+  # Set the account_id (value is taken from the event)
+  before_validation :set_account_id
+
   belongs_to :user
   belongs_to :room
   has_many   :votes, as: :votable, dependent: :destroy
@@ -87,6 +90,12 @@ class Question < ApplicationRecord
     broadcast_update_to self.room_id, target: "asked_question_counter", html: Question.asked_questions_for_room(self.room_id).count
     broadcast_update_to self.room_id, target: "question_counter", html: Question.approved_questions_for_room(self.room_id).count
     broadcast_remove_to self.room_id, target: self
+  end
+
+  private
+
+  def set_account_id
+    self.account_id = self.room.account_id if self.account_id.nil?
   end
 
 end

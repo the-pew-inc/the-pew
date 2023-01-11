@@ -60,9 +60,9 @@ README.md
 
 .rspec
 
-tmp
+tmp/*
 
-log
+log/*
 
 test
 
