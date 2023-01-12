@@ -78,6 +78,7 @@ Rails.application.routes.draw do
   post '/', to: 'events#validate_pin', as: :pin
 
   # Legal routes
+  get 'legal', to: 'legal#index'
   get 'legal/coc', to: 'legal#coc'
   get 'legal/privacy', to: 'legal#privacy'
   get 'legal/tos', to: 'legal#tos'
