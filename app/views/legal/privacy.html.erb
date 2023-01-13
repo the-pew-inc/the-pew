@@ -1,4 +1,5 @@
 <%# Privacy Policy %>
+<%= render "legal/breadcrumb", current_page: "Privacy Policy" %>
 <h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 dark:text-white">
   Privacy Policy
 </h1>
@@ -103,7 +104,7 @@
           Payment Information When you make a payment for our Services, you will be asked to submit payment information data such as the credit card number and details. The payment is processed by our third party partners; we do not store or process any of your payment information.
         </td>
         <td class="px-6 py-4">
-          We use third party payment processors, any transactions that are processed by these third party payment processors will be governed by their privacy policies and terms which we recommend that you review. Note that, currently we use the following third party service providers for payment processing: Stripe (please see the privacy policy here)
+          We use third party payment processors, any transactions that are processed by these third party payment processors will be governed by their privacy policies and terms which we recommend that you review. Note that, currently we use the following third party service providers for payment processing: Stripe (please see the privacy policy <%= link_to "here", "https://stripe.com/privacy", class: "font-medium text-blue-600 underline dark:text-blue-500 hover:no-underline" %>)
         </td>
         <td class="px-6 py-4">
           This information will be processed for the purpose of performing our contract with you and will enable you to use our Services
@@ -246,7 +247,7 @@
   </li>
 </ul>
 <p class="mb-3 font-light text-gray-500 dark:text-gray-400">
-  Please review our <%= link_to "Privacy Rights Policy", "legal/prp", class: "font-medium text-blue-600 underline dark:text-blue-500 hover:no-underline" %> regarding your rights under applicable law. You may exercise any or all of your above rights in relation to your Personal Data by filling out the Data Subject Request form (“DSR”) available here and send it to our privacy team at: support@thepew.io Please note that:
+  Please review our <%= link_to "Privacy Rights Policy", "/legal/prp", class: "font-medium text-blue-600 underline dark:text-blue-500 hover:no-underline" %> regarding your rights under applicable law. You may exercise any or all of your above rights in relation to your Personal Data by filling out the Data Subject Request form (“DSR”) available here and send it to our privacy team at: support@thepew.io Please note that:
 </p>
 <ul class="mb-3 list-disc md:ml-6">
   <li class="font-light text-gray-500 dark:text-gray-400">
@@ -267,7 +268,7 @@
   Security
 </h2>
 <p class="mb-3 font-light text-gray-500 dark:text-gray-400">
-  Security is at our highest priority; we design our Services taking in to account the means of securing your data. We use physical, technical and administrative security measures for the Services that we believe are in compliance with applicable laws and industry standards in order to prevent your information from being accessed without the proper authorization, improperly used or disclosed, unlawfully destructed or accidentally lost, as we will further explain in our <%= link_to "Security Policy", "legal/sp", class: "font-medium text-blue-600 underline dark:text-blue-500 hover:no-underline" %>. As part of our efforts to maintain appropriate safeguards, policies and procedures, we have validated our systems’ security by the SOC 2 compliance program. It is important for you to remember however, that unfortunately, the transmission of information via the internet cannot be 100% secure. Please contact us at: support@thepew.io if you feel that your privacy was not dealt with properly or was dealt with in a way that was in breach of our Privacy Policy or if you become aware of a third party’s attempt to gain unauthorized access to any of your Personal Data. We will make a reasonable effort to notify you and the appropriate authorities (if required by applicable law) in the event that we discover a security incident related to your Personal Data.
+  Security is at our highest priority; we design our Services taking in to account the means of securing your data. We use physical, technical and administrative security measures for the Services that we believe are in compliance with applicable laws and industry standards in order to prevent your information from being accessed without the proper authorization, improperly used or disclosed, unlawfully destructed or accidentally lost, as we will further explain in our <%= link_to "Security Policy", "/legal/sp", class: "font-medium text-blue-600 underline dark:text-blue-500 hover:no-underline" %>. As part of our efforts to maintain appropriate safeguards, policies and procedures, we have validated our systems’ security by the SOC 2 compliance program. It is important for you to remember however, that unfortunately, the transmission of information via the internet cannot be 100% secure. Please contact us at: support@thepew.io if you feel that your privacy was not dealt with properly or was dealt with in a way that was in breach of our Privacy Policy or if you become aware of a third party’s attempt to gain unauthorized access to any of your Personal Data. We will make a reasonable effort to notify you and the appropriate authorities (if required by applicable law) in the event that we discover a security incident related to your Personal Data.
 </p>
 <h2 class="my-4 text-3xl font-extrabold leading-none tracking-tight text-gray-900 dark:text-white">
   Children
