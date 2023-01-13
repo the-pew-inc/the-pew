@@ -35,8 +35,7 @@
         <div class="mb-6">
           <%= form.submit "Create my account", class: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full  px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" %>
         </div>
-        <div class="text-sm text-slate-500">By clicking on CREATE MY ACCOUNT, you agree to the Terms of Service and Privacy of ThePew and our code of conduct</div>
-        <div class="text-sm text-slate-500 mt-3">After clicking on CREATE MY ACCOUNT, you will receive an email to verify your email address. Unverified accounts cannot be used to ask questions.</div>
+        <div class="text-sm text-slate-500">By clicking on CREATE MY ACCOUNT, you agree to our <%= link_to "Terms of Service", "/legal/tos", class: "font-medium text-blue-600 underline dark:text-blue-500 hover:no-underline" %>, <%= link_to "Privacy Policy", "/legal/privacy", class: "font-medium text-blue-600 underline dark:text-blue-500 hover:no-underline" %> and our <%= link_to "Code of Conduct", "/legal/coc", class: "font-medium text-blue-600 underline dark:text-blue-500 hover:no-underline" %> </div>
       <% end %>
     </div>
   </div>
