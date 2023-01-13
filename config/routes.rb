@@ -79,6 +79,7 @@ Rails.application.routes.draw do
 
   # Legal routes
   get 'legal',         to: 'legal#index'
+  get 'legal/ccpa',    to: 'legal#ccpa'
   get 'legal/coc',     to: 'legal#coc'
   get 'legal/privacy', to: 'legal#privacy'
   get 'legal/prp',     to: 'legal#prp'
