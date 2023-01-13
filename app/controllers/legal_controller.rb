@@ -9,10 +9,19 @@ class LegalController < ApplicationController
   # Terms of Service
   def tos; end
 
+  # Cookie Policy
+  def cp; end
+
+  # Security Policy
+  def sp; end
+
   # Terms of Usage
   def tou; end
 
   # Privacy
   def privacy; end
+
+  # Privacy Rights Policy 
+  def prp; end
 
 end

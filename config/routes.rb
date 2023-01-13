@@ -78,11 +78,14 @@ Rails.application.routes.draw do
   post '/', to: 'events#validate_pin', as: :pin
 
   # Legal routes
-  get 'legal', to: 'legal#index'
-  get 'legal/coc', to: 'legal#coc'
+  get 'legal',         to: 'legal#index'
+  get 'legal/coc',     to: 'legal#coc'
   get 'legal/privacy', to: 'legal#privacy'
-  get 'legal/tos', to: 'legal#tos'
-  get 'legal/tou', to: 'legal#tou'
+  get 'legal/prp',     to: 'legal#prp'
+  get 'legal/sp',      to: 'legal#sp'
+  get 'legal/tos',     to: 'legal#tos'
+  get 'legal/tou',     to: 'legal#tou'
+  get 'legal/cp',      to: 'legal#cp'
 
   # Defines the main root path route ("/")
   # Must be the last route in the file
