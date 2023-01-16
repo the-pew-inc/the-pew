@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/faker-ruby/faker.git
-  revision: f8b08372f602b2fb6fe3dd3bb0bfe3d85da23584
+  revision: e199b6dd4def391feac529f91a7bf2e2e3a9ea7f
   specs:
     faker (3.1.0)
       i18n (>= 1.8.11, < 2)
@@ -94,7 +94,7 @@ GEM
       ffi-compiler (~> 1.0)
     ast (2.4.2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.692.0)
+    aws-partitions (1.693.0)
     aws-sdk-core (3.168.4)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.651.0)
@@ -151,7 +151,7 @@ GEM
       addressable (~> 2.8)
     errbase (0.2.2)
     erubi (1.12.0)
-    faraday (2.7.2)
+    faraday (2.7.3)
       faraday-net_http (>= 2.0, < 3.1)
       ruby2_keywords (>= 0.0.4)
     faraday-net_http (3.0.2)
@@ -248,7 +248,7 @@ GEM
     omniauth-rails_csrf_protection (1.0.1)
       actionpack (>= 4.2)
       omniauth (~> 2.0)
-    pagy (6.0.0)
+    pagy (6.0.1)
     paper_trail (14.0.0)
       activerecord (>= 6.0)
       request_store (~> 1.4)
@@ -295,9 +295,9 @@ GEM
       zeitwerk (~> 2.5)
     rainbow (3.1.1)
     rake (13.0.6)
-    redis (5.0.5)
+    redis (5.0.6)
       redis-client (>= 0.9.0)
-    redis-client (0.12.0)
+    redis-client (0.12.1)
       connection_pool
     regexp_parser (2.6.1)
     reline (0.3.2)
