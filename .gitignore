@@ -41,3 +41,6 @@
 output.html
 
 /config/credentials/test.key
+
+# Production specific files
+.do/app-production.yaml
