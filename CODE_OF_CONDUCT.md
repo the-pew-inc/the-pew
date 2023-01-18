@@ -122,8 +122,7 @@ version 2.1, available at
 Community Impact Guidelines were inspired by
 [Mozilla's code of conduct enforcement ladder][Mozilla CoC].
 
-For answers to common questions about this code of conduct, see the FAQ at
-[FAQ](../master/CODE_OF_CONDUCT_FAQ.md).
+For answers to common questions about this code of conduct, see the FAQ [here](../master/CODE_OF_CONDUCT_FAQ.md).
 
 [homepage]: https://www.thepew.io
 [v2.1]: https://www.contributor-covenant.org/version/2/1/code_of_conduct.html
