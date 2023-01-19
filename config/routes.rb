@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   # Cookie acceptance
   get 'cookies', to: 'cookies#index'
 
-  # Account routes
+  # User Account routes
   put 'account/:id', to: 'users#update', as: 'update_account'
   get 'account/:id', to: 'users#edit', as: 'edit_account'
   delete 'account/:id', to: 'users#destroy', as: 'destroy_account'
@@ -87,6 +87,12 @@ Rails.application.routes.draw do
   get 'legal/tos',     to: 'legal#tos'
   get 'legal/tou',     to: 'legal#tou'
   get 'legal/cp',      to: 'legal#cp'
+
+  # Organization (aka Account model) routes
+  get 'organization/:id',      to: 'account#show'
+  get 'organization/:id/edit', to: 'account#edit'
+  put 'organization/:id',      to: 'account#update'
+
 
   # Defines the main root path route ("/")
   # Must be the last route in the file

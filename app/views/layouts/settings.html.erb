@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>The Pew | Understand your audience!</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="robots" content="noindex,nofollow">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+    <% if session[:cookies_accepted] == true %>
+      <!-- Hotjar Tracking Code for https://app.thepew.io -->
+      <script>
+        (function(h,o,t,j,a,r){
+            h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+            h._hjSettings={hjid:3116485,hjsv:6};
+            a=o.getElementsByTagName('head')[0];
+            r=o.createElement('script');r.async=1;
+            r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+            a.appendChild(r);
+        })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+      </script>
+      <%#= render 'layout/google_analytcis' %>
+    <% end %>
+    <%= favicon_link_tag asset_path('favicon.png') %>
+  </head>
+  <body class="antialiased">
+    <div class="flex flex-col min-h-screen bg-white dark:bg-gray-900">
+      <header class="sticky top-0 z-40 flex-none mx-auto w-full bg-white border-b border-gray-200 dark:border-gray-600 dark:bg-gray-800">
+        <%# render "shared/banner" %>
+        <%= render "shared/top_navigation" %>
+      </header>
+      <%# Flash message %>
+      <div class="fixed z-50 inset-0 px-4 py-6 pointer-events-none sm:p-6 sm:items-start sm:justify-end">
+        <div id="alerts" class="flex flex-col items-end justify-center">
+          <% flash.each do |type, data| %>
+            <%= render AlertComponent.new(type: type, data: data) %>
+          <% end %>
+        </div>
+      </div>
+      <main class="flex-grow">
+        <div class="pt-2 lg:max-w-7xl max-w-6xl px-1">
+          <%= yield %>
+        </div>
+      </main>
+      <%= turbo_frame_tag :cookies_modal, src: cookies_path if session[:cookies_accepted].nil? %>
+      <%= render "shared/footer" %>
+    </div>
+  </body>
+</html>
