@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_05_225145) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_17_215006) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -21,7 +21,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_05_225145) do
     t.string "country"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "domain"
+    t.boolean "sso", default: false, null: false
+    t.string "dns_txt"
+    t.boolean "domain_verified", default: false, null: false
+    t.datetime "domain_verified_at", precision: nil
     t.index ["country"], name: "index_accounts_on_country"
+    t.index ["dns_txt"], name: "index_accounts_on_dns_txt", unique: true
+    t.index ["domain"], name: "index_accounts_on_domain", unique: true
+    t.index ["domain_verified"], name: "index_accounts_on_domain_verified"
+    t.index ["sso"], name: "index_accounts_on_sso"
   end
 
   create_table "action_text_rich_texts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
