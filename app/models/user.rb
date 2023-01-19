@@ -119,8 +119,13 @@ class User < ApplicationRecord
 
     # Attach user to the default account
     @member = Member.new()
+<<<<<<< HEAD
     @member.user_id = self.id
     @member.organization_id = @default_organization.id
+=======
+    @member.user = self
+    @member.account = @account
+>>>>>>> 2ad12b2 (Make sure that users are owner of their default account)
     @member.owner = true
     @member.save
   end
