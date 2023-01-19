@@ -6,8 +6,8 @@ class Account < ApplicationRecord
   has_paper_trail
 
   # Callbacks
-  before_save :generate_dns_txt
-  before_validation :clean_domain
+  before_save :generate_dns_txt, if: :will_save_change_to_domain?
+  before_validation :clean_domain, if: :will_save_change_to_domain?
 
   # has_many :members
   has_many :users,   through: :members
@@ -55,6 +55,6 @@ class Account < ApplicationRecord
   # from the domain name
   # It is called before validating the model and only if the domain name has changed
   def clean_domain
-    self.domain = self.domain.gsub(/(http|https):\/\/|\/$/, '').gsub(/[\r\n\s]/, '') if self.domain_changed?
+    self.domain = self.domain.gsub(/(http|https):\/\/|\/$/, '').gsub(/[\r\n\s]/, '')
   end
 end
