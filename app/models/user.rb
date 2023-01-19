@@ -88,6 +88,7 @@ class User < ApplicationRecord
     @member = Member.new()
     @member.user = self
     @member.account = @account
+    @member.owner = true
     @member.save
   end
   
