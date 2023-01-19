@@ -1,4 +1,4 @@
-class Account < ApplicationRecord
+class Account < ApplicationRecord  
   # enable rolify on the Account class
   resourcify
 
@@ -6,8 +6,8 @@ class Account < ApplicationRecord
   has_paper_trail
 
   # Callbacks
-  before_save :generate_dns_txt if self.domain_changed? 
-  before_validation :clean_domain if self.domain_changed?
+  before_save :generate_dns_txt
+  before_validation :clean_domain
 
   # has_many :members
   has_many :users,   through: :members
@@ -25,11 +25,11 @@ class Account < ApplicationRecord
   validates :domain,  uniqueness: true, 
                       fully_qualified_domain: true,
                       length: { minimum: 3, maximum: 120 }
-  validates :dns_txt, uniqueness: true, length: 63
+  validates :dns_txt, uniqueness: true, length: { is: 63 }
 
   # Generate a unique TXT entry
   def generate_dns_txt
-    self.dns_txt = random_unique_string
+    self.dns_txt = random_unique_string if self.domain_changed? 
   end
 
   # Display the full dns text 
@@ -55,6 +55,6 @@ class Account < ApplicationRecord
   # from the domain name
   # It is called before validating the model and only if the domain name has changed
   def clean_domain
-    self.domain = self.domain.gsub(/(http|https):\/\/|\/$/, '').gsub(/[\r\n\s]/, '')
+    self.domain = self.domain.gsub(/(http|https):\/\/|\/$/, '').gsub(/[\r\n\s]/, '') if self.domain_changed?
   end
 end
