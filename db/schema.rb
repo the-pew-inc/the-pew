@@ -179,11 +179,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_24_185308) do
 
   create_table "members", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "user_id", null: false
-    t.uuid "organization_id", null: false
+    t.uuid "account_id", null: false
     t.boolean "owner", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["organization_id"], name: "index_members_on_organization_id"
+    t.index ["account_id"], name: "index_members_on_account_id"
     t.index ["owner"], name: "index_members_on_owner"
     t.index ["user_id"], name: "index_members_on_user_id"
   end

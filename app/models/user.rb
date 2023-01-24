@@ -34,11 +34,7 @@ class User < ApplicationRecord
   attr_accessor :current_password
 
   # Callbacks
-<<<<<<< HEAD
   after_create  :create_and_attach_to_organization
-=======
-  after_create  :create_and_attach_to_default_organization
->>>>>>> 9aab7f0 (Renaming Account into Organization)
   after_create  :send_confirmation_email!
   before_save   :downcase_email, if: :will_save_change_to_email?
   before_save   :generate_password_digest
@@ -114,33 +110,17 @@ class User < ApplicationRecord
     self.confirmed_at = nil
   end
 
-<<<<<<< HEAD
   def create_and_attach_to_organization
     # Creating a default account
     # TODO: connect users to existing account via SSO or other mechanisms to support invitation
     @default_organization = Organization.create!({name: '__default__'})
 
     logger.info @default_organization.inspect
-=======
-  def create_and_attach_to_default_organization
-    # Creating a default account
-    # TODO: connect users to existing account via SSO or other mechanisms to support invitation
-    @organization = Organization.create({name: '__default__'})
->>>>>>> 9aab7f0 (Renaming Account into Organization)
 
     # Attach user to the default account
     @member = Member.new()
-<<<<<<< HEAD
     @member.user_id = self.id
     @member.organization_id = @default_organization.id
-=======
-    @member.user = self
-<<<<<<< HEAD
-    @member.account = @account
->>>>>>> 2ad12b2 (Make sure that users are owner of their default account)
-=======
-    @member.organization = @organization
->>>>>>> 9aab7f0 (Renaming Account into Organization)
     @member.owner = true
     @member.save
   end
