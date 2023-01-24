@@ -89,11 +89,19 @@ Rails.application.routes.draw do
   get 'legal/cp',      to: 'legal#cp'
 
   # Organization (aka Account model) routes
+<<<<<<< HEAD
   # and sub-routes
   resources :organization, only: [:show, :update, :edit] do
     resources :users, only: [:index]
     resource  :ssos,  only: [:show, :update, :edit], shallow: true
   end
+=======
+  resources :organization, only: [:show, :update, :edit]
+
+  # Organization (aka Account model) related routes
+  get 'organization/:id/users', to: 'organization#users', as: :organization_users
+  get 'organization/:id/sso',   to: 'organization#sso',   as: :organization_sso
+>>>>>>> 9aab7f0 (Renaming Account into Organization)
 
   # Defines the main root path route ("/")
   # Must be the last route in the file

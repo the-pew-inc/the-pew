@@ -14,7 +14,12 @@ class OrganizationController < ApplicationController
   def edit
     # TODO add a condition for when a user is an admin for the account.
     # Current code only displays account information when the user is the owner
+<<<<<<< HEAD
     @organization.name = nil if @organization.name === "__default__"
+=======
+    @organization = Organization.find(params[:id])
+    @organization_owner = true
+>>>>>>> 9aab7f0 (Renaming Account into Organization)
   end
 
   # GET /organization/:id
@@ -35,6 +40,20 @@ class OrganizationController < ApplicationController
     else
       render :edit, status: :unprocessable_entity
     end
+  end
+
+  # Organization related routes
+
+  # GET /organization/:id/users
+  # List all organization users (aka users who belong to an organization)
+  def users
+    @users = User.where(user_id: Member.where(organization_id: params[:id]).select(:user_id))
+  end
+
+  # GET /organization/:id/sso
+  # Single Sign On
+  def sso
+
   end
 
   private
