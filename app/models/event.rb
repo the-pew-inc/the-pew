@@ -32,7 +32,7 @@ class Event < ApplicationRecord
   def set_values
     self.end_date = start_date
     self.short_code = generate_pin if self.short_code.nil?
-    self.account_id = Member.where(user_id: self.user_id).first.account_id if self.account_id.nil?
+    self.organization_id = Member.where(user_id: self.user_id).first.organization_id if self.organization_id.nil?
 
     set_duration
 

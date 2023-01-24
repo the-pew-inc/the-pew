@@ -6,7 +6,7 @@ class User < ApplicationRecord
   attr_accessor :current_password
 
   # Callbacks
-  after_create  :create_and_attach_to_default_account
+  after_create  :create_and_attach_to_default_organization
   after_create  :send_confirmation_email!
   before_save   :downcase_email, if: :will_save_change_to_email?
   before_save   :generate_password_digest
@@ -79,15 +79,15 @@ class User < ApplicationRecord
     self.confirmed_at = nil
   end
 
-  def create_and_attach_to_default_account
+  def create_and_attach_to_default_organization
     # Creating a default account
     # TODO: connect users to existing account via SSO or other mechanisms to support invitation
-    @account = Account.create({name: '__default__'})
+    @organization = Organization.create({name: '__default__'})
 
     # Attach user to the default account
     @member = Member.new()
     @member.user = self
-    @member.account = @account
+    @member.organization = @organization
     @member.owner = true
     @member.save
   end

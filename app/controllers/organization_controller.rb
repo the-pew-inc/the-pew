@@ -13,19 +13,32 @@ class OrganizationController < ApplicationController
   def edit
     # TODO add a condition for when a user is an admin for the account.
     # Current code only displays account information when the user is the owner
-    @account = Account.where(account_id: Member.where(user_id: current_user.id, owner: true).first.id).first
-    @account_owner = true
+    @organization = Organization.find(params[:id])
+    @organization_owner = true
   end
 
   # GET /organization/:id
+  # TODO make it API only as the app is using the edit form
   def show
-    @account = Account.find(params[:id])
-    # Shall be moved to another controller that only deals with the users who are part of an account
-    # @account_users = User.where(user_id: User.where(user_id: Member.where(account_id: @account.id)).select(:user_id))
+    # @account = Account.find(params[:id])
   end
 
   # PUT /organization/:id
   def update
+
+  end
+
+  # Organization related routes
+
+  # GET /organization/:id/users
+  # List all organization users (aka users who belong to an organization)
+  def users
+    @users = User.where(user_id: Member.where(organization_id: params[:id]).select(:user_id))
+  end
+
+  # GET /organization/:id/sso
+  # Single Sign On
+  def sso
 
   end
 

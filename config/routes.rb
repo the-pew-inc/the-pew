@@ -89,10 +89,11 @@ Rails.application.routes.draw do
   get 'legal/cp',      to: 'legal#cp'
 
   # Organization (aka Account model) routes
-  get 'organization/:id',      to: 'account#show'
-  get 'organization/:id/edit', to: 'account#edit'
-  put 'organization/:id',      to: 'account#update'
+  resources :organization, only: [:show, :update, :edit]
 
+  # Organization (aka Account model) related routes
+  get 'organization/:id/users', to: 'organization#users', as: :organization_users
+  get 'organization/:id/sso',   to: 'organization#sso',   as: :organization_sso
 
   # Defines the main root path route ("/")
   # Must be the last route in the file

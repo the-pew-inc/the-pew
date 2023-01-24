@@ -1,4 +1,4 @@
-class Account < ApplicationRecord  
+class Organization < ApplicationRecord  
   # enable rolify on the Account class
   resourcify
 

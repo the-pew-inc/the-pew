@@ -6,7 +6,7 @@ class Room < ApplicationRecord
   has_paper_trail
 
   # Set the account_id (value is taken from the event)
-  before_validation :set_account_id
+  before_validation :set_organization_id
 
   belongs_to :event
   has_many   :attendances, dependent: :destroy
@@ -26,7 +26,7 @@ class Room < ApplicationRecord
 
   private
 
-  def set_account_id
-    self.account_id = self.event.account_id if self.account_id.nil?
+  def set_organization_id
+    self.organization_id = self.event.organization_id if self.organization_id.nil?
   end
 end
