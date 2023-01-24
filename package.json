@@ -9,7 +9,7 @@
     "chart.js": "4.2.0",
     "chartkick": "5.0.1",
     "esbuild": "0.16.17",
-    "flowbite": "1.6.2",
+    "flowbite": "1.6.3",
     "postcss": "8.4.21",
     "stimulus-autocomplete": "3.0.2",
     "taggle": "1.15.0",
