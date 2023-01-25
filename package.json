@@ -5,6 +5,7 @@
     "@hotwired/stimulus": "3.2.1",
     "@hotwired/turbo-rails": "7.2.4",
     "@rails/actiontext": "7.0.4-2",
+    "@tailwindcss/typography": "0.5.9",
     "autoprefixer": "10.4.13",
     "chart.js": "4.2.0",
     "chartkick": "5.0.1",

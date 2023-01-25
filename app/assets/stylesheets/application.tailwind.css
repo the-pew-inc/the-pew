@@ -1,4 +1,5 @@
 @import "actiontext";
+
 /* Tailwind CSS */
 @tailwind base;
 @tailwind components;
@@ -16,4 +17,4 @@
 }
 
 /* Applying style to Trix using Tailwind Typograhy plugin */
-/* trix-editor { @apply prose max-w-none } */
+trix-editor { @apply prose max-w-none }
