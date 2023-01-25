@@ -4,7 +4,7 @@
   "dependencies": {
     "@hotwired/stimulus": "3.2.1",
     "@hotwired/turbo-rails": "7.2.4",
-    "@rails/actiontext": "7.0.4",
+    "@rails/actiontext": "7.0.4-2",
     "autoprefixer": "10.4.13",
     "chart.js": "4.2.0",
     "chartkick": "5.0.1",
@@ -18,7 +18,7 @@
   },
   "scripts": {
     "build": "node esbuild.config.js",
-    "build:css": "tailwindcss -i ./app/assets/stylesheets/application.tailwind.css -o ./app/assets/builds/application.css --minify"
+    "build:css": "tailwindcss -i ./app/assets/stylesheets/application.tailwind.css -o ./app/assets/builds/application.css"
   },
   "devDependencies": {
     "@tailwindcss/line-clamp": "0.4.2",
