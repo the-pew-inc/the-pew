@@ -10,7 +10,7 @@ class RenameAccountModelToOrganization < ActiveRecord::Migration[7.0]
     if Event.attribute_names.include? "account_id"
       rename_column :events, :account_id, :organization_id 
     end
-    if Member.attribute_names.include? "schaccount_iddule"
+    if Member.attribute_names.include? "account_id"
       rename_column :members, :account_id, :organization_id
     end
     if Question.attribute_names.include? "account_id"

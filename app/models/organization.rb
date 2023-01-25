@@ -22,10 +22,11 @@ class Organization < ApplicationRecord
                      size: { between: 1.kilobyte..5.megabytes, message: 'is not given between size' }
 
   # SSO related field
-  validates :domain,  uniqueness: true, 
+  validates :domain,  uniqueness: true,
+                      allow_nil: true,
                       fully_qualified_domain: true,
                       length: { minimum: 3, maximum: 120 }
-  validates :dns_txt, uniqueness: true, length: { is: 63 }
+  validates :dns_txt, uniqueness: true, length: { is: 63 }, allow_nil: true
 
   # Generate a unique TXT entry
   def generate_dns_txt

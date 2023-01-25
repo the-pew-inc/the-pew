@@ -3,7 +3,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@import 'actiontext.css';
 
 /* Custom animation used by Alert messages (aka Flash) */
 @keyframes notification-countdown {
