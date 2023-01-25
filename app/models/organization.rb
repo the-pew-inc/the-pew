@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # == Schema Information
 #
 # Table name: organizations
@@ -23,8 +22,6 @@
 #  index_organizations_on_domain_verified  (domain_verified)
 #  index_organizations_on_sso              (sso)
 #
-=======
->>>>>>> 9aab7f0 (Renaming Account into Organization)
 class Organization < ApplicationRecord  
   # enable rolify on the Account class
   resourcify
@@ -33,17 +30,10 @@ class Organization < ApplicationRecord
   has_paper_trail
 
   # Callbacks
-<<<<<<< HEAD
   before_validation :generate_dns_txt, if: :will_save_change_to_domain?
   before_validation :clean_domain, if: :will_save_change_to_domain?
 
   has_many :members
-=======
-  before_save :generate_dns_txt, if: :will_save_change_to_domain?
-  before_validation :clean_domain, if: :will_save_change_to_domain?
-
-  # has_many :members
->>>>>>> 9aab7f0 (Renaming Account into Organization)
   has_many :users,   through: :members
   
   has_one_attached :logo
@@ -56,7 +46,6 @@ class Organization < ApplicationRecord
                      size: { between: 1.kilobyte..5.megabytes, message: 'is not given between size' }
 
   # SSO related field
-<<<<<<< HEAD
   validates :domain,  uniqueness: true,
                       allow_nil: true,
                       fully_qualified_domain: true,
@@ -65,20 +54,6 @@ class Organization < ApplicationRecord
 
   # Display the full dns text 
   # This includes the prefix (27 characters) and the unique 126 character string stored in the database
-=======
-  validates :domain,  uniqueness: true, 
-                      fully_qualified_domain: true,
-                      length: { minimum: 3, maximum: 120 }
-  validates :dns_txt, uniqueness: true, length: { is: 63 }
-
-  # Generate a unique TXT entry
-  def generate_dns_txt
-    self.dns_txt = random_unique_string if self.domain_changed? 
-  end
-
-  # Display the full dns text 
-  # This includes the prefix (27 characters) and the unique 63 character string stored in the database
->>>>>>> 9aab7f0 (Renaming Account into Organization)
   def full_dns_txt
     prefix = "thepew-domain-verification=" # 27 characters
     prefix + self.dns_txt
@@ -86,16 +61,12 @@ class Organization < ApplicationRecord
 
   private
 
-<<<<<<< HEAD
   # Generate a unique TXT entry
   def generate_dns_txt
     self.dns_txt = random_unique_string if self.domain_changed?
   end
 
   # Generates a unique 126 character long and case sensitive string
-=======
-  # Generates a unique 63 character and case sensitive string
->>>>>>> 9aab7f0 (Renaming Account into Organization)
   def random_unique_string
     rus = ""
     loop do
@@ -111,8 +82,4 @@ class Organization < ApplicationRecord
   def clean_domain
     self.domain = self.domain.gsub(/(http|https):\/\/|\/$/, '').gsub(/[\r\n\s]/, '')
   end
-<<<<<<< HEAD
 end
-=======
-end
->>>>>>> 9aab7f0 (Renaming Account into Organization)
