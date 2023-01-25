@@ -17,4 +17,8 @@
 }
 
 /* Applying style to Trix using Tailwind Typograhy plugin */
+<<<<<<< HEAD
 trix-editor { @apply prose max-w-none }
+=======
+trix-editor { @apply prose max-w-none }
+>>>>>>> 0a62069 (Adding Tailwind Typography plugin to better format text inside of Trix)
