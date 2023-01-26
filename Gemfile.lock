@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/faker-ruby/faker.git
-  revision: 2f63c85bf2878b974ce8325cec896c9c064eb247
+  revision: 1c868b22beeb164962c955c4a81c98b000e3ec71
   specs:
     faker (3.1.0)
       i18n (>= 1.8.11, < 2)
@@ -84,7 +84,7 @@ GEM
       activesupport (>= 5.2)
       device_detector
       safely_block (>= 0.2.1)
-    appmap (0.95.0)
+    appmap (0.95.1)
       activesupport
       method_source
       rack
@@ -94,8 +94,8 @@ GEM
       ffi-compiler (~> 1.0)
     ast (2.4.2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.699.0)
-    aws-sdk-core (3.169.0)
+    aws-partitions (1.700.0)
+    aws-sdk-core (3.170.0)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.651.0)
       aws-sigv4 (~> 1.5)
@@ -110,7 +110,7 @@ GEM
     aws-sigv4 (1.5.2)
       aws-eventstream (~> 1, >= 1.0.2)
     bindex (0.8.1)
-    bootsnap (1.15.0)
+    bootsnap (1.16.0)
       msgpack (~> 1.2)
     brakeman (5.4.0)
     builder (3.2.4)
@@ -135,7 +135,7 @@ GEM
     chunky_png (1.4.0)
     concurrent-ruby (1.2.0)
     connection_pool (2.3.0)
-    countries (5.3.0)
+    countries (5.3.1)
       unaccent (~> 0.3)
     crass (1.0.6)
     cssbundling-rails (1.1.2)
@@ -159,7 +159,7 @@ GEM
     ffi-compiler (1.0.1)
       ffi (>= 1.0.0)
       rake
-    globalid (1.0.1)
+    globalid (1.1.0)
       activesupport (>= 5.0)
     groupdate (6.1.0)
       activesupport (>= 5.2)
