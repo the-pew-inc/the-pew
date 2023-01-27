@@ -1,10 +1,6 @@
 GIT
   remote: https://github.com/faker-ruby/faker.git
-<<<<<<< HEAD
   revision: 53843386b662445d1d766f7b4226aa63549954a6
-=======
-  revision: 1c868b22beeb164962c955c4a81c98b000e3ec71
->>>>>>> 729c260 (Upgrading appmap and country gems)
   specs:
     faker (3.1.1)
       i18n (>= 1.8.11, < 2)
@@ -89,6 +85,7 @@ GEM
       device_detector
       safely_block (>= 0.2.1)
 <<<<<<< HEAD
+<<<<<<< HEAD
     annotate (3.2.0)
       activerecord (>= 3.2, < 8.0)
       rake (>= 10.4, < 14.0)
@@ -96,6 +93,9 @@ GEM
 =======
     appmap (0.95.1)
 >>>>>>> 729c260 (Upgrading appmap and country gems)
+=======
+    appmap (0.95.2)
+>>>>>>> 31241bf (Upgrading appmap, aws-partitions and aws-sdk-s3 gems)
       activesupport
       method_source
       rack
@@ -106,10 +106,14 @@ GEM
     ast (2.4.2)
     aws-eventstream (1.2.0)
 <<<<<<< HEAD
+<<<<<<< HEAD
     aws-partitions (1.730.0)
     aws-sdk-core (3.170.1)
 =======
     aws-partitions (1.700.0)
+=======
+    aws-partitions (1.701.0)
+>>>>>>> 31241bf (Upgrading appmap, aws-partitions and aws-sdk-s3 gems)
     aws-sdk-core (3.170.0)
 >>>>>>> 729c260 (Upgrading appmap and country gems)
       aws-eventstream (~> 1, >= 1.0.2)
@@ -119,7 +123,11 @@ GEM
     aws-sdk-kms (1.63.0)
       aws-sdk-core (~> 3, >= 3.165.0)
       aws-sigv4 (~> 1.1)
+<<<<<<< HEAD
     aws-sdk-s3 (1.119.1)
+=======
+    aws-sdk-s3 (1.119.0)
+>>>>>>> 31241bf (Upgrading appmap, aws-partitions and aws-sdk-s3 gems)
       aws-sdk-core (~> 3, >= 3.165.0)
       aws-sdk-kms (~> 1)
       aws-sigv4 (~> 1.4)
