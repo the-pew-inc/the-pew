@@ -3,19 +3,11 @@
   "private": "true",
   "dependencies": {
     "@hotwired/stimulus": "3.2.1",
-<<<<<<< HEAD
     "@hotwired/turbo-rails": "7.3.0",
     "@rails/actiontext": "7.0.4-3",
     "@tailwindcss/typography": "0.5.9",
     "autoprefixer": "10.4.14",
     "chart.js": "4.2.1",
-=======
-    "@hotwired/turbo-rails": "7.2.4",
-    "@rails/actiontext": "7.0.4-2",
-    "@tailwindcss/typography": "0.5.9",
-    "autoprefixer": "10.4.13",
-    "chart.js": "4.2.0",
->>>>>>> 0a62069 (Adding Tailwind Typography plugin to better format text inside of Trix)
     "chartkick": "5.0.1",
     "esbuild": "0.17.11",
     "flowbite": "1.6.4",
