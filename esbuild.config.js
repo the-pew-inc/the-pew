@@ -1,5 +1,5 @@
 const path = require("path");
-const { replace } = require("esbuild-plugin-replace");
+// const { replace } = require("esbuild-plugin-replace");
 
 require("esbuild")
   .context({
