@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/faker-ruby/faker.git
-  revision: 1c868b22beeb164962c955c4a81c98b000e3ec71
+  revision: 3088c5a9c6ca44cc232b249df95bf3b81607cc35
   specs:
     faker (3.1.0)
       i18n (>= 1.8.11, < 2)
@@ -368,7 +368,7 @@ GEM
       actionpack (>= 6.0.0)
       activejob (>= 6.0.0)
       railties (>= 6.0.0)
-    tzinfo (2.0.5)
+    tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     unaccent (0.4.0)
     unf (0.1.4)
