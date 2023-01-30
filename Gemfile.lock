@@ -161,7 +161,7 @@ GEM
       rake
     globalid (1.1.0)
       activesupport (>= 5.0)
-    groupdate (6.1.0)
+    groupdate (6.2.0)
       activesupport (>= 5.2)
     hashie (5.0.0)
     honeybadger (5.0.2)
