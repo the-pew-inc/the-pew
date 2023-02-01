@@ -107,6 +107,7 @@ GEM
     aws-eventstream (1.2.0)
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     aws-partitions (1.730.0)
     aws-sdk-core (3.170.1)
 =======
@@ -114,6 +115,9 @@ GEM
 =======
     aws-partitions (1.701.0)
 >>>>>>> 31241bf (Upgrading appmap, aws-partitions and aws-sdk-s3 gems)
+=======
+    aws-partitions (1.702.0)
+>>>>>>> 33446d3 (upgrading honeybadger and aws-partitions)
     aws-sdk-core (3.170.0)
 >>>>>>> 729c260 (Upgrading appmap and country gems)
       aws-eventstream (~> 1, >= 1.0.2)
@@ -189,7 +193,11 @@ GEM
     groupdate (6.2.0)
       activesupport (>= 5.2)
     hashie (5.0.0)
+<<<<<<< HEAD
     honeybadger (5.2.1)
+=======
+    honeybadger (5.1.0)
+>>>>>>> 33446d3 (upgrading honeybadger and aws-partitions)
     htmlentities (4.3.4)
     http (5.1.1)
       addressable (~> 2.8)
