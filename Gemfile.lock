@@ -1,6 +1,10 @@
 GIT
   remote: https://github.com/faker-ruby/faker.git
+<<<<<<< HEAD
   revision: 53843386b662445d1d766f7b4226aa63549954a6
+=======
+  revision: 4f4c6728178209b15ec40d5f24ed66002deddc50
+>>>>>>> 758302b (Upgrading faker, jwt (2.7.0) and aws-partitions (1.703.0))
   specs:
     faker (3.1.1)
       i18n (>= 1.8.11, < 2)
@@ -108,6 +112,7 @@ GEM
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     aws-partitions (1.730.0)
     aws-sdk-core (3.170.1)
 =======
@@ -118,6 +123,9 @@ GEM
 =======
     aws-partitions (1.702.0)
 >>>>>>> 33446d3 (upgrading honeybadger and aws-partitions)
+=======
+    aws-partitions (1.703.0)
+>>>>>>> 758302b (Upgrading faker, jwt (2.7.0) and aws-partitions (1.703.0))
     aws-sdk-core (3.170.0)
 >>>>>>> 729c260 (Upgrading appmap and country gems)
       aws-eventstream (~> 1, >= 1.0.2)
