@@ -84,7 +84,7 @@ GEM
       activesupport (>= 5.2)
       device_detector
       safely_block (>= 0.2.1)
-    appmap (0.95.2)
+    appmap (0.96.0)
       activesupport
       method_source
       rack
@@ -459,4 +459,4 @@ RUBY VERSION
    ruby 3.1.2p20
 
 BUNDLED WITH
-   2.4.5
+   2.4.6
