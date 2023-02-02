@@ -90,6 +90,7 @@ GEM
       safely_block (>= 0.2.1)
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     annotate (3.2.0)
       activerecord (>= 3.2, < 8.0)
       rake (>= 10.4, < 14.0)
@@ -100,6 +101,9 @@ GEM
 =======
     appmap (0.95.2)
 >>>>>>> 31241bf (Upgrading appmap, aws-partitions and aws-sdk-s3 gems)
+=======
+    appmap (0.96.0)
+>>>>>>> 210c499 (Upgrading appmap)
       activesupport
       method_source
       rack
