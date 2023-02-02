@@ -117,6 +117,7 @@ GEM
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     aws-partitions (1.730.0)
     aws-sdk-core (3.170.1)
 =======
@@ -130,6 +131,9 @@ GEM
 =======
     aws-partitions (1.703.0)
 >>>>>>> 758302b (Upgrading faker, jwt (2.7.0) and aws-partitions (1.703.0))
+=======
+    aws-partitions (1.704.0)
+>>>>>>> 28c8bd9 (Upgrading rolify)
     aws-sdk-core (3.170.0)
 >>>>>>> 729c260 (Upgrading appmap and country gems)
       aws-eventstream (~> 1, >= 1.0.2)
