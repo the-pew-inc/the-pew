@@ -6,10 +6,10 @@ class Organization < ApplicationRecord
   has_paper_trail
 
   # Callbacks
-  before_save :generate_dns_txt, if: :will_save_change_to_domain?
+  before_validation :generate_dns_txt, if: :will_save_change_to_domain?
   before_validation :clean_domain, if: :will_save_change_to_domain?
 
-  # has_many :members
+  has_many :members
   has_many :users,   through: :members
   
   has_one_attached :logo
@@ -26,15 +26,10 @@ class Organization < ApplicationRecord
                       allow_nil: true,
                       fully_qualified_domain: true,
                       length: { minimum: 3, maximum: 120 }
-  validates :dns_txt, uniqueness: true, length: { is: 63 }, allow_nil: true
-
-  # Generate a unique TXT entry
-  def generate_dns_txt
-    self.dns_txt = random_unique_string if self.domain_changed? 
-  end
+  validates :dns_txt, uniqueness: true, length: { is: 126 }, allow_nil: true
 
   # Display the full dns text 
-  # This includes the prefix (27 characters) and the unique 63 character string stored in the database
+  # This includes the prefix (27 characters) and the unique 126 character string stored in the database
   def full_dns_txt
     prefix = "thepew-domain-verification=" # 27 characters
     prefix + self.dns_txt
@@ -42,7 +37,12 @@ class Organization < ApplicationRecord
 
   private
 
-  # Generates a unique 63 character and case sensitive string
+  # Generate a unique TXT entry
+  def generate_dns_txt
+    self.dns_txt = random_unique_string if self.domain_changed?
+  end
+
+  # Generates a unique 126 character long and case sensitive string
   def random_unique_string
     rus = ""
     loop do

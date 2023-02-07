@@ -27,7 +27,10 @@ class User < ApplicationRecord
   has_many :events,          dependent: :destroy
   has_many :questions,       dependent: :destroy
   has_many :votes,           dependent: :destroy
-  has_one  :account,         through:   :members,   required: false
+
+  # Managing organization membership (one to many through Member)
+  has_one  :member
+  has_one  :organization,    through: :member, required: false
 
   # Validations
   validates :email, presence: true, uniqueness: { case_sensitive: false }, format: { with: URI::MailTo::EMAIL_REGEXP }
