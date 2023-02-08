@@ -3,6 +3,7 @@
 class OrganizationController < ApplicationController
   before_action :authenticate_user!
   before_action :redirect_if_unauthenticated
+  before_action :set_organization
 
   # DELETE /organization/:id
   def destroy
@@ -13,8 +14,7 @@ class OrganizationController < ApplicationController
   def edit
     # TODO add a condition for when a user is an admin for the account.
     # Current code only displays account information when the user is the owner
-    @organization = Organization.find(params[:id])
-    @organization_owner = true
+    @organization.name = nil if @organization.name === "__default__"
   end
 
   # GET /organization/:id
@@ -25,22 +25,24 @@ class OrganizationController < ApplicationController
 
   # PUT /organization/:id
   def update
+    
+    if ((update_organization_params[:name].nil? || update_organization_params[:name].strip.length == 0) && @organization.name.nil?)
+      @organization.name = "__default__"
+    end
 
-  end
-
-  # Organization related routes
-
-  # GET /organization/:id/users
-  # List all organization users (aka users who belong to an organization)
-  def users
-    @users = User.where(user_id: Member.where(organization_id: params[:id]).select(:user_id))
-  end
-
-  # GET /organization/:id/sso
-  # Single Sign On
-  def sso
-
+    if @organization.update(update_organization_params)
+      render :edit, status: :ok
+    else
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   private
+  def update_organization_params
+    params.require(:organization).permit(:name, :website, :description, :logo)
+  end
+
+  def set_organization
+    @organization = Organization.find(params[:id])
+  end
 end

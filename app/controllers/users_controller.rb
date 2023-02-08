@@ -1,6 +1,12 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!, only: %i[edit destroy update]
+  before_action :authenticate_user!, only: %i[edit destroy update index]
   before_action :redirect_if_authenticated, only: %i[create new]
+
+  # GET /organization/:id/users
+  def index
+    @organization = Organization.find(params[:organization_id])
+    @users = @organization.users
+  end
 
   def create
     @user = User.new(create_user_params)
