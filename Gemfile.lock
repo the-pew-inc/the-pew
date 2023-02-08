@@ -1,10 +1,6 @@
 GIT
   remote: https://github.com/faker-ruby/faker.git
-<<<<<<< HEAD
   revision: 53843386b662445d1d766f7b4226aa63549954a6
-=======
-  revision: 4f4c6728178209b15ec40d5f24ed66002deddc50
->>>>>>> 758302b (Upgrading faker, jwt (2.7.0) and aws-partitions (1.703.0))
   specs:
     faker (3.1.1)
       i18n (>= 1.8.11, < 2)
@@ -88,22 +84,10 @@ GEM
       activesupport (>= 5.2)
       device_detector
       safely_block (>= 0.2.1)
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
     annotate (3.2.0)
       activerecord (>= 3.2, < 8.0)
       rake (>= 10.4, < 14.0)
     appmap (0.98.1)
-=======
-    appmap (0.95.1)
->>>>>>> 729c260 (Upgrading appmap and country gems)
-=======
-    appmap (0.95.2)
->>>>>>> 31241bf (Upgrading appmap, aws-partitions and aws-sdk-s3 gems)
-=======
-    appmap (0.96.0)
->>>>>>> 210c499 (Upgrading appmap)
       activesupport
       method_source
       rack
@@ -113,29 +97,8 @@ GEM
       ffi-compiler (~> 1.0)
     ast (2.4.2)
     aws-eventstream (1.2.0)
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-    aws-partitions (1.730.0)
+    aws-partitions (1.731.0)
     aws-sdk-core (3.170.1)
-=======
-    aws-partitions (1.700.0)
-=======
-    aws-partitions (1.701.0)
->>>>>>> 31241bf (Upgrading appmap, aws-partitions and aws-sdk-s3 gems)
-=======
-    aws-partitions (1.702.0)
->>>>>>> 33446d3 (upgrading honeybadger and aws-partitions)
-=======
-    aws-partitions (1.703.0)
->>>>>>> 758302b (Upgrading faker, jwt (2.7.0) and aws-partitions (1.703.0))
-=======
-    aws-partitions (1.704.0)
->>>>>>> 28c8bd9 (Upgrading rolify)
-    aws-sdk-core (3.170.0)
->>>>>>> 729c260 (Upgrading appmap and country gems)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.651.0)
       aws-sigv4 (~> 1.5)
@@ -143,11 +106,7 @@ GEM
     aws-sdk-kms (1.63.0)
       aws-sdk-core (~> 3, >= 3.165.0)
       aws-sigv4 (~> 1.1)
-<<<<<<< HEAD
     aws-sdk-s3 (1.119.1)
-=======
-    aws-sdk-s3 (1.119.0)
->>>>>>> 31241bf (Upgrading appmap, aws-partitions and aws-sdk-s3 gems)
       aws-sdk-core (~> 3, >= 3.165.0)
       aws-sdk-kms (~> 1)
       aws-sigv4 (~> 1.4)
@@ -209,11 +168,7 @@ GEM
     groupdate (6.2.0)
       activesupport (>= 5.2)
     hashie (5.0.0)
-<<<<<<< HEAD
     honeybadger (5.2.1)
-=======
-    honeybadger (5.1.0)
->>>>>>> 33446d3 (upgrading honeybadger and aws-partitions)
     htmlentities (4.3.4)
     http (5.1.1)
       addressable (~> 2.8)
@@ -265,15 +220,9 @@ GEM
     net-smtp (0.3.3)
       net-protocol
     nio4r (2.5.8)
-<<<<<<< HEAD
     nokogiri (1.14.2-arm64-darwin)
       racc (~> 1.4)
     nokogiri (1.14.2-x86_64-linux)
-=======
-    nokogiri (1.14.1-arm64-darwin)
-      racc (~> 1.4)
-    nokogiri (1.14.1-x86_64-linux)
->>>>>>> 75ff3c0 (Upgrading to nokogiri 1.14.1)
       racc (~> 1.4)
     noticed (1.6.0)
       http (>= 4.0.0)
@@ -413,13 +362,8 @@ GEM
     stimulus-rails (1.2.1)
       railties (>= 6.0.0)
     thor (1.2.1)
-<<<<<<< HEAD
     timeout (0.3.2)
     turbo-rails (1.4.0)
-=======
-    timeout (0.3.1)
-    turbo-rails (1.3.3)
->>>>>>> 3110451 (Upgrading to turbo-rails 1.3.3)
       actionpack (>= 6.0.0)
       activejob (>= 6.0.0)
       railties (>= 6.0.0)
@@ -517,4 +461,4 @@ RUBY VERSION
    ruby 3.2.1p31
 
 BUNDLED WITH
-   2.4.6
+   2.4.8
