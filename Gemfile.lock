@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/faker-ruby/faker.git
-  revision: 5f59aa29f98e8611b417558cc2f7613b972a6675
+  revision: 85ae39a4de52ec8c4a64e7c47908aaff81f53568
   specs:
     faker (3.1.1)
       i18n (>= 1.8.11, < 2)
@@ -312,7 +312,7 @@ GEM
       chunky_png (~> 1.0)
       rqrcode_core (~> 1.0)
     rqrcode_core (1.2.0)
-    rubocop (1.44.1)
+    rubocop (1.45.1)
       json (~> 2.3)
       parallel (~> 1.10)
       parser (>= 3.2.0.0)
