@@ -322,8 +322,8 @@ GEM
       rubocop-ast (>= 1.24.1, < 2.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 2.4.0, < 3.0)
-    rubocop-ast (1.24.1)
-      parser (>= 3.1.1.0)
+    rubocop-ast (1.26.0)
+      parser (>= 3.2.1.0)
     rubocop-rails (2.17.4)
       activesupport (>= 4.2.0)
       rack (>= 1.1)
@@ -434,7 +434,7 @@ DEPENDENCIES
   pagy (~> 6.0.0)
   paper_trail
   pg (~> 1.4)
-  puma (~> 6.0.1)
+  puma (~> 6.0.2)
   pundit
   rails (~> 7.0.4)
   redis (~> 5.0.5)
