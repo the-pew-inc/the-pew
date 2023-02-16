@@ -97,8 +97,13 @@ GEM
       ffi-compiler (~> 1.0)
     ast (2.4.2)
     aws-eventstream (1.2.0)
+<<<<<<< HEAD
     aws-partitions (1.731.0)
     aws-sdk-core (3.170.1)
+=======
+    aws-partitions (1.712.0)
+    aws-sdk-core (3.170.0)
+>>>>>>> f909796 (Upgrading sidekiq to version 7.0.5 and timeout to version 0.3.2 / minor upgrade to aws-partitions 1.712.0)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.651.0)
       aws-sigv4 (~> 1.5)
@@ -344,7 +349,11 @@ GEM
       sendgrid-ruby (~> 6.4)
     sendgrid-ruby (6.6.2)
       ruby_http_client (~> 3.4)
+<<<<<<< HEAD
     sidekiq (7.0.7)
+=======
+    sidekiq (7.0.5)
+>>>>>>> f909796 (Upgrading sidekiq to version 7.0.5 and timeout to version 0.3.2 / minor upgrade to aws-partitions 1.712.0)
       concurrent-ruby (< 2)
       connection_pool (>= 2.3.0)
       rack (>= 2.2.4)
@@ -363,7 +372,11 @@ GEM
       railties (>= 6.0.0)
     thor (1.2.1)
     timeout (0.3.2)
+<<<<<<< HEAD
     turbo-rails (1.4.0)
+=======
+    turbo-rails (1.3.3)
+>>>>>>> f909796 (Upgrading sidekiq to version 7.0.5 and timeout to version 0.3.2 / minor upgrade to aws-partitions 1.712.0)
       actionpack (>= 6.0.0)
       activejob (>= 6.0.0)
       railties (>= 6.0.0)
