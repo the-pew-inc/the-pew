@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/faker-ruby/faker.git
-  revision: 0f47ff04fec32445703323834ce824f9312a168c
+  revision: 6859248cda639356de48b818e5598297f2215091
   specs:
     faker (3.1.1)
       i18n (>= 1.8.11, < 2)
@@ -94,7 +94,7 @@ GEM
       ffi-compiler (~> 1.0)
     ast (2.4.2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.712.0)
+    aws-partitions (1.715.0)
     aws-sdk-core (3.170.0)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.651.0)
@@ -112,7 +112,7 @@ GEM
     bindex (0.8.1)
     bootsnap (1.16.0)
       msgpack (~> 1.2)
-    brakeman (5.4.0)
+    brakeman (5.4.1)
     builder (3.2.4)
     capybara (3.38.0)
       addressable
@@ -248,7 +248,7 @@ GEM
     omniauth-rails_csrf_protection (1.0.1)
       actionpack (>= 4.2)
       omniauth (~> 2.0)
-    pagy (6.0.1)
+    pagy (6.0.2)
     paper_trail (14.0.0)
       activerecord (>= 6.0)
       request_store (~> 1.4)
@@ -297,7 +297,7 @@ GEM
     rake (13.0.6)
     redis (5.0.6)
       redis-client (>= 0.9.0)
-    redis-client (0.12.1)
+    redis-client (0.12.2)
       connection_pool
     regexp_parser (2.7.0)
     reline (0.3.2)
@@ -336,7 +336,7 @@ GEM
     rubyzip (2.3.2)
     safely_block (0.3.0)
       errbase (>= 0.1.1)
-    selenium-webdriver (4.8.0)
+    selenium-webdriver (4.8.1)
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
@@ -345,7 +345,7 @@ GEM
       sendgrid-ruby (~> 6.4)
     sendgrid-ruby (6.6.2)
       ruby_http_client (~> 3.4)
-    sidekiq (7.0.5)
+    sidekiq (7.0.6)
       concurrent-ruby (< 2)
       connection_pool (>= 2.3.0)
       rack (>= 2.2.4)
@@ -459,4 +459,4 @@ RUBY VERSION
    ruby 3.1.2p20
 
 BUNDLED WITH
-   2.4.6
+   2.4.7
