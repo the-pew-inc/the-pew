@@ -17,7 +17,7 @@ gem 'sprockets-rails'
 gem 'pg', '~> 1.4'
 
 # Use the Puma web server [https://github.com/puma/puma]
-gem 'puma', '~> 6.0.2'
+gem 'puma', '~> 6.1.0'
 # Returning to 5.6.5 as the 6.0 seems to have some issues slowing down requests
 # gem 'puma', '~>5.6.5'
 
