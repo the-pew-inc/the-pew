@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/faker-ruby/faker.git
-  revision: 6859248cda639356de48b818e5598297f2215091
+  revision: a67007ae0a1b638775f0b67ecc1e32ffa9f4d417
   specs:
     faker (3.1.1)
       i18n (>= 1.8.11, < 2)
@@ -80,11 +80,11 @@ GEM
       tzinfo (~> 2.0)
     addressable (2.8.1)
       public_suffix (>= 2.0.2, < 6.0)
-    ahoy_matey (4.2.0)
+    ahoy_matey (4.2.1)
       activesupport (>= 5.2)
       device_detector
       safely_block (>= 0.2.1)
-    appmap (0.97.0)
+    appmap (0.98.0)
       activesupport
       method_source
       rack
@@ -94,7 +94,7 @@ GEM
       ffi-compiler (~> 1.0)
     ast (2.4.2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.715.0)
+    aws-partitions (1.716.0)
     aws-sdk-core (3.170.0)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.651.0)
@@ -312,14 +312,14 @@ GEM
       chunky_png (~> 1.0)
       rqrcode_core (~> 1.0)
     rqrcode_core (1.2.0)
-    rubocop (1.45.1)
+    rubocop (1.46.0)
       json (~> 2.3)
       parallel (~> 1.10)
       parser (>= 3.2.0.0)
       rainbow (>= 2.2.2, < 4.0)
       regexp_parser (>= 1.8, < 3.0)
       rexml (>= 3.2.5, < 4.0)
-      rubocop-ast (>= 1.24.1, < 2.0)
+      rubocop-ast (>= 1.26.0, < 2.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 2.4.0, < 3.0)
     rubocop-ast (1.26.0)
