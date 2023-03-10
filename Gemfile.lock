@@ -1,6 +1,10 @@
 GIT
   remote: https://github.com/faker-ruby/faker.git
+<<<<<<< HEAD
   revision: 53843386b662445d1d766f7b4226aa63549954a6
+=======
+  revision: 7f69c04546201efdfa15da9c9cb7ad8bf0f5cba6
+>>>>>>> 9e5ab63 (Upgrades)
   specs:
     faker (3.1.1)
       i18n (>= 1.8.11, < 2)
@@ -84,9 +88,12 @@ GEM
       activesupport (>= 5.2)
       device_detector
       safely_block (>= 0.2.1)
+<<<<<<< HEAD
     annotate (3.2.0)
       activerecord (>= 3.2, < 8.0)
       rake (>= 10.4, < 14.0)
+=======
+>>>>>>> 9e5ab63 (Upgrades)
     appmap (0.98.1)
       activesupport
       method_source
@@ -98,10 +105,14 @@ GEM
     ast (2.4.2)
     aws-eventstream (1.2.0)
 <<<<<<< HEAD
+<<<<<<< HEAD
     aws-partitions (1.730.0)
     aws-sdk-core (3.170.1)
 =======
     aws-partitions (1.723.0)
+=======
+    aws-partitions (1.724.0)
+>>>>>>> 9e5ab63 (Upgrades)
     aws-sdk-core (3.170.0)
 >>>>>>> 25b448a (Upgrading a few gems)
       aws-eventstream (~> 1, >= 1.0.2)
