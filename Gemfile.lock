@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/faker-ruby/faker.git
-  revision: a67007ae0a1b638775f0b67ecc1e32ffa9f4d417
+  revision: 7f69c04546201efdfa15da9c9cb7ad8bf0f5cba6
   specs:
     faker (3.1.1)
       i18n (>= 1.8.11, < 2)
@@ -84,7 +84,7 @@ GEM
       activesupport (>= 5.2)
       device_detector
       safely_block (>= 0.2.1)
-    appmap (0.98.0)
+    appmap (0.98.1)
       activesupport
       method_source
       rack
@@ -94,7 +94,7 @@ GEM
       ffi-compiler (~> 1.0)
     ast (2.4.2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.723.0)
+    aws-partitions (1.724.0)
     aws-sdk-core (3.170.0)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.651.0)
@@ -297,7 +297,7 @@ GEM
     rake (13.0.6)
     redis (5.0.6)
       redis-client (>= 0.9.0)
-    redis-client (0.13.0)
+    redis-client (0.14.0)
       connection_pool
     regexp_parser (2.7.0)
     reline (0.3.2)
