@@ -84,6 +84,9 @@ GEM
       activesupport (>= 5.2)
       device_detector
       safely_block (>= 0.2.1)
+    annotate (3.2.0)
+      activerecord (>= 3.2, < 8.0)
+      rake (>= 10.4, < 14.0)
     appmap (0.98.1)
       activesupport
       method_source
@@ -114,6 +117,9 @@ GEM
       msgpack (~> 1.2)
     brakeman (5.4.1)
     builder (3.2.4)
+    bullet (7.0.7)
+      activesupport (>= 3.0.0)
+      uniform_notifier (~> 1.11)
     capybara (3.38.0)
       addressable
       matrix
@@ -375,6 +381,7 @@ GEM
       unf_ext
     unf_ext (0.0.8.2)
     unicode-display_width (2.4.2)
+    uniform_notifier (1.16.0)
     validate_url (1.0.15)
       activemodel (>= 3.0.0)
       public_suffix
@@ -407,11 +414,13 @@ PLATFORMS
 DEPENDENCIES
   active_storage_validations (~> 1.0.0)
   ahoy_matey
+  annotate (~> 3.2.0)
   appmap
   argon2 (~> 2.2.0)
   aws-sdk-s3
   bootsnap
   brakeman
+  bullet
   capybara
   caxlsx
   caxlsx_rails
