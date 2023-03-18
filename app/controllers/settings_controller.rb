@@ -8,7 +8,7 @@ class SettingsController < ApplicationController
   def index
     # TODO add a condition for when a user is an admin for the account.
     # Current code only displays account information when the user is the owner
-    @account_id = Member.where(user_id: current_user.id, owner: true).first.account_id
-    @account_owner = true
+    @organization_id = Member.where(user_id: current_user.id, owner: true).first.organization_id
+    @organization_owner = true
   end
 end

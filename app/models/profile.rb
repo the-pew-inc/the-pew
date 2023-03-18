@@ -1,3 +1,23 @@
+# == Schema Information
+#
+# Table name: profiles
+#
+#  id         :uuid             not null, primary key
+#  mode       :integer          default("light"), not null
+#  nickname   :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  user_id    :uuid             not null
+#
+# Indexes
+#
+#  index_profiles_on_mode     (mode)
+#  index_profiles_on_user_id  (user_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (user_id => users.id)
+#
 class Profile < ApplicationRecord
   belongs_to :user
 

@@ -1,3 +1,36 @@
+# == Schema Information
+#
+# Table name: events
+#
+#  id              :uuid             not null, primary key
+#  allow_anonymous :boolean          default(FALSE), not null
+#  always_on       :boolean          default(FALSE), not null
+#  duration        :integer
+#  end_date        :datetime         not null
+#  event_type      :integer          not null
+#  name            :string           not null
+#  short_code      :string
+#  start_date      :datetime         not null
+#  status          :integer          default("draft"), not null
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  organization_id :uuid             not null
+#  user_id         :uuid             not null
+#
+# Indexes
+#
+#  index_events_on_allow_anonymous  (allow_anonymous)
+#  index_events_on_always_on        (always_on)
+#  index_events_on_event_type       (event_type)
+#  index_events_on_organization_id  (organization_id)
+#  index_events_on_short_code       (short_code)
+#  index_events_on_status           (status)
+#  index_events_on_user_id          (user_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (user_id => users.id)
+#
 class Event < ApplicationRecord
   include Rails.application.routes.url_helpers
 
@@ -32,7 +65,7 @@ class Event < ApplicationRecord
   def set_values
     self.end_date = start_date
     self.short_code = generate_pin if self.short_code.nil?
-    self.account_id = Member.where(user_id: self.user_id).first.account_id if self.account_id.nil?
+    self.organization_id = Member.where(user_id: self.user_id).first.organization_id if self.organization_id.nil?
 
     set_duration
 

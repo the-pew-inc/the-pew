@@ -5,8 +5,12 @@ class YourQuestionsController < ApplicationController
   def index
     # TODO: make sure the user is the only one enable to read the question
     # Pundit ;-)
-    @questions = Question.where(user_id: current_user.id).order(created_at: :desc)
+    @questions = current_user.questions.order(created_at: :desc)
     @count = @questions.count
+  end
+
+  def show
+    @question = current_user.questions.find(params[:id])
   end
 
 end

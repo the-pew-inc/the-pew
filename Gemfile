@@ -17,7 +17,7 @@ gem 'sprockets-rails'
 gem 'pg', '~> 1.4'
 
 # Use the Puma web server [https://github.com/puma/puma]
-gem 'puma', '~> 6.0.1'
+gem 'puma', '~> 6.1.0'
 # Returning to 5.6.5 as the 6.0 seems to have some issues slowing down requests
 # gem 'puma', '~>5.6.5'
 
@@ -161,6 +161,12 @@ group :development do
   # Add support to Brakeman [https://github.com/presidentbeef/brakeman]
   # Vulnerability scanner
   gem 'brakeman'
+
+  # Add Model annotations
+  gem 'annotate', '~>3.2.0'
+
+  # Add Bullet to monitor and help fix N+1 DB queries
+  gem 'bullet'
 end
 
 group :test do

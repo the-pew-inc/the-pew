@@ -1,0 +1,2 @@
+module SsosHelper
+end

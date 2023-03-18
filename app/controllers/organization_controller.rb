@@ -3,6 +3,7 @@
 class OrganizationController < ApplicationController
   before_action :authenticate_user!
   before_action :redirect_if_unauthenticated
+  before_action :set_organization
 
   # DELETE /organization/:id
   def destroy
@@ -13,21 +14,35 @@ class OrganizationController < ApplicationController
   def edit
     # TODO add a condition for when a user is an admin for the account.
     # Current code only displays account information when the user is the owner
-    @account = Account.where(account_id: Member.where(user_id: current_user.id, owner: true).first.id).first
-    @account_owner = true
+    @organization.name = nil if @organization.name === "__default__"
   end
 
   # GET /organization/:id
+  # TODO make it API only as the app is using the edit form
   def show
-    @account = Account.find(params[:id])
-    # Shall be moved to another controller that only deals with the users who are part of an account
-    # @account_users = User.where(user_id: User.where(user_id: Member.where(account_id: @account.id)).select(:user_id))
+    # @account = Account.find(params[:id])
   end
 
   # PUT /organization/:id
   def update
+    
+    if ((update_organization_params[:name].nil? || update_organization_params[:name].strip.length == 0) && @organization.name.nil?)
+      @organization.name = "__default__"
+    end
 
+    if @organization.update(update_organization_params)
+      render :edit, status: :ok
+    else
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   private
+  def update_organization_params
+    params.require(:organization).permit(:name, :website, :description, :logo)
+  end
+
+  def set_organization
+    @organization = Organization.find(params[:id])
+  end
 end

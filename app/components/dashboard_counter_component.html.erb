@@ -1,0 +1,31 @@
+<div class="<%= @background_color %> p-4">
+  <div class="flex flex-row justify-start items-center space-x-2">
+    <h3 class="text-gray-400 text-xl font-light"><%= @title %></h3>
+    <div class="w-5 h-5 <%= @icon_color %>">
+      <% if @link %>
+        <%= link_to @link do %>
+          <%= @icon.html_safe %>
+        <% end %>
+      <% else %>
+        <%= @icon.html_safe %>
+      <% end %>
+    </div>
+  </div>
+  <div class="text-white font-extrabold text-6xl py-3">
+    <%= @total %>
+  </div>
+  <div class="flex flex-row justify-start items-center space-x-2">
+    <div class="flex flex-col justify-start text-red-400">
+      <h5 class="font-light text-sm tracking-tighter">Negative</h5>
+      <p class="font-bold"><%= @negative %>%</p>
+    </div>
+    <div class="flex flex-col justify-start text-blue-400">
+      <h5 class="font-light text-sm tracking-tighter">Neutral</h5>
+      <p class="font-bold"><%= @neutral %>%</p>
+    </div>
+    <div class="flex flex-col justify-start text-green-400">
+      <h5 class="font-light text-sm tracking-tighter">Positive</h5>
+      <p class="font-bold"><%= @positive %>%</p>
+    </div>
+  </div>
+</div>

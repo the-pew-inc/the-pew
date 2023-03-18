@@ -1,0 +1,44 @@
+<!-- app/views/ssos/edit.html.erb -->
+<%= turbo_frame_tag "settings_main" do %>
+  <% if !@organization.domain_verified %>
+    <%= form_with model: @organization do |form| %>
+      <%= render partial: "shared/form_errors", locals: { object: form.object } %>
+      <div class="mb-6">
+        <%= form.label :domain, "Domain of your organization", class: "block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" %>
+        <%= form.text_field :domain, class:"bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500", placeholder: "example: your_domain.com" %>
+      </div>
+      <%= form.submit class: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" %>
+    <% end %>
+  <% end %>
+  <div class="flex justify-start items-center space-x-4 pt-2">
+    <h4 class="text-2xl font-bold dark:text-white">
+      Domain Ownership Status 
+    </h4>
+    <% if @organization.domain_verified %>
+      <div class="inline-flex items-center bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300">
+        <span class="w-2 h-2 mr-1 bg-green-500 rounded-full"></span>
+        Verified
+      </div>
+    <% else %>
+      <div class="inline-flex items-center bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-red-900 dark:text-red-300">
+        <span class="w-2 h-2 mr-1 bg-red-500 rounded-full"></span>
+        Not yet verified
+      </div>
+    <% end %>
+  </div>
+  <% if !@organization.domain_verified && @organization.domain.present? %>
+    <div class="pt-6">
+      <h5 class="text-xl font-bold dark:text-white">
+        Why verifying domain ownership is important?
+      </h5>
+      <div class="font-light text-gray-500 dark:text-gray-400 mb-6">
+        By verifying ownership, we can ensure that the domain is being used by its rightful owner and not by someone with malicious intent. This helps prevent unauthorized access, phishing scams, and other security threats. Additionally, verifying ownership also helps prevent any potential issues with branding or trademark infringement. By requiring proof of ownership, we can protect both our customers and our service, ensuring a positive and secure experience for all users.
+      </div>
+      <h5 class="text-xl font-bold dark:text-white">
+        How to verify ownership your domain?
+      </h5>
+      <div class="font-light text-gray-500 dark:text-gray-400 mb-6">
+      </div>
+    </div>
+  <% end %>
+<% end %>

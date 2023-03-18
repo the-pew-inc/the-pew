@@ -1,10 +1,36 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+# == Schema Information
+#
+# Table name: rooms
+#
+#  id              :uuid             not null, primary key
+#  allow_anonymous :boolean          default(FALSE), not null
+#  always_on       :boolean          default(FALSE), not null
+#  name            :string           not null
+#  start_date      :datetime         not null
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  event_id        :uuid             not null
+#  organization_id :uuid             not null
+#
+# Indexes
+#
+#  index_rooms_on_allow_anonymous  (allow_anonymous)
+#  index_rooms_on_always_on        (always_on)
+#  index_rooms_on_event_id         (event_id)
+#  index_rooms_on_organization_id  (organization_id)
+#  index_rooms_on_start_date       (start_date)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (event_id => events.id)
+#
 
 one:
   name: __default__
   event: one
   always_on: false
   allow_anonymous: false
+  organization_id: organization(:one).id
   start_date: <%= DateTime.now.utc %>
   created_at: <%= Time.current.utc %>
   updated_at: <%= Time.current.utc %>
@@ -14,6 +40,7 @@ two:
   event: two
   always_on: true
   allow_anonymous: true
+  organization_id: organization(:two).id
   start_date: <%= DateTime.now.utc %>
   created_at: <%= Time.current.utc %>
   updated_at: <%= Time.current.utc %>

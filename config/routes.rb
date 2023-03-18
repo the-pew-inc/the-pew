@@ -72,7 +72,7 @@ Rails.application.routes.draw do
   put 'notifications',     to: 'notifications#mark_all_as_read', as: :mark_as_read_all
 
   # Display the user's questions
-  resources :your_questions, only: [:index]
+  resources :your_questions, only: [:index, :show]
 
   # Validate event PIN
   post '/', to: 'events#validate_pin', as: :pin
@@ -89,10 +89,11 @@ Rails.application.routes.draw do
   get 'legal/cp',      to: 'legal#cp'
 
   # Organization (aka Account model) routes
-  get 'organization/:id',      to: 'account#show'
-  get 'organization/:id/edit', to: 'account#edit'
-  put 'organization/:id',      to: 'account#update'
-
+  # and sub-routes
+  resources :organization, only: [:show, :update, :edit] do
+    resources :users, only: [:index]
+    resource  :ssos,  only: [:show, :update, :edit], shallow: true
+  end
 
   # Defines the main root path route ("/")
   # Must be the last route in the file

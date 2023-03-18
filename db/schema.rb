@@ -10,11 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
+ActiveRecord::Schema[7.0].define(version: 2023_03_17_012332) do
+=======
 ActiveRecord::Schema[7.0].define(version: 2023_01_17_215006) do
+>>>>>>> main
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
+<<<<<<< HEAD
+=======
   create_table "accounts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.string "website"
@@ -33,6 +39,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_17_215006) do
     t.index ["sso"], name: "index_accounts_on_sso"
   end
 
+>>>>>>> main
   create_table "action_text_rich_texts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -153,11 +160,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_17_215006) do
     t.string "short_code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.uuid "account_id", null: false
-    t.index ["account_id"], name: "index_events_on_account_id"
+    t.uuid "organization_id", null: false
     t.index ["allow_anonymous"], name: "index_events_on_allow_anonymous"
     t.index ["always_on"], name: "index_events_on_always_on"
     t.index ["event_type"], name: "index_events_on_event_type"
+    t.index ["organization_id"], name: "index_events_on_organization_id"
     t.index ["short_code"], name: "index_events_on_short_code"
     t.index ["status"], name: "index_events_on_status"
     t.index ["user_id"], name: "index_events_on_user_id"
@@ -165,11 +172,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_17_215006) do
 
   create_table "members", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "user_id", null: false
-    t.uuid "account_id", null: false
+    t.uuid "organization_id", null: false
     t.boolean "owner", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["account_id"], name: "index_members_on_account_id"
+    t.index ["organization_id"], name: "index_members_on_organization_id"
     t.index ["owner"], name: "index_members_on_owner"
     t.index ["user_id"], name: "index_members_on_user_id"
   end
@@ -197,6 +204,24 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_17_215006) do
     t.index ["recipient_type", "recipient_id"], name: "index_notifications_on_recipient"
   end
 
+  create_table "organizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.string "website"
+    t.string "country"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "domain"
+    t.boolean "sso", default: false, null: false
+    t.string "dns_txt"
+    t.boolean "domain_verified", default: false, null: false
+    t.datetime "domain_verified_at", precision: nil
+    t.index ["country"], name: "index_organizations_on_country"
+    t.index ["dns_txt"], name: "index_organizations_on_dns_txt", unique: true
+    t.index ["domain"], name: "index_organizations_on_domain", unique: true
+    t.index ["domain_verified"], name: "index_organizations_on_domain_verified"
+    t.index ["sso"], name: "index_organizations_on_sso"
+  end
+
   create_table "profiles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "user_id", null: false
     t.string "nickname"
@@ -217,13 +242,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_17_215006) do
     t.boolean "anonymous", default: false, null: false
     t.integer "rejection_cause"
     t.uuid "parent_id"
-    t.uuid "account_id", null: false
-    t.index ["account_id"], name: "index_questions_on_account_id"
+    t.uuid "organization_id", null: false
+    t.integer "tone", default: 0, null: false
     t.index ["anonymous"], name: "index_questions_on_anonymous"
+    t.index ["organization_id"], name: "index_questions_on_organization_id"
     t.index ["parent_id"], name: "index_questions_on_parent_id"
     t.index ["rejection_cause"], name: "index_questions_on_rejection_cause"
     t.index ["room_id"], name: "index_questions_on_room_id"
     t.index ["status"], name: "index_questions_on_status"
+    t.index ["tone"], name: "index_questions_on_tone"
     t.index ["user_id", "room_id"], name: "index_questions_on_user_id_and_room_id"
     t.index ["user_id", "status"], name: "index_questions_on_user_id_and_status"
     t.index ["user_id"], name: "index_questions_on_user_id"
@@ -247,12 +274,28 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_17_215006) do
     t.datetime "start_date", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.uuid "account_id", null: false
-    t.index ["account_id"], name: "index_rooms_on_account_id"
+    t.uuid "organization_id", null: false
     t.index ["allow_anonymous"], name: "index_rooms_on_allow_anonymous"
     t.index ["always_on"], name: "index_rooms_on_always_on"
     t.index ["event_id"], name: "index_rooms_on_event_id"
+    t.index ["organization_id"], name: "index_rooms_on_organization_id"
     t.index ["start_date"], name: "index_rooms_on_start_date"
+  end
+
+  create_table "topics", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "event_id"
+    t.uuid "user_id"
+    t.uuid "room_id"
+    t.uuid "question_id"
+    t.string "name", null: false
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_topics_on_event_id"
+    t.index ["name"], name: "index_topics_on_name"
+    t.index ["question_id"], name: "index_topics_on_question_id"
+    t.index ["room_id"], name: "index_topics_on_room_id"
+    t.index ["user_id"], name: "index_topics_on_user_id"
   end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

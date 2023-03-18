@@ -1,9 +1,9 @@
+@import "actiontext";
+
 /* Tailwind CSS */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@import 'actiontext.css';
 
 /* Custom animation used by Alert messages (aka Flash) */
 @keyframes notification-countdown {
@@ -15,3 +15,6 @@
     width: 0;
   }
 }
+
+/* Applying style to Trix using Tailwind Typograhy plugin */
+trix-editor { @apply prose max-w-none }

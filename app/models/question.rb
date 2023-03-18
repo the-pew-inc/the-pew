@@ -1,3 +1,38 @@
+# == Schema Information
+#
+# Table name: questions
+#
+#  id              :uuid             not null, primary key
+#  anonymous       :boolean          default(FALSE), not null
+#  rejection_cause :integer
+#  status          :integer          default("asked"), not null
+#  title           :string           not null
+#  tone            :integer          default("undefined"), not null
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  organization_id :uuid             not null
+#  parent_id       :uuid
+#  room_id         :uuid             not null
+#  user_id         :uuid             not null
+#
+# Indexes
+#
+#  index_questions_on_anonymous            (anonymous)
+#  index_questions_on_organization_id      (organization_id)
+#  index_questions_on_parent_id            (parent_id)
+#  index_questions_on_rejection_cause      (rejection_cause)
+#  index_questions_on_room_id              (room_id)
+#  index_questions_on_status               (status)
+#  index_questions_on_tone                 (tone)
+#  index_questions_on_user_id              (user_id)
+#  index_questions_on_user_id_and_room_id  (user_id,room_id)
+#  index_questions_on_user_id_and_status   (user_id,status)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (room_id => rooms.id)
+#  fk_rails_...  (user_id => users.id)
+#
 class Question < ApplicationRecord
   # Enable rolify on the Question class
   resourcify
@@ -9,7 +44,7 @@ class Question < ApplicationRecord
   has_paper_trail
 
   # Set the account_id (value is taken from the event)
-  before_validation :set_account_id
+  before_validation :set_organization_id
 
   belongs_to :user
   belongs_to :room
@@ -36,6 +71,13 @@ class Question < ApplicationRecord
     duplicate: 30,
     explicit: 40,
     other: 50
+  }
+
+  enum tone: {
+    positive: 30,
+    neutral: 20,
+    negative: 10,
+    undefined: 0
   }
 
   scope :questions_for_room, -> (room) { where('room_id = ? AND parent_id IS NULL', room) }
@@ -94,8 +136,8 @@ class Question < ApplicationRecord
 
   private
 
-  def set_account_id
-    self.account_id = self.room.account_id if self.account_id.nil?
+  def set_organization_id
+    self.organization_id = self.room.organization_id if self.organization_id.nil?
   end
 
 end
