@@ -10,43 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 ActiveRecord::Schema[7.0].define(version: 2023_03_20_192611) do
-=======
-ActiveRecord::Schema[7.0].define(version: 2023_01_17_215006) do
->>>>>>> 798a578 (Defining the routes and controler for the settings and the organization controller)
-=======
-ActiveRecord::Schema[7.0].define(version: 2023_01_24_185308) do
->>>>>>> 9aab7f0 (Renaming Account into Organization)
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-  create_table "accounts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "name"
-    t.string "website"
-    t.string "country"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "domain"
-    t.boolean "sso", default: false, null: false
-    t.string "dns_txt"
-    t.boolean "domain_verified", default: false, null: false
-    t.datetime "domain_verified_at", precision: nil
-    t.index ["country"], name: "index_accounts_on_country"
-    t.index ["dns_txt"], name: "index_accounts_on_dns_txt", unique: true
-    t.index ["domain"], name: "index_accounts_on_domain", unique: true
-    t.index ["domain_verified"], name: "index_accounts_on_domain_verified"
-    t.index ["sso"], name: "index_accounts_on_sso"
-  end
-
->>>>>>> 798a578 (Defining the routes and controler for the settings and the organization controller)
-=======
->>>>>>> 9aab7f0 (Renaming Account into Organization)
   create_table "action_text_rich_texts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -250,10 +218,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_24_185308) do
     t.integer "rejection_cause"
     t.uuid "parent_id"
     t.uuid "organization_id", null: false
-<<<<<<< HEAD
     t.integer "tone", default: 0, null: false
-=======
->>>>>>> 9aab7f0 (Renaming Account into Organization)
     t.index ["anonymous"], name: "index_questions_on_anonymous"
     t.index ["organization_id"], name: "index_questions_on_organization_id"
     t.index ["parent_id"], name: "index_questions_on_parent_id"
