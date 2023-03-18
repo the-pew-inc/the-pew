@@ -16,16 +16,16 @@
 # DashboardCounterComponent.new()
 # DashboardCounterComponent.new()
 class DashboardCounterComponent < ViewComponent::Base
-  def initialize(title:, total:, icon:, icon_color:, link:nil, positive:0, neutral:0, negative:0, background_color:)
+  def initialize(title:, total:, icon:, icon_color:, link:nil, positive:, neutral:, negative:, background_color:)
 
     @title = title.capitalize
-    @total = total       # Sum of positive, negative, neutral must be equal to the total
+    @total = total || 0      # Sum of positive, negative, neutral must be equal to the total
     @icon = icon         # Icon to be displayed next to the title (svg format)
     @icon_color = icon_color # Tailwind color passed as text-{color}-{value}
     @link = link         # In case the icon should open a new page
-    @positive = compute_percentage(total, positive)  # % of positive questions from the total
-    @neutral  = compute_percentage(total, neutral)   # % of neutral questions from the total
-    @negative = compute_percentage(total, negative)  # % of negative questions from the total
+    @positive = compute_percentage(@total, positive)  # % of positive questions from the total
+    @neutral  = compute_percentage(@total, neutral)   # % of neutral questions from the total
+    @negative = compute_percentage(@total, negative)  # % of negative questions from the total
     @background_color = background_color # Tailwind color passed as bg-{color}-{value}
 
   end
@@ -35,6 +35,8 @@ class DashboardCounterComponent < ViewComponent::Base
   def compute_percentage(total, value)
     if total > 0
       ((value.to_f / total) * 100).round
+    else
+      0
     end
   end
 
