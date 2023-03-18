@@ -94,11 +94,6 @@ Rails.application.routes.draw do
     resources :users, only: [:index]
     resource  :ssos,  only: [:show, :update, :edit], shallow: true
   end
-  
-  # get 'organization/:id',      to: 'account#show'
-  # get 'organization/:id/edit', to: 'account#edit'
-  # put 'organization/:id',      to: 'account#update'
-
 
   # Defines the main root path route ("/")
   # Must be the last route in the file
