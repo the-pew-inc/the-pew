@@ -72,7 +72,7 @@ Rails.application.routes.draw do
   put 'notifications',     to: 'notifications#mark_all_as_read', as: :mark_as_read_all
 
   # Display the user's questions
-  resources :your_questions, only: [:index]
+  resources :your_questions, only: [:index, :show]
 
   # Validate event PIN
   post '/', to: 'events#validate_pin', as: :pin

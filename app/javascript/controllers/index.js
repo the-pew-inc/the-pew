@@ -34,6 +34,9 @@ application.register("reset-form", ResetFormController)
 import ToggleController from "./toggle_controller"
 application.register("toggle", ToggleController)
 
+import TurboModalController from "./turbo_modal_controller"
+application.register("turbo-modal", TurboModalController)
+
 import UserVoteController from "./user_vote_controller"
 application.register("user-vote", UserVoteController)
 

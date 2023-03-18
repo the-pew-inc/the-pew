@@ -9,4 +9,8 @@ class YourQuestionsController < ApplicationController
     @count = @questions.count
   end
 
+  def show
+    @question = current_user.questions.find(params[:id])
+  end
+
 end

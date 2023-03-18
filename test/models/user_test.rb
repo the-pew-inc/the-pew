@@ -1,3 +1,29 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id              :uuid             not null, primary key
+#  blocked         :boolean          default(FALSE), not null
+#  confirmed       :boolean          default(FALSE), not null
+#  confirmed_at    :datetime
+#  email           :string           not null
+#  failed_attempts :integer          default(0), not null
+#  locked          :boolean          default(FALSE), not null
+#  locked_at       :datetime
+#  password_digest :string
+#  provider        :string
+#  uid             :string
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#
+# Indexes
+#
+#  index_users_on_blocked   (blocked)
+#  index_users_on_email     (email) UNIQUE
+#  index_users_on_locked    (locked)
+#  index_users_on_provider  (provider)
+#  index_users_on_uid       (uid) UNIQUE
+#
 require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase

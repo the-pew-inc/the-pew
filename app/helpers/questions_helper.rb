@@ -1,4 +1,6 @@
 module QuestionsHelper
+  # Used in _question.html.erb and _sub_question.html.erb
+  # Display the question status
   def question_status(question)
     case question.status
     when 'asked'
@@ -14,6 +16,25 @@ module QuestionsHelper
     else
       # TODO: report error
       content_tag(:span, "invalid status" , class:"bg-yellow-100 text-yellow-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-yellow-200 dark:text-yellow-900")
+    end
+  end
+
+  # Used in your_questions#show, your_question#index, dahsboard#show
+  # Display the question status in a flowbite bordered badge
+  def display_question_status(status)
+    case status
+    when 'approved'
+      content_tag(:span, "Approved" , class: "bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-blue-400 border border-blue-400")
+    when 'asked'
+      content_tag(:span, "Pending" , class: "bg-yellow-100 text-yellow-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-yellow-300 border border-yellow-300")
+    when 'beinganswered'
+      content_tag(:span, "Being Answered" , class: "bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-green-400 border border-green-400")
+    when 'answered'
+      content_tag(:span, "Ansered" , class: "bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-green-400 border border-green-400")
+    when 'rejected'
+      content_tag(:span, "Rejected" , class: "bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-red-400 border border-red-400")
+    else
+
     end
   end
 
