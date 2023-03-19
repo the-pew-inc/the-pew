@@ -148,8 +148,6 @@ GEM
       railties (>= 6.0.0)
     date (3.3.3)
     debug (1.7.1)
-      irb (>= 1.5.0)
-      reline (>= 0.3.1)
     device_detector (1.1.0)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
@@ -185,9 +183,6 @@ GEM
     image_processing (1.12.2)
       mini_magick (>= 4.9.5, < 5)
       ruby-vips (>= 2.0.17, < 3)
-    io-console (0.6.0)
-    irb (1.6.3)
-      reline (>= 0.3.0)
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
@@ -306,8 +301,6 @@ GEM
     redis-client (0.14.0)
       connection_pool
     regexp_parser (2.7.0)
-    reline (0.3.2)
-      io-console (~> 0.5)
     request_store (1.5.1)
       rack (>= 1.4)
     reverse_markdown (2.1.1)
@@ -408,7 +401,7 @@ GEM
     zeitwerk (2.6.7)
 
 PLATFORMS
-  arm64-darwin-21
+  arm64-darwin-22
   x86_64-linux
 
 DEPENDENCIES
@@ -465,7 +458,7 @@ DEPENDENCIES
   webdrivers
 
 RUBY VERSION
-   ruby 3.1.2p20
+   ruby 3.2.1p31
 
 BUNDLED WITH
-   2.4.8
+   2.4.6
