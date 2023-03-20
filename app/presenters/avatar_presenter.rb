@@ -2,14 +2,15 @@ class AvatarPresenter
   include ActionView::Context
   include ActionView::Helpers::AssetTagHelper
 
-  def self.call(user, size = 8)
-    new(user, size).call
+  def self.call(user, size = 8, font_size = 14)
+    new(user, size, font_size).call
   end
   
   attr_accessor :user
-  def initialize(user, size)
+  def initialize(user, size, font_size)
     @user = user
     @size = size
+    @font_size = font_size
   end
 
   def call
@@ -41,9 +42,10 @@ class AvatarPresenter
 
   def initials_element
     style = "background-color: #{avatar_color(initials.first)};"
+    font_style = "font-size: #{@font_size}px;"
     
     content_tag :div, class: "rounded-full flex flex-shrink-0 items-center justify-center w-#{@size} h-#{@size}", style: style do
-      content_tag :div, initials, class: 'font-mono font-bold text-gray-100'
+      content_tag :div, initials, class: "font-mono font-bold text-gray-100", style: font_style
     end
   end
 
