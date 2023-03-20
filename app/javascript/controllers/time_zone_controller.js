@@ -12,7 +12,7 @@ export default class extends Controller {
     // and save it to a cookie (which expires 1 day from its creation time)
     // If the cookie is not expired, we read the timezone from the cookie instead.
     if (this.readTimezoneCookie() === undefined) {
-      _ = this.saveTimezoneCookie();
+      this.saveTimezoneCookie();
     }
   }
 
