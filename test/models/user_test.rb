@@ -12,17 +12,19 @@
 #  locked_at       :datetime
 #  password_digest :string
 #  provider        :string
+#  time_zone       :string
 #  uid             :string
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #
 # Indexes
 #
-#  index_users_on_blocked   (blocked)
-#  index_users_on_email     (email) UNIQUE
-#  index_users_on_locked    (locked)
-#  index_users_on_provider  (provider)
-#  index_users_on_uid       (uid) UNIQUE
+#  index_users_on_blocked    (blocked)
+#  index_users_on_email      (email) UNIQUE
+#  index_users_on_locked     (locked)
+#  index_users_on_provider   (provider)
+#  index_users_on_time_zone  (time_zone)
+#  index_users_on_uid        (uid) UNIQUE
 #
 require 'test_helper'
 
