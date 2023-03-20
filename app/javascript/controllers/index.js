@@ -31,6 +31,9 @@ application.register("order-questions", OrderQuestionsController)
 import ResetFormController from "./reset_form_controller"
 application.register("reset-form", ResetFormController)
 
+import TimeZoneController from "./time_zone_controller"
+application.register("time-zone", TimeZoneController)
+
 import ToggleController from "./toggle_controller"
 application.register("toggle", ToggleController)
 
