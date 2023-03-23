@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_20_192611) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_22_221914) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -219,6 +219,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_20_192611) do
     t.uuid "parent_id"
     t.uuid "organization_id", null: false
     t.integer "tone", default: 0, null: false
+    t.jsonb "ai_response"
     t.index ["anonymous"], name: "index_questions_on_anonymous"
     t.index ["organization_id"], name: "index_questions_on_organization_id"
     t.index ["parent_id"], name: "index_questions_on_parent_id"

@@ -3,6 +3,7 @@
 # Table name: questions
 #
 #  id              :uuid             not null, primary key
+#  ai_response     :jsonb
 #  anonymous       :boolean          default(FALSE), not null
 #  rejection_cause :integer
 #  status          :integer          default("asked"), not null
@@ -45,6 +46,11 @@ class Question < ApplicationRecord
 
   # Set the account_id (value is taken from the event)
   before_validation :set_organization_id
+
+  # Moderate the question using openAI moderation models
+  # We wait for the question to be saved before moderating it.
+  # Moderation is done as part of a "background job"
+  after_save :moderate_question
 
   belongs_to :user
   belongs_to :room
@@ -138,6 +144,12 @@ class Question < ApplicationRecord
 
   def set_organization_id
     self.organization_id = self.room.organization_id if self.organization_id.nil?
+  end
+
+  def moderate_question
+    if self.asked?
+      ModerateQuestionJob.perform_async(self.to_json)
+    end
   end
 
 end

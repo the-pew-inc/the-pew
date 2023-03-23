@@ -3,6 +3,7 @@
 # Table name: questions
 #
 #  id              :uuid             not null, primary key
+#  ai_response     :jsonb
 #  anonymous       :boolean          default(FALSE), not null
 #  rejection_cause :integer
 #  status          :integer          default("asked"), not null
