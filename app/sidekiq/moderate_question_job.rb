@@ -48,7 +48,7 @@ class ModerateQuestionJob
       Question.update(question.dig("id"), {status: :rejected, rejection_cause: cause, ai_response: response})
 
       # Notify the user that their question was rejected
-      
+      Message.create(user_id: question.dig("user_id"), title: "Question Rejected", content: "Your question: #{question.dig("title")} has been rejected by ModBot", level: :alert)
     else
       # The question is approved by the automatic moderation
       Question.update(question.dig("id"), {status: :approved, ai_response: response})
