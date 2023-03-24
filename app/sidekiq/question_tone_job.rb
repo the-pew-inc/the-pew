@@ -36,7 +36,7 @@ class QuestionToneJob
   end
 
   def tone(tone)
-    puts "QUESTION TONE IS: #{tone}"
+    tone = tone.lines.last.chomp
     case tone.strip
     when "Neutral"
       return :neutral
