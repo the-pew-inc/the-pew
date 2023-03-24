@@ -8,10 +8,10 @@ class ModerateQuestionJob
     client = OpenAI::Client.new
 
     # Parse the question
-    question = JSON.parse(question)
+    qh = JSON.parse(question)
 
     # Send the question to openAI for moderation and wait for the response
-    response = client.moderations(parameters: { input: question.dig("title") })  
+    response = client.moderations(parameters: { input: qh.dig("title") })  
 
     # Process the response from openAI
     flagged = response.dig("results", 0, "flagged")
@@ -45,13 +45,23 @@ class ModerateQuestionJob
       end
 
       # Update the question with rejected status
-      Question.update(question.dig("id"), {status: :rejected, rejection_cause: cause, ai_response: response})
+      # Defaulting the tone to negative as the rejection case is negative
+      Question.update(qh.dig("id"), { status: :rejected, 
+                                            rejection_cause: cause,
+                                            tone: :negative,
+                                            ai_response: response})
 
       # Notify the user that their question was rejected
-      Message.create(user_id: question.dig("user_id"), title: "Question Rejected", content: "Your question: #{question.dig("title")} has been rejected by ModBot", level: :alert)
+      Message.create(user_id: qh.dig("user_id"), title: "Question Rejected", content: "Your question: #{qh.dig("title")} has been rejected by ModBot", level: :alert)
     else
       # The question is approved by the automatic moderation
-      Question.update(question.dig("id"), {status: :approved, ai_response: response})
+      Question.update(qh.dig("id"), {status: :approved, ai_response: response})
+
+      # Extract key elements from the question such as Tone, Keywords and Topics
+      QuestionToneJob.perform_async(question)
+  
+      # QuestionKeyworksExtractionJob.perform_async(question)
+      # QuestionTopicsExtractionJob.perform_async(question)
     end
   end
 end

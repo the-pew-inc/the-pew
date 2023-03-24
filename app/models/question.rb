@@ -50,7 +50,7 @@ class Question < ApplicationRecord
   # Moderate the question using openAI moderation models
   # We wait for the question to be saved before moderating it.
   # Moderation is done as part of a "background job"
-  after_save :moderate_question
+  after_save :realtime_ai_processing
 
   belongs_to :user
   belongs_to :room
@@ -146,9 +146,16 @@ class Question < ApplicationRecord
     self.organization_id = self.room.organization_id if self.organization_id.nil?
   end
 
-  def moderate_question
+  # Method called when the question is updated to 
+  # 1. Moderate the question (approve / reject)
+  # 2. Run Sentiment (Tone) analysis
+  # 3. Extract the keywords from the question
+  # 4. Extract the topic(s) from the question
+  # Steps 2, 3 and 4 are triggered from within the moderate_question_job
+  def realtime_ai_processing
+    question = self.to_json
     if self.asked?
-      ModerateQuestionJob.perform_async(self.to_json)
+      ModerateQuestionJob.perform_async(question)
     end
   end
 
