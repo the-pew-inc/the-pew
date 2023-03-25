@@ -36,6 +36,10 @@ class QuestionToneJob
   end
 
   def tone(tone)
+    # Extract the last line in the string (responses from openAI usually are like \n\nTone or ?\n\nTone)
+    # Using .strip only is not enough as it does not remove characters that could be introduced before the 
+    # \n\n. This is why we are extracting the last line from the response text since it contains the
+    # sentiment analysis value that we are looking for
     tone = tone.lines.last.chomp
     case tone.strip
     when "Neutral"
