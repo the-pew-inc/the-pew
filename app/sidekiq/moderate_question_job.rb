@@ -60,7 +60,7 @@ class ModerateQuestionJob
       # Extract key elements from the question such as Tone, Keywords and Topics
       QuestionToneJob.perform_async(question)
   
-      # QuestionKeyworksExtractionJob.perform_async(question)
+      QuestionKeyworksExtractionJob.perform_async(question)
       # QuestionTopicsExtractionJob.perform_async(question)
     end
   end

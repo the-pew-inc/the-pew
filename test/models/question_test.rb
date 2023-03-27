@@ -5,6 +5,7 @@
 #  id              :uuid             not null, primary key
 #  ai_response     :jsonb
 #  anonymous       :boolean          default(FALSE), not null
+#  keywords        :string           default([]), is an Array
 #  rejection_cause :integer
 #  status          :integer          default("asked"), not null
 #  title           :string           not null
