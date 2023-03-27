@@ -53,6 +53,20 @@
         </div>
       </div>
       <div>
+        <h3 class="text-gray-400 text-xl font-light">Keywords:</h3>
+        <% if @question.keywords.count > 0 %>
+          <div class="flex flex-row justify-start items-center">
+            <% @question.keywords.each do |keyword| %>
+              <span class="inline-flex items-center px-2 py-1 mr-2 text-sm font-medium text-blue-800 bg-blue-100 rounded dark:bg-blue-900 dark:text-blue-300">
+                <%= keyword %>
+              </span>
+            <% end %>
+          </div>
+        <% else %>
+          <p class="text-gray-500 dark:text-gray-400 font-light">No keyword</p>
+        <% end %>
+      </div>
+      <div>
         <h3 class="text-gray-400 text-xl font-light">Event:</h3>
         <%= link_to room_questions_path(@question.room), class: "text-gray-500 dark:text-gray-400" do %>
           <%= @question.room.event.name %>
