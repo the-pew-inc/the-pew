@@ -22,6 +22,5 @@
     "build:css": "tailwindcss -i ./app/assets/stylesheets/application.tailwind.css -o ./app/assets/builds/application.css"
   },
   "devDependencies": {
-    "@tailwindcss/line-clamp": "0.4.2"
   }
 }
