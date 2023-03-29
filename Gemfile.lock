@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/faker-ruby/faker.git
-  revision: 4d52bc1e148d5290da10cb2775e244e0023778b0
+  revision: 36cd3825584510cce8f5ab7ad036252b69753435
   specs:
     faker (3.1.1)
       i18n (>= 1.8.11, < 2)
@@ -97,7 +97,7 @@ GEM
       ffi-compiler (~> 1.0)
     ast (2.4.2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.735.0)
+    aws-partitions (1.736.0)
     aws-sdk-core (3.171.0)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.651.0)
@@ -147,7 +147,9 @@ GEM
     cssbundling-rails (1.1.2)
       railties (>= 6.0.0)
     date (3.3.3)
-    debug (1.7.1)
+    debug (1.7.2)
+      irb (>= 1.5.0)
+      reline (>= 0.3.1)
     device_detector (1.1.0)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
@@ -186,6 +188,9 @@ GEM
     image_processing (1.12.2)
       mini_magick (>= 4.9.5, < 5)
       ruby-vips (>= 2.0.17, < 3)
+    io-console (0.6.0)
+    irb (1.6.3)
+      reline (>= 0.3.0)
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
@@ -211,7 +216,7 @@ GEM
     mini_magick (4.12.0)
     mini_mime (1.1.2)
     minitest (5.18.0)
-    msgpack (1.6.1)
+    msgpack (1.7.0)
     multi_xml (0.6.0)
     net-imap (0.3.4)
       date
@@ -261,7 +266,7 @@ GEM
       ast (~> 2.4.1)
     pg (1.4.6)
     public_suffix (5.0.1)
-    puma (6.1.1)
+    puma (6.2.0)
       nio4r (~> 2.0)
     pundit (2.3.0)
       activesupport (>= 3.0.0)
@@ -304,6 +309,8 @@ GEM
     redis-client (0.14.0)
       connection_pool
     regexp_parser (2.7.0)
+    reline (0.3.3)
+      io-console (~> 0.5)
     request_store (1.5.1)
       rack (>= 1.4)
     reverse_markdown (2.1.1)
@@ -340,7 +347,7 @@ GEM
     rubyzip (2.3.2)
     safely_block (0.3.0)
       errbase (>= 0.1.1)
-    selenium-webdriver (4.8.3)
+    selenium-webdriver (4.8.6)
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
@@ -441,7 +448,7 @@ DEPENDENCIES
   pagy (~> 6.0.0)
   paper_trail
   pg (~> 1.4)
-  puma (~> 6.1.0)
+  puma (~> 6.2.0)
   pundit
   rails (~> 7.0.4)
   redis (~> 5.0.5)
