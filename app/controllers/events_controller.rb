@@ -16,6 +16,11 @@ class EventsController < ApplicationController
     is_confirmed? and return
 
     @event = current_user.events.new(create_event_params)
+
+    # Flowbite Datepicker returns the date formatted as mm/dd/yyyy
+    # This format must be aligned with the expected datetime (aka timestamp) used by ActiveRecord
+    # Using Date.parse leads to strange result such as April 1st being converted to Jan 1st
+    @event.start_date = Date.strptime(create_event_params[:start_date], "%m/%d/%Y")
     
     respond_to do |format|
       if @event.save
@@ -45,6 +50,7 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find_by(id: params[:id])
+    @event.start_date = @event.start_date.strftime("%m/%d/%Y")
   end
 
   def edit
