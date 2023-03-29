@@ -5,8 +5,13 @@ class DashboardsController < ApplicationController
   def show
     @questions = current_user.questions.order(created_at: :desc).limit(5)
     @status = current_user.questions.group(:status).count
+    @status_tones = current_user.questions.group([:status, :tone]).count
     @total = @status.values.reduce(:+) || 0 # Sum all the questions
     @pew_points = 0
+
+    @positive = 0
+    @neutral = 0
+    @negative = 0
 
     # Call for @pew_points update
     update_pew_points

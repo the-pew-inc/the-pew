@@ -135,6 +135,9 @@ gem 'groupdate'
 # Chart [https://chartkick.com]
 gem 'chartkick'
 
+# openAI [https://github.com/alexrudall/ruby-openai]
+gem "ruby-openai", "~> 3.7.0"
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: %i[mri mingw x64_mingw]
