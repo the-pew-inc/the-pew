@@ -3,7 +3,7 @@ class DashboardsController < ApplicationController
   before_action :redirect_if_unauthenticated
 
   def show
-    @questions = current_user.questions.order(created_at: :desc).limit(5)
+    @questions = current_user.questions.order(created_at: :desc).limit(5).includes(room: :event)
     @status = current_user.questions.group(:status).count
     @status_tones = current_user.questions.group([:status, :tone]).count
     @total = @status.values.reduce(:+) || 0 # Sum all the questions
