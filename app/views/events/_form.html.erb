@@ -7,30 +7,43 @@
     <%= form.text_field :name, required: true, class:"bg-gray-50 border border-gray-300 text-gray-900 text-base md:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
     <p id="helper-text-explanation" class="mt-2 text-sm text-gray-500 dark:text-gray-400">Max 250 characters, but we recommend to keep it simple 😎</p>
   </div>
-  <div class="relative max-w-sm mb-6">
-    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-      <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
-    </div>
-    <%= form.text_field :start_date, 
+  <div class="mb-6">
+    <%= form.label :start_date, class: "block text-sm font-medium text-gray-900 dark:text-gray-300" %>
+    <p id="helper-text-explanation" class="mb-2 text-sm text-gray-500 dark:text-gray-400">The event start date, format mm/dd/yyyy.</p>
+    <div class="relative max-w-sm">
+      <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+        <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
+      </div>
+      <%= form.text_field :start_date, 
                         datepicker: "", 
                         "datepicker-autohide": "", 
                         "datepicker-format": "mm/dd/yyyy",
-                        "datepicker-minDate": Time.zone.today.strftime("%m/%d/%Y"),
-                        value: @event.start_date.nil? ? nil : @event.start_date.strftime("%m/%d/%Y"),
+                        "data-minDate": Time.zone.today.strftime("%m/%d/%Y"),
+                        value: @event.start_date.nil? ? Time.zone.today.strftime("%m/%d/%Y") : @event.start_date.strftime("%m/%d/%Y"),
                         class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500", 
-                        placeholder: "Select date" %>
+                        placeholder: "Select date (mm/dd/yyyy)" %>
+    </div>
   </div>
   <div class="mb-6 flex flex-1 space-x-2 items-center justify-start">
-    <label for="always_on" class="inline-flex relative items-center cursor-pointer">
+    <label for="always_on" class="inline-flex relative items-center cursor-pointer" data-tooltip-target="tooltip-open-<%= dom_id(event) %>">
       <%= form.check_box :always_on, value: "", id: "always_on", class: "sr-only peer" %>
       <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
       <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Keep the event opened</span>
     </label>
-    <label form.label for="allow_anonymous" class="inline-flex relative items-center cursor-pointer">
+    <div id="tooltip-open-<%= dom_id(event) %>" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+      Keep the event open and receive more questions<br/>
+      or have it closing 48 hours after it ends.
+      <div class="tooltip-arrow" data-popper-arrow></div>
+    </div>
+    <label form.label for="allow_anonymous" class="inline-flex relative items-center cursor-pointer" data-tooltip-target="tooltip-anonymous-<%= dom_id(event) %>">
       <%= form.check_box :allow_anonymous, value: "", id: :allow_anonymous, class: "sr-only peer" %>
       <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
       <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Allow anonymous</span>
     </label>
+    <div id="tooltip-anonymous-<%= dom_id(event) %>" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+      Hide user's pseud/nickname.
+      <div class="tooltip-arrow" data-popper-arrow></div>
+    </div>
   </div>
   <div class="flex flex-row justify-between space-x-2 items-center">
     <%= form.submit class: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" %>

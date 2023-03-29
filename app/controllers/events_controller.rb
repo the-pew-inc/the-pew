@@ -3,7 +3,7 @@ class EventsController < ApplicationController
   before_action :redirect_if_unauthenticated, only: %i[index edit destroy update new]
 
   def index
-    @events = Event.where(user_id: current_user.id).order(start_date: :desc).includes(:user, :rooms)
+    @events = Event.where(user_id: current_user.id).order(start_date: :desc)
   end
 
   def new

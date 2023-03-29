@@ -3,7 +3,7 @@ class NotificationsController < ApplicationController
   before_action :redirect_if_unauthenticated
   
   def index
-    @notifications = Notification.where(recipient: current_user).order(created_at: :desc)
+    @notifications = Notification.where(recipient: current_user).order(created_at: :desc).includes(:recipient)
   end
 
   def mark_all_as_read
