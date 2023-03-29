@@ -11,7 +11,7 @@
       Notifications
     </div>
     <div class="divide-y divide-gray-100 dark:divide-gray-700">
-      <% current_user.notifications.newest_first.limit(3).each do |notification| %>
+      <% current_user.notifications.newest_first.limit(3).includes(:recipient).each do |notification| %>
         <%=link_to notifications_path, class: "flex py-3 px-4 hover:bg-gray-100 dark:hover:bg-gray-700" do %>
           <div class="pl-3 w-full">
             <div class="text-gray-500 text-sm mb-1.5 dark:text-gray-400"><%= notification.to_notification.message %></div>
