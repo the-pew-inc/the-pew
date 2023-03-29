@@ -11,6 +11,7 @@
     "chartkick": "5.0.1",
     "esbuild": "0.17.11",
     "flowbite": "1.6.4",
+    "flowbite-datepicker": "1.2.2",
     "postcss": "8.4.21",
     "stimulus-autocomplete": "3.1.0",
     "taggle": "1.15.0",
