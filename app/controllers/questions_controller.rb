@@ -8,7 +8,7 @@ class QuestionsController < ApplicationController
   def index
     if @room.event.universal?
       @question = @room.questions.build
-      @questions = Question.questions_for_room(params[:room_id]).includes(:user, :room)
+      @questions = Question.questions_for_room(params[:room_id]).includes(:room)
     else
       # TODO: make it more real ;-) and move this logic to pundit
       redirect_to room_path, alert: "This event is private"
@@ -30,6 +30,7 @@ class QuestionsController < ApplicationController
   end
 
   # GET /questions/1/edit
+  # TODO check as this seems to not be used and should be removed
   def edit; end
 
   # POST /rooms/:room_id/questions

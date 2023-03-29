@@ -1,4 +1,5 @@
-<%= form_with model: question, url: room_questions_path, data: { controller: "reset-form", action: "turbo:submit-end->reset-form#reset"} do |form| %>
+<%= form_with model: question, url: room_questions_path, 
+              data: { controller: "reset-form submit-question", action: "turbo:submit-end->reset-form#reset"} do |form| %>
   <%= render partial: 'shared/form_errors', locals: { object: question } %>
   <div class="w-full">
     <div>
@@ -9,6 +10,7 @@
         id: "helper-text",
         "data-maxchar-target": "input",
         "data-action": "input->maxchar#onchange",
+        "data-action": "keydown.enter->submit-question#submit",
         "aria-describedby": "helper-text-explanation" %>
         <p id="helper-text-explanation" class="mt-2 font-light text-xs text-gray-500 dark:text-gray-400" data-maxchar-target="msg">Max: 250 characters.</p>
       </div>
