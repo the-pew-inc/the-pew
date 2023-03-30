@@ -70,6 +70,9 @@ gem 'omniauth-google-oauth2' , '~> 1.1.1'
 # Required when not using Devise
 gem 'omniauth-rails_csrf_protection' 
 
+# Adding invisible_captcha [https://github.com/markets/invisible_captcha]
+gem 'invisible_captcha', '~> 2.1.0'
+
 # Adding Pundit to manage authorizations [https://github.com/varvet/pundit]
 gem 'pundit'
 # Adding Rolify to manage roles [https://github.com/RolifyCommunity/rolify]

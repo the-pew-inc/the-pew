@@ -7,7 +7,6 @@ export default class extends Controller {
   };
 
   connect() {
-    console.debug("TIMEZONE!");
     // Set the user's timezone based on their browser timezone configuration
     // and save it to a cookie (which expires 1 day from its creation time)
     // If the cookie is not expired, we read the timezone from the cookie instead.

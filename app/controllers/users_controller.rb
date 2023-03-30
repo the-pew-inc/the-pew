@@ -2,6 +2,9 @@ class UsersController < ApplicationController
   before_action :authenticate_user!, only: %i[edit destroy update index]
   before_action :redirect_if_authenticated, only: %i[create new]
 
+  # Add invisible_captcha
+  invisible_captcha only: [:create, :update]
+
   # GET /organization/:id/users
   def index
     @organization = Organization.find(params[:organization_id])

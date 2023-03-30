@@ -5,6 +5,9 @@
 class PasswordsController < ApplicationController
   before_action :redirect_if_authenticated
 
+  # Adding invisible_captcha
+  invisible_captcha only: [:create, :update]
+
   def create
     @user = User.find_by(email: params[:user][:email].strip.downcase)
     if @user.present?
