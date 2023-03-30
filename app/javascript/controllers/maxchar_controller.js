@@ -16,8 +16,8 @@ export default class extends Controller {
   }
 
   onchange(event) {
-    this.currentchars = this.inputTarget.value.length;
-    if (this.currentchars > this.maxcharsValue) {
+    var currentchars = this.inputTarget.value.length || 0;
+    if (currentchars > this.maxcharsValue) {
       // cut the input value to maxchar
       this.inputTarget.value = this.inputTarget.value.substring(
         0,
@@ -27,11 +27,16 @@ export default class extends Controller {
       this.msgTarget.innerText = this.errormsgValue;
     } else {
       // update the counter msg
-      this.msgTarget.innerText = `${this.currentchars} / ${this.maxcharsValue}`;
+      this.msgTarget.innerText = `${currentchars} / ${this.maxcharsValue}`;
     }
     if (this.currentchars === 0) {
       // display the default message
       this.msgTarget.innerText = this.defaultmsgValue;
     }
+  }
+
+  // Method called when the "reset-question-form" custom event is received.
+  reset() {
+    this.msgTarget.innerText = `0 / ${this.maxcharsValue}`;
   }
 }
