@@ -55,6 +55,7 @@ class EventsController < ApplicationController
 
   def edit
     @event = Event.find_by(id: params[:id])
+    @event.start_date = @event.start_date.strftime("%m/%d/%Y")
   end
 
   # GET /event/:id/stats
@@ -72,8 +73,15 @@ class EventsController < ApplicationController
     is_confirmed? and return
 
     @event = Event.find(params[:id])
+
+    # Flowbite Datepicker returns the date formatted as mm/dd/yyyy
+    # This format must be aligned with the expected datetime (aka timestamp) used by ActiveRecord
+    # Using Date.parse leads to strange result such as April 1st being converted to Jan 1st
+    attributes = update_event_params.clone
+    attributes[:start_date] = Date.strptime(update_event_params[:start_date], "%m/%d/%Y")
+
     respond_to do |format|
-      if @event.update(update_event_params)
+      if @event.update(attributes)
         # Update the default room (if it exists)
         @room = Room.where(event_id: @event.id, name: '__default__').first
         if @room

@@ -48,9 +48,9 @@ class Event < ApplicationRecord
 
   has_one_attached :qr_code
 
-  validates :name, presence: true, length: { minimum: 3, maximum: 250 }
+  validates :name,       presence: true, length: { minimum: 3, maximum: 250 }
   validates :start_date, presence: true
-  validates :end_date, presence: true
+  validates :end_date,   presence: true
   validate  :end_date_is_after_start_date
 
   enum status: { draft: 0, published: 10, opened: 20, closed: 30, archived: 40 }
@@ -62,7 +62,7 @@ class Event < ApplicationRecord
 
   private
 
-  def set_values
+  def set_values    
     self.end_date = start_date
     self.short_code = generate_pin if self.short_code.nil?
     self.organization_id = Member.where(user_id: self.user_id).first.organization_id if self.organization_id.nil?
