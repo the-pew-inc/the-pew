@@ -55,13 +55,14 @@ class ModerateQuestionJob
       Message.create(user_id: qh.dig("user_id"), title: "Question Rejected", content: "Your question: #{qh.dig("title")} has been rejected by ModBot", level: :alert)
     else
       # The question is approved by the automatic moderation
+      # Updating its status to :approved
       Question.update(qh.dig("id"), {status: :approved, ai_response: response})
 
-      # Extract key elements from the question such as Tone, Keywords and Topics
-      QuestionToneJob.perform_async(question)
-  
-      QuestionKeyworksExtractionJob.perform_async(question)
-      # QuestionTopicsExtractionJob.perform_async(question)
+
+      # Calling the QUestionProcessingJob where most of the question analysis is performed
+      # This is a single call to reduce the Moderation Worker processing time.
+      QuestionProcessingJob.perform_async(question)
+      
     end
   end
 end
