@@ -97,7 +97,7 @@ GEM
       ffi-compiler (~> 1.0)
     ast (2.4.2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.736.0)
+    aws-partitions (1.737.0)
     aws-sdk-core (3.171.0)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.651.0)
@@ -308,7 +308,7 @@ GEM
     rake (13.0.6)
     redis (5.0.6)
       redis-client (>= 0.9.0)
-    redis-client (0.14.0)
+    redis-client (0.14.1)
       connection_pool
     regexp_parser (2.7.0)
     reline (0.3.3)
