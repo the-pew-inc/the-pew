@@ -6,9 +6,9 @@ class QuestionProcessingJob
     # Topics are extracted via a cron job
 
     # Extract Tone from the quesstion
-    QuestionToneJob.perform(question)
+    QuestionToneJob.perform_async(question)
   
     # Extract Keywords from the question
-    QuestionKeywordsExtractionJob.perform(question)
+    QuestionKeywordsExtractionJob.perform_async(question)
   end
 end
