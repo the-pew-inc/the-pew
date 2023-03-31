@@ -84,6 +84,10 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', require: false
 
+# Add Merit [https://github.com/merit-gem/merit]
+# Used for badges, reputation, etc.
+gem 'merit'
+
 # Mailer - Sendgrid [https://github.com/sendgrid/sendgrid-ruby]
 gem 'sendgrid-actionmailer', '~> 3.2.0'
 

@@ -42,6 +42,10 @@ class QuestionsController < ApplicationController
 
         track
 
+        # Moderate the question
+        # The Moderate Job triggers other job such as keyword and tone extraction
+        ModerateQuestionJob.perform_async(@question.to_json)
+
         format.turbo_stream 
       else
         format.html { render :new, status: :unprocessable_entity }
