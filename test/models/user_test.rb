@@ -8,6 +8,7 @@
 #  confirmed_at    :datetime
 #  email           :string           not null
 #  failed_attempts :integer          default(0), not null
+#  level           :integer          default(0)
 #  locked          :boolean          default(FALSE), not null
 #  locked_at       :datetime
 #  password_digest :string
@@ -16,13 +17,16 @@
 #  uid             :string
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  sash_id         :integer
 #
 # Indexes
 #
 #  index_users_on_blocked    (blocked)
 #  index_users_on_email      (email) UNIQUE
+#  index_users_on_level      (level)
 #  index_users_on_locked     (locked)
 #  index_users_on_provider   (provider)
+#  index_users_on_sash_id    (sash_id)
 #  index_users_on_time_zone  (time_zone)
 #  index_users_on_uid        (uid) UNIQUE
 #

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_25_011418) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_31_184103) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -122,6 +122,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_25_011418) do
     t.index ["user_id"], name: "index_attendances_on_user_id"
   end
 
+  create_table "badges_sashes", force: :cascade do |t|
+    t.integer "badge_id"
+    t.integer "sash_id"
+    t.boolean "notified_user", default: false
+    t.datetime "created_at"
+    t.index ["badge_id", "sash_id"], name: "index_badges_sashes_on_badge_id_and_sash_id"
+    t.index ["badge_id"], name: "index_badges_sashes_on_badge_id"
+    t.index ["sash_id"], name: "index_badges_sashes_on_sash_id"
+  end
+
   create_table "events", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "user_id", null: false
     t.string "name", null: false
@@ -154,6 +164,42 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_25_011418) do
     t.index ["organization_id"], name: "index_members_on_organization_id"
     t.index ["owner"], name: "index_members_on_owner"
     t.index ["user_id"], name: "index_members_on_user_id"
+  end
+
+  create_table "merit_actions", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "action_method"
+    t.integer "action_value"
+    t.boolean "had_errors", default: false
+    t.string "target_model"
+    t.integer "target_id"
+    t.text "target_data"
+    t.boolean "processed", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["processed"], name: "index_merit_actions_on_processed"
+  end
+
+  create_table "merit_activity_logs", force: :cascade do |t|
+    t.integer "action_id"
+    t.string "related_change_type"
+    t.integer "related_change_id"
+    t.string "description"
+    t.datetime "created_at"
+  end
+
+  create_table "merit_score_points", force: :cascade do |t|
+    t.bigint "score_id"
+    t.bigint "num_points", default: 0
+    t.string "log"
+    t.datetime "created_at"
+    t.index ["score_id"], name: "index_merit_score_points_on_score_id"
+  end
+
+  create_table "merit_scores", force: :cascade do |t|
+    t.bigint "sash_id"
+    t.string "category", default: "default"
+    t.index ["sash_id"], name: "index_merit_scores_on_sash_id"
   end
 
   create_table "messages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -259,6 +305,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_25_011418) do
     t.index ["start_date"], name: "index_rooms_on_start_date"
   end
 
+  create_table "sashes", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "topics", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "event_id"
     t.uuid "user_id"
@@ -289,10 +340,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_25_011418) do
     t.string "uid"
     t.string "provider"
     t.string "time_zone"
+    t.integer "sash_id"
+    t.integer "level", default: 0
     t.index ["blocked"], name: "index_users_on_blocked"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["level"], name: "index_users_on_level"
     t.index ["locked"], name: "index_users_on_locked"
     t.index ["provider"], name: "index_users_on_provider"
+    t.index ["sash_id"], name: "index_users_on_sash_id"
     t.index ["time_zone"], name: "index_users_on_time_zone"
     t.index ["uid"], name: "index_users_on_uid", unique: true
   end
