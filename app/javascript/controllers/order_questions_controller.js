@@ -18,7 +18,10 @@ export default class extends Controller {
   }
 
   update() {
+    // Getting the list of the displayed questions
     const questions = this.questionTargets;
+
+    // Updating listOfQuestion (add or update)
     questions.forEach((element, index) => {
       const questionId = this.getQuestionId(element);
       const questionCreatedAt = this.getCreatedAt(element);
@@ -34,6 +37,7 @@ export default class extends Controller {
         cronoIndex: index,
         element: element.parentNode,
       };
+
       const indx = this.listOfQuestions.findIndex((ele) => {
         return ele.id === q.id;
       });
@@ -44,6 +48,17 @@ export default class extends Controller {
       }
     });
 
+    // Updaring listOfQuestions (remove)
+    this.listOfQuestions.forEach((lq, lqIndx) => {
+      const indx = questions.findIndex((ele) => {
+        return this.getQuestionId(ele) === lq.id;
+      });
+      if (indx === -1) {
+        this.listOfQuestions.splice(lqIndx, 1);
+      }
+    });
+
+    // Updating the display
     switch (this.orderingValue) {
       case "trending":
         this.removeHidden();
