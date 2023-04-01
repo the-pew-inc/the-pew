@@ -103,11 +103,15 @@ class QuestionsController < ApplicationController
       return
     end
 
-    # Broadcasting the deletion of a question
-    Broadcasters::Questions::Deleted.new(@question).call
-
+    # Cloning the question and deleting it
+    # We keep the clone in memory to make sure we can properly broadcast its deletion
+    # to the users who are connected to the room.
+    @qc = @question.clone
     @question.destroy
     # TODO: better handle the error (need turbo stream flash support)
+
+    # Broadcasting the deletion of a question
+    Broadcasters::Questions::Deleted.new(@qc).call
   end
 
   private
