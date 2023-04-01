@@ -17,7 +17,7 @@
   <% else %>
     <div>
       <h3 class="inline-block font-extrabold text-xl tracking-tight text-slate-800 dark:text-white">You need to be logged in to ask a question</h3>
-      <%= link_to 'Sign up', new_user_path %> or <%= link_to 'Login', login_path %>
+      <span class="text-gray-500 dark:text-gray-400 text-sm font-semibold tracking-tight"><%= link_to 'Sign up', new_user_path %> or <%= link_to 'Login', login_path %></span>
     </div>
   <% end %>
 </section>
