@@ -1,3 +1,12 @@
+# Removing the broadcast_..._to from the model and placing them into their respective Service class
+# There is one service class per action: Created, Updated and Deleted
+# The service class can be called anywhere, including in the console, as soon as a
+# proper question object is passed.
+# Exanple: 
+#
+# @question = Question.first
+# ... perform some updates on @question and save them before calling
+# Broadcasters::Questions::Updated.new(@question).call
 class Broadcasters::Questions::Updated
   attr_reader :question
 
