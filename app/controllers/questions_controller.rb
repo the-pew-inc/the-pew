@@ -46,6 +46,9 @@ class QuestionsController < ApplicationController
         # The Moderate Job triggers other job such as keyword and tone extraction
         ModerateQuestionJob.perform_async(@question.to_json)
 
+        # Broadcasting the new question
+        Broadcasters::Questions::Created.new(@question).call
+
         format.turbo_stream 
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -79,6 +82,9 @@ class QuestionsController < ApplicationController
 
         track
 
+        # Broadcasting the updated question
+        Broadcasters::Questions::Updated.new(@question).call
+
         format.turbo_stream
       else
         format.turbo_stream
@@ -96,6 +102,9 @@ class QuestionsController < ApplicationController
       redirect_to room_questions_path(@question.room_id), status: :unauthorized
       return
     end
+
+    # Broadcasting the deletion of a question
+    Broadcasters::Questions::Deleted.new(@question).call
 
     @question.destroy
     # TODO: better handle the error (need turbo stream flash support)

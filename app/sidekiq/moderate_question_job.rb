@@ -10,6 +10,9 @@ class ModerateQuestionJob
     # Parse the question
     qh = JSON.parse(question)
 
+    # Extract the question id
+    qid = qh.dig("id")
+
     # Send the question to openAI for moderation and wait for the response
     response = client.moderations(parameters: { input: qh.dig("title") })  
 
@@ -46,7 +49,7 @@ class ModerateQuestionJob
 
       # Update the question with rejected status
       # Defaulting the tone to negative as the rejection case is negative
-      Question.update(qh.dig("id"), { status: :rejected, 
+      Question.update(qid, { status: :rejected, 
                                             rejection_cause: cause,
                                             tone: :negative,
                                             ai_response: response})
@@ -56,13 +59,16 @@ class ModerateQuestionJob
     else
       # The question is approved by the automatic moderation
       # Updating its status to :approved
-      Question.update(qh.dig("id"), {status: :approved, ai_response: response})
+      Question.update(qid, {status: :approved, ai_response: response})
 
 
       # Calling the QUestionProcessingJob where most of the question analysis is performed
       # This is a single call to reduce the Moderation Worker processing time.
       QuestionProcessingJob.perform_async(question)
-      
     end
+
+    # Broadcasting the updated question
+    qb = Question.find(qid)
+    Broadcasters::Questions::Updated.new(qb).call
   end
 end
