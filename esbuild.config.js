@@ -10,9 +10,6 @@ require("esbuild")
     absWorkingDir: path.join(process.cwd(), "app/javascript"),
     plugins: [],
     minify: process.argv.includes("--minify"),
-    define: {
-      HONEYBADGER_API_KEY: JSON.stringify(process.env.HONEYBADGER_API_KEY),
-    },
   })
   .then((context) => {
     if (process.argv.includes("--watch")) {

@@ -4,7 +4,7 @@ import * as Honeybadger from "@honeybadger-io/js";
 
 // Configure honeybadger.js
 Honeybadger.configure({
-  apiKey: HONEYBADGER_API_KEY,
+  apiKey: process.env.HONEYBADGER_API_KEY,
   environment: "production",
   revision: "git SHA/project version",
 });
