@@ -46,7 +46,12 @@ class Event < ApplicationRecord
   has_many   :attendances, dependent: :destroy
   has_many   :rooms,       dependent: :destroy
 
+  # QR Code of the event
   has_one_attached :qr_code
+
+  # Description (optional) / Used to extract topics and intends from questions by
+  # offering a better context to openAI
+  has_rich_text :description
 
   validates :name,       presence: true, length: { minimum: 3, maximum: 250 }
   validates :start_date, presence: true

@@ -10,3 +10,8 @@ import "chartkick/chart.js";
 // });
 import "trix";
 import "@rails/actiontext";
+
+// Preventing file upload in Trix
+document.addEventListener("trix-file-accept", (e) => {
+  e.preventDefault();
+});
