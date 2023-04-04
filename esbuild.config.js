@@ -22,4 +22,7 @@ require("esbuild")
       });
     }
   })
-  .catch(() => process.exit(1));
+  .catch((error) => {
+    console.error("[esbuild] build failed", error);
+    process.exit(1);
+  });
