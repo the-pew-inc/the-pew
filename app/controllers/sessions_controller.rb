@@ -5,6 +5,8 @@ class SessionsController < ApplicationController
   def create
     @user = User.find_by(email: params[:user][:email].downcase)
 
+    user_was_invited? and return
+
     # If the user exists but uses an OTP, then redirect to the login page with an error
     if @user && (@user.provider? && @user.uid?)
       flash.now[:alert] = 'Incorrect authentication method.'
@@ -119,5 +121,16 @@ class SessionsController < ApplicationController
     # Generate a unique filename
     filename = Time.current.utc.to_s + SecureRandom.hex(16)
     user.profile.avatar.attach(io: tempavatar, filename: filename, content_type: tempavatar.content_type)
-  end  
+  end
+
+
+  # Check if the user has still a pending invite
+  # If this is the case we deny access to the app and require the user to go back to the
+  # invite flow.
+  def user_was_invited?
+    if @user.invited && @user.accepted_invitation_on.nil?
+      flash[:alert] = 'The email address you are using has a pending invite. Please check your mailbox for an invite.'
+      redirect_to(root_path) and return true
+    end
+  end
 end

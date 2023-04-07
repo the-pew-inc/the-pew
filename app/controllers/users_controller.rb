@@ -13,6 +13,10 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(create_user_params)
+
+    # Cannot register with an email that receieved an invitation to join an organization
+    user_was_invited? and return 
+
     if @user.save
       after_login_path = session[:user_return_to] || root_path
       login(@user)
@@ -149,6 +153,15 @@ class UsersController < ApplicationController
     if @user.locked
       flash.now[:alert] = 'Your account has been locked. Please contact your admin.'
       render(:edit, status: :unprocessable_entity) and return true
+    end
+  end
+
+  def user_was_invited?
+    user = User.find_by(email: @user.email)
+
+    if user.invited && user.accepted_invitation_on.nil?
+      flash[:alert] = 'The email address you used has a pending invitation. Check your mailbox for an invite.'
+      redirect_to(root_path) and return true
     end
   end
 

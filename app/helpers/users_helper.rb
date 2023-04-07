@@ -8,7 +8,7 @@ module UsersHelper
 
     if !user.confirmed
       # User is not confirmed
-      return '<div class="h-2.5 w-2.5 rounded-full bg-purple-500 mr-2"></div> Inactive'.html_safe
+      return '<div class="h-2.5 w-2.5 rounded-full bg-purple-500 mr-2"></div> Unconfirmed'.html_safe
     end
 
     if user.blocked
