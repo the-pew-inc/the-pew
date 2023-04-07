@@ -19,11 +19,15 @@
       <%= user_status(user) %>
     </div>
   </td>
-  <td class="px-6 py-4">
-    <%= link_to "Resend Invitation", resend_confirmation_path(user), data: { 'turbo-method': :put }, class: "font-medium text-blue-600 dark:text-blue-500 hover:underline" %> |
-    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Reset Password</a> |
-    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Unlock</a> |
-    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Block</a> |
+  <td class="px-6 py-4 flex flex-row justify-end items-center space-x-2">
+    <% if user.invited && !user.accepted_invitation_on.nil? %>
+      <%= link_to "Resend Invitation", resend_confirmation_path(user), data: { 'turbo-method': :put }, class: "font-medium text-blue-600 dark:text-blue-500 hover:underline" %> &nbsp;|
+    <% end %>
+    <% if !user.confirmed %>
+      <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Reset Password</a> &nbsp;|
+    <% end %>
+    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Unlock</a> &nbsp;|
+    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Block</a> &nbsp;|
     <a href="#" class="font-medium text-red-600 dark:text-red-500 hover:underline">Delete</a>
   </td>
 </tr>
