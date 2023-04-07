@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_31_184103) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_05_193622) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -342,8 +342,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_31_184103) do
     t.string "time_zone"
     t.integer "sash_id"
     t.integer "level", default: 0
+    t.boolean "invited", default: false, null: false
+    t.datetime "invited_at", precision: nil
+    t.datetime "accepted_invitation_on", precision: nil
     t.index ["blocked"], name: "index_users_on_blocked"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["invited"], name: "index_users_on_invited"
     t.index ["level"], name: "index_users_on_level"
     t.index ["locked"], name: "index_users_on_locked"
     t.index ["provider"], name: "index_users_on_provider"

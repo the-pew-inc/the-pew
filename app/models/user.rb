@@ -2,27 +2,31 @@
 #
 # Table name: users
 #
-#  id              :uuid             not null, primary key
-#  blocked         :boolean          default(FALSE), not null
-#  confirmed       :boolean          default(FALSE), not null
-#  confirmed_at    :datetime
-#  email           :string           not null
-#  failed_attempts :integer          default(0), not null
-#  level           :integer          default(0)
-#  locked          :boolean          default(FALSE), not null
-#  locked_at       :datetime
-#  password_digest :string
-#  provider        :string
-#  time_zone       :string
-#  uid             :string
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
-#  sash_id         :integer
+#  id                     :uuid             not null, primary key
+#  accepted_invitation_on :datetime
+#  blocked                :boolean          default(FALSE), not null
+#  confirmed              :boolean          default(FALSE), not null
+#  confirmed_at           :datetime
+#  email                  :string           not null
+#  failed_attempts        :integer          default(0), not null
+#  invited                :boolean          default(FALSE), not null
+#  invited_at             :datetime
+#  level                  :integer          default(0)
+#  locked                 :boolean          default(FALSE), not null
+#  locked_at              :datetime
+#  password_digest        :string
+#  provider               :string
+#  time_zone              :string
+#  uid                    :string
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
+#  sash_id                :integer
 #
 # Indexes
 #
 #  index_users_on_blocked    (blocked)
 #  index_users_on_email      (email) UNIQUE
+#  index_users_on_invited    (invited)
 #  index_users_on_level      (level)
 #  index_users_on_locked     (locked)
 #  index_users_on_provider   (provider)
@@ -70,7 +74,7 @@ class User < ApplicationRecord
 
   # Validations
   validates :email, presence: true, uniqueness: { case_sensitive: false }, format: { with: URI::MailTo::EMAIL_REGEXP }
-  validates :password, presence: true, length: { minimum: 6, maximum: 35 }, on: :create
+  validates :password, presence: true, length: { minimum: 6, maximum: 35 }, on: :create, if: -> { !invited }
 
   ## Functions
 
@@ -85,16 +89,52 @@ class User < ApplicationRecord
     update_columns(confirmed_at: Time.current, confirmed: true)
   end
 
+  # Block the user
+  def block!
+    update_columns(blocked: true)
+  end
+
+  # Unblock the user
+  def unblock!
+    update_columns(blocked: false)
+  end
+
+  def lock!
+    update_columns(confirmed_at: Time.current, locked: true)
+  end
+
+  def unlock!
+    update_columns(confirmed_at: Time.current, locked: false)
+  end
+
   # Send a password reset email to the user
   def send_password_reset_email!
-    password_reset_token = signed_id(purpose: :reset_password, expires_in: PASSWORD_RESET_TOKEN_EXPIRATION)
-    UserMailer.password_reset(self, password_reset_token).deliver_later
+    # If the user was invited, the user should not be able to bypass the invitation flow 
+    # by resetting their password, unless they have accepted the invitation what translated to
+    # accepted_invitation_on is different from nil
+    if !self.invited || self.accepted_invitation_on != nil
+      password_reset_token = signed_id(purpose: :reset_password, expires_in: PASSWORD_RESET_TOKEN_EXPIRATION)
+      UserMailer.password_reset(self, password_reset_token).deliver_later
+    end
   end
 
   # Send a confirmation email to the user
   def send_confirmation_email!
-    confirmation_token = signed_id(purpose: :email_confirmation, expires_in: CONFIRMATION_TOKEN_EXPIRATION)
-    UserMailer.confirmation(self, confirmation_token).deliver_later
+    # If the user was invited, the user should not be able to bypass the invitation flow 
+    # by accepting an invitation email.
+    # Users invited to join an organization are automatically confirmed as the invitation to
+    # join the organization plays the role of a confirmation email.
+    if !self.invited
+      confirmation_token = signed_id(purpose: :email_confirmation, expires_in: CONFIRMATION_TOKEN_EXPIRATION)
+      UserMailer.confirmation(self, confirmation_token).deliver_later
+    end
+  end
+
+  # Used to send an invite to join an Organization
+  # Invitates are valid for 3 days
+  def send_invite!
+    invitation_token = signed_id(purpose: :invitation, expires_in: 3.days)
+    UserMailer.invite(self, invitation_token).deliver_later
   end
 
   # PRIVATE METHODS #
@@ -119,18 +159,21 @@ class User < ApplicationRecord
   end
 
   def create_and_attach_to_organization
-    # Creating a default account
-    # TODO: connect users to existing account via SSO or other mechanisms to support invitation
-    @default_organization = Organization.create!({name: '__default__'})
+    # Only attached a user to a new organization if this user is not invited to join an
+    # existing organization
+    if !self.invited 
+      # Creating a default organization
+      @default_organization = Organization.create!({name: '__default__'})
 
-    logger.info @default_organization.inspect
-
-    # Attach user to the default account
-    @member = Member.new()
-    @member.user_id = self.id
-    @member.organization_id = @default_organization.id
-    @member.owner = true
-    @member.save
+      # Attach user to the default account
+      @member = Member.new()
+      @member.user_id = self.id
+      @member.organization_id = @default_organization.id
+      @member.owner = true
+      @member.save
+    else
+      #TODO Should return an error pointing to the invitation
+    end
   end
   
 end

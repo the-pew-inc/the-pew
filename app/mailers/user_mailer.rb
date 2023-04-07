@@ -34,4 +34,13 @@ class UserMailer < ApplicationMailer
       subject: 'ThePew: Password changed'
     )
   end
+
+  def invite(user, invitation_token)
+    @user = user
+    @invitation_token = invitation_token
+    mail(
+      to: @user.email,
+      subject: "You've been invited to join ThePew!"
+    )
+  end
 end

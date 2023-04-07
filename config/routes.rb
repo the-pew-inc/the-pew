@@ -14,18 +14,22 @@ Rails.application.routes.draw do
   get 'cookies', to: 'cookies#index'
 
   # User Account routes
-  put 'account/:id', to: 'users#update', as: 'update_account'
-  get 'account/:id', to: 'users#edit', as: 'edit_account'
-  delete 'account/:id', to: 'users#destroy', as: 'destroy_account'
-  put 'account/:id/resend_confirmation', to: 'users#resend_confirmation', as: 'resend_confirmation'
+  put    'account/:id',                         to: 'users#update',  as: 'update_account'
+  get    'account/:id',                         to: 'users#edit',    as: 'edit_account'
+  delete 'account/:id',                         to: 'users#destroy', as: 'destroy_account'
+  put    'account/:id/resend_confirmation',     to: 'users#resend_confirmation', as: 'resend_confirmation'
+  
+  # Invite routes
+  # Invite routes are only used to invite a user to join an existing Organization
+  resources :invites, only: %i[ create new ]
 
   # User routes
-  resources :users,     only: %i[create new ]
-  resources :profiles,  only: %i[update edit]
+  resources :users,     only: %i[ create new ]
+  resources :profiles,  only: %i[ update edit ]
 
   # Session routes
-  post 'login', to: 'sessions#create'
-  get  'login', to: 'sessions#new'
+  post   'login',  to: 'sessions#create'
+  get    'login',  to: 'sessions#new'
   delete 'logout', to: 'sessions#destroy'
 
 

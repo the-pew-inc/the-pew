@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   # GET /organization/:id/users
   def index
     @organization = Organization.find(params[:organization_id])
-    @users = @organization.users
+    @users = @organization.users.includes([:profile])
   end
 
   def create

@@ -2,27 +2,31 @@
 #
 # Table name: users
 #
-#  id              :uuid             not null, primary key
-#  blocked         :boolean          default(FALSE), not null
-#  confirmed       :boolean          default(FALSE), not null
-#  confirmed_at    :datetime
-#  email           :string           not null
-#  failed_attempts :integer          default(0), not null
-#  level           :integer          default(0)
-#  locked          :boolean          default(FALSE), not null
-#  locked_at       :datetime
-#  password_digest :string
-#  provider        :string
-#  time_zone       :string
-#  uid             :string
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
-#  sash_id         :integer
+#  id                     :uuid             not null, primary key
+#  accepted_invitation_on :datetime
+#  blocked                :boolean          default(FALSE), not null
+#  confirmed              :boolean          default(FALSE), not null
+#  confirmed_at           :datetime
+#  email                  :string           not null
+#  failed_attempts        :integer          default(0), not null
+#  invited                :boolean          default(FALSE), not null
+#  invited_at             :datetime
+#  level                  :integer          default(0)
+#  locked                 :boolean          default(FALSE), not null
+#  locked_at              :datetime
+#  password_digest        :string
+#  provider               :string
+#  time_zone              :string
+#  uid                    :string
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
+#  sash_id                :integer
 #
 # Indexes
 #
 #  index_users_on_blocked    (blocked)
 #  index_users_on_email      (email) UNIQUE
+#  index_users_on_invited    (invited)
 #  index_users_on_level      (level)
 #  index_users_on_locked     (locked)
 #  index_users_on_provider   (provider)

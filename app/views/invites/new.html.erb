@@ -1,0 +1,25 @@
+<!-- app/views/invites/invite.html.erb -->
+<%= turbo_frame_tag "invite_user" do %>
+  <%= form_with model: @user, url: invites_path do |form| %>
+    <%# render partial: "shared/form_errors", locals: { object: form.object } %>
+    <div class="mb-2">
+      <%= form.label :email, "Add a new user to your organization by sending an invite email", class: "block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" %>
+    </div>
+    <div class="mb-8 flex flex-row justify-start space-x-4">
+      <div class="flex flex-col justify-start space-y-1 w-96">
+        <%= form.email_field :email, required: true, autocomplete: false, class: "bg-gray-50 border border-gray-300 text-gray-900 text-base md:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500", placeholder:"User's email address" %>
+      </div>
+      <div class="w-44">
+        <%# form.submit "Invite", class: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full  px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" %>
+        <%= button_tag :submit, class: "flex flew-row justify-center items-center space-x-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full  px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" do %>
+          <svg fill="none" class="w-5 h-5" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"></path>
+          </svg>
+          <span>
+            Send Invite
+          </span>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+<% end %>
