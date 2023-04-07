@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   
   # Invite routes
   # Invite routes are only used to invite a user to join an existing Organization
-  resources :invites, only: %i[ create new ]
+  resources :invites, only: %i[ edit create new update ]
 
   # User routes
   resources :users,     only: %i[ create new ]

@@ -1,7 +1,7 @@
 module UsersHelper
 
   def user_status(user)
-    if user.invited
+    if user.invited && user.accepted_invitation_on.nil?
       # User is not confirmed
       return '<div class="h-2.5 w-2.5 rounded-full bg-blue-500 mr-2"></div> Invited'.html_safe
     end

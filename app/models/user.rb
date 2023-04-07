@@ -120,9 +120,9 @@ class User < ApplicationRecord
 
   # Send a confirmation email to the user
   def send_confirmation_email!
-    # If the user was invited, the user should not be able to bypass the invitation flow 
-    # by accepting an invitation email.
-    # Users invited to join an organization are automatically confirmed as the invitation to
+    # If the user was invited, the user should not be able to bypass the invite flow 
+    # by accepting a confirmation email.
+    # Users invited to join an organization are automatically confirmed as the invite to
     # join the organization plays the role of a confirmation email.
     if !self.invited
       confirmation_token = signed_id(purpose: :email_confirmation, expires_in: CONFIRMATION_TOKEN_EXPIRATION)
@@ -133,8 +133,13 @@ class User < ApplicationRecord
   # Used to send an invite to join an Organization
   # Invitates are valid for 3 days
   def send_invite!
-    invitation_token = signed_id(purpose: :invitation, expires_in: 3.days)
+    invitation_token = signed_id(purpose: :invite, expires_in: 3.days)
     UserMailer.invite(self, invitation_token).deliver_later
+  end
+
+  def invited!
+    self.confirm!
+    update_columns(accepted_invitation_on: Time.current)
   end
 
   # PRIVATE METHODS #

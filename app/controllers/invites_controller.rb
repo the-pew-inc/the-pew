@@ -1,12 +1,18 @@
 class InvitesController < ApplicationController
-  before_action :authenticate_user!
-  before_action :redirect_if_unauthenticated
+  before_action :authenticate_user!, except: %i[edit update]
+  before_action :redirect_if_unauthenticated, except: %i[edit update]
 
-  # GET /invites
-  # Instantiate an invite (@user)
-  def new
-    @user = User.new
-    @user.build_profile
+  # GET /invites/:id/edit
+  # where :id is the signed_id sent to the user via email
+  def edit
+    if user_signed_in?
+      redirect_to(root_path, notice: "This page is not accessible.")
+      return
+    end
+    @user = User.find_signed(params[:id], purpose: :invite)
+    if @user.profile.nil?
+      @user.build_profile
+    end
   end
 
   # POST /invites
@@ -39,6 +45,13 @@ class InvitesController < ApplicationController
     end
   end
 
+  # GET /invites
+  # Instantiate an invite (@user)
+  def new
+    @user = User.new
+    @user.build_profile
+  end
+
   # Used to resend the invitation in case the user didn't receive it when 
   # first invited.
   def resend_invite
@@ -46,10 +59,25 @@ class InvitesController < ApplicationController
     @user.send_invite!
   end
 
+  def update
+    @user = User.find(params[:id])
+    if @user.update(update_user_params)
+      @user.invited!
+      login(@user)
+      redirect_to(root_path, notice: "You successfully logged in")
+    else
+      render(:edit, status: :unprocessable_entity)
+    end
+  end
+
   private
 
   def invite_user_params
     params.require(:user).permit(:email)
+  end
+
+  def update_user_params
+    params.require(:user).permit(:password, profile_attributes: [:nickname])
   end
 
 end
