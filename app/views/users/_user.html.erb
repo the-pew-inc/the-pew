@@ -1,4 +1,4 @@
-<tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+<tr id="user_<%=user.id%>" is="turbo-frame" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
   <td class="w-4 p-4">
     <div class="flex items-center">
       <input id="checkbox-table-search-1" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
@@ -6,9 +6,9 @@
     </div>
   </td>
   <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
-    <%= image_tag current_user.profile.avatar.variant(resize_to_limit: [100, 100]),
-            width: 100, height: 100, class: "w-10 h-10 rounded-full" if current_user.profile.avatar.attached? %>
-    <%= AvatarPresenter.call(user, 10, 18) unless current_user.profile.avatar.attached?  %>
+    <%= image_tag user.profile.avatar.variant(resize_to_limit: [100, 100]),
+            width: 100, height: 100, class: "w-10 h-10 rounded-full" if user.profile&.avatar&.attached? %>
+    <%= AvatarPresenter.call(user, 10, 18) unless user.profile&.avatar&.attached?  %>
     <div class="pl-3">
       <div class="text-base font-semibold"><%= user.profile&.nickname %></div>
       <div class="font-normal text-gray-500"><%= user.email %></div>

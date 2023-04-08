@@ -11,8 +11,8 @@ class Broadcasters::Users::Created
   end
 
   def call
-    Turbo::StreamsChannel.broadcast_prepend_later_to @organization.id, target: "settings_users", partial: "users/user", locals: { question: @user }
-    Turbo::StreamsChannel.broadcast_update_later_to  @organization.id, target: "settings_users_counter", html: @user.organization.members.count
+    Turbo::StreamsChannel.broadcast_append_later_to @organization.id, target: "user-list", partial: "users/user", locals: { user: @user }
+    # Turbo::StreamsChannel.broadcast_update_later_to @organization.id, target: "users-counter", html: @user.organization.members.count
   end
 
 end

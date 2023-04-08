@@ -2,7 +2,7 @@
 # The service class can be called anywhere, including in the console, as soon as a
 # proper user object is passed.
 #
-class Broadcasters::Users::Created
+class Broadcasters::Users::Updated
   attr_reader :question
 
   def initialize(user)
@@ -11,7 +11,7 @@ class Broadcasters::Users::Created
   end
 
   def call
-    Turbo::StreamsChannel.broadcast_update_later_to @organization.id, target: "settings_users", partial: "users/user", locals: { question: @user }
+    Turbo::StreamsChannel.broadcast_update_later_to @organization.id, target: "user-list", partial: "users/user", locals: { user: @user }
   end
 
 end

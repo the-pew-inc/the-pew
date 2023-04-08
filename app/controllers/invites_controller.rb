@@ -34,6 +34,9 @@ class InvitesController < ApplicationController
         # Send email to the user
         @user.send_invite!
 
+        # Broadcast the new user
+        Broadcasters::Users::Created.new(@user).call
+
         # Return a success message in flash
         format.html { redirect_to new_invite_url, notice: "User was successfully invited." }
         format.json { render :show, status: :created, location: @user }
@@ -64,6 +67,7 @@ class InvitesController < ApplicationController
     if @user.update(update_user_params)
       @user.invited!
       login(@user)
+      Broadcasters::Users::Updated.new(@user).call
       redirect_to(root_path, notice: "You successfully logged in")
     else
       render(:edit, status: :unprocessable_entity)
