@@ -12,7 +12,7 @@ class Broadcasters::Users::Created
 
   def call
     Turbo::StreamsChannel.broadcast_append_later_to @organization.id, target: "user-list", partial: "users/user", locals: { user: @user }
-    # Turbo::StreamsChannel.broadcast_update_later_to @organization.id, target: "users-counter", html: @user.organization.members.count
+    Turbo::StreamsChannel.broadcast_update_later_to @organization.id, target: "users-counter", html: @user.organization.members.count
   end
 
 end

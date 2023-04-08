@@ -41,6 +41,30 @@ class UsersController < ApplicationController
     redirect_to(root_path, notice: 'Your account has been deleted.')
   end
 
+  # Used by admin or organization owner to delete a user
+  def delete_user
+    @user = User.find(params[:id])
+
+    if @user && !is_organization_owner?
+      # Disconnect the user from all previous session
+      @user.active_sessions.destroy_all
+
+      # Keep the user's id for a short time
+      @user_clone = @user.clone
+      @organization = @user.organization
+
+      # remove the user from the organization
+      member = Member.find_by(user_id: @user.id)
+      member.destroy
+
+      # Delete the user
+      @user.destroy
+
+      # Broadcast
+      Broadcasters::Users::Deleted.new(@user_clone, @organization).call
+    end
+  end
+
   def edit
     @user = User.find(params[:id])
 
@@ -199,6 +223,10 @@ class UsersController < ApplicationController
       flash.now[:alert] = 'You do not have permission to edit this user.'
       render(:edit, status: :unprocessable_entity) and return true
     end
+  end
+
+  def is_organization_owner?
+    Member.find_by(user_id: @user.id, owner: true).nil? ? false : true
   end
 
 

@@ -18,7 +18,8 @@ Rails.application.routes.draw do
   get    'account/:id',                         to: 'users#edit',    as: 'edit_account'
   delete 'account/:id',                         to: 'users#destroy', as: 'destroy_account'
   put    'account/:id/resend_confirmation',     to: 'users#resend_confirmation', as: 'resend_confirmation'
-  
+  delete 'account/:id/delete',                  to: 'users#delete_user',         as: 'delete_user'
+
   # Unlock a user's account
   post   'account/:id/unlock', to: 'users#unlock',        as: :user_unlock
 

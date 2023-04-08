@@ -37,6 +37,6 @@
     <% else %>
       <%= button_to "Block", user_block_path(user), class: "font-medium text-blue-600 dark:text-blue-500 hover:underline"%> &nbsp;|
     <% end %>
-    <a href="#" class="font-medium text-red-600 dark:text-red-500 hover:underline">Delete</a>
+    <%= link_to "Delete", delete_user_path(user), data: { turbo_method: :delete,  turbo_confirm: 'Are you sure? All the data associated with this user will be lost.' }, class: "font-medium text-red-600 dark:text-red-500 hover:underline" %>
   </td>
 </tr>

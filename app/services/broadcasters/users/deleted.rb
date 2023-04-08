@@ -5,14 +5,14 @@
 class Broadcasters::Users::Deleted
   attr_reader :question
 
-  def initialize(user)
+  def initialize(user, organization)
     @user = user
-    @organization = @user.organization
+    @organization = organization
   end
 
   def call
-    Turbo::StreamsChannel.broadcast_remove_to @organization.id, target: "user-list", partial: "users/user", locals: { user: @user }
-    Turbo::StreamsChannel.broadcast_update_later_to  @organization.id, target: "settings_users_counter", html: @user.organization.members.count
+    Turbo::StreamsChannel.broadcast_remove_to @organization.id, target: @user 
+    Turbo::StreamsChannel.broadcast_update_later_to  @organization.id, target: "users-counter", html: @organization.members.count
   end
 
 end
