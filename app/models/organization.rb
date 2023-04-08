@@ -2,17 +2,18 @@
 #
 # Table name: organizations
 #
-#  id                 :uuid             not null, primary key
-#  country            :string
-#  dns_txt            :string
-#  domain             :string
-#  domain_verified    :boolean          default(FALSE), not null
-#  domain_verified_at :datetime
-#  name               :string
-#  sso                :boolean          default(FALSE), not null
-#  website            :string
-#  created_at         :datetime         not null
-#  updated_at         :datetime         not null
+#  id                  :uuid             not null, primary key
+#  country             :string
+#  dns_txt             :string
+#  domain              :string
+#  domain_verified     :boolean          default(FALSE), not null
+#  domain_verified_at  :datetime
+#  max_failed_attempts :integer          default(5), not null
+#  name                :string
+#  sso                 :boolean          default(FALSE), not null
+#  website             :string
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
 #
 # Indexes
 #

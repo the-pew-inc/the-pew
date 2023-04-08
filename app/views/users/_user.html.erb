@@ -24,10 +24,10 @@
       <%= link_to "Resend Invite", resend_confirmation_path(user), data: { 'turbo-method': :put }, class: "font-medium text-blue-600 dark:text-blue-500 hover:underline" %> &nbsp;|
     <% end %>
     <% if user.confirmed %>
-      <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Reset Password</a> &nbsp;|
+      <%= button_to "Reset Password", password_reset_path(user), class: "font-medium text-blue-600 dark:text-blue-500 hover:underline"%> &nbsp;|
     <% end %>
     <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Unlock</a> &nbsp;|
-    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Block</a> &nbsp;|
+    <%= button_to "Reset Password", user_block_path(user), class: "font-medium text-blue-600 dark:text-blue-500 hover:underline"%> &nbsp;| &nbsp;|
     <a href="#" class="font-medium text-red-600 dark:text-red-500 hover:underline">Delete</a>
   </td>
 </tr>

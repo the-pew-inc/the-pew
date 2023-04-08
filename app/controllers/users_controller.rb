@@ -82,6 +82,27 @@ class UsersController < ApplicationController
     end
   end
 
+  def reset_password
+    # TODO make sure the user is an admin or the owner of the organization
+    @user = User.find(params[:id])
+    if @user
+      # Disconnect the user
+      @user.active_sessions.destroy_all
+
+      # Invalidate the previous password
+      @user.update_columns(password_digest: nil)
+
+      # Send password reset email
+      @user.send_password_reset_email!
+      flash.now[:success] = "We just sent reset instructions to ${@user.email}."
+      redirect_to(organization_users_path(@user.organization.id))
+    else
+      redirect_to(organization_users_path(@user.organization.id), alert: 'Something went wrong. If this error persist, please contact your administrator.')
+    end
+  end
+
+  # Used to resent the confirmation email to a user when a user can login, but is not confirmed yet
+  # This action is done by the user only from the profile section of the app
   def resend_confirmation
     @user = User.find(params[:id])
     

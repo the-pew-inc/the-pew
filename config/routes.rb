@@ -39,6 +39,7 @@ Rails.application.routes.draw do
 
   # Password routes
   resources :passwords, only: %i[create edit new update], param: :password_reset_token
+  post      'passwords/:id/reset', to: 'users#reset_password', as: :password_reset
 
   # Confirmation routes
   resources :confirmations, only: %i[create edit new], param: :confirmation_token
