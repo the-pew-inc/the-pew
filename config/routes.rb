@@ -20,10 +20,13 @@ Rails.application.routes.draw do
   put    'account/:id/resend_confirmation',     to: 'users#resend_confirmation', as: 'resend_confirmation'
   
   # Unlock a user's account
-  post   'account/:id/unlock', to: 'users#unlock', as: :user_unlock
+  post   'account/:id/unlock', to: 'users#unlock',        as: :user_unlock
 
   # Block / unblock a user's account
-  post   'account/:id/block',  to: 'users#block',  as: :user_block
+  post   'account/:id/block',  to: 'users#block',         as: :user_block
+
+  # Resend the invite to join an organization to a user
+  post   'account/:id/invite', to: 'users#resend_invite', as: :resend_invite
 
   # Invite routes
   # Invite routes are only used to invite a user to join an existing Organization

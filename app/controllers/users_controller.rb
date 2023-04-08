@@ -119,6 +119,14 @@ class UsersController < ApplicationController
     end
   end
 
+  # Method used to resend an invitation to join an organization to a user.
+  def resend_invite
+    @user = User.find(params[:id])
+    if @user && @user.invited && @user.accepted_invitation_on.nil?
+      @user.send_invite!
+    end
+  end
+
   # Method used to toggle the blocked value for a given user
   def block
     # TODO make sure that only the admin or the owner of an organization can use this
