@@ -19,6 +19,12 @@ Rails.application.routes.draw do
   delete 'account/:id',                         to: 'users#destroy', as: 'destroy_account'
   put    'account/:id/resend_confirmation',     to: 'users#resend_confirmation', as: 'resend_confirmation'
   
+  # Unlock a user's account
+  post   'account/:id/unlock', to: 'users#unlock', as: :user_unlock
+
+  # Block / unblock a user's account
+  post   'account/:id/block',  to: 'users#block',  as: :user_block
+
   # Invite routes
   # Invite routes are only used to invite a user to join an existing Organization
   resources :invites, only: %i[ edit create new update ]

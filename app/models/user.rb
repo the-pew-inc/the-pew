@@ -100,11 +100,11 @@ class User < ApplicationRecord
   end
 
   def lock!
-    update_columns(confirmed_at: Time.current, locked: true)
+    update_columns(locked_at: Time.current, locked: true)
   end
 
   def unlock!
-    update_columns(confirmed_at: Time.current, locked: false)
+    update_columns(locked: false, locked_at: nil, failed_attempts: 0)
   end
 
   # Send a password reset email to the user

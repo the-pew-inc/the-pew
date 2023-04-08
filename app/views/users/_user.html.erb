@@ -26,8 +26,14 @@
     <% if user.confirmed %>
       <%= button_to "Reset Password", password_reset_path(user), class: "font-medium text-blue-600 dark:text-blue-500 hover:underline"%> &nbsp;|
     <% end %>
-    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Unlock</a> &nbsp;|
-    <%= button_to "Reset Password", user_block_path(user), class: "font-medium text-blue-600 dark:text-blue-500 hover:underline"%> &nbsp;| &nbsp;|
+    <% if user.locked %>
+      <%= button_to "Unlock", user_unlock_path(user), class: "font-medium text-blue-600 dark:text-blue-500 hover:underline"%> &nbsp;|
+    <% end %>
+    <% if user.blocked %>
+      <%= button_to "Unblock", user_block_path(user), class: "font-medium text-blue-600 dark:text-blue-500 hover:underline"%> &nbsp;|
+    <% else %>
+      <%= button_to "Block", user_block_path(user), class: "font-medium text-blue-600 dark:text-blue-500 hover:underline"%> &nbsp;|
+    <% end %>
     <a href="#" class="font-medium text-red-600 dark:text-red-500 hover:underline">Delete</a>
   </td>
 </tr>

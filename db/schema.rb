@@ -237,6 +237,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_08_003310) do
     t.boolean "domain_verified", default: false, null: false
     t.datetime "domain_verified_at", precision: nil
     t.integer "max_failed_attempts", default: 5, null: false
+    t.integer "failed_attempts_timeout", default: 900, null: false
     t.index ["country"], name: "index_organizations_on_country"
     t.index ["dns_txt"], name: "index_organizations_on_dns_txt", unique: true
     t.index ["domain"], name: "index_organizations_on_domain", unique: true

@@ -119,6 +119,30 @@ class UsersController < ApplicationController
     end
   end
 
+  # Method used to toggle the blocked value for a given user
+  def block
+    # TODO make sure that only the admin or the owner of an organization can use this
+    @user = User.find(params[:id])
+    if @user
+      if @user.blocked
+        @user.unblock!
+      else
+        @user.block!
+      end
+    end
+  end
+
+  # Method used by an admin or organization owner to reset the locked status of a given user
+  def unlock
+    # TODO make sure that only the admin or the owner of an organization can use this
+    @user = User.find(params[:id])
+    if @user
+      if @user.locked
+        @user.unlock!
+      end
+    end
+  end
+
   private
 
   def create_user_params
