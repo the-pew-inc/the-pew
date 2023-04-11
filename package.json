@@ -10,7 +10,7 @@
     "autoprefixer": "10.4.14",
     "chart.js": "4.2.1",
     "chartkick": "5.0.1",
-    "esbuild": "0.17.11",
+    "esbuild": "0.17.16",
     "flowbite": "1.6.5",
     "flowbite-datepicker": "1.2.2",
     "postcss": "8.4.21",
