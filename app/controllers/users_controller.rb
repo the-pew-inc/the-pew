@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   # GET /organization/:id/users
   def index
     @organization = Organization.find(params[:organization_id])
-    @users = @organization.users.includes([:profile])
+    @users = @organization.users.includes([:profile, :organization])
   end
 
   def create
@@ -173,6 +173,23 @@ class UsersController < ApplicationController
         @user.unlock!
       end
     end
+  end
+
+
+  # PATCH accounts/
+  # Used to update a bulk of users all at once.
+  # Supported operations:
+  # - Delete
+  # - Block
+  # - Promote Admin (assign as organization admin)
+  # - Demote Admin (remove from organization admin)
+  def bulk_update
+    logger.debug "########### BULK UPDATE ########"
+    logger.debug params[:bulk_action]
+    logger.debug params[:user_ids]
+
+    @selected_users = User.where(id: params.fetch(:user_ids, []).compact)
+    logger.debug @selected_users
   end
 
   private

@@ -24,4 +24,12 @@ module UsersHelper
     # If non of the above, the user is active
     return '<div class="h-2.5 w-2.5 rounded-full bg-green-500 mr-2"></div> Active'.html_safe
   end
+
+
+  def user_roles(user)
+    member = Member.find_by(user_id: user.id, organization: user.organization.id)
+    if member.owner
+      return '<span class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-blue-900 dark:text-blue-300">Owner</span>'.html_safe
+    end
+  end
 end
