@@ -165,7 +165,7 @@ group :development do
   # gem "spring"
 
   # Add support to Rubocop [https://github.com/rubocop/rubocop]
-  gem 'rubocop', '~> 1.40', require: false
+  gem 'rubocop', '~> 1.50', require: false
   gem 'rubocop-rails', require: false
 
   # Add support to Brakeman [https://github.com/presidentbeef/brakeman]
