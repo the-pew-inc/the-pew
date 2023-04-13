@@ -88,7 +88,7 @@ GEM
     annotate (3.2.0)
       activerecord (>= 3.2, < 8.0)
       rake (>= 10.4, < 14.0)
-    appmap (0.98.1)
+    appmap (0.99.0)
       activesupport
       method_source
       rack
@@ -98,7 +98,7 @@ GEM
       ffi-compiler (~> 1.0)
     ast (2.4.2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.746.0)
+    aws-partitions (1.747.0)
     aws-sdk-core (3.171.0)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.651.0)
@@ -142,7 +142,7 @@ GEM
     chunky_png (1.4.0)
     concurrent-ruby (1.2.2)
     connection_pool (2.4.0)
-    countries (5.3.2)
+    countries (5.4.0)
       unaccent (~> 0.3)
     crass (1.0.6)
     cssbundling-rails (1.1.2)
@@ -436,7 +436,7 @@ DEPENDENCIES
   caxlsx
   caxlsx_rails
   chartkick
-  countries (~> 5.3.0)
+  countries (~> 5.4.0)
   cssbundling-rails
   debug
   down (~> 5.0)
