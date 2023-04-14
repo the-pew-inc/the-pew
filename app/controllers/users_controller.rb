@@ -8,11 +8,15 @@ class UsersController < ApplicationController
   # GET /organization/:id/users
   def index
     @organization = Organization.find(params[:organization_id])
-    @users = @organization.users
+    @users = @organization.users.includes([:profile, :organization])
   end
 
   def create
     @user = User.new(create_user_params)
+
+    # Cannot register with an email that receieved an invitation to join an organization
+    user_was_invited? and return 
+
     if @user.save
       after_login_path = session[:user_return_to] || root_path
       login(@user)
@@ -35,6 +39,30 @@ class UsersController < ApplicationController
     @user.destroy
 
     redirect_to(root_path, notice: 'Your account has been deleted.')
+  end
+
+  # Used by admin or organization owner to delete a user
+  def delete_user
+    @user = User.find(params[:id])
+
+    if @user && !is_organization_owner?
+      # Disconnect the user from all previous session
+      @user.active_sessions.destroy_all
+
+      # Keep the user's id for a short time
+      @user_clone = @user.clone
+      @organization = @user.organization
+
+      # remove the user from the organization
+      member = Member.find_by(user_id: @user.id)
+      member.destroy
+
+      # Delete the user
+      @user.destroy
+
+      # Broadcast
+      Broadcasters::Users::Deleted.new(@user_clone, @organization).call
+    end
   end
 
   def edit
@@ -78,6 +106,27 @@ class UsersController < ApplicationController
     end
   end
 
+  def reset_password
+    # TODO make sure the user is an admin or the owner of the organization
+    @user = User.find(params[:id])
+    if @user
+      # Disconnect the user
+      @user.active_sessions.destroy_all
+
+      # Invalidate the previous password
+      @user.update_columns(password_digest: nil)
+
+      # Send password reset email
+      @user.send_password_reset_email!
+      flash.now[:success] = "We just sent reset instructions to ${@user.email}."
+      redirect_to(organization_users_path(@user.organization.id))
+    else
+      redirect_to(organization_users_path(@user.organization.id), alert: 'Something went wrong. If this error persist, please contact your administrator.')
+    end
+  end
+
+  # Used to resent the confirmation email to a user when a user can login, but is not confirmed yet
+  # This action is done by the user only from the profile section of the app
   def resend_confirmation
     @user = User.find(params[:id])
     
@@ -92,6 +141,55 @@ class UsersController < ApplicationController
       @user.send_confirmation_email!
       redirect_to(edit_account_path, notice: 'Please check your email for confirmation instructions.')
     end
+  end
+
+  # Method used to resend an invitation to join an organization to a user.
+  def resend_invite
+    @user = User.find(params[:id])
+    if @user && @user.invited && @user.accepted_invitation_on.nil?
+      @user.send_invite!
+    end
+  end
+
+  # Method used to toggle the blocked value for a given user
+  def block
+    # TODO make sure that only the admin or the owner of an organization can use this
+    @user = User.find(params[:id])
+    if @user
+      if @user.blocked
+        @user.unblock!
+      else
+        @user.block!
+      end
+    end
+  end
+
+  # Method used by an admin or organization owner to reset the locked status of a given user
+  def unlock
+    # TODO make sure that only the admin or the owner of an organization can use this
+    @user = User.find(params[:id])
+    if @user
+      if @user.locked
+        @user.unlock!
+      end
+    end
+  end
+
+
+  # PATCH accounts/
+  # Used to update a bulk of users all at once.
+  # Supported operations:
+  # - Delete
+  # - Block
+  # - Promote Admin (assign as organization admin)
+  # - Demote Admin (remove from organization admin)
+  def bulk_update
+    logger.debug "########### BULK UPDATE ########"
+    logger.debug params[:bulk_action]
+    logger.debug params[:user_ids]
+
+    @selected_users = User.where(id: params.fetch(:user_ids, []).compact)
+    logger.debug @selected_users
   end
 
   private
@@ -144,11 +242,24 @@ class UsersController < ApplicationController
     end
   end
 
+  def is_organization_owner?
+    Member.find_by(user_id: @user.id, owner: true).nil? ? false : true
+  end
+
 
   def is_locked
     if @user.locked
       flash.now[:alert] = 'Your account has been locked. Please contact your admin.'
       render(:edit, status: :unprocessable_entity) and return true
+    end
+  end
+
+  def user_was_invited?
+    user = User.find_by(email: @user.email)
+
+    if user.invited && user.accepted_invitation_on.nil?
+      flash[:alert] = 'The email address you used has a pending invitation. Check your mailbox for an invite.'
+      redirect_to(root_path) and return true
     end
   end
 

@@ -1,5 +1,7 @@
-# account routes as used to manage the USER ACCOUNT (users_controller)
-# so the
+# account routes are used to manage the USER ACCOUNT
+# Users are managed from the settings section of the application 
+# via the users_controller. The index section displays all the users that are part
+# of this organization.
 class OrganizationController < ApplicationController
   before_action :authenticate_user!
   before_action :redirect_if_unauthenticated

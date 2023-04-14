@@ -3,9 +3,12 @@
   <div class="m-auto md:w-8/12 lg:w-5/12">
     <div class="text-center pb-4">
       <!-- TODO: ADD LOGO HERE -->
-      <h1 class="inline-block mb-2 font-extrabold text-3xl tracking-tight text-slate-800 dark:text-white">Password reset</h1>
+      <h1 class="inline-block mb-2 font-extrabold text-3xl tracking-tight text-slate-800 dark:text-white">
+        Password Reset
+      </h1>
     </div>
     <%= form_with url: password_path(params[:password_reset_token]), scope: :user, method: :put do |form| %>
+      <%= invisible_captcha %>
       <div class="mb-6">
         <%= form.label :password, class: "block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" %>
         <%= form.password_field :password, autofocus: true, required: true, autocomplete: "new-password", class: "bg-gray-50 border border-gray-300 text-gray-900 text-base md:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>

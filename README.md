@@ -10,6 +10,12 @@
 
 ## DESCRIPTION
 
+As a comprehensive audience analytics platform, THEPEW enables you to understand your employees, team members, prospects, and more. By analyzing audience responses and behavior over time, you can identify patterns and trends that provide insights into their needs, expectations, feature requests, and communication gaps.
+
+THEPEW is designed to help businesses identify trends, analyze topic evolution over time, and track geographic locations using advanced data visualization tools. These reports can be shared with stakeholders and team members, empowering businesses to make data-driven decisions that improve overall performance.
+
+Using openAI, THEPEW provides personalized recommendations that are tailored to each participant's individual interests. Whether it's valuable insights, informative articles, or self-improvement resources, THEPEW gives back to its participants in meaningful ways that help them grow and improve.
+
 ## LICENSE
 [License](../master/LICENSE.md)
 

@@ -1,0 +1,57 @@
+<tr id="user_<%=user.id%>" is="turbo-frame" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+  <td class="w-4 p-4">
+    <div class="flex items-center">
+      <%= check_box_tag "user_ids[]", 
+                        user.id, 
+                        nil, 
+                        {
+                          multiple: true,
+                          class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600",
+                          id: "checkbox-all-search",
+                          form: :bulk_action_form
+                          } %>
+      <label for="checkbox-all-search" class="sr-only">checkbox</label>
+    </div>
+  </td>
+  <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
+    <%= image_tag user.profile.avatar.variant(resize_to_limit: [100, 100]),
+            width: 100, height: 100, class: "w-10 h-10 rounded-full" if user.profile&.avatar&.attached? %>
+    <%= AvatarPresenter.call(user, 10, 18) unless user.profile&.avatar&.attached?  %>
+    <div class="pl-3">
+      <div class="text-base font-semibold"><%= user.profile&.nickname %></div>
+      <div class="font-normal text-gray-500"><%= user.email %></div>
+    </div>
+  </th>
+  <td class="px-6 py-4">
+    <div class="flex items-center">
+      <%= user_status(user) %>
+    </div>
+  </td>
+  <td class="px-6 py-4">
+    <div class="flex items-center">
+      <%= user_roles(user) %>
+    </div>
+  </td>
+  <td class="px-6 py-4 flex flex-row justify-end items-center space-x-2">
+    <% if current_user.id != user.id %>
+      <% if !user.confirmed && !user.invited %>
+        <%= link_to "Resend Confirmation", resend_confirmation_path(user), data: { 'turbo-method': :put }, class: "font-medium text-blue-600 dark:text-blue-500 hover:underline" %> &nbsp;|
+      <% end %>
+      <% if user.invited && user.accepted_invitation_on.nil? %>
+        <%= button_to "Resend Invite", resend_invite_path(user), class: "font-medium text-blue-600 dark:text-blue-500 hover:underline"%> &nbsp;|
+      <% end %>
+      <% if user.confirmed %>
+        <%= button_to "Reset Password", password_reset_path(user), class: "font-medium text-blue-600 dark:text-blue-500 hover:underline"%> &nbsp;|
+      <% end %>
+      <% if user.locked %>
+        <%= button_to "Unlock", user_unlock_path(user), class: "font-medium text-blue-600 dark:text-blue-500 hover:underline"%> &nbsp;|
+      <% end %>
+      <% if user.blocked %>
+        <%= button_to "Unblock", user_block_path(user), class: "font-medium text-blue-600 dark:text-blue-500 hover:underline"%> &nbsp;|
+      <% else %>
+        <%= button_to "Block", user_block_path(user), class: "font-medium text-blue-600 dark:text-blue-500 hover:underline"%> &nbsp;|
+      <% end %>
+      <%= link_to "Delete", delete_user_path(user), data: { turbo_method: :delete,  turbo_confirm: 'Are you sure? All the data associated with this user will be lost.' }, class: "font-medium text-red-600 dark:text-red-500 hover:underline" %>
+    <% end %>
+  </td>
+</tr>

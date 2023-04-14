@@ -35,7 +35,7 @@ class PasswordsController < ApplicationController
     @user = User.find_signed(params[:password_reset_token], purpose: :reset_password)
     if @user
       if @user.update(password_params)
-        redirect_to(login_path, notice: 'Sign in.')
+        redirect_to(login_path, notice: 'You can now login using your new password.')
       else
         flash.now[:alert] = @user.errors.full_messages.to_sentence
         render(:edit, status: :unprocessable_entity)
@@ -49,6 +49,7 @@ class PasswordsController < ApplicationController
   private
 
   def password_params
-    params.require(:user).permit(:password, :password_confirmation)
+    # params.require(:user).permit(:password, :password_confirmation)
+    params.require(:user).permit(:password)
   end
 end

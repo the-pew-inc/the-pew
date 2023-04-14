@@ -5,6 +5,8 @@ class SessionsController < ApplicationController
   def create
     @user = User.find_by(email: params[:user][:email].downcase)
 
+    user_was_invited? and return
+
     # If the user exists but uses an OTP, then redirect to the login page with an error
     if @user && (@user.provider? && @user.uid?)
       flash.now[:alert] = 'Incorrect authentication method.'
@@ -13,19 +15,23 @@ class SessionsController < ApplicationController
     end
 
     if @user
-      if @user.locked
-        redirect_to(:new, alert: 'Your account is locked.')
+      if is_the_account_locked?
+        redirect_to(login_path, alert: 'Your account is locked.')
         return
       elsif @user.authenticate(params[:user][:password])
         after_login_path = session[:user_return_to] || root_path
         active_session = login(@user)
         remember(active_session) if params[:user][:remember_me] == '1'
+
+        # Reset failed_attempts if needed
+        reset_failed_attempts
         
         # If everything is ok, redirect the user to where they were suppose to go.
         redirect_to(after_login_path, notice: 'Signed in.')
         return
       else
         flash.now[:alert] = 'Incorrect email or password.'
+        should_we_lock_the_account?
         render(:new, status: :unprocessable_entity)
         return
       end
@@ -119,5 +125,48 @@ class SessionsController < ApplicationController
     # Generate a unique filename
     filename = Time.current.utc.to_s + SecureRandom.hex(16)
     user.profile.avatar.attach(io: tempavatar, filename: filename, content_type: tempavatar.content_type)
-  end  
+  end
+
+
+  # Check if the user has still a pending invite
+  # If this is the case we deny access to the app and require the user to go back to the
+  # invite flow.
+  def user_was_invited?
+    if @user.invited && @user.accepted_invitation_on.nil?
+      flash[:alert] = 'The email address you are using has a pending invite. Please check your mailbox for an invite.'
+      redirect_to(root_path) and return true
+    end
+  end
+
+  # Method used to increment the failed_attempts column in the User model
+  # and to compare the resulting value to the max_failed_attempts defined for the user's organization
+  # Default max_failed_attempts is 5
+  # So as we start from 0 when we reach 5 then user's locked column will be set to true
+  # Locked accounts can be unlocked by an admin or after waiting a certain time (default 900 seconds)
+  def should_we_lock_the_account?
+    @user.increment!(:failed_attempts, 1)
+    if @user.failed_attempts >= @user.organization.max_failed_attempts
+      @user.lock!
+    end
+  end
+
+  # Return true when 1. the locked value is true or 2. when the account is locked and the timeout
+  # to automatically reset the locked value has not been reached.
+  # Return false when the locked value is false
+  def is_the_account_locked?
+    if @user.locked && (@user.locked_at + @user.organization.failed_attempts_timeout <= Time.current)
+      @user.unlock!
+      return true
+    end
+      return @user.locked
+  end
+
+  # Used to reset the failed_attempts counter to 0 when a successful login is recorded
+  # before reaching the value that locks the user's account
+  def reset_failed_attempts
+    if @user.failed_attempts != 0 && !@user.locked
+      @user.update_columns(failed_attempts: 0)
+    end
+  end
+
 end

@@ -54,7 +54,7 @@ class AvatarPresenter
   end
 
   def nickname
-    user.profile.nickname
+    user.profile&.nickname || "👻"
   end
 
   def initials
@@ -72,7 +72,7 @@ class AvatarPresenter
       '#800000'
     ]
 
-    colors[initials.first.to_s.downcase.ord - 97] || '#000000'
+    colors[initials.first.to_s.downcase.ord - 97] || '#696969'
   end
 
 end
