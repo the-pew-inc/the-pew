@@ -9,7 +9,7 @@ import "chartkick/chart.js";
 //   console.log("Ready triggered!");
 // });
 import "trix";
-import "@rails/actiontext";
+// import "@rails/actiontext"; // Seems to be deprecated
 
 // Preventing file upload in Trix
 document.addEventListener("trix-file-accept", (e) => {
