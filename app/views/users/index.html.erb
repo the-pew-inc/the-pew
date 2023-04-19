@@ -14,7 +14,7 @@
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
       <div class="flex items-center justify-between pb-4 bg-white dark:bg-gray-900">
         <div>
-          <%= form_with url: :user_bulk_update, method: :patch, id: :bulk_action_form, local: true do |form| %>
+          <%= form_with url: :user_bulk_update, method: :put, id: :bulk_action_form, local: true do |form| %>
             <button id="dropdownActionButton" data-dropdown-toggle="dropdownAction" class="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" type="button">
               <span class="sr-only">Action button</span>
               Action
@@ -24,17 +24,30 @@
             <div id="dropdownAction" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
               <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownActionButton">
                 <li>
-                  <%= form.submit "Make Admin", name: "promote_admin", class: "w-full text-left block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" %>
+                  <%= form.button "Make Admin", type: :submit, 
+                      name: "bulk_action", value: "promote",
+                      class: "w-full text-left block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" %>
                 </li>
                 <li>
-                  <%= form.submit "Remove Admin", class: "w-full text-left block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" %>
+                  <%= form.submit "Remove from Admin", type: :submit, 
+                      name: "bulk_action", value: "demote",
+                      class: "w-full text-left block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" %>
                 </li>
                 <li>
-                  <%= form.submit "Block", name: "block", class: "w-full text-left block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" %>
+                  <%= form.submit "Block", type: :submit, 
+                      name: "bulk_action", value: "block",
+                      class: "w-full text-left block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" %>
+                </li>
+                <li>
+                  <%= form.submit "Unblock", type: :submit, 
+                      name: "bulk_action", value: "unblock",
+                      class: "w-full text-left block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" %>
                 </li>
               </ul>
               <div class="py-1">
-                <%= form.submit "Delete", class: "w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" %>
+                <%= form.submit "Delete", type: :submit, 
+                        name: "bulk_action", value: "delete",
+                        class: "w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" %>
               </div>
             </div>
           <% end %>

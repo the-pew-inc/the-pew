@@ -5,6 +5,9 @@ class UsersController < ApplicationController
   # Add invisible_captcha
   invisible_captcha only: [:create, :update]
 
+  # Add User Bulk Actions
+  include UserBulkActions
+
   # GET /organization/:id/users
   def index
     @organization = Organization.find(params[:organization_id])
@@ -158,38 +161,24 @@ class UsersController < ApplicationController
     if @user
       if @user.blocked
         @user.unblock!
+        Broadcasters::Users::Updated.new(@user).call
       else
         @user.block!
+        Broadcasters::Users::Updated.new(@user).call
       end
     end
   end
 
-  # Method used by an admin or organization owner to reset the locked status of a given user
+  # Method used by an admin or organization owner to reset the unlocked a given user
   def unlock
     # TODO make sure that only the admin or the owner of an organization can use this
     @user = User.find(params[:id])
     if @user
       if @user.locked
         @user.unlock!
+        Broadcasters::Users::Updated.new(@user).call
       end
     end
-  end
-
-
-  # PATCH accounts/
-  # Used to update a bulk of users all at once.
-  # Supported operations:
-  # - Delete
-  # - Block
-  # - Promote Admin (assign as organization admin)
-  # - Demote Admin (remove from organization admin)
-  def bulk_update
-    logger.debug "########### BULK UPDATE ########"
-    logger.debug params[:bulk_action]
-    logger.debug params[:user_ids]
-
-    @selected_users = User.where(id: params.fetch(:user_ids, []).compact)
-    logger.debug @selected_users
   end
 
   private
