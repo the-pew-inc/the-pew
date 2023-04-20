@@ -14,9 +14,6 @@ module UserBulkActions
   # - Promote Admin (assign as organization admin)
   # - Demote Admin (remove from organization admin)
   def bulk_update
-    logger.debug "ACTION: #{params[:commit]} / #{params[:value]}"
-    logger.debug "PARAMS: #{params[:bulk_action]}"
-    logger.debug "USER_IDS: #{params[:user_ids]} / #{params[:user_ids].nil?}"
     # Return if no user is selected
     # if params[:user_ids].nil?
     #   logger.debug "WE HAVE NO USER SELECTED!!!"
@@ -24,26 +21,27 @@ module UserBulkActions
     #   return true
     # end
 
-    logger.debug "WE HAVE USERS, SELECTING THE RIGHT ACTION:"
     case params[:bulk_action]
     when "promote"
-      logger.debug "PROMOTE"
       bulk_promote(params[:user_ids])
     when "demote"
-      logger.debug "DEMOTE"
+      bulk_demote(params[:user_ids])
     when "block"
-      logger.debug "BLOCK"
       bulk_block(params[:user_ids])
     when "unblock"
-      logger.debug "UNBLOCK"
       bulk_unblock(params[:user_ids])
     when "delete"
-      logger.debug "DELETE"
+      bulk_delete(params[:user_ids])
     else
-      # TODO log an error before return
       logger.error "Unsupported bulk_action: #{params[:bulk_action]}"
       head :bad_request
       return true
+    end
+
+    # Broadcast the changes
+    users = User.find( params.fetch(:user_ids, []).compact )
+    users.each do |user|
+      Broadcasters::Users::Updated.new(user).call
     end
     
   end
@@ -90,7 +88,6 @@ module UserBulkActions
   #
   # Returns the number of modified objects.
   def bulk_block(user_ids)
-    logger.debug "IN BULK_BLOCK"
     c = User.where(id: params.fetch(:user_ids, []).compact).update_all(blocked: true)
     return c
   end
@@ -106,7 +103,6 @@ module UserBulkActions
   #
   # Returns the number of modified objects.
   def bulk_unblock(user_ids)
-    logger.debug "IN BULK_UNBLOCK"
     c = User.where(id: params.fetch(:user_ids, []).compact).update_all(blocked: false)
     return c
   end
