@@ -13,6 +13,9 @@ application.register("auto-submit", AutoSubmitController)
 import ClipboardController from "./clipboard_controller"
 application.register("clipboard", ClipboardController)
 
+import CloseDropdownController from "./close_dropdown_controller"
+application.register("close-dropdown", CloseDropdownController)
+
 import EmptyStateController from "./empty_state_controller"
 application.register("empty-state", EmptyStateController)
 
