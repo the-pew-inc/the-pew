@@ -8,10 +8,14 @@ class Broadcasters::Users::Updated
   def initialize(user)
     @user = user
     @organization = @user.organization
+    @current_user = Current.user
   end
 
   def call
-    Turbo::StreamsChannel.broadcast_update_later_to @organization.id, target: "user-list", partial: "users/user", locals: { user: @user }
+    Turbo::StreamsChannel.broadcast_replace_later_to @organization.id, 
+      target: "user_#{@user.id}", 
+      partial: "users/user", 
+      locals: { user: @user, current_user: @current_user }
   end
 
 end

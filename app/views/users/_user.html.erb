@@ -1,7 +1,8 @@
 <tr id="user_<%=user.id%>" is="turbo-frame" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
   <td class="w-4 p-4">
-    <div class="flex items-center">
-      <%= check_box_tag "user_ids[]", 
+    <% if current_user.id != user.id %>
+      <div class="flex items-center">
+        <%= check_box_tag "user_ids[]", 
                         user.id, 
                         nil, 
                         {
@@ -10,8 +11,9 @@
                           id: "checkbox-all-search",
                           form: :bulk_action_form
                           } %>
-      <label for="checkbox-all-search" class="sr-only">checkbox</label>
-    </div>
+        <label for="checkbox-all-search" class="sr-only">checkbox</label>
+      </div>
+    <% end %>
   </td>
   <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
     <%= image_tag user.profile.avatar.variant(resize_to_limit: [100, 100]),

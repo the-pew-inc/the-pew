@@ -67,7 +67,6 @@ class InvitesController < ApplicationController
     if @user.update(update_user_params)
       @user.invited!
       login(@user)
-      Broadcasters::Users::Updated.new(@user).call
       redirect_to(root_path, notice: "You successfully logged in")
     else
       render(:edit, status: :unprocessable_entity)
