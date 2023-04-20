@@ -2,52 +2,52 @@
 // Run that command whenever you add a new controller or create them with
 // ./bin/rails generate stimulus controllerName
 
-import { application } from "./application"
+import { application } from "./application";
 
-import AlertController from "./alert_controller"
-application.register("alert", AlertController)
+import AlertController from "./alert_controller";
+application.register("alert", AlertController);
 
-import AutoSubmitController from "./auto_submit_controller"
-application.register("auto-submit", AutoSubmitController)
+import AutoSubmitController from "./auto_submit_controller";
+application.register("auto-submit", AutoSubmitController);
 
-import ClipboardController from "./clipboard_controller"
-application.register("clipboard", ClipboardController)
+import ClipboardController from "./clipboard_controller";
+application.register("clipboard", ClipboardController);
 
-import CloseDropdownController from "./close_dropdown_controller"
-application.register("close-dropdown", CloseDropdownController)
+import CloseDropdownController from "./close_dropdown_controller";
+application.register("close-dropdown", CloseDropdownController);
 
-import EmptyStateController from "./empty_state_controller"
-application.register("empty-state", EmptyStateController)
+import EmptyStateController from "./empty_state_controller";
+application.register("empty-state", EmptyStateController);
 
-import HamburgerController from "./hamburger_controller"
-application.register("hamburger", HamburgerController)
+import HamburgerController from "./hamburger_controller";
+application.register("hamburger", HamburgerController);
 
-import MaxcharController from "./maxchar_controller"
-application.register("maxchar", MaxcharController)
+import MaxcharController from "./maxchar_controller";
+application.register("maxchar", MaxcharController);
 
-import ModeController from "./mode_controller"
-application.register("mode", ModeController)
+import ModeController from "./mode_controller";
+application.register("mode", ModeController);
 
-import OrderQuestionsController from "./order_questions_controller"
-application.register("order-questions", OrderQuestionsController)
+import OrderQuestionsController from "./order_questions_controller";
+application.register("order-questions", OrderQuestionsController);
 
-import ResetFormController from "./reset_form_controller"
-application.register("reset-form", ResetFormController)
+import ResetFormController from "./reset_form_controller";
+application.register("reset-form", ResetFormController);
 
-import SubmitQuestionController from "./submit_question_controller"
-application.register("submit-question", SubmitQuestionController)
+import SubmitQuestionController from "./submit_question_controller";
+application.register("submit-question", SubmitQuestionController);
 
-import TimeZoneController from "./time_zone_controller"
-application.register("time-zone", TimeZoneController)
+import TimeZoneController from "./time_zone_controller";
+application.register("time-zone", TimeZoneController);
 
-import ToggleController from "./toggle_controller"
-application.register("toggle", ToggleController)
+import ToggleController from "./toggle_controller";
+application.register("toggle", ToggleController);
 
-import TurboModalController from "./turbo_modal_controller"
-application.register("turbo-modal", TurboModalController)
+import TurboModalController from "./turbo_modal_controller";
+application.register("turbo-modal", TurboModalController);
 
-import UserVoteController from "./user_vote_controller"
-application.register("user-vote", UserVoteController)
+import UserVoteController from "./user_vote_controller";
+application.register("user-vote", UserVoteController);
 
-import ValidatePinController from "./validate_pin_controller"
-application.register("validate-pin", ValidatePinController)
+import ValidatePinController from "./validate_pin_controller";
+application.register("validate-pin", ValidatePinController);
