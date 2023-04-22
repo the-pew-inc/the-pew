@@ -63,6 +63,10 @@ gem 'argon2', '~> 2.2.0'
 gem 'caxlsx'
 gem 'caxlsx_rails'
 
+# Parse Excel xlsx files
+# [https://github.com/martijn/xsv]
+gem 'xsv'
+
 # Adding OAuth2 support [https://github.com/omniauth/omniauth]
 gem 'omniauth', '~> 2.1.0'
 # Adding Google Sign-in support
