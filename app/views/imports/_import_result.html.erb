@@ -1,0 +1,32 @@
+<tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+  <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
+    <div class="pl-3">
+      <div class="text-base font-semibold"><%= import_result.filename %></div>
+      <div class="font-normal text-gray-500 text-sm">Uploaded: <%= import_result.created_at.strftime("%Y %b %d at %l%P : %M") %></div>
+      <% if import_result.created_at != import_result.updated_at %>
+        <div class="font-normal text-gray-500 text-sm">Processed: <%= import_result.updated_at.strftime("%Y %b %d at %l%P : %M") %></div>
+      <% end %>
+    </div>
+  </th>
+  <td class="px-6 py-4">
+    <div class="flex items-center">
+      <% if import_result.success? %>
+        <div class="h-2.5 w-2.5 rounded-full bg-green-500 mr-2"></div>
+        Success
+      <% end %>
+      <% if import_result.error? %>
+        <div class="h-2.5 w-2.5 rounded-full bg-red-500 mr-2"></div>
+        Failed
+      <% end %>
+      <% if import_result.processing? %>
+        <div class="h-2.5 w-2.5 rounded-full bg-blue-500 mr-2"></div>
+        Processing
+      <% end %>
+    </div>
+  </td>
+  <td class="px-6 py-4">
+    <%= link_to import_path(import_result.id) do %>
+      <%= import_result.message.split("\n")[0] %>
+    <% end %>
+  </td>
+</tr>
