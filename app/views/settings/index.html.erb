@@ -2,7 +2,6 @@
 <div class="lg:flex">
   <%= render partial: "sidebar", locals: { organization_id: @organization_id } %>
   <div class="px-6 w-full">
-    <%= render "breadcrumb" %>
     <%= turbo_frame_tag "settings_main", src: edit_organization_path(@organization_id) do %>
       <div role="status" class="max-w-md p-4 space-y-4 border border-gray-200 divide-y divide-gray-200 rounded shadow animate-pulse dark:divide-gray-700 md:p-6 dark:border-gray-700">
         <div class="flex items-center justify-between">
