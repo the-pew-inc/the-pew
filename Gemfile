@@ -5,7 +5,8 @@ ruby '3.2.2'
 
 # IMPORTANT: This must be the first gem listed
 # Add support to appmap in development and test
-gem 'appmap', groups: %i[development test]
+
+gem 'appmap', :groups => [:development, :test]
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem 'rails', '~> 7.0.4'
