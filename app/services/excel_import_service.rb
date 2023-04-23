@@ -43,6 +43,7 @@ class ExcelImportService
       if email.blank? || !email.match?(URI::MailTo::EMAIL_REGEXP)
         errors << "Row #{index + 1}: Invalid email | #{email}"
         error_records += 1
+        processed_records += 1
         next
       end
 

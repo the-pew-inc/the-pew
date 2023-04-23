@@ -38,7 +38,7 @@ class ProcessExcelImportJob
     end
 
     # Cleanup
-    # user.import_file.purge
+    user.import_file.purge
   end
 
 end
