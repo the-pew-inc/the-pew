@@ -71,6 +71,9 @@ Rails.application.routes.draw do
   get 'event/:id/stats',  to: 'events#stats', as: :event_stats
   get 'event/:id/export', to: 'events#export', as: :event_export
 
+  # Import CSV files
+  resources :imports, only: %i[new create index show]
+
   # Question routes
   resources :rooms do
     resources :questions, shallow: true

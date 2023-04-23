@@ -1,0 +1,31 @@
+<!-- app/views/imports/index.html.erb -->
+<%= turbo_frame_tag "settings_main" do %>
+  <%= render partial: "settings/breadcrumb", locals: { sub1: "Users" } %>
+  <div class="mb-6">
+    <%= link_to new_import_path, class: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" do %>
+      Upload a file
+    <% end %>
+  </div>
+  <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <tr>
+          <th scope="col" class="px-6 py-3">
+            Filename
+          </th>
+          <th scope="col" class="px-6 py-3">
+            Status
+          </th>
+          <th scope="col" class="px-6 py-3">
+            Message
+          </th>
+          <th scope="col" class="px-6 py-3">
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= render partial: "import_result", collection: @import_results %>
+      </tbody>
+    </table>
+  </div>
+<% end %>

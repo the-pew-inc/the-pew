@@ -1,0 +1,54 @@
+<!-- app/views/imports/show.html.erb -->
+<%= turbo_frame_tag "settings_main" do %>
+  <%= render partial: "settings/breadcrumb", locals: { sub1: "Users" } %>
+  <div class="container pt-4">
+    <div class="mb-6">
+      <%= link_to imports_path, class: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" do %>
+        Back
+      <% end %>
+    </div>
+    <section>
+      <h1 class="inline-block mb-2 font-extrabold text-3xl tracking-tight text-slate-800 dark:text-white">
+        File: "<i><%= @import_result.filename %></i>"
+      </h1>
+      <div class="flex flex-col space-y-3">
+        <div>
+          <h3 class="text-gray-400 text-xl font-light">Status:</h3>
+          <div class="flex flex-row justify-start items-center space-x-2 text-gray-500">
+            <div class="flex items-center">
+              <% if @import_result.success? %>
+                <div class="h-2.5 w-2.5 rounded-full bg-green-500 mr-2"></div>
+                Success
+              <% end %>
+              <% if @import_result.error? %>
+                <div class="h-2.5 w-2.5 rounded-full bg-red-500 mr-2"></div>
+                Failed
+              <% end %>
+              <% if @import_result.processing? %>
+                <div class="h-2.5 w-2.5 rounded-full bg-blue-500 mr-2"></div>
+                Processing
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <div>
+          <h3 class="text-gray-400 text-xl font-light">Stats:</h3>
+          <div class="flex flex-row space-x-4 justify-start items-center text-gray-500 dark:text-gray-400 font-light">
+            <div>
+              Uploaded At: <%= @import_result.created_at.strftime("%Y %b %d at %l%P : %M") %>
+            </div>
+            <div>
+              Processed At: <%= @import_result.updated_at.strftime("%Y %b %d at %l%P : %M") %>
+            </div>
+          </div>
+        </div>
+        <div>
+          <h3 class="text-gray-400 text-xl font-light">Logs:</h3>
+          <div class="flex flex-row justify-start items-center text-gray-500 dark:text-gray-400 font-light text-sm">
+            <%= simple_format(@import_result.message) %>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+<% end %>

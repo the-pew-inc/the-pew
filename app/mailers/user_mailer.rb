@@ -1,8 +1,8 @@
 class UserMailer < ApplicationMailer
   default from: User::MAILER_FROM_EMAIL
 
-  def confirmation(user, confirmation_token)
-    @user = user
+  def confirmation(user_id, confirmation_token)
+    @user = User.find(user_id)
     @confirmation_token = confirmation_token
 
     mail(
@@ -10,8 +10,8 @@ class UserMailer < ApplicationMailer
       subject: 'THEPEW: Account Confirmation Instructions')
   end
 
-  def password_reset(user, password_reset_token)
-    @user = user
+  def password_reset(user_id, password_reset_token)
+    @user = User.find(user_id)
     @password_reset_token = password_reset_token
 
     mail(
@@ -19,24 +19,24 @@ class UserMailer < ApplicationMailer
       subject: 'THEPEW: Password Reset Instructions')
   end
 
-  def welcome(user)
-    @user = user
+  def welcome(user_id)
+    @user = User.find(user_id)
     mail(
       to: @user.email,
       subject: 'THEPEW: Welcome'
     )
   end
 
-  def password_change_confirmatiom(user)
-    @user = user
+  def password_change_confirmatiom(user_id)
+    @user = User.find(user_id)
     mail(
       to: @user.email,
       subject: 'THEPEW: Password changed'
     )
   end
 
-  def invite(user, invitation_token)
-    @user = user
+  def invite(user_id, invitation_token)
+    @user = User.find(user_id)
     @invitation_token = invitation_token
     mail(
       to: @user.email,

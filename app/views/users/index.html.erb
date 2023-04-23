@@ -1,5 +1,6 @@
 <!-- app/views/users/users.html.erb -->
 <%= turbo_frame_tag "settings_main" do %>
+  <%= render partial: "settings/breadcrumb", locals: { sub1: "Users" } %>
   <h1 class="mb-6 text-4xl font-extrabold leading-none tracking-tight text-gray-900 dark:text-white">
     Manage Users
   </h1>
@@ -7,8 +8,8 @@
     <%= turbo_frame_tag "invite_user", src: new_invite_path %>
   </div>
   <div class="mb-6">
-    <h3 class="text-gray-400 text-xl font-light mb-4">Manage via a CSV file</h3>
-    <button type="button" class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800">Upload CSV file</button>
+    <h3 class="text-gray-400 text-xl font-light mb-4">Manage via an Excel file</h3>
+    <%= link_to "Upload .xlsx file", imports_path, class: "text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800" %>
   </div>
   <div>
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">

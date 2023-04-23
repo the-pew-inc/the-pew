@@ -69,6 +69,10 @@ class User < ApplicationRecord
   has_one  :member
   has_one  :organization,    through: :member, required: false
 
+  # To enable bullk upload via an excel spreadsheet
+  has_one_attached :import_file
+  has_many         :import_results, dependent: :destroy
+
   # Connect the user to their Merit
   has_merit
 
@@ -114,7 +118,7 @@ class User < ApplicationRecord
     # accepted_invitation_on is different from nil
     if !self.invited || self.accepted_invitation_on != nil
       password_reset_token = signed_id(purpose: :reset_password, expires_in: PASSWORD_RESET_TOKEN_EXPIRATION)
-      UserMailer.password_reset(self, password_reset_token).deliver_later
+      UserMailer.password_reset(self.id, password_reset_token).deliver_later
     end
   end
 
@@ -126,7 +130,7 @@ class User < ApplicationRecord
     # join the organization plays the role of a confirmation email.
     if !self.invited
       confirmation_token = signed_id(purpose: :email_confirmation, expires_in: CONFIRMATION_TOKEN_EXPIRATION)
-      UserMailer.confirmation(self, confirmation_token).deliver_later
+      UserMailer.confirmation(self.id, confirmation_token).deliver_later
     end
   end
 
@@ -134,7 +138,7 @@ class User < ApplicationRecord
   # Invitates are valid for 3 days
   def send_invite!
     invitation_token = signed_id(purpose: :invite, expires_in: 3.days)
-    UserMailer.invite(self, invitation_token).deliver_later
+    UserMailer.invite(self.id, invitation_token).deliver_later
   end
 
   def invited!

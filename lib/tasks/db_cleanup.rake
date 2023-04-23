@@ -54,4 +54,24 @@ namespace :db_cleanup do
     puts("[#{Time.now.utc}] Running remove_orphan_accounts :: END#{' (dry_run activated)' if dry_run}")
   end
 
+
+  # Usage:
+  #   - rake db_cleanup:remove_orphan_members
+  desc "Remove members without a matching user"
+  task remove_orphan_members: :environment do
+    batch_size = 1000
+
+    # Fetch all member ids that don't have a matching user
+    orphan_members = Member.left_outer_joins(:user).where(users: { id: nil })
+
+    # Remove orphan members in batches
+    removed_count = 0
+    orphan_members.in_batches(of: batch_size) do |batch|
+      removed_count += batch.delete_all
+    end
+
+    # Output the number of removed members
+    puts "#{removed_count} orphan members removed."
+  end
+
 end
