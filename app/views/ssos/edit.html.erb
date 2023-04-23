@@ -1,5 +1,6 @@
 <!-- app/views/ssos/edit.html.erb -->
 <%= turbo_frame_tag "settings_main" do %>
+  <%= render partial: "settings/breadcrumb", locals: { sub1: "SSO" } %>
   <% if !@organization.domain_verified %>
     <%= form_with model: @organization do |form| %>
       <%= render partial: "shared/form_errors", locals: { object: form.object } %>

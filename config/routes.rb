@@ -111,7 +111,7 @@ Rails.application.routes.draw do
   # and sub-routes
   resources :organization, only: [:show, :update, :edit] do
     resources :users, only: [:index]
-    resource  :ssos,  only: [:show, :update, :edit], shallow: true
+    resource  :ssos,  only: [:update, :edit], shallow: true
   end
 
   # Defines the main root path route ("/")
