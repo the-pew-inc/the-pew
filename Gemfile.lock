@@ -88,7 +88,7 @@ GEM
     annotate (3.2.0)
       activerecord (>= 3.2, < 8.0)
       rake (>= 10.4, < 14.0)
-    appmap (0.99.0)
+    appmap (0.98.1)
       activesupport
       method_source
       rack
@@ -428,7 +428,7 @@ DEPENDENCIES
   active_storage_validations (~> 1.0.0)
   ahoy_matey
   annotate (~> 3.2.0)
-  appmap
+  appmap (~> 0.98.0)
   argon2 (~> 2.2.0)
   aws-sdk-s3
   bootsnap
