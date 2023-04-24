@@ -26,6 +26,7 @@
 #
 
 one:
+  id: 8c5e36bb-6163-4d07-8a7e-9f13e77d6e40
   name: ACME Inc
   website: https://www.acme.com
   country:
@@ -35,6 +36,7 @@ one:
   dns_txt: sOmeRandomeString
 
 two:
+  id: 8c2e36bb-1963-4d07-8a7d-9f13e77d6e19
   name: Supa Corp
   website: https://supa.corp.com
   country:

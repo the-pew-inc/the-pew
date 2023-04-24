@@ -38,26 +38,42 @@ require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
   def setup
-    @user = users(:one)
+    @user = users(:john)
   end
 
-  %i[email password].each do |attr|
-    test "#{attr} must be present" do
-      eval "@user.#{attr} = nil"
-      assert_not @user.valid?
-    end
+  test 'valid user' do
+    assert @user.valid?
   end
 
-  # test "roles and assignments" do
-  #   should have_many(:assignments)
-  #   should have_many(:roles).through(:assignments)
-  # end
+  test 'invalid without email' do
+    @user.email = nil
+    refute @user.valid?, 'user is valid without an email'
+    assert_not_nil @user.errors[:email], 'no validation error for email present'
+  end
 
-  # test "user should have role" do
-  #   assert_not(@subject.role? :admin)
+  test 'email format validation' do
+    @user.email = 'invalid_email'
+    refute @user.valid?, 'user is valid with an invalid email format'
+    assert_not_nil @user.errors[:email], 'no validation error for email format present'
+  end
 
-  #   @subject.roles << Role.new(name: 'admin')
+  test 'email uniqueness validation' do
+    @duplicate_user = @user.dup
+    @user.save
+    refute @duplicate_user.valid?, 'user is valid with a duplicate email'
+    assert_not_nil @duplicate_user.errors[:email], 'no validation error for email uniqueness present'
+  end
 
-  #   assert(@subject.role? :admin)
-  # end
+  test 'password length validation' do
+    @user.password = 'short'
+    refute @user.valid?, 'user is valid with a short password'
+    assert_not_nil @user.errors[:password], 'no validation error for password length present'
+  end
+
+  test 'authenticate user' do
+    assert @user.authenticate('password123'), 'failed to authenticate user with valid password'
+    refute @user.authenticate('wrong_password'), 'authenticated user with invalid password'
+  end
+
+  # Add more tests for other functionalities as needed
 end

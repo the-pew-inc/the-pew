@@ -23,13 +23,13 @@
 #
 
 one:
-  user: one
+  user_id: 7c5e36bb-6163-4d07-8e7e-9f13e77d6e39
   user_agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:103.0) Gecko/20100101 Firefox/103.0
   ip_address: 192.168.1.1
   remember_token: KbiDE4Lze1TkoCx1ek1nGaU6
 
 two:
-  user: two
+  user_id: 60322e8a-5b0a-4d1b-8e69-9accea00e1a0
   user_agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:103.0) Gecko/20100101 Firefox/103.0
   ip_address: 192.168.1.2
   remember_token: TN23ZBEzJDTu6wUUHyjBnLkh

@@ -38,13 +38,13 @@
 
 one:
   title: This is question number 1
-  user: one
+  user_id: 7c5e36bb-6163-4d07-8e7e-9f13e77d6e39
   room: one
-  organization_id: organization(:one).id
+  organization_id: 8c5e36bb-6163-4d07-8a7e-9f13e77d6e40
 
 two:
   title: This is question number 2
-  user: one
+  user_id: 60322e8a-5b0a-4d1b-8e69-9accea00e1a0
   room: two
   anonymous: true
-  organization_id: organization(:two).id
+  organization_id: 8c5e36bb-6163-4d07-8a7e-9f13e77d6e40

@@ -16,12 +16,12 @@
 #  index_members_on_user_id          (user_id)
 #
 
-one:
-  user: one
-  organization: one
+john:
+  user_id: 7c5e36bb-6163-4d07-8e7e-9f13e77d6e39
+  organization_id: 8c5e36bb-6163-4d07-8a7e-9f13e77d6e40
   owner: true
 
-two:
-  user: two
-  organization: two
+jane:
+  user_id: 60322e8a-5b0a-4d1b-8e69-9accea00e1a0
+  organization_id: 8c5e36bb-6163-4d07-8a7e-9f13e77d6e40
   owner: false
