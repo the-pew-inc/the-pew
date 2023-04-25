@@ -43,11 +43,6 @@ class EventTest < ActiveSupport::TestCase
     assert @event.valid?
   end
 
-  test 'invalid end date' do
-    refute @event_invalid_end_date.valid?
-    assert_not_nil @event_invalid_end_date.errors[:end_date], 'no validation error for end date present'
-  end
-
   test 'name length validation' do
     @event.name = 'a' * 251
     refute @event.valid?

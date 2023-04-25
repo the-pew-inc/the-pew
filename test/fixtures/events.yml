@@ -46,7 +46,7 @@ one:
 two:
   name: Event with an invalid stop date
   start_date: <%= Time.current.utc + 1.day %>
-  end_date: <%= Time.current.utc - 2.day %>
+  end_date: <%= Time.current.utc - 2.days %>
   duration: 1
   short_code: nil
   user_id: 7c5e36bb-6163-4d07-8e7e-9f13e77d6e39

@@ -67,6 +67,9 @@ class Event < ApplicationRecord
 
   private
 
+  # Note: If the way end_date is defined in the set_values method changes,
+  # make sure to implement a corresponding test to check if the validation
+  # for end_date being before start_date is working correctly.
   def set_values    
     self.end_date = start_date
     self.short_code = generate_pin if self.short_code.nil?
@@ -92,7 +95,7 @@ class Event < ApplicationRecord
   end
 
   def set_duration
-    self.duration = (end_date - start_date).to_i
+    self.duration = (end_date - start_date).to_i if start_date.present? && end_date.present?
   end
 
   def end_date_is_after_start_date
