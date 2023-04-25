@@ -37,14 +37,37 @@
 #
 
 one:
-  title: This is question number 1
+  title: This is question number 1 with status 'asked'
   user_id: 7c5e36bb-6163-4d07-8e7e-9f13e77d6e39
   room: one
   organization_id: 8c5e36bb-6163-4d07-8a7e-9f13e77d6e40
+  status: asked
 
 two:
-  title: This is question number 2
+  title: This is question number 2 with status 'asked'
   user_id: 60322e8a-5b0a-4d1b-8e69-9accea00e1a0
-  room: two
+  room: one
   anonymous: true
+  organization_id: 8c5e36bb-6163-4d07-8a7e-9f13e77d6e40
+  status: asked
+
+three:
+  title: This is question number 3 with status 'approved'
+  user_id: 7c5e36bb-6163-4d07-8e7e-9f13e77d6e39
+  room: one
+  status: approved
+  organization_id: 8c5e36bb-6163-4d07-8a7e-9f13e77d6e40
+
+four:
+  title: This is question number 4 with status 'asked'
+  user_id: 7c5e36bb-6163-4d07-8e7e-9f13e77d6e39
+  room: one
+  status: asked
+  organization_id: 8c5e36bb-6163-4d07-8a7e-9f13e77d6e40
+
+five:
+  title: This is question number 5 with status 'beinganswered'
+  user_id: 7c5e36bb-6163-4d07-8e7e-9f13e77d6e39
+  room: one
+  status: beinganswered
   organization_id: 8c5e36bb-6163-4d07-8a7e-9f13e77d6e40
