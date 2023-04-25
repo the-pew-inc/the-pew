@@ -65,9 +65,9 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test 'password length validation' do
-    @user.password = 'short'
-    refute @user.valid?, 'user is valid with a short password'
-    assert_not_nil @user.errors[:password], 'no validation error for password length present'
+    new_user = User.new(email: 'test@example.com', password: 'short')
+    refute new_user.valid?, 'user is valid with a short password'
+    assert_not_nil new_user.errors[:password], 'no validation error for password length present'
   end
 
   test 'authenticate user' do
