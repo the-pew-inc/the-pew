@@ -33,7 +33,7 @@ one:
   domain: acme.com
   domain_verified: true
   domain_verified_at: <%= Time.current.utc %>
-  dns_txt: sOmeRandomeString
+  dns_txt: sOmeRandomeStringWithEnoughCharactersToMakeIt126InTotalABCDEFGHIJ0123456789KLMNOPQRSTUVWXYZabcdefghijklmno1234567890abcdefghjk
 
 two:
   id: 8c2e36bb-1963-4d07-8a7d-9f13e77d6e19
