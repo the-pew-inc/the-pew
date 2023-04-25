@@ -19,4 +19,24 @@ Using openAI, THEPEW provides personalized recommendations that are tailored to 
 ## LICENSE
 [License](../master/LICENSE.md)
 
+## INSTALLATION
+### PREREQUISITES
+- ruby (version 3.2 with YJIT)
+- rails (version 7.0.4)
+- postgresql (version 14 or above)
+- mailcatcher
+- redis (version 6.2)
+- docker (used by postgres, redis and mailcatcher)
+
+### INSTALLING POSTGRES USING DOCKER
+docker run -p 5432:5432 --name postgres-15.2-alpine -e POSTGRES_PASSWORD=mysecretpassword -d postgres:15.2-alpine
+
+### INSTALLING REDIS USING DOCKER
+docker run -p 6379:6379 --name redis-6.2-alpine -d 6.2-alpine
+
+### INSTALLING MAILCATCHER USING DOCKER
+docker run -p 1080:1080 -p 1025:1025 --name mailcatcher -d stpaquet/alpinemailcatcher
+
+For more information you can read this medium post [https://medium.com/@spaquet/mailcatcher-to-the-rescue-4ba438dc98c2](https://medium.com/@spaquet/mailcatcher-to-the-rescue-4ba438dc98c2)
+
 ## CREDITS
