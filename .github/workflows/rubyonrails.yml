@@ -28,7 +28,7 @@ jobs:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: mysecretpassword
       redis:
-        image: redis:-6.2-alpine
+        image: redis:6.2-alpine
         options: >-
           --health-cmd "redis-cli ping"
           --health-interval 10s
