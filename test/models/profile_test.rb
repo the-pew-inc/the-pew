@@ -22,13 +22,47 @@ require 'test_helper'
 
 class ProfileTest < ActiveSupport::TestCase
   def setup
-    @profile = profiles(:first)
+    @profile = profiles(:one)
   end
 
-  %i[nickname].each do |attr|
-    test "#{attr} must be present" do
-      eval "@profile.#{attr} = nil"
-      assert_not @profile.valid?
-    end
+  test "should be valid" do
+    assert @profile.valid?
+  end
+
+  test "user_id should be present" do
+    @profile.user_id = nil
+    assert_not @profile.valid?
+  end
+
+  test "nickname should be present" do
+    @profile.nickname = "     "
+    assert_not @profile.valid?
+  end
+
+  test "nickname should not be too short" do
+    @profile.nickname = "a" * 2
+    assert_not @profile.valid?
+  end
+
+  test "nickname should not be too long" do
+    @profile.nickname = "a" * 41
+    assert_not @profile.valid?
+  end
+
+  test "avatar should be present" do
+    @profile.avatar.attach(io: File.open(Rails.root.join('test', 'fixtures', 'files', 'test-avatar.jpeg')), filename: 'test-avatar.png', content_type: 'image/png')
+    assert @profile.valid?
+  end
+
+  test "avatar should be a valid content type" do
+    @profile.avatar.attach(io: File.open(Rails.root.join('test', 'fixtures', 'files', 'test-avatar.pdf')), filename: 'test-avatar.pdf', content_type: 'application/pdf')
+    assert_not @profile.valid?
+  end
+
+  test "avatar should not be too large" do
+    @profile.avatar.attach(io: File.open(Rails.root.join('test', 'fixtures', 'files', 'test-avatar.jpeg')), filename: 'test-avatar.png', content_type: 'image/png')
+    assert @profile.valid?
+    @profile.avatar.attach(io: File.open(Rails.root.join('test', 'fixtures', 'files', 'large-avatar.jpg')), filename: 'large-avatar.png', content_type: 'image/png')
+    assert_not @profile.valid?
   end
 end
