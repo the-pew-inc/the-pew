@@ -31,8 +31,10 @@ class Vote < ApplicationRecord
       up_vote? ? cancel! : up_vote!
     when 'down_vote'
       down_vote? ? cancel! : down_vote!
+    when 'cancel'
+      cancel!
     else
-      logger.error "User #{self.user_id} tried to use an invalid vote choice: #{choice}"
+      errors.add(:choice, 'invalid_choice')
       return
     end
   end
