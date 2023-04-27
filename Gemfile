@@ -5,7 +5,8 @@ ruby '3.2.2'
 
 # IMPORTANT: This must be the first gem listed
 # Add support to appmap in development and test
-gem 'appmap', groups: %i[development test]
+
+gem 'appmap', '~> 0.99.1', :groups => [:development, :test]
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem 'rails', '~> 7.0.4'
@@ -147,7 +148,8 @@ gem 'groupdate'
 gem 'chartkick'
 
 # openAI [https://github.com/alexrudall/ruby-openai]
-gem "ruby-openai", "~> 3.7.0"
+# gem "ruby-openai", "~> 3.7.0"
+gem 'ruby-openai', '~> 4.0.0'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

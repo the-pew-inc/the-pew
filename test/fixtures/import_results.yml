@@ -21,11 +21,13 @@
 #
 
 one:
-  user: one
-  status: MyString
-  message: MyText
+  user_id: 7c5e36bb-6163-4d07-8e7e-9f13e77d6e39
+  status: :success
+  filename: "success_file.xlsx"
+  
 
 two:
-  user: two
-  status: MyString
-  message: MyText
+  user_id: 7c5e36bb-6163-4d07-8e7e-9f13e77d6e39
+  status: :error
+  message: "An error occured while uploading the file"
+  filename: "error_file.xls"

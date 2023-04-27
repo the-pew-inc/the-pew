@@ -35,29 +35,37 @@
 #  index_users_on_uid        (uid) UNIQUE
 #
 
-# User one is confirmed and unblocked/unlocked
-one:
-  email: test_user1@test.com
-  password_digest: <%= Argon2::Password.create("passpass") %>
-  blocked: false
+john:
+  id: 7c5e36bb-6163-4d07-8e7e-9f13e77d6e39
+  email: john@example.com
+  password_digest: <%= Argon2::Password.create('password123') %>
   confirmed: true
-  confirmed_at: Time.current.utc
+  confirmed_at: <%= Time.current %>
+  created_at: <%= Time.current %>
+  updated_at: <%= Time.current %>
 
-# User two is not confirmed and blocked but not locked
-two:
-  email: test_user2@test.com
-  password_digest: <%= Argon2::Password.create("passpass") %>
-  blocked: true
+jane:
+  id: 60322e8a-5b0a-4d1b-8e69-9accea00e1a0
+  email: jane@example.com
+  password_digest: <%= Argon2::Password.create('password123') %>
+  confirmed: true
+  confirmed_at: <%= Time.current %>
+  created_at: <%= Time.current %>
+  updated_at: <%= Time.current %>
 
-# User three is locked and not confirmed and not blocked
-three:
-  email: test_user3@test.com
-  password_digest: <%= Argon2::Password.create("passpass") %>
-  locked: true
-  locked_at: Time.current.utc
+joe:
+  id: 60355e8a-5b0a-4d1b-8e69-9accea00e10a
+  email: joe@example.com
+  password_digest: <%= Argon2::Password.create('password123') %>
+  confirmed: false
+  created_at: <%= Time.current %>
+  updated_at: <%= Time.current %>
 
-# User four is unlocked, not blocked and unconfirmed
-four:
-  email: test_user4@test.com
-  password_digest: <%= Argon2::Password.create("passpass") %>
-  blocked: false
+mary:
+  id: 60322e8a-5b0a-4d3b-8e70-9accea00e10b
+  email: mary@example.com
+  password_digest: <%= Argon2::Password.create('password123') %>
+  confirmed: true
+  confirmed_at: <%= Time.current %>
+  created_at: <%= Time.current %>
+  updated_at: <%= Time.current %>

@@ -30,7 +30,7 @@ one:
   event: one
   always_on: false
   allow_anonymous: false
-  organization_id: organization(:one).id
+  organization_id: 8c5e36bb-6163-4d07-8a7e-9f13e77d6e40
   start_date: <%= DateTime.now.utc %>
   created_at: <%= Time.current.utc %>
   updated_at: <%= Time.current.utc %>
@@ -40,7 +40,7 @@ two:
   event: two
   always_on: true
   allow_anonymous: true
-  organization_id: organization(:two).id
+  organization_id: 8c5e36bb-6163-4d07-8a7e-9f13e77d6e40
   start_date: <%= DateTime.now.utc %>
   created_at: <%= Time.current.utc %>
   updated_at: <%= Time.current.utc %>

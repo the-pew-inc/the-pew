@@ -20,9 +20,17 @@
 #
 
 one:
-  user: one
-  nickname: User1 NickaName
+  user_id: 7c5e36bb-6163-4d07-8e7e-9f13e77d6e39
+  nickname: Johny
 
 two:
-  user: two
-  nickname: User2 Simple
+  user_id: 60322e8a-5b0a-4d1b-8e69-9accea00e1a0
+  nickname: Jane
+
+three:
+  user_id: 60355e8a-5b0a-4d1b-8e69-9accea00e10a
+  nickname: Joe
+
+four:
+  user_id: 60322e8a-5b0a-4d3b-8e70-9accea00e10b
+  nickname: Mary

@@ -22,8 +22,8 @@
 
 one:
   content: MyText
-  user: one
+  user_id: 7c5e36bb-6163-4d07-8e7e-9f13e77d6e39
 
 two:
   content: MyText
-  user: two
+  user_id: 60322e8a-5b0a-4d1b-8e69-9accea00e1a0
