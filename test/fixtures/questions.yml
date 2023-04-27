@@ -37,6 +37,7 @@
 #
 
 one:
+  id: 70344e8a-5b0a-6d1b-8e69-9accea00e101
   title: This is question number 1 with status 'asked'
   user_id: 7c5e36bb-6163-4d07-8e7e-9f13e77d6e39
   room: one
@@ -44,6 +45,7 @@ one:
   status: asked
 
 two:
+  id: 70344e8a-5b0a-6d1b-8e69-9accea00e102
   title: This is question number 2 with status 'asked'
   user_id: 60322e8a-5b0a-4d1b-8e69-9accea00e1a0
   room: one
@@ -52,6 +54,7 @@ two:
   status: asked
 
 three:
+  id: 70344e8a-5b0a-6d1b-8e69-9accea00e103
   title: This is question number 3 with status 'approved'
   user_id: 7c5e36bb-6163-4d07-8e7e-9f13e77d6e39
   room: one
@@ -59,6 +62,7 @@ three:
   organization_id: 8c5e36bb-6163-4d07-8a7e-9f13e77d6e40
 
 four:
+  id: 70344e8a-5b0a-6d1b-8e69-9accea00e104
   title: This is question number 4 with status 'asked'
   user_id: 7c5e36bb-6163-4d07-8e7e-9f13e77d6e39
   room: one
@@ -66,8 +70,18 @@ four:
   organization_id: 8c5e36bb-6163-4d07-8a7e-9f13e77d6e40
 
 five:
+  id: 70344e8a-5b0a-6d1b-8e69-9accea00e105
   title: This is question number 5 with status 'beinganswered'
   user_id: 7c5e36bb-6163-4d07-8e7e-9f13e77d6e39
   room: one
   status: beinganswered
+  organization_id: 8c5e36bb-6163-4d07-8a7e-9f13e77d6e40
+
+six:
+  id: 70344e8a-5b0a-6d1b-8e69-9accea00e106
+  title: This is question number 6 with status 'rejected'
+  user_id: 60322e8a-5b0a-4d1b-8e69-9accea00e1a0
+  room: one
+  status: rejected
+  rejection_cause: inapropriate
   organization_id: 8c5e36bb-6163-4d07-8a7e-9f13e77d6e40

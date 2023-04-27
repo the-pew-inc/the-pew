@@ -52,3 +52,20 @@ jane:
   confirmed_at: <%= Time.current %>
   created_at: <%= Time.current %>
   updated_at: <%= Time.current %>
+
+joe:
+  id: 60355e8a-5b0a-4d1b-8e69-9accea00e10a
+  email: joe@example.com
+  password_digest: <%= Argon2::Password.create('password123') %>
+  confirmed: false
+  created_at: <%= Time.current %>
+  updated_at: <%= Time.current %>
+
+mary:
+  id: 60322e8a-5b0a-4d3b-8e70-9accea00e10b
+  email: mary@example.com
+  password_digest: <%= Argon2::Password.create('password123') %>
+  confirmed: true
+  confirmed_at: <%= Time.current %>
+  created_at: <%= Time.current %>
+  updated_at: <%= Time.current %>

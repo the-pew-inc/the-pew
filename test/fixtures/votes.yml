@@ -22,10 +22,25 @@
 
 one:
   user_id: 7c5e36bb-6163-4d07-8e7e-9f13e77d6e39
-  votable: one
-  votable_type: votable
+  votable_id: 70344e8a-5b0a-6d1b-8e69-9accea00e101
+  votable_type: 'Question'
+  choice: :up_vote
+
 
 two:
   user_id: 60322e8a-5b0a-4d1b-8e69-9accea00e1a0
-  votable: one
-  votable_type: votable
+  votable_id: 70344e8a-5b0a-6d1b-8e69-9accea00e101
+  votable_type: 'Question'
+  choice: :down_vote
+
+three:
+  user_id: 60355e8a-5b0a-4d1b-8e69-9accea00e10a
+  votable_id: 70344e8a-5b0a-6d1b-8e69-9accea00e101
+  votable_type: 'Question'
+  choice: up_vote
+  
+four:
+  user_id: 60322e8a-5b0a-4d3b-8e70-9accea00e10b
+  votable_id: 70344e8a-5b0a-6d1b-8e69-9accea00e101
+  votable_type: 'Question'
+  choice: :cancel
