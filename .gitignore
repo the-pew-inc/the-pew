@@ -44,4 +44,6 @@ output.html
 
 # Production specific files
 .do/app-production.yaml
+
+# Local code coverage
 coverage
