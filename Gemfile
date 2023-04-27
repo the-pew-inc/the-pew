@@ -190,6 +190,12 @@ group :test do
   gem 'capybara'
   gem 'selenium-webdriver'
   gem 'webdrivers'
+
+  # Adding SimpleCov [https://github.com/simplecov-ruby/simplecov]
+  # SimpleCov is a test coverage for Rails. Used by CodeClimate
+  # Read [https://docs.codeclimate.com/docs/configuring-test-coverage] for more information
+  # on how to integrate ith CodeClimate
+  gem 'simplecov', require: false
 end
 
 
