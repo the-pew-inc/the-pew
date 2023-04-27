@@ -59,9 +59,13 @@ jobs:
           cmd: install
       # Add or replace database setup steps here
       - name: Set up database schema
+        env:
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
         run: bin/rails db:schema:load
       # Add or replace test runners here
       - name: Run tests
+        env:
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
         run: bin/rails test
 
   # lint:
