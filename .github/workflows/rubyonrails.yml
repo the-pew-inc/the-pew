@@ -7,7 +7,7 @@
 name: "Ruby on Rails CI"
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "ci" ]
   pull_request:
     branches: [ "main" ]
 jobs:
@@ -18,24 +18,45 @@ jobs:
         image: postgres:15-alpine
         ports:
           - "5432:5432"
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
         env:
           POSTGRES_DB: ask_test
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: mysecretpassword
+      redis:
+        image: redis:-6.2-alpine
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+          --entrypoint redis-server
+        ports:
+          - "6379:6379"
     env:
       RAILS_ENV: test
       DATABASE_URL: "postgres://postgres:mysecretpassword@localhost:5432/ask_test"
+      REDISCLOUD_URL: "redis://localhost:6379/1"
       RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }} 
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
       # Add or replace dependency steps here
-      - name: Install xmllint
-        run: sudo apt-get install libxml2-utils libvips
+      - name: Install libvips
+        run: sudo apt-get install libvips
       - name: Install Ruby and gems
         uses: ruby/setup-ruby@55283cc23133118229fd3f97f9336ee23a179fcf # v1.146.0
         with:
+          ruby-version: 3.2.2
           bundler-cache: true
+      - name: Install yarn
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: install
       # Add or replace database setup steps here
       - name: Set up database schema
         run: bin/rails db:schema:load
