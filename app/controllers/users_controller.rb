@@ -246,7 +246,7 @@ class UsersController < ApplicationController
   def user_was_invited?
     user = User.find_by(email: @user.email)
 
-    if user.invited && user.accepted_invitation_on.nil?
+    if user && user.invited && user.accepted_invitation_on.nil?
       flash[:alert] = 'The email address you used has a pending invitation. Check your mailbox for an invite.'
       redirect_to(root_path) and return true
     end

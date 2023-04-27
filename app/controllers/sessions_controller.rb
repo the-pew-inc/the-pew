@@ -132,7 +132,7 @@ class SessionsController < ApplicationController
   # If this is the case we deny access to the app and require the user to go back to the
   # invite flow.
   def user_was_invited?
-    if @user.invited && @user.accepted_invitation_on.nil?
+    if @user && @user.invited && @user.accepted_invitation_on.nil?
       flash[:alert] = 'The email address you are using has a pending invite. Please check your mailbox for an invite.'
       redirect_to(root_path) and return true
     end
