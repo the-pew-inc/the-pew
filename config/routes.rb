@@ -82,6 +82,9 @@ Rails.application.routes.draw do
   # Question routes / votes
   post 'question/:votable_id/votes', to: 'votes#show', as: :question_votes,  votable_type: 'Question'
 
+  # Polls
+  resources :polls
+
   # Settings routes
   resources :settings, only: [:index]
 
