@@ -29,7 +29,24 @@
 require "test_helper"
 
 class PollTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  test "should create a new poll" do
+    poll = Poll.new(
+      title: "New Poll",
+      poll_type: "universal",
+      status: "opened",
+      duration: 7,
+      organization: organizations(:one),
+      user: users(:john)
+    )
+    poll.poll_options.build(title: "Option 1")
+    poll.poll_options.build(title: "Option 2")
+    
+    assert poll.save
+    assert_equal "New Poll", poll.title
+    assert_equal "universal", poll.poll_type
+    assert_equal "opened", poll.status
+    assert_equal 7, poll.duration
+    assert_equal organizations(:one), poll.organization
+    assert_equal users(:john), poll.user
+  end
 end

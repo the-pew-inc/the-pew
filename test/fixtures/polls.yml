@@ -28,9 +28,9 @@
 #
 
 one:
-  title: MyString
-  organization: one
-
-two:
-  title: MyString
-  organization: two
+  title: My Poll
+  user_id: <%= users(:john).id %>
+  organization_id: <%= organizations(:one).id %>
+  poll_options_attributes:
+    - title: Option 1
+    - title: Option 2
