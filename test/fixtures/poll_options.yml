@@ -25,7 +25,9 @@
 #
 
 one:
-  poll: one
+  poll_id: 3c5e36ab-6123-4e07-8e7e-9a13e77d6e39
+  title: "Option 1 poll 1"
 
 two:
-  poll: two
+  poll_id: 3c5e36ab-6123-4e07-8e7e-9a13e77d6e39
+  title: "Option 2 poll 1"

@@ -28,9 +28,9 @@
 #
 
 one:
-  title: My Poll
-  user_id: <%= users(:john).id %>
-  organization_id: <%= organizations(:one).id %>
-  poll_options_attributes:
-    - title: Option 1
-    - title: Option 2
+  id: 3c5e36ab-6123-4e07-8e7e-9a13e77d6e39
+  title: The Father of all Polls
+  user_id: 7c5e36bb-6163-4d07-8e7e-9f13e77d6e39
+  organization_id: 8c5e36bb-6163-4d07-8a7e-9f13e77d6e40
+  poll_type: :universal
+  status: :opened

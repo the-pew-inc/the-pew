@@ -13,7 +13,18 @@ class ActiveSupport::TestCase
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
   # fixtures :all
   fixtures %w[users profiles organizations members active_sessions events rooms 
-    questions attendances messages notifications topics votes import_results roles]
+    questions attendances messages notifications topics votes import_results roles 
+    polls poll_options]
 
   # Add more helper methods to be used by all tests here...
+
+
+  def login(user)
+    post login_path, params: { user: { email: user.email, password: 'password123' } }
+  end
+
+  def switch_timezone
+    Time.zone
+  end
+
 end
