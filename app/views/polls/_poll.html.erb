@@ -12,10 +12,10 @@
     <%= poll.participants %>
   </td>
   <td class="px-6 py-4">
-    <%= link_to "View", poll_path(poll.id), class: "font-medium text-blue-600 dark:text-blue-500 hover:underline" %>
+    <%= link_to "View", poll_path(poll), class: "font-medium text-blue-600 dark:text-blue-500 hover:underline" %>
     |
-    <%= link_to "Edit", edit_poll_path(poll.id), class: "font-medium text-blue-600 dark:text-blue-500 hover:underline" %>
+    <%= link_to "Edit", edit_poll_path(poll), class: "font-medium text-blue-600 dark:text-blue-500 hover:underline" %>
     |
-    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Delete</a>
+    <%= link_to "Delete", poll_path(poll), data: { turbo_method: :delete,  turbo_confirm: "Are you sure you want to delete this poll and all its data?" }, class: "font-medium text-blue-600 dark:text-blue-500 hover:underline" %>
   </td>
 </tr>

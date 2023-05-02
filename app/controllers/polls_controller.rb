@@ -43,6 +43,13 @@ class PollsController < ApplicationController
   end
 
   def destroy
+    @poll = current_user.organization.polls.find(params[:id])
+    if @poll.destroy
+      redirect_to polls_url, notice: "The poll was successfully deleted."
+    else
+      flash[:alert] = "An error prevented the poll from being deleted."
+      redirect_to polls_url
+    end
   end
 
   private
