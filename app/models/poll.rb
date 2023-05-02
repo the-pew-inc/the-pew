@@ -5,6 +5,7 @@
 #  id              :uuid             not null, primary key
 #  add_option      :boolean          default(TRUE), not null
 #  duration        :integer
+#  participants    :integer          default(0), not null
 #  poll_type       :integer          not null
 #  status          :integer          not null
 #  title           :string           not null
@@ -34,11 +35,14 @@ class Poll < ApplicationRecord
 
   # Relationships
   has_many :poll_options, dependent: :destroy
+  accepts_nested_attributes_for :poll_options, allow_destroy: true
+  
   has_many :poll_answers, dependent: :destroy
 
   has_rich_text :description
 
   validates :title, presence: true, length: { minimum: 3, maximum: 250 }
+  validate :validate_poll_options
 
   # Universal: everyone can see participate to the poll
   # Restricted: participating to the poll requires an account
@@ -49,4 +53,12 @@ class Poll < ApplicationRecord
 
   # Define how the poll options are ordered when displayed to the user
   enum display: { random: 10, up_vote: 20, down_vote: 30 }, _default: 10
+
+  private
+
+  def validate_poll_options
+    if poll_options.size < 2
+      errors.add(:poll_options, "must have at least two options")
+    end
+  end
 end

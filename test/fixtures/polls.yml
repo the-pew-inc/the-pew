@@ -5,6 +5,7 @@
 #  id              :uuid             not null, primary key
 #  add_option      :boolean          default(TRUE), not null
 #  duration        :integer
+#  participants    :integer          default(0), not null
 #  poll_type       :integer          not null
 #  status          :integer          not null
 #  title           :string           not null

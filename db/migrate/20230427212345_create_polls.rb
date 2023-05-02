@@ -11,6 +11,8 @@ class CreatePolls < ActiveRecord::Migration[7.0]
       t.integer    :duration
       t.boolean    :add_option,   null: false, default: true # Let user's add an option
 
+      t.integer    :participants, null: false, default: 0
+
       t.timestamps
     end
 

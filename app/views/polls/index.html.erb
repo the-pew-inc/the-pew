@@ -1,0 +1,37 @@
+<%# turbo_stream_from [current_user.id, :polls] %>
+<section>
+  <div class="mb-6">
+    <%= link_to "Create a new poll", new_poll_path, class: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full  px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" %>
+  </div>
+</section>
+<section class="pt-4">
+  <h2 class="inline-block mb-2 font-extrabold text-2xl tracking-tight text-slate-800 dark:text-white">Polls: </h2>
+</section>
+<section>
+  <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <tr>
+          <th scope="col" class="px-6 py-3">
+            Poll name
+          </th>
+          <th scope="col" class="px-6 py-3">
+            Created by
+          </th>
+          <th scope="col" class="px-6 py-3">
+            Created on
+          </th>
+          <th scope="col" class="px-6 py-3">
+            Participants
+          </th>
+          <th scope="col" class="px-6 py-3">
+            Action
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= render @polls %>
+      </tbody>
+    </table>
+  </div>
+</section>

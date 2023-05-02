@@ -1,0 +1,21 @@
+<tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+  <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+    <%= poll.title %>
+  </th>
+  <td class="px-6 py-4">
+    <%= poll.user.profile.nickname %>
+  </td>
+  <td class="px-6 py-4">
+    <%= poll.created_at.strftime('%b %d, %y') %>
+  </td>
+  <td class="px-6 py-4">
+    <%= poll.participants %>
+  </td>
+  <td class="px-6 py-4">
+    <%= link_to "View", poll_path(poll.id), class: "font-medium text-blue-600 dark:text-blue-500 hover:underline" %>
+    |
+    <%= link_to "Edit", edit_poll_path(poll.id), class: "font-medium text-blue-600 dark:text-blue-500 hover:underline" %>
+    |
+    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Delete</a>
+  </td>
+</tr>
