@@ -2,6 +2,7 @@
 
 import { Controller } from "@hotwired/stimulus";
 
+//  Used to add / remove poll options when creating or editing a poll
 export default class extends Controller {
   static targets = ["container", "template", "error"];
 

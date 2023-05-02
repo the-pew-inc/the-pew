@@ -30,6 +30,23 @@ class PollOption < ApplicationRecord
   has_paper_trail
 
   has_many :poll_answers, dependent: :destroy
+  has_many :votes,        as: :votable, dependent: :destroy
 
   validates :title, presence: true, length: { minimum: 3, maximum: 250 }
+
+  # This is the sum of +1 and -1
+  def vote_count
+    Vote.where(votable_id: self.id).sum(:choice)
+  end
+
+  # This only sums the +1
+  def up_votes
+    Vote.where(votable_id: self.id).up_vote.sum(:choice)
+  end
+
+  # This only sums the -1
+  def down_votes
+    Vote.where(votable_id: self.id).down_vote.sum(:choice)
+  end
+
 end

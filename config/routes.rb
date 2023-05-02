@@ -79,11 +79,14 @@ Rails.application.routes.draw do
     resources :questions, shallow: true
   end
 
-  # Question routes / votes
+  # Question votes
   post 'question/:votable_id/votes', to: 'votes#show', as: :question_votes,  votable_type: 'Question'
 
   # Polls
   resources :polls
+
+  # Polls votes
+  post 'poll/:votable_id/votes', to: 'votes#show', as: :poll_votes,  votable_type: 'Poll'
 
   # Settings routes
   resources :settings, only: [:index]
