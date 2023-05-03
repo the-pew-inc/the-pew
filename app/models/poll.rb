@@ -54,6 +54,14 @@ class Poll < ApplicationRecord
   # Define how the poll options are ordered when displayed to the user
   enum display: { random: 10, up_vote: 20, down_vote: 30 }, _default: 10
 
+  # Used to update the participants column
+  # A poll participant is a person who casted their vote for a poll
+  # A vote is :up_vote (+1), :down_vote (-1), :cancel (0)
+  def update_participants
+    self.participants = 0
+  end
+
+
   private
 
   def validate_poll_options

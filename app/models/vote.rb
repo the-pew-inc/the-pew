@@ -23,14 +23,14 @@ class Vote < ApplicationRecord
   belongs_to :user
   belongs_to :votable, polymorphic: true
 
-  enum choice: { up_vote: 1, down_vote: -1, cancel: 0 }
+  enum choice: { up_vote: 1, down_vote: -1, cancel: 0, make_it_null: nil }
 
   def voted(choice)
     case choice
     when 'up_vote'
-      up_vote? ? cancel! : up_vote!
+      up_vote? ? make_it_null! : up_vote!
     when 'down_vote'
-      down_vote? ? cancel! : down_vote!
+      down_vote? ? make_it_null! : down_vote!
     when 'cancel'
       cancel!
     else

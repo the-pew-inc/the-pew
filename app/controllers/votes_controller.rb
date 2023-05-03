@@ -9,7 +9,14 @@ class VotesController < ApplicationController
   
     @vote.voted(params[:choice])
 
-    @vote.broadcast_update_later_to(@vote.votable.room.id, target: "#{dom_id(@vote.votable)}_count", html: @vote.votable.up_votes)
+    case params[:votable_type]
+    when "Question"
+      @vote.broadcast_update_later_to(@vote.votable.room.id, target: "#{dom_id(@vote.votable)}_count", html: @vote.votable.up_votes)
+    when "PollOption"
+      
+    else
+      logger.info "No broadcast associated to #{params[:votable_type]} in votes_controller#show"
+    end
   end
 
 end
