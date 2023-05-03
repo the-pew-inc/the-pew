@@ -85,8 +85,9 @@ Rails.application.routes.draw do
   # Polls
   resources :polls
 
-  # Polls votes
-  post 'poll/:votable_id/votes', to: 'votes#show', as: :poll_votes,  votable_type: 'Poll'
+  # Polls votes (aka the PollOption as Polls are not votable)
+  # votable_id is the id of the PollOption the user is voting for (up_vote, down_vote or cancel)
+  post 'poll/:votable_id/votes', to: 'votes#show', as: :poll_votes,  votable_type: 'PollOption'
 
   # Settings routes
   resources :settings, only: [:index]
