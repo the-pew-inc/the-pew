@@ -5,6 +5,8 @@
 #  id              :uuid             not null, primary key
 #  add_option      :boolean          default(TRUE), not null
 #  duration        :integer
+#  max_answers     :integer
+#  num_answers     :integer
 #  participants    :integer          default(0), not null
 #  poll_type       :integer          not null
 #  status          :integer          not null
@@ -48,5 +50,88 @@ class PollTest < ActiveSupport::TestCase
     assert_equal 7, poll.duration
     assert_equal organizations(:one), poll.organization
     assert_equal users(:john), poll.user
+  end
+
+  test "should not allow num_answers to be greater than the number of poll options" do
+    poll = Poll.new(
+      title: "New Poll",
+      poll_type: "universal",
+      status: "opened",
+      num_answers: 3, # should not be greater than the number of poll options
+      organization: organizations(:one),
+      user: users(:john)
+    )
+    poll.poll_options.build(title: "Option 1")
+    poll.poll_options.build(title: "Option 2")
+    
+    assert_not poll.save
+    assert_equal ["cannot be greater than the number of poll options"], poll.errors[:num_answers]
+  end
+
+  test "should not allow max_answers to be greater than the number of poll options" do
+    poll = Poll.new(
+      title: "New Poll",
+      poll_type: "universal",
+      status: "opened",
+      max_answers: 3, # should not be greater than the number of poll options
+      organization: organizations(:one),
+      user: users(:john)
+    )
+    poll.poll_options.build(title: "Option 1")
+    poll.poll_options.build(title: "Option 2")
+    
+    assert_not poll.save
+    assert_equal ["cannot be greater than the number of poll options"], poll.errors[:max_answers]
+  end
+
+  test "should not allow num_answers and max_answers to both be greater than 0" do
+    poll = Poll.new(
+      title: "New Poll",
+      poll_type: "universal",
+      status: "opened",
+      num_answers: 2,
+      max_answers: 2, # should not allow both to be greater than 0
+      organization: organizations(:one),
+      user: users(:john)
+    )
+    poll.poll_options.build(title: "Option 1")
+    poll.poll_options.build(title: "Option 2")
+    
+    assert_not poll.save
+    assert_equal ["either strict or flexible when setting values for the number or options a user can vote for"], poll.errors[:base]
+  end
+
+  test "should allow num_answers and max_answers to both be nil" do
+    poll = Poll.new(
+      title: "New Poll",
+      poll_type: "universal",
+      status: "opened",
+      organization: organizations(:one),
+      user: users(:john)
+    )
+    poll.poll_options.build(title: "Option 1")
+    poll.poll_options.build(title: "Option 2")
+    
+    assert poll.save
+    assert_nil poll.num_answers
+    assert_nil poll.max_answers
+  end
+
+  test "should allow num_answers and max_answers to be 0 and convert to nil" do
+    poll = Poll.new(
+      title: "New Poll",
+      poll_type: "universal",
+      status: "opened",
+      num_answers: 0,
+      max_answers: 0,
+      organization: organizations(:one),
+      user: users(:john)
+    )
+    poll.poll_options.build(title: "Option 1")
+    poll.poll_options.build(title: "Option 2")
+    
+    assert poll.save
+    assert_nil poll.num_answers
+    assert_nil poll.max_answers
   end
 end
