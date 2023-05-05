@@ -7,11 +7,12 @@ class Broadcasters::Users::Created
 
   def initialize(user)
     @user = user
-    @organization = @user.organization
+    @current_user = Current.user
+    @organization = @current_user.organization
   end
 
   def call
-    Turbo::StreamsChannel.broadcast_append_later_to @organization.id, target: "user-list", partial: "users/user", locals: { user: @user }
+    Turbo::StreamsChannel.broadcast_append_later_to @organization.id, target: "user-list", partial: "users/user", locals: { user: @user, current_user: @current_user }
     Turbo::StreamsChannel.broadcast_update_later_to @organization.id, target: "users-counter", html: @user.organization.members.count
   end
 
