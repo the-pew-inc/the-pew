@@ -20,9 +20,6 @@ export default class extends Controller {
     // 1. Check the status of the other buttons (if any)
     const currentButtonAction = event.params.voteAction;
     const pollOptionId = event.params.pollOptionId;
-    console.debug(
-      `action: ${currentButtonAction} || pollOptionId: ${pollOptionId}`
-    );
 
     // 2. Get all the other buttons
     const buttons = document.querySelectorAll(
@@ -31,11 +28,7 @@ export default class extends Controller {
 
     // 3. Run against the button array and apply the proper style
     buttons.forEach((button) => {
-      console.debug(button);
       if (button.dataset.pollVoteActionParam !== currentButtonAction) {
-        console.debug(
-          `BUTTON DIFFERENT FROM ACTION ${button.dataset.pollVoteActionParam} || ${currentButtonAction}`
-        );
         // We revert to inactive if the button is active but not the one
         // the user clicked on.
         if (
@@ -53,9 +46,6 @@ export default class extends Controller {
           );
         }
       } else {
-        console.debug(
-          `BUTTON IS THE ACTION ${button.dataset.pollVoteActionParam} || ${currentButtonAction}`
-        );
         // We apply the proper style to the button the user clicked on
         if (
           this.buttonTarget.classList.contains("border-sky-500") &&

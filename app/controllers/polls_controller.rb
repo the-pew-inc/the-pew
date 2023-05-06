@@ -40,6 +40,9 @@ class PollsController < ApplicationController
 
   def show
     @poll = Poll.find(params[:id])
+    @labels = []
+    @data = []
+    poll_stats
   end
 
   def destroy
@@ -58,6 +61,14 @@ class PollsController < ApplicationController
     params.require(:poll).permit(:add_option, :poll_type, :status, :title, 
       :duration, :display, :description,
       poll_options_attributes: [:id, :title, :_destroy])
+  end
+
+  def poll_stats
+    stats = Vote.joins("INNER JOIN poll_options ON votes.votable_id = poll_options.id AND votes.votable_type = 'PollOption'").where(poll_options: { id: @poll.poll_option_ids }).group('poll_options.title').count
+    stats.each do |item|
+      @labels << item[0]
+      @data << item[1]
+    end
   end
 
 end

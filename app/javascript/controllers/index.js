@@ -31,6 +31,9 @@ application.register("mode", ModeController)
 import OrderQuestionsController from "./order_questions_controller"
 application.register("order-questions", OrderQuestionsController)
 
+import PollChartController from "./poll_chart_controller"
+application.register("poll-chart", PollChartController)
+
 import PollController from "./poll_controller"
 application.register("poll", PollController)
 
