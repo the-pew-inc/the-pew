@@ -64,6 +64,9 @@ class User < ApplicationRecord
   has_many :events,          dependent: :destroy
   has_many :questions,       dependent: :destroy
   has_many :votes,           dependent: :destroy
+  has_many :polls,           dependent: :destroy
+  has_many :poll_answers,    dependent: :destroy
+  has_many :poll_options,    dependent: :destroy
 
   # Managing organization membership (one to many through Member)
   has_one  :member

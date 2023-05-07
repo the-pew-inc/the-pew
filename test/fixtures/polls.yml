@@ -1,0 +1,38 @@
+# == Schema Information
+#
+# Table name: polls
+#
+#  id              :uuid             not null, primary key
+#  add_option      :boolean          default(TRUE), not null
+#  duration        :integer
+#  max_answers     :integer
+#  num_answers     :integer
+#  participants    :integer          default(0), not null
+#  poll_type       :integer          not null
+#  status          :integer          not null
+#  title           :string           not null
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  organization_id :uuid             not null
+#  user_id         :uuid             not null
+#
+# Indexes
+#
+#  index_polls_on_organization_id  (organization_id)
+#  index_polls_on_poll_type        (poll_type)
+#  index_polls_on_status           (status)
+#  index_polls_on_user_id          (user_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (organization_id => organizations.id)
+#  fk_rails_...  (user_id => users.id)
+#
+
+one:
+  id: 3c5e36ab-6123-4e07-8e7e-9a13e77d6e39
+  title: The Father of all Polls
+  user_id: 7c5e36bb-6163-4d07-8e7e-9f13e77d6e39
+  organization_id: 8c5e36bb-6163-4d07-8a7e-9f13e77d6e40
+  poll_type: :universal
+  status: :opened

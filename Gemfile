@@ -98,7 +98,7 @@ gem 'sendgrid-actionmailer', '~> 3.2.0'
 
 # Sidekiq [https://github.com/mperham/sidekiq]
 # gem 'sidekiq', '6.5.7'
-gem 'sidekiq', '~>7.0.0'
+gem 'sidekiq', '~>7.1.0'
 # gem 'sidekiq', git: 'https://github.com/mperham/sidekiq.git'
 
 # Monitoring - Honeybadger []

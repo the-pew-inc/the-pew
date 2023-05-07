@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_20_201240) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_01_024948) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -256,6 +256,52 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_20_201240) do
     t.index ["sso"], name: "index_organizations_on_sso"
   end
 
+  create_table "poll_answers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id", null: false
+    t.uuid "poll_id", null: false
+    t.uuid "poll_option_id", null: false
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["poll_id"], name: "index_poll_answers_on_poll_id"
+    t.index ["poll_option_id"], name: "index_poll_answers_on_poll_option_id"
+    t.index ["user_id"], name: "index_poll_answers_on_user_id"
+  end
+
+  create_table "poll_options", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "poll_id", null: false
+    t.uuid "user_id"
+    t.boolean "is_answer", default: false, null: false
+    t.string "title"
+    t.integer "points", limit: 2, default: 0, null: false
+    t.boolean "title_enabled", default: false, null: false
+    t.boolean "text_answer_enabled", default: false, null: false
+    t.boolean "document_answer_enabled", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["poll_id"], name: "index_poll_options_on_poll_id"
+    t.index ["user_id"], name: "index_poll_options_on_user_id"
+  end
+
+  create_table "polls", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "organization_id", null: false
+    t.uuid "user_id", null: false
+    t.integer "poll_type", null: false
+    t.string "title", null: false
+    t.integer "status", null: false
+    t.integer "num_answers"
+    t.integer "max_answers"
+    t.integer "duration"
+    t.boolean "add_option", default: true, null: false
+    t.integer "participants", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["organization_id"], name: "index_polls_on_organization_id"
+    t.index ["poll_type"], name: "index_polls_on_poll_type"
+    t.index ["status"], name: "index_polls_on_status"
+    t.index ["user_id"], name: "index_polls_on_user_id"
+  end
+
   create_table "profiles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "user_id", null: false
     t.string "nickname"
@@ -406,6 +452,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_20_201240) do
   add_foreign_key "events", "users"
   add_foreign_key "import_results", "users"
   add_foreign_key "messages", "users"
+  add_foreign_key "poll_answers", "poll_options"
+  add_foreign_key "poll_answers", "polls"
+  add_foreign_key "poll_answers", "users"
+  add_foreign_key "poll_options", "polls"
+  add_foreign_key "polls", "organizations"
+  add_foreign_key "polls", "users"
   add_foreign_key "profiles", "users"
   add_foreign_key "questions", "rooms"
   add_foreign_key "questions", "users"
