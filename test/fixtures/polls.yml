@@ -6,7 +6,9 @@
 #  add_option      :boolean          default(TRUE), not null
 #  duration        :integer
 #  max_answers     :integer
+#  max_votes       :integer
 #  num_answers     :integer
+#  num_votes       :integer
 #  participants    :integer          default(0), not null
 #  poll_type       :integer          not null
 #  status          :integer          not null

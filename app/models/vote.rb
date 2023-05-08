@@ -28,9 +28,9 @@ class Vote < ApplicationRecord
   def voted(choice)
     case choice
     when 'up_vote'
-      up_vote? ? make_it_null! : up_vote!
+      up_vote? ? cancel! : up_vote!
     when 'down_vote'
-      down_vote? ? make_it_null! : down_vote!
+      down_vote? ? cancel! : down_vote!
     when 'cancel'
       cancel!
     else
@@ -38,5 +38,73 @@ class Vote < ApplicationRecord
       return
     end
   end
+
+  def poll_voted(poll, user, choice)
+    num_votes = poll.num_votes
+    max_votes = poll.max_votes
+  
+    case choice
+    when 'up_vote'
+      if up_vote?
+        make_it_null!
+      else
+        if num_votes.nil? || num_votes <= 0
+          up_vote!
+          poll.update_participants
+        elsif max_votes.nil? || max_votes > 0
+          vote_count = user.poll_option_votes.where(poll_option: poll.poll_options).count
+          if num_votes > vote_count
+            up_vote!
+            poll.update_participants
+          else
+            errors.add(:vote, 'num_votes_exceeded')
+          end
+        else
+          errors.add(:vote, 'invalid_poll_settings')
+        end
+      end
+    when 'down_vote'
+      if down_vote?
+        make_it_null!
+      else
+        if num_votes.nil? || num_votes <= 0
+          down_vote!
+          poll.update_participants
+        elsif max_votes.nil? || max_votes > 0
+          vote_count = user.poll_option_votes.where(poll_option: poll.poll_options).count
+          if num_votes > vote_count
+            down_vote!
+            poll.update_participants
+          else
+            errors.add(:vote, 'num_votes_exceeded')
+          end
+        else
+          errors.add(:vote, 'invalid_poll_settings')
+        end
+      end
+    when 'cancel'
+      if cancel?
+        make_it_null!
+      else
+        if num_votes.nil? || num_votes <= 0
+          cancel!
+          poll.update_participants
+        elsif max_votes.nil? || max_votes > 0
+          vote_count = user.poll_option_votes.where(poll_option: poll.poll_options).count
+          if num_votes > vote_count
+            cancel!
+            poll.update_participants
+          else
+            errors.add(:vote, 'num_votes_exceeded')
+          end
+        else
+          errors.add(:vote, 'invalid_poll_settings')
+        end
+      end
+    else
+      errors.add(:choice, 'invalid_choice')
+    end
+  end
+  
 
 end

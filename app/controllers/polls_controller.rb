@@ -64,7 +64,10 @@ class PollsController < ApplicationController
   end
 
   def poll_stats
-    stats = Vote.joins("INNER JOIN poll_options ON votes.votable_id = poll_options.id AND votes.votable_type = 'PollOption'").where(poll_options: { id: @poll.poll_option_ids }).group('poll_options.title').count
+    # stats = Vote.joins("INNER JOIN poll_options ON votes.votable_id = poll_options.id AND votes.votable_type = 'PollOption'").where(poll_options: { id: @poll.poll_option_ids }).group('poll_options.title').count
+    stats = Vote.joins("INNER JOIN poll_options ON votes.votable_id = poll_options.id AND votes.votable_type = 'PollOption'").where(poll_options: { id: @poll.poll_option_ids }).group('poll_options.title').sum(:choice)
+    @table_data = Vote.joins("JOIN poll_options ON votes.votable_id = poll_options.id AND votes.votable_type = 'PollOption'").where(poll_options: { id: @poll.poll_option_ids }).group('poll_options.title').group(:choice).count
+
     stats.each do |item|
       @labels << item[0]
       @data << item[1]
