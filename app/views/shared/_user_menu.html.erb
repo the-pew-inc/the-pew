@@ -15,9 +15,11 @@
       <li>
         <%= link_to "Profile", edit_account_path(current_user), class: "block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" %>
       </li>
-      <li>
-        <%= link_to "Settings", settings_path, class: "block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" %>
-      </li>
+      <% if current_user.member.owner? %>
+        <li>
+          <%= link_to "Settings", settings_path, class: "block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" %>
+        </li>
+      <% end %>
       <li>
         <%= link_to "Agreements & Policies", legal_path, class: "block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" %>
       </li>
