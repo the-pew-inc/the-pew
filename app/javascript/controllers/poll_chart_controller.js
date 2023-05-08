@@ -13,6 +13,7 @@ export default class extends Controller {
   connect() {
     // Set up the chart
     this.chart = new Chart(this.chartTarget, {
+      plugins: [ChartDataLabels],
       type: "bar",
       data: {
         labels: this.labelsValue,
@@ -26,7 +27,6 @@ export default class extends Controller {
           },
         ],
       },
-      plugins: [ChartDataLabels],
       options: {
         indexAxis: "y", // To have horizontal bars
         scales: {
@@ -35,15 +35,20 @@ export default class extends Controller {
               display: false,
             },
           },
-          y: {
-            grid: {
-              display: false,
-            },
-          },
         },
         plugins: {
           legend: {
             display: false,
+          },
+          datalabels: {
+            display: true,
+            align: "start",
+            anchor: "start",
+            offset: 5,
+            color: "#000", // Choose the color you want for the labels
+            // formatter: function (value, context) {
+            //   return value; // Display the data value as-is
+            // },
           },
         },
         title: {
