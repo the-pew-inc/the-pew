@@ -10,8 +10,13 @@ class SettingsController < ApplicationController
     # TODO add a second condition owner: true
     # Current code only displays account information when the user is the owner
     organization = Member.find_by(user_id: current_user.id, owner: true).organization
-    @organization_id = organization.id
-    @user_count = organization.members.count
-    @organization_owner = true
+    if organization
+      @organization_id = organization.id
+      @user_count = organization.members.count
+      @organization_owner = true
+    else
+      flash[:alert] = "You are not the owner of this organization"
+      redirect_to root_path
+    end
   end
 end
