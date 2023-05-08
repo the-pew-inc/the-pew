@@ -291,6 +291,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_01_024948) do
     t.integer "status", null: false
     t.integer "num_answers"
     t.integer "max_answers"
+    t.integer "num_votes"
+    t.integer "max_votes"
     t.integer "duration"
     t.boolean "add_option", default: true, null: false
     t.integer "participants", default: 0, null: false

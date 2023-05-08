@@ -1,5 +1,6 @@
 import { Controller } from "@hotwired/stimulus";
 import Chart from "chart.js/auto";
+import ChartDataLabels from "chartjs-plugin-datalabels";
 
 // Connects to data-controller="poll-chart"
 export default class extends Controller {
@@ -19,11 +20,27 @@ export default class extends Controller {
           {
             backgroundColor: "rgba(79, 70, 229, 1)",
             data: this.dataValue,
+            borderWidth: 0,
+            barPercentage: 1,
+            categoryPercentage: 0.5,
           },
         ],
       },
+      plugins: [ChartDataLabels],
       options: {
         indexAxis: "y", // To have horizontal bars
+        scales: {
+          x: {
+            grid: {
+              display: false,
+            },
+          },
+          y: {
+            grid: {
+              display: false,
+            },
+          },
+        },
         plugins: {
           legend: {
             display: false,
@@ -31,7 +48,6 @@ export default class extends Controller {
         },
         title: {
           display: false,
-          text: "Predicted world population (millions) in 2050",
         },
         responsive: true,
       },
