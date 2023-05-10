@@ -88,7 +88,7 @@ GEM
     annotate (3.2.0)
       activerecord (>= 3.2, < 8.0)
       rake (>= 10.4, < 14.0)
-    appmap (0.99.1)
+    appmap (0.99.3)
       activesupport
       method_source
       rack
@@ -98,7 +98,7 @@ GEM
       ffi-compiler (~> 1.0)
     ast (2.4.2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.761.0)
+    aws-partitions (1.762.0)
     aws-sdk-core (3.172.0)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.651.0)
@@ -204,7 +204,7 @@ GEM
     llhttp-ffi (0.4.0)
       ffi-compiler (~> 1.0)
       rake (~> 13.0)
-    loofah (2.20.0)
+    loofah (2.21.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     mail (2.8.1)
