@@ -5,7 +5,8 @@
 namespace :onboard do
 
   # Usage:
-  # 
+  #   Used to create the owner of an organization and the organization.
+  #   Once successfuly created, the user receives and email to finalize the registration
   #   - rake "onboard:create_first_user_and_org[test@test.com, ACME Inc., https://acme.com, acme.com]"
   desc 'Create first user (owner) and org'
   task :create_first_user_and_org, [:email, :org_name, :org_website, :domain] => :environment do |_t, args|
