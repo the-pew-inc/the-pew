@@ -27,10 +27,16 @@ class EventPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      if user.has_role?(:admin, scope.first.organization) || scope.first.organization.members.where(user: user, owner: true).exists?
-        scope.all
+      if user.has_role?(:admin, user.organization) || user.member.owner?
+        # Case 1: User is an owner or an organization admin
+        org_events_ids = scope.where(organization_id: user.member.organization_id).pluck(:id)
+        admin_events_ids = Event.with_role(:admin, user).pluck(:id)
+        scope.where(id: org_events_ids + admin_events_ids)
       else
-        scope.where(user_id: user.id).or(scope.with_role(:admin, user))
+        # Case 2: User is neither an owner nor an organization admin
+        user_events_ids = scope.where(user_id: user.id).pluck(:id)
+        admin_events_ids = Event.with_role(:admin, user).pluck(:id)
+        scope.where(id: user_events_ids + admin_events_ids)
       end
     end
   end
