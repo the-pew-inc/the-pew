@@ -9,6 +9,10 @@ class OrganizationPolicy < ApplicationPolicy
 
   alias_method :edit?, :update?
 
+  def manage_users?
+    user.has_role?(:admin, record) || user.member.owner?
+  end
+
   private
 
   def user_is_owner?

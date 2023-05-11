@@ -11,8 +11,8 @@ class UsersController < ApplicationController
   # GET /organization/:id/users
   def index
     @organization = Organization.find(params[:organization_id])
+    authorize @organization, :manage_users?
     @users = @organization.users.includes([:profile, :organization])
-    authorize @users
   end
 
   def create

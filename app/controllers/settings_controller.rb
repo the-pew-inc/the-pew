@@ -9,7 +9,7 @@ class SettingsController < ApplicationController
     # TODO add a condition for when a user is an admin for the account. so that extraction of the organization will be something like current_user.member.organization
     # TODO add a second condition owner: true
     # Current code only displays account information when the user is the owner
-    organization = Member.find_by(user_id: current_user.id, owner: true).organization
+    organization = Member.find_by(user_id: current_user.id).organization
     if organization
       @organization_id = organization.id
       @user_count = organization.members.count
