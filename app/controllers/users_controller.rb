@@ -12,6 +12,7 @@ class UsersController < ApplicationController
   def index
     @organization = Organization.find(params[:organization_id])
     @users = @organization.users.includes([:profile, :organization])
+    authorize @users
   end
 
   def create
@@ -47,6 +48,7 @@ class UsersController < ApplicationController
   # Used by admin or organization owner to delete a user
   def delete_user
     @user = User.find(params[:id])
+    authorize @user
 
     if @user && !is_organization_owner?
       # Disconnect the user from all previous session
@@ -149,6 +151,7 @@ class UsersController < ApplicationController
   # Method used to resend an invitation to join an organization to a user.
   def resend_invite
     @user = User.find(params[:id])
+    authorize @user
     if @user && @user.invited && @user.accepted_invitation_on.nil?
       @user.send_invite!
     end
@@ -156,8 +159,9 @@ class UsersController < ApplicationController
 
   # Method used to toggle the blocked value for a given user
   def block
-    # TODO make sure that only the admin or the owner of an organization can use this
     @user = User.find(params[:id])
+    authorize @user
+
     if @user
       if @user.blocked
         @user.unblock!
@@ -171,8 +175,9 @@ class UsersController < ApplicationController
 
   # Method used by an admin or organization owner to reset the unlocked a given user
   def unlock
-    # TODO make sure that only the admin or the owner of an organization can use this
     @user = User.find(params[:id])
+    authorize @user
+    
     if @user
       if @user.locked
         @user.unlock!
