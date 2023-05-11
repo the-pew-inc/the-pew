@@ -11,49 +11,50 @@ export default class extends Controller {
   };
 
   connect() {
-    // Set up the chart
+    // Create the chart and displays it
     this.chart = new Chart(this.chartTarget, {
-      plugins: [ChartDataLabels],
       type: "bar",
       data: {
         labels: this.labelsValue,
         datasets: [
           {
-            backgroundColor: "rgba(79, 70, 229, 1)",
+            backgroundColor: "rgba(79, 70, 229, 0.4)",
+            borderColor: "rgba(79, 70, 229, 1)",
             data: this.dataValue,
-            borderWidth: 0,
+            borderWidth: 1,
+            borderSkipped: false,
+            borderRadius: 5,
             barPercentage: 1,
             categoryPercentage: 0.5,
           },
         ],
       },
+      plugins: [ChartDataLabels],
       options: {
+        events: [],
         indexAxis: "y", // To have horizontal bars
         scales: {
           x: {
             grid: {
               display: false,
+              drawBorder: false,
             },
+            ticks: { display: false },
+          },
+          y: {
+            grid: {
+              display: false,
+              drawBorder: false,
+            },
+            ticks: { display: false },
           },
         },
         plugins: {
-          legend: {
-            display: false,
-          },
-          datalabels: {
-            display: true,
-            align: "start",
-            anchor: "start",
-            offset: 5,
-            color: "#000", // Choose the color you want for the labels
-            // formatter: function (value, context) {
-            //   return value; // Display the data value as-is
-            // },
-          },
+          legend: { display: false },
+          tooltip: { enabled: false },
+          hover: { mode: null },
         },
-        title: {
-          display: false,
-        },
+        title: { display: false },
         responsive: true,
       },
     });
