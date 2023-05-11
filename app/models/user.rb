@@ -149,6 +149,12 @@ class User < ApplicationRecord
     update_columns(accepted_invitation_on: Time.current)
   end
 
+  # Method used to confir that a user is the owner of a given organization
+  def organization_owner?(organization)
+    member = Member.find_by(user_id: id, organization_id: organization.id)
+    member&.owner?
+  end
+
   # PRIVATE METHODS #
   private
 
