@@ -17,13 +17,25 @@ p "Generating default test users"
 users = User.create!([
   { email: "test@test.com", password: "passpass", confirmed: true, confirmed_at: Time.current.utc},
   { email: "test2@test.com", password: "passpass"},
-  { email: "test3@test.com", password: "passpass"}])
+  { email: "test3@test.com", password: "passpass"},
+  { email: "test4@test.com", invited: true, invited_at: Time.current.utc},
+  { email: "test5@test.com", invited: true, invited_at: Time.current.utc}])
 
 
-p "Generating default test user's profiles"
+p "Generating default user's profiles"
 users.each do |user|
   Profile.create!(user_id: user.id, nickname: Faker::Name.name )
 end
+
+p "Updating user test default organization"
+users[0].organization.update!(name: "ACME", website: "https://acme.com", domain: "acme.com")
+
+p "Placing users test5 and test6 into the same organization as user test"
+Member.create!(user_id: users[3].id, organization_id: users[0].organization.id, owner: false)
+Member.create!(user_id: users[4].id, organization_id: users[0].organization.id, owner: false)
+
+p "Making test4 an organization admin"
+users[3].add_role :admin, users[0].organization
 
 p "Deleting existing events"
 Event.destroy_all
@@ -90,6 +102,10 @@ p "Generating a set of random events with default room & questions"
 
   print '.'
 end
+
+print "\n"
+p "Making test5 an event admin of test"
+users[4].add_role :admin, users[0].events.first
 
 print "\n"
 p "Generating a confirmed user with empty profile and event"

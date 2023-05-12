@@ -5,6 +5,7 @@
 #
 module UserBulkActions
   extend ActiveSupport::Concern
+  include Pundit
 
   # PATCH accounts/
   # Used to update a bulk of users all at once.
@@ -14,6 +15,8 @@ module UserBulkActions
   # - Promote Admin (assign as organization admin)
   # - Demote Admin (remove from organization admin)
   def bulk_update
+    authorize current_user, :bulk_update?
+    
     # Return if no user is selected
     # if params[:user_ids].nil?
     #   logger.debug "WE HAVE NO USER SELECTED!!!"
@@ -60,7 +63,11 @@ module UserBulkActions
   # Returns the number of modified objects.
   def bulk_promote(user_ids)
     logger.debug "MAKE ADMIN"
-    # Implementation code here
+    users = User.where(id: params.fetch(:user_ids, []).compact)
+    organization = current_user.organization
+    users.each do |user|
+      user.add_role(:admin, organization) if !user.has_role?(:admin, organization)
+    end
   end
 
   # Private: Demotes an array of organization admins to regular users.
@@ -74,7 +81,12 @@ module UserBulkActions
   #
   # Returns the number of modified objects.
   def bulk_demote(user_ids)
-    # Implementation code here
+    logger.debug "NO LONGER AN ADMIN"
+    users = User.where(id: params.fetch(:user_ids, []).compact)
+    organization = current_user.organization
+    users.each do |user|
+      user.remove_role(:admin, organization) if user.has_role?(:admin, organization)
+    end
   end
 
   # Private: Blocks an array of users.

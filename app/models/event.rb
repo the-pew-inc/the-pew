@@ -43,6 +43,7 @@ class Event < ApplicationRecord
   before_validation :set_values
 
   belongs_to :user
+  belongs_to :organization
   has_many   :attendances, dependent: :destroy
   has_many   :rooms,       dependent: :destroy
 

@@ -22,4 +22,8 @@ module ApplicationHelper
       'text-green-700'
     end
   end
+
+  def admin_or_owner?(user)
+    user.organization_owner?(user.organization) || user.has_role?(:admin, user.organization)
+  end
 end

@@ -1,9 +1,11 @@
 class EventsController < ApplicationController
   before_action :authenticate_user!, only: %i[index edit destroy update new]
   before_action :redirect_if_unauthenticated, only: %i[index edit destroy update new]
+  before_action :set_event, except: %i[index new create event validate_pin]
+  before_action :authorize_event, only: [:show, :edit, :update, :stats, :export]
 
   def index
-    @events = Event.where(user_id: current_user.id).order(start_date: :desc)
+    @events = policy_scope(Event).includes(user: :profile).order(start_date: :desc)
   end
 
   def new
@@ -49,18 +51,15 @@ class EventsController < ApplicationController
   end
 
   def show
-    @event = Event.find_by(id: params[:id])
     @event.start_date = @event.start_date.strftime("%m/%d/%Y")
   end
 
   def edit
-    @event = Event.find_by(id: params[:id])
     @event.start_date = @event.start_date.strftime("%m/%d/%Y")
   end
 
   # GET /event/:id/stats
   def stats
-    @event = Event.find_by(id: params[:id])
     @questions = Question.where(room_id: @event.rooms.first.id).order(status: :desc).order(created_at: :desc)
     @count = @questions.count
     if @count > 0 
@@ -124,7 +123,6 @@ class EventsController < ApplicationController
 
   # GET /event/:id/export
   def export
-    @event = Event.find(params[:id])
     @room  = @event.rooms.first
 
     @questions = Question.where(room_id: @room.id)
@@ -180,6 +178,14 @@ class EventsController < ApplicationController
   end
 
   private
+
+  def set_event
+    @event = Event.find(params[:id])
+  end
+
+  def authorize_event
+    authorize @event
+  end
 
   def create_event_params
     params.require(:event).permit(:allow_anonymous, :always_on, :description, :event_type, :name, :start_date, :status, :stop_date)

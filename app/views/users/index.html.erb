@@ -22,22 +22,22 @@
             <div id="dropdownAction" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
               <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownActionButton">
                 <li>
-                  <%= form.button "Make Admin", type: :submit, 
+                  <%= form.button "Make Org Admin", type: :submit, 
                       name: "bulk_action", value: "promote",
                       class: "w-full text-left block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" %>
                 </li>
                 <li>
-                  <%= form.submit "Remove from Admin", type: :submit, 
+                  <%= form.button "Remove from Org Admin", type: :submit, 
                       name: "bulk_action", value: "demote",
                       class: "w-full text-left block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" %>
                 </li>
                 <li>
-                  <%= form.submit "Block", type: :submit, 
+                  <%= form.button "Block", type: :submit, 
                       name: "bulk_action", value: "block",
                       class: "w-full text-left block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" %>
                 </li>
                 <li>
-                  <%= form.submit "Unblock", type: :submit, 
+                  <%= form.button "Unblock", type: :submit, 
                       name: "bulk_action", value: "unblock",
                       class: "w-full text-left block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" %>
                 </li>

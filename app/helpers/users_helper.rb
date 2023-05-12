@@ -29,7 +29,10 @@ module UsersHelper
   def user_roles(user)
     member = Member.find_by(user_id: user.id, organization: user.organization.id)
     if member.owner
-      return '<span class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-blue-900 dark:text-blue-300">Owner</span>'.html_safe
+      return '<span class="bg-purple-100 text-purple-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-purple-900 dark:text-purple-300">Owner</span>'.html_safe
+    end
+    if user.has_role?(:admin, user.organization)
+      return '<span class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-blue-900 dark:text-blue-300">Admin</span>'.html_safe
     end
   end
 end

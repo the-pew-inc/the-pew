@@ -98,7 +98,7 @@ GEM
       ffi-compiler (~> 1.0)
     ast (2.4.2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.761.0)
+    aws-partitions (1.763.0)
     aws-sdk-core (3.172.0)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.651.0)
@@ -121,7 +121,7 @@ GEM
     bullet (7.0.7)
       activesupport (>= 3.0.0)
       uniform_notifier (~> 1.11)
-    capybara (3.39.0)
+    capybara (3.39.1)
       addressable
       matrix
       mini_mime (>= 0.1.3)
@@ -204,9 +204,9 @@ GEM
     llhttp-ffi (0.4.0)
       ffi-compiler (~> 1.0)
       rake (~> 13.0)
-    loofah (2.20.0)
+    loofah (2.21.2)
       crass (~> 1.0.2)
-      nokogiri (>= 1.5.9)
+      nokogiri (>= 1.12.0)
     mail (2.8.1)
       mini_mime (>= 0.1.1)
       net-imap
@@ -234,11 +234,11 @@ GEM
     net-smtp (0.3.3)
       net-protocol
     nio4r (2.5.9)
-    nokogiri (1.14.3-arm64-darwin)
+    nokogiri (1.14.4-arm64-darwin)
       racc (~> 1.4)
-    nokogiri (1.14.3-x86_64-linux)
+    nokogiri (1.14.4-x86_64-linux)
       racc (~> 1.4)
-    noticed (1.6.2)
+    noticed (1.6.3)
       http (>= 4.0.0)
       rails (>= 5.2.0)
     oauth2 (2.0.9)
@@ -385,7 +385,7 @@ GEM
       sprockets (>= 3.0.0)
     stimulus-rails (1.2.1)
       railties (>= 6.0.0)
-    thor (1.2.1)
+    thor (1.2.2)
     timeout (0.3.2)
     turbo-rails (1.4.0)
       actionpack (>= 6.0.0)
@@ -434,7 +434,7 @@ DEPENDENCIES
   active_storage_validations (~> 1.0.0)
   ahoy_matey
   annotate (~> 3.2.0)
-  appmap (~> 0.99.1)
+  appmap (= 0.99.1)
   argon2 (~> 2.2.0)
   aws-sdk-s3
   bootsnap
@@ -492,4 +492,4 @@ RUBY VERSION
    ruby 3.2.2p53
 
 BUNDLED WITH
-   2.4.12
+   2.4.13

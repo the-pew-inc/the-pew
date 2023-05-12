@@ -6,6 +6,7 @@ class OrganizationController < ApplicationController
   before_action :authenticate_user!
   before_action :redirect_if_unauthenticated
   before_action :set_organization
+  before_action :authorize_organization, only: [:show, :edit, :update]
 
   # DELETE /organization/:id
   def destroy
@@ -46,5 +47,9 @@ class OrganizationController < ApplicationController
 
   def set_organization
     @organization = Organization.find(params[:id])
+  end
+
+  def authorize_organization
+    authorize @organization
   end
 end

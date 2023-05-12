@@ -35,10 +35,58 @@
       <div class="font-light text-gray-500 dark:text-gray-400 mb-6">
         By verifying ownership, we can ensure that the domain is being used by its rightful owner and not by someone with malicious intent. This helps prevent unauthorized access, phishing scams, and other security threats. Additionally, verifying ownership also helps prevent any potential issues with branding or trademark infringement. By requiring proof of ownership, we can protect both our customers and our service, ensuring a positive and secure experience for all users.
       </div>
-      <h5 class="text-xl font-bold dark:text-white">
+      <h5 class="text-xl font-bold dark:text-white mb-6">
         How to verify ownership your domain?
       </h5>
       <div class="font-light text-gray-500 dark:text-gray-400 mb-6">
+        <div class="text-slate-700 text-sm flex flex-row items-center pr-4" data-controller="clipboard">
+          <div class="relative">
+            <input type="text" id="small_outlined" class="block px-2.5 pb-1.5 pt-3 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" value="<%= @organization.full_dns_txt %>" data-clipboard-target="source" size=80 readonly />
+            <label for="small_outlined" class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-3 scale-75 top-1 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-1 peer-focus:scale-75 peer-focus:-translate-y-3 left-1">TXT RECORD</label>
+          </div>
+          <span class="text-slate-500 pl-2" data-clipboard-target="copy">
+            <div>
+              <button data-action="clipboard#copy mouseenter->popper#show mouseleave->popper#hide">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500 dark:text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                </svg>
+              </button>
+            </div>
+          </span>
+          <span class="hidden pl-2" data-clipboard-target="copied">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-400 dark:text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+            </svg>
+          </span>
+        </div>
+      </div>
+      <div class="font-light text-gray-500 dark:text-gray-400 mb-6">
+        <div class="mb-4">
+          To use domain validation using a TXT record in the DNS, follow these steps:
+          <ol class="pl-5 mt-2 space-y-1 list-decimal list-inside w-96">
+            <li>Access your DNS provider's control panel or dashboard.</li>
+            <li>Locate the section for managing DNS records or zone settings.</li>
+            <li>Look for an option to add a new record and select the TXT record type.</li>
+            <li>Enter the necessary information as provided by the service or website requiring domain validation.</li>
+            <li>Save or apply the changes to add the TXT record to your DNS configuration.</li>
+          </ol>
+        </div>
+        <h5 class="text-xl font-bold dark:text-white mb-6">
+          Brief troubleshooting guide:
+        </h5>
+        <div class="mb-4">
+          When working with TXT entries in different DNS providers, it's important to be aware of potential pitfalls:
+          <ol class="pl-5 mt-2 space-y-1 list-decimal list-inside max-w-md">
+            <li>Formatting restrictions: Different DNS providers may have specific formatting requirements for TXT records. Make sure to follow the correct syntax and character limitations specified by your provider.</li>
+            <li>TTL settings: The TTL (Time-to-Live) value determines how long the TXT record is cached by DNS servers. If you need to update or remove the TXT record in the future, ensure that the TTL is set to a lower value, so the changes propagate quickly.</li>
+            <li>Escaping special characters: Some DNS providers require special characters in the TXT record, such as quotes or backslashes, to be escaped with specific escape sequences. Double-check the provider's documentation or support resources for any guidelines on escaping special characters.</li>
+            <li>Multiple TXT records: Some domain validation processes may require adding multiple TXT records with different values. In such cases, ensure that you correctly add all the required TXT records and their respective values without overwriting existing records.</li>
+            <li>DNS propagation time: After adding or modifying a TXT record, it takes some time for the changes to propagate across the DNS system. This propagation delay can range from a few minutes to several hours. Be patient and allow enough time for the changes to take effect before expecting the domain validation to succeed.</li>
+          </ol>
+        </div>
+        <div>
+          Remember, if you encounter any difficulties or have specific questions, it's always recommended to reach out to your DNS provider's support team for assistance.
+        </div>
       </div>
     </div>
   <% end %>
