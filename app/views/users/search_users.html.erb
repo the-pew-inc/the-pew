@@ -1,6 +1,17 @@
-<% @searched_users.each do |user| %>
-  <li class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" role="option" data-autocomplete-value="<%= user.id %>" data-autocomplete-label="<%= user.profile.nickname %>">
-    <%= user.profile.nickname %>
-    <span class="text-sm font-light block"><%= user.email %></span>
+<% if !@searched_users.none? %>
+  <% @searched_users.each do |user| %>
+    <li class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" role="option" data-autocomplete-value="<%= user.id %>" data-autocomplete-label="<%= user.profile.nickname %>">
+      <%= user.profile.nickname %>
+      <span class="text-sm font-light block"><%= user.email %></span>
+    </li>
+  <% end %>
+<% else %>
+  <li class="w-full flex items-center space-x-4 text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"></path>
+    </svg>
+    <span>
+      No Result
+    </span>
   </li>
 <% end %>
