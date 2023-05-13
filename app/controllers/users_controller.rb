@@ -8,6 +8,9 @@ class UsersController < ApplicationController
   # Add User Bulk Actions
   include UserBulkActions
 
+  # Add User Searchable
+  include UserSearchable
+
   # GET /organization/:id/users
   def index
     @organization = Organization.find(params[:organization_id])

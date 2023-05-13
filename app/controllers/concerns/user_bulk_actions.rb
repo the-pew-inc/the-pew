@@ -62,7 +62,6 @@ module UserBulkActions
   #
   # Returns the number of modified objects.
   def bulk_promote(user_ids)
-    logger.debug "MAKE ADMIN"
     users = User.where(id: params.fetch(:user_ids, []).compact)
     organization = current_user.organization
     users.each do |user|
@@ -81,7 +80,6 @@ module UserBulkActions
   #
   # Returns the number of modified objects.
   def bulk_demote(user_ids)
-    logger.debug "NO LONGER AN ADMIN"
     users = User.where(id: params.fetch(:user_ids, []).compact)
     organization = current_user.organization
     users.each do |user|

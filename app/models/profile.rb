@@ -19,10 +19,23 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Profile < ApplicationRecord
+  include PgSearch::Model
+
+
   belongs_to :user
 
   # Tracking changes
   has_paper_trail
+
+  # PG_SEARCH
+  pg_search_scope :search,
+    against: [:nickname],
+    using: {
+      tsearch: {
+        prefix: true,
+        dictionary: 'simple'
+      }
+    }
 
   # Active Storage & Action Text
   has_rich_text    :bio
