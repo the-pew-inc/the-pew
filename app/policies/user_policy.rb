@@ -24,6 +24,10 @@ class UserPolicy < ApplicationPolicy
     allowed?
   end
 
+  def search_users?
+    allowed?
+  end
+
   private
 
   def allowed?

@@ -35,7 +35,11 @@ Rails.application.routes.draw do
   resources :invites, only: %i[ edit create new update ]
 
   # User routes
-  resources :users,     only: %i[ create new ]
+  resources :users, only: %i[create new] do
+    collection do
+      get 'search', action: :search_users
+    end
+  end
   resources :profiles,  only: %i[ update edit ]
 
   # Session routes

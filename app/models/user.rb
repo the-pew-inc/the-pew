@@ -35,6 +35,7 @@
 #  index_users_on_uid        (uid) UNIQUE
 #
 class User < ApplicationRecord
+  include PgSearch::Model
 
   rolify strict: true
   
@@ -82,6 +83,19 @@ class User < ApplicationRecord
   # Validations
   validates :email, presence: true, uniqueness: { case_sensitive: false }, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :password, presence: true, length: { minimum: 6, maximum: 35 }, on: :create, if: -> { !invited }
+
+  # PG_SEARCH
+  pg_search_scope :search,
+    against: [:email],
+    associated_against: {
+      profile: [:nickname]
+    },
+    using: {
+      tsearch: {
+        prefix: true,
+        dictionary: 'simple'
+      }
+    }
 
   ## Functions
 
