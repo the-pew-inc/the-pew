@@ -19,6 +19,9 @@ application.register("close-dropdown", CloseDropdownController)
 import EmptyStateController from "./empty_state_controller"
 application.register("empty-state", EmptyStateController)
 
+import FilterUsersController from "./filter_users_controller"
+application.register("filter-users", FilterUsersController)
+
 import HamburgerController from "./hamburger_controller"
 application.register("hamburger", HamburgerController)
 
