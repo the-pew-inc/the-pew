@@ -10,11 +10,28 @@ class ModerateQuestionJob
     # Parse the question
     qh = JSON.parse(question)
 
-    # Extract the question id
+    # Extract the question id & title
     qid = qh.dig("id")
+    question_title = qh.dig("title")
+
+    # Check for prohibited data
+    # prohibited data: email addresses, domain, website
+    prohibited_content = ModerationService.detect_prohibited_content(question_title)
+    if prohibited_content
+      # Handle prohibited content
+      Question.update(qid, { status: :rejected, 
+        rejection_cause: :inapropriate,
+        tone: :negative,
+        ai_response: nil})
+
+      # Notify the user that their question was rejected
+      Message.create(user_id: qh.dig("user_id"), title: "Question Rejected", content: "Your question: #{question_title} has been rejected by ModBot", level: :alert)
+
+      raise StandardError, prohibited_content
+    end
 
     # Send the question to openAI for moderation and wait for the response
-    response = client.moderations(parameters: { input: qh.dig("title") })  
+    response = client.moderations(parameters: { input: question_title })  
 
     # Process the response from openAI
     flagged = response.dig("results", 0, "flagged")
@@ -55,7 +72,7 @@ class ModerateQuestionJob
                                             ai_response: response})
 
       # Notify the user that their question was rejected
-      Message.create(user_id: qh.dig("user_id"), title: "Question Rejected", content: "Your question: #{qh.dig("title")} has been rejected by ModBot", level: :alert)
+      Message.create(user_id: qh.dig("user_id"), title: "Question Rejected", content: "Your question: #{question_title} has been rejected by ModBot", level: :alert)
     else
       # The question is approved by the automatic moderation
       # Updating its status to :approved
