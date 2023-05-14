@@ -53,6 +53,17 @@ export default class extends Controller {
           legend: { display: false },
           tooltip: { enabled: false },
           hover: { mode: null },
+          datalabels: {
+            anchor: "end", // Position the labels at the end of the bars
+            align: "end",
+            color: "#fff", // Label color
+            font: {
+              weight: "bold", // Label font weight
+            },
+            formatter: function (value, context) {
+              return context.dataset.data[context.dataIndex];
+            },
+          },
         },
         title: { display: false },
         responsive: true,
