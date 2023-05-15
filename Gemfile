@@ -97,9 +97,7 @@ gem 'merit'
 gem 'sendgrid-actionmailer', '~> 3.2.0'
 
 # Sidekiq [https://github.com/mperham/sidekiq]
-# gem 'sidekiq', '6.5.7'
 gem 'sidekiq', '~>7.1.0'
-# gem 'sidekiq', git: 'https://github.com/mperham/sidekiq.git'
 
 # Monitoring - Honeybadger []
 gem 'honeybadger', '~> 5.0'
@@ -148,7 +146,6 @@ gem 'groupdate'
 gem 'chartkick'
 
 # openAI [https://github.com/alexrudall/ruby-openai]
-# gem "ruby-openai", "~> 3.7.0"
 gem 'ruby-openai', '~> 4.1.0'
 
 # Adding pgsearch
