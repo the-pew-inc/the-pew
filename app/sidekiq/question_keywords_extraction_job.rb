@@ -2,6 +2,7 @@ class QuestionKeywordsExtractionJob
   include Sidekiq::Job
 
   require "openai"
+  require_relative "../services/prompt_retriever_service.rb"
 
   def perform(question)
     # Initialize an openAI client
@@ -10,13 +11,15 @@ class QuestionKeywordsExtractionJob
     # Parse the question
     qh = JSON.parse(question)
 
-    # Use GTP 3.5 Chat to extract the relevant keywords from the question
+    # Use GTP 4 Chat to extract the relevant keywords from the question
+    pr = PromptRetriever.retrieve("question-keyword-extraction", nil)
+    puts "## PROMPT ##"
+    puts pr
     response = client.chat(
       parameters: {
-          # model: "gpt-3.5-turbo",
           model: "gpt-4",
           messages: [
-            { role: "system", content: 'Given a short conversational sentence, extract up to 10 meaningful keywords without expressing any opinions or using words that are not present in the sentence. If the sentence is a basic question like "what is this?", "why is this?", or "how could it be?", or if the sentence does not contain sufficient information to extract meaningful keywords, return an empty string "". Otherwise, return a comma-separated string of up to 10 keywords without any additional formatting.' },
+            { role: "system", content: pr[:prompt] },
             { role: "user", content: "Extract keywords from this text:\n\n" + qh.dig("title")}
           ],
           temperature: 0.7,
