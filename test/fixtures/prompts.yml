@@ -1,0 +1,28 @@
+# == Schema Information
+#
+# Table name: prompts
+#
+#  id              :uuid             not null, primary key
+#  label           :string(50)       not null
+#  prompt          :text             not null
+#  title           :string(50)       not null
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  organization_id :uuid
+#
+# Indexes
+#
+#  index_prompts_on_label_and_organization_id  (label,organization_id) UNIQUE
+#  index_prompts_on_organization_id            (organization_id)
+#
+
+one:
+  label: prompt-one-label
+  title: Prompts one description
+  organization_id: 8c5e36bb-6163-4d07-8a7e-9f13e77d6e40
+  prompt: A bogus prompt to be used for testing purpose only
+
+two:
+  label: prompt-two-label
+  title: Prompts two description
+  prompt: A bogus prompt to be used for testing purpose only and this is for prompts two so we do not have any organization

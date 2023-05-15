@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_01_024948) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_14_234427) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -312,6 +312,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_01_024948) do
     t.datetime "updated_at", null: false
     t.index ["mode"], name: "index_profiles_on_mode"
     t.index ["user_id"], name: "index_profiles_on_user_id"
+  end
+
+  create_table "prompts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "label", limit: 50, null: false
+    t.string "title", limit: 50, null: false
+    t.uuid "organization_id"
+    t.text "prompt", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["label", "organization_id"], name: "index_prompts_on_label_and_organization_id", unique: true
+    t.index ["organization_id"], name: "index_prompts_on_organization_id"
   end
 
   create_table "questions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
