@@ -485,7 +485,7 @@ DEPENDENCIES
   simplecov
   sprockets-rails
   stimulus-rails
-  stripe
+  stripe (~> 8.5.0)
   turbo-rails
   tzinfo-data
   validate_url

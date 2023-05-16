@@ -7,6 +7,7 @@ ruby '3.2.2'
 # Add support to appmap in development and test
 
 gem 'appmap', '0.99.1', :groups => [:development, :test]
+# gem 'appmap', github: 'getappmap/appmap-ruby', branch: 'fix/serving-static-assets'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem 'rails', '~> 7.0.4'
