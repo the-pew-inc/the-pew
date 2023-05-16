@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/faker-ruby/faker.git
-  revision: 4bee42acd22d8f5561d1993f36859c768677948b
+  revision: 85ff60305465ee07927802420d659d99622af2be
   specs:
     faker (3.2.0)
       i18n (>= 1.8.11, < 2)
@@ -88,7 +88,7 @@ GEM
     annotate (3.2.0)
       activerecord (>= 3.2, < 8.0)
       rake (>= 10.4, < 14.0)
-    appmap (0.99.1)
+    appmap (0.99.4)
       activesupport
       method_source
       rack
@@ -98,7 +98,7 @@ GEM
       ffi-compiler (~> 1.0)
     ast (2.4.2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.763.0)
+    aws-partitions (1.764.0)
     aws-sdk-core (3.172.0)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.651.0)
@@ -204,7 +204,7 @@ GEM
     llhttp-ffi (0.4.0)
       ffi-compiler (~> 1.0)
       rake (~> 13.0)
-    loofah (2.21.2)
+    loofah (2.21.3)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
     mail (2.8.1)
@@ -438,7 +438,7 @@ DEPENDENCIES
   active_storage_validations (~> 1.0.0)
   ahoy_matey
   annotate (~> 3.2.0)
-  appmap (= 0.99.1)
+  appmap (= 0.99.4)
   argon2 (~> 2.2.0)
   aws-sdk-s3
   bootsnap
