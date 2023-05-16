@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_14_234427) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_15_180807) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -256,6 +256,22 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_14_234427) do
     t.index ["sso"], name: "index_organizations_on_sso"
   end
 
+  create_table "plans", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "subscription_id", null: false
+    t.string "stripe_product_id"
+    t.string "label", null: false
+    t.boolean "active", null: false
+    t.string "currency", default: "USD", null: false
+    t.integer "price", null: false
+    t.jsonb "features", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["active"], name: "index_plans_on_active"
+    t.index ["currency"], name: "index_plans_on_currency"
+    t.index ["stripe_product_id"], name: "index_plans_on_stripe_product_id"
+    t.index ["subscription_id"], name: "index_plans_on_subscription_id"
+  end
+
   create_table "poll_answers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "user_id", null: false
     t.uuid "poll_id", null: false
@@ -382,6 +398,32 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_14_234427) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "subcription_transactions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "subscriptions_id", null: false
+    t.string "transaction_id"
+    t.string "transaction_err"
+    t.string "transaction_txt"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["subscriptions_id"], name: "index_subcription_transactions_on_subscriptions_id"
+  end
+
+  create_table "subscriptions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "organization_id", null: false
+    t.string "stripe_id"
+    t.boolean "active", default: false, null: false
+    t.string "period", null: false
+    t.date "current_period_end"
+    t.date "current_period_start"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["active"], name: "index_subscriptions_on_active"
+    t.index ["current_period_end"], name: "index_subscriptions_on_current_period_end"
+    t.index ["organization_id"], name: "index_subscriptions_on_organization_id"
+    t.index ["period"], name: "index_subscriptions_on_period"
+    t.index ["stripe_id"], name: "index_subscriptions_on_stripe_id", unique: true
+  end
+
   create_table "topics", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "event_id"
     t.uuid "user_id"
@@ -465,6 +507,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_14_234427) do
   add_foreign_key "events", "users"
   add_foreign_key "import_results", "users"
   add_foreign_key "messages", "users"
+  add_foreign_key "plans", "subscriptions"
   add_foreign_key "poll_answers", "poll_options"
   add_foreign_key "poll_answers", "polls"
   add_foreign_key "poll_answers", "users"
@@ -475,5 +518,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_14_234427) do
   add_foreign_key "questions", "rooms"
   add_foreign_key "questions", "users"
   add_foreign_key "rooms", "events"
+  add_foreign_key "subcription_transactions", "subscriptions", column: "subscriptions_id"
+  add_foreign_key "subscriptions", "organizations"
   add_foreign_key "votes", "users"
 end

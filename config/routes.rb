@@ -125,6 +125,12 @@ Rails.application.routes.draw do
     resource  :ssos,  only: [:update, :edit], shallow: true
   end
 
+  # Strip routes
+  # Manage subscriptions
+  resources :subscriptions
+  # Webhooks // Stripe
+  resources :webhooks, only: :create
+
   # Defines the main root path route ("/")
   # Must be the last route in the file
   root 'welcome#index'
