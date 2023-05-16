@@ -125,6 +125,11 @@ Rails.application.routes.draw do
     resource  :ssos,  only: [:update, :edit], shallow: true
   end
 
+  # Error pages
+  match '/404', to: 'errors#not_found', via: :all
+  match '/422', to: 'errors#unacceptable', via: :all
+  match '/500', to: 'errors#internal_server_error', via: :all
+
   # Defines the main root path route ("/")
   # Must be the last route in the file
   root 'welcome#index'
