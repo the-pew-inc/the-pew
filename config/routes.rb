@@ -130,6 +130,7 @@ Rails.application.routes.draw do
   resources :subscriptions
   # Webhooks // Stripe
   resources :webhooks, only: :create
+
   # Error pages
   match '/404', to: 'errors#not_found', via: :all
   match '/422', to: 'errors#unacceptable', via: :all
