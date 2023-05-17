@@ -257,19 +257,20 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_15_180807) do
   end
 
   create_table "plans", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "subscription_id", null: false
-    t.string "stripe_product_id"
+    t.string "stripe_product_id", null: false
     t.string "label", null: false
-    t.boolean "active", null: false
-    t.string "currency", default: "USD", null: false
-    t.integer "price", null: false
+    t.boolean "active", default: false, null: false
+    t.integer "min_seat", default: 1, null: false
+    t.integer "max_seats", default: 1, null: false
+    t.decimal "price_mo", precision: 10, scale: 3
+    t.decimal "price_y", precision: 10, scale: 3
+    t.string "stripe_price_mo"
+    t.string "stripe_price_y"
     t.jsonb "features", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["active"], name: "index_plans_on_active"
-    t.index ["currency"], name: "index_plans_on_currency"
-    t.index ["stripe_product_id"], name: "index_plans_on_stripe_product_id"
-    t.index ["subscription_id"], name: "index_plans_on_subscription_id"
+    t.index ["stripe_product_id"], name: "index_plans_on_stripe_product_id", unique: true
   end
 
   create_table "poll_answers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -410,7 +411,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_15_180807) do
 
   create_table "subscriptions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "organization_id", null: false
-    t.string "stripe_id"
+    t.uuid "plan_id", null: false
+    t.string "stripe_subscription_id"
     t.boolean "active", default: false, null: false
     t.string "period", null: false
     t.date "current_period_end"
@@ -421,7 +423,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_15_180807) do
     t.index ["current_period_end"], name: "index_subscriptions_on_current_period_end"
     t.index ["organization_id"], name: "index_subscriptions_on_organization_id"
     t.index ["period"], name: "index_subscriptions_on_period"
-    t.index ["stripe_id"], name: "index_subscriptions_on_stripe_id", unique: true
+    t.index ["plan_id"], name: "index_subscriptions_on_plan_id"
+    t.index ["stripe_subscription_id"], name: "index_subscriptions_on_stripe_subscription_id", unique: true
   end
 
   create_table "topics", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -507,7 +510,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_15_180807) do
   add_foreign_key "events", "users"
   add_foreign_key "import_results", "users"
   add_foreign_key "messages", "users"
-  add_foreign_key "plans", "subscriptions"
   add_foreign_key "poll_answers", "poll_options"
   add_foreign_key "poll_answers", "polls"
   add_foreign_key "poll_answers", "users"
@@ -520,5 +522,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_15_180807) do
   add_foreign_key "rooms", "events"
   add_foreign_key "subcription_transactions", "subscriptions", column: "subscriptions_id"
   add_foreign_key "subscriptions", "organizations"
+  add_foreign_key "subscriptions", "plans"
   add_foreign_key "votes", "users"
 end
