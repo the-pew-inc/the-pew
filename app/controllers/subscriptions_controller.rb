@@ -31,7 +31,7 @@ class SubscriptionsController < ApplicationController
       organization_website = params[:website]
     end
 
-    if params[:organiztaion]
+    if params[:organiztaion] && !params[:organiztaion].blank?
       organization_name = params[:organization]
     else
       organization_name = "__default__"
@@ -39,7 +39,7 @@ class SubscriptionsController < ApplicationController
 
     # Validate the email format and uniqueness
     begin
-      validate_email(email_param)
+      validate_email(email)
       # Continue with the execution flow if the email is valid
     rescue StandardError => e
       render_error(e.message)
@@ -51,16 +51,6 @@ class SubscriptionsController < ApplicationController
       flash[:alert] = "Incorrect number of seats"
       render :new, status: :unprocessable_entity
       return
-    end
-
-    # Setting Stripe price reference
-    case interval
-    when "month"
-      price = @plan.price_mo
-    when "year"
-      price = @plan.price_y
-    else
-      price = @plan.price_y
     end
 
     # Creating the user OR getting the current one
@@ -81,8 +71,13 @@ class SubscriptionsController < ApplicationController
     # Create the organization for the user
     organization = Organization.new
     organization.name    = organization_name
-    organization.website = organization_website ? organization_website : ""
-    if !organization.save
+    organization.website = organization_website ? organization_website : nil
+
+    if organization.save
+      logger.debug "#####"
+      logger.debug organization.inspect
+      logger.debug "#####"
+
       user.destroy
       flash[:alert] = "An error occured while creating your organization"
       render :new, status: :unprocessable_entity
@@ -91,9 +86,9 @@ class SubscriptionsController < ApplicationController
 
     # Connect the user to their organization
     member = Member.new
-    member.organization_id = @organization.id
-    member.user_id         = @user.id
-    if !member.save
+    member.organization_id = organization.id
+    member.user_id         = user.id
+    if member.save
       user.destroy
       organization.destroy
       flash[:alert] = "An error occured"
@@ -108,17 +103,17 @@ class SubscriptionsController < ApplicationController
       success_url: root_url + "success?session_id={CHECKOUT_SESSION_ID}",
       cancel_url: subscriptions_url,
       payment_method_types: ['card'],
+      currency: 'USD',
       mode: 'subscription',
       customer_email: user_signed_in? ? current_user.email : email,
       line_items: [{
         quantity: ordered_seats,
-        price: ,
+        price: (interval == 1 ? @plan.stripe_price_mo : @plan.stripe_price_y),
       }]
     )
 
     # Process to Stripe checkout page
     redirect_to session.url, allow_other_host: true, status: :see_other
-
   end
 
   def new

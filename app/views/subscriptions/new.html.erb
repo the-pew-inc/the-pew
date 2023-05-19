@@ -12,7 +12,7 @@
 </section>
 <section>
   <div class="mx-auto">
-    <%= form_with url: subscriptions_path(plan_id: @plan.id) do |f| %>
+    <%= form_with url: subscriptions_path(plan_id: @plan.id), data: { turbo: false } do |f| %>
       <div class="mb-6">
         <%= f.label :email, "Your email", class: "block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" %>
         <%= f.email_field :email, required: true, autocomplete: "email", class: "bg-gray-50 border border-gray-300 text-gray-900 text-base md:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500", placeholder:"your_email@example.com" %>
@@ -20,14 +20,14 @@
       <div class="mb-6">
         <%= f.label :organization, class: "block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" %>
         <%= f.text_field :organization, 
-              class: "bg-gray-50 border border-gray-300 text-gray-900 text-base md:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              value: user_signed_in? ? current_user.organization.name : "" %>
+              class: "bg-gray-50 border border-gray-300 text-gray-900 text-base md:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
+              value: (user_signed_in? ? current_user.organization.name : "") %>
       </div>
       <div class="mb-6">
         <%= f.label :website, class: "block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" %>
         <%= f.text_field :website, 
-              class: "bg-gray-50 border border-gray-300 text-gray-900 text-base md:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              value: user_signed_in? ? current_user.organization.website : ""  %>
+              class: "bg-gray-50 border border-gray-300 text-gray-900 text-base md:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
+              value: (user_signed_in? ? current_user.organization.website : "")  %>
       </div>
       <div class="mb-6 flex space-x-2">
         <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Monthly</span>
