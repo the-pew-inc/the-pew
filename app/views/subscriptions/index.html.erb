@@ -10,9 +10,11 @@
         <h3 class="mb-4 text-2xl font-semibold">Starter</h3>
         <p class="font-light text-gray-500 sm:text-lg dark:text-gray-400">Best option for personal use & for your next project.</p>
         <div class="flex justify-center items-baseline my-8">
-          <span class="mr-2 text-5xl font-extrabold">$29</span>
+          <span class="mr-2 text-5xl font-extrabold">$<%= @starter.price_y %></span>
           <span class="text-gray-500 dark:text-gray-400">/month</span>
         </div>
+        <!-- Button to checkout -->
+        <%= link_to "Get Starter", new_subscription_path(plan_id: @starter.id), class: "mb-4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" %>
         <!-- List -->
         <ul role="list" class="mb-8 space-y-4 text-left">
           <li class="flex items-center space-x-3">
@@ -41,19 +43,17 @@
             <span>Free updates: <span class="font-semibold">6 months</span></span>
           </li>
         </ul>
-        <%= form_tag subscriptions_path,  method: :post, data: { turbo: false } do %>
-          <input type="hidden" name="plan_id" value="<%= @plans.first.id %>" />
-          <%= submit_tag "Subscribe for $10/mo", data: { disable_with: "Hold please..." }, class: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" %>
-        <% end %>
       </div>
       <!-- Pricing Card -->
       <div class="flex flex-col p-6 mx-auto max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow dark:border-gray-600 xl:p-8 dark:bg-gray-800 dark:text-white">
-        <h3 class="mb-4 text-2xl font-semibold">Company</h3>
+        <h3 class="mb-4 text-2xl font-semibold">Pro</h3>
         <p class="font-light text-gray-500 sm:text-lg dark:text-gray-400">Relevant for multiple users, extended & premium support.</p>
         <div class="flex justify-center items-baseline my-8">
-          <span class="mr-2 text-5xl font-extrabold">$99</span>
+          <span class="mr-2 text-5xl font-extrabold">$<%= @starter.price_y %></span>
           <span class="text-gray-500 dark:text-gray-400" dark:text-gray-400>/month</span>
         </div>
+        <!-- Button to checkout -->
+        <%= link_to "Go Pro!", new_subscription_path(plan_id: @plans.find_by(label: 'pro')), class: "mb-4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" %>
         <!-- List -->
         <ul role="list" class="mb-8 space-y-4 text-left">
           <li class="flex items-center space-x-3">
@@ -72,7 +72,6 @@
             <span>Team size: <span class="font-semibold">10 developers</span></span>
           </li>
         </ul>
-        <a href="#" class="text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:ring-primary-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:text-white  dark:focus:ring-primary-900">Get started</a>
       </div>
       <!-- Pricing Card -->
       <div class="flex flex-col p-6 mx-auto max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow dark:border-gray-600 xl:p-8 dark:bg-gray-800 dark:text-white">
@@ -82,6 +81,8 @@
           <span class="mr-2 text-5xl font-extrabold">$499</span>
           <span class="text-gray-500 dark:text-gray-400">/month</span>
         </div>
+        <!-- Button to checkout -->
+        <%= link_to "Contact us", new_subscription_path(plan_id: @plans.find_by(label: 'enterprise')), class: "mb-4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" %>
         <!-- List -->
         <ul role="list" class="mb-8 space-y-4 text-left">
           <li class="flex items-center space-x-3">
@@ -110,7 +111,6 @@
             <span>Free updates: <span class="font-semibold">36 months</span></span>
           </li>
         </ul>
-        <a href="#" class="text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:ring-primary-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:text-white  dark:focus:ring-primary-900">Get started</a>
       </div>
     </div>
   </div>

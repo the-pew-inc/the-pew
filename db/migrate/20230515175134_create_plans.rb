@@ -4,7 +4,7 @@ class CreatePlans < ActiveRecord::Migration[7.0]
       t.string     :stripe_product_id, null: false
       t.string     :label,             null: false
       t.boolean    :active,            null: false, default: false
-      t.integer    :min_seat,          null: false, default: 1
+      t.integer    :min_seats,         null: false, default: 1
       t.integer    :max_seats,         null: false, default: 1
       t.decimal    :price_mo, precision: 10, scale: 3 # pricing per mo per seat
       t.decimal    :price_y,  precision: 10, scale: 3 # pricing per year per seat

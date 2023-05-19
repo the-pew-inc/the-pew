@@ -7,7 +7,7 @@
 #  features          :jsonb            not null
 #  label             :string           not null
 #  max_seats         :integer          default(1), not null
-#  min_seat          :integer          default(1), not null
+#  min_seats         :integer          default(1), not null
 #  price_mo          :decimal(10, 3)
 #  price_y           :decimal(10, 3)
 #  stripe_price_mo   :string

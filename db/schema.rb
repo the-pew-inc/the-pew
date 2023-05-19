@@ -260,7 +260,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_15_180807) do
     t.string "stripe_product_id", null: false
     t.string "label", null: false
     t.boolean "active", default: false, null: false
-    t.integer "min_seat", default: 1, null: false
+    t.integer "min_seats", default: 1, null: false
     t.integer "max_seats", default: 1, null: false
     t.decimal "price_mo", precision: 10, scale: 3
     t.decimal "price_y", precision: 10, scale: 3

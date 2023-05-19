@@ -1,0 +1,53 @@
+<!-- app/views/subscriptions/new.html.erb -->
+<section>
+  <div class="container pt-9">
+    <div class="m-auto md:w-8/12 lg:w-5/12">
+      <div class="text-center pb-4">
+        <!-- TODO: ADD LOGO HERE -->
+        <h1 class="inline-block mb-2 font-extrabold text-3xl tracking-tight text-slate-800 dark:text-white">Plans & Pricing</h1>
+        <div class="text-slate-500 mt-9">Creating your account is free and let you ask questions on the platform.</div>
+      </div>
+    </div>
+  </div>
+</section>
+<section>
+  <div class="mx-auto">
+    <%= form_with url: subscriptions_path(plan_id: @plan.id) do |f| %>
+      <div class="mb-6">
+        <%= f.label :email, "Your email", class: "block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" %>
+        <%= f.email_field :email, required: true, autocomplete: "email", class: "bg-gray-50 border border-gray-300 text-gray-900 text-base md:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500", placeholder:"your_email@example.com" %>
+      </div>
+      <div class="mb-6">
+        <%= f.label :organization, class: "block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" %>
+        <%= f.text_field :organization, 
+              class: "bg-gray-50 border border-gray-300 text-gray-900 text-base md:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              value: user_signed_in? ? current_user.organization.name : "" %>
+      </div>
+      <div class="mb-6">
+        <%= f.label :website, class: "block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" %>
+        <%= f.text_field :website, 
+              class: "bg-gray-50 border border-gray-300 text-gray-900 text-base md:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              value: user_signed_in? ? current_user.organization.website : ""  %>
+      </div>
+      <div class="mb-6 flex space-x-2">
+        <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Monthly</span>
+        <label class="relative inline-flex items-center mb-5 cursor-pointer">
+          <%= f.check_box :interval, class: "sr-only peer", checked: true %>
+          <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+        </label>
+        <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Yearly</span>
+      </div>
+      <% if @plan.min_seats < @plan.max_seats %>
+        <div class="mb-6">
+          <%= f.label :seats, class: "block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" %>
+          <%= f.number_field :seats, 
+                class: "bg-gray-50 border border-gray-300 text-gray-900 text-base md:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
+                value: @plan.min_seats,
+                in: @plan.min_seats..@plan.max_seats,
+                step: 1 %>
+        </div>
+      <% end %>
+      <%= f.submit "Process to payment", class: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full  px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" %>
+    <% end %>
+  </div>
+</section>
