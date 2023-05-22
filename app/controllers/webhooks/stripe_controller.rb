@@ -1,4 +1,4 @@
-class WebhooksController < ApplicationController
+class Webhooks::StripeController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def create
@@ -6,7 +6,11 @@ class WebhooksController < ApplicationController
     # receive POST from Stripe
     payload = request.body.read
     signature_header = request.env["HTTP_STRIPE_SIGNATURE"]
-    endpoint_secret = ENV["STRIPE_WEBHOOK_SECRET"] # Stripe webhook secret passed as environment variable
+
+    # Stripe webhook secret passed as environment variable
+    endpoint_secret = Rails.env.production? ? ENV["STRIPE_WEBHOOK_SECRET_KEY"] : Rails.application.credentials.stripe[:webhook_secret_key]
+    
+    # Making sure we start from an empty event
     event = nil
 
     # Make sure that the request comes from Stripe
@@ -25,22 +29,11 @@ class WebhooksController < ApplicationController
       return
     end
 
+    logger.debug event.inspect
     # Handle the event
     case event.type
     when 'checkout.session.completed'
-      # If a user doesn't exist we definitely don't want to subscribe them
-      if !User.exists?(:email => event.data.object.customer_details.email)
-        # Create a user with this email before fullfilling the order
-        User.invite!(email: event.data.object.customer_details.email)
-        fullfill_order(event.data.object)
-      else
-        # Payment is successful and the subscription is created.
-        # Provision the subscription and save the customer ID to your database.
-        logger.info "User already exists in the database"
-        fullfill_order(event.data.object)
-        
-        # Redirect to the billing dashboard where the user can upgrade their plan
-      end
+      fullfill_order(event.data.object)
     when 'customer.subscription.deleted', 'customer.subscription.updated'
       update_subscription(event.data.object)
     else

@@ -27,9 +27,8 @@ class SubscriptionsController < ApplicationController
     interval      = params[:interval]
     email         = params[:email]
 
-    if params[:website]
-      organization_website = params[:website]
-    end
+
+    organization_website = params[:website] || nil
 
     if params[:organiztaion] && !params[:organiztaion].blank?
       organization_name = params[:organization]
@@ -71,13 +70,9 @@ class SubscriptionsController < ApplicationController
     # Create the organization for the user
     organization = Organization.new
     organization.name    = organization_name
-    organization.website = organization_website ? organization_website : nil
+    organization.website = organization_website
 
     if organization.save
-      logger.debug "#####"
-      logger.debug organization.inspect
-      logger.debug "#####"
-
       user.destroy
       flash[:alert] = "An error occured while creating your organization"
       render :new, status: :unprocessable_entity
@@ -100,11 +95,11 @@ class SubscriptionsController < ApplicationController
     session = Stripe::Checkout::Session.create(
       allow_promotion_codes: true,
       client_reference_id: user_signed_in? ? current_user.organization.id : organization.id,
-      success_url: root_url + "success?session_id={CHECKOUT_SESSION_ID}",
+      success_url: root_url + "checkout/success?session_id={CHECKOUT_SESSION_ID}",
       cancel_url: subscriptions_url,
-      payment_method_types: ['card'],
-      currency: 'USD',
-      mode: 'subscription',
+      payment_method_types: ["card"],
+      currency: "USD",
+      mode: "subscription",
       customer_email: user_signed_in? ? current_user.email : email,
       line_items: [{
         quantity: ordered_seats,
