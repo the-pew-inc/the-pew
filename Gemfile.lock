@@ -155,7 +155,7 @@ GEM
     docile (1.4.0)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
-    down (5.4.0)
+    down (5.4.1)
       addressable (~> 2.8)
     erubi (1.12.0)
     faraday (2.7.4)
