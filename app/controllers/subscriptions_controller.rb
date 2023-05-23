@@ -92,21 +92,30 @@ class SubscriptionsController < ApplicationController
     end
 
     # Creating Stripe session
-    session = Stripe::Checkout::Session.create(
-      allow_promotion_codes: true,
-      client_reference_id: user_signed_in? ? current_user.organization.id : organization.id,
-      success_url: root_url + "checkout/success?session_id={CHECKOUT_SESSION_ID}",
-      cancel_url: subscriptions_url,
-      payment_method_types: ["card"],
-      currency: "USD",
-      mode: "subscription",
-      customer_email: user_signed_in? ? current_user.email : email,
-      line_items: [{
-        quantity: ordered_seats,
-        price: (interval == 1 ? @plan.stripe_price_mo : @plan.stripe_price_y),
-      }]
-    )
-
+    begin
+      session = Stripe::Checkout::Session.create(
+        allow_promotion_codes: true,
+        client_reference_id: user_signed_in? ? current_user.organization.id : organization.id,
+        customer_email: user_signed_in? ? current_user.email : email,
+        cancel_url: subscriptions_url,
+        currency: "USD",
+        expires_at: 3.hours.from_now.to_i,
+        line_items: [{
+          quantity: ordered_seats,
+          price: (interval == 1 ? @plan.stripe_price_mo : @plan.stripe_price_y),
+        }],
+        mode: "subscription",
+        payment_method_types: ["card", "paypal", "us_bank_account"],
+        success_url: root_url + "checkout/success?session_id={CHECKOUT_SESSION_ID}",
+      )
+  
+    rescue Stripe::StripeError => e
+      member.destroy
+      organization.destroy
+      user.destroy
+      render_error("An error occured while connecting to Stripe. Please try again in a few minutes and if this error persists contact our support team.")
+      return
+    end
     # Process to Stripe checkout page
     redirect_to session.url, allow_other_host: true, status: :see_other
   end

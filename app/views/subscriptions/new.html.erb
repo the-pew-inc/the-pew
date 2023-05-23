@@ -12,7 +12,12 @@
 </section>
 <section>
   <div class="mx-auto">
-    <%= form_with url: subscriptions_path(plan_id: @plan.id), data: { turbo: false } do |f| %>
+    <%= form_with url: subscriptions_path(plan_id: @plan.id), 
+          data: { turbo: false, controller: "subscription-form", 
+                  "subscription-form-min-seats-value": @plan.min_seats,
+                  "subscription-form-max-seats-value": @plan.max_seats,
+                  "subscription-form-price-per-seat-monthly-value": @plan.price_mo,
+                  "subscription-form-price-per-seat-yearly-value": @plan.price_y } do |f| %>
       <div class="mb-6">
         <%= f.label :email, "Your email", class: "block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" %>
         <%= f.email_field :email, required: true, autocomplete: "email", class: "bg-gray-50 border border-gray-300 text-gray-900 text-base md:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500", placeholder:"your_email@example.com" %>
@@ -25,14 +30,19 @@
       </div>
       <div class="mb-6">
         <%= f.label :website, class: "block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" %>
-        <%= f.text_field :website, 
+        <%= f.text_field :website,
+              data: { action: "input->subscription-form#formatWebsite" },
+              placeholder: "https://",
               class: "bg-gray-50 border border-gray-300 text-gray-900 text-base md:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
               value: (user_signed_in? ? current_user.organization.website : "")  %>
       </div>
       <div class="mb-6 flex space-x-2">
         <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Monthly</span>
         <label class="relative inline-flex items-center mb-5 cursor-pointer">
-          <%= f.check_box :interval, class: "sr-only peer", checked: true %>
+          <%= f.check_box :interval, 
+                class: "sr-only peer",
+                data: { action: "change->subscription-form#onToggleChange", "subscription-form-target": "toggle" },
+                checked: true %>
           <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
         </label>
         <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Yearly</span>
@@ -44,8 +54,12 @@
                 class: "bg-gray-50 border border-gray-300 text-gray-900 text-base md:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
                 value: @plan.min_seats,
                 in: @plan.min_seats..@plan.max_seats,
+                data: { action: "input->subscription-form#validateSeats", "subscription-form-target": "seats" },
+                # pattern: "[0-9]+",
+                pattern: "\\d*",
                 step: 1 %>
         </div>
+        <div id="total-price" data-subscription-form-target="totalPrice"></div>
       <% end %>
       <%= f.submit "Process to payment", class: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full  px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" %>
     <% end %>
