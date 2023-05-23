@@ -93,8 +93,6 @@ export default class extends Controller {
   }
 
   calculateTotalPrice() {
-    console.debug(`We are in calculateTotalPrice}`);
-
     const toggleValue = this.toggleTarget.checked;
     const seatsValue = parseInt(this.seatsTarget.value);
 
@@ -102,7 +100,6 @@ export default class extends Controller {
       return;
     }
 
-    console.debug(`toggle: ${toggleValue}`);
     const pricePerSeat = toggleValue
       ? this.pricePerSeatYearlyValue
       : this.pricePerSeatMonthlyValue;
@@ -111,7 +108,7 @@ export default class extends Controller {
     if (this.hasTotalPriceTarget) {
       this.totalPriceTarget.innerHTML = `Total Price: $${total.toFixed(
         2
-      )} per ${toggleValue ? "year" : "month"}`;
+      )} per ${toggleValue ? "year" : "month"} (excluding taxes)`;
     }
   }
 
