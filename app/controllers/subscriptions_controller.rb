@@ -69,6 +69,7 @@ class SubscriptionsController < ApplicationController
     organization = Organization.new
     organization.name    = organization_name
     organization.website = organization_website
+    organization.owner   = true
 
     if !organization.save
       user.destroy
