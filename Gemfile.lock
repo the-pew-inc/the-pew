@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/faker-ruby/faker.git
-  revision: 4bee42acd22d8f5561d1993f36859c768677948b
+  revision: 85ff60305465ee07927802420d659d99622af2be
   specs:
     faker (3.2.0)
       i18n (>= 1.8.11, < 2)
@@ -88,7 +88,7 @@ GEM
     annotate (3.2.0)
       activerecord (>= 3.2, < 8.0)
       rake (>= 10.4, < 14.0)
-    appmap (0.99.1)
+    appmap (0.99.4)
       activesupport
       method_source
       rack
@@ -98,8 +98,8 @@ GEM
       ffi-compiler (~> 1.0)
     ast (2.4.2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.763.0)
-    aws-sdk-core (3.172.0)
+    aws-partitions (1.767.0)
+    aws-sdk-core (3.173.0)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.651.0)
       aws-sigv4 (~> 1.5)
@@ -141,7 +141,7 @@ GEM
     chartkick (5.0.2)
     chunky_png (1.4.0)
     concurrent-ruby (1.2.2)
-    connection_pool (2.4.0)
+    connection_pool (2.4.1)
     countries (5.4.0)
       unaccent (~> 0.3)
     crass (1.0.6)
@@ -155,7 +155,7 @@ GEM
     docile (1.4.0)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
-    down (5.4.0)
+    down (5.4.1)
       addressable (~> 2.8)
     erubi (1.12.0)
     faraday (2.7.4)
@@ -204,7 +204,7 @@ GEM
     llhttp-ffi (0.4.0)
       ffi-compiler (~> 1.0)
       rake (~> 13.0)
-    loofah (2.21.2)
+    loofah (2.21.3)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
     mail (2.8.1)
@@ -221,7 +221,7 @@ GEM
     mini_magick (4.12.0)
     mini_mime (1.1.2)
     minitest (5.18.0)
-    msgpack (1.7.0)
+    msgpack (1.7.1)
     multi_xml (0.6.0)
     multipart-post (2.3.0)
     net-imap (0.3.4)
@@ -318,7 +318,7 @@ GEM
     redis-client (0.14.1)
       connection_pool
     regexp_parser (2.8.0)
-    reline (0.3.3)
+    reline (0.3.4)
       io-console (~> 0.5)
     request_store (1.5.1)
       rack (>= 1.4)
@@ -326,7 +326,7 @@ GEM
       nokogiri
     rexml (3.2.5)
     rolify (6.0.1)
-    rqrcode (2.1.2)
+    rqrcode (2.2.0)
       chunky_png (~> 1.0)
       rqrcode_core (~> 1.0)
     rqrcode_core (1.2.0)
@@ -388,6 +388,7 @@ GEM
       sprockets (>= 3.0.0)
     stimulus-rails (1.2.1)
       railties (>= 6.0.0)
+    stripe (8.5.0)
     thor (1.2.2)
     timeout (0.3.2)
     turbo-rails (1.4.0)
@@ -437,7 +438,7 @@ DEPENDENCIES
   active_storage_validations (~> 1.0.0)
   ahoy_matey
   annotate (~> 3.2.0)
-  appmap (= 0.99.1)
+  appmap (= 0.99.4)
   argon2 (~> 2.2.0)
   aws-sdk-s3
   bootsnap
@@ -484,6 +485,7 @@ DEPENDENCIES
   simplecov
   sprockets-rails
   stimulus-rails
+  stripe (~> 8.5.0)
   turbo-rails
   tzinfo-data
   validate_url

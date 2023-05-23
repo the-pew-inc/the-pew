@@ -71,8 +71,8 @@ Rails.application.routes.draw do
 
   # Event routes
   resources :events
-  get 'event/:pin',       to: 'events#event', as: :join_event
-  get 'event/:id/stats',  to: 'events#stats', as: :event_stats
+  get 'event/:pin',       to: 'events#event',  as: :join_event
+  get 'event/:id/stats',  to: 'events#stats',  as: :event_stats
   get 'event/:id/export', to: 'events#export', as: :event_export
 
   # Import CSV files
@@ -123,6 +123,17 @@ Rails.application.routes.draw do
   resources :organization, only: [:show, :update, :edit] do
     resources :users, only: [:index]
     resource  :ssos,  only: [:update, :edit], shallow: true
+  end
+
+  # Strip routes
+  # Manage subscriptions
+  resources :subscriptions
+  get 'checkout/success', to: 'checkout#success', as: :checkout_success
+  
+  # Webhooks
+  namespace :webhooks do
+    # Stripe
+    resources :stripe, only: :create
   end
 
   # Error pages

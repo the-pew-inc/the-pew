@@ -16,6 +16,9 @@ application.register("clipboard", ClipboardController)
 import CloseDropdownController from "./close_dropdown_controller"
 application.register("close-dropdown", CloseDropdownController)
 
+import ConfettiController from "./confetti_controller"
+application.register("confetti", ConfettiController)
+
 import EmptyStateController from "./empty_state_controller"
 application.register("empty-state", EmptyStateController)
 
@@ -48,6 +51,9 @@ application.register("reset-form", ResetFormController)
 
 import SubmitQuestionController from "./submit_question_controller"
 application.register("submit-question", SubmitQuestionController)
+
+import SubscriptionFormController from "./subscription_form_controller"
+application.register("subscription-form", SubscriptionFormController)
 
 import TimeZoneController from "./time_zone_controller"
 application.register("time-zone", TimeZoneController)

@@ -15,14 +15,16 @@
 #  website                 :string
 #  created_at              :datetime         not null
 #  updated_at              :datetime         not null
+#  stripe_customer_id      :string
 #
 # Indexes
 #
-#  index_organizations_on_country          (country)
-#  index_organizations_on_dns_txt          (dns_txt) UNIQUE
-#  index_organizations_on_domain           (domain) UNIQUE
-#  index_organizations_on_domain_verified  (domain_verified)
-#  index_organizations_on_sso              (sso)
+#  index_organizations_on_country             (country)
+#  index_organizations_on_dns_txt             (dns_txt) UNIQUE
+#  index_organizations_on_domain              (domain) UNIQUE
+#  index_organizations_on_domain_verified     (domain_verified)
+#  index_organizations_on_sso                 (sso)
+#  index_organizations_on_stripe_customer_id  (stripe_customer_id) UNIQUE
 #
 class Organization < ApplicationRecord  
   # enable rolify on the Account class
@@ -34,11 +36,14 @@ class Organization < ApplicationRecord
   # Callbacks
   before_validation :generate_dns_txt, if: :will_save_change_to_domain?
   before_validation :clean_domain, if: :will_save_change_to_domain?
+  before_validation :cleaning_strings
 
-  has_many :members
-  has_many :users,   through: :members
-  has_many :polls,   dependent: :destroy
+  has_one  :subscription
+
   has_many :events,  dependent: :destroy
+  has_many :members
+  has_many :polls,   dependent: :destroy
+  has_many :users,   through: :members
   
   has_one_attached :logo
 
@@ -85,5 +90,14 @@ class Organization < ApplicationRecord
   # It is called before validating the model and only if the domain name has changed
   def clean_domain
     self.domain = self.domain.gsub(/(http|https):\/\/|\/$/, '').gsub(/[\r\n\s]/, '')
+  end
+
+
+  # Remove trailing spaces and carriage returns
+  # Remove all \n from the string
+  def cleaning_strings
+    self.domain  = self.domain.strip.tr("\n","")  if !self.domain.nil?
+    self.name    = self.name.strip.tr("\n","")    if !self.name.nil?
+    self.website = self.website.strip.tr("\n","") if !self.website.nil?
   end
 end

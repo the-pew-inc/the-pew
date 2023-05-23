@@ -6,7 +6,7 @@ ruby '3.2.2'
 # IMPORTANT: This must be the first gem listed
 # Add support to appmap in development and test
 
-gem 'appmap', '0.99.1', :groups => [:development, :test]
+gem 'appmap', '0.99.4', :groups => [:development, :test]
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem 'rails', '~> 7.0.4'
@@ -150,6 +150,9 @@ gem 'ruby-openai', '~> 4.1.0'
 
 # Adding pgsearch
 gem 'pg_search', '~> 2.3.6'
+
+# Stripe (payment, subscription processing) [https://github.com/stripe/stripe-ruby]
+gem 'stripe', '~> 8.5.0'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

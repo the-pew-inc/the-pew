@@ -15,14 +15,16 @@
 #  website                 :string
 #  created_at              :datetime         not null
 #  updated_at              :datetime         not null
+#  stripe_customer_id      :string
 #
 # Indexes
 #
-#  index_organizations_on_country          (country)
-#  index_organizations_on_dns_txt          (dns_txt) UNIQUE
-#  index_organizations_on_domain           (domain) UNIQUE
-#  index_organizations_on_domain_verified  (domain_verified)
-#  index_organizations_on_sso              (sso)
+#  index_organizations_on_country             (country)
+#  index_organizations_on_dns_txt             (dns_txt) UNIQUE
+#  index_organizations_on_domain              (domain) UNIQUE
+#  index_organizations_on_domain_verified     (domain_verified)
+#  index_organizations_on_sso                 (sso)
+#  index_organizations_on_stripe_customer_id  (stripe_customer_id) UNIQUE
 #
 require 'test_helper'
 
