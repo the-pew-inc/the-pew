@@ -25,14 +25,13 @@ export default class extends Controller {
   }
 
   validateSeats(event) {
-    const seatsInput = event.currentTarget;
-
     // Ensure seatsInput is not null before accessing its value
-    if (!seatsInput) {
+    if (!this.hasSeatsTarget) {
       console.error("Seats input element not found.");
       return;
     }
 
+    const seatsInput = this.seatsTarget;
     const seatsValue = seatsInput.value;
 
     // Clear the input if it's not a valid positive integer

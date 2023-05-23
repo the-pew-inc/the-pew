@@ -47,8 +47,8 @@
         </label>
         <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Yearly</span>
       </div>
-      <% if @plan.min_seats < @plan.max_seats %>
-        <div class="mb-6">
+      <div class="mb-6 flex items-center space-x-2">
+        <div >
           <%= f.label :seats, class: "block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" %>
           <%= f.number_field :seats, 
                 class: "bg-gray-50 border border-gray-300 text-gray-900 text-base md:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
@@ -57,10 +57,11 @@
                 data: { action: "input->subscription-form#validateSeats", "subscription-form-target": "seats" },
                 # pattern: "[0-9]+",
                 pattern: "\\d*",
+                readonly: (@plan.min_seats == @plan.max_seats ? true : false),
                 step: 1 %>
         </div>
-        <div id="total-price" data-subscription-form-target="totalPrice"></div>
-      <% end %>
+        <div id="total-price" data-subscription-form-target="totalPrice" class="text-slate-500 mt-9"></div>
+      </div>
       <%= f.submit "Process to payment", class: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full  px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" %>
     <% end %>
   </div>
