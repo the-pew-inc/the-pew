@@ -17,8 +17,7 @@ class SubscriptionsController < ApplicationController
   def create
     # Making we sure to receive expected parameters
     if !params[:plan_id] || !params[:seats] || !params[:interval] || !params[:email]
-      flash[:alert] = "Missing parameter"
-      render :new, status: :unprocessable_entity
+      render_error("Missing parameter")
       return
     end
 
@@ -62,8 +61,7 @@ class SubscriptionsController < ApplicationController
     user.invited_at = Time.current
     user.invited = true
     if !user.save
-      flash[:alert] = "An error occured while creating your user account"
-      render :new, status: :unprocessable_entity
+      render_error("An error occured while creating your user account")
       return
     end
 
@@ -72,10 +70,9 @@ class SubscriptionsController < ApplicationController
     organization.name    = organization_name
     organization.website = organization_website
 
-    if organization.save
+    if !organization.save
       user.destroy
-      flash[:alert] = "An error occured while creating your organization"
-      render :new, status: :unprocessable_entity
+      render_error("An error occured while creating your organization")
       return
     end
 
@@ -83,11 +80,10 @@ class SubscriptionsController < ApplicationController
     member = Member.new
     member.organization_id = organization.id
     member.user_id         = user.id
-    if member.save
+    if !member.save
       user.destroy
       organization.destroy
-      flash[:alert] = "An error occured"
-      render :new, status: :unprocessable_entity
+      render_error("An error occured")
       return
     end
 
