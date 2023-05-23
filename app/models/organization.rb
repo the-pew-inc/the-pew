@@ -15,14 +15,16 @@
 #  website                 :string
 #  created_at              :datetime         not null
 #  updated_at              :datetime         not null
+#  stripe_customer_id      :string
 #
 # Indexes
 #
-#  index_organizations_on_country          (country)
-#  index_organizations_on_dns_txt          (dns_txt) UNIQUE
-#  index_organizations_on_domain           (domain) UNIQUE
-#  index_organizations_on_domain_verified  (domain_verified)
-#  index_organizations_on_sso              (sso)
+#  index_organizations_on_country             (country)
+#  index_organizations_on_dns_txt             (dns_txt) UNIQUE
+#  index_organizations_on_domain              (domain) UNIQUE
+#  index_organizations_on_domain_verified     (domain_verified)
+#  index_organizations_on_sso                 (sso)
+#  index_organizations_on_stripe_customer_id  (stripe_customer_id) UNIQUE
 #
 class Organization < ApplicationRecord  
   # enable rolify on the Account class
@@ -36,10 +38,12 @@ class Organization < ApplicationRecord
   before_validation :clean_domain, if: :will_save_change_to_domain?
   before_validation :cleaning_strings
 
-  has_many :members
-  has_many :users,   through: :members
-  has_many :polls,   dependent: :destroy
+  has_one  :subscription
+
   has_many :events,  dependent: :destroy
+  has_many :members
+  has_many :polls,   dependent: :destroy
+  has_many :users,   through: :members
   
   has_one_attached :logo
 

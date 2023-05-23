@@ -22,5 +22,6 @@
 #  index_plans_on_stripe_product_id  (stripe_product_id) UNIQUE
 #
 class Plan < ApplicationRecord
-  has_many :subscriptions
+  
+  validates :stripe_product_id, presence: true
 end

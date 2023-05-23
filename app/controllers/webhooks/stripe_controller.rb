@@ -29,12 +29,13 @@ class Webhooks::StripeController < ApplicationController
       return
     end
 
-    logger.debug event.inspect
-    # Handle the event
+    # Handle Stripe event
     case event.type
-    when 'checkout.session.completed'
+    when "payment_intent.created"
+      logger.warn "payment_intent.created not yet supported"
+    when 'checkout.session.completed', "payment_intent.succeeded"
       fullfill_order(event.data.object)
-    when 'customer.subscription.deleted', 'customer.subscription.updated'
+    when "customer.subscription.deleted", "customer.subscription.updated"
       update_subscription(event.data.object)
     else
       logger.warn "Unhandled event type: #{event.type}"
@@ -48,28 +49,34 @@ class Webhooks::StripeController < ApplicationController
     # Find user and assign customer id from Stripe
     # user = User.find(checkout_session.client_reference_id)
     user = User.find_by(:email => checkout_session.customer_details.email)
-    user.update!(stripe_customer_id: checkout_session.customer)
+    organization = user.organization
+    organization.update!(stripe_customer_id: checkout_session.customer)
 
     # Retrieve new subscription via Stripe API using susbscription id
     stripe_subscription = Stripe::Subscription.retrieve(checkout_session.subscription)
 
     # Create new subscription with Stripe subscription details and user data
     Subscription.create!(
-      customer_id: stripe_subscription.customer,
+      active: true,
       current_period_start: Time.at(stripe_subscription.current_period_start).to_datetime,
       current_period_end: Time.at(stripe_subscription.current_period_end).to_datetime,
-      plan: stripe_subscription.plan.id,
+      customer_id: stripe_subscription.customer,
       interval: stripe_subscription.plan.interval,
+      organization: organization,
       status: stripe_subscription.status,
+      stripe_plan: stripe_subscription.plan.id,
       subscription_id: stripe_subscription.id,
-      user: user,
+      
     )
+
+    # Send the invitation email to the user
+    user.send_invite!
   end
 
   def update_subscription(subscription)
     stripe_subscription = Stripe::Subscription.retrieve(subscription.id)
-    user_subscription = Subscription.find_by(subscription_id: stripe_subscription.id)
-    user_subscription.update!(
+    subscription = Subscription.find_by(subscription_id: stripe_subscription.id)
+    subscription.update!(
       status: subscription.status,
       current_period_start: Time.at(stripe_subscription.current_period_start).to_datetime,
       current_period_end: Time.at(stripe_subscription.current_period_end).to_datetime,

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_15_180807) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_23_222443) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -249,11 +249,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_15_180807) do
     t.datetime "domain_verified_at", precision: nil
     t.integer "max_failed_attempts", default: 5, null: false
     t.integer "failed_attempts_timeout", default: 900, null: false
+    t.string "stripe_customer_id"
     t.index ["country"], name: "index_organizations_on_country"
     t.index ["dns_txt"], name: "index_organizations_on_dns_txt", unique: true
     t.index ["domain"], name: "index_organizations_on_domain", unique: true
     t.index ["domain_verified"], name: "index_organizations_on_domain_verified"
     t.index ["sso"], name: "index_organizations_on_sso"
+    t.index ["stripe_customer_id"], name: "index_organizations_on_stripe_customer_id", unique: true
   end
 
   create_table "plans", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -411,20 +413,24 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_15_180807) do
 
   create_table "subscriptions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "organization_id", null: false
-    t.uuid "plan_id", null: false
-    t.string "stripe_subscription_id"
+    t.string "customer_id", null: false
+    t.string "stripe_plan", null: false
+    t.string "subscription_id"
+    t.string "status", null: false
     t.boolean "active", default: false, null: false
-    t.string "period", null: false
-    t.date "current_period_end"
-    t.date "current_period_start"
+    t.string "interval", null: false
+    t.datetime "current_period_end"
+    t.datetime "current_period_start"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["active"], name: "index_subscriptions_on_active"
     t.index ["current_period_end"], name: "index_subscriptions_on_current_period_end"
+    t.index ["customer_id"], name: "index_subscriptions_on_customer_id"
+    t.index ["interval"], name: "index_subscriptions_on_interval"
     t.index ["organization_id"], name: "index_subscriptions_on_organization_id"
-    t.index ["period"], name: "index_subscriptions_on_period"
-    t.index ["plan_id"], name: "index_subscriptions_on_plan_id"
-    t.index ["stripe_subscription_id"], name: "index_subscriptions_on_stripe_subscription_id", unique: true
+    t.index ["status"], name: "index_subscriptions_on_status"
+    t.index ["stripe_plan"], name: "index_subscriptions_on_stripe_plan"
+    t.index ["subscription_id"], name: "index_subscriptions_on_subscription_id", unique: true
   end
 
   create_table "topics", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -522,6 +528,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_15_180807) do
   add_foreign_key "rooms", "events"
   add_foreign_key "subcription_transactions", "subscriptions", column: "subscriptions_id"
   add_foreign_key "subscriptions", "organizations"
-  add_foreign_key "subscriptions", "plans"
   add_foreign_key "votes", "users"
 end
