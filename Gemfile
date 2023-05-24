@@ -5,8 +5,8 @@ ruby '3.2.2'
 
 # IMPORTANT: This must be the first gem listed
 # Add support to appmap in development and test
-
 gem 'appmap', '0.99.4', :groups => [:development, :test]
+
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem 'rails', '~> 7.0.4'
@@ -45,14 +45,10 @@ gem 'redis', '~> 5.0.5'
 # gem 'kredis'
 
 # Add Noticed to support notifications [https://github.com/excid3/noticed]
-gem "noticed", "~> 1.5"
+gem 'noticed', '~> 1.5'
 
 # Adding support to View Component (better than partials ;-) ) [https://github.com/github/view_component]
 gem 'view_component'
-
-# Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
-# Replaced by argon2 and custom authentication solution based on [https://stevepolito.design/blog/rails-authentication-from-scratch/]
-# gem "bcrypt", "~> 3.1.7"
 
 # User authentication
 # Use Argon2 to hash passwords [https://github.com/technion/ruby-argon2]
