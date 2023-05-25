@@ -4,7 +4,7 @@ class CreateEmbeddeds < ActiveRecord::Migration[7.0]
       t.references :organization, null: false, foreign_key: true, type: :uuid
       t.references :user,         null: false, foreign_key: true, type: :uuid
       t.string     :token,        null: false
-      t.string     :path # The path, usualy :controller/:action/:id but can be different in the case of questions
+      t.string     :path  # The path, usualy :controller/:action/:id but can be different in the case of questions the path is going to be rooms/:room_id/questions/new
       t.string     :label # Add a description to the Embedded
 
       t.timestamps
