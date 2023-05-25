@@ -62,6 +62,7 @@ class User < ApplicationRecord
   has_many :actions,         class_name: 'Ahoy::Event'
   has_one  :profile,         dependent: :destroy
   accepts_nested_attributes_for :profile, allow_destroy: true
+  has_many :embeddeds,       dependent: :destroy
   has_many :events,          dependent: :destroy
   has_many :questions,       dependent: :destroy
   has_many :votes,           dependent: :destroy
