@@ -30,11 +30,9 @@ class EmbeddedsController < ApplicationController
   def show
     headers["X-Frame-Options"] = "allowall"
     @embedded = Embedded.find_by(token: params[:id])
-    render template: "#{@embedded.path}", layout: false
+    # render template: "#{@embedded.path}", layout: false
+    redirect_to @embedded.path, layout: false
   end 
-
-  def update
-  end
 
   private
 
