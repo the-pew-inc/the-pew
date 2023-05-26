@@ -45,7 +45,7 @@ class EventPolicy < ApplicationPolicy
 
   def user_is_owner_or_admin?
     user.has_role?(:admin, record.organization) || 
-    record.organization.members.where(user_id: user.id, owner: true).exists?
+    record.organization.member.where(user_id: user.id, owner: true).exists?
   end
 
   def user_created_event?

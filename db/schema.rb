@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_23_222443) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_24_011120) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -130,6 +130,23 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_23_222443) do
     t.index ["badge_id", "sash_id"], name: "index_badges_sashes_on_badge_id_and_sash_id"
     t.index ["badge_id"], name: "index_badges_sashes_on_badge_id"
     t.index ["sash_id"], name: "index_badges_sashes_on_sash_id"
+  end
+
+  create_table "embeddeds", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "embeddable_type", null: false
+    t.uuid "embeddable_id", null: false
+    t.uuid "organization_id", null: false
+    t.uuid "user_id", null: false
+    t.string "token", null: false
+    t.string "path"
+    t.string "label"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["embeddable_type", "embeddable_id"], name: "index_embeddeds_on_embeddable"
+    t.index ["organization_id"], name: "index_embeddeds_on_organization_id"
+    t.index ["path"], name: "index_embeddeds_on_path", unique: true
+    t.index ["token"], name: "index_embeddeds_on_token", unique: true
+    t.index ["user_id"], name: "index_embeddeds_on_user_id"
   end
 
   create_table "events", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -513,6 +530,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_23_222443) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "attendances", "events"
   add_foreign_key "attendances", "users"
+  add_foreign_key "embeddeds", "organizations"
+  add_foreign_key "embeddeds", "users"
   add_foreign_key "events", "users"
   add_foreign_key "import_results", "users"
   add_foreign_key "messages", "users"

@@ -37,6 +37,8 @@ class Room < ApplicationRecord
   belongs_to :event
   has_many   :attendances, dependent: :destroy
   has_many   :questions,   dependent: :destroy
+  
+  has_one    :embedded,    as: :embeddable, dependent: :destroy
 
   validates  :name, presence: true
 
