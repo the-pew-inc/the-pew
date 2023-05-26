@@ -1,0 +1,28 @@
+<!-- app/views/embeddeds/_embbeded.html.erb -->
+<tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+  <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
+    <div class="pl-3">
+      <div class="text-base font-semibold"><%= embedded.label %></div>
+      <div class="font-normal text-gray-500 text-sm">Created at: <%= embedded.created_at.strftime("%Y %b %d at %l%P : %M") %></div>
+    </div>
+  </th>
+  <td class="px-6 py-4">
+    <% embedded_iframe = content_tag(
+      :iframe,
+      nil,
+      width: "100%",
+      height: "400px",
+      src: embedded_url(id: embedded.token)
+    ) %>
+    <%= text_area_tag :embedded, embedded_iframe, class: "form-control" %>
+  </td>
+  <td class="px-6 py-4">
+    <div class="flex items-center justify-end space-x-2">
+      <%= link_to embedded_path(embedded.id), data: { turbo_method: :delete,  turbo_confirm: 'Are you sure you want to delete this Embedded Link? This action cannot be undone.' } do %>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-600 dark:text-red-500" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+        </svg>
+      <% end %>
+    </div>
+  </td>
+</tr>

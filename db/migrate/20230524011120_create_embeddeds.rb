@@ -1,6 +1,7 @@
 class CreateEmbeddeds < ActiveRecord::Migration[7.0]
   def change
     create_table :embeddeds, id: :uuid do |t|
+      t.references :embeddable,   polymorphic: true, type: :uuid, null: false
       t.references :organization, null: false, foreign_key: true, type: :uuid
       t.references :user,         null: false, foreign_key: true, type: :uuid
       t.string     :token,        null: false

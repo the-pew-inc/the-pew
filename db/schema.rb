@@ -133,6 +133,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_24_011120) do
   end
 
   create_table "embeddeds", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "embeddable_type", null: false
+    t.uuid "embeddable_id", null: false
     t.uuid "organization_id", null: false
     t.uuid "user_id", null: false
     t.string "token", null: false
@@ -140,6 +142,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_24_011120) do
     t.string "label"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["embeddable_type", "embeddable_id"], name: "index_embeddeds_on_embeddable"
     t.index ["organization_id"], name: "index_embeddeds_on_organization_id"
     t.index ["path"], name: "index_embeddeds_on_path", unique: true
     t.index ["token"], name: "index_embeddeds_on_token", unique: true

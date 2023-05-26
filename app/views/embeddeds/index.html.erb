@@ -1,0 +1,28 @@
+<!-- app/views/embeddeds/index.html.erb -->
+<section>
+  <h1 class="mb-4 text-4xl font-bold tracking-tight leading-none text-gray-900 lg:mb-6 md:text-5xl xl:text-6xl dark:text-white">
+    Embedded Links
+  </h1>
+</section>
+<section>
+  <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <tr>
+          <th scope="col" class="px-6 py-3">
+            Label
+          </th>
+          <th scope="col" class="px-6 py-3">
+            Link
+          </th>
+          <th scope="col" class="px-6 py-3">
+            Delete
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= render partial: "embedded", collection: @embeddeds %>
+      </tbody>
+    </table>
+  </div>
+</section>
