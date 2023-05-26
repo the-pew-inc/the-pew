@@ -1,11 +1,4 @@
 <!-- app/views/embeddeds/edit.html.erb -->
 <%= turbo_frame_tag :embedded do %>
-  <% embedded_iframe = content_tag(
-    :iframe,
-    nil,
-    width: "100%",
-    height: "400px",
-    src: embedded_url(id: @embedded.token)
-  ) %>
-  <%= text_area_tag :embedded, embedded_iframe, class: "form-control" %>
+  <%= render partial: "embedded_link", locals: { embedded: @embedded } %>
 <% end %>
