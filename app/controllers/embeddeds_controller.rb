@@ -16,6 +16,7 @@ class EmbeddedsController < ApplicationController
   def destroy
     @embedded = Embedded.find(params[:id])
     @embedded.destroy
+    redirect_to embeddeds_path, notice: "Embedded Link deleted"
   end
 
   def edit
