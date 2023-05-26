@@ -10,7 +10,8 @@
                       embeddable_type: "Room" } %>
     </div>
   </section>
-<% else %>
+<% end %>
+<% if !event.new_record? && event.rooms.first.embedded %>
   <div>
     <% embedded_iframe = content_tag(
       :iframe,
