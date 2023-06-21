@@ -40,7 +40,6 @@ class Organization < ApplicationRecord
 
   has_one  :subscription
 
-  has_many :embeddeds, dependent: :destroy
   has_many :events,    dependent: :destroy
   has_many :member
   has_many :polls,     dependent: :destroy

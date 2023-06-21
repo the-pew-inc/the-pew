@@ -1,20 +1,4 @@
 <!-- app/views/events/_form.html.erb -->
-<% embedded = event.rooms.first.embedded if !event.new_record? %>
-<% if action_name == "edit" && !embedded  %>
-  <section class="my-4">
-    <div>
-      <% path = "rooms/#{event.rooms.first.id}/questions" %>
-      <%= render partial: "embeddeds/create_embedded", 
-            locals: { path: path , 
-                      label: event.name,
-                      embeddable_id: event.rooms.first.id,
-                      embeddable_type: "Room" } %>
-    </div>
-  </section>
-<% end %>
-<% if !event.new_record? && embedded %>
-  <%= render partial: "embeddeds/embedded_link", locals: { embedded: embedded } %>
-<% end %>
 <section>
   <%= form_with model: event,
               id: dom_id(event),

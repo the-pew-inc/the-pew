@@ -38,8 +38,6 @@ class Room < ApplicationRecord
   has_many   :attendances, dependent: :destroy
   has_many   :questions,   dependent: :destroy
   
-  has_one    :embedded,    as: :embeddable, dependent: :destroy
-
   validates  :name, presence: true
 
   # Return the number of approved, being answered or answered questions in this room
