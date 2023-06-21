@@ -18,9 +18,7 @@ gem 'sprockets-rails'
 gem 'pg', '~> 1.4'
 
 # Use the Puma web server [https://github.com/puma/puma]
-gem 'puma', '~> 6.2.0'
-# Returning to 5.6.5 as the 6.0 seems to have some issues slowing down requests
-# gem 'puma', '~>5.6.5'
+gem 'puma', '~> 6.3.0'
 
 # Bundle and transpile JavaScript [https://github.com/rails/jsbundling-rails]
 gem 'jsbundling-rails'
@@ -126,7 +124,7 @@ gem 'rqrcode', '~> 2.0'
 gem 'pagy', '~> 6.0.0'
 
 # Countries [https://github.com/countries/countries]
-gem 'countries', '~> 5.4.0', require: 'countries/global'
+gem 'countries', '~> 5.5.0', require: 'countries/global'
 
 # Validate URL format [https://github.com/perfectline/validates_url]
 gem 'validate_url'
@@ -142,7 +140,7 @@ gem 'groupdate'
 gem 'chartkick'
 
 # openAI [https://github.com/alexrudall/ruby-openai]
-gem 'ruby-openai', '~> 4.1.0'
+gem 'ruby-openai', '~> 4.2.0'
 
 # Adding pgsearch
 gem 'pg_search', '~> 2.3.6'
