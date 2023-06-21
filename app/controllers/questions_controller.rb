@@ -29,10 +29,6 @@ class QuestionsController < ApplicationController
     @question = @room.questions.build
   end
 
-  # GET /questions/1/edit
-  # TODO check as this seems to not be used and should be removed
-  def edit; end
-
   # POST /rooms/:room_id/questions
   def create
     @question = @room.questions.build(create_question_params)
