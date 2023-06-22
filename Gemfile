@@ -42,6 +42,10 @@ gem 'redis', '~> 5.0.5'
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem 'kredis'
 
+# Add connection_pool [https://github.com/mperham/connection_pool]
+# Enable connection pool for Redis, memcache and a few more.
+gem 'connection_pool'
+
 # Add Noticed to support notifications [https://github.com/excid3/noticed]
 gem 'noticed', '~> 1.5'
 
