@@ -35,6 +35,9 @@ gem 'cssbundling-rails'
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem 'jbuilder'
 
+# Faster JSON processing [https://github.com/ohler55/oj/blob/develop/pages/Rails.md]
+gem 'oj', '~> 3.15.0'
+
 # Use Redis adapter to run Action Cable in production
 gem 'redis', '~> 5.0.5'
 
