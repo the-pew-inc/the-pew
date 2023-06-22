@@ -450,7 +450,6 @@ DEPENDENCIES
   caxlsx
   caxlsx_rails
   chartkick
-  connection_pool
   countries (~> 5.5.0)
   cssbundling-rails
   debug

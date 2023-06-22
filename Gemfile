@@ -36,15 +36,13 @@ gem 'cssbundling-rails'
 gem 'jbuilder'
 
 # Use Redis adapter to run Action Cable in production
-# gem 'redis', '~> 4.8.0'
 gem 'redis', '~> 5.0.5'
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem 'kredis'
 
-# Add connection_pool [https://github.com/mperham/connection_pool]
-# Enable connection pool for Redis, memcache and a few more.
-gem 'connection_pool'
+# Sidekiq [https://github.com/mperham/sidekiq]
+gem 'sidekiq', '~>7.1.0'
 
 # Add Noticed to support notifications [https://github.com/excid3/noticed]
 gem 'noticed', '~> 1.5'
@@ -93,9 +91,6 @@ gem 'merit'
 
 # Mailer - Sendgrid [https://github.com/sendgrid/sendgrid-ruby]
 gem 'sendgrid-actionmailer', '~> 3.2.0'
-
-# Sidekiq [https://github.com/mperham/sidekiq]
-gem 'sidekiq', '~>7.1.0'
 
 # Monitoring - Honeybadger []
 gem 'honeybadger', '~> 5.0'
