@@ -35,12 +35,17 @@ gem 'cssbundling-rails'
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem 'jbuilder'
 
+# Faster JSON processing [https://github.com/ohler55/oj/blob/develop/pages/Rails.md]
+gem 'oj', '~> 3.15.0'
+
 # Use Redis adapter to run Action Cable in production
-# gem 'redis', '~> 4.8.0'
 gem 'redis', '~> 5.0.5'
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem 'kredis'
+
+# Sidekiq [https://github.com/mperham/sidekiq]
+gem 'sidekiq', '~>7.1.0'
 
 # Add Noticed to support notifications [https://github.com/excid3/noticed]
 gem 'noticed', '~> 1.5'
@@ -89,9 +94,6 @@ gem 'merit'
 
 # Mailer - Sendgrid [https://github.com/sendgrid/sendgrid-ruby]
 gem 'sendgrid-actionmailer', '~> 3.2.0'
-
-# Sidekiq [https://github.com/mperham/sidekiq]
-gem 'sidekiq', '~>7.1.0'
 
 # Monitoring - Honeybadger []
 gem 'honeybadger', '~> 5.0'
