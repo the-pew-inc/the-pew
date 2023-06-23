@@ -12,7 +12,7 @@ class QuestionKeywordsExtractionJob
     qh = JSON.parse(question)
 
     # Use GTP 4 Chat to extract the relevant keywords from the question
-    pr = PromptRetriever.retrieve("question-keyword-extraction", nil)
+    pr = PromptRetrieverService.retrieve("question-keyword-extraction", nil)
     puts "## PROMPT ##"
     puts pr
     response = client.chat(
