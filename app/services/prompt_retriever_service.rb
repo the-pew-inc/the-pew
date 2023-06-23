@@ -1,4 +1,5 @@
-module PromptRetriever
+# app/services/prompt_retriever_service.rb
+module PromptRetrieverService
 
   # Retrieve the title and prompt for a given label and organization ID (with fallback)
   #
