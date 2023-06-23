@@ -3,7 +3,9 @@
 # Table name: prompts
 #
 #  id              :uuid             not null, primary key
+#  function        :string
 #  label           :string(50)       not null
+#  model           :string           default("gpt-3.5"), not null
 #  prompt          :text             not null
 #  title           :string(50)       not null
 #  created_at      :datetime         not null
@@ -13,6 +15,7 @@
 # Indexes
 #
 #  index_prompts_on_label_and_organization_id  (label,organization_id) UNIQUE
+#  index_prompts_on_model                      (model)
 #  index_prompts_on_organization_id            (organization_id)
 #
 class Prompt < ApplicationRecord
