@@ -1,11 +1,11 @@
 # app/services/prompt_retriever_service.rb
 module PromptRetrieverService
 
-  # Retrieve the title and prompt for a given label and organization ID (with fallback)
+  # Retrieve the title, prompt, model, and function for a given label and organization ID (with fallback)
   #
   # @param label [String] The label of the prompt to retrieve
   # @param organization_id [String, nil] The organization ID (optional)
-  # @return [Hash, nil] A hash with :title and :prompt if a prompt is found, nil otherwise
+  # @return [Hash, nil] A hash with :title, :prompt, :model, and :function if a prompt is found, nil otherwise
   def self.retrieve(label, organization_id = nil)
     prompt = Prompt.find_by(label: label, organization_id: organization_id)
 
@@ -18,7 +18,10 @@ module PromptRetrieverService
 
     {
       title: prompt.title,
-      prompt: prompt.prompt
+      prompt: prompt.prompt,
+      model: prompt.model,
+      function: prompt.function || nil
     }
   end
+
 end

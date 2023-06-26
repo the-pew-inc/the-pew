@@ -1,4 +1,5 @@
 @import "actiontext";
+@import "trix/dist/trix";
 
 /* Tailwind CSS */
 @tailwind base;
