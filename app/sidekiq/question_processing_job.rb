@@ -10,5 +10,8 @@ class QuestionProcessingJob
   
     # Extract Keywords from the question
     QuestionKeywordsExtractionJob.perform_async(question)
+
+    # Extract Topics fomr the question
+    
   end
 end

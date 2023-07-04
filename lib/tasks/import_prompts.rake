@@ -1,11 +1,11 @@
-# lib/tasks/import_prompts.rake
 require 'octokit'
+require 'base64'
+require 'json'
 
 namespace :prompts do
   desc "Import prompts from YAML file in a private GitHub repository"
   task import: :environment do
     # Retrieves prompts from a YAML file in a private GitHub repository and imports them into the database.
-
     # Environment Variables:
     #   - GITHUB_REPO: The repository name in the format 'username/repo'.
     #   - FILE_PATH: The path to the YAML file in the repository.
@@ -21,25 +21,67 @@ namespace :prompts do
 
     client = Octokit::Client.new(access_token: github_token)
     file_content = client.contents(repository, path: file_path).content
-    prompts_data = YAML.safe_load(Base64.decode64(file_content))
 
-    prompts_data.each do |prompt_data|
-      prompt = Prompt.new(
-        label: prompt_data['label'],
-        title: prompt_data['title'],
-        organization_id: prompt_data['organization_id'],
-        model: prompt_data['model'],
-        messages: prompt_data['messages'],
-        functions: prompt_data['function'],
-        function_call: prompt_data['function_call']
-      )
+    # Decode the base64 string
+    decoded_content = Base64.decode64(file_content)
 
-      if prompt.save
-        puts "Prompt with label '#{prompt.label}' imported successfully."
+    # Parse the YAML data
+    prompts_data = YAML.safe_load(decoded_content)
+
+    prompts_data.each do |prompt_key, prompt_data|
+      label = prompt_data['label']
+      organization_id = prompt_data['organization_id']
+      
+      prompt = Prompt.find_or_initialize_by(label: label, organization_id: organization_id)
+
+      prompt.title = prompt_data['title']
+      prompt.model = prompt_data['model']
+      prompt.messages = parse_messages(prompt_data['messages'])
+      prompt.functions = parse_functions(prompt_data['functions'])
+      prompt.function_call = prompt_data['function_call']
+
+      if prompt.persisted?
+        prompt.save
+        puts "Prompt with label '#{prompt.label}' updated successfully."
       else
-        puts "Failed to import prompt with label '#{prompt.label}'. Errors: #{prompt.errors.full_messages.join(', ')}"
+        prompt.save
+        puts "Prompt with label '#{prompt.label}' imported successfully."
       end
     end
   end
-end
 
+  # Parse the messages field based on the format
+  def self.parse_messages(messages)
+    if messages.is_a?(Array)
+      # Newer format with separate roles and content for each message
+      parsed_messages = []
+      messages.each do |message|
+        parsed_messages << {
+          role: message['role'],
+          content: message['content']
+        }
+      end
+      parsed_messages.to_json
+    else
+      # Older format with a single prompt message
+      [{ role: 'prompt', content: messages }].to_json
+    end
+  end
+
+  # Parse the functions field
+  def self.parse_functions(functions)
+    return nil if functions.nil?
+
+    parsed_functions = []
+
+    functions.each do |function|
+      parsed_functions << {
+        name: function['name'],
+        description: function['description'],
+        parameters: function['parameters']
+      }
+    end
+
+    parsed_functions.to_json
+  end
+end

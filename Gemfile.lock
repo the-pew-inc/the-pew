@@ -474,7 +474,7 @@ DEPENDENCIES
   merit
   nokogiri (~> 1.15.0)
   noticed (~> 1.5)
-  octokit
+  octokit (~> 6.1.1)
   oj (~> 3.15.0)
   omniauth (~> 2.1.0)
   omniauth-google-oauth2 (~> 1.1.1)

@@ -26,7 +26,9 @@ namespace :update_query_key_insights do
 
     puts("[#{Time.now.utc}] Running update_keywords :: INI#{' (dry_run activated)' if dry_run}")
 
-    Question.all.each do |question|
+    questions = Question.where("keywords = '{}'").not_rejected
+
+    questions.each do |question|
       puts("Updating keywords for question id: #{question.id} title: #{question.title} #{' (dry_run activated)' if dry_run}")
       QuestionKeywordsExtractionJob.perform_async(question.to_json) unless dry_run
     end

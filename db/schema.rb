@@ -336,7 +336,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_23_222443) do
   create_table "prompts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "organization_id"
     t.string "label", limit: 50, null: false
-    t.string "title", limit: 50, null: false
+    t.string "title", limit: 150, null: false
     t.string "model"
     t.text "messages", null: false
     t.text "functions"
