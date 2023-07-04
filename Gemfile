@@ -118,6 +118,9 @@ gem 'image_processing', '~> 1.2'
 gem 'ruby-vips', '>= 2.1.0'
 gem 'aws-sdk-s3', require: false
 
+# Octokig [https://github.com/octokit/octokit.rb]
+# Mostly used to import openAI prompts from GitHub repo using the import_prompts.rake task
+gem 'octokit', '~> 6.1.1'
 
 # Generate QRCode [https://github.com/whomwah/rqrcode]
 gem 'rqrcode', '~> 2.0'
