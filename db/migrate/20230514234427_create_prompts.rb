@@ -3,10 +3,11 @@ class CreatePrompts < ActiveRecord::Migration[7.0]
     create_table :prompts, id: :uuid do |t|
       t.uuid    :organization_id
       t.string  :label,          null: false, limit: 50
-      t.string  :title,          null: false, limit: 50
+      t.string  :title,          null: false, limit: 150
       t.string  :model
-      t.text    :message,        null: false
-      t.text    :function
+      t.text    :messages,       null: false
+      t.text    :functions
+      t.string  :function_call
 
       t.timestamps
     end
