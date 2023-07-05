@@ -52,20 +52,8 @@ namespace :prompts do
 
   # Parse the messages field based on the format
   def self.parse_messages(messages)
-    if messages.is_a?(Array)
-      # Newer format with separate roles and content for each message
-      parsed_messages = []
-      messages.each do |message|
-        parsed_messages << {
-          role: message['role'],
-          content: message['content']
-        }
-      end
-      parsed_messages.to_json
-    else
-      # Older format with a single prompt message
-      [{ role: 'prompt', content: messages }].to_json
-    end
+    parsed_messages = YAML.safe_load(messages)
+    parsed_messages.to_json
   end
 
   # Parse the functions field

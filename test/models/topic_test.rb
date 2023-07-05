@@ -14,11 +14,12 @@
 #
 # Indexes
 #
-#  index_topics_on_event_id     (event_id)
-#  index_topics_on_name         (name)
-#  index_topics_on_question_id  (question_id)
-#  index_topics_on_room_id      (room_id)
-#  index_topics_on_user_id      (user_id)
+#  index_topics_on_event_id                             (event_id)
+#  index_topics_on_name                                 (name)
+#  index_topics_on_question_id                          (question_id)
+#  index_topics_on_question_id_and_room_id_and_user_id  (question_id,room_id,user_id) UNIQUE
+#  index_topics_on_room_id                              (room_id)
+#  index_topics_on_user_id                              (user_id)
 #
 require "test_helper"
 

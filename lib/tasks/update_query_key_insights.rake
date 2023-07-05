@@ -36,4 +36,23 @@ namespace :update_query_key_insights do
     puts("[#{Time.now.utc}] Running update_keywords :: END#{' (dry_run activated)' if dry_run}")
   end
 
+  # Usage:
+  #   - rake update_query_key_insights:update_topic
+  #   - rake "update_query_key_insights:update_topic[false]"
+  desc 'Update queries with missing topic'
+  task :update_topic, [:dry_run] => :environment do |_t, args|
+    dry_run = true unless args[:dry_run] == 'false'
+
+    puts("[#{Time.now.utc}] Running update_keywords :: INI#{' (dry_run activated)' if dry_run}")
+
+    questions = Question.not_rejected
+
+    questions.each do |question|
+      puts("Updating keywords for question id: #{question.id} title: #{question.title} #{' (dry_run activated)' if dry_run}")
+      QuestionTopicExtractionJob.perform_async(question.to_json) unless dry_run
+    end
+
+    puts("[#{Time.now.utc}] Running update_keywords :: END#{' (dry_run activated)' if dry_run}")
+  end
+
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_23_222443) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_05_005152) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -438,6 +438,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_23_222443) do
     t.datetime "updated_at", null: false
     t.index ["event_id"], name: "index_topics_on_event_id"
     t.index ["name"], name: "index_topics_on_name"
+    t.index ["question_id", "room_id", "user_id"], name: "index_topics_on_question_id_and_room_id_and_user_id", unique: true
     t.index ["question_id"], name: "index_topics_on_question_id"
     t.index ["room_id"], name: "index_topics_on_room_id"
     t.index ["user_id"], name: "index_topics_on_user_id"

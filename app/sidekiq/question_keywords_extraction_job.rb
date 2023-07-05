@@ -27,13 +27,13 @@ class QuestionKeywordsExtractionJob
       user: qh.dig("user_id")
     }
 
-    puts params
+    # puts params
 
     response = client.chat(
       parameters: params
       )
 
-    puts response
+    # puts response
     keywords = response.dig("choices", 0, "message","content")
     keywords = keywords.split(", ")
     keywords.map{ |word| word.strip.chomp(".") }
