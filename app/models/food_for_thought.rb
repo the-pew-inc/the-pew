@@ -31,7 +31,7 @@ class FoodForThought < ApplicationRecord
 
   has_rich_text :article
 
-  before_validation :generate_summary, if: [:article_changed?, :url_changed?]
+  before_validation :generate_summary, if: :should_generate_summary?
 
   # Select a random set of articles based on provided criteria and sponsor ratio
   #
@@ -85,10 +85,14 @@ class FoodForThought < ApplicationRecord
     end
   end
 
+  def should_generate_summary?
+    article.present? || (url.present? && summary.blank?)
+  end
+
   # Generate a summary from the article or extract a summary from the URL
   def generate_summary
     if article.present?
-      self.summary = article.to_plain_text.truncate(100)
+      self.summary = article.body.to_plain_text.truncate(100)
     elsif url.present?
       # Extracting the URL summary via a Sidekiq Job
       SummaryExtractionJob.perform_async(self.url, self.id)

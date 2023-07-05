@@ -14,7 +14,7 @@ class ActiveSupport::TestCase
   # fixtures :all
   fixtures %w[users profiles organizations members active_sessions events rooms 
     questions attendances messages notifications topics votes import_results roles 
-    polls poll_options prompts]
+    polls poll_options prompts food_for_thoughts]
 
   # Add more helper methods to be used by all tests here...
 

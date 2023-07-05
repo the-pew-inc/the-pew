@@ -26,6 +26,6 @@
 
 one:
   user_id: 7c5e36bb-6163-4d07-8e7e-9f13e77d6e39
-  event: one
+  event_id: 105e36bb-6163-4c09-8e7e-9f03e77d6e32
   room_id: 1
   start_time: <%= DateTime.now.utc %>

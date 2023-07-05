@@ -22,16 +22,21 @@
 #  index_food_for_thoughts_on_sponsored_by     (sponsored_by)
 #
 
+# test/fixtures/food_for_thoughts.yml
 one:
-  title: MyString
-  organization_id: 
+  title: My First Food for Thought
+  summary: Some summary text
+  url: "https://example.com"
   event_id: 
-  summary: MyString
-  url: MyString
 
 two:
-  title: MyString
-  organization_id: 
-  event_id: 
-  summary: MyString
-  url: MyString
+  title: My Second Food for Thought
+  summary: Another summary text
+  url: "https://example.org"
+  organization_id: 8c5e36bb-6163-4d07-8a7e-9f13e77d6e40
+
+three:
+  title: My Third Food for Thought
+  summary: Some summary text comes here
+  url: "https://example.com"
+  event_id: 105e36bb-6163-4c09-8e7e-9f03e77d6e32 

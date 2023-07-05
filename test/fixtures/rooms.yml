@@ -27,7 +27,7 @@
 
 one:
   name: __default__
-  event: one
+  event_id: 105e36bb-6163-4c09-8e7e-9f03e77d6e32
   always_on: false
   allow_anonymous: false
   organization_id: 8c5e36bb-6163-4d07-8a7e-9f13e77d6e40
@@ -37,7 +37,7 @@ one:
 
 two:
   name: __default__
-  event: two
+  event_id: 105e36bb-6163-4c09-8e7e-9f03e77d6e33
   always_on: true
   allow_anonymous: true
   organization_id: 8c5e36bb-6163-4d07-8a7e-9f13e77d6e40
