@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_05_005152) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_05_191628) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -153,6 +153,23 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_05_005152) do
     t.index ["short_code"], name: "index_events_on_short_code"
     t.index ["status"], name: "index_events_on_status"
     t.index ["user_id"], name: "index_events_on_user_id"
+  end
+
+  create_table "food_for_thoughts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "title", null: false
+    t.uuid "organization_id"
+    t.uuid "event_id"
+    t.string "summary", null: false
+    t.string "url"
+    t.boolean "sponsored", default: false, null: false
+    t.string "sponsored_by"
+    t.string "sponsored_utm"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_food_for_thoughts_on_event_id"
+    t.index ["organization_id"], name: "index_food_for_thoughts_on_organization_id"
+    t.index ["sponsored"], name: "index_food_for_thoughts_on_sponsored"
+    t.index ["sponsored_by"], name: "index_food_for_thoughts_on_sponsored_by"
   end
 
   create_table "import_results", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
