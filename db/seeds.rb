@@ -112,4 +112,17 @@ p "Generating a confirmed user with empty profile and event"
 u1 = User.create( email: "test1@test.com", password: "passpass", confirmed: true, confirmed_at: Time.current.utc )
 Profile.create!(user_id: u1.id, nickname: "User 1 / aka empty")
 
+print "\n"
+p 'Deleting FoodForThought'
+FoodForThought.destroy_all
+12.times do
+  FoodForThought.create!(title: Faker::Book.unique.title)
+end
+4.times do
+  FoodForThought.create!(title: Faker::Book.unique.title, sponsored: true, sponsored_by: Faker::Company.name)
+end
+FoodForThought.all.each do |fft|
+  ActionText::RichText.create!(record_type: 'FoodForThought', record_id: fft.id, name: 'content', body: Faker::Lorem.sentence)
+end
+
 p 'Seed completed'
