@@ -159,7 +159,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_05_191628) do
     t.string "title", null: false
     t.uuid "organization_id"
     t.uuid "event_id"
-    t.string "summary", null: false
+    t.string "summary"
     t.string "url"
     t.boolean "sponsored", default: false, null: false
     t.string "sponsored_by"

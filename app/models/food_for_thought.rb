@@ -6,7 +6,7 @@
 #  sponsored       :boolean          default(FALSE), not null
 #  sponsored_by    :string
 #  sponsored_utm   :string
-#  summary         :string           not null
+#  summary         :string
 #  title           :string           not null
 #  url             :string
 #  created_at      :datetime         not null
@@ -24,7 +24,6 @@
 
 class FoodForThought < ApplicationRecord
   validates :title,   presence: true
-  validates :summary, presence: true
   validates :url,     url: { allow_blank: true, enforce_https: true }
 
   validate :validate_url_and_article_presence

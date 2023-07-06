@@ -4,7 +4,7 @@ class CreateFoodForThoughts < ActiveRecord::Migration[7.0]
       t.string  :title,          null: false
       t.uuid    :organization_id
       t.uuid    :event_id
-      t.string  :summary,        null: false
+      t.string  :summary
       t.string  :url
       t.boolean :sponsored,      null: false, default: false
       t.string  :sponsored_by
