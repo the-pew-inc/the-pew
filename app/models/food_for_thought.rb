@@ -73,7 +73,7 @@ class FoodForThought < ApplicationRecord
     end
 
     all_articles = sponsored_articles + random_articles
-    all_articles.shuffle
+    all_articles.present? ? all_articles.shuffle : []
   end
 
   private

@@ -13,6 +13,9 @@ class DashboardsController < ApplicationController
     @neutral = 0
     @negative = 0
 
+    # Fetch Food for thought
+    @recommended_articles = FoodForThought.random_selection()
+
     # Call for @pew_points update
     update_pew_points
 
