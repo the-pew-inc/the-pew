@@ -7,8 +7,8 @@ export default class extends Controller {
   static targets = ["canvas"];
   static values = {
     shortCode: String,
-    size: { type: Number, default: 680 },
-    logoURL: String,
+    size: { type: Number, default: 680 }, // Size of the canvas
+    logoUrl: String, // company or event logo, https://server.com/path/to/image
   };
 
   connect() {
@@ -34,19 +34,28 @@ export default class extends Controller {
       backgroundOptions: {
         color: "transparent",
       },
-      imageOptions: {
+    };
+
+    if (this.hasLogoUrlValue && /^https:\/\/.*/.test(this.logoUrlValue)) {
+      qrCodeParams.image = this.logoUrlValue;
+      qrCodeParams.imageOptions = {
         crossOrigin: "anonymous",
         margin: 20,
-      },
-    };
+      };
+    }
 
     // Generate the QRCode and attached it to the target
     this.qrCode = new QRCodeStyling(qrCodeParams);
 
+    // Display the QRCode
     this.qrCode.append(this.canvasTarget);
   }
 
+  // To Download the Event QRCode
   download() {
-    this.qrCode.download({ name: "qr", extension: "svg" });
+    this.qrCode.download({
+      name: `thepew-event-${this.shortCodeValue}`,
+      extension: "svg",
+    });
   }
 }

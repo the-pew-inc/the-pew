@@ -4,9 +4,13 @@
       <h5 class="text-5xl font-extrabold dark:text-white text-center">
         You can engage with the speaker or the topic by asking questions or dropping a comment here.
       </h5>
-      <div class="mt-12">
+      <div class="mt-12" data-qr-code-generator-short-code-value=<%= @room.event.short_code %>
+                         data-qr-code-generator-size-value=490
+                         data-controller="qr-code-generator">
         <p class="text-2xl font-extrabold dark:text-white text-center">Join the conversation</p>
-        <%= image_tag @room.event.qr_code, class: 'pt-2 mx-auto object-git w-full dark:invert w-96 h-96' if @room.event.qr_code.present?  %>
+        <div class="flex justify-center">
+          <div data-qr-code-generator-target="canvas"></div>
+        </div>
       </div>
     </div>
   </div>
