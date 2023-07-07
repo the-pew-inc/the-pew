@@ -5,14 +5,16 @@
 #  id         :uuid             not null, primary key
 #  mode       :integer          default("light"), not null
 #  nickname   :string
+#  pew_points :integer          default(0), not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  user_id    :uuid             not null
 #
 # Indexes
 #
-#  index_profiles_on_mode     (mode)
-#  index_profiles_on_user_id  (user_id)
+#  index_profiles_on_mode        (mode)
+#  index_profiles_on_pew_points  (pew_points)
+#  index_profiles_on_user_id     (user_id)
 #
 # Foreign Keys
 #
