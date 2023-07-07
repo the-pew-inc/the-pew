@@ -27,6 +27,8 @@
 class FoodForThought < ApplicationRecord
   validates :title,   presence: true
   validates :url,     url: { allow_blank: true, enforce_https: true }
+  validates :sponsor_url, presence: true, if: :sponsored?
+  validate  :validate_sponsor_url_format, if: :sponsored?
 
   validate :validate_url_and_article_presence
 
@@ -97,6 +99,16 @@ class FoodForThought < ApplicationRecord
     elsif url.present?
       # Extracting the URL summary via a Sidekiq Job
       SummaryExtractionJob.perform_async(self.url, self.id)
+    end
+  end
+
+  def sponsored?
+    sponsored == true
+  end
+
+  def validate_sponsor_url_format
+    if sponsor_url.present? && !sponsor_url.starts_with?('https://')
+      errors.add(:sponsor_url, 'must be a valid HTTPS URL')
     end
   end
 end
