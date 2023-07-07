@@ -122,9 +122,6 @@ gem 'aws-sdk-s3', require: false
 # Mostly used to import openAI prompts from GitHub repo using the import_prompts.rake task
 gem 'octokit', '~> 6.1.1'
 
-# Generate QRCode [https://github.com/whomwah/rqrcode]
-gem 'rqrcode', '~> 2.0'
-
 # Pagination [https://github.com/ddnexus/pagy]
 gem 'pagy', '~> 6.0.0'
 

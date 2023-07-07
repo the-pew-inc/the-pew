@@ -23,9 +23,6 @@ namespace :close_events do
 
       # Removing the PIN
       event.pin = nil
-
-      # Removing the QR code
-      event.qr_code.purge
     end
     
     puts("[#{Time.now.utc}] Running close_events :: END#{' (dry_run activated)' if dry_run}")
