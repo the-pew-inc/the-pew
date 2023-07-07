@@ -164,10 +164,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_05_191628) do
     t.boolean "sponsored", default: false, null: false
     t.string "sponsored_by"
     t.string "sponsored_utm"
+    t.string "sponsor_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["event_id"], name: "index_food_for_thoughts_on_event_id"
     t.index ["organization_id"], name: "index_food_for_thoughts_on_organization_id"
+    t.index ["sponsor_url"], name: "index_food_for_thoughts_on_sponsor_url"
     t.index ["sponsored"], name: "index_food_for_thoughts_on_sponsored"
     t.index ["sponsored_by"], name: "index_food_for_thoughts_on_sponsored_by"
   end

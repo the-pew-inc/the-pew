@@ -9,6 +9,7 @@ class CreateFoodForThoughts < ActiveRecord::Migration[7.0]
       t.boolean :sponsored,      null: false, default: false
       t.string  :sponsored_by
       t.string  :sponsored_utm
+      t.string  :sponsor_url
 
       t.timestamps
     end
@@ -17,5 +18,6 @@ class CreateFoodForThoughts < ActiveRecord::Migration[7.0]
     add_index :food_for_thoughts, :event_id
     add_index :food_for_thoughts, :sponsored
     add_index :food_for_thoughts, :sponsored_by
+    add_index :food_for_thoughts, :sponsor_url
   end
 end

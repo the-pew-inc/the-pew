@@ -14,7 +14,7 @@ class DashboardsController < ApplicationController
     @negative = 0
 
     # Fetch Food for thought
-    @recommended_articles = FoodForThought.random_selection()
+    @recommended_articles = FoodForThought.random_selection(nil, nil, 0.2)
 
     # Call for @pew_points update
     update_pew_points

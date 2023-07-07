@@ -116,10 +116,10 @@ print "\n"
 p 'Deleting FoodForThought'
 FoodForThought.destroy_all
 12.times do
-  FoodForThought.create!(title: Faker::Book.unique.title)
+  FoodForThought.create!(title: Faker::Book.unique.title, summary: Faker::Books::Dune.quote)
 end
 4.times do
-  FoodForThought.create!(title: Faker::Book.unique.title, sponsored: true, sponsored_by: Faker::Company.name)
+  FoodForThought.create!(title: Faker::Book.unique.title, summary: Faker::Books::Dune.quote, sponsored: true, sponsored_by: Faker::Company.name, sponsor_url: "https://google.com")
 end
 FoodForThought.all.each do |fft|
   ActionText::RichText.create!(record_type: 'FoodForThought', record_id: fft.id, name: 'content', body: Faker::Lorem.sentence)

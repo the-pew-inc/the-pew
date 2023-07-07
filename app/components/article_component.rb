@@ -8,19 +8,24 @@ class ArticleComponent < ViewComponent::Base
     @article = article
   end
 
-  def url_options
-    { target: '_blank' }
+  def link
+    @article.url
   end
 
-  def title
-    @article.title
+  def sponsored_by
+    @article.sponsored_by
   end
 
   def summary
     @article.summary
   end
 
-  def link
-    @article.url
+  def title
+    @article.title
   end
+
+  def url_options
+    { target: '_blank' }
+  end
+
 end

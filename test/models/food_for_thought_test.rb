@@ -3,6 +3,7 @@
 # Table name: food_for_thoughts
 #
 #  id              :uuid             not null, primary key
+#  sponsor_url     :string
 #  sponsored       :boolean          default(FALSE), not null
 #  sponsored_by    :string
 #  sponsored_utm   :string
@@ -18,6 +19,7 @@
 #
 #  index_food_for_thoughts_on_event_id         (event_id)
 #  index_food_for_thoughts_on_organization_id  (organization_id)
+#  index_food_for_thoughts_on_sponsor_url      (sponsor_url)
 #  index_food_for_thoughts_on_sponsored        (sponsored)
 #  index_food_for_thoughts_on_sponsored_by     (sponsored_by)
 #
