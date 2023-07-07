@@ -1,0 +1,20 @@
+<!-- app/components/article_component.html.erb -->
+<div class="border-b dark:border-gray-400 border-gray-700 w-full pb-2 mb-4">
+  <div class="flex justify-between items-center">
+    <% if @article.url.present? %>
+      <%= link_to 'Read more', @article.url, target: '_blank' %>
+    <% else %>
+      <h3 class="font-normal text-gray-500 lex dark:text-gray-300"><%= @article.title %></h3>
+    <% end %>
+    <% if @article.sponsored %>
+      <div class="bg-indigo-100 text-indigo-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-indigo-900 dark:text-indigo-300">
+        sponsored by: <%= @article.sponsored_by %>
+      </div>
+    <% end %>
+  </div>
+  <%= link_to food_for_thought_path(@article) do %>
+    <div class="p-3 text-xs font-normal text-gray-500 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-600 dark:border-gray-500 dark:text-gray-300">
+      <%= @article.summary %>
+    </div>
+  <% end %>
+</div>

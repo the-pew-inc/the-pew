@@ -24,9 +24,9 @@ one:
   label: prompt-one-label
   title: Prompts one description
   organization_id: 8c5e36bb-6163-4d07-8a7e-9f13e77d6e40
-  prompt: A bogus prompt to be used for testing purpose only
+  messages: A bogus prompt to be used for testing purpose only
 
 two:
   label: prompt-two-label
   title: Prompts two description
-  prompt: A bogus prompt to be used for testing purpose only and this is for prompts two so we do not have any organization
+  messages: A bogus prompt to be used for testing purpose only and this is for prompts two so we do not have any organization

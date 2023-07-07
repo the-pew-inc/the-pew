@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_05_005152) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_07_190034) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -153,6 +153,25 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_05_005152) do
     t.index ["short_code"], name: "index_events_on_short_code"
     t.index ["status"], name: "index_events_on_status"
     t.index ["user_id"], name: "index_events_on_user_id"
+  end
+
+  create_table "food_for_thoughts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "title", null: false
+    t.uuid "organization_id"
+    t.uuid "event_id"
+    t.string "summary"
+    t.string "url"
+    t.boolean "sponsored", default: false, null: false
+    t.string "sponsored_by"
+    t.string "sponsored_utm"
+    t.string "sponsor_url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_food_for_thoughts_on_event_id"
+    t.index ["organization_id"], name: "index_food_for_thoughts_on_organization_id"
+    t.index ["sponsor_url"], name: "index_food_for_thoughts_on_sponsor_url"
+    t.index ["sponsored"], name: "index_food_for_thoughts_on_sponsored"
+    t.index ["sponsored_by"], name: "index_food_for_thoughts_on_sponsored_by"
   end
 
   create_table "import_results", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -329,7 +348,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_05_005152) do
     t.integer "mode", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "pew_points", default: 0, null: false
     t.index ["mode"], name: "index_profiles_on_mode"
+    t.index ["pew_points"], name: "index_profiles_on_pew_points"
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 

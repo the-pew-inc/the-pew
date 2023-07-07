@@ -1,0 +1,44 @@
+# == Schema Information
+#
+# Table name: food_for_thoughts
+#
+#  id              :uuid             not null, primary key
+#  sponsor_url     :string
+#  sponsored       :boolean          default(FALSE), not null
+#  sponsored_by    :string
+#  sponsored_utm   :string
+#  summary         :string
+#  title           :string           not null
+#  url             :string
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  event_id        :uuid
+#  organization_id :uuid
+#
+# Indexes
+#
+#  index_food_for_thoughts_on_event_id         (event_id)
+#  index_food_for_thoughts_on_organization_id  (organization_id)
+#  index_food_for_thoughts_on_sponsor_url      (sponsor_url)
+#  index_food_for_thoughts_on_sponsored        (sponsored)
+#  index_food_for_thoughts_on_sponsored_by     (sponsored_by)
+#
+
+# test/fixtures/food_for_thoughts.yml
+one:
+  title: My First Food for Thought
+  summary: Some summary text
+  url: "https://example.com"
+  event_id: 
+
+two:
+  title: My Second Food for Thought
+  summary: Another summary text
+  url: "https://example.org"
+  organization_id: 8c5e36bb-6163-4d07-8a7e-9f13e77d6e40
+
+three:
+  title: My Third Food for Thought
+  summary: Some summary text comes here
+  url: "https://example.com"
+  event_id: 105e36bb-6163-4c09-8e7e-9f03e77d6e32 

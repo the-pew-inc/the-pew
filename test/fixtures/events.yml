@@ -33,6 +33,7 @@
 #
 
 one:
+  id: 105e36bb-6163-4c09-8e7e-9f03e77d6e32
   name: Event number One
   start_date: <%= Time.current.utc %>
   end_date: <%= Time.current.utc + 1.day %>
@@ -44,6 +45,7 @@ one:
   organization_id: 8c5e36bb-6163-4d07-8a7e-9f13e77d6e40
 
 two:
+  id: 105e36bb-6163-4c09-8e7e-9f03e77d6e33
   name: Event with an invalid stop date
   start_date: <%= Time.current.utc + 1.day %>
   end_date: <%= Time.current.utc - 2.days %>
