@@ -2,6 +2,7 @@ import { Controller } from "@hotwired/stimulus";
 import QRCodeStyling from "qr-code-styling";
 
 // Connects to data-controller="qr-code-generator"
+// Description: Used to generate EVENT QR Code on the fly (aka client side)
 export default class extends Controller {
   static targets = ["canvas"];
   static values = {

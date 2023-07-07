@@ -46,6 +46,9 @@ application.register("poll", PollController)
 import PollOptionsController from "./poll_options_controller"
 application.register("poll-options", PollOptionsController)
 
+import QrCodeGeneratorController from "./qr_code_generator_controller"
+application.register("qr-code-generator", QrCodeGeneratorController)
+
 import ResetFormController from "./reset_form_controller"
 application.register("reset-form", ResetFormController)
 

@@ -47,9 +47,6 @@ class Event < ApplicationRecord
   has_many   :attendances, dependent: :destroy
   has_many   :rooms,       dependent: :destroy
 
-  # QR Code of the event
-  has_one_attached :qr_code
-
   # Description (optional) / Used to extract topics and intends from questions by
   # offering a better context to openAI
   has_rich_text :description
@@ -78,21 +75,6 @@ class Event < ApplicationRecord
 
     set_duration
 
-    generate_qr_code if self.short_code_changed?
-  end
-
-  def generate_qr_code
-    qr_url = url_for(
-      controller: 'events',
-      action: 'event',
-      host: ENV['DEFAULT_URL'] || 'localhost:3000',
-      pin: short_code,
-      only_path: false,
-      protocol: 'https',
-      source: 'from_qr'
-    )
-
-    qr_code.attach(QrGenerator.call(qr_url))
   end
 
   def set_duration
