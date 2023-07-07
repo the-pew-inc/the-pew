@@ -28,7 +28,7 @@
         Food for Thoughts
       </h2>
       <div class="overflow-y-auto max-h-96">
-        <%= render(ArticleComponent.with_collection(@recommended_articles)) %>
+        <%= render ArticleComponent.with_collection(@recommended_articles) %>
       </div>
       <div class="text-right mt-2 text-gray-500">Scroll for more articles</div>
     </div>

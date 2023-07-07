@@ -6,7 +6,7 @@
 #  sponsored       :boolean          default(FALSE), not null
 #  sponsored_by    :string
 #  sponsored_utm   :string
-#  summary         :string           not null
+#  summary         :string
 #  title           :string           not null
 #  url             :string
 #  created_at      :datetime         not null

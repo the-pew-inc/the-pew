@@ -2,9 +2,9 @@
 # frozen_string_literal: true
 
 class ArticleComponent < ViewComponent::Base
-  with_collection_parameter :article
+  # with_collection_parameter :article
 
-  def initialize(article)
+  def initialize(article:)
     @article = article
   end
 
