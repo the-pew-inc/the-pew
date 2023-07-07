@@ -42,6 +42,9 @@ Rails.application.routes.draw do
   end
   resources :profiles,  only: %i[ update edit ]
 
+  # Food for Thought routes
+  resources :food_for_thought, only: %i[show]
+
   # Session routes
   post   'login',  to: 'sessions#create'
   get    'login',  to: 'sessions#new'
