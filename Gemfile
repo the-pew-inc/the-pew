@@ -150,6 +150,16 @@ gem 'pg_search', '~> 2.3.6'
 # Stripe (payment, subscription processing) [https://github.com/stripe/stripe-ruby]
 gem 'stripe', '~> 8.5.0'
 
+# # # # # # # # # # # # # # # # # # # # # #
+# The following gems are added to         #
+# facilitate the deployment to Digital    #
+# Ocean.
+# [https://gorails.com/deploy/ubuntu/22.04]
+gem 'capistrano', '~> 3.11'
+gem 'capistrano-rails', '~> 1.4'
+gem 'capistrano-passenger', '~> 0.2.0'
+gem 'capistrano-rbenv', '~> 2.1', '>= 2.1.4'
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: %i[mri mingw x64_mingw]
