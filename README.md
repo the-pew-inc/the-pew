@@ -40,3 +40,13 @@ docker run -p 1080:1080 -p 1025:1025 --name mailcatcher -d stpaquet/alpinemailca
 For more information you can read this medium post [https://medium.com/@spaquet/mailcatcher-to-the-rescue-4ba438dc98c2](https://medium.com/@spaquet/mailcatcher-to-the-rescue-4ba438dc98c2)
 
 ## CREDITS
+Shout out to the following projects:
+### Javascript:
+- [chart.js](https://www.chartjs.org)
+- [flowbite](https://flowbite.com)
+- [QR Code Styling](https://github.com/kozakdenys/qr-code-styling)
+- [stimulus-autocomplete](https://github.com/afcapel/stimulus-autocomplete)
+- [taggle](https://github.com/okcoker/taggle.js)
+- [tailwindcss](https://tailwindcss.com)
+
+### RubyGems:
