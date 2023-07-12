@@ -1,6 +1,7 @@
 class EventPolicy < ApplicationPolicy
   def show?
-    user_is_owner_or_admin? || user_created_event? || user.has_role?(:admin, record)
+    # user_is_owner_or_admin? || user_created_event? || user.has_role?(:admin, record)
+    user_is_owner_or_admin? || user_created_event?
   end
 
   def update?
@@ -44,11 +45,19 @@ class EventPolicy < ApplicationPolicy
   private
 
   def user_is_owner_or_admin?
-    user.has_role?(:admin, record.organization) || 
-    record.organization.members.where(user_id: user.id, owner: true).exists?
+    if user 
+      user.has_role?(:admin, record.organization) || 
+      record.organization.members.where(user_id: user.id, owner: true).exists?
+    else
+      false
+    end
   end
 
   def user_created_event?
-    record.user_id == user.id
+    if user
+      record.user_id == user.id
+    else
+      false
+    end
   end
 end
