@@ -150,16 +150,6 @@ gem 'pg_search', '~> 2.3.6'
 # Stripe (payment, subscription processing) [https://github.com/stripe/stripe-ruby]
 gem 'stripe', '~> 8.5.0'
 
-# # # # # # # # # # # # # # # # # # # # # #
-# The following gems are added to         #
-# facilitate the deployment to Digital    #
-# Ocean.
-# [https://gorails.com/deploy/ubuntu/22.04]
-gem 'capistrano', '~> 3.11'
-gem 'capistrano-rails', '~> 1.4'
-gem 'capistrano-passenger', '~> 0.2.0'
-gem 'capistrano-rbenv', '~> 2.1', '>= 2.1.4'
-
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: %i[mri mingw x64_mingw]
@@ -192,6 +182,17 @@ group :development do
 
   # Add Bullet to monitor and help fix N+1 DB queries
   gem 'bullet'
+
+  # # # # # # # # # # # # # # # # # # # # # #
+  # The following gems are added to         #
+  # facilitate the deployment to Digital    #
+  # Ocean.
+  # [https://gorails.com/deploy/ubuntu/22.04]
+  gem 'capistrano', '~> 3.17',            require: false
+  gem 'capistrano-rails', '~> 1.6.3',     require: false
+  gem 'capistrano-rbenv', '~> 2.2.0',     require: false
+  gem 'capistrano-bundler', require: false
+  gem 'capistrano3-puma', '~> 6.0.0.beta1',   require: false
 end
 
 group :test do
@@ -206,5 +207,3 @@ group :test do
   # on how to integrate ith CodeClimate
   gem 'simplecov', require: false
 end
-
-
