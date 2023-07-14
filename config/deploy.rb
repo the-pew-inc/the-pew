@@ -7,6 +7,10 @@ set :repo_url, "git@github.com:the-pew-inc/the-pew.git"
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
+# Not using ask to avoid being asked everytime we deploy
+# changing the branch... as master no longer exists on GitHub
+set :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
+
 # Default deploy_to directory is /var/www/my_app_name
 # set :deploy_to, "/var/www/my_app_name"
 set :deploy_to, "/home/deploy/#{fetch :application}"

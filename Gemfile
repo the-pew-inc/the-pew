@@ -148,7 +148,7 @@ gem 'ruby-openai', '~> 4.2.0'
 gem 'pg_search', '~> 2.3.6'
 
 # Stripe (payment, subscription processing) [https://github.com/stripe/stripe-ruby]
-gem 'stripe', '~> 8.5.0'
+gem 'stripe', '~> 8.6.0'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -193,6 +193,7 @@ group :development do
   gem 'capistrano-rbenv', '~> 2.2.0',     require: false
   gem 'capistrano-bundler', require: false
   gem 'capistrano3-puma', '~> 6.0.0.beta1',   require: false
+  gem 'capistrano-sidekiq', '~> 2.3.1',   require: false
 end
 
 group :test do
