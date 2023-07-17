@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/faker-ruby/faker.git
-  revision: 1bc565f02c99f91843145c64ff7ca2218b1d20e3
+  revision: 56fc3c844d29dfa2e8175ba79168c498a8672b5a
   specs:
     faker (3.2.0)
       i18n (>= 1.8.11, < 2)
@@ -100,7 +100,7 @@ GEM
       ffi-compiler (~> 1.0)
     ast (2.4.2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.786.0)
+    aws-partitions (1.787.0)
     aws-sdk-core (3.178.0)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.651.0)
@@ -213,7 +213,7 @@ GEM
     invisible_captcha (2.1.0)
       rails (>= 5.2)
     io-console (0.6.0)
-    irb (1.7.3)
+    irb (1.7.4)
       reline (>= 0.3.6)
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
@@ -308,7 +308,7 @@ GEM
     public_suffix (5.0.3)
     puma (6.3.0)
       nio4r (~> 2.0)
-    pundit (2.3.0)
+    pundit (2.3.1)
       activesupport (>= 3.0.0)
     racc (1.7.1)
     rack (2.2.7)
