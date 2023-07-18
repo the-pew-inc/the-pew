@@ -5,13 +5,6 @@ require "capistrano/setup"
 require "capistrano/deploy"
 
 # Load the SCM plugin appropriate to your project:
-#
-# require "capistrano/scm/hg"
-# install_plugin Capistrano::SCM::Hg
-# or
-# require "capistrano/scm/svn"
-# install_plugin Capistrano::SCM::Svn
-# or
 require "capistrano/scm/git"
 install_plugin Capistrano::SCM::Git
 
@@ -27,12 +20,22 @@ install_plugin Capistrano::SCM::Git
 #   https://github.com/capistrano/passenger
 #
 # require "capistrano/rvm"
+# require "capistrano/rails"
 require "capistrano/rbenv"
 # require "capistrano/chruby"
 require "capistrano/bundler"
 require "capistrano/rails/assets"
-# require "capistrano/rails/migrations"
-require "capistrano/passenger"
+require "capistrano/rails/migrations"
+# require "capistrano/passenger"
+
+# require "capistrano/sidekiq"
+# install_plugin Capistrano::Sidekiq
+# install_plugin Capistrano::Sidekiq::Systemd
+
+require "capistrano/puma"
+install_plugin Capistrano::Puma
+# install_plugin Capistrano::Puma::Daemon
+# install_plugin Capistrano::Puma::Systemd
 
 set :rbenv_type, :user
 set :rbenv_ruby, "3.2.2"
