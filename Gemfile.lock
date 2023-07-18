@@ -90,7 +90,7 @@ GEM
     annotate (3.2.0)
       activerecord (>= 3.2, < 8.0)
       rake (>= 10.4, < 14.0)
-    appmap (0.101.0)
+    appmap (0.102.0)
       activesupport
       method_source
       rack
@@ -244,7 +244,7 @@ GEM
     mini_magick (4.12.0)
     mini_mime (1.1.2)
     minitest (5.18.1)
-    msgpack (1.7.1)
+    msgpack (1.7.2)
     multi_xml (0.6.0)
     multipart-post (2.3.0)
     net-imap (0.3.6)
@@ -474,7 +474,7 @@ DEPENDENCIES
   active_storage_validations (~> 1.0.0)
   ahoy_matey
   annotate (~> 3.2.0)
-  appmap (= 0.101.0)
+  appmap (= 0.102.0)
   argon2 (~> 2.2.0)
   aws-sdk-s3
   bootsnap
