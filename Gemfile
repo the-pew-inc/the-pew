@@ -190,7 +190,7 @@ group :development do
   # [https://gorails.com/deploy/ubuntu/22.04]
   gem 'capistrano', '~> 3.17',              require: false
   gem 'capistrano-rails', '~> 1.6.3',       require: false
-  gem 'capistrano-rake', '~> 0.2.0',        require: false
+  # gem 'capistrano-rake', '~> 0.2.0',        require: false
   gem 'capistrano-rbenv', '~> 2.2.0',       require: false
   gem 'capistrano-bundler',                 require: false
   gem 'capistrano3-puma', '~> 6.0.0.beta1', require: false
