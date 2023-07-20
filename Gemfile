@@ -193,8 +193,8 @@ group :development do
   # gem 'capistrano-rake', '~> 0.2.0',        require: false
   gem 'capistrano-rbenv', '~> 2.2.0',       require: false
   gem 'capistrano-bundler',                 require: false
-  gem 'capistrano3-puma', '~> 6.0.0.beta1', require: false
-  gem 'capistrano-sidekiq', '~> 2.3.1',     require: false
+  # gem 'capistrano3-puma', '~> 6.0.0.beta1', require: false
+  # gem 'capistrano-sidekiq', '~> 2.3.1',     require: false
 end
 
 group :test do
