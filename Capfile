@@ -28,14 +28,10 @@ require "capistrano/rbenv"
 # require "capistrano/rails/migrations"
 # require "capistrano/passenger"
 
-# require "capistrano/sidekiq"
-# install_plugin Capistrano::Sidekiq
-# install_plugin Capistrano::Sidekiq::Systemd
+require "capistrano/sidekiq"
+install_plugin Capistrano::Sidekiq
+install_plugin Capistrano::Sidekiq::Systemd
 
-# require "capistrano/puma"
-# install_plugin Capistrano::Puma
-# install_plugin Capistrano::Puma::Daemon
-# install_plugin Capistrano::Puma::Systemd
 
 set :rbenv_type, :user
 set :rbenv_ruby, "3.2.2"
