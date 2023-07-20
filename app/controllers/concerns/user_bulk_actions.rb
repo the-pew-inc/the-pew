@@ -5,7 +5,7 @@
 #
 module UserBulkActions
   extend ActiveSupport::Concern
-  include Pundit
+  include Pundit::Authorization
 
   # PATCH accounts/
   # Used to update a bulk of users all at once.
