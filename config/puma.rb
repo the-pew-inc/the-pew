@@ -73,9 +73,9 @@ if %w[production staging].member?(rails_env)
   on_worker_boot do
     ActiveSupport.on_load(:active_record) do
       # app does not use database, uncomment when needed
-      # db_url = ENV.fetch('DATABASE_URL')
-      # puts "puma: connecting to DB at #{db_url}"
-      # ActiveRecord::Base.establish_connection(db_url)
+      db_url = ENV.fetch('DATABASE_URL')
+      puts "puma: connecting to DB at #{db_url}"
+      ActiveRecord::Base.establish_connection(db_url)
     end
   end
 elsif rails_env == "development"
