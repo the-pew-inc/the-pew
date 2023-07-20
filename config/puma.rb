@@ -22,13 +22,11 @@ worker_timeout 3600 if ENV.fetch('RAILS_ENV', 'development') == 'development'
 rails_env = ENV.fetch('RAILS_ENV') { 'development' }
 environment rails_env
 
-# app_dir = File.expand_path("../..", __FILE__)
-app_dir "/home/deploy/thepew"
-directory app_dir
+app_dir = File.expand_path("../../../..", __FILE__)
+# directory app_dir
 shared_dir = "#{app_dir}/shared"
 
 p "####"
-p app_dir
 p shared_dir
 p "####"
 
