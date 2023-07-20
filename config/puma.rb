@@ -22,9 +22,15 @@ worker_timeout 3600 if ENV.fetch('RAILS_ENV', 'development') == 'development'
 rails_env = ENV.fetch('RAILS_ENV') { 'development' }
 environment rails_env
 
-app_dir = File.expand_path("../..", __FILE__)
+# app_dir = File.expand_path("../..", __FILE__)
+app_dir "/home/deploy/thepew"
 directory app_dir
 shared_dir = "#{app_dir}/shared"
+
+p "####"
+p app_dir
+p shared_dir
+p "####"
 
 # Specifies the number of `workers` to boot in clustered mode.
 # Workers are forked web server processes. If using threads and workers together
@@ -59,7 +65,7 @@ if %w[production staging].member?(rails_env)
   preload_app!
 
   # Set up socket location
-  bind "unix://#{shared_dir}/sockets/thepew-puma.sock"
+  bind "unix://#{shared_dir}/tmp/sockets/thepew-puma.sock"
 
   before_fork do
     # app does not use database, uncomment when needed
