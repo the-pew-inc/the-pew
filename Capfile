@@ -32,8 +32,8 @@ require "capistrano/rbenv"
 # install_plugin Capistrano::Sidekiq
 # install_plugin Capistrano::Sidekiq::Systemd
 
-require "capistrano/puma"
-install_plugin Capistrano::Puma
+# require "capistrano/puma"
+# install_plugin Capistrano::Puma
 # install_plugin Capistrano::Puma::Daemon
 # install_plugin Capistrano::Puma::Systemd
 
