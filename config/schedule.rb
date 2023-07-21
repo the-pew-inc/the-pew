@@ -18,3 +18,15 @@
 # end
 
 # Learn more: http://github.com/javan/whenever
+
+set :output, "log/cron.log"
+
+# Clear Active Sessions from sessions that are tooooo long
+every 6.hours do
+  rake 'clean_active_sessions:clean[false]'
+end
+
+# Close Events
+every 1.day do
+  rake 'close_events:close_events[false]'
+end
