@@ -53,6 +53,7 @@ set :linked_dirs,  fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 
 set :linked_files, %w{config/database.yml config/master.key}
 
 # Sidekiq
-set :sidekiq_service_unit_name, "sidekiq"
-set :sidekiq_service_unit_user, :system
-set :sidekiq_config, "config/sidekiq.yml"
+# set :sidekiq_service_unit_name, "sidekiq"
+# set :sidekiq_service_unit_user, :system
+# set :sidekiq_env => fetch(:rack_env, fetch(:rails_env, fetch(:stage)))
+# set :sidekiq_config, "config/sidekiq.yml"
