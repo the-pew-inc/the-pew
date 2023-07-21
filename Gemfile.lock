@@ -182,6 +182,8 @@ GEM
     faraday-multipart (1.0.4)
       multipart-post (~> 2)
     faraday-net_http (3.0.2)
+    faraday-retry (2.2.0)
+      faraday (~> 2.0)
     ffi (1.15.5)
     ffi-compiler (1.0.1)
       ffi (>= 1.0.0)
@@ -491,6 +493,7 @@ DEPENDENCIES
   debug
   down (~> 5.0)
   faker!
+  faraday-retry (~> 2.2.0)
   groupdate
   hiredis (~> 0.6.3)
   honeybadger (~> 5.0)
