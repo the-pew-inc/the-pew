@@ -46,11 +46,11 @@ set :keep_releases, 2
 # set :ssh_options, verify_host_key: :secure
 
 # Puma configuration
-set :use_sudo, true
+# set :use_sudo, true
 # set :linked_files, %w{config/master.key config/database.yml}
 set :rails_env,    "production"
 set :linked_dirs,  fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system')
-set :linked_files, %w{config/database.yml config/master.key}
+# set :linked_files, %w{config/database.yml config/master.key}
 
 # Sidekiq
 # set :sidekiq_service_unit_name, "sidekiq"
