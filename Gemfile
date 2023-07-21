@@ -157,7 +157,7 @@ gem 'stripe', '~> 8.6.0'
 gem 'faraday-retry', '~> 2.2.0'
 
 # Whenever gem to mamage crontab & tasks [https://github.com/javan/whenever]
-gem 'whenever', '~> 1.0.0'
+gem 'whenever', '~> 1.0.0', require: false
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
