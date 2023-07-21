@@ -8,8 +8,12 @@ namespace :db_cleanup do
   #   - rake "db_cleanup:remove_orphan_members_and_accounts[false]"
   desc 'Remove accounts that have no user'
   task :remove_orphan_members_and_accounts, [:dry_run] => :environment do |_t, args|
+    start_at= Time.now.utc
+    failed_list = []
+    member_count = 0
     dry_run = true unless args[:dry_run] == 'false'
 
+    Rails.logger.error "[remove_orphan_members_and_accounts] Starting at #{start_at}."
     puts("[#{Time.now.utc}] Running remove_orphan_members_and_accounts :: INI#{' (dry_run activated)' if dry_run}")
 
     # List all the rows in members which do not have a matching user
@@ -24,9 +28,28 @@ namespace :db_cleanup do
 
       # Delete the orphan member entry
       Member.destroy!(member.id)
+
+      # Increment the counter
+      member_count += 1
+    rescue StandardError => e
+      failed_list.push({ member_id: member.id, reason: member.inspect })
+        
+      Rails.logger.error "[remove_orphan_members_and_accounts] member_id: #{member.id} failed to update user name."
+      Rails.logger.error "[remove_orphan_members_and_accounts] member_id: #{member.id} failed reason: #{e.inspect}"
     end
     
+    if failed_list.count > 0
+      Rails.logger.info "[remove_orphan_members_and_accounts] Failed list: #{failed_list}"
+      p "[#{Time.now.utc}] [remove_orphan_members_and_accounts] Failed list: #{failed_list}"
+    end
 
+    # End the task
+    # Compute task duration
+    end_at= Time.now.utc
+    duration = ((end_at - start_at) / 60.seconds).to_i
+
+    # Display closing messages and report to Rails logger for centralized logs
+    Rails.logger.error "[remove_orphan_members_and_accounts] Ending at #{end_at}. Members removed: #{member_count} in #{duration}"
     puts("[#{Time.now.utc}] Running remove_orphan_members_and_accounts :: END#{' (dry_run activated)' if dry_run}")
   end
 
@@ -39,7 +62,7 @@ namespace :db_cleanup do
 
     puts("[#{Time.now.utc}] Running remove_orphan_accounts :: INI#{' (dry_run activated)' if dry_run}")
 
-    # List all the rows in members which do not have a matching user
+    # List all the rows in accounts which do not have a matching user
     # In order to avoid deleting objects that are freshly created and might still be in review
     # it has been decided to only check objects for which the created_at value is greater or equal
     # to 7 days from the current date.
