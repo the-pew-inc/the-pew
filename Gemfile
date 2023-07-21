@@ -183,8 +183,8 @@ group :development do
   # Vulnerability scanner
   gem 'brakeman', '~> 6.0.1'
 
-  # Add Model annotations
-  gem 'annotate', '~>3.2.0'
+  # Add Model annotations [https://github.com/ctran/annotate_models]
+  gem 'annotate', '~>3.2.0', require: false
 
   # Add Bullet to monitor and help fix N+1 DB queries
   gem 'bullet'
