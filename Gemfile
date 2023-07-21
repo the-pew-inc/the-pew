@@ -156,6 +156,9 @@ gem 'stripe', '~> 8.6.0'
 # To enable retry in Faraday v2.0+
 gem 'faraday-retry', '~> 2.2.0'
 
+# Whenever gem to mamage crontab & tasks [https://github.com/javan/whenever]
+gem 'whenever', '~> 1.0.0'
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: %i[mri mingw x64_mingw]

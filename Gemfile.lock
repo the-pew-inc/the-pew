@@ -158,6 +158,7 @@ GEM
       actionpack (>= 3.1)
       caxlsx (>= 3.0)
     chartkick (5.0.2)
+    chronic (0.10.2)
     concurrent-ruby (1.2.2)
     connection_pool (2.4.1)
     countries (5.5.0)
@@ -459,6 +460,8 @@ GEM
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
+    whenever (1.0.0)
+      chronic (>= 0.6.3)
     xpath (3.2.0)
       nokogiri (~> 1.8)
     xsv (1.2.1)
@@ -535,6 +538,7 @@ DEPENDENCIES
   view_component
   web-console
   webdrivers
+  whenever (~> 1.0.0)
   xsv
 
 RUBY VERSION
