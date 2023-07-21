@@ -140,6 +140,10 @@ GEM
       capistrano (>= 3.9.0)
       capistrano-bundler
       sidekiq (>= 6.0.6)
+    capistrano3-puma (6.0.0.beta.1)
+      capistrano (~> 3.7)
+      capistrano-bundler
+      puma (>= 5.1, < 7.0)
     capybara (3.39.2)
       addressable
       matrix
@@ -487,6 +491,7 @@ DEPENDENCIES
   capistrano-rails (~> 1.6.3)
   capistrano-rbenv (~> 2.2.0)
   capistrano-sidekiq (~> 3.0.0.alpha.2)
+  capistrano3-puma (~> 6.0.0.beta.1)
   capybara
   caxlsx
   caxlsx_rails

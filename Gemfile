@@ -197,11 +197,12 @@ group :development do
   # facilitate the deployment to Digital    #
   # Ocean.
   # [https://gorails.com/deploy/ubuntu/22.04]
-  gem 'capistrano', '~> 3.17',              require: false
-  gem 'capistrano-rails', '~> 1.6.3',       require: false
-  gem 'capistrano-rbenv', '~> 2.2.0',       require: false
-  gem 'capistrano-bundler',                 require: false
-  gem 'capistrano-sidekiq', '~> 3.0.0.alpha.2',     require: false
+  gem 'capistrano', '~> 3.17',                  require: false
+  gem 'capistrano-rails', '~> 1.6.3',           require: false
+  gem 'capistrano-rbenv', '~> 2.2.0',           require: false
+  gem 'capistrano-bundler',                     require: false
+  gem 'capistrano-sidekiq', '~> 3.0.0.alpha.2', require: false
+  gem 'capistrano3-puma', '~> 6.0.0.beta.1',    require: false
 end
 
 group :test do
