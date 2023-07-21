@@ -41,6 +41,9 @@ gem 'oj', '~> 3.15.0'
 # Use Redis adapter to run Action Cable in production
 gem 'redis', '~> 5.0.5'
 
+# To speed up caching in production
+gem 'hiredis', '~> 0.6.3'
+
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem 'kredis'
 

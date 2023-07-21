@@ -191,6 +191,7 @@ GEM
     groupdate (6.3.0)
       activesupport (>= 6.1)
     hashie (5.0.0)
+    hiredis (0.6.3)
     honeybadger (5.2.1)
     htmlentities (4.3.4)
     http (5.1.1)
@@ -491,6 +492,7 @@ DEPENDENCIES
   down (~> 5.0)
   faker!
   groupdate
+  hiredis
   honeybadger (~> 5.0)
   image_processing (~> 1.2)
   invisible_captcha (~> 2.1.0)
