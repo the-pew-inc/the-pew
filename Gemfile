@@ -175,7 +175,7 @@ group :development do
 
   # Add support to Brakeman [https://github.com/presidentbeef/brakeman]
   # Vulnerability scanner
-  gem 'brakeman'
+  gem 'brakeman', '~> 6.0.1'
 
   # Add Model annotations
   gem 'annotate', '~>3.2.0'
