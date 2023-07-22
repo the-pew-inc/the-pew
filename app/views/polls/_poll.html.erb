@@ -2,10 +2,10 @@
   <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white w-2/5 max-w-xs break-words">
     <%= poll.title %>
   </th>
-  <td class="px-6 py-4">
+  <td class="px-6 py-4 hidden md:table-cell">
     <%= poll.user.profile.nickname %>
   </td>
-  <td class="px-6 py-4">
+  <td class="px-6 py-4 hidden md:table-cell">
     <%= poll.created_at.strftime('%b %d, %y') %>
   </td>
   <td class="px-6 py-4">
