@@ -28,11 +28,11 @@ require "whenever/capistrano"
 
 require "capistrano/sidekiq"
 install_plugin Capistrano::Sidekiq
-install_plugin Capistrano::Sidekiq::Systemd
+# install_plugin Capistrano::Sidekiq::Systemd
 
 require 'capistrano/puma'
 install_plugin Capistrano::Puma  # Default puma tasks
-install_plugin Capistrano::Puma::Systemd
+# install_plugin Capistrano::Puma::Systemd
 
 set :rbenv_type, :user
 set :rbenv_ruby, "3.2.2"

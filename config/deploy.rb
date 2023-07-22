@@ -37,12 +37,16 @@ append :linked_files, "config/database.yml", 'config/master.key'
 # set :keep_releases, 5
 set :keep_releases, 2
 
+set :use_sudo, true
+
 # Uncomment the following to require manually verifying the host key before first deploy.
 # set :ssh_options, verify_host_key: :secure
 
 # Puma
-set :puma_user, fetch(:user)
-set :puma_role, :web
+# Commented out as we control puma manually for the moment.
+# set :puma_service_unit_name, "puma.service"
+# set :puma_user, fetch(:user)
+# set :puma_role, :web
 
 # Sidekiq
 # set :sidekiq_service_unit_name, "sidekiq"

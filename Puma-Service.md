@@ -23,9 +23,9 @@ sudo systemctl daemon-reload
 sudo systemctl enable puma.service
 sudo systemctl start puma.service
 
-sudo systemctl start puma-thepew51
-sudo systemctl stop puma-thepew51
-sudo systemctl status puma-thepew51
+sudo systemctl start puma
+sudo systemctl stop puma
+sudo systemctl status puma
 ps -eo pid,comm,euser,supgrp | grep nginx
 
 When using SSL add the following to ExecStart to enable Puma over HTTPS
