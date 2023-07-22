@@ -40,7 +40,7 @@ namespace :clean_active_sessions do
     duration = ((end_at - start_at) / 60.seconds).to_i
 
     # Display closing messages and report to Rails logger for centralized logs
-    Rails.logger.error "[clean_active_sessions:clean] Ending at #{end_at}. Sessions terminated: #{member_count} in #{duration}"
+    Rails.logger.error "[clean_active_sessions:clean] Ending at #{end_at}. Sessions terminated: #{session_count} in #{duration}"
     puts("[#{Time.now.utc}] Running clean session :: END#{' (dry_run activated)' if dry_run}")
   end
 end
