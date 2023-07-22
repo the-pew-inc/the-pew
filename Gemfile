@@ -153,6 +153,12 @@ gem 'pg_search', '~> 2.3.6'
 # Stripe (payment, subscription processing) [https://github.com/stripe/stripe-ruby]
 gem 'stripe', '~> 8.6.0'
 
+# To enable retry in Faraday v2.0+
+gem 'faraday-retry', '~> 2.2.0'
+
+# Whenever gem to mamage crontab & tasks [https://github.com/javan/whenever]
+gem 'whenever', '~> 1.0.0', require: false
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: %i[mri mingw x64_mingw]
@@ -180,8 +186,8 @@ group :development do
   # Vulnerability scanner
   gem 'brakeman', '~> 6.0.1'
 
-  # Add Model annotations
-  gem 'annotate', '~>3.2.0'
+  # Add Model annotations [https://github.com/ctran/annotate_models]
+  gem 'annotate', '~>3.2.0', require: false
 
   # Add Bullet to monitor and help fix N+1 DB queries
   gem 'bullet'
@@ -191,11 +197,12 @@ group :development do
   # facilitate the deployment to Digital    #
   # Ocean.
   # [https://gorails.com/deploy/ubuntu/22.04]
-  gem 'capistrano', '~> 3.17',              require: false
-  gem 'capistrano-rails', '~> 1.6.3',       require: false
-  gem 'capistrano-rbenv', '~> 2.2.0',       require: false
-  gem 'capistrano-bundler',                 require: false
-  gem 'capistrano-sidekiq', '~> 3.0.0.alpha.2',     require: false
+  gem 'capistrano', '~> 3.17',                  require: false
+  gem 'capistrano-rails', '~> 1.6.3',           require: false
+  gem 'capistrano-rbenv', '~> 2.2.0',           require: false
+  gem 'capistrano-bundler',                     require: false
+  gem 'capistrano-sidekiq', '~> 3.0.0.alpha.2', require: false
+  gem 'capistrano3-puma', '~> 6.0.0.beta.1',    require: false
 end
 
 group :test do

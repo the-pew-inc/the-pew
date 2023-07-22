@@ -11,16 +11,11 @@ set :repo_url, "git@github.com:the-pew-inc/the-pew.git"
 # changing the branch... as master no longer exists on GitHub
 set :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
 
+set :rails_env,    "production"
+set :linked_dirs,  fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system')
+
 # Default deploy_to directory is /var/www/my_app_name
-# set :deploy_to, "/var/www/my_app_name"
 set :deploy_to, "/home/deploy/#{fetch :application}"
-
-# Default value for :format is :airbrussh.
-# set :format, :airbrussh
-
-# You can configure the Airbrussh format using :format_options.
-# These are the defaults.
-# set :format_options, command_output: true, log_file: "log/capistrano.log", color: :auto, truncate: :auto
 
 # Default value for :pty is false
 # set :pty, true
@@ -42,15 +37,16 @@ append :linked_files, "config/database.yml", 'config/master.key'
 # set :keep_releases, 5
 set :keep_releases, 2
 
+set :use_sudo, true
+
 # Uncomment the following to require manually verifying the host key before first deploy.
 # set :ssh_options, verify_host_key: :secure
 
-# Puma configuration
-# set :use_sudo, true
-# set :linked_files, %w{config/master.key config/database.yml}
-set :rails_env,    "production"
-set :linked_dirs,  fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system')
-# set :linked_files, %w{config/database.yml config/master.key}
+# Puma
+# Commented out as we control puma manually for the moment.
+# set :puma_service_unit_name, "puma.service"
+# set :puma_user, fetch(:user)
+# set :puma_role, :web
 
 # Sidekiq
 # set :sidekiq_service_unit_name, "sidekiq"
