@@ -9,7 +9,7 @@
       <div class="bg-blue-600 h-2.5 rounded-full transition-all duration-500" style="width: 0%" data-poll-target="progress"></div>
     </div>
     <% @poll.poll_options.each do |option| %>
-      <div class="flex items-center mb-3 space-x-4">
+      <div class="flex justify-between items-center mb-3 space-x-4">
         <div class="text-gray-500 dark:text-gray-400 tracking-tight font-bold text-lg">
           <%= option.title %>
         </div>
