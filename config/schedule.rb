@@ -19,6 +19,9 @@
 
 # Learn more: http://github.com/javan/whenever
 
+# Fix an issue when using rbenv (at least)
+env :PATH, ENV['PATH']
+
 set :output, "log/cron.log"
 
 # Clear Active Sessions from sessions that are tooooo long
