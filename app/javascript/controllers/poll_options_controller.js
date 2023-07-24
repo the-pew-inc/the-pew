@@ -7,7 +7,7 @@ export default class extends Controller {
   static targets = ["container", "template", "error"];
 
   connect() {
-    if (this.pollOptions.length < 2) {
+    if (this.pollOptions.length < 1) {
       this.errorTarget.style.display = "block";
     }
   }
@@ -19,10 +19,10 @@ export default class extends Controller {
       this.pollOptions.length
     );
     this.containerTarget.insertAdjacentHTML("beforeend", content);
-    if (this.pollOptions.length < 2) {
+    if (this.pollOptions.length < 1) {
       this.errorTarget.style.display = "block";
     }
-    if (this.pollOptions.length >= 2) {
+    if (this.pollOptions.length >= 1) {
       this.errorTarget.style.display = "none";
     }
   }
@@ -32,7 +32,7 @@ export default class extends Controller {
     const option = event.currentTarget.closest("[data-poll-option]");
     option.querySelector("input[name*='_destroy']").value = 1;
     option.style.display = "none";
-    if (this.pollOptions.length < 3) {
+    if (this.pollOptions.length < 2) {
       this.errorTarget.style.display = "block";
     }
   }
