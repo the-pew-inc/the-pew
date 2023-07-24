@@ -59,8 +59,8 @@ class PollsController < ApplicationController
 
   def poll_params
     params.require(:poll).permit(:add_option, :poll_type, :status, :title, 
-      :duration, :display, :description,
-      poll_options_attributes: [:id, :title, :_destroy])
+      :duration, :display, :description, :max_votes, :num_votes,
+      poll_options_attributes: [:id, :title, :is_answer, :_destroy])
   end
 
   def poll_stats
