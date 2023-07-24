@@ -66,6 +66,9 @@ class Poll < ApplicationRecord
   validate :num_votes_not_greater_than_max_votes, if: -> { max_votes.present? && num_votes.present? }
   validate :num_votes_not_greater_than_options, if: -> { max_votes.nil? && num_votes.present? }
 
+  # :selectors validation rules
+  validate :validate_selectors
+
   # Universal: everyone can see participate to the poll
   # Restricted: participating to the poll requires an account
   # Invite_only: participating to the poll requires an invitation
@@ -120,6 +123,16 @@ class Poll < ApplicationRecord
 
   def num_votes_not_greater_than_options
     errors.add(:num_votes, "cannot be greater than the number of options") if num_votes > selectors.count
+  end
+
+  def validate_selectors
+    if selectors.blank?
+      errors.add(:selectors, "must contain at least one value")
+    elsif selectors.count > 3
+      errors.add(:selectors, "cannot contain more than 3 values")
+    elsif (selectors - ["upvote", "downvote", "neutral"]).any?
+      errors.add(:selectors, "can only include 'upvote', 'downvote', or 'neutral'")
+    end
   end
 
   def convert_zero_to_nil
