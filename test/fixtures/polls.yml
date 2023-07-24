@@ -11,6 +11,7 @@
 #  num_votes       :integer
 #  participants    :integer          default(0), not null
 #  poll_type       :integer          not null
+#  selectors       :string           default(["\"upvote\"", "\"downvote\"", "\"neutral\""]), is an Array
 #  status          :integer          not null
 #  title           :string           not null
 #  created_at      :datetime         not null
@@ -22,6 +23,7 @@
 #
 #  index_polls_on_organization_id  (organization_id)
 #  index_polls_on_poll_type        (poll_type)
+#  index_polls_on_selectors        (selectors)
 #  index_polls_on_status           (status)
 #  index_polls_on_user_id          (user_id)
 #
