@@ -51,13 +51,20 @@ class Poll < ApplicationRecord
   has_rich_text :description
 
   validates :title, presence: true, length: { minimum: 3, maximum: 250 }
-  validate :validate_poll_options
+  validates :duration, numericality: { only_integer: true, greater_than_or_equal_to: 0, allow_nil: true }
+  validate  :validate_poll_options
 
   # :num_answers and :max_answers validation rules
   validates :num_answers, :max_answers, numericality: { greater_than_or_equal_to: 0, allow_nil: true }
-  validate :num_answers_less_than_or_equal_to_poll_options_count
-  validate :num_and_max_answers_exclusive
-  validate :max_answers_less_than_or_equal_to_poll_options_count
+  validate  :num_answers_less_than_or_equal_to_poll_options_count
+  validate  :num_and_max_answers_exclusive
+  validate  :max_answers_less_than_or_equal_to_poll_options_count
+
+  # :num_votes and max_votes validation rules
+  validates :num_votes, :max_votes, numericality: { only_integer: true, greater_than_or_equal_to: 0, allow_nil: true }
+  validate :max_votes_not_greater_than_options, if: -> { max_votes.present? }
+  validate :num_votes_not_greater_than_max_votes, if: -> { max_votes.present? && num_votes.present? }
+  validate :num_votes_not_greater_than_options, if: -> { max_votes.nil? && num_votes.present? }
 
   # Universal: everyone can see participate to the poll
   # Restricted: participating to the poll requires an account
@@ -101,6 +108,18 @@ class Poll < ApplicationRecord
     if num_answers.present? && max_answers.present? && num_answers > 0 && max_answers > 0
       errors.add(:base, "either strict or flexible when setting values for the number or options a user can vote for")
     end
+  end
+
+  def max_votes_not_greater_than_options
+    errors.add(:max_votes, "cannot be greater than the number of options") if max_votes > selectors.count
+  end
+
+  def num_votes_not_greater_than_max_votes
+    errors.add(:num_votes, "cannot be greater than max_votes") if num_votes > max_votes
+  end
+
+  def num_votes_not_greater_than_options
+    errors.add(:num_votes, "cannot be greater than the number of options") if num_votes > selectors.count
   end
 
   def convert_zero_to_nil
