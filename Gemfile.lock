@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/faker-ruby/faker.git
-  revision: 56fc3c844d29dfa2e8175ba79168c498a8672b5a
+  revision: 0839df200586fefa2a522c63b67a48326edfdc20
   specs:
     faker (3.2.0)
       i18n (>= 1.8.11, < 2)
@@ -100,8 +100,8 @@ GEM
       ffi-compiler (~> 1.0)
     ast (2.4.2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.790.0)
-    aws-sdk-core (3.178.0)
+    aws-partitions (1.792.0)
+    aws-sdk-core (3.179.0)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.651.0)
       aws-sigv4 (~> 1.5)
@@ -109,8 +109,8 @@ GEM
     aws-sdk-kms (1.71.0)
       aws-sdk-core (~> 3, >= 3.177.0)
       aws-sigv4 (~> 1.1)
-    aws-sdk-s3 (1.131.0)
-      aws-sdk-core (~> 3, >= 3.177.0)
+    aws-sdk-s3 (1.132.0)
+      aws-sdk-core (~> 3, >= 3.179.0)
       aws-sdk-kms (~> 1)
       aws-sigv4 (~> 1.6)
     aws-sigv4 (1.6.0)
@@ -161,7 +161,7 @@ GEM
     caxlsx_rails (0.6.3)
       actionpack (>= 3.1)
       caxlsx (>= 3.0)
-    chartkick (5.0.2)
+    chartkick (5.0.3)
     chronic (0.10.2)
     concurrent-ruby (1.2.2)
     connection_pool (2.4.1)
@@ -447,7 +447,7 @@ GEM
       activemodel (>= 3.0.0)
       public_suffix
     version_gem (1.1.3)
-    view_component (3.4.0)
+    view_component (3.5.0)
       activesupport (>= 5.2.0, < 8.0)
       concurrent-ruby (~> 1.0)
       method_source (~> 1.0)
@@ -470,7 +470,7 @@ GEM
       nokogiri (~> 1.8)
     xsv (1.2.1)
       rubyzip (>= 1.3, < 3)
-    zeitwerk (2.6.8)
+    zeitwerk (2.6.9)
 
 PLATFORMS
   arm64-darwin-22
