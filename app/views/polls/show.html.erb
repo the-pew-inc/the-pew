@@ -60,13 +60,15 @@
         </div>
       <% end %>
     </div>
-    <div class="flex justify-center my-4">
-      <%= button_to 'Participate', poll_poll_participations_path(@poll), 
+    <% if @poll.duration.nil? %>
+      <div class="flex justify-center my-4">
+        <%= button_to 'Participate', poll_poll_participations_path(@poll), 
               method: :post, 
               form: { 'data-turbo-action': 'replace', 'data-turbo-frame': '_top' },
               data: { action: 'turbo:submit-end->poll#handleEnd' },
               class: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" %>
-    </div>
+      </div>
+    <% end %>
   </section>
 <% else %>
   <section class="mx-auto flex flex-col" id="poll-results" data-controller="poll-chart" data-poll-chart-labels-value='<%= @labels %>' data-poll-chart-data-value='<%= @data %>'>

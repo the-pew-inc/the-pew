@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_25_000820) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_25_052107) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -342,10 +342,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_25_000820) do
     t.integer "max_votes"
     t.integer "duration"
     t.boolean "add_option", default: true, null: false
-    t.integer "participants", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "selectors", default: ["upvote", "downvote", "neutral"], array: true
+    t.boolean "is_anonymous", default: false, null: false
     t.index ["organization_id"], name: "index_polls_on_organization_id"
     t.index ["poll_type"], name: "index_polls_on_poll_type"
     t.index ["selectors"], name: "index_polls_on_selectors"

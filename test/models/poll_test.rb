@@ -5,11 +5,11 @@
 #  id              :uuid             not null, primary key
 #  add_option      :boolean          default(TRUE), not null
 #  duration        :integer
+#  is_anonymous    :boolean          default(FALSE), not null
 #  max_answers     :integer
 #  max_votes       :integer
 #  num_answers     :integer
 #  num_votes       :integer
-#  participants    :integer          default(0), not null
 #  poll_type       :integer          not null
 #  selectors       :string           default(["\"upvote\"", "\"downvote\"", "\"neutral\""]), is an Array
 #  status          :integer          not null
