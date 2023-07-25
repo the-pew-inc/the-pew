@@ -2,6 +2,11 @@
   <h1 class="inline-block mb-12 text-center font-extrabold text-3xl tracking-tight text-slate-800 dark:text-white">
     <%= @poll.title %>
   </h1>
+  <% if @poll.num_votes || @poll.max_votes %>
+    <div class="w-full text-center text-sm text-gray-500 dark:text-gray-400 mb-6">
+      <%= voting_guide_message(@poll.num_votes, @poll.max_votes) %>
+    </div>
+  <% end %>
 </section>
 <section class="mx-auto flex flex-col" id="poll-submission">
   <div data-controller="poll" data-poll-duration-value="<%= @poll.duration %>" class="mx-auto flex flex-col">

@@ -52,7 +52,7 @@ class Vote < ApplicationRecord
           up_vote!
           poll.update_participants
         elsif max_votes.nil? || max_votes > 0
-          vote_count = user.poll_option_votes.where(poll_option: poll.poll_options).count
+          vote_count = user_votes_in_poll(user, poll)
           if num_votes > vote_count
             up_vote!
             poll.update_participants
@@ -71,7 +71,7 @@ class Vote < ApplicationRecord
           down_vote!
           poll.update_participants
         elsif max_votes.nil? || max_votes > 0
-          vote_count = user.poll_option_votes.where(poll_option: poll.poll_options).count
+          vote_count = user_votes_in_poll(user, poll)
           if num_votes > vote_count
             down_vote!
             poll.update_participants
@@ -90,7 +90,7 @@ class Vote < ApplicationRecord
           cancel!
           poll.update_participants
         elsif max_votes.nil? || max_votes > 0
-          vote_count = user.poll_option_votes.where(poll_option: poll.poll_options).count
+          vote_count = user_votes_in_poll(user, poll)
           if num_votes > vote_count
             cancel!
             poll.update_participants
@@ -106,5 +106,10 @@ class Vote < ApplicationRecord
     end
   end
   
+  private
+
+  def user_votes_in_poll(user, poll)
+    Vote.where(votable: poll.poll_options, user_id: user.id).count
+  end
 
 end
