@@ -50,12 +50,10 @@ class Vote < ApplicationRecord
       else
         if num_votes.nil? || num_votes <= 0
           up_vote!
-          poll.update_participants
         elsif max_votes.nil? || max_votes > 0
           vote_count = user_votes_in_poll(user, poll)
           if num_votes > vote_count
             up_vote!
-            poll.update_participants
           else
             errors.add(:vote, 'num_votes_exceeded')
           end
@@ -69,12 +67,10 @@ class Vote < ApplicationRecord
       else
         if num_votes.nil? || num_votes <= 0
           down_vote!
-          poll.update_participants
         elsif max_votes.nil? || max_votes > 0
           vote_count = user_votes_in_poll(user, poll)
           if num_votes > vote_count
             down_vote!
-            poll.update_participants
           else
             errors.add(:vote, 'num_votes_exceeded')
           end
@@ -88,12 +84,10 @@ class Vote < ApplicationRecord
       else
         if num_votes.nil? || num_votes <= 0
           cancel!
-          poll.update_participants
         elsif max_votes.nil? || max_votes > 0
           vote_count = user_votes_in_poll(user, poll)
           if num_votes > vote_count
             cancel!
-            poll.update_participants
           else
             errors.add(:vote, 'num_votes_exceeded')
           end

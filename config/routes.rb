@@ -90,7 +90,10 @@ Rails.application.routes.draw do
   post 'question/:votable_id/votes', to: 'votes#show', as: :question_votes,  votable_type: 'Question'
 
   # Polls
-  resources :polls
+  # resources :polls
+  resources :polls do
+    resources :poll_participations, only: [:create]
+  end  
 
   # Polls votes (aka the PollOption as Polls are not votable)
   # votable_id is the id of the PollOption the user is voting for (up_vote, down_vote or cancel)
