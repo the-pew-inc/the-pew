@@ -51,7 +51,7 @@ class Poll < ApplicationRecord
   has_rich_text :description
 
   # Record user who participated in the poll
-  has_many :poll_participations
+  has_many :poll_participations, dependent: :destroy
   has_many :participants, through: :poll_participations, source: :user
 
   validates :title, presence: true, length: { minimum: 3, maximum: 250 }
