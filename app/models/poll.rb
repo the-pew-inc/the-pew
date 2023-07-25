@@ -50,6 +50,10 @@ class Poll < ApplicationRecord
 
   has_rich_text :description
 
+  # Record user who participated in the poll
+  has_many :poll_participations
+  has_many :participants, through: :poll_participations, source: :user
+
   validates :title, presence: true, length: { minimum: 3, maximum: 250 }
   validates :duration, numericality: { only_integer: true, greater_than_or_equal_to: 0, allow_nil: true }
   validate  :validate_poll_options
