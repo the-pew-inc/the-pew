@@ -8,7 +8,7 @@
     "@rails/actiontext": "7.0.6",
     "@tailwindcss/typography": "0.5.9",
     "autoprefixer": "10.4.14",
-    "chart.js": "4.3.1",
+    "chart.js": "4.3.2",
     "chartjs-plugin-datalabels": "2.2.0",
     "chartkick": "5.0.1",
     "esbuild": "0.18.6",
