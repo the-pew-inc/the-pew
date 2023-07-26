@@ -3,7 +3,7 @@ class PollsController < ApplicationController
   before_action :redirect_if_unauthenticated
 
   def index
-    @polls = current_user.organization.polls.includes(:user)
+    @polls = current_user.organization.polls.order(created_at: :desc).includes(:user)
   end
 
   def new
