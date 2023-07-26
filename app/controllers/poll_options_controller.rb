@@ -5,6 +5,7 @@ class PollOptionsController < ApplicationController
     poll_option = PollOption.create(poll_option_params)
     poll_option.poll_id = params[:id]
     poll_option.user_id = current_user.id
+    poll_option.save
   end
 
   private

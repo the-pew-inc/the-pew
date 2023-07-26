@@ -40,9 +40,8 @@ class PollsController < ApplicationController
 
   def show
     @poll = Poll.find(params[:id])
-    @labels = []
-    @data = []
-    poll_stats
+    
+    @table_data = VoteCounterService.count_by_poll_option_and_choice(@poll)
   end
 
   def destroy
@@ -62,17 +61,6 @@ class PollsController < ApplicationController
       :display, :duration, :is_anonymous, :max_votes, :num_votes, 
       :poll_type, :status, :title, selectors: [],
       poll_options_attributes: [:id, :title, :is_answer, :_destroy])
-  end
-
-  def poll_stats
-    # stats = Vote.joins("INNER JOIN poll_options ON votes.votable_id = poll_options.id AND votes.votable_type = 'PollOption'").where(poll_options: { id: @poll.poll_option_ids }).group('poll_options.title').count
-    stats = Vote.joins("INNER JOIN poll_options ON votes.votable_id = poll_options.id AND votes.votable_type = 'PollOption'").where(poll_options: { id: @poll.poll_option_ids }).group('poll_options.title').sum(:choice)
-    @table_data = Vote.joins("JOIN poll_options ON votes.votable_id = poll_options.id AND votes.votable_type = 'PollOption'").where(poll_options: { id: @poll.poll_option_ids }).group('poll_options.title').group(:choice).count
-
-    stats.each do |item|
-      @labels << item[0]
-      @data << item[1]
-    end
   end
 
 end

@@ -7,6 +7,7 @@ class PollParticipationsController < ApplicationController
     respond_to do |format|
       if !PollParticipation.participated?(current_user, @poll)
         PollParticipation.create(user: current_user, poll: @poll)
+
         format.turbo_stream { render :success }
       else
         format.turbo_stream { render :errors }
@@ -18,5 +19,6 @@ class PollParticipationsController < ApplicationController
 
   def set_poll
     @poll = Poll.find(params[:poll_id])
+    @table_data = VoteCounterService.count_by_poll_option_and_choice(@poll)
   end
 end
