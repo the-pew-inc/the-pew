@@ -90,9 +90,7 @@
     <% end %>
   </section>
 <% else %>
-  <section class="mx-auto flex flex-col" id="poll-results" data-controller="poll-chart" data-poll-chart-labels-value='<%= @labels %>' data-poll-chart-data-value='<%= @data %>'>
-    <canvas data-poll-chart-target="chart" class="mb-6">
-    </canvas>
+  <section class="mx-auto flex flex-col" id="poll-results">
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
       <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
