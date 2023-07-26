@@ -93,6 +93,7 @@ Rails.application.routes.draw do
   # resources :polls
   resources :polls do
     resources :poll_participations, only: [:create]
+    resources :poll_options, only: [:create]
   end  
 
   # Polls votes (aka the PollOption as Polls are not votable)
