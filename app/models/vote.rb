@@ -3,7 +3,7 @@
 # Table name: votes
 #
 #  id           :bigint           not null, primary key
-#  choice       :integer          default("cancel")
+#  choice       :integer
 #  votable_type :string           not null
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
@@ -42,7 +42,7 @@ class Vote < ApplicationRecord
   def poll_voted(poll, user, choice)
     num_votes = poll.num_votes
     max_votes = poll.max_votes
-  
+
     case choice
     when 'up_vote'
       if up_vote?

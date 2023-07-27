@@ -94,7 +94,7 @@ class Poll < ApplicationRecord
   private
 
   def validate_poll_options
-    if poll_options.size < 2
+    if poll_options.size < 1
       errors.add(:poll_options, "must have at least two options")
     end
   end

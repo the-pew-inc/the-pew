@@ -8,7 +8,7 @@ class PollParticipationsController < ApplicationController
       if !PollParticipation.participated?(current_user, @poll)
         PollParticipation.create(user: current_user, poll: @poll)
 
-        format.turbo_stream { render :success }
+        format.turbo_stream { render :success, locals: { add_option: @poll.add_option } }
       else
         format.turbo_stream { render :errors }
       end

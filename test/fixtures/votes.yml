@@ -3,7 +3,7 @@
 # Table name: votes
 #
 #  id           :bigint           not null, primary key
-#  choice       :integer          default("cancel")
+#  choice       :integer
 #  votable_type :string           not null
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
