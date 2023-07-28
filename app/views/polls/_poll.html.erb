@@ -1,3 +1,4 @@
+<!-- app/views/polls/_poll.html.erb -->
 <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
   <td scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white w-2/5 max-w-xs break-words">
     <%= link_to poll_path(poll) do %>
@@ -11,7 +12,7 @@
     <%= poll.created_at.strftime('%b %d, %y') %>
   </td>
   <td class="px-6 py-4">
-    <%= poll.participants %>
+    <%= poll.participants.count %>
   </td>
   <td class="px-6 py-4">
     <%= link_to "Edit", edit_poll_path(poll), class: "font-medium text-blue-600 dark:text-blue-500 hover:underline" %>

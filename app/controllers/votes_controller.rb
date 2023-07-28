@@ -12,6 +12,7 @@ class VotesController < ApplicationController
       @vote.voted(params[:choice])
       @vote.broadcast_update_later_to(@vote.votable.room.id, target: "#{dom_id(@vote.votable)}_count", html: @vote.votable.up_votes)
     when "PollOption"
+      Rails.logger.debug '### Poll Option'
       @poll = Poll.find(params[:poll_id])
       @vote.poll_voted(@poll, current_user, params[:choice])
     else

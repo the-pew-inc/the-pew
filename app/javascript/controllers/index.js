@@ -4,6 +4,9 @@
 
 import { application } from "./application"
 
+import AddPollOptionController from "./add_poll_option_controller"
+application.register("add-poll-option", AddPollOptionController)
+
 import AlertController from "./alert_controller"
 application.register("alert", AlertController)
 
@@ -36,9 +39,6 @@ application.register("mode", ModeController)
 
 import OrderQuestionsController from "./order_questions_controller"
 application.register("order-questions", OrderQuestionsController)
-
-import PollChartController from "./poll_chart_controller"
-application.register("poll-chart", PollChartController)
 
 import PollController from "./poll_controller"
 application.register("poll", PollController)

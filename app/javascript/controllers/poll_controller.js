@@ -6,6 +6,7 @@ export default class extends Controller {
   static values = {
     duration: Number,
     button_type: String,
+    allowUserOption: { type: Boolean, default: false },
   };
 
   connect() {
@@ -35,7 +36,6 @@ export default class extends Controller {
           button.firstElementChild.classList.contains("border-sky-500") &&
           button.firstElementChild.classList.contains("text-sky-500")
         ) {
-          console.debug("Removing the selection colors");
           button.firstElementChild.classList.remove(
             "border-sky-500",
             "text-sky-500"
@@ -51,16 +51,8 @@ export default class extends Controller {
           this.buttonTarget.classList.contains("border-sky-500") &&
           this.buttonTarget.classList.contains("text-sky-500")
         ) {
-          if (button.dataset.pollVoteActionParam !== "cancel") {
-            this.buttonTarget.classList.remove(
-              "border-sky-500",
-              "text-sky-500"
-            );
-            this.buttonTarget.classList.add(
-              "border-slate-500",
-              "text-gray-500"
-            );
-          }
+          this.buttonTarget.classList.remove("border-sky-500", "text-sky-500");
+          this.buttonTarget.classList.add("border-slate-500", "text-gray-500");
         } else {
           this.buttonTarget.classList.remove(
             "border-slate-500",
@@ -72,16 +64,16 @@ export default class extends Controller {
     });
   }
 
+  displayProgressBar() {
+    this.progressBarTarget.classList.remove("hidden");
+  }
+
   hideOptionsAfter(duration) {
     if (duration > 0) {
       setTimeout(() => {
         this.element.remove();
       }, (duration + 1) * 1000);
     }
-  }
-
-  displayProgressBar() {
-    this.progressBarTarget.classList.remove("hidden");
   }
 
   startProgressBar() {

@@ -1,0 +1,7 @@
+<%# app/views/poll_participations/success.turbo_stream.erb %>
+<turbo-stream action="replace" target="poll-submission">
+  <template>
+    <%# You can customize this part as per your UI requirements %>
+    <%= render partial: "/polls/poll_stats", formats: :html, locals: { poll: @poll, table_data: @table_data } %>
+  </template>
+</turbo-stream>

@@ -1,0 +1,19 @@
+<!-- app/views/polls/_user_option_form.html.erb -->
+<%= form_with url: poll_poll_options_path(poll), id: "user-option-form" do |form| %>
+  <%# render partial: 'shared/form_errors', locals: { object: poll } %>
+  <div class="w-full">
+    <div>
+      <div class="mb-2" data-controller="maxchar">
+        <%= form.text_field :title, 
+        class: "bg-gray-50 border border-gray-300 text-gray-900 text-base md:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
+        placeholder: "Type an option here",
+        id: "helper-text",
+        "data-maxchar-target": "input",
+        "data-action": "input->maxchar#onchange",
+        "data-action": "reset-question-form@window->maxchar#reset",
+        "aria-describedby": "helper-text-explanation" %>
+        <p id="helper-text-explanation" class="mt-2 font-light text-xs text-gray-500 dark:text-gray-400" data-maxchar-target="msg">Max: 250 characters.</p>
+      </div>
+    </div>
+  </div>
+<% end %>

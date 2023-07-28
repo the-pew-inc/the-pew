@@ -77,6 +77,10 @@ class User < ApplicationRecord
   has_one_attached :import_file
   has_many         :import_results, dependent: :destroy
 
+  # Record vote participation
+  has_many :poll_participations
+  has_many :participated_polls, through: :poll_participations, source: :poll
+
   # Connect the user to their Merit
   has_merit
 

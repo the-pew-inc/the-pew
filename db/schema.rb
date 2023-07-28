@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_07_190034) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_27_204155) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -321,6 +321,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_07_190034) do
     t.index ["user_id"], name: "index_poll_options_on_user_id"
   end
 
+  create_table "poll_participations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id", null: false
+    t.uuid "poll_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["poll_id"], name: "index_poll_participations_on_poll_id"
+    t.index ["user_id"], name: "index_poll_participations_on_user_id"
+  end
+
   create_table "polls", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "organization_id", null: false
     t.uuid "user_id", null: false
@@ -333,11 +342,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_07_190034) do
     t.integer "max_votes"
     t.integer "duration"
     t.boolean "add_option", default: true, null: false
-    t.integer "participants", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "selectors", default: ["upvote", "downvote", "neutral"], array: true
+    t.boolean "is_anonymous", default: false, null: false
     t.index ["organization_id"], name: "index_polls_on_organization_id"
     t.index ["poll_type"], name: "index_polls_on_poll_type"
+    t.index ["selectors"], name: "index_polls_on_selectors"
     t.index ["status"], name: "index_polls_on_status"
     t.index ["user_id"], name: "index_polls_on_user_id"
   end
@@ -517,7 +528,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_07_190034) do
     t.uuid "user_id", null: false
     t.string "votable_type", null: false
     t.uuid "votable_id", null: false
-    t.integer "choice", default: 0
+    t.integer "choice"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_votes_on_user_id"
@@ -536,6 +547,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_07_190034) do
   add_foreign_key "poll_answers", "polls"
   add_foreign_key "poll_answers", "users"
   add_foreign_key "poll_options", "polls"
+  add_foreign_key "poll_participations", "polls"
+  add_foreign_key "poll_participations", "users"
   add_foreign_key "polls", "organizations"
   add_foreign_key "polls", "users"
   add_foreign_key "profiles", "users"

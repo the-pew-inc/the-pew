@@ -1,0 +1,2 @@
+module PollParticipationsHelper
+end

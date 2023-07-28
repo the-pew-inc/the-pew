@@ -8,6 +8,9 @@
 
 [![Version](https://img.shields.io/github/v/release/the-pew-inc/the-pew?display_name=tag)]()
 
+## SUPPORT US
+[![Open Source Helpers](https://www.codetriage.com/the-pew-inc/the-pew/badges/users.svg)](https://www.codetriage.com/the-pew-inc/the-pew)
+
 ## DESCRIPTION
 
 As a comprehensive audience analytics platform, THEPEW enables you to understand your employees, team members, prospects, and more. By analyzing audience responses and behavior over time, you can identify patterns and trends that provide insights into their needs, expectations, feature requests, and communication gaps.

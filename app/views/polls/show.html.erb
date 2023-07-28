@@ -1,99 +1,134 @@
-<section class="mx-auto flex flex-col" id="poll-title">
+<!-- app/views/polls/show.html.erb -->
+<%= turbo_stream_from @poll %>
+<section class="mx-auto flex flex-col" id="poll-title" data-controller="add-poll-option" data-add-poll-option-allow-user-option-value="<%= @poll.add_option %>">
   <h1 class="inline-block mb-12 text-center font-extrabold text-3xl tracking-tight text-slate-800 dark:text-white">
     <%= @poll.title %>
   </h1>
-</section>
-<section class="mx-auto flex flex-col" id="poll-submission">
-  <div data-controller="poll" data-poll-duration-value="<%= @poll.duration %>" class="mx-auto flex flex-col">
-    <div class="mb-4 w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700 hidden" data-poll-target="progressBar">
-      <div class="bg-blue-600 h-2.5 rounded-full transition-all duration-500" style="width: 0%" data-poll-target="progress"></div>
-    </div>
-    <% @poll.poll_options.each do |option| %>
-      <div class="flex justify-between items-center mb-3 space-x-4">
-        <div class="text-gray-500 dark:text-gray-400 tracking-tight font-bold text-lg">
-          <%= option.title %>
+  <% if @poll.is_anonymous %>
+    <div class="mb-6 w-fit mx-auto">
+      <div class="bg-indigo-100 text-indigo-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-indigo-900 dark:text-indigo-300">
+        <div class="flex justify-center items-center space-x-4">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M3.53 2.47a.75.75 0 00-1.06 1.06l18 18a.75.75 0 101.06-1.06l-18-18zM22.676 12.553a11.249 11.249 0 01-2.631 4.31l-3.099-3.099a5.25 5.25 0 00-6.71-6.71L7.759 4.577a11.217 11.217 0 014.242-.827c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113z"></path>
+            <path d="M15.75 12c0 .18-.013.357-.037.53l-4.244-4.243A3.75 3.75 0 0115.75 12zM12.53 15.713l-4.243-4.244a3.75 3.75 0 004.243 4.243z"></path>
+            <path d="M6.75 12c0-.619.107-1.213.304-1.764l-3.1-3.1a11.25 11.25 0 00-2.63 4.31c-.12.362-.12.752 0 1.114 1.489 4.467 5.704 7.69 10.675 7.69 1.5 0 2.933-.294 4.242-.827l-2.477-2.477A5.25 5.25 0 016.75 12z"></path>
+          </svg>
+          <span>
+            This poll is <strong>anonymous</strong>
+          </span>
         </div>
-        <div class="flex justify-end items-center space-x-2">
-          <%= button_to poll_votes_path(option),
-          params: {choice: :up_vote, poll_id: @poll.id},
-          data: { controller: "poll", action: "poll#click", "poll-poll-option-id-param": "#{option.id}", "poll-vote-action-param": "up" },
-          method: :post do %>
-            <div data-poll-target="button" class="flex flex-row justify-start items-center space-x-2 rounded-full border px-2 py-1 hover:bg-slate-200 dark:hover:bg-slate-600 <%= (option.votes.find_by(user_id: current_user.id)&.up_vote?) ? "border-sky-500 text-sky-500" : "border-slate-500 text-gray-500" %>">
-              <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M6.633 10.5c.806 0 1.533-.446 2.031-1.08a9.041 9.041 0 012.861-2.4c.723-.384 1.35-.956 1.653-1.715a4.498 4.498 0 00.322-1.672V3a.75.75 0 01.75-.75A2.25 2.25 0 0116.5 4.5c0 1.152-.26 2.243-.723 3.218-.266.558.107 1.282.725 1.282h3.126c1.026 0 1.945.694 2.054 1.715.045.422.068.85.068 1.285a11.95 11.95 0 01-2.649 7.521c-.388.482-.987.729-1.605.729H13.48c-.483 0-.964-.078-1.423-.23l-3.114-1.04a4.501 4.501 0 00-1.423-.23H5.904M14.25 9h2.25M5.904 18.75c.083.205.173.405.27.602.197.4-.078.898-.523.898h-.908c-.889 0-1.713-.518-1.972-1.368a12 12 0 01-.521-3.507c0-1.553.295-3.036.831-4.398C3.387 10.203 4.167 9.75 5 9.75h1.053c.472 0 .745.556.5.96a8.958 8.958 0 00-1.302 4.665c0 1.194.232 2.333.654 3.375z"></path>
-              </svg>
-            </div>
-          <% end %>
-          <%= button_to poll_votes_path(option),
-          params: {choice: :down_vote, poll_id: @poll.id},
-          data: { controller: "poll", action: "poll#click", "poll-poll-option-id-param": "#{option.id}", "poll-vote-action-param": "down" },
-          method: :post do %>
-            <div data-poll-target="button" class="flex flex-row justify-start items-center space-x-2 rounded-full border px-2 py-1 hover:bg-slate-200 dark:hover:bg-slate-600 <%= (option.votes.find_by(user_id: current_user.id)&.down_vote?) ? "border-sky-500 text-sky-500" : "border-slate-500 text-gray-500" %>">
-              <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 15h2.25m8.024-9.75c.011.05.028.1.052.148.591 1.2.924 2.55.924 3.977a8.96 8.96 0 01-.999 4.125m.023-8.25c-.076-.365.183-.75.575-.75h.908c.889 0 1.713.518 1.972 1.368.339 1.11.521 2.287.521 3.507 0 1.553-.295 3.036-.831 4.398C20.613 14.547 19.833 15 19 15h-1.053c-.472 0-.745-.556-.5-.96a8.95 8.95 0 00.303-.54m.023-8.25H16.48a4.5 4.5 0 01-1.423-.23l-3.114-1.04a4.5 4.5 0 00-1.423-.23H6.504c-.618 0-1.217.247-1.605.729A11.95 11.95 0 002.25 12c0 .434.023.863.068 1.285C2.427 14.306 3.346 15 4.372 15h3.126c.618 0 .991.724.725 1.282A7.471 7.471 0 007.5 19.5a2.25 2.25 0 002.25 2.25.75.75 0 00.75-.75v-.633c0-.573.11-1.14.322-1.672.304-.76.93-1.33 1.653-1.715a9.04 9.04 0 002.86-2.4c.498-.634 1.226-1.08 2.032-1.08h.384"></path>
-              </svg>
-            </div>
-          <% end %>
-          <%= button_to poll_votes_path(option),
-          params: {choice: :cancel, poll_id: @poll.id},
-          data: { controller: "poll", action: "poll#click", "poll-poll-option-id-param": "#{option.id}", "poll-vote-action-param": "cancel" },
-          method: :post do %>
-            <div data-poll-target="button" class="flex flex-row justify-start items-center space-x-2 rounded-full border px-2 py-1 hover:bg-slate-200 dark:hover:bg-slate-600 <%= (option.votes.find_by(user_id: current_user.id)&.cancel?) ? "border-sky-500 text-sky-500" : "border-slate-500 text-gray-500" %>">
-              <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
-              </svg>
-            </div>
-          <% end %>
+      </div>
+    </div>
+  <% end %>
+</section>
+<% if !PollParticipation.participated?(current_user, @poll) %>
+  <section class="mx-auto flex flex-col" id="poll-submission">
+    <% if @poll.num_votes || @poll.max_votes %>
+      <div class="mx-auto flex flex-col">
+        <div class="w-full text-center text-sm text-gray-500 dark:text-gray-400 mb-6">
+          <%= voting_guide_message(@poll.num_votes, @poll.max_votes) %>
         </div>
       </div>
     <% end %>
+    <div data-controller="poll" data-poll-duration-value="<%= @poll.duration %>" class="mx-auto flex flex-col">
+      <div class="mb-4 w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700 hidden" data-poll-target="progressBar">
+        <div class="bg-blue-600 h-2.5 rounded-full transition-all duration-500" style="width: 0%" data-poll-target="progress"></div>
+      </div>
+      <% @poll.poll_options.each do |option| %>
+        <div class="flex justify-between items-center mb-3 space-x-4">
+          <div class="text-gray-500 dark:text-gray-400 tracking-tight font-bold text-lg">
+            <%= option.title %>
+          </div>
+          <div class="flex justify-end items-center space-x-2">
+            <% if @poll.selectors.include?("upvote") %>
+              <%= button_to poll_votes_path(option),
+          params: {choice: :up_vote, poll_id: @poll.id},
+          data: { controller: "poll", action: "poll#click", "poll-poll-option-id-param": "#{option.id}", "poll-vote-action-param": "up" },
+          method: :post do %>
+                <div data-poll-target="button" class="flex flex-row justify-start items-center space-x-2 rounded-full border px-2 py-1 hover:bg-slate-200 dark:hover:bg-slate-600 <%= (option.votes.find_by(user_id: current_user.id)&.up_vote?) ? "border-sky-500 text-sky-500" : "border-slate-500 text-gray-500" %>">
+                  <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6.633 10.5c.806 0 1.533-.446 2.031-1.08a9.041 9.041 0 012.861-2.4c.723-.384 1.35-.956 1.653-1.715a4.498 4.498 0 00.322-1.672V3a.75.75 0 01.75-.75A2.25 2.25 0 0116.5 4.5c0 1.152-.26 2.243-.723 3.218-.266.558.107 1.282.725 1.282h3.126c1.026 0 1.945.694 2.054 1.715.045.422.068.85.068 1.285a11.95 11.95 0 01-2.649 7.521c-.388.482-.987.729-1.605.729H13.48c-.483 0-.964-.078-1.423-.23l-3.114-1.04a4.501 4.501 0 00-1.423-.23H5.904M14.25 9h2.25M5.904 18.75c.083.205.173.405.27.602.197.4-.078.898-.523.898h-.908c-.889 0-1.713-.518-1.972-1.368a12 12 0 01-.521-3.507c0-1.553.295-3.036.831-4.398C3.387 10.203 4.167 9.75 5 9.75h1.053c.472 0 .745.556.5.96a8.958 8.958 0 00-1.302 4.665c0 1.194.232 2.333.654 3.375z"></path>
+                  </svg>
+                </div>
+              <% end %>
+            <% end %>
+            <% if @poll.selectors.include?("downvote") %>
+              <%= button_to poll_votes_path(option),
+          params: {choice: :down_vote, poll_id: @poll.id},
+          data: { controller: "poll", action: "poll#click", "poll-poll-option-id-param": "#{option.id}", "poll-vote-action-param": "down" },
+          method: :post do %>
+                <div data-poll-target="button" class="flex flex-row justify-start items-center space-x-2 rounded-full border px-2 py-1 hover:bg-slate-200 dark:hover:bg-slate-600 <%= (option.votes.find_by(user_id: current_user.id)&.down_vote?) ? "border-sky-500 text-sky-500" : "border-slate-500 text-gray-500" %>">
+                  <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 15h2.25m8.024-9.75c.011.05.028.1.052.148.591 1.2.924 2.55.924 3.977a8.96 8.96 0 01-.999 4.125m.023-8.25c-.076-.365.183-.75.575-.75h.908c.889 0 1.713.518 1.972 1.368.339 1.11.521 2.287.521 3.507 0 1.553-.295 3.036-.831 4.398C20.613 14.547 19.833 15 19 15h-1.053c-.472 0-.745-.556-.5-.96a8.95 8.95 0 00.303-.54m.023-8.25H16.48a4.5 4.5 0 01-1.423-.23l-3.114-1.04a4.5 4.5 0 00-1.423-.23H6.504c-.618 0-1.217.247-1.605.729A11.95 11.95 0 002.25 12c0 .434.023.863.068 1.285C2.427 14.306 3.346 15 4.372 15h3.126c.618 0 .991.724.725 1.282A7.471 7.471 0 007.5 19.5a2.25 2.25 0 002.25 2.25.75.75 0 00.75-.75v-.633c0-.573.11-1.14.322-1.672.304-.76.93-1.33 1.653-1.715a9.04 9.04 0 002.86-2.4c.498-.634 1.226-1.08 2.032-1.08h.384"></path>
+                  </svg>
+                </div>
+              <% end %>
+            <% end %>
+            <% if @poll.selectors.include?("neutral") %>
+              <%= button_to poll_votes_path(option),
+          params: {choice: :cancel, poll_id: @poll.id},
+          data: { controller: "poll", action: "poll#click", "poll-poll-option-id-param": "#{option.id}", "poll-vote-action-param": "cancel" },
+          method: :post do %>
+                <div data-poll-target="button" class="flex flex-row justify-start items-center space-x-2 rounded-full border px-2 py-1 hover:bg-slate-200 dark:hover:bg-slate-600 <%= (option.votes.find_by(user_id: current_user.id)&.cancel?) ? "border-sky-500 text-sky-500" : "border-slate-500 text-gray-500" %>">
+                  <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+                  </svg>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <% if @poll.duration.nil? %>
+      <div class="flex justify-center mt-4">
+        <%= button_to 'Final Answer!', poll_poll_participations_path(@poll), 
+              method: :post, 
+              form: { 'data-turbo-action': 'replace', 'data-turbo-frame': '_top' },
+              data: { action: 'turbo:submit-end->poll#handleEnd' },
+              class: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" %>
+      </div>
+      <div class="mx-auto text-justify my-2 font-light text-xs text-gray-500 dark:text-gray-400 w-48">
+        Once you click on Final Answer! your selections can no longer be changed.
+      </div>
+    <% end %>
+  </section>
+<% else %>
+  <%= render "poll_stats",  poll: @poll, table_data: @table_data  %>
+<% end %>
+<% if @poll.add_option %>
+  <!-- User Option modal -->
+  <div id="optionModal" tabindex="-1" aria-hidden="true" data-modal-backdrop="static" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="relative w-full max-w-2xl max-h-full">
+      <!-- Modal content -->
+      <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+        <!-- Modal header -->
+        <div class="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
+          <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+            Share an additional question
+          </h3>
+          <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="optionModal">
+            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+            </svg>
+            <span class="sr-only">Close modal</span>
+          </button>
+        </div>
+        <!-- Modal body -->
+        <div class="p-6 space-y-6">
+          <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+            Feel free to share a question, comment. This question or comment will be added to this Poll. Please be courteous and respect the rules defined in the Code of Conduct.
+          </p>
+          <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+            <%= render "user_option_form", poll: @poll %>
+          </p>
+        </div>
+        <!-- Modal footer -->
+        <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
+          <button data-modal-hide="optionModal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">No Thanks</button>
+          <button type="submit" form="user-option-form" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Yes</button>
+        </div>
+      </div>
+    </div>
   </div>
-</section>
-<section class="mx-auto flex flex-col" id="poll-results" data-controller="poll-chart" data-poll-chart-labels-value='<%= @labels %>' data-poll-chart-data-value='<%= @data %>'>
-  <canvas data-poll-chart-target="chart" class="mb-6">
-  </canvas>
-  <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-        <tr>
-          <th scope="col" class="px-6 py-3">
-            Option
-          </th>
-          <th scope="col" class="px-6 py-3">
-            <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M6.633 10.5c.806 0 1.533-.446 2.031-1.08a9.041 9.041 0 012.861-2.4c.723-.384 1.35-.956 1.653-1.715a4.498 4.498 0 00.322-1.672V3a.75.75 0 01.75-.75A2.25 2.25 0 0116.5 4.5c0 1.152-.26 2.243-.723 3.218-.266.558.107 1.282.725 1.282h3.126c1.026 0 1.945.694 2.054 1.715.045.422.068.85.068 1.285a11.95 11.95 0 01-2.649 7.521c-.388.482-.987.729-1.605.729H13.48c-.483 0-.964-.078-1.423-.23l-3.114-1.04a4.501 4.501 0 00-1.423-.23H5.904M14.25 9h2.25M5.904 18.75c.083.205.173.405.27.602.197.4-.078.898-.523.898h-.908c-.889 0-1.713-.518-1.972-1.368a12 12 0 01-.521-3.507c0-1.553.295-3.036.831-4.398C3.387 10.203 4.167 9.75 5 9.75h1.053c.472 0 .745.556.5.96a8.958 8.958 0 00-1.302 4.665c0 1.194.232 2.333.654 3.375z"></path>
-            </svg>
-          </th>
-          <th scope="col" class="px-6 py-3">
-            <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 15h2.25m8.024-9.75c.011.05.028.1.052.148.591 1.2.924 2.55.924 3.977a8.96 8.96 0 01-.999 4.125m.023-8.25c-.076-.365.183-.75.575-.75h.908c.889 0 1.713.518 1.972 1.368.339 1.11.521 2.287.521 3.507 0 1.553-.295 3.036-.831 4.398C20.613 14.547 19.833 15 19 15h-1.053c-.472 0-.745-.556-.5-.96a8.95 8.95 0 00.303-.54m.023-8.25H16.48a4.5 4.5 0 01-1.423-.23l-3.114-1.04a4.5 4.5 0 00-1.423-.23H6.504c-.618 0-1.217.247-1.605.729A11.95 11.95 0 002.25 12c0 .434.023.863.068 1.285C2.427 14.306 3.346 15 4.372 15h3.126c.618 0 .991.724.725 1.282A7.471 7.471 0 007.5 19.5a2.25 2.25 0 002.25 2.25.75.75 0 00.75-.75v-.633c0-.573.11-1.14.322-1.672.304-.76.93-1.33 1.653-1.715a9.04 9.04 0 002.86-2.4c.498-.634 1.226-1.08 2.032-1.08h.384"></path>
-            </svg>
-          </th>
-          <th scope="col" class="px-6 py-3">
-            <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
-            </svg>
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @poll.poll_options.each do |poll_option| %>
-          <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
-            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-              <%= poll_option.title %>
-            </th>
-            <td class="px-6 py-4">
-              <%= @table_data[[poll_option.title, "up_vote"]] || 0 %>
-            </td>
-            <td class="px-6 py-4">
-              <%= @table_data[[poll_option.title, "down_vote"]] || 0 %>
-            </td>
-            <td class="px-6 py-4">
-              <%= @table_data[[poll_option.title, "cancel"]] || 0 %>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
-</section>
+<% end %>

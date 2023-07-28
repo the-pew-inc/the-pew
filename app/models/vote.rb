@@ -3,7 +3,7 @@
 # Table name: votes
 #
 #  id           :bigint           not null, primary key
-#  choice       :integer          default("cancel")
+#  choice       :integer
 #  votable_type :string           not null
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
@@ -42,7 +42,7 @@ class Vote < ApplicationRecord
   def poll_voted(poll, user, choice)
     num_votes = poll.num_votes
     max_votes = poll.max_votes
-  
+
     case choice
     when 'up_vote'
       if up_vote?
@@ -50,12 +50,10 @@ class Vote < ApplicationRecord
       else
         if num_votes.nil? || num_votes <= 0
           up_vote!
-          poll.update_participants
         elsif max_votes.nil? || max_votes > 0
-          vote_count = user.poll_option_votes.where(poll_option: poll.poll_options).count
+          vote_count = user_votes_in_poll(user, poll)
           if num_votes > vote_count
             up_vote!
-            poll.update_participants
           else
             errors.add(:vote, 'num_votes_exceeded')
           end
@@ -69,12 +67,10 @@ class Vote < ApplicationRecord
       else
         if num_votes.nil? || num_votes <= 0
           down_vote!
-          poll.update_participants
         elsif max_votes.nil? || max_votes > 0
-          vote_count = user.poll_option_votes.where(poll_option: poll.poll_options).count
+          vote_count = user_votes_in_poll(user, poll)
           if num_votes > vote_count
             down_vote!
-            poll.update_participants
           else
             errors.add(:vote, 'num_votes_exceeded')
           end
@@ -88,12 +84,10 @@ class Vote < ApplicationRecord
       else
         if num_votes.nil? || num_votes <= 0
           cancel!
-          poll.update_participants
         elsif max_votes.nil? || max_votes > 0
-          vote_count = user.poll_option_votes.where(poll_option: poll.poll_options).count
+          vote_count = user_votes_in_poll(user, poll)
           if num_votes > vote_count
             cancel!
-            poll.update_participants
           else
             errors.add(:vote, 'num_votes_exceeded')
           end
@@ -105,6 +99,25 @@ class Vote < ApplicationRecord
       errors.add(:choice, 'invalid_choice')
     end
   end
+
+  # This class method takes a poll as a parameter and returns a count of votes
+  # grouped by poll option title and choice. IT IS NOT CALLED DIRECTLY BUT VIA
+  # A SERVICE NAMED: VoteCounterService
+  # 
+  # @param poll [Poll]
+  # @return [Hash] A hash with the count of votes for each poll option and choice.
+  def self.count_by_poll_option_and_choice(poll)
+    joins("JOIN poll_options ON votes.votable_id = poll_options.id AND votes.votable_type = 'PollOption'")
+      .where(poll_options: { id: poll.poll_option_ids })
+      .group('poll_options.title')
+      .group(:choice)
+      .count
+  end
   
+  private
+
+  def user_votes_in_poll(user, poll)
+    Vote.where(votable: poll.poll_options, user_id: user.id).count
+  end
 
 end

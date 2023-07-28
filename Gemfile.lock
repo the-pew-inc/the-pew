@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/faker-ruby/faker.git
-  revision: 56fc3c844d29dfa2e8175ba79168c498a8672b5a
+  revision: 0839df200586fefa2a522c63b67a48326edfdc20
   specs:
     faker (3.2.0)
       i18n (>= 1.8.11, < 2)
@@ -90,7 +90,7 @@ GEM
     annotate (3.2.0)
       activerecord (>= 3.2, < 8.0)
       rake (>= 10.4, < 14.0)
-    appmap (0.102.0)
+    appmap (0.102.1)
       activesupport
       method_source
       rack
@@ -100,8 +100,8 @@ GEM
       ffi-compiler (~> 1.0)
     ast (2.4.2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.790.0)
-    aws-sdk-core (3.178.0)
+    aws-partitions (1.793.0)
+    aws-sdk-core (3.180.0)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.651.0)
       aws-sigv4 (~> 1.5)
@@ -109,8 +109,8 @@ GEM
     aws-sdk-kms (1.71.0)
       aws-sdk-core (~> 3, >= 3.177.0)
       aws-sigv4 (~> 1.1)
-    aws-sdk-s3 (1.131.0)
-      aws-sdk-core (~> 3, >= 3.177.0)
+    aws-sdk-s3 (1.132.0)
+      aws-sdk-core (~> 3, >= 3.179.0)
       aws-sdk-kms (~> 1)
       aws-sigv4 (~> 1.6)
     aws-sigv4 (1.6.0)
@@ -161,7 +161,7 @@ GEM
     caxlsx_rails (0.6.3)
       actionpack (>= 3.1)
       caxlsx (>= 3.0)
-    chartkick (5.0.2)
+    chartkick (5.0.3)
     chronic (0.10.2)
     concurrent-ruby (1.2.2)
     connection_pool (2.4.1)
@@ -247,11 +247,11 @@ GEM
     method_source (1.0.0)
     mini_magick (4.12.0)
     mini_mime (1.1.2)
-    minitest (5.18.1)
+    minitest (5.19.0)
     msgpack (1.7.2)
     multi_xml (0.6.0)
     multipart-post (2.3.0)
-    net-imap (0.3.6)
+    net-imap (0.3.7)
       date
       net-protocol
     net-pop (0.1.2)
@@ -355,15 +355,15 @@ GEM
     redis-client (0.14.1)
       connection_pool
     regexp_parser (2.8.1)
-    reline (0.3.6)
+    reline (0.3.7)
       io-console (~> 0.5)
     request_store (1.5.1)
       rack (>= 1.4)
     reverse_markdown (2.1.1)
       nokogiri
-    rexml (3.2.5)
+    rexml (3.2.6)
     rolify (6.0.1)
-    rubocop (1.54.2)
+    rubocop (1.55.0)
       json (~> 2.3)
       language_server-protocol (>= 3.17.0)
       parallel (~> 1.10)
@@ -371,7 +371,7 @@ GEM
       rainbow (>= 2.2.2, < 4.0)
       regexp_parser (>= 1.8, < 3.0)
       rexml (>= 3.2.5, < 4.0)
-      rubocop-ast (>= 1.28.0, < 2.0)
+      rubocop-ast (>= 1.28.1, < 2.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 2.4.0, < 3.0)
     rubocop-ast (1.29.0)
@@ -447,7 +447,7 @@ GEM
       activemodel (>= 3.0.0)
       public_suffix
     version_gem (1.1.3)
-    view_component (3.4.0)
+    view_component (3.5.0)
       activesupport (>= 5.2.0, < 8.0)
       concurrent-ruby (~> 1.0)
       method_source (~> 1.0)
@@ -461,7 +461,7 @@ GEM
       rubyzip (>= 1.3.0)
       selenium-webdriver (~> 4.0)
     websocket (1.2.9)
-    websocket-driver (0.7.5)
+    websocket-driver (0.7.6)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
     whenever (1.0.0)
@@ -470,7 +470,7 @@ GEM
       nokogiri (~> 1.8)
     xsv (1.2.1)
       rubyzip (>= 1.3, < 3)
-    zeitwerk (2.6.8)
+    zeitwerk (2.6.9)
 
 PLATFORMS
   arm64-darwin-22
@@ -480,7 +480,7 @@ DEPENDENCIES
   active_storage_validations (~> 1.0.0)
   ahoy_matey
   annotate (~> 3.2.0)
-  appmap (= 0.102.0)
+  appmap (= 0.102.1)
   argon2 (~> 2.2.0)
   aws-sdk-s3
   bootsnap
