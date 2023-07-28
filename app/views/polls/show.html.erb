@@ -1,4 +1,5 @@
 <!-- app/views/polls/show.html.erb -->
+<%= turbo_stream_from @poll %>
 <section class="mx-auto flex flex-col" id="poll-title">
   <h1 class="inline-block mb-12 text-center font-extrabold text-3xl tracking-tight text-slate-800 dark:text-white">
     <%= @poll.title %>
@@ -90,7 +91,7 @@
     <% end %>
   </section>
 <% else %>
-  <%= render "poll_stats", poll: @poll %>
+  <%= render "poll_stats",  poll: @poll, table_data: @table_data  %>
 <% end %>
 <!-- User Option modal -->
 <div id="defaultModal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">

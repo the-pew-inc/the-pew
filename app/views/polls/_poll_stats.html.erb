@@ -1,5 +1,5 @@
 <!-- app/views/polls/_poll_stats.html.erb -->
-<section class="mx-auto flex flex-col" id="poll-results">
+<section class="mx-auto flex flex-col" id="poll-results" data-turbo-frame-id="poll_stats">
   <h3 class="font-normal text-gray-500 lex dark:text-gray-300 mb-2">
     Thank you for participating in this poll.
   </h3>
@@ -47,21 +47,21 @@
             </td>
             <% if poll.selectors.include?("upvote") %>
               <td class="px-6 py-4">
-                <%= @table_data[[poll_option.title, "up_vote"]] || 0 %>
+                <%= table_data[poll_option.title]["up_vote"] || 0 %>
               </td>
             <% end %>
             <% if poll.selectors.include?("downvote") %>
               <td class="px-6 py-4">
-                <%= @table_data[[poll_option.title, "down_vote"]] || 0 %>
+                <%= table_data[poll_option.title]["down_vote"] || 0 %>
               </td>
             <% end %>
             <% if poll.selectors.include?("neutral") %>
               <td class="px-6 py-4">
-                <%= @table_data[[poll_option.title, "cancel"]] || 0 %>
+                <%= table_data[poll_option.title]["cancel"] || 0 %>
               </td>
             <% end %>
             <td class="px-6 py-4">
-              <%= @table_data[[poll_option.title, "total"]] || 0 %>
+              <%= table_data[poll_option.title]["total"] || 0 %>
             </td>
           </tr>
         <% end %>

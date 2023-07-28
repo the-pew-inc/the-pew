@@ -19,6 +19,20 @@ class VoteCounterService
       votes[[option, 'total']] = total
     end
     
-    votes  # return the updated hash
+    # votes  # return the updated hash
+    # Change to an [][] 
+    convert_table_data(votes)
+  end
+
+  private
+  def self.convert_table_data(raw_table_data)
+    new_table_data = {}
+    
+    raw_table_data.each do |(option, choice), count|
+      new_table_data[option] ||= {}
+      new_table_data[option][choice] = count
+    end
+    
+    new_table_data
   end
 end
