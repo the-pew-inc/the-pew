@@ -2,6 +2,17 @@ class PollOptionsController < ApplicationController
   before_action :authenticate_user!
 
   def create
+    # Retrieve the poll
+    poll = Poll.find(params[:poll_id])
+  
+    # Check that users are allowed to add options
+    # If not, we redirect to the poll with an error message
+    if !poll.add_option
+      logger.warn "User #{current_user.id} tried to add an option to poll #{poll.id}"
+      redirect_to(poll_path(params[:poll_id]), alert: 'This poll does not allow users to add options.')
+    end
+
+    # Create a new PollOption
     poll_option = PollOption.create(poll_id: params[:poll_id], title: params[:title], user_id: current_user.id)
     
     if poll_option.save!
