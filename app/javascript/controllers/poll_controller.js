@@ -21,8 +21,6 @@ export default class extends Controller {
     const currentButtonAction = event.params.voteAction;
     const pollOptionId = event.params.pollOptionId;
 
-    console.debug(`Current button action: ${currentButtonAction}`);
-
     // 2. Get all the other buttons
     const buttons = document.querySelectorAll(
       `button[data-poll-poll-option-id-param="${pollOptionId}"]`
@@ -30,9 +28,6 @@ export default class extends Controller {
 
     // 3. Run against the button array and apply the proper style
     buttons.forEach((button) => {
-      console.log(
-        `button.dataset.pollVoteActionParam: ${button.dataset.pollVoteActionParam}`
-      );
       if (button.dataset.pollVoteActionParam !== currentButtonAction) {
         // We revert to inactive if the button is active but not the one
         // the user clicked on.
@@ -40,7 +35,6 @@ export default class extends Controller {
           button.firstElementChild.classList.contains("border-sky-500") &&
           button.firstElementChild.classList.contains("text-sky-500")
         ) {
-          console.debug("Removing the selection colors");
           button.firstElementChild.classList.remove(
             "border-sky-500",
             "text-sky-500"
