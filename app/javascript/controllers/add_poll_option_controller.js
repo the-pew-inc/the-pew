@@ -14,7 +14,7 @@ export default class extends Controller {
           if (mutation.type === "childList") {
             for (let node of mutation.removedNodes) {
               if (node.id === "poll-submission") {
-                // "poll-submission" section removed, open the modal
+                // "poll-submission" section removed then open the modal
                 const $targetEl = document.getElementById("optionModal");
                 if ($targetEl) {
                   const optionModal = new Modal($targetEl, null);
@@ -24,11 +24,6 @@ export default class extends Controller {
                 }
               }
             }
-            // for (let node of mutation.addedNodes) {
-            //   if (node.id === "poll-submission") {
-            //     // "poll-submission" section added, do something here
-            //   }
-            // }
           }
         }
       });

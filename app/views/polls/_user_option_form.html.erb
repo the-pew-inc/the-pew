@@ -1,6 +1,6 @@
 <!-- app/views/polls/_user_option_form.html.erb -->
-<%= form_with url: poll_poll_options_path(poll) do |form| %>
-  <%= render partial: 'shared/form_errors', locals: { object: poll } %>
+<%= form_with url: poll_poll_options_path(poll), id: "user-option-form" do |form| %>
+  <%# render partial: 'shared/form_errors', locals: { object: poll } %>
   <div class="w-full">
     <div>
       <div class="mb-2" data-controller="maxchar">
