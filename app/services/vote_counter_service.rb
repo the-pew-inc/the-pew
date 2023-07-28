@@ -19,8 +19,9 @@ class VoteCounterService
       votes[[option, 'total']] = total
     end
     
-    # votes  # return the updated hash
-    # Change to an [][] 
+    # Convert the hash to a double array [][] in order to be able to
+    # properly serialized the votes results to an ActiveJob used by
+    # TurboStream delay
     convert_table_data(votes)
   end
 
