@@ -22,12 +22,18 @@ class VoteCounterService
     # Convert the hash to a double array [][] in order to be able to
     # properly serialized the votes results to an ActiveJob used by
     # TurboStream delay
-    convert_table_data(votes)
+    convert_table_data(votes, poll)
   end
 
   private
-  def self.convert_table_data(raw_table_data)
+  def self.convert_table_data(raw_table_data, poll)
     new_table_data = {}
+
+    # Initialize each poll_option title with a zeroed vote hash
+    poll.poll_options.each do |option|
+      new_table_data[option.title] = { 'up_vote' => 0, 'down_vote' => 0, 'neutral' => 0, 'total' => 0 }
+    end
+
     
     raw_table_data.each do |(option, choice), count|
       new_table_data[option] ||= {}

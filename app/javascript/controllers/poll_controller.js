@@ -6,6 +6,7 @@ export default class extends Controller {
   static values = {
     duration: Number,
     button_type: String,
+    allowUserOption: { type: Boolean, default: false },
   };
 
   connect() {
@@ -63,16 +64,16 @@ export default class extends Controller {
     });
   }
 
+  displayProgressBar() {
+    this.progressBarTarget.classList.remove("hidden");
+  }
+
   hideOptionsAfter(duration) {
     if (duration > 0) {
       setTimeout(() => {
         this.element.remove();
       }, (duration + 1) * 1000);
     }
-  }
-
-  displayProgressBar() {
-    this.progressBarTarget.classList.remove("hidden");
   }
 
   startProgressBar() {
