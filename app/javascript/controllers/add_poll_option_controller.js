@@ -1,5 +1,4 @@
 import { Controller } from "@hotwired/stimulus";
-import { Modal } from "flowbite";
 
 // Connects to data-controller="add-poll-option"
 export default class extends Controller {
