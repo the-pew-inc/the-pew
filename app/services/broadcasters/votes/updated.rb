@@ -14,7 +14,7 @@ class Broadcasters::Votes::Updated
 
   def call
     @table_data = VoteCounterService.count_by_poll_option_and_choice(@poll)
-    Turbo::StreamsChannel.broadcast_update_later_to  @poll, target: "", partial: "polls/poll_stats", locals: { poll: @poll, table_data: @table_data }
+    Turbo::StreamsChannel.broadcast_update_later_to  @poll, target: "poll-results", partial: "polls/poll_stats", locals: { poll: @poll, table_data: @table_data }
   end
 
 end
