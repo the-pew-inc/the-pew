@@ -30,7 +30,7 @@
         </div>
       </div>
     <% end %>
-    <div data-controller="poll" data-poll-duration-value="<%= @poll.duration %>" class="mx-auto flex flex-col">
+    <div data-controller="poll" data-poll-duration-value="<%= @poll.duration %>" data-poll-id-value="<%= @poll.id %>" class="mx-auto flex flex-col">
       <div class="mb-4 w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700 hidden" data-poll-target="progressBar">
         <div class="bg-blue-600 h-2.5 rounded-full transition-all duration-500" style="width: 0%" data-poll-target="progress"></div>
       </div>
