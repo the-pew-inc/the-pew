@@ -1,19 +1,20 @@
 import { Controller } from "@hotwired/stimulus";
+import { post } from "@rails/request.js";
 
 // Connects to data-controller="poll"
 export default class extends Controller {
   static targets = ["button", "progress", "progressBar"];
   static values = {
     duration: Number,
-    button_type: String,
+    id: String,
     allowUserOption: { type: Boolean, default: false },
   };
 
   connect() {
     if (this.hasDurationValue && this.durationValue > 0) {
       this.hideOptionsAfter(this.durationValue);
-      this.startProgressBar();
       this.displayProgressBar();
+      this.startProgressBar();
     }
   }
 
@@ -84,7 +85,19 @@ export default class extends Controller {
       this.progressTarget.style.width = `${progressPercent}%`;
       if (elapsed >= this.durationValue) {
         clearInterval(intervalId);
+
+        this.createPollParticipation(this.idValue);
       }
     }, 1000);
+  }
+
+  createPollParticipation(pollId) {
+    const url = `/polls/${pollId}/poll_participations`;
+
+    try {
+      post(url, { responseKind: "turbo-stream" });
+    } catch (error) {
+      console.error("Failed to create poll participation", error);
+    }
   }
 }
