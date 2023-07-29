@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_27_204155) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_28_232345) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -317,7 +317,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_27_204155) do
     t.boolean "document_answer_enabled", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "status", default: 0, null: false
     t.index ["poll_id"], name: "index_poll_options_on_poll_id"
+    t.index ["status"], name: "index_poll_options_on_status"
     t.index ["user_id"], name: "index_poll_options_on_user_id"
   end
 

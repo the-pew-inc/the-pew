@@ -31,7 +31,6 @@ export default class extends Controller {
   toggleModal() {
     const $targetEl = document.getElementById("optionModal");
     if ($targetEl) {
-      console.debug("We found the modal on the page");
       const optionModal = new Modal($targetEl, null);
       optionModal.toggle();
     } else {
