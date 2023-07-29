@@ -6,6 +6,7 @@
 #  document_answer_enabled :boolean          default(FALSE), not null
 #  is_answer               :boolean          default(FALSE), not null
 #  points                  :integer          default(0), not null
+#  status                  :integer          default("in_review"), not null
 #  text_answer_enabled     :boolean          default(FALSE), not null
 #  title                   :string
 #  title_enabled           :boolean          default(FALSE), not null
@@ -17,6 +18,7 @@
 # Indexes
 #
 #  index_poll_options_on_poll_id  (poll_id)
+#  index_poll_options_on_status   (status)
 #  index_poll_options_on_user_id  (user_id)
 #
 # Foreign Keys

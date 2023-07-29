@@ -60,7 +60,7 @@ class PollsController < ApplicationController
     params.require(:poll).permit(:add_option, :description,
       :display, :duration, :is_anonymous, :max_votes, :num_votes, 
       :poll_type, :status, :title, selectors: [],
-      poll_options_attributes: [:id, :title, :is_answer, :_destroy])
+      poll_options_attributes: [:id, :title, :status, :is_answer, :_destroy])
   end
 
 end

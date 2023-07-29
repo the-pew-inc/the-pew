@@ -8,9 +8,6 @@ class PollParticipationsController < ApplicationController
       if !PollParticipation.participated?(current_user, @poll)
         PollParticipation.create(user: current_user, poll: @poll)
 
-        # Broadcast to all the other connected users
-        Broadcasters::Votes::Updated.new(@poll).call
-
         # Render for the current user
         format.turbo_stream { render :success, locals: { add_option: @poll.add_option } }
       else

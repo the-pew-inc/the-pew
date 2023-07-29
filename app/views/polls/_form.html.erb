@@ -113,6 +113,7 @@
             </svg>
           </a>
         </div>
+        <%= po.hidden_field :status, value: :approved %>
         <%= po.hidden_field :_destroy %>
       </div>
     <% end %>
@@ -134,6 +135,7 @@
               </svg>
             </a>
           </div>
+          <%= po.hidden_field :status, value: :approved %>
           <%= po.hidden_field :_destroy %>
         </div>
       <% end %>
