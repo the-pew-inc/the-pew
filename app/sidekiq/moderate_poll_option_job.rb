@@ -31,8 +31,6 @@ class ModeratePollOptionJob
     # Send the question to openAI for moderation and wait for the response
     response = client.moderations(parameters: { input: poll_option_title })
 
-    logger.debug(`Response from openAI: ${response.inspect}`)
-
     # Process the response from openAI
     flagged = response.dig("results", 0, "flagged")
     if flagged
