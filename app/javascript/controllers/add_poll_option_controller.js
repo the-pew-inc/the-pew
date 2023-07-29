@@ -1,5 +1,4 @@
 import { Controller } from "@hotwired/stimulus";
-import { Modal } from "flowbite";
 
 // Connects to data-controller="add-poll-option"
 export default class extends Controller {
@@ -15,13 +14,7 @@ export default class extends Controller {
             for (let node of mutation.removedNodes) {
               if (node.id === "poll-submission") {
                 // "poll-submission" section removed then open the modal
-                const $targetEl = document.getElementById("optionModal");
-                if ($targetEl) {
-                  const optionModal = new Modal($targetEl, null);
-                  optionModal.show();
-                } else {
-                  console.error("optionModal element not found");
-                }
+                this.toggleModal();
               }
             }
           }
@@ -33,5 +26,15 @@ export default class extends Controller {
 
   disconnect() {
     this.observer.disconnect();
+  }
+
+  toggleModal() {
+    const $targetEl = document.getElementById("optionModal");
+    if ($targetEl) {
+      const optionModal = new Modal($targetEl, null);
+      optionModal.toggle();
+    } else {
+      console.error("optionModal element not found");
+    }
   }
 }
