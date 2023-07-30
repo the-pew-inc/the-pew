@@ -13,7 +13,7 @@
     "chartjs-plugin-datalabels": "2.2.0",
     "chartkick": "5.0.1",
     "esbuild": "0.18.6",
-    "flowbite": "1.7.0",
+    "flowbite": "1.8.0",
     "flowbite-datepicker": "1.2.2",
     "js-confetti": "0.11.0",
     "postcss": "8.4.24",
