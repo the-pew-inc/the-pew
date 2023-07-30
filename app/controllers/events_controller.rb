@@ -2,10 +2,11 @@ class EventsController < ApplicationController
   before_action :authenticate_user!, only: %i[index edit destroy update new]
   before_action :redirect_if_unauthenticated, only: %i[index edit destroy update new]
   before_action :set_event, except: %i[index new create event validate_pin]
-  before_action :authorize_event, only: [:show, :edit, :update, :stats, :export]
+  before_action :authorize_event, only: [:show, :edit, :update, :stats, :export, :destroy]
 
   def index
     @events = policy_scope(Event).includes(user: :profile).order(start_date: :desc)
+    authorize @events
   end
 
   def new
@@ -158,6 +159,7 @@ class EventsController < ApplicationController
     is_confirmed? and return
 
     @event = Event.find(params[:id])
+
     if @event.user_id != current_user.id
       flash[:alert] = 'You are not the owner of this event'
       redirect_to(events_path)

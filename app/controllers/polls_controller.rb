@@ -4,6 +4,7 @@ class PollsController < ApplicationController
 
   def index
     @polls = current_user.organization.polls.order(created_at: :desc).includes(:user)
+    authorize @polls
   end
 
   def new
@@ -36,17 +37,20 @@ class PollsController < ApplicationController
 
   def edit
     @poll = Poll.find(params[:id])
+    authorize @poll
   end
 
   def show
     # @poll = Poll.find(params[:id])
     @poll = Poll.includes(:poll_options).where(poll_options: { status: PollOption.statuses[:approved] }).find(params[:id])
-    
+    authorize @poll
+
     @table_data = VoteCounterService.count_by_poll_option_and_choice(@poll)
   end
 
   def destroy
     @poll = current_user.organization.polls.find(params[:id])
+    authorize @poll
     if @poll.destroy
       redirect_to polls_url, notice: "The poll was successfully deleted."
     else
