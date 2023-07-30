@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  sender: one
+  recipient: one
+  invitable: one
+  invitable_type: Invitable
+  token: MyString
+  status: 1
+
+two:
+  sender: two
+  recipient: two
+  invitable: two
+  invitable_type: Invitable
+  token: MyString
+  status: 1

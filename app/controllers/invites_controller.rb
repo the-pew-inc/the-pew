@@ -16,7 +16,7 @@ class InvitesController < ApplicationController
   end
 
   # POST /invites
-  # Send invitation email to users who are invoted to join an organization
+  # Send invitation email to users who are invited to join an organization
   # or invited to join an invite only event
   def create
     @user = User.new(invite_user_params)

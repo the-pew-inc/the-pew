@@ -3,14 +3,13 @@ class PollPolicy < ApplicationPolicy
     user_created_poll_or_admin? || record.universal? || (record.restricted? && user_belongs_to_organization?)
   end
 
-  def index?
-    user_created_poll_or_admin? || user.organization.has_role?(:admin, user)
+  def update?
+    user_created_poll_or_admin? || user_belongs_to_organization?
   end
 
-  def update?
+  def destroy?
     user_created_poll_or_admin?
   end
-  alias_method :destroy?, :update?
 
   private
 

@@ -4,7 +4,6 @@ class PollsController < ApplicationController
 
   def index
     @polls = current_user.organization.polls.order(created_at: :desc).includes(:user)
-    authorize @polls
   end
 
   def new
