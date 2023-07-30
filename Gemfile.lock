@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/faker-ruby/faker.git
-  revision: 0839df200586fefa2a522c63b67a48326edfdc20
+  revision: 82a1dbe2ee6b50240f8d61d800c1af271f745d2c
   specs:
     faker (3.2.0)
       i18n (>= 1.8.11, < 2)
@@ -262,7 +262,7 @@ GEM
       net-ssh (>= 2.6.5, < 8.0.0)
     net-smtp (0.3.3)
       net-protocol
-    net-ssh (7.1.0)
+    net-ssh (7.2.0)
     nio4r (2.5.9)
     nokogiri (1.15.3-arm64-darwin)
       racc (~> 1.4)
