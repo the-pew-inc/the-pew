@@ -39,7 +39,8 @@ class PollsController < ApplicationController
   end
 
   def show
-    @poll = Poll.find(params[:id])
+    # @poll = Poll.find(params[:id])
+    @poll = Poll.includes(:poll_options).where(poll_options: { status: PollOption.statuses[:approved] }).find(params[:id])
     
     @table_data = VoteCounterService.count_by_poll_option_and_choice(@poll)
   end
