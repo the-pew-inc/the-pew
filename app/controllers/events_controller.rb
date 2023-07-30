@@ -6,7 +6,6 @@ class EventsController < ApplicationController
 
   def index
     @events = policy_scope(Event).includes(user: :profile).order(start_date: :desc)
-    authorize @events
   end
 
   def new
