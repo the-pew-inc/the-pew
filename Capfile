@@ -23,7 +23,13 @@ require "capistrano/rails"
 require "capistrano/rbenv"
 require "capistrano/bundler"
 require "capistrano/rails/assets"
-require "capistrano/rails/migrations"
+
+# To trigger a db migration use:
+# RUN_MIGRATIONS=true bundle exec cap production deploy:migrate
+if ENV['RUN_MIGRATIONS'].present?
+  require 'capistrano/rails/migrations'
+end
+
 require "whenever/capistrano"
 
 # require "capistrano/sidekiq"
