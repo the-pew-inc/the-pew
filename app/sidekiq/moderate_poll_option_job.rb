@@ -16,6 +16,7 @@ class ModeratePollOptionJob
     poll_option_title = qh.dig("title")
     user_id = qh.dig("user_id")
 
+
     # Check for prohibited data
     # prohibited data: email addresses, domain, website
     prohibited_content = ModerationService.detect_prohibited_content(poll_option_title)
