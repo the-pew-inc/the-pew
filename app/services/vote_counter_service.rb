@@ -25,6 +25,23 @@ class VoteCounterService
     convert_table_data(votes, poll)
   end
 
+  # Fetches all votable IDs (associated with PollOptions) for a specific user on a particular poll.
+  #
+  # This method is used to efficiently fetch all votes made by a user on a particular poll.
+  # The votable IDs correspond to the IDs of the PollOptions that the user has voted on. 
+  # The result can be used to indicate visually on the UI which options a user has voted for.
+  #
+  # @param user [User] The user for whom to fetch the votes.
+  # @param poll [Poll] The poll on which to fetch the user's votes.
+  #
+  # @return [Array<Integer>] An array of IDs corresponding to the PollOptions that the user has voted on.
+  def self.user_votes_for_poll(user, poll)
+    Vote.joins("JOIN poll_options ON votes.votable_id = poll_options.id AND votes.votable_type = 'PollOption'")
+    .where(user: user, votable: poll.poll_options)
+    .pluck('poll_options.title', 'votes.choice')
+    .to_h
+  end
+
   private
   def self.convert_table_data(raw_table_data, poll)
     new_table_data = {}

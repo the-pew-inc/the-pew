@@ -15,6 +15,14 @@ class PollOptionsController < ApplicationController
     if !poll.add_option
       logger.warn "User #{current_user.id} tried to add an option to poll #{poll.id}"
       redirect_to(poll_path(params[:poll_id]), alert: 'This poll does not allow users to add options.')
+      return
+    end
+
+    # Make sure the user has not already suggested a new poll_option
+    if PollOption.find_by(user_id: current_user.id, poll_id: poll.id)
+      logger.warn "User #{current_user.id} tried to add more than one option to poll #{poll.id}"
+      redirect_to(poll_path(params[:poll_id]), alert: 'You already suggested a new option for this poll.')
+      return
     end
 
     # Create a new PollOption

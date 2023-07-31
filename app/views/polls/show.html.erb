@@ -94,7 +94,25 @@
     <% end %>
   </section>
 <% else %>
-  <%= render "poll_stats",  poll: @poll, table_data: @table_data  %>
+  <%# Render Global results & user's votes %>
+  <div class="mb-4 border-b border-gray-200 dark:border-gray-700">
+    <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="myTab" data-tabs-toggle="#myTabContent" role="tablist">
+      <li class="mr-2" role="presentation">
+        <button class="inline-block p-4 border-b-2 rounded-t-lg" id="results-tab" data-tabs-target="#results" type="button" role="tab" aria-controls="results" aria-selected="false">Results</button>
+      </li>
+      <li class="mr-2" role="presentation">
+        <button class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="choices-tab" data-tabs-target="#choices" type="button" role="tab" aria-controls="user choices" aria-selected="false">Your choices</button>
+      </li>
+    </ul>
+  </div>
+  <div id="myTabContent">
+    <div class="hidden p-4" id="results" role="tabpanel" aria-labelledby="results-tab">
+      <%= render "poll_stats",  poll: @poll, table_data: @table_data %>
+    </div>
+    <div class="hidden p-4" id="choices" role="tabpanel" aria-labelledby="choices-tab">
+      <%= render "user_votes",  poll: @poll, user_votes: @user_votes %>
+    </div>
+  </div>
 <% end %>
 <% if @poll.add_option %>
   <!-- User Option modal -->

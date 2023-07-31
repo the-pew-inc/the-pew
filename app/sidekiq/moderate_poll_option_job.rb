@@ -14,6 +14,8 @@ class ModeratePollOptionJob
     poll_option_id = qh.dig("id")
     poll_id = qh.dig("poll_id")
     poll_option_title = qh.dig("title")
+    user_id = qh.dig("user_id")
+
 
     # Check for prohibited data
     # prohibited data: email addresses, domain, website
@@ -29,7 +31,7 @@ class ModeratePollOptionJob
     end
 
     # Send the question to openAI for moderation and wait for the response
-    response = client.moderations(parameters: { input: poll_option_title })  
+    response = client.moderations(parameters: { input: poll_option_title })
 
     # Process the response from openAI
     flagged = response.dig("results", 0, "flagged")
@@ -47,6 +49,7 @@ class ModeratePollOptionJob
 
     # Broadcasting the updated question
     poll = Poll.find(poll_id)
-    Broadcasters::Votes::Updated.new(poll).call
+    user = User.find(user_id)
+    Broadcasters::Votes::Updated.new(poll, user).call
   end
 end

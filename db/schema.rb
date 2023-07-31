@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_28_232345) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_30_193848) do
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -408,6 +409,29 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_28_232345) do
     t.index ["user_id"], name: "index_questions_on_user_id"
   end
 
+  create_table "resource_invites", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "sender_id", null: false
+    t.uuid "organization_id", null: false
+    t.uuid "recipient_id"
+    t.string "invitable_type", null: false
+    t.uuid "invitable_id", null: false
+    t.datetime "expires_at"
+    t.string "email", null: false
+    t.string "token", null: false
+    t.integer "status"
+    t.string "template"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_resource_invites_on_email"
+    t.index ["invitable_type", "invitable_id"], name: "index_resource_invites_on_invitable"
+    t.index ["invitable_type", "invitable_id"], name: "index_resource_invites_on_invitable_type_and_invitable_id"
+    t.index ["organization_id"], name: "index_resource_invites_on_organization_id"
+    t.index ["recipient_id"], name: "index_resource_invites_on_recipient_id"
+    t.index ["sender_id"], name: "index_resource_invites_on_sender_id"
+    t.index ["status"], name: "index_resource_invites_on_status"
+    t.index ["token"], name: "index_resource_invites_on_token", unique: true
+  end
+
   create_table "roles", force: :cascade do |t|
     t.string "name"
     t.string "resource_type"
@@ -556,6 +580,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_28_232345) do
   add_foreign_key "profiles", "users"
   add_foreign_key "questions", "rooms"
   add_foreign_key "questions", "users"
+  add_foreign_key "resource_invites", "organizations"
+  add_foreign_key "resource_invites", "users", column: "recipient_id"
+  add_foreign_key "resource_invites", "users", column: "sender_id"
   add_foreign_key "rooms", "events"
   add_foreign_key "subscriptions", "organizations"
   add_foreign_key "votes", "users"
