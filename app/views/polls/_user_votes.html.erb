@@ -1,7 +1,12 @@
-<%# app/views/polls/_poll_stats.html.erb %>
+<%# app/views/polls/_user_votes.html.erb %>
 <section class="mx-auto flex flex-col" id="poll-results">
   <h3 class="font-normal text-gray-500 lex dark:text-gray-300 mb-2">
-    Thank you for participating in this poll.
+    <div class="flex justify-start items-center space-x-2">
+      <span>
+        Your choices for this poll are marked with a 
+      </span>
+      <span class="w-3.5 h-3.5 bg-purple-600 dark:bg-purple-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
+    </div>
   </h3>
   <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -31,12 +36,6 @@
               </svg>
             </th>
           <% end %>
-          <%# Display the total %>
-          <th scope="col" class="px-6 py-3">
-            <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <path clip-rule="evenodd" fill-rule="evenodd" d="M1.5 7.125c0-1.036.84-1.875 1.875-1.875h6c1.036 0 1.875.84 1.875 1.875v3.75c0 1.036-.84 1.875-1.875 1.875h-6A1.875 1.875 0 011.5 10.875v-3.75zm12 1.5c0-1.036.84-1.875 1.875-1.875h5.25c1.035 0 1.875.84 1.875 1.875v8.25c0 1.035-.84 1.875-1.875 1.875h-5.25a1.875 1.875 0 01-1.875-1.875v-8.25zM3 16.125c0-1.036.84-1.875 1.875-1.875h5.25c1.036 0 1.875.84 1.875 1.875v2.25c0 1.035-.84 1.875-1.875 1.875h-5.25A1.875 1.875 0 013 18.375v-2.25z"></path>
-            </svg>
-          </th>
         </tr>
       </thead>
       <tbody>
@@ -48,27 +47,30 @@
             <% if poll.selectors.include?("upvote") %>
               <td class="px-6 py-4">
                 <div class="flex flex-row space-x-2 items-center">
-                  <%= table_data[poll_option.title]["up_vote"] || 0 %>
+                  <% if user_votes[poll_option.title] == "up_vote" %>
+                    <span class="w-3.5 h-3.5 bg-purple-600 dark:bg-purple-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
+                  <% end %>
                 </div>
               </td>
             <% end %>
             <% if poll.selectors.include?("downvote") %>
               <td class="px-6 py-4">
                 <div class="flex flex-row space-x-2 items-center">
-                  <%= table_data[poll_option.title]["down_vote"] || 0 %>
+                  <% if user_votes[poll_option.title] == "down_vote" %>
+                    <span class="w-3.5 h-3.5 bg-purple-600 dark:bg-purple-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
+                  <% end %>
                 </div>
               </td>
             <% end %>
             <% if poll.selectors.include?("neutral") %>
               <td class="px-6 py-4">
                 <div class="flex flex-row space-x-2 items-center">
-                  <%= table_data[poll_option.title]["cancel"] || 0 %>
+                  <% if user_votes[poll_option.title] == "cancel" %>
+                    <span class="w-3.5 h-3.5 bg-purple-600 dark:bg-purple-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
+                  <% end %>
                 </div>
               </td>
             <% end %>
-            <td class="px-6 py-4">
-              <%= table_data[poll_option.title]["total"] || 0 %>
-            </td>
           </tr>
         <% end %>
       </tbody>

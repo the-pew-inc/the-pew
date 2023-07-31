@@ -45,6 +45,7 @@ class PollsController < ApplicationController
     authorize @poll
 
     @table_data = VoteCounterService.count_by_poll_option_and_choice(@poll)
+    @user_votes = VoteCounterService.user_votes_for_poll(current_user, @poll)
   end
 
   def destroy

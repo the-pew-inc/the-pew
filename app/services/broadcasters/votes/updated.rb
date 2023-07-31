@@ -8,7 +8,7 @@
 class Broadcasters::Votes::Updated
   attr_reader :poll
 
-  def initialize(poll)
+  def initialize(poll, user)
     @poll = poll
   end
 
