@@ -48,6 +48,8 @@ class Poll < ApplicationRecord
   
   has_many :poll_answers, dependent: :destroy
 
+  has_many :poll_participations, dependent: :destroy
+
   has_rich_text :description
 
   # Record user who participated in the poll

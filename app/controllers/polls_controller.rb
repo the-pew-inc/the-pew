@@ -40,7 +40,6 @@ class PollsController < ApplicationController
   end
 
   def show
-    # @poll = Poll.find(params[:id])
     @poll = Poll.includes(:poll_options).where(poll_options: { status: PollOption.statuses[:approved] }).find(params[:id])
     authorize @poll
 
@@ -57,6 +56,37 @@ class PollsController < ApplicationController
       flash[:alert] = "An error prevented the poll from being deleted."
       redirect_to polls_url
     end
+  end
+
+  # GET /polls/user-stats
+  def user_stats
+    # Stats for the polls created by the user
+    @created_polls_count = Poll.where(user_id: current_user.id).count
+    @participation_count = PollParticipation.joins(:poll).where(polls: { user_id: current_user.id }).count
+    @votes_count = Vote.joins("INNER JOIN poll_options ON votes.votable_id = poll_options.id")
+            .where("votes.votable_type = 'PollOption' AND poll_options.poll_id IN (?)", 
+            Poll.where(user_id: current_user.id).pluck(:id)).count
+
+
+    # Stats for the polls the user participated in
+    @participated_polls = PollParticipation.where(user_id: current_user.id).order(created_at: :desc)
+    @casted_votes_count = Vote.where(user_id: current_user.id).count
+
+    # Poll creation key dates
+    @first_poll_date = current_user.polls.order(:created_at).first&.created_at
+    @last_poll_date = current_user.polls.order(:created_at).last&.created_at
+
+    # Poll participation key dates
+    @first_vote_date = Vote.joins("INNER JOIN poll_options ON votes.votable_id = poll_options.id")
+                      .where("votes.votable_type = 'PollOption' AND poll_options.poll_id IN (?)", 
+                              Poll.where(user_id: current_user.id).pluck(:id))
+                      .order(:created_at).first&.created_at
+
+    @last_vote_date = Vote.joins("INNER JOIN poll_options ON votes.votable_id = poll_options.id")
+                      .where("votes.votable_type = 'PollOption' AND poll_options.poll_id IN (?)", 
+                              Poll.where(user_id: current_user.id).pluck(:id))
+                      .order(:created_at).last&.created_at
+ 
   end
 
   private
