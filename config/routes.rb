@@ -91,10 +91,11 @@ Rails.application.routes.draw do
 
   # Polls
   # resources :polls
+  get 'polls/user-stats', to: 'polls#user_stats'
   resources :polls do
     resources :poll_participations, only: [:create]
     resources :poll_options, only: [:create]
-  end  
+  end
 
   # Polls votes (aka the PollOption as Polls are not votable)
   # votable_id is the id of the PollOption the user is voting for (up_vote, down_vote or cancel)

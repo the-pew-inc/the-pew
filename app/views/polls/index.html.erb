@@ -1,8 +1,13 @@
 <!-- app/views/polls/index.html.erb -->
 <%# turbo_stream_from [current_user.id, :polls] %>
 <section>
-  <div class="mb-6">
-    <%= link_to "Create a new poll", new_poll_path, class: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full  px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" %>
+  <div class="flex justify-between items-center">
+    <div class="mb-6">
+      <%= link_to "Create a new poll", new_poll_path, class: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full  px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" %>
+    </div>
+    <div class="mb-6">
+      <%= link_to "Poll Insights", polls_user_stats_path, class: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full  px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" %>
+    </div>
   </div>
 </section>
 <section class="pt-4">

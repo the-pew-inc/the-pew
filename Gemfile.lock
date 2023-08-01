@@ -100,8 +100,8 @@ GEM
       ffi-compiler (~> 1.0)
     ast (2.4.2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.794.0)
-    aws-sdk-core (3.180.0)
+    aws-partitions (1.795.0)
+    aws-sdk-core (3.180.1)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.651.0)
       aws-sigv4 (~> 1.5)
@@ -165,7 +165,7 @@ GEM
     chronic (0.10.2)
     concurrent-ruby (1.2.2)
     connection_pool (2.4.1)
-    countries (5.5.0)
+    countries (5.6.0)
       unaccent (~> 0.3)
     crass (1.0.6)
     cssbundling-rails (1.2.0)
@@ -352,7 +352,7 @@ GEM
     rake (13.0.6)
     redis (5.0.6)
       redis-client (>= 0.9.0)
-    redis-client (0.14.1)
+    redis-client (0.15.0)
       connection_pool
     regexp_parser (2.8.1)
     reline (0.3.7)
@@ -456,10 +456,10 @@ GEM
       activemodel (>= 6.0.0)
       bindex (>= 0.4.0)
       railties (>= 6.0.0)
-    webdrivers (5.2.0)
+    webdrivers (5.3.1)
       nokogiri (~> 1.6)
       rubyzip (>= 1.3.0)
-      selenium-webdriver (~> 4.0)
+      selenium-webdriver (~> 4.0, < 4.11)
     websocket (1.2.9)
     websocket-driver (0.7.6)
       websocket-extensions (>= 0.1.0)
@@ -496,7 +496,7 @@ DEPENDENCIES
   caxlsx
   caxlsx_rails
   chartkick
-  countries (~> 5.5.0)
+  countries (~> 5.6.0)
   cssbundling-rails
   debug
   down (~> 5.0)
