@@ -189,11 +189,11 @@ class EventsController < ApplicationController
   end
 
   def create_event_params
-    params.require(:event).permit(:allow_anonymous, :always_on, :description, :event_type, :name, :start_date, :status, :stop_date)
+    params.require(:event).permit(:allow_anonymous, :always_on, :description, :event_type, :name, :start_date, :status, :end_date)
   end
 
   def update_event_params
-    params.require(:event).permit(:allow_anonymous, :always_on, :description, :event_type, :name, :short_code, :start_date, :status, :stop_date)
+    params.require(:event).permit(:allow_anonymous, :always_on, :description, :event_type, :name, :short_code, :start_date, :status, :end_date)
   end
 
   # Called to make sure a user's account is confirmed before they can create or edit an event.

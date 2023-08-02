@@ -32,16 +32,16 @@
         <div id="accordion-flush-body-1" class="hidden" aria-labelledby="accordion-flush-heading-1">
           <div class="grid gap-2 py-5">
             <div class="flex items-center pl-4 border border-gray-200 rounded dark:border-gray-700">
-              <input id="bordered-radio-1" type="radio" value="" name="bordered-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-              <label for="bordered-radio-1" class="w-full py-4 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Open to the world</label>
+              <%= form.radio_button :event_type, :universal, class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" %>
+              <%= form.label :event_type, "Open to the world", class: "w-full py-4 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300" %>
             </div>
             <div class="flex items-center pl-4 border border-gray-200 rounded dark:border-gray-700">
-              <input id="bordered-radio-2" type="radio" value="" name="bordered-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-              <label for="bordered-radio-2" class="w-full py-4 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Anyone from your company</label>
+              <%= form.radio_button :event_type, :restricted, class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" %>
+              <%= form.label :event_type, "Only people from your organization", class: "w-full py-4 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300" %>
             </div>
             <div class="flex items-center pl-4 border border-gray-200 rounded dark:border-gray-700">
-              <input id="bordered-radio-3" type="radio" value="" name="bordered-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-              <label for="bordered-radio-3" class="w-full py-4 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Invite only</label>
+              <%= form.radio_button :event_type, :invite_only, class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" %>
+              <%= form.label :event_type, "Invite only", class: "w-full py-4 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300" %>
             </div>
           </div>
         </div>
@@ -56,7 +56,7 @@
         <div id="accordion-flush-body-2" class="hidden" aria-labelledby="accordion-flush-heading-2">
           <div class="py-5">
             <div class="flex flex-row justify-start items-center space-x-6">
-              <%# Start date %>
+              <%# Event start date %>
               <div>
                 <%= form.label :start_date, class: "block text-sm font-medium text-gray-900 dark:text-gray-300" %>
                 <p id="helper-text-explanation" class="mb-2 text-sm text-gray-500 dark:text-gray-400">The event start date, format mm/dd/yyyy.</p>
@@ -70,24 +70,6 @@
                         "datepicker-format": "mm/dd/yyyy",
                         "data-minDate": Time.zone.today.strftime("%m/%d/%Y"),
                         value: @event.start_date.nil? ? Time.zone.today.strftime("%m/%d/%Y") : @event.start_date,
-                        class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500", 
-                        placeholder: "Select date (mm/dd/yyyy)" %>
-                </div>
-              </div>
-              <%# End date %>
-              <div>
-                <%= form.label :end_date, class: "block text-sm font-medium text-gray-900 dark:text-gray-300" %>
-                <p id="helper-text-explanation" class="mb-2 text-sm text-gray-500 dark:text-gray-400">The event end date, format mm/dd/yyyy.</p>
-                <div class="relative max-w-sm">
-                  <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                    <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
-                  </div>
-                  <%= form.text_field :end_date, 
-                        datepicker: "", 
-                        "datepicker-autohide": "", 
-                        "datepicker-format": "mm/dd/yyyy",
-                        "data-minDate": Time.zone.today.strftime("%m/%d/%Y"),
-                        value: @event.end_date.nil? ? Time.zone.today.strftime("%m/%d/%Y") : @event.end_date,
                         class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500", 
                         placeholder: "Select date (mm/dd/yyyy)" %>
                 </div>
