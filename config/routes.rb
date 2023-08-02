@@ -30,6 +30,10 @@ Rails.application.routes.draw do
   # Resend the invite to join an organization to a user
   post   'account/:id/invite', to: 'users#resend_invite', as: :resend_invite
 
+  # Resource invites
+  # Used to invite users to join a specific poll, survey, event, etc.
+  resources :resource_invites
+
   # Invite routes
   # Invite routes are only used to invite a user to join an existing Organization
   resources :invites, only: %i[ edit create new update ]

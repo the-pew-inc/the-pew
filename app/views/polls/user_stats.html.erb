@@ -4,10 +4,10 @@
     Your polls: 
   </h2>
   <div class="block text-gray-700 dark:text-gray-400">
-    First poll created on: <%= @first_poll_date.strftime("%B %d, %Y") %>
+    First poll created on: <%= @first_poll_date&.strftime("%B %d, %Y") %>
   </div>
   <div class="block text-gray-700 dark:text-gray-400 mb-2">
-    Last poll created on: <%= @last_poll_date.strftime("%B %d, %Y") %>
+    Last poll created on: <%= @last_poll_date&.strftime("%B %d, %Y") %>
   </div>
   <div class="flex space-x-2 items-center justify-start">
     <div class="bg-gray-800 p-4 rounded w-52">
@@ -47,10 +47,10 @@
     Your participation: 
   </h2>
   <div class="block text-gray-700 dark:text-gray-400">
-    First vote for one of your polls: <%= @first_vote_date.strftime("%B %d, %Y") %>
+    First vote for one of your polls: <%= @first_vote_date&.strftime("%B %d, %Y") %>
   </div>
   <div class="block text-gray-700 dark:text-gray-400 mb-2">
-    Last vote for one of your polls: <%= @last_vote_date.strftime("%B %d, %Y") %>
+    Last vote for one of your polls: <%= @last_vote_date&.strftime("%B %d, %Y") %>
   </div>
   <div class="flex space-x-2 items-center justify-start">
     <div class="bg-gray-800 p-4 rounded w-52">
@@ -95,7 +95,9 @@
         <% @participated_polls.each do |poll_participation| %>
           <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
             <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-              <%= poll_participation.poll.title %>
+              <%= link_to poll_path(poll_participation.poll) do %>
+                <%= poll_participation.poll.title %>
+              <% end %>
             </th>
             <td class="px-6 py-4">
               <span class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-blue-900 dark:text-blue-300">
