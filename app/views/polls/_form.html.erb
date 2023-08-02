@@ -49,6 +49,23 @@
     </div>
   </div>
   <div class="mb-6">
+    <h3 class="mb-5 text-lg font-medium text-gray-900 dark:text-white">Choose who can participate:</h3>
+    <div class="grid gap-2 md:grid-cols-2">
+      <div class="flex items-center pl-4 border border-gray-200 rounded dark:border-gray-700">
+        <%= form.radio_button :poll_type, :universal, class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" %>
+        <%= form.label :poll_type, "Open to the world", class: "w-full py-4 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300" %>
+      </div>
+      <div class="flex items-center pl-4 border border-gray-200 rounded dark:border-gray-700">
+        <%= form.radio_button :poll_type, :restricted, class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" %>
+        <%= form.label :poll_type, "Only people from your organization", class: "w-full py-4 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300" %>
+      </div>
+      <div class="flex items-center pl-4 border border-gray-200 rounded dark:border-gray-700">
+        <%= form.radio_button :poll_type, :invite_only, class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" %>
+        <%= form.label :poll_type, "Invite only", class: "w-full py-4 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300" %>
+      </div>
+    </div>
+  </div>
+  <div class="mb-6">
     <h3 class="mb-5 text-lg font-medium text-gray-900 dark:text-white">Choose what users can do:</h3>
     <ul class="grid w-full gap-6 md:grid-cols-3">
       <li>
