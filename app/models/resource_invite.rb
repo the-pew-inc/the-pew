@@ -34,6 +34,8 @@
 #  fk_rails_...  (sender_id => users.id)
 #
 class ResourceInvite < ApplicationRecord
+  include PgSearch::Model
+  
   belongs_to :sender, class_name: 'User'
   belongs_to :recipient, class_name: 'User', optional: true
   belongs_to :invitable, polymorphic: true
@@ -44,6 +46,11 @@ class ResourceInvite < ApplicationRecord
   validates :email, presence: true
 
   enum status: { pending: 0, accepted: 1, declined: 2, expired: 3 }
+
+  # PG_SEARCH
+  pg_search_scope :search, against: [:email]
+
+  # FUNCTIONS:
 
   def token_valid?
     self.expires_at > Time.now

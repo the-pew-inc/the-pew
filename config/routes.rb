@@ -41,7 +41,8 @@ Rails.application.routes.draw do
   # User routes
   resources :users, only: %i[create new] do
     collection do
-      get 'search', action: :search_users
+      get 'search',        action: :search_users
+      get 'invite_search', action: :search_users_and_groups_for_invites
     end
   end
   resources :profiles,  only: %i[ update edit ]

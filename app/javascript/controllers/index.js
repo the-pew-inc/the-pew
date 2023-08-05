@@ -31,6 +31,9 @@ application.register("filter-users", FilterUsersController)
 import HamburgerController from "./hamburger_controller"
 application.register("hamburger", HamburgerController)
 
+import InviteToggleController from "./invite_toggle_controller"
+application.register("invite-toggle", InviteToggleController)
+
 import MaxcharController from "./maxchar_controller"
 application.register("maxchar", MaxcharController)
 
@@ -66,6 +69,9 @@ application.register("toggle", ToggleController)
 
 import TurboModalController from "./turbo_modal_controller"
 application.register("turbo-modal", TurboModalController)
+
+import UserInvitesController from "./user_invites_controller"
+application.register("user-invites", UserInvitesController)
 
 import UserVoteController from "./user_vote_controller"
 application.register("user-vote", UserVoteController)
