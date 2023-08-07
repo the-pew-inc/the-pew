@@ -34,7 +34,7 @@ export default class extends Controller {
     if (!this.invitedUsersValue.some((user) => user.label === invited.label)) {
       this.invitedUsersValue.push(invited);
     } else {
-      alert("Already exist");
+      alert(`${this.searchInputTarget.value} is already in the list`);
       this.searchInputTarget.value = "";
       return;
     }
