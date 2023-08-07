@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/faker-ruby/faker.git
-  revision: 82a1dbe2ee6b50240f8d61d800c1af271f745d2c
+  revision: d0ebdbea503b08a7bef8f00c87b238dd8323ac7b
   specs:
     faker (3.2.0)
       i18n (>= 1.8.11, < 2)
@@ -100,7 +100,7 @@ GEM
       ffi-compiler (~> 1.0)
     ast (2.4.2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.797.0)
+    aws-partitions (1.798.0)
     aws-sdk-core (3.180.1)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.651.0)
@@ -298,8 +298,8 @@ GEM
       actionpack (>= 4.2)
       omniauth (~> 2.0)
     pagy (6.0.4)
-    paper_trail (14.0.0)
-      activerecord (>= 6.0)
+    paper_trail (15.0.0)
+      activerecord (>= 6.1)
       request_store (~> 1.4)
     parallel (1.23.0)
     parser (3.2.2.3)
@@ -518,7 +518,7 @@ DEPENDENCIES
   omniauth-google-oauth2 (~> 1.1.1)
   omniauth-rails_csrf_protection
   pagy (~> 6.0.0)
-  paper_trail
+  paper_trail (~> 15.0.0)
   pg (~> 1.4)
   pg_search (~> 2.3.6)
   puma (~> 6.3.0)
