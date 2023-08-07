@@ -30,20 +30,8 @@
           </button>
         </h2>
         <div id="accordion-flush-body-1" class="hidden" aria-labelledby="accordion-flush-heading-1">
-          <div class="grid gap-2 py-5">
-            <div class="flex items-center pl-4 border border-gray-200 rounded dark:border-gray-700">
-              <%= form.radio_button :event_type, :universal, class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" %>
-              <%= form.label :event_type, "Open to the world", class: "w-full py-4 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300" %>
-            </div>
-            <div class="flex items-center pl-4 border border-gray-200 rounded dark:border-gray-700">
-              <%= form.radio_button :event_type, :restricted, class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" %>
-              <%= form.label :event_type, "Only people from your organization", class: "w-full py-4 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300" %>
-            </div>
-            <div class="flex items-center pl-4 border border-gray-200 rounded dark:border-gray-700">
-              <%= form.radio_button :event_type, :invite_only, class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" %>
-              <%= form.label :event_type, "Invite only", class: "w-full py-4 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300" %>
-            </div>
-          </div>
+          <%# Render the type and invite section %>
+          <%= render "layouts/invites/resource_invite", form: form, resource: event %>
         </div>
         <h2 id="accordion-flush-heading-2">
           <button type="button" class="flex items-center justify-between w-full py-5 font-medium text-left text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400" data-accordion-target="#accordion-flush-body-2" aria-expanded="false" aria-controls="accordion-flush-body-2">
