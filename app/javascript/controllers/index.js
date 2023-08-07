@@ -2,79 +2,79 @@
 // Run that command whenever you add a new controller or create them with
 // ./bin/rails generate stimulus controllerName
 
-import { application } from "./application"
+import { application } from "./application";
 
-import AddPollOptionController from "./add_poll_option_controller"
-application.register("add-poll-option", AddPollOptionController)
+import AddPollOptionController from "./add_poll_option_controller";
+application.register("add-poll-option", AddPollOptionController);
 
-import AlertController from "./alert_controller"
-application.register("alert", AlertController)
+import AlertController from "./alert_controller";
+application.register("alert", AlertController);
 
-import AutoSubmitController from "./auto_submit_controller"
-application.register("auto-submit", AutoSubmitController)
+import AutoSubmitController from "./auto_submit_controller";
+application.register("auto-submit", AutoSubmitController);
 
-import ClipboardController from "./clipboard_controller"
-application.register("clipboard", ClipboardController)
+import ClipboardController from "./clipboard_controller";
+application.register("clipboard", ClipboardController);
 
-import CloseDropdownController from "./close_dropdown_controller"
-application.register("close-dropdown", CloseDropdownController)
+import CloseDropdownController from "./close_dropdown_controller";
+application.register("close-dropdown", CloseDropdownController);
 
-import ConfettiController from "./confetti_controller"
-application.register("confetti", ConfettiController)
+import ConfettiController from "./confetti_controller";
+application.register("confetti", ConfettiController);
 
-import EmptyStateController from "./empty_state_controller"
-application.register("empty-state", EmptyStateController)
+import EmptyStateController from "./empty_state_controller";
+application.register("empty-state", EmptyStateController);
 
-import FilterUsersController from "./filter_users_controller"
-application.register("filter-users", FilterUsersController)
+import FilterUsersController from "./filter_users_controller";
+application.register("filter-users", FilterUsersController);
 
-import HamburgerController from "./hamburger_controller"
-application.register("hamburger", HamburgerController)
+import HamburgerController from "./hamburger_controller";
+application.register("hamburger", HamburgerController);
 
-import InviteToggleController from "./invite_toggle_controller"
-application.register("invite-toggle", InviteToggleController)
+import InviteToggleController from "./invite_toggle_controller";
+application.register("invite-toggle", InviteToggleController);
 
-import MaxcharController from "./maxchar_controller"
-application.register("maxchar", MaxcharController)
+import MaxcharController from "./maxchar_controller";
+application.register("maxchar", MaxcharController);
 
-import ModeController from "./mode_controller"
-application.register("mode", ModeController)
+import ModeController from "./mode_controller";
+application.register("mode", ModeController);
 
-import OrderQuestionsController from "./order_questions_controller"
-application.register("order-questions", OrderQuestionsController)
+import OrderQuestionsController from "./order_questions_controller";
+application.register("order-questions", OrderQuestionsController);
 
-import PollController from "./poll_controller"
-application.register("poll", PollController)
+import PollController from "./poll_controller";
+application.register("poll", PollController);
 
-import PollOptionsController from "./poll_options_controller"
-application.register("poll-options", PollOptionsController)
+import PollOptionsController from "./poll_options_controller";
+application.register("poll-options", PollOptionsController);
 
-import QrCodeGeneratorController from "./qr_code_generator_controller"
-application.register("qr-code-generator", QrCodeGeneratorController)
+import QrCodeGeneratorController from "./qr_code_generator_controller";
+application.register("qr-code-generator", QrCodeGeneratorController);
 
-import ResetFormController from "./reset_form_controller"
-application.register("reset-form", ResetFormController)
+import ResetFormController from "./reset_form_controller";
+application.register("reset-form", ResetFormController);
 
-import SubmitQuestionController from "./submit_question_controller"
-application.register("submit-question", SubmitQuestionController)
+import SubmitQuestionController from "./submit_question_controller";
+application.register("submit-question", SubmitQuestionController);
 
-import SubscriptionFormController from "./subscription_form_controller"
-application.register("subscription-form", SubscriptionFormController)
+import SubscriptionFormController from "./subscription_form_controller";
+application.register("subscription-form", SubscriptionFormController);
 
-import TimeZoneController from "./time_zone_controller"
-application.register("time-zone", TimeZoneController)
+import TimeZoneController from "./time_zone_controller";
+application.register("time-zone", TimeZoneController);
 
-import ToggleController from "./toggle_controller"
-application.register("toggle", ToggleController)
+import ToggleController from "./toggle_controller";
+application.register("toggle", ToggleController);
 
-import TurboModalController from "./turbo_modal_controller"
-application.register("turbo-modal", TurboModalController)
+import TurboModalController from "./turbo_modal_controller";
+application.register("turbo-modal", TurboModalController);
 
-import UserInvitesController from "./user_invites_controller"
-application.register("user-invites", UserInvitesController)
+import UserInvitesController from "./user_invites_controller";
+application.register("user-invites", UserInvitesController);
 
-import UserVoteController from "./user_vote_controller"
-application.register("user-vote", UserVoteController)
+import UserVoteController from "./user_vote_controller";
+application.register("user-vote", UserVoteController);
 
-import ValidatePinController from "./validate_pin_controller"
-application.register("validate-pin", ValidatePinController)
+import ValidatePinController from "./validate_pin_controller";
+application.register("validate-pin", ValidatePinController);

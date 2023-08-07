@@ -49,57 +49,31 @@ module UserSearchable
     # 
     # If no results are found or if no query is provided, an empty array is returned.
     def search_users_and_groups_for_invites
-      results = []
       
       if params[:q].present?
         query = params[:q]
     
-        # Search users
-        searched_users = User.joins(:member)
+        # Search users within the organization
+        @searched_users = User.joins(:member)
                              .where(members: { organization_id: current_user.organization.id })
                              .search(query) 
                              .includes(:profile)
                              .limit(5)
-        
-        searched_users.each do |user|
-          results << {
-            type: :user,
-            name: user.profile&.name,
-            email: user.email,
-            id: user.id
-          }
-        end
     
-        # Search groups
-        searched_groups = Group
+        # Search groups within the organization or created by the user
+        @searched_groups = Group
                           .where("user_id = ? OR (group_type = ? AND organization_id = ?)", current_user.id, Group.group_types[:organization], current_user.organization.id)
                           .search(query)
                           .limit(5)
-    
-        searched_groups.each do |group|
-          results << {
-            type: :group,
-            name: group.name,
-            id: group.id
-          }
-        end
 
-        # Search resource invites
-        searched_invites = ResourceInvite.search(query)
+        # Search resource invites (aka user's previously invited by the current user)
+        @searched_invites = ResourceInvite.search(query)
                           .where(sender_id: current_user.id)
                           .limit(5)
 
-        searched_invites.each do |invite|
-          results << {
-          type: :invite,
-          name: nil,
-          email: invite.email,
-          id: nil
-          }
-        end
       end
     
-      render json: results
+      render layout: false
     end
     
 end
