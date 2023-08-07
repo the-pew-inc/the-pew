@@ -31,6 +31,7 @@ class Group < ApplicationRecord
   
   has_many :group_memberships
   has_many :users, through: :group_memberships
+  has_many :resource_invites
 
   # Defines if the group only be accessed by the user who created it or if it
   # can be access by anyone from the organization

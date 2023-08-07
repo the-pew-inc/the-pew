@@ -39,6 +39,7 @@ class ResourceInvite < ApplicationRecord
   belongs_to :sender, class_name: 'User'
   belongs_to :recipient, class_name: 'User', optional: true
   belongs_to :invitable, polymorphic: true
+  belongs_to :group, optional: true
 
   before_validation :generate_token, on: :create
 
