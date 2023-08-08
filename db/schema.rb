@@ -439,14 +439,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_02_183847) do
     t.uuid "recipient_id"
     t.string "invitable_type", null: false
     t.uuid "invitable_id", null: false
+    t.uuid "group_id"
+    t.datetime "sent_on"
     t.datetime "expires_at"
     t.string "email", null: false
     t.string "token", null: false
     t.integer "status"
     t.string "template"
+    t.text "error_msg"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_resource_invites_on_email"
+    t.index ["group_id"], name: "index_resource_invites_on_group_id"
     t.index ["invitable_type", "invitable_id"], name: "index_resource_invites_on_invitable"
     t.index ["invitable_type", "invitable_id"], name: "index_resource_invites_on_invitable_type_and_invitable_id"
     t.index ["organization_id"], name: "index_resource_invites_on_organization_id"

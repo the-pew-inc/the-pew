@@ -4,7 +4,7 @@
 #
 #  id              :uuid             not null, primary key
 #  description     :text
-#  group_type      :integer          default("private"), not null
+#  group_type      :integer          default("restricted"), not null
 #  icon            :string
 #  name            :string
 #  created_at      :datetime         not null
