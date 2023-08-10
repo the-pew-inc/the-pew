@@ -28,6 +28,10 @@ export default class extends Controller {
     this.searchInputTarget.value = "";
   }
 
+  disconnect() {
+    this.invitedUsersValue = [];
+  }
+
   addBadge(invited) {
     // Append the email to the invitedUser Array
     // ✅ only appends if value not in array

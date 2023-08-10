@@ -47,6 +47,7 @@ Shout out to the following projects:
 ### Javascript:
 - [chart.js](https://www.chartjs.org)
 - [flowbite](https://flowbite.com)
+- [Merakiui - Email Templates](https://merakiui.com/components/email-templates)
 - [QR Code Styling](https://github.com/kozakdenys/qr-code-styling)
 - [stimulus-autocomplete](https://github.com/afcapel/stimulus-autocomplete)
 - [taggle](https://github.com/okcoker/taggle.js)

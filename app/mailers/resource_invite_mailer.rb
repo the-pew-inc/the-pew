@@ -1,8 +1,8 @@
 class ResourceInviteMailer < ApplicationMailer
-  def invite(email, record)
-    @email = email
-    @record = record
+  def invite(resource, invitation)
+    @resource = resource
+    @invitation = invitation
 
-    mail(to: @email, subject: 'You are invited!')
+    mail(to: @invitation.email, subject: 'You are invited!')
   end
 end

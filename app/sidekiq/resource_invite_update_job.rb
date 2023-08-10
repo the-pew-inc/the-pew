@@ -57,7 +57,8 @@ class ResourceInviteUpdateJob
     end
 
     # Call ResourceInviteJob to invite the new users
-    ResourceInviteJob.perform_async(new_invites_users, sender, resource)
+    # but first make sure that the new_invites_users can be passed to Sidekiq
+    ResourceInviteJob.perform_async(new_invites_users.to_json, sender, resource)
 
     # invites should now only contains the groups and users which have
     # been removed from the resource by the organizer.
