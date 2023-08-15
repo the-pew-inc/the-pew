@@ -145,7 +145,7 @@ gem 'groupdate'
 gem 'chartkick'
 
 # openAI [https://github.com/alexrudall/ruby-openai]
-gem 'ruby-openai', '~> 4.3.0'
+gem 'ruby-openai', '~> 5.0.0'
 
 # Adding pgsearch
 gem 'pg_search', '~> 2.3.6'
