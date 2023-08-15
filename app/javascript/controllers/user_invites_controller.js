@@ -8,8 +8,11 @@ export default class extends Controller {
   };
 
   connect() {
+    // Clear inviterUsers from any previous value that might still be haging somewhere ;-)
+    this.invitedUsersValue = [];
+
     // Get the autocomplete object from the page
-    const autocomplete = document.getElementById("autocomplete");
+    this.autocomplete = document.getElementById("autocomplete");
 
     autocomplete.addEventListener("autocomplete.change", (event) => {
       // Get the email address or group id
@@ -29,7 +32,15 @@ export default class extends Controller {
   }
 
   disconnect() {
+    // Remove the autocomplete listener
+    if (this.autocomplete) {
+      this.autocomplete.removeEventListener(
+        "autocomplete.change",
+        this.autocompleteListener
+      );
+    }
     this.invitedUsersValue = [];
+    this.invitedUsersTarget.value = JSON.stringify(this.invitedUsersValue);
   }
 
   addBadge(invited) {
