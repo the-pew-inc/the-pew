@@ -34,7 +34,7 @@ class PollOption < ApplicationRecord
   has_many :poll_answers, dependent: :destroy
   has_many :votes,        as: :votable, dependent: :destroy
 
-  validates :title, presence: true, length: { minimum: 3, maximum: 250 }
+  validates :title, presence: true, length: { maximum: 250 }
 
   enum status: {
     in_review: 0,
