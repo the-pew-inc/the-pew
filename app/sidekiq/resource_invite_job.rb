@@ -34,12 +34,12 @@ class ResourceInviteJob
     resource      = JSON.parse(resource)
     
     # Fetching the user who initiated the invitation: aka sender
-    sender = User.find(sender_id)
+    @sender = User.find(sender_id)
     
     invited_users.each do |invited|
       case invited['type']
       when 'group'
-        group_invite(invited['id'], sender, resource)
+        group_invite(invited['id'], resource)
       when 'new_email'
         email = invited['label']
         if valid_email?(email)
@@ -47,9 +47,9 @@ class ResourceInviteJob
             group_id: nil,
             invitable_id: resource['invitable_id'],
             invitable_type: resource['invitable_type'],
-            organization_id: sender.organization.id, 
+            organization_id: @sender.organization.id, 
             recipient_id: nil, 
-            sender_id: sender.id)
+            sender_id: @sender.id)
           send_invite(resource, invitation)
         end
       when 'user'
@@ -59,9 +59,9 @@ class ResourceInviteJob
             group_id: nil,
             invitable_id: resource['invitable_id'],
             invitable_type: resource['invitable_type'],
-            organization_id: sender.organization.id, 
+            organization_id: @sender.organization.id, 
             recipient_id: user.id, 
-            sender_id: sender.id)
+            sender_id: @sender.id)
           send_invite(resource, invitation)
         end
       when 'invite'
@@ -71,9 +71,9 @@ class ResourceInviteJob
             group_id: nil,
             invitable_id: resource['invitable_id'],
             invitable_type: resource['invitable_type'],
-            organization_id: sender.organization.id, 
+            organization_id: @sender.organization.id, 
             recipient_id: nil, 
-            sender_id: sender.id)
+            sender_id: @sender.id)
           send_invite(resource, invitation)
         end
       else
@@ -85,10 +85,15 @@ class ResourceInviteJob
   private
 
   def send_invite(resource, invitation)
-    ResourceInviteMailer.invite(resource, invitation).deliver_later
+    resource['email'] = invitation['email'] # Email receiving the invitation
+    resource['nickname'] = @sender.profile.nickname # Name of the person inviting (sender)
+
+    # Serializing the JSON &
+    # Sending to the mailer for async processing
+    ResourceInviteMailer.invite(resource.to_json).deliver_later
   end
 
-  def group_invite(group_id, sender, resource)
+  def group_invite(group_id, resource)
     group = Group.find(group_id)
     
     if group
@@ -101,9 +106,9 @@ class ResourceInviteJob
                               group_id: group_id,
                               invitable_id: resource['invitable_id'],
                               invitable_type: resource['invitable_type'],
-                              organization_id: sender.organization.id, 
+                              organization_id: @sender.organization.id, 
                               recipient_id: user.id, 
-                              sender_id: sender.id)
+                              sender_id: @sender.id)
         # Send the invitation email to the invited user
         send_invite(resource, invitation)
       end

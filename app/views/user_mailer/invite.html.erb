@@ -1,130 +1,73 @@
-<!-- app/views/user_mailer/invite.html.erb -->
-<div class="es-wrapper-color">
-  <!--[if gte mso 9]>
-    <v:background xmlns:v="urn:schemas-microsoft-com:vml" fill="t">
-      <v:fill type="tile" color="#fafafa"></v:fill>
-    </v:background>
-  <![endif]-->
-  <table class="es-wrapper" width="100%" cellspacing="0" cellpadding="0">
-    <tbody>
-      <tr>
-        <td class="esd-email-paddings" valign="top">
-          <table cellpadding="0" cellspacing="0" class="es-content" align="center">
-            <tbody>
-              <tr>
-                <td class="esd-stripe" align="center">
-                  <table bgcolor="#ffffff" class="es-content-body" align="center" cellpadding="0" cellspacing="0" width="600">
-                    <tbody>
-                      <tr>
-                        <td class="esd-structure es-p30t es-p30b es-p20r es-p20l" align="left">
-                          <table cellpadding="0" cellspacing="0" width="100%">
-                            <tbody>
-                              <tr>
-                                <td width="560" class="esd-container-frame" align="center" valign="top">
-                                  <table cellpadding="0" cellspacing="0" width="100%">
-                                    <tbody>
-                                      <tr>
-                                        <td align="center" class="esd-block-image es-p10t es-p10b" style="font-size: 0px;"><a target="_blank"><img src="https://vvvafd.stripocdn.email/content/guids/CABINET_67e080d830d87c17802bd9b4fe1c0912/images/55191618237638326.png" alt style="display: block;" width="100"></a></td>
-                                      </tr>
-                                      <tr>
-                                        <td align="center" class="esd-block-text es-p10b es-m-txt-c">
-                                          <h1 style="font-size: 46px; line-height: 100%;">Welcome to THEPEW</h1>
-                                        </td>
-                                      </tr>
-                                      <tr>
-                                        <td align="center" class="esd-block-text es-p5t es-p5b es-p40r es-p40l es-m-p0r es-m-p0l">
-                                          <p>
-                                            You've been invited to join <%= @user.organization.name %> account on THEPEW, and we can't wait to see how you'll use our platform to engage with us, your team and customers.
-                                          </p>
-                                          <p>
-                                            As a member of <%= @user.organization.name %>, you now have access to all of the features of THEPEW. With our user-friendly interface and robust analytics, you'll be able to gather insights and make data-driven decisions in no time.
-                                          </p>
-                                          <p>
-                                            Whether you're looking to get feedback on a new project, brainstorm ideas, or simply have some fun with your colleagues, THEPEW has everything you need to make it happen.
-                                          </p>
-                                          Thanks for joining us on this exciting journey, and we can't wait to see what you'll achieve with THEPEW.
-                                        </p>
-                                      </td>
-                                    </tr>
-                                    <tr>
-                                      <td align="center" class="esd-block-button es-p10t es-p10b"><span class="es-button-border" style="border-radius: 6px;"><%= link_to "COMPLETE YOUR REGISTRATION", edit_invite_url(@invitation_token), class: "es-button", target: "_blank", style: "mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#FFFFFF;font-size:20px;border-style:solid;border-color:#5C68E2;border-width:10px 30px 10px 30px;display:inline-block;background:#5C68E2;border-radius:6px;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-weight:normal;font-style:normal;line-height:24px;width:auto;text-align:center;border-left-width:30px;border-right-width:30px" %></span></td>
-                                    </tr>
-                                    <tr>
-                                      <td align="center" class="esd-block-text es-p5t es-p5b es-p40r es-p40l es-m-p0r es-m-p0l">
-                                        <p>Once confirmed, this email will be uniquely associated with your account.</p>
-                                      </td>
-                                    </tr>
-                                  </tbody>
-                                </table>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <table cellpadding="0" cellspacing="0" class="es-footer esd-footer-popover" align="center">
-          <tbody>
-            <tr>
-              <td class="esd-stripe esd-synchronizable-module" align="center">
-                <table class="es-footer-body" align="center" cellpadding="0" cellspacing="0" width="640" style="background-color: transparent;">
-                  <tbody>
-                    <tr>
-                      <td class="esd-structure es-p20t es-p20b es-p20r es-p20l" align="left">
-                        <table cellpadding="0" cellspacing="0" width="100%">
-                          <tbody>
-                            <tr>
-                              <td width="600" class="esd-container-frame" align="left">
-                                <table cellpadding="0" cellspacing="0" width="100%">
-                                  <tbody>
-                                    <tr>
-                                      <td align="center" class="esd-block-social es-p15t es-p15b" style="font-size:0">
-                                        <table cellpadding="0" cellspacing="0" class="es-table-not-adapt es-social">
-                                          <tbody>
-                                            <tr>
-                                              <td align="center" valign="top" class="es-p40r"><a target="_blank" href><img title="Facebook" src="https://vvvafd.stripocdn.email/content/assets/img/social-icons/logo-black/facebook-logo-black.png" alt="Fb" width="32"></a></td>
-                                              <td align="center" valign="top" class="es-p40r"><a target="_blank" href><img title="Twitter" src="https://vvvafd.stripocdn.email/content/assets/img/social-icons/logo-black/twitter-logo-black.png" alt="Tw" width="32"></a></td>
-                                              <td align="center" valign="top" class="es-p40r"><a target="_blank" href><img title="Instagram" src="https://vvvafd.stripocdn.email/content/assets/img/social-icons/logo-black/instagram-logo-black.png" alt="Inst" width="32"></a></td>
-                                              <td align="center" valign="top"><a target="_blank" href><img title="Youtube" src="https://vvvafd.stripocdn.email/content/assets/img/social-icons/logo-black/youtube-logo-black.png" alt="Yt" width="32"></a></td>
-                                            </tr>
-                                          </tbody>
-                                        </table>
-                                      </td>
-                                    </tr>
-                                    <tr>
-                                      <td class="esd-block-menu" esd-tmp-menu-padding="5|5" esd-tmp-divider="1|solid|#cccccc" esd-tmp-menu-color="#999999">
-                                        <table cellpadding="0" cellspacing="0" width="100%" class="es-menu">
-                                          <tbody>
-                                            <tr class="links">
-                                              <td align="center" valign="top" width="33.33%" class="es-p10t es-p10b es-p5r es-p5l" style="padding-top: 5px; padding-bottom: 5px;"><a target="_blank" href="https://thepew.io" style="color: #999999;">Visit Us </a></td>
-                                              <td align="center" valign="top" width="33.33%" class="es-p10t es-p10b es-p5r es-p5l" style="padding-top: 5px; padding-bottom: 5px; border-left: 1px solid #cccccc;"><a target="_blank" href="https://app.thepew.io/legal/privacy" style="color: #999999;">Privacy Policy</a></td>
-                                              <td align="center" valign="top" width="33.33%" class="es-p10t es-p10b es-p5r es-p5l" style="padding-top: 5px; padding-bottom: 5px; border-left: 1px solid #cccccc;"><a target="_blank" href="https://app.thepew.io/legal/tos" style="color: #999999;">Terms of Use</a></td>
-                                            </tr>
-                                          </tbody>
-                                        </table>
-                                      </td>
-                                    </tr>
-                                  </tbody>
-                                </table>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </td>
-            </tr>
-          </tbody>
+<div class="sm-px-4" style="background-color: #f8fafc; font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif">
+  <table align="center" cellpadding="0" cellspacing="0" role="none">
+    <tr>
+      <td style="width: 552px; max-width: 100%">
+        <div class="sm-my-8" style="margin-top: 48px; margin-bottom: 48px; text-align: center">
+          <a href="https://thepew.io">
+            <img src="<%= image_url('thepew-logo.png') %>" width="70" alt="ThePew Logo" style="max-width: 100%; vertical-align: middle; line-height: 1; border: 0">
+          </a>
+        </div>
+        <table style="width: 100%;" cellpadding="0" cellspacing="0" role="none">
+          <tr>
+            <td class="sm-px-6" style="border-radius: 4px; background-color: #fff; padding: 48px; font-size: 16px; color: #334155; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05)">
+              <h1 class="sm-leading-8" style="margin: 0 0 24px; font-size: 24px; font-weight: 600; color: #000">
+                Welcome to ThePew!
+              </h1>
+              <p style="margin: 0; line-height: 24px">
+                As a member of <%= @user.organization.name %>, you now have access to all of the features of THEPEW. With our user-friendly interface and robust analytics, you'll be able to gather insights and make data-driven decisions in no time.
+              </p>
+              <div role="separator" style="line-height: 24px">&zwj;</div>
+              <p style="margin: 0; line-height: 24px;">
+                Whether you're looking to get feedback on a new project, brainstorm ideas, or simply have some fun with your colleagues, THEPEW has everything you need to make it happen.
+              </p>
+              <div role="separator" style="line-height: 24px">&zwj;</div>
+              <div>
+                <a href="<%= edit_invite_url(@invitation_token) %>" style="display: inline-block; border-radius: 4px; background-color: #4338ca; padding: 16px 24px; font-size: 16px; font-weight: 600; line-height: 1; color: #f8fafc; text-decoration: none">
+                  <!--[if mso]>
+                    <i style="mso-font-width: -100%; letter-spacing: 32px; mso-text-raise: 30px" hidden>&nbsp;</i>
+                  <![endif]-->
+                  <span style="mso-text-raise: 16px">
+                    Continue &rarr;
+                  </span>
+                  <!--[if mso]>
+                    <i style="mso-font-width: -100%; letter-spacing: 32px;" hidden>&nbsp;</i>
+                  <![endif]-->
+                </a>
+              </div>
+              <div role="separator" style="line-height: 24px">&zwj;</div>
+              <p style="margin: 0; line-height: 24px;">
+                Thanks for joining us on this exciting journey, and we can't wait to see what you'll achieve with THEPEW.
+              </p>
+              <div role="separator" style="line-height: 24px">&zwj;</div>
+              <p style="margin: 0;">
+                ThePew Team
+              </p>
+            </td>
+          </tr>
+          <tr role="separator">
+            <td style="line-height: 48px">&zwj;</td>
+          </tr>
+          <tr>
+            <td>
+              <div style="padding-left: 24px; padding-right: 24px; text-align: center; font-size: 12px; color: #475569">
+                <p style="margin: 0 0 16px; text-transform: uppercase">
+                  Powered by ThePew
+                </p>
+                <p style="margin: 0; font-style: italic">
+                  Capture, Analyze, Empower
+                </p>
+                <p style="cursor: default">
+                  <a href="https://docs.thepew.io/" class="hover-important-text-decoration-underline" style="color: #4338ca; text-decoration: none">Docs</a>
+                  &bull;
+                  <a href="https://github.com/the-pew-inc/the-pew" class="hover-important-text-decoration-underline" style="color: #4338ca; text-decoration: none;">Github</a>
+                  &bull;
+                  <a href="https://twitter.com/ThePewInc" class="hover-important-text-decoration-underline" style="color: #4338ca; text-decoration: none;">Twitter</a>
+                </p>
+              </div>
+            </td>
+          </tr>
         </table>
       </td>
     </tr>
-  </tbody>
-</table>
+  </table>
 </div>
