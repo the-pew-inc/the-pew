@@ -8,7 +8,7 @@ class CreateResourceInvites < ActiveRecord::Migration[7.0]
       t.uuid       :group_id
       t.datetime   :sent_on
       t.datetime   :expires_at
-      t.string     :email,        null: false
+      t.string     :email
       t.string     :token,        null: false
       t.integer    :status
       t.string     :template
