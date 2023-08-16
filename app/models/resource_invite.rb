@@ -3,7 +3,7 @@
 # Table name: resource_invites
 #
 #  id              :uuid             not null, primary key
-#  email           :string           not null
+#  email           :string
 #  error_msg       :text
 #  expires_at      :datetime
 #  invitable_type  :string           not null

@@ -1,4 +1,6 @@
 class PollsController < ApplicationController
+  include Invitable
+
   before_action :authenticate_user!
   before_action :redirect_if_unauthenticated
 
@@ -47,6 +49,8 @@ class PollsController < ApplicationController
   def edit
     @poll = Poll.find(params[:id])
     authorize @poll
+
+    @invited_users = fetch_invited_users(@poll)
   end
 
   def show

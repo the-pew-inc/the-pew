@@ -1,6 +1,6 @@
 <%# /app/views/layouts/invites/_resource_invite.html.erb %>
 <% attribute_name = "#{resource.class.name.downcase}_type" %>
-<div class="mb-6" data-controller="invite-toggle">
+<div class="mb-6" data-controller="invite-toggle" data-invite-toggle-open-form-value=<%= resource.send(attribute_name) == 'universal'? false : true %> >
   <div class="grid gap-2 md:grid-cols-2">
     <div class="flex justify-between items-center px-4 border border-gray-200 rounded dark:border-gray-700">
       <div class="flex justify-start space-x-3 items-center">
@@ -11,6 +11,7 @@
       </div>
       <%= form.radio_button attribute_name.to_sym, :universal, 
             data: { action: 'invite-toggle#close' },
+            checked: resource.send(attribute_name) == 'universal',
             class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" %>
     </div>
     <div class="flex justify-between items-center px-4 border border-gray-200 rounded dark:border-gray-700">
@@ -23,6 +24,7 @@
       </div>
       <%= form.radio_button attribute_name.to_sym, :restricted, 
             data: { action: 'invite-toggle#open' },
+            checked: resource.send(attribute_name) == 'restricted',
             class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" %>
     </div>
     <div class="flex justify-between items-center px-4 border border-gray-200 rounded dark:border-gray-700">
@@ -37,10 +39,14 @@
       </div>
       <%= form.radio_button attribute_name.to_sym, :invite_only, 
             data: { action: 'invite-toggle#open' },
+            checked: resource.send(attribute_name) == 'invite_only',
             class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" %>
     </div>
   </div>
-  <div class="mt-4 w-full" data-invite-toggle-target="form" data-controller="user-invites">
+  <div class="mt-4 w-full" 
+       data-invite-toggle-target="form" 
+       data-controller="user-invites"
+       data-user-invites-invited-users-value=<%= @invited_users.to_json %>>
     <h4 class="font-bold dark:text-white">
       Invite users to join:
     </h4>

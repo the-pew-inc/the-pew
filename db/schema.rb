@@ -442,7 +442,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_02_183847) do
     t.uuid "group_id"
     t.datetime "sent_on"
     t.datetime "expires_at"
-    t.string "email", null: false
+    t.string "email"
     t.string "token", null: false
     t.integer "status"
     t.string "template"

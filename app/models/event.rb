@@ -47,6 +47,9 @@ class Event < ApplicationRecord
   has_many   :attendances, dependent: :destroy
   has_many   :rooms,       dependent: :destroy
 
+  # Link to resource invitation(s)
+  has_many :resource_invites, as: :invitable, dependent: :destroy
+
   # Description (optional) / Used to extract topics and intends from questions by
   # offering a better context to openAI
   has_rich_text :description
