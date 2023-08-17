@@ -36,7 +36,7 @@ gem 'cssbundling-rails'
 gem 'jbuilder'
 
 # Faster JSON processing [https://github.com/ohler55/oj/blob/develop/pages/Rails.md]
-gem 'oj', '~> 3.15.0'
+gem 'oj', '~> 3.16.0'
 
 # Use Redis adapter to run Action Cable in production
 gem 'redis', '~> 5.0.5'
@@ -151,7 +151,7 @@ gem 'ruby-openai', '~> 5.0.0'
 gem 'pg_search', '~> 2.3.6'
 
 # Stripe (payment, subscription processing) [https://github.com/stripe/stripe-ruby]
-gem 'stripe', '~> 8.7.0'
+gem 'stripe', '~> 9.0.0'
 
 # To enable retry in Faraday v2.0+
 gem 'faraday-retry', '~> 2.2.0'
