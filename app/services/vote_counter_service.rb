@@ -15,7 +15,30 @@ class VoteCounterService
     grouped_votes = votes.group_by { |k, _| k[0] } # Group by the poll option title
 
     grouped_votes.each do |option, counts|
-      total = counts.map { |_, v| v || 0 }.reduce(0, :+)
+      # Total participants per option
+      total_participants = counts.map { |_, v| v || 0 }.reduce(0, :+)
+      votes[[option, 'participants']] = total_participants
+
+      # Total vote based on the vote options
+      # upvote accounts for +1, downvote for -1 and cancel/neutral for 0
+      # so if we have 3 users voting for the same option the following way:
+      # user 1: upvote, user 2 downvote and user 3 cancel we should have a
+      # total of 0 (sum of +1 -1 0 is equal to 0)
+      total = counts.reduce(0) do |sum, (keys, count)|
+        choice = keys[1]
+        # Adjust value depending on vote type
+        value = case choice
+        when 'up_vote'
+          count
+        when 'down_vote'
+          -count
+        when 'neutral', 'cancel'
+          0
+        else
+          0
+        end
+        sum + value
+      end
       votes[[option, 'total']] = total
     end
     

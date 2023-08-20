@@ -1,3 +1,4 @@
+<%# app/views/resource_invite_mailer/resource_invite.html.erb %>
 <div class="sm-px-4" style="background-color: #f8fafc; font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif">
   <table align="center" cellpadding="0" cellspacing="0" role="none">
     <tr>
@@ -11,35 +12,31 @@
           <tr>
             <td class="sm-px-6" style="border-radius: 4px; background-color: #fff; padding: 48px; font-size: 16px; color: #334155; box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05)">
               <h1 class="sm-leading-8" style="margin: 0 0 24px; font-size: 24px; font-weight: 600; color: #000">
-                Welcome to ThePew!
+                Hi,
               </h1>
               <p style="margin: 0; line-height: 24px">
-                As a member of <%= @user.organization.name %>, you now have access to all of the features of THEPEW. With our user-friendly interface and robust analytics, you'll be able to gather insights and make data-driven decisions in no time.
-              </p>
-              <div role="separator" style="line-height: 24px">&zwj;</div>
-              <p style="margin: 0; line-height: 24px;">
-                Whether you're looking to get feedback on a new project, brainstorm ideas, or simply have some fun with your colleagues, THEPEW has everything you need to make it happen.
+                <%= @resource['nickname'] %> is inviting you to join "<%= @resource['title'] %>" (<%= @resource['invitable_type'] %>)
               </p>
               <div role="separator" style="line-height: 24px">&zwj;</div>
               <div>
-                <a href="<%= edit_invite_url(@invitation_token) %>" style="display: inline-block; border-radius: 4px; background-color: #4338ca; padding: 16px 24px; font-size: 16px; font-weight: 600; line-height: 1; color: #f8fafc; text-decoration: none">
+                <a href="<%= @resource_url %>" style="display: inline-block; border-radius: 4px; background-color: #4338ca; padding: 16px 24px; font-size: 16px; font-weight: 600; line-height: 1; color: #f8fafc; text-decoration: none">
                   <!--[if mso]>
                     <i style="mso-font-width: -100%; letter-spacing: 32px; mso-text-raise: 30px" hidden>&nbsp;</i>
                   <![endif]-->
                   <span style="mso-text-raise: 16px">
-                    Continue &rarr;
+                    Join &rarr;
                   </span>
                   <!--[if mso]>
                     <i style="mso-font-width: -100%; letter-spacing: 32px;" hidden>&nbsp;</i>
                   <![endif]-->
                 </a>
               </div>
-              <div role="separator" style="line-height: 24px">&zwj;</div>
-              <p style="margin: 0; line-height: 24px;">
-                Thanks for joining us on this exciting journey, and we can't wait to see what you'll achieve with THEPEW.
-              </p>
-              <div role="separator" style="line-height: 24px">&zwj;</div>
+              <div role="separator" style="background-color: #e2e8f0; height: 1px; line-height: 1px; margin: 32px 0">&zwj;</div>
               <p style="margin: 0;">
+                If you didn't sign up for ThePew, you can safely ignore this email.
+                <br>
+                <br>
+                Thanks, <br>
                 ThePew Team
               </p>
             </td>

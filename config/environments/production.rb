@@ -109,6 +109,7 @@ Rails.application.configure do
     api_key: ENV['SENDGRID_API_KEY'],
     raise_delivery_errors: true
   }
-  config.action_mailer.default_url_options = { host: ENV['DEFAULT_URL'] }
+  config.action_mailer.default_url_options = { host: ENV['DEFAULT_URL'], protocol: :ssl }
+  config.action_mailer.asset_host = "https://" + ENV['DEFAULT_URL']
   
 end

@@ -9,7 +9,7 @@ gem 'appmap', '0.102.1', :groups => [:development, :test]
 
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem 'rails', '~> 7.0.5'
+gem 'rails', '~> 7.0.7'
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem 'sprockets-rails'
@@ -36,7 +36,7 @@ gem 'cssbundling-rails'
 gem 'jbuilder'
 
 # Faster JSON processing [https://github.com/ohler55/oj/blob/develop/pages/Rails.md]
-gem 'oj', '~> 3.15.0'
+gem 'oj', '~> 3.16.0'
 
 # Use Redis adapter to run Action Cable in production
 gem 'redis', '~> 5.0.5'
@@ -95,6 +95,11 @@ gem 'bootsnap', require: false
 # Used for badges, reputation, etc.
 gem 'merit'
 
+# Add Meta Tags [https://github.com/kpumuk/meta-tags]
+# the main reason is to prevent stimulus controllers from being double loaded
+# Read [https://blog.corsego.com/double-loading-stimulus-controllers] for more details
+gem 'meta-tags', '~> 2.18.0'
+
 # Mailer - Sendgrid [https://github.com/sendgrid/sendgrid-ruby]
 gem 'sendgrid-actionmailer', '~> 3.2.0'
 
@@ -111,7 +116,7 @@ gem 'nokogiri', '~> 1.15.0'
 gem 'down', '~> 5.0'
 
 # Tracking changes using PaperTrail [https://github.com/paper-trail-gem/paper_trail]
-gem 'paper_trail'
+gem 'paper_trail', '~> 15.0.0'
 
 # Active storage validations [https://github.com/igorkasyanchuk/active_storage_validations]
 gem 'active_storage_validations', '~> 1.0.0'
@@ -145,13 +150,13 @@ gem 'groupdate'
 gem 'chartkick'
 
 # openAI [https://github.com/alexrudall/ruby-openai]
-gem 'ruby-openai', '~> 4.2.0'
+gem 'ruby-openai', '~> 5.0.0'
 
 # Adding pgsearch
 gem 'pg_search', '~> 2.3.6'
 
 # Stripe (payment, subscription processing) [https://github.com/stripe/stripe-ruby]
-gem 'stripe', '~> 8.6.0'
+gem 'stripe', '~> 9.0.0'
 
 # To enable retry in Faraday v2.0+
 gem 'faraday-retry', '~> 2.2.0'

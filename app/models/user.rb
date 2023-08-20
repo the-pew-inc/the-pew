@@ -73,6 +73,10 @@ class User < ApplicationRecord
   has_one  :member
   has_one  :organization,    through: :member, required: false
 
+  # Groups
+  has_many :group_memberships
+  has_many :groups, through: :group_memberships
+
   # To enable bullk upload via an excel spreadsheet
   has_one_attached :import_file
   has_many         :import_results, dependent: :destroy

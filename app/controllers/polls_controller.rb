@@ -1,4 +1,6 @@
 class PollsController < ApplicationController
+  include Invitable
+
   before_action :authenticate_user!
   before_action :redirect_if_unauthenticated
 
@@ -16,6 +18,11 @@ class PollsController < ApplicationController
     @poll.user_id = current_user.id
 
     if @poll.save
+      # Trigger the invitation if the poll is not universal. Poll type is tested in 
+      # ResourceInviteService
+      # params[:invited_users] is already a JSON so we pass it as it is to the next
+      # steps as Sidekiq is expecting this format.
+      ResourceInviteService.new(params[:invited_users], current_user.id, @poll).create
       redirect_to polls_url, notice: "The poll was succesfully saved."
     else
       flash[:alert] = "An error prevented the poll from being created"
@@ -27,6 +34,11 @@ class PollsController < ApplicationController
     @poll = Poll.find(params[:id])
 
     if @poll.update(poll_params)
+      # Update the invitation if the poll is not universal. Poll type is tested in 
+      # ResourceInviteService
+      # params[:invited_users] is already a JSON so we pass it as it is to the next
+      # steps as Sidekiq is expecting this format.
+      ResourceInviteService.new(params[:invited_users], current_user.id, @poll).update
       redirect_to polls_url, notice: "The poll was succesfully updated."
     else
       flash[:alert] = "An error prevented the poll from being updated"
@@ -37,6 +49,8 @@ class PollsController < ApplicationController
   def edit
     @poll = Poll.find(params[:id])
     authorize @poll
+
+    @invited_users = fetch_invited_users(@poll)
   end
 
   def show

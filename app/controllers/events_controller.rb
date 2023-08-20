@@ -1,4 +1,6 @@
 class EventsController < ApplicationController
+  include Invitable
+  
   before_action :authenticate_user!, only: %i[index edit destroy update new]
   before_action :redirect_if_unauthenticated, only: %i[index edit destroy update new]
   before_action :set_event, except: %i[index new create event validate_pin]
@@ -56,6 +58,7 @@ class EventsController < ApplicationController
 
   def edit
     @event.start_date = @event.start_date.strftime("%m/%d/%Y")
+    @invited_users = fetch_invited_users(@event)
   end
 
   # GET /event/:id/stats
@@ -189,11 +192,11 @@ class EventsController < ApplicationController
   end
 
   def create_event_params
-    params.require(:event).permit(:allow_anonymous, :always_on, :description, :event_type, :name, :start_date, :status, :stop_date)
+    params.require(:event).permit(:allow_anonymous, :always_on, :description, :event_type, :name, :start_date, :status, :end_date)
   end
 
   def update_event_params
-    params.require(:event).permit(:allow_anonymous, :always_on, :description, :event_type, :name, :short_code, :start_date, :status, :stop_date)
+    params.require(:event).permit(:allow_anonymous, :always_on, :description, :event_type, :name, :short_code, :start_date, :status, :end_date)
   end
 
   # Called to make sure a user's account is confirmed before they can create or edit an event.

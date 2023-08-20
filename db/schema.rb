@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_30_193848) do
-
+ActiveRecord::Schema[7.0].define(version: 2023_08_02_183847) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -173,6 +172,31 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_30_193848) do
     t.index ["sponsor_url"], name: "index_food_for_thoughts_on_sponsor_url"
     t.index ["sponsored"], name: "index_food_for_thoughts_on_sponsored"
     t.index ["sponsored_by"], name: "index_food_for_thoughts_on_sponsored_by"
+  end
+
+  create_table "group_memberships", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id", null: false
+    t.uuid "group_id", null: false
+    t.integer "role"
+    t.integer "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["group_id"], name: "index_group_memberships_on_group_id"
+    t.index ["user_id"], name: "index_group_memberships_on_user_id"
+  end
+
+  create_table "groups", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id", null: false
+    t.uuid "organization_id", null: false
+    t.string "icon"
+    t.string "name"
+    t.text "description"
+    t.integer "group_type", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["group_type"], name: "index_groups_on_group_type"
+    t.index ["organization_id"], name: "index_groups_on_organization_id"
+    t.index ["user_id"], name: "index_groups_on_user_id"
   end
 
   create_table "import_results", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -415,14 +439,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_30_193848) do
     t.uuid "recipient_id"
     t.string "invitable_type", null: false
     t.uuid "invitable_id", null: false
+    t.uuid "group_id"
+    t.datetime "sent_on"
     t.datetime "expires_at"
-    t.string "email", null: false
+    t.string "email"
     t.string "token", null: false
     t.integer "status"
     t.string "template"
+    t.text "error_msg"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_resource_invites_on_email"
+    t.index ["group_id"], name: "index_resource_invites_on_group_id"
     t.index ["invitable_type", "invitable_id"], name: "index_resource_invites_on_invitable"
     t.index ["invitable_type", "invitable_id"], name: "index_resource_invites_on_invitable_type_and_invitable_id"
     t.index ["organization_id"], name: "index_resource_invites_on_organization_id"
@@ -567,6 +595,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_30_193848) do
   add_foreign_key "attendances", "events"
   add_foreign_key "attendances", "users"
   add_foreign_key "events", "users"
+  add_foreign_key "group_memberships", "groups"
+  add_foreign_key "group_memberships", "users"
+  add_foreign_key "groups", "organizations"
+  add_foreign_key "groups", "users"
   add_foreign_key "import_results", "users"
   add_foreign_key "messages", "users"
   add_foreign_key "poll_answers", "poll_options"

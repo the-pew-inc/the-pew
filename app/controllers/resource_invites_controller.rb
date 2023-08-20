@@ -11,7 +11,9 @@ class ResourceInvitesController < ApplicationController
   end
 
   def new
-    
+    @resource_invite = ResourceInvites.new
+    @resource_invite.user_id = current_user.id
+    @resource_invite.organization_id = current_user.organization.id
   end
 
   def create
@@ -23,6 +25,10 @@ class ResourceInvitesController < ApplicationController
   end
 
   def update
+
+  end
+
+  def destroy
 
   end
 end

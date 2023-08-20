@@ -3,14 +3,17 @@
 # Table name: resource_invites
 #
 #  id              :uuid             not null, primary key
-#  email           :string           not null
+#  email           :string
+#  error_msg       :text
 #  expires_at      :datetime
 #  invitable_type  :string           not null
+#  sent_on         :datetime
 #  status          :integer
 #  template        :string
 #  token           :string           not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  group_id        :uuid
 #  invitable_id    :uuid             not null
 #  organization_id :uuid             not null
 #  recipient_id    :uuid
@@ -19,6 +22,7 @@
 # Indexes
 #
 #  index_resource_invites_on_email                            (email)
+#  index_resource_invites_on_group_id                         (group_id)
 #  index_resource_invites_on_invitable                        (invitable_type,invitable_id)
 #  index_resource_invites_on_invitable_type_and_invitable_id  (invitable_type,invitable_id)
 #  index_resource_invites_on_organization_id                  (organization_id)

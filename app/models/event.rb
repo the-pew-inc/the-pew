@@ -47,6 +47,9 @@ class Event < ApplicationRecord
   has_many   :attendances, dependent: :destroy
   has_many   :rooms,       dependent: :destroy
 
+  # Link to resource invitation(s)
+  has_many :resource_invites, as: :invitable, dependent: :destroy
+
   # Description (optional) / Used to extract topics and intends from questions by
   # offering a better context to openAI
   has_rich_text :description
@@ -69,7 +72,7 @@ class Event < ApplicationRecord
   # make sure to implement a corresponding test to check if the validation
   # for end_date being before start_date is working correctly.
   def set_values    
-    self.end_date = start_date
+    self.end_date = start_date if self.end_date.nil?
     self.short_code = generate_pin if self.short_code.nil?
     self.organization_id = Member.where(user_id: self.user_id).first.organization_id if self.organization_id.nil?
 
@@ -89,10 +92,6 @@ class Event < ApplicationRecord
 
   # Generate a unique pin for the event
   def generate_pin
-    # loop do
-    #   pin = 6.times.map{rand(10)}.join
-    #   break pin unless Event.exists?(short_code: pin)
-    # end
     6.times.map { rand(10) }.join
   end
 end

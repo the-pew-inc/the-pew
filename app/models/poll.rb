@@ -56,6 +56,9 @@ class Poll < ApplicationRecord
   has_many :poll_participations, dependent: :destroy
   has_many :participants, through: :poll_participations, source: :user
 
+  # Link to resource invitation(s)
+  has_many :resource_invites, as: :invitable, dependent: :destroy
+
   validates :title, presence: true, length: { minimum: 3, maximum: 250 }
   validates :duration, numericality: { only_integer: true, greater_than_or_equal_to: 0, allow_nil: true }
   validate  :validate_poll_options

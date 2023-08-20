@@ -20,7 +20,6 @@ export default class extends Controller {
   }
 
   clear() {
-    console.debug("Calling Clear");
     if (this.selected_user_id) {
       // Loop through the table rows and display the non selected users
       this.toggleUsers();
