@@ -20,7 +20,7 @@ class ResourceInviteService
 
   # Used in the update method of a resource controller
   def update
-    if @invited_users.count > 0
+    if JSON.parse(@invited_users).count > 0
       # Sending the task to a Sidekiq job [Model must be formatted as JSON]
       # What the job does:
       # * Check for new user(s) and send proper invitation(s)

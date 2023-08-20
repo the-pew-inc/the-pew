@@ -7,9 +7,14 @@ class ResourceInviteUpdateJob
   def perform(invited_users, sender, resource)
     # Invited users (received from the UI)
     invited_users = JSON.parse(invited_users)
+    # Remove duplicates based on the label attribute
+    invited_users.uniq! { |user| user["label"] }
 
-    # Invited users for the same resource (fetch from db)
-    invites = ResourceInvite.where(invitable: resource)
+    resource = JSON.parse(resource)
+
+    # Fetch from the database a list of the already invited users and groups
+    invites = ResourceInvite.where(invitable_id: resource['invitable_id'], invitable_type: resource['invitable_type'])
+    filtered_invites = invites.to_a # Convert to array to work with 
 
     new_invites_users = []
     
@@ -26,7 +31,8 @@ class ResourceInviteUpdateJob
         # Check if group_id is already in invites
         # If so remove all entries from invites which have this group_id (group and users)
         if invites.exists?(group_id: group_id)
-          invites.where(group_id: group_id).destroy_all
+          # invites.where(group_id: group_id).destroy_all
+          filtered_invites.reject! { |invite| invite.group_id == group_id }
         else
           new_invites_users << invited
         end
@@ -36,8 +42,9 @@ class ResourceInviteUpdateJob
           # Check if email is already in invites
           # If so remove the entry(ies) with this email from invites
           if valid_email?(email) && invites.exists?(email: email)
-            invites.where(email: email).destroy_all
-          elsif valid_email?(email)
+            # invites.where(email: email).destroy_all
+            filtered_invites.reject! { |invite| invite.email == email }
+          else
             new_invites_users << invited
           end
         end
@@ -45,8 +52,9 @@ class ResourceInviteUpdateJob
         user = User.find(invited['id'])
         # Check if user is already in invites
         # If so remove the entry(ies) with this user from invites
-        if user && invites.exists?(user: user)
-          invites.where(user: user).destroy_all
+        if user && invites.exists?(recipient_id: user.id)
+          # invites.where(recipient_id: user.id).destroy_all
+          filtered_invites.reject! { |invite| invite.recipient_id == user.id }
         elsif user
           new_invites_users << invited
         end
@@ -58,28 +66,24 @@ class ResourceInviteUpdateJob
 
     # Call ResourceInviteJob to invite the new users
     # but first make sure that the new_invites_users can be passed to Sidekiq
-    ResourceInviteJob.perform_async(new_invites_users.to_json, sender, resource)
+    ResourceInviteJob.perform_async(new_invites_users.to_json, sender, resource.to_json) if new_invites_users.length > 0
 
     # invites should now only contains the groups and users which have
     # been removed from the resource by the organizer.
     # We can now remove them from ResourceInvite to match the organizer list.
-    invites.each do |invite|
-      case invite['type']
-      when 'group'
-        # Delete all users and group with group_id equal to invite['id']
-        # Make sure to do it for this resource as a group and users part of this group
-        # can be invited for multiple resources.
-        ResourceInvite.where(invitable: resource, group_id: group_id).destroy_all
-      when 'user'
-        # Remove from ResourceInvite using the User.id from invite['id']
-        ResourceInvite.where(invitable: resource, recipient_id: invite['id']).destroy_all
-      when 'invite', 'new_email'
-        # Remove from ResourceInvite using the email address from label
-        email = invite['label']
-        ResourceInvite.where(invitable: resource, email: email).destroy_all
-      else
-        Rails.logger.error "Unsupported type #{invited['type']} cannot remove #{invited.inspect} from ResourceInvite"
-      end
+    if filtered_invites.length > 0
+      # Extract group_ids from filtered_invites
+      group_ids_to_remove = filtered_invites.select { |invite| invite.group_id }.map(&:group_id)
+
+      # Extract recipient_ids (user ids) from filtered_invites
+      user_ids_to_remove = filtered_invites.select { |invite| invite.recipient_id }.map(&:recipient_id)
+
+      # Remove ResourceInvites by group_ids
+      ResourceInvite.where(group_id: group_ids_to_remove, invitable_id: resource['invitable_id'], invitable_type: resource['invitable_type']).destroy_all if group_ids_to_remove.any?
+
+      # Remove ResourceInvites by user (recipient) ids
+      ResourceInvite.where(recipient_id: user_ids_to_remove, invitable_id: resource['invitable_id'], invitable_type: resource['invitable_type']).destroy_all if user_ids_to_remove.any?
+
     end
   end
 

@@ -32,6 +32,9 @@ class ResourceInviteJob
   def perform(invited_users, sender_id, resource)
     invited_users = JSON.parse(invited_users)
     resource      = JSON.parse(resource)
+
+    # Remove duplicates based on the label attribute
+    invited_users.uniq! { |user| user["label"] }
     
     # Fetching the user who initiated the invitation: aka sender
     @sender = User.find(sender_id)

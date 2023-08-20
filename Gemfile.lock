@@ -245,6 +245,8 @@ GEM
     merit (4.0.3)
       ambry (~> 1.0.0)
       zeitwerk
+    meta-tags (2.18.0)
+      actionpack (>= 3.2.0, < 7.1)
     method_source (1.0.0)
     mini_magick (4.12.0)
     mini_mime (1.1.5)
@@ -512,6 +514,7 @@ DEPENDENCIES
   jbuilder
   jsbundling-rails
   merit
+  meta-tags (~> 2.18.0)
   nokogiri (~> 1.15.0)
   noticed (~> 1.5)
   octokit (~> 7.0.0)

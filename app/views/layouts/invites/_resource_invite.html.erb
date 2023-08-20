@@ -46,7 +46,7 @@
   <div class="mt-4 w-full" 
        data-invite-toggle-target="form" 
        data-controller="user-invites"
-       data-user-invites-invited-users-value=<%= @invited_users.to_json %>>
+       data-user-invites-init-invited-users-value=<%= (@invited_users || []).to_json %>>
     <h4 class="font-bold dark:text-white">
       Invite users to join:
     </h4>

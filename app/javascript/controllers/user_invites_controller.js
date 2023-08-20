@@ -5,21 +5,33 @@ export default class extends Controller {
   static targets = ["searchInput", "badgeContainer", "invitedUsers"];
   static values = {
     invitedUsers: { type: Array, default: [] },
+    initInvitedUsers: { type: Array, default: [] },
   };
 
   connect() {
     // If invitedUser is not an empty array, display the list of invited users
     // Otherwise just make sure the invitedUser is fully empty in the JS code too
-    if (this.invitedUsersValue.length > 0) {
-      this.invitedUsersValue.forEach((invite) => {
-        // Display the badge for the user or group
-        this.displayBadge(invite);
+    if (this.initInvitedUsersValue.length > 0) {
+      this.initInvitedUsersValue.forEach((invite) => {
+        // Check if the user is already in the invitedUsersValue array based on the label
+        if (
+          !this.invitedUsersValue.some((user) => user.label === invite.label)
+        ) {
+          // Display the badge for the user or group
+          this.displayBadge(invite);
 
-        // Serialize the invitedUsersValue as JSON and store it in the hidden input
-        this.invitedUsersTarget.value = JSON.stringify(this.invitedUsersValue);
+          // Update invitedUsers array
+          this.invitedUsersValue.push(invite);
+        }
       });
+
+      // Serialize the invitedUsersValue as JSON and store it in the hidden input
+      this.invitedUsersTarget.value = JSON.stringify(
+        this.initInvitedUsersValue
+      );
     } else {
-      this.invitedUsersValue = [];
+      // this.invitedUsersValue = [];
+      this.invitedUsersValue.length = 0;
     }
 
     // Get the autocomplete object from the page
@@ -68,11 +80,11 @@ export default class extends Controller {
     // Create a new badge and add it to the badge container
     this.displayBadge(invited);
 
-    // Clear the search input field
-    this.searchInputTarget.value = "";
-
     // Serialize the invitedUsersValue as JSON and store it in the hidden input
     this.invitedUsersTarget.value = JSON.stringify(this.invitedUsersValue);
+
+    // Clear the search input field
+    this.searchInputTarget.value = "";
   }
 
   addEmail(event) {
