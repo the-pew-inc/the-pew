@@ -1,23 +1,9 @@
-class PollPolicy < ApplicationPolicy
-  def show?
-    user_created_poll_or_admin? || record.universal? || (record.restricted? && user_belongs_to_organization?)
-  end
+# Defines the access policies for the Poll resource.
+# As the Poll is aligned with the new ResourcePolicy we do not need
+# to defined specific policies. Should this change, specific policies
+# to the Poll resource will be written here.
 
-  def update?
-    user_created_poll_or_admin? || user_belongs_to_organization?
-  end
-
-  def destroy?
-    user_created_poll_or_admin?
-  end
-
-  private
-
-  def user_created_poll_or_admin?
-    user && (record.user_id == user.id || user.has_role?(:admin, record))
-  end
-
-  def user_belongs_to_organization?
-    user.organization.id == record.organization_id
-  end
+# All policies are using Pundit
+class PollPolicy < ResourcePolicy
+  
 end
