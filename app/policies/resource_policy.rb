@@ -68,4 +68,29 @@ class ResourcePolicy < ApplicationPolicy
       email: user.email
     )
   end
+
+  class Scope
+    attr_reader :user, :scope
+
+    def initialize(user, scope)
+      @user = user
+      @scope = scope
+    end
+
+    def resolve
+      # Resources that the user created
+      resources_created_by_user = scope.where(user_id: user.id)
+
+      # Resources for which the user has been granted the admin role
+      roles = user.roles.where(name: "admin", resource_type: scope.name)
+      resource_ids_user_is_admin_on = roles.map(&:resource_id)
+      resources_user_is_admin_on = scope.where(id: resource_ids_user_is_admin_on)
+
+      # Combine both sets of resources
+      combined_resources = resources_created_by_user.or(resources_user_is_admin_on)
+
+      # Order and eagerly load associated users
+      combined_resources.order(created_at: :desc).includes(:user)
+    end
+  end
 end
