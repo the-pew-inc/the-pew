@@ -384,7 +384,7 @@ GEM
       activesupport (>= 4.2.0)
       rack (>= 1.1)
       rubocop (>= 1.33.0, < 2.0)
-    ruby-openai (5.0.0)
+    ruby-openai (5.1.0)
       faraday (>= 1)
       faraday-multipart (>= 1)
     ruby-progressbar (1.13.0)
@@ -533,7 +533,7 @@ DEPENDENCIES
   rolify (~> 6.0.0)
   rubocop (~> 1.50)
   rubocop-rails
-  ruby-openai (~> 5.0.0)
+  ruby-openai (~> 5.1.0)
   ruby-vips (>= 2.1.0)
   selenium-webdriver
   sendgrid-actionmailer (~> 3.2.0)

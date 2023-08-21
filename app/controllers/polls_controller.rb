@@ -5,7 +5,8 @@ class PollsController < ApplicationController
   before_action :redirect_if_unauthenticated
 
   def index
-    @polls = current_user.organization.polls.order(created_at: :desc).includes(:user)
+    # @polls = current_user.organization.polls.order(created_at: :desc).includes(:user)
+    @polls = policy_scope(Poll)
   end
 
   def new
