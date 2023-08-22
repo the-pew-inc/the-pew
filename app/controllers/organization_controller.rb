@@ -40,9 +40,30 @@ class OrganizationController < ApplicationController
     end
   end
 
+  # Logo section
+
+  # POST /organization/:id/upload_logo
+  def upload_logo
+    @organization = Organization.find(params[:id])
+
+    authorize @organization, :upload_logo?
+
+    if @organization.update(logo_params)
+      flash.now[:alert] = "You successfully updated your company's logo."
+      render partial: "organization/uploaded_logo", locals: { organization: @organization }
+    else
+      flash.now[:alert] = "Failed to upload logo. Please try again."
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
   private
   def update_organization_params
-    params.require(:organization).permit(:name, :website, :description, :logo)
+    params.require(:organization).permit(:name, :website, :description)
+  end
+
+  def logo_params
+    params.require(:organization).permit(:logo)
   end
 
   def set_organization
