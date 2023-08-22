@@ -1,36 +1,47 @@
 class UserPolicy < ApplicationPolicy
-  
+
   def index?
-    allowed?
+    admin_or_owner?
   end
 
   def delete_user?
-    allowed?
+    admin_or_owner?
   end
 
   def resend_invite?
-    allowed?
+    admin_or_owner?
   end
 
   def block?
-    allowed?
+    admin_or_owner?
   end
 
   def unlock?
-    allowed?
+    admin_or_owner?
   end
 
   def bulk_update?
-    allowed?
+    admin_or_owner?
   end
 
   def search_users?
-    allowed?
+    admin_or_owner?
   end
 
   private
 
-  def allowed?
-    user.has_role?(:admin, record.organization) || record.member.owner?
+  def admin_or_owner?
+    user_has_admin_role? || user_is_organization_owner?
+  end
+
+  def user_has_admin_role?
+    user.has_role?(:admin, record.organization)
+  end
+
+  # Checking if the user (the one performing the action) is an owner of the organization 
+  # that the record (the user being acted upon) belongs to
+  def user_is_organization_owner?
+    organization = record.organization
+    Member.where(user_id: user.id, organization_id: organization.id, owner: true).exists?
   end
 end

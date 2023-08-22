@@ -71,7 +71,7 @@ class User < ApplicationRecord
 
   # Managing organization membership (one to many through Member)
   has_one  :member
-  has_one  :organization,    through: :member, required: false
+  has_one  :organization,    through: :member, required: false, dependent: :destroy
 
   # Groups
   has_many :group_memberships
