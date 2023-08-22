@@ -14,7 +14,7 @@ export default class extends Controller {
     );
     this.dropAreaTarget.addEventListener("drop", (event) => this.drop(event));
     this.fileInputTarget.addEventListener("change", (event) =>
-      this.uploadFile(event.target.files[0])
+      this.handleFileChange(event)
     );
   }
 
@@ -32,7 +32,34 @@ export default class extends Controller {
     event.preventDefault();
     this.dropAreaTarget.classList.remove("active-drop");
     const file = event.dataTransfer.files[0];
-    this.uploadFile(file);
+    this.handleFileChange({ target: { files: [file] } });
+  }
+
+  handleFileChange(event) {
+    const file = event.target.files[0];
+    if (this.isValidFile(file)) {
+      this.uploadFile(file);
+    }
+  }
+
+  isValidFile(file) {
+    const validTypes = ["image/jpeg", "image/jpg", "image/gif", "image/png"];
+    const maxSize = 5 * 1024 * 1024; // 5MB
+    const minSize = 1 * 1024; // 1KB
+
+    if (!validTypes.includes(file.type)) {
+      alert("Invalid file type. Only JPEG, JPG, GIF, and PNG are allowed.");
+      return false;
+    }
+    if (file.size > maxSize) {
+      alert("File size exceeds the 5MB limit.");
+      return false;
+    }
+    if (file.size < minSize) {
+      alert("File size is below the 1KB limit.");
+      return false;
+    }
+    return true;
   }
 
   selectFile() {
@@ -40,15 +67,17 @@ export default class extends Controller {
   }
 
   uploadFile(file) {
-    const uploadUrl = this.fileInputTarget.getAttribute("direct-upload-url");
+    window.addEventListener("beforeunload", this.preventNavigation);
 
+    const uploadUrl = this.fileInputTarget.getAttribute("direct-upload-url");
     const upload = new DirectUpload(file, uploadUrl);
 
     upload.create((error, blob) => {
+      window.removeEventListener("beforeunload", this.preventNavigation);
+
       if (error) {
-        // Handle the error
-        console.error(`An error occured while uploading the file`);
-        alert("An error occured while uploading the file.");
+        console.error(`An error occurred while uploading the file: ${error}`);
+        alert("An error occurred while uploading the file.");
       } else {
         const hiddenField = document.createElement("input");
         hiddenField.setAttribute("type", "hidden");
@@ -58,5 +87,11 @@ export default class extends Controller {
         this.element.submit();
       }
     });
+  }
+
+  preventNavigation(event) {
+    event.preventDefault();
+    event.returnValue =
+      "An upload is currently in progress. Leaving the page may interrupt the process. Are you sure you want to leave?";
   }
 }
