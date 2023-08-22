@@ -137,7 +137,7 @@ Rails.application.routes.draw do
     resources :users, only: [:index]
     resource  :ssos,  only: [:update, :edit], shallow: true
     member do
-      post :upload_logo
+      post   :upload_logo
     end
   end
 
