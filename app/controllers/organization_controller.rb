@@ -40,9 +40,27 @@ class OrganizationController < ApplicationController
     end
   end
 
+  def upload_logo
+    @organization = Organization.find(params[:id])
+    if @organization.update(logo_params)
+      # Simply render the view for a successful update. 
+      # The contents of the turbo-frame "logo_frame" will get replaced.
+      render :upload_logo
+    else
+      # If there's an error with the update, let's set a flash message. 
+      # You can also choose to directly display an error within the turbo frame if preferred.
+      flash.now[:alert] = "Failed to upload logo. Please try again."
+      render :upload_logo
+    end
+  end
+
   private
   def update_organization_params
-    params.require(:organization).permit(:name, :website, :description, :logo)
+    params.require(:organization).permit(:name, :website, :description)
+  end
+
+  def logo_params
+    params.require(:organization).permit(:logo)
   end
 
   def set_organization

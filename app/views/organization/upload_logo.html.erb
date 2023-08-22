@@ -1,0 +1,9 @@
+<%# app/views/organization/upload_logo.html.erb %>
+<%= turbo_frame_tag "logo_frame" do %>
+  <% if @organization.logo.attached? %>
+    <%= image_tag @organization.logo, alt: @organization.name, class: "w-full h-full object-cover" %>
+    <!-- Add any other content you want inside this frame -->
+  <% else %>
+    <!-- Placeholder logic here -->
+  <% end %>
+<% end %>

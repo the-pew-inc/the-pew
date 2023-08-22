@@ -133,9 +133,12 @@ Rails.application.routes.draw do
 
   # Organization (aka Account model) routes
   # and sub-routes
-  resources :organization, only: [:show, :update, :edit] do
+  resources :organization, only: [:show, :update, :edit], direct_upload: true do
     resources :users, only: [:index]
     resource  :ssos,  only: [:update, :edit], shallow: true
+    member do
+      post :upload_logo
+    end
   end
 
   # Strip routes

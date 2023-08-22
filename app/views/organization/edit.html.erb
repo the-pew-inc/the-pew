@@ -1,6 +1,23 @@
-<!-- app/views/organization/show.html.erb -->
+<%# app/views/organization/edit.html.erb %>
 <%= turbo_frame_tag "settings_main" do %>
   <%= render partial: "settings/breadcrumb", locals: { sub1: "Organization" } %>
+  <%# Logo section %>
+  <section class="my-4">
+    <%= turbo_frame_tag "logo_frame" do %>
+      <%= form_with(url: upload_logo_organization_path(@organization), data: { controller: "image-drop" }) do |form| %>
+        <input type="file" data-image-drop-target="fileInput" direct-upload-url="<%= rails_direct_uploads_url %>" style="display:none;">
+        <div data-image-drop-target="dropArea" class="drop-area" data-action="click->image-drop#selectFile">
+          <% if @organization.logo.attached? %>
+            <%= image_tag @organization.logo, alt: 'Organization Logo', class: "w-full h-full object-cover" %>
+          <% else %>
+            <!-- Placeholder for when there is no logo -->
+            <div>Drop your logo here or click to upload.</div>
+          <% end %>
+        </div>
+      <% end %>
+    <% end %>
+  </section>
+  <%# Rest of it ;-) %>
   <%= form_with model: @organization do |form| %>
     <%= render partial: "shared/form_errors", locals: { object: form.object } %>
     <div class="mb-6">
