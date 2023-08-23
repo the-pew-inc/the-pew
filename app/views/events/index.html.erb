@@ -1,23 +1,60 @@
-<%= turbo_stream_from [current_user.id, :events] %>
-<section>
-  <div class="mb-6">
-    <% if user_signed_in? %>
-      <%= link_to "Create a new event", new_event_path, data: {turbo_frame: "modal"}, class: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full  px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" %>
-      <%= turbo_frame_tag "modal" %>
-    <% end %>
-  </div>
-</section>
+<%# app/views/events/index.html.erb %>
 <% if !current_user.confirmed %>
   <section>
     <%= render "shared/unconfirmed_account" %>
   </section>
-<% end %>
-<section class="pt-4">
-  <h2 class="inline-block mb-2 font-extrabold text-2xl tracking-tight text-slate-800 dark:text-white">Events: </h2>
-  <div id="events" data-controller="empty-state" class="pt-2 space-y-2">
-    <div data-empty-state-target="emptyState">
-      <%= render "empty_state" %>
+<% else %>
+  <section>
+    <div class="flex justify-between items-center">
+      <div class="mb-6">
+        <%= link_to "Create a new event", new_event_path, class: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full  px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" %>
+      </div>
+      <div class="mb-6">
+        <%= link_to "Event Insights", nil, class: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full  px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" %>
+      </div>
     </div>
-    <%= render @events %>
-  </div>
-</section>
+  </section>
+<% end %>
+<% if %>
+  <section class="pt-4">
+    <h2 class="inline-block mb-2 font-extrabold text-2xl tracking-tight text-slate-800 dark:text-white">Polls: </h2>
+  </section>
+  <section>
+    <div class="relative shadow-md sm:rounded-lg">
+      <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+          <tr>
+            <th scope="col" class="px-6 py-3 ">
+              Event name
+            </th>
+            <th scope="col" class="px-6 py-3 hidden md:table-cell">
+              Created by
+            </th>
+            <th scope="col" class="px-6 py-3 hidden md:table-cell">
+              Created on
+            </th>
+            <th scope="col" class="px-6 py-3 ">
+              Event Date
+            </th>
+            <th scope="col" class="px-6 py-3 hidden md:table-cell">
+              Status
+            </th>
+            <th scope="col" class="px-6 py-3 hidden md:table-cell">
+              Type
+            </th>
+            <th scope="col" class="px-6 py-3">
+              Action
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= render @events %>
+        </tbody>
+      </table>
+    </div>
+  </section>
+<% else %>
+  <section class="pt-4">
+    <%= render "empty_state" %>
+  </section>
+<% end %>
