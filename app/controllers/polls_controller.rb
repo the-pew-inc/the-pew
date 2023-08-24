@@ -40,6 +40,7 @@ class PollsController < ApplicationController
       # params[:invited_users] is already a JSON so we pass it as it is to the next
       # steps as Sidekiq is expecting this format.
       ResourceInviteService.new(params[:invited_users], current_user.id, @poll).update
+      
       redirect_to polls_url, notice: "The poll was succesfully updated."
     else
       flash[:alert] = "An error prevented the poll from being updated"
