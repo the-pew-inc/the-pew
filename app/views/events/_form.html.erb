@@ -43,25 +43,36 @@
         </h2>
         <div id="accordion-flush-body-2" class="hidden" aria-labelledby="accordion-flush-heading-2">
           <div class="py-5">
-            <div class="flex flex-row justify-start items-center space-x-6">
-              <%# Event start date %>
-              <div>
-                <%= form.label :start_date, class: "block text-sm font-medium text-gray-900 dark:text-gray-300" %>
-                <p id="helper-text-explanation" class="mb-2 text-sm text-gray-500 dark:text-gray-400">The event start date, format mm/dd/yyyy.</p>
-                <div class="relative max-w-sm">
+            <div class="flex flex-col justify-start space-y-2">
+              <%# Date range picker (start and end dates) %>
+              <div date-rangepicker class="flex items-center">
+                <div class="relative">
                   <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                    <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
+                    <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
+                    </svg>
                   </div>
-                  <%= form.text_field :start_date, 
-                        datepicker: "", 
-                        "datepicker-autohide": "", 
+                  <%= form.text_field :start_date,
                         "datepicker-format": "mm/dd/yyyy",
-                        "data-minDate": Time.zone.today.strftime("%m/%d/%Y"),
-                        value: @event.start_date.nil? ? Time.zone.today.strftime("%m/%d/%Y") : @event.start_date,
+                        value: @event.start_date.nil? ? Time.zone.today.strftime("%m/%d/%Y") : @event.start_date.strftime("%m/%d/%Y"),
                         class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500", 
-                        placeholder: "Select date (mm/dd/yyyy)" %>
+                        placeholder: "Select start date" %>
+                </div>
+                <span class="mx-4 text-gray-500">to</span>
+                <div class="relative">
+                  <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                    <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
+                    </svg>
+                  </div>
+                  <%= form.text_field :end_date,
+                        "datepicker-format": "mm/dd/yyyy",
+                        value: @event.end_date.nil? ? Time.zone.today.strftime("%m/%d/%Y") : @event.end_date.strftime("%m/%d/%Y"),
+                        class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500", 
+                        placeholder: "Select end date" %>
                 </div>
               </div>
+              <p id="dates-text-explanation" class="mb-2 text-sm text-gray-500 dark:text-gray-400">Select the event start and end dates, format mm/dd/yyyy.</p>
             </div>
           </div>
         </div>
