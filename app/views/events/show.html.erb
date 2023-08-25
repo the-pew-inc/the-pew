@@ -6,37 +6,72 @@
     </h1>
   </div>
 </section>
-<section class="mx-auto flex flex-row items-center justify-center space-x-1"
-         data-qr-code-generator-short-code-value=<%= @event.short_code %>
-         data-controller="qr-code-generator">
-  <div class="w-3/5 border-2 border-gray-500 border-spacing-1 rounded-2xl">
-    <div class="flex justify-center">
-      <div data-qr-code-generator-target="canvas"></div>
+<%# List the rooms %>
+<section>
+  <% @event.rooms_by_blocks.group_by { |room| room.start_date.to_date }.each do |date, rooms_on_date| %>
+    <div class="p-5 mb-4 border border-gray-100 rounded-lg bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
+      <time class="text-lg font-semibold text-gray-900 dark:text-white"><%= date.strftime("%B %d, %Y") %></time>
+      <ol class="mt-3 divide-y divider-gray-200 dark:divide-gray-700">
+        <!-- This is the block date -->
+        <% rooms_on_date.each do |room| %>
+          <li>
+            <%= link_to room_questions_path(room.id), class: "items-center block p-3 sm:flex hover:bg-gray-100 dark:hover:bg-gray-700" do %>
+              <svg class="w-12 h-12 mb-3 mr-3 rounded-full sm:mb-0 text-gray-600 dark:text-gray-400" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path clip-rule="evenodd" fill-rule="evenodd" d="M3 6a3 3 0 013-3h2.25a3 3 0 013 3v2.25a3 3 0 01-3 3H6a3 3 0 01-3-3V6zm9.75 0a3 3 0 013-3H18a3 3 0 013 3v2.25a3 3 0 01-3 3h-2.25a3 3 0 01-3-3V6zM3 15.75a3 3 0 013-3h2.25a3 3 0 013 3V18a3 3 0 01-3 3H6a3 3 0 01-3-3v-2.25zm9.75 0a3 3 0 013-3H18a3 3 0 013 3V18a3 3 0 01-3 3h-2.25a3 3 0 01-3-3v-2.25z"></path>
+              </svg>
+              <div class="text-gray-600 dark:text-gray-400">
+                <div class="text-base font-normal"><span class="font-medium text-gray-900 dark:text-white"><%= room.name %></span> </div>
+                <div class="text-sm font-normal"><%= room.start_date.strftime("%I:%M %p") %></div>
+                <span class="inline-flex items-center text-xs font-normal text-gray-500 dark:text-gray-400">
+                  <% if room.universal? %>
+                    <svg class="w-2.5 h-2.5 mr-1" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                      <path d="M21.721 12.752a9.711 9.711 0 00-.945-5.003 12.754 12.754 0 01-4.339 2.708 18.991 18.991 0 01-.214 4.772 17.165 17.165 0 005.498-2.477zM14.634 15.55a17.324 17.324 0 00.332-4.647c-.952.227-1.945.347-2.966.347-1.021 0-2.014-.12-2.966-.347a17.515 17.515 0 00.332 4.647 17.385 17.385 0 005.268 0zM9.772 17.119a18.963 18.963 0 004.456 0A17.182 17.182 0 0112 21.724a17.18 17.18 0 01-2.228-4.605zM7.777 15.23a18.87 18.87 0 01-.214-4.774 12.753 12.753 0 01-4.34-2.708 9.711 9.711 0 00-.944 5.004 17.165 17.165 0 005.498 2.477zM21.356 14.752a9.765 9.765 0 01-7.478 6.817 18.64 18.64 0 001.988-4.718 18.627 18.627 0 005.49-2.098zM2.644 14.752c1.682.971 3.53 1.688 5.49 2.099a18.64 18.64 0 001.988 4.718 9.765 9.765 0 01-7.478-6.816zM13.878 2.43a9.755 9.755 0 016.116 3.986 11.267 11.267 0 01-3.746 2.504 18.63 18.63 0 00-2.37-6.49zM12 2.276a17.152 17.152 0 012.805 7.121c-.897.23-1.837.353-2.805.353-.968 0-1.908-.122-2.805-.353A17.151 17.151 0 0112 2.276zM10.122 2.43a18.629 18.629 0 00-2.37 6.49 11.266 11.266 0 01-3.746-2.504 9.754 9.754 0 016.116-3.985z"></path>
+                    </svg>
+                    Public
+                  <% else %>
+                    <svg class="w-2.5 h-2.5 mr-1" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                      <path d="M3.53 2.47a.75.75 0 00-1.06 1.06l18 18a.75.75 0 101.06-1.06l-18-18zM22.676 12.553a11.249 11.249 0 01-2.631 4.31l-3.099-3.099a5.25 5.25 0 00-6.71-6.71L7.759 4.577a11.217 11.217 0 014.242-.827c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113z"></path>
+                      <path d="M15.75 12c0 .18-.013.357-.037.53l-4.244-4.243A3.75 3.75 0 0115.75 12zM12.53 15.713l-4.243-4.244a3.75 3.75 0 004.243 4.243z"></path>
+                      <path d="M6.75 12c0-.619.107-1.213.304-1.764l-3.1-3.1a11.25 11.25 0 00-2.63 4.31c-.12.362-.12.752 0 1.114 1.489 4.467 5.704 7.69 10.675 7.69 1.5 0 2.933-.294 4.242-.827l-2.477-2.477A5.25 5.25 0 016.75 12z"></path>
+                    </svg>
+                    Private
+                  <% end %>
+                </span>
+              </div>
+            <% end %>
+          </li>
+        <% end %>
+      </ol>
     </div>
-  </div>
+  <% end %>
+</section>
+<%# Event QR Code will be placed here %>
+<section class="fixed bottom-12 right-12 w-64 h-64 md:block hidden"
+        data-qr-code-generator-server-url-value=<%= event_url(@event) %>
+        data-controller="qr-code-generator">
+  <h4 class="font-bold text-sm font-medium uppercase text-slate-800 dark:text-slate-400 text-center">
+    Scan to Join
+  </h4>
   <% if current_user&.id == @event.user_id %>
-    <div class="flex flex-col space-y-2">
-      <button data-action="click->qr-code-generator#download">
-        <div class=" rounded-full border border-gray-500 hover:bg-gray-50 p-2">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500 dark:text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-          </svg>
-        </div>
-      </button>
-      <div data-controller="clipboard">
-        <input type="hidden" value="<%= join_event_url(@event.short_code) %>" data-clipboard-target="source" readonly />
-        <button data-action="clipboard#copy mouseenter->popper#show mouseleave->popper#hide">
-          <div class=" rounded-full border border-gray-500 hover:bg-gray-50 p-2" data-clipboard-target="copy">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500 dark:text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
-            </svg>
-          </div>
-          <div class=" rounded-full border border-green-500 p-2 hidden" data-clipboard-target="copied">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500 dark:text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
-            </svg>
-          </div>
-        </button>
+    <div class="border-2 border-gray-500 bg-white dark:bg-gray-900 border-spacing-1 rounded-2xl cursor-pointer" 
+         data-action="click->qr-code-generator#download" data-popover-target="popover-download">
+      <div class="flex justify-center items-center" data-qr-code-generator-target="container">
+        <div data-qr-code-generator-target="canvas"></div>
+      </div>
+    </div>
+    <div data-popover id="popover-download" role="tooltip" class="absolute z-10 invisible inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800">
+      <div class="px-3 py-2 bg-gray-100 border-b border-gray-200 rounded-t-lg dark:border-gray-600 dark:bg-gray-700">
+        <h3 class="font-semibold text-gray-900 dark:text-white">Download</h3>
+      </div>
+      <div class="px-3 py-2">
+        <p>Click the QR Code to download its SVG.</p>
+      </div>
+      <div data-popper-arrow></div>
+    </div>
+  <% else %>
+    <div class="border-2 border-gray-500 bg-white dark:bg-gray-900 border-spacing-1 rounded-2xl">
+      <div class="flex justify-center items-center" data-qr-code-generator-target="container">
+        <div data-qr-code-generator-target="canvas"></div>
       </div>
     </div>
   <% end %>

@@ -66,6 +66,10 @@ class Event < ApplicationRecord
   # Invite_only: seeing and asking questions require an account and an invitation
   enum event_type: { universal: 10, restricted: 20, invite_only: 30 }, _default: 10
 
+  def rooms_by_blocks
+    rooms.order(Arel.sql("DATE(start_date), EXTRACT(HOUR FROM start_date), EXTRACT(MINUTE FROM start_date), name"))
+  end  
+
   private
 
   # Note: If the way end_date is defined in the set_values method changes,

@@ -5,7 +5,9 @@
 #  id              :uuid             not null, primary key
 #  allow_anonymous :boolean          default(FALSE), not null
 #  always_on       :boolean          default(FALSE), not null
+#  end_date        :datetime         not null
 #  name            :string           not null
+#  room_type       :integer
 #  start_date      :datetime         not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
@@ -33,12 +35,18 @@ class Room < ApplicationRecord
 
   # Set the account_id (value is taken from the event)
   before_validation :set_organization_id
+  before_validation :set_end_date # Set the end date in case the user is not passing one
 
   belongs_to :event
   has_many   :attendances, dependent: :destroy
   has_many   :questions,   dependent: :destroy
   
   validates  :name, presence: true
+
+  # Universal: everyone can see questions, asking question requires an account
+  # Restricted: seeing and asking questions require an account
+  # Invite_only: seeing and asking questions require an account and an invitation
+  enum room_type: { universal: 10, restricted: 20, invite_only: 30 }, _default: 10
 
   # Return the number of approved, being answered or answered questions in this room
   def approved_question_count
@@ -54,5 +62,10 @@ class Room < ApplicationRecord
 
   def set_organization_id
     self.organization_id = self.event.organization_id if self.organization_id.nil?
+  end
+
+  # Used in case the user is not passing an end_date
+  def set_end_date
+    self.end_date = start_date if self.end_date.nil?
   end
 end

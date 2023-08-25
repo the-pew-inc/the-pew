@@ -5,7 +5,9 @@
 #  id              :uuid             not null, primary key
 #  allow_anonymous :boolean          default(FALSE), not null
 #  always_on       :boolean          default(FALSE), not null
+#  end_date        :datetime         not null
 #  name            :string           not null
+#  room_type       :integer
 #  start_date      :datetime         not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null

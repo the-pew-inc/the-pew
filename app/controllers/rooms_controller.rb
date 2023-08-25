@@ -1,6 +1,11 @@
 class RoomsController < ApplicationController
   before_action :authenticate_user!
   before_action :redirect_if_unauthenticated
+
+  def index
+    @event = Event.find(params[:id])
+    @rooms = @event.rooms
+  end
   
   def show
     @room = Room.find(params[:id])

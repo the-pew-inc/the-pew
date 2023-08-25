@@ -3,6 +3,12 @@
   <h1 class="inline-block mb-2 font-extrabold text-3xl tracking-tight text-slate-800 dark:text-white">
     <%= @room.event.name %>
   </h1>
+  <% if @room.name != "__default__" %>
+    <hr class="h-px my-4 bg-gray-200 border-0 dark:bg-gray-700">
+    <h2 class="font-bold md:text-2xl text-xl tracking-tight leading-none text-gray-900 mb-4 dark:text-white">
+      <%= @room.name %>
+    </h2>
+  <% end %>
   <div class="text-gray-500 dark:text-gray-400 text-sm font-semibold tracking-tight mb-2">
     <%= @room.start_date.strftime("%B %d, %Y") %>
   </div>
@@ -59,4 +65,35 @@
     </div>
     <%= render @questions %>
   </div>
+</section>
+<%# Event QR Code will be placed here %>
+<section class="fixed bottom-12 right-12 w-64 h-64 md:block hidden"
+        data-qr-code-generator-server-url-value=<%= room_url(@room) %>
+        data-controller="qr-code-generator">
+  <h4 class="font-bold text-sm font-medium uppercase text-slate-800 dark:text-slate-400 text-center">
+    Scan to Join
+  </h4>
+  <% if current_user&.id == @room.event.user_id %>
+    <div class="border-2 border-gray-500 bg-white dark:bg-gray-900 border-spacing-1 rounded-2xl cursor-pointer" 
+         data-action="click->qr-code-generator#download" data-popover-target="popover-download">
+      <div class="flex justify-center items-center" data-qr-code-generator-target="container">
+        <div data-qr-code-generator-target="canvas"></div>
+      </div>
+    </div>
+    <div data-popover id="popover-download" role="tooltip" class="absolute z-10 invisible inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800">
+      <div class="px-3 py-2 bg-gray-100 border-b border-gray-200 rounded-t-lg dark:border-gray-600 dark:bg-gray-700">
+        <h3 class="font-semibold text-gray-900 dark:text-white">Download</h3>
+      </div>
+      <div class="px-3 py-2">
+        <p>Click the QR Code to download its SVG.</p>
+      </div>
+      <div data-popper-arrow></div>
+    </div>
+  <% else %>
+    <div class="border-2 border-gray-500 bg-white dark:bg-gray-900 border-spacing-1 rounded-2xl">
+      <div class="flex justify-center items-center" data-qr-code-generator-target="container">
+        <div data-qr-code-generator-target="canvas"></div>
+      </div>
+    </div>
+  <% end %>
 </section>

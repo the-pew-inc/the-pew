@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_02_183847) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_24_194117) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -479,6 +479,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_02_183847) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.uuid "organization_id", null: false
+    t.integer "room_type"
+    t.datetime "end_date", null: false
     t.index ["allow_anonymous"], name: "index_rooms_on_allow_anonymous"
     t.index ["always_on"], name: "index_rooms_on_always_on"
     t.index ["event_id"], name: "index_rooms_on_event_id"

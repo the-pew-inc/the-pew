@@ -43,6 +43,8 @@ class EventsController < ApplicationController
       room.always_on = @event.always_on
       room.allow_anonymous = @event.allow_anonymous
       room.start_date = @event.start_date
+      room.end_date = @event.end_date
+      room.room_type = @event.event_type
       if room.save
         # Make the user the admin of the default room
         current_user.add_role :admin, room
@@ -59,11 +61,10 @@ class EventsController < ApplicationController
   end
 
   def show
-    @event.start_date = @event.start_date.strftime("%m/%d/%Y")
+    render layout: "display"
   end
 
   def edit
-    @event.start_date = @event.start_date.strftime("%m/%d/%Y")
     @invited_users = fetch_invited_users(@event)
   end
 
@@ -173,12 +174,16 @@ class EventsController < ApplicationController
 
   private
 
-  def set_event
-    @event = Event.find(params[:id])
-  end
-
   def authorize_event
     authorize @event
+  end
+
+  def rooms_by_blocks
+    rooms.order("DATE(start_date), EXTRACT(HOUR FROM start_date), EXTRACT(MINUTE FROM start_date), name")
+  end
+
+  def set_event
+    @event = Event.find(params[:id])
   end
 
   def create_event_params
