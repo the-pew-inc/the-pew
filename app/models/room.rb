@@ -40,6 +40,8 @@ class Room < ApplicationRecord
   belongs_to :event
   has_many   :attendances, dependent: :destroy
   has_many   :questions,   dependent: :destroy
+
+  has_rich_text :description
   
   validates  :name, presence: true
 
