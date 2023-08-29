@@ -11,11 +11,11 @@
     <%= render "rooms/question", question: @question if @question %>
   </div>
 </section>
-<% if current_user&.id == @room.event.user_id %>
+<% if @room.questions.count > 0 %>
   <section class="fixed bottom-12 right-12 w-64 h-64 md:block hidden"
         data-qr-code-generator-server-url-value=<%= room_url(@room) %>
         data-controller="qr-code-generator">
-    <h4 class="font-bold text-sm font-medium uppercase text-slate-800 dark:text-slate-400 text-center">
+    <h4 class="text-sm font-bold uppercase text-slate-800 dark:text-slate-400 text-center">
       Scan to Join
     </h4>
     <div class="border-2 border-gray-500 bg-white dark:bg-gray-900 border-spacing-1 rounded-2xl cursor-pointer" 

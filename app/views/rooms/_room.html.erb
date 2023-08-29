@@ -1,7 +1,7 @@
 <%# app/views/rooms/_room.html.erb %>
 <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
   <td scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white break-words">
-    <%= link_to room_path(room) do %>
+    <%= link_to room_questions_path(room) do %>
       <%= room.name %>
     <% end %>
   </td>
@@ -15,6 +15,10 @@
     <%= resource_type(room) %>
   </td>
   <td class="px-6 py-4 block">
+    <%= link_to "Display", room_path(room), data: { turbo: false }, class: "font-medium text-blue-600 dark:text-blue-500 hover:underline" %>
+    |
+    <%= link_to "View", room_questions_path(room), data: { turbo: false }, class: "font-medium text-blue-600 dark:text-blue-500 hover:underline" %>
+    |
     <%= link_to "Edit", edit_room_path(room), data: { turbo: false }, class: "font-medium text-blue-600 dark:text-blue-500 hover:underline" %>
     |
     <%= link_to "Delete", room_path(room), data: { turbo_method: :delete,  turbo_confirm: "Are you sure you want to delete this poll and all its data?" }, class: "font-medium text-red-600 dark:text-red-500 hover:underline" %>
