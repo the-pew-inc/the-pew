@@ -1,5 +1,5 @@
 <!-- app/views/rooms/_form.html.erb -->
-<%= form_with model: room do |form| %>
+<%= form_with model: room, url: form_url, local: true do |form| %>
   <%= render partial: 'shared/form_errors', locals: { object: room } %>
   <div class="mb-6">
     <%= form.label :name, class: "block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" %>
@@ -13,39 +13,48 @@
     </p>
     <%= form.rich_text_area :description, 
         class:"h-24 md:h-32 block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500", 
-        placeholder: "Add a short text describing the event. This can also be the agenda of a meeting, etc." %>
+        placeholder: "Add a short text describing the room. This can also be the agenda of a meeting, etc." %>
   </div>
-  <div class="mb-6 flex flex-col md:flex-row items-center justify-start space-x-2">
-    <div>
-      <%= form.label :duration, "Display duration", class: "block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" %>
-      <%= form.number_field :duration, inputmode: "numeric", class:"bg-gray-50 border border-gray-300 text-gray-900 text-base md:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
-      <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">Time in seconds during which the poll is displayed and open for vote. When empty, the poll remains opened.</p>
+  <div class="flex flex-col justify-start space-y-2">
+    <%# Date range picker (start and end dates) %>
+    <div date-rangepicker class="flex items-center">
+      <div class="relative">
+        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+          <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
+          </svg>
+        </div>
+        <%= form.text_field :start_date,
+                        "datepicker-format": "mm/dd/yyyy",
+                        value: @room.start_date.nil? ? Time.zone.today.strftime("%m/%d/%Y") : @room.start_date.strftime("%m/%d/%Y"),
+                        class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500", 
+                        placeholder: "Select start date" %>
+      </div>
+      <span class="mx-4 text-gray-500">to</span>
+      <div class="relative">
+        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+          <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
+          </svg>
+        </div>
+        <%= form.text_field :end_date,
+                        "datepicker-format": "mm/dd/yyyy",
+                        value: @room.end_date.nil? ? Time.zone.today.strftime("%m/%d/%Y") : @room.end_date.strftime("%m/%d/%Y"),
+                        class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500", 
+                        placeholder: "Select end date" %>
+      </div>
     </div>
-    <div>
-      <%= form.label :max_votes, "Maximum options", class: "block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" %>
-      <%= form.number_field :max_votes, inputmode: "numeric", class:"bg-gray-50 border border-gray-300 text-gray-900 text-base md:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
-      <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">The maximum number of options that a user can vote for. If kept empty, the user can vote for all the options from the poll.</p>
-    </div>
-    <div>
-      <%= form.label :num_votes, "Minimum options", class: "block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" %>
-      <%= form.number_field :num_votes, inputmode: "numeric", class:"bg-gray-50 border border-gray-300 text-gray-900 text-base md:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
-      <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">The minimum number of option(s) a user can vote for. If kept empty there is no minimum required.</p>
-    </div>
+    <p id="dates-text-explanation" class="mb-2 text-sm text-gray-500 dark:text-gray-400">Select the room start and end dates, format mm/dd/yyyy.</p>
   </div>
-  <div class="mb-6 flex flex-col md:flex-row md:items-center justify-start md:space-x-4">
-    <div>
-      <label class="relative inline-flex items-center cursor-pointer">
-        <%= form.check_box :add_option, class: "sr-only peer" %>
-        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
-        <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Allow users to add an option after voting</span>
-      </label>
-    </div>
-    <div>
-      <label class="relative inline-flex items-center cursor-pointer">
-        <%= form.check_box :is_anonymous, class: "sr-only peer" %>
-        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
-        <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Make it anonymous</span>
-      </label>
+  <div class="py-5 mb-6 flex flex-1 space-x-2 items-center justify-start">
+    <label form.label for="allow_anonymous" class="inline-flex relative items-center cursor-pointer" data-tooltip-target="tooltip-anonymous-<%= dom_id(room) %>">
+      <%= form.check_box :allow_anonymous, value: "", id: :allow_anonymous, class: "sr-only peer" %>
+      <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+      <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Allow anonymous</span>
+    </label>
+    <div id="tooltip-anonymous-<%= dom_id(room) %>" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+      Hide user's nickname from display and reports.
+      <div class="tooltip-arrow" data-popper-arrow></div>
     </div>
   </div>
   <%# Render the type and invite section %>
