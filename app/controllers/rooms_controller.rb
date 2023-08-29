@@ -1,4 +1,6 @@
 class RoomsController < ApplicationController
+  include Invitable
+  
   before_action :authenticate_user!
   before_action :redirect_if_unauthenticated
 
@@ -49,6 +51,8 @@ class RoomsController < ApplicationController
   def edit
     @room = Room.find(params[:id])
     @event = @room.event
+
+    @invited_users = fetch_invited_users(@room)
   end
 
   # GET /events/:event_id/rooms
