@@ -90,7 +90,7 @@ class EventsController < ApplicationController
     attributes[:start_date] = Date.strptime(update_event_params[:start_date], "%m/%d/%Y")
     attributes[:end_date]   = Date.strptime(update_event_params[:end_date], "%m/%d/%Y")
 
-    # Update the invitation if the poll is not universal. Poll type is tested in 
+    # Update the invitation if the event is not universal. Event type is tested in 
     # ResourceInviteService
     # params[:invited_users] is already a JSON so we pass it as it is to the next
     # steps as Sidekiq is expecting this format.
