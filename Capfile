@@ -26,7 +26,7 @@ require "capistrano/rails/assets"
 
 # To trigger a db migration use:
 # RUN_MIGRATIONS=true bundle exec cap production deploy:migrate
-if ENV['RUN_MIGRATIONS'].present?
+if ENV['RUN_MIGRATIONS']
   require 'capistrano/rails/migrations'
 end
 
