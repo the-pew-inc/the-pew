@@ -25,39 +25,46 @@ class EventsController < ApplicationController
     # This format must be aligned with the expected datetime (aka timestamp) used by ActiveRecord
     # Using Date.parse leads to strange result such as April 1st being converted to Jan 1st
     @event.start_date = Date.strptime(create_event_params[:start_date], "%m/%d/%Y")
+    @event.end_date   = Date.strptime(create_event_params[:end_date], "%m/%d/%Y")
     
-    respond_to do |format|
-      if @event.save
-        # Make the user the admin of the event
-        current_user.add_role :admin, @event
+    if @event.save
+      # Make the user the admin of the event
+      current_user.add_role :admin, @event
 
-        # When a new event is create we attach a default room.
-        room = @event.rooms.new
-        room.name = '__default__'
-        room.always_on = @event.always_on
-        room.allow_anonymous = @event.allow_anonymous
-        room.start_date = @event.start_date
-        if room.save
-          # Make the user the admin of the default room
-          current_user.add_role :admin, room
+      # Trigger the invitation if the event is not universal. Event type is tested in 
+      # ResourceInviteService
+      # params[:invited_users] is already a JSON so we pass it as it is to the next
+      # steps as Sidekiq is expecting this format.
+      ResourceInviteService.new(params[:invited_users], current_user.id, @event).create if !params[:invited_users].blank?
 
-          format.html { redirect_to events_path, notice: "Event was successfully created." }
-          format.turbo_stream
-        else
-          format.html { render :new, status: :unprocessable_entity }
-        end
+      # When a new event is create we attach a default room.
+      room = @event.rooms.new
+      room.name = '__default__'
+      room.always_on = @event.always_on
+      room.allow_anonymous = @event.allow_anonymous
+      room.start_date = @event.start_date
+      room.end_date = @event.end_date
+      room.room_type = @event.event_type
+      if room.save
+        # Make the user the admin of the default room
+        current_user.add_role :admin, room
+
+        redirect_to events_path, notice: "Event was successfully created."
       else
-        format.html { render :new, status: :unprocessable_entity }
+        flash[:alert] = "An error prevented the event from being created"
+        render :new, status: :unprocessable_entity
       end
+    else
+      flash[:alert] = "An error prevented the event from being created"
+      render :new, status: :unprocessable_entity
     end
   end
 
   def show
-    @event.start_date = @event.start_date.strftime("%m/%d/%Y")
+    render layout: "display"
   end
 
   def edit
-    @event.start_date = @event.start_date.strftime("%m/%d/%Y")
     @invited_users = fetch_invited_users(@event)
   end
 
@@ -81,28 +88,23 @@ class EventsController < ApplicationController
     # Using Date.parse leads to strange result such as April 1st being converted to Jan 1st
     attributes = update_event_params.clone
     attributes[:start_date] = Date.strptime(update_event_params[:start_date], "%m/%d/%Y")
+    attributes[:end_date]   = Date.strptime(update_event_params[:end_date], "%m/%d/%Y")
 
-    respond_to do |format|
-      if @event.update(attributes)
-        # Update the default room (if it exists)
-        @room = Room.where(event_id: @event.id, name: '__default__').first
-        if @room
-          @room.always_on = update_event_params[:always_on]
-          @room.allow_anonymous = update_event_params[:allow_anonymous]
-          @room.start_date = @event.start_date
+    # Update the invitation if the event is not universal. Event type is tested in 
+    # ResourceInviteService
+    # params[:invited_users] is already a JSON so we pass it as it is to the next
+    # steps as Sidekiq is expecting this format.
+    ResourceInviteService.new(params[:invited_users], current_user.id, @event).update if !params[:invited_users].blank?
 
-          if @room.save
-            format.turbo_stream
-          else 
-            render :edit, status: :unprocessable_entity
-          end
-        else
-          format.turbo_stream
-        end
+    if @event.update(attributes)
+      if @event.saved_changes?
+        redirect_to events_path, notice: "Event was successfully updated."
       else
-        # format.turbo_stream
-        render :edit, status: :unprocessable_entity
+        redirect_to events_path, notice: "No changes were made."
       end
+    else
+      flash[:alert] = "An error prevented the event from being created"
+      render :edit, status: :unprocessable_entity
     end
   end
 
@@ -162,33 +164,26 @@ class EventsController < ApplicationController
 
     @event = Event.find(params[:id])
 
-    if @event.user_id != current_user.id
-      flash[:alert] = 'You are not the owner of this event'
-      redirect_to(events_path)
-      return
+    if @event.destroy
+      flash.now[:success] = 'Object was successfully deleted.'
+    else
+      flash.now[:alert] = 'Something went wrong'
     end
-
-    respond_to do |format|
-      if @event.destroy
-        flash.now[:success] = 'Object was successfully deleted.'
-        format.html { redirect_to events_path }
-        format.turbo_stream 
-      else
-        flash.now[:alert] = 'Something went wrong'
-        # redirect_to(events_path)
-        # format.turbo_stream
-      end
-    end
+    redirect_to events_path
   end
 
   private
 
-  def set_event
-    @event = Event.find(params[:id])
-  end
-
   def authorize_event
     authorize @event
+  end
+
+  def rooms_by_blocks
+    rooms.order("DATE(start_date), EXTRACT(HOUR FROM start_date), EXTRACT(MINUTE FROM start_date), name")
+  end
+
+  def set_event
+    @event = Event.find(params[:id])
   end
 
   def create_event_params

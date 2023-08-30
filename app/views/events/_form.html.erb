@@ -1,13 +1,24 @@
-<!-- app/views/events/_form.html.erb -->
+<%# app/views/events/_form.html.erb %>
 <section>
   <%= form_with model: event,
               id: dom_id(event),
               target: :_top do |form| %>
     <%= render partial: 'shared/form_errors', locals: { object: event } %>
-    <div class="mb-6">
-      <%= form.label :name, class: "block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" %>
-      <%= form.text_field :name, required: true, class:"bg-gray-50 border border-gray-300 text-gray-900 text-base md:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
-      <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">Max 250 characters, but we recommend to keep it simple 😎</p>
+    <div class="mb-6 flex items-center justify-between space-x-6">
+      <div class="w-full">
+        <%= form.label :name, class: "block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" %>
+        <%= form.text_field :name, required: true, class:"bg-gray-50 border border-gray-300 text-gray-900 text-base md:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
+        <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">Max 250 characters, but we recommend to keep it simple 😎</p>
+      </div>
+      <div>
+        <%= form.select :status, options_for_select([
+          ['Draft', 'draft'],
+          ['Publish', 'published'],
+          ['Open', 'opened'],
+          ['Close', 'closed'],
+          ['Archive', 'archived']
+        ], @event.status), { }, class: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" %>
+      </div>
     </div>
     <div class="mb-6">
       <%= form.label :description, class: "block text-sm font-medium text-gray-900 dark:text-gray-300" %>
@@ -34,8 +45,8 @@
           <%= render "layouts/invites/resource_invite", form: form, resource: event %>
         </div>
         <h2 id="accordion-flush-heading-2">
-          <button type="button" class="flex items-center justify-between w-full py-5 font-medium text-left text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400" data-accordion-target="#accordion-flush-body-2" aria-expanded="false" aria-controls="accordion-flush-body-2">
-            <span>Event dates</span>
+          <button type="button" class="flex items-center justify-between w-full py-5 font-medium text-left text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400" data-accordion-target="#accordion-flush-body-2" aria-expanded="true" aria-controls="accordion-flush-body-2">
+            <span>Event dates & Time</span>
             <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
               <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
             </svg>
@@ -43,25 +54,36 @@
         </h2>
         <div id="accordion-flush-body-2" class="hidden" aria-labelledby="accordion-flush-heading-2">
           <div class="py-5">
-            <div class="flex flex-row justify-start items-center space-x-6">
-              <%# Event start date %>
-              <div>
-                <%= form.label :start_date, class: "block text-sm font-medium text-gray-900 dark:text-gray-300" %>
-                <p id="helper-text-explanation" class="mb-2 text-sm text-gray-500 dark:text-gray-400">The event start date, format mm/dd/yyyy.</p>
-                <div class="relative max-w-sm">
+            <div class="flex flex-col justify-start space-y-2">
+              <%# Date range picker (start and end dates) %>
+              <div date-rangepicker class="flex items-center">
+                <div class="relative">
                   <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                    <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
+                    <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
+                    </svg>
                   </div>
-                  <%= form.text_field :start_date, 
-                        datepicker: "", 
-                        "datepicker-autohide": "", 
+                  <%= form.text_field :start_date,
                         "datepicker-format": "mm/dd/yyyy",
-                        "data-minDate": Time.zone.today.strftime("%m/%d/%Y"),
-                        value: @event.start_date.nil? ? Time.zone.today.strftime("%m/%d/%Y") : @event.start_date,
+                        value: @event.start_date.nil? ? Time.zone.today.strftime("%m/%d/%Y") : @event.start_date.strftime("%m/%d/%Y"),
                         class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500", 
-                        placeholder: "Select date (mm/dd/yyyy)" %>
+                        placeholder: "Select start date" %>
+                </div>
+                <span class="mx-4 text-gray-500">to</span>
+                <div class="relative">
+                  <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                    <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
+                    </svg>
+                  </div>
+                  <%= form.text_field :end_date,
+                        "datepicker-format": "mm/dd/yyyy",
+                        value: @event.end_date.nil? ? Time.zone.today.strftime("%m/%d/%Y") : @event.end_date.strftime("%m/%d/%Y"),
+                        class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500", 
+                        placeholder: "Select end date" %>
                 </div>
               </div>
+              <p id="dates-text-explanation" class="mb-2 text-sm text-gray-500 dark:text-gray-400">Select the event start and end dates, format mm/dd/yyyy.</p>
             </div>
           </div>
         </div>
@@ -99,18 +121,6 @@
       </div>
       <div class="flex flex-row justify-between space-x-2 items-center">
         <%= form.submit class: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" %>
-        <%# unless form.object.new_record? %>
-        <% if controller.action_name == "edit" %>
-          <%= link_to "Cancel", events_path,
-          class: "w-full text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-800",
-          data: {turbo_frame: :events}  %>
-        <% else %>
-          <%= button_tag "Cancel", 
-          data: { action: "turbo-modal#hideModal" }, 
-          type: "button", 
-          class: "w-full text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-800" %>
-        <% end %>
-        <%# end %>
       </div>
     </div>
   <% end %>

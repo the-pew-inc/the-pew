@@ -23,7 +23,7 @@ class PollsController < ApplicationController
       # ResourceInviteService
       # params[:invited_users] is already a JSON so we pass it as it is to the next
       # steps as Sidekiq is expecting this format.
-      ResourceInviteService.new(params[:invited_users], current_user.id, @poll).create
+      ResourceInviteService.new(params[:invited_users], current_user.id, @poll).create if !params[:invited_users].blank?
       redirect_to polls_url, notice: "The poll was succesfully saved."
     else
       flash[:alert] = "An error prevented the poll from being created"
@@ -39,7 +39,8 @@ class PollsController < ApplicationController
       # ResourceInviteService
       # params[:invited_users] is already a JSON so we pass it as it is to the next
       # steps as Sidekiq is expecting this format.
-      ResourceInviteService.new(params[:invited_users], current_user.id, @poll).update
+      ResourceInviteService.new(params[:invited_users], current_user.id, @poll).update if !params[:invited_users].blank?
+      
       redirect_to polls_url, notice: "The poll was succesfully updated."
     else
       flash[:alert] = "An error prevented the poll from being updated"

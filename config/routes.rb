@@ -68,28 +68,29 @@ Rails.application.routes.draw do
   resources :confirmations, only: %i[create edit new], param: :confirmation_token
 
   # Active session routes
-  resources :active_sessions, only: [:destroy] do
+  resources :active_sessions, only: %i[destroy] do
     collection do
       delete 'destroy_all'
     end
   end
 
   # Dashboard routes
-  resource :dashboard, only: [:show]
-
-  # Event routes
-  resources :events
-  get 'event/:pin',       to: 'events#event',  as: :join_event
-  get 'event/:id/stats',  to: 'events#stats',  as: :event_stats
-  get 'event/:id/export', to: 'events#export', as: :event_export
+  resource :dashboard, only: %i[show]
 
   # Import CSV files
   resources :imports, only: %i[new create index show]
 
+  # Event routes
+  resources :events do
+    resources :rooms, shallow: true
+  end
   # Question routes
   resources :rooms do
     resources :questions, shallow: true
   end
+  get 'event/:pin',       to: 'events#event',  as: :join_event
+  get 'event/:id/stats',  to: 'events#stats',  as: :event_stats
+  get 'event/:id/export', to: 'events#export', as: :event_export
 
   # Question votes
   post 'question/:votable_id/votes', to: 'votes#show', as: :question_votes,  votable_type: 'Question'

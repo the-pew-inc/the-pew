@@ -36,9 +36,13 @@ class ResourceInviteService
 
   private
 
+  # Method to extract the title or name of a resource.
+  # For 'Event' and 'Room' resources, it returns the 'name'.
+  # For 'Poll' and 'Survey' resources, it returns the 'title'.
+  # For any other resource type, it logs an error as it is unsupported.
   def getResourceTitle
     case @resource.class.name
-    when 'Event'
+    when 'Event', 'Room'
       @resource.name
     when 'Poll', 'Survey'
       @resource.title

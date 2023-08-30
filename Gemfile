@@ -128,7 +128,7 @@ gem 'aws-sdk-s3', require: false
 
 # Octokig [https://github.com/octokit/octokit.rb]
 # Mostly used to import openAI prompts from GitHub repo using the import_prompts.rake task
-gem 'octokit', '~> 7.0.0'
+gem 'octokit', '~> 7.1.0'
 
 # Pagination [https://github.com/ddnexus/pagy]
 gem 'pagy', '~> 6.0.0'

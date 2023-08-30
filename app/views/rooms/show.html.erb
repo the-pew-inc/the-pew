@@ -1,5 +1,5 @@
 <%= turbo_stream_from "display_#{@room.id}" %>
-<div class="mt-4 flex flex-col items-center">
+<section class="mt-4 flex flex-col items-center">
   <div class="flex flex-col items-center mb-16">
     <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white"><%= @room.event.name %></h1>
     <h2 class="text-3xl font-extrabold tracking-tight leading-none text-gray-900 md:text-4xl dark:text-white <%= @room.name == '__default__' ? 'invisible' : '' %>"><%= @room.name %></h2>
@@ -10,4 +10,28 @@
     </div>
     <%= render "rooms/question", question: @question if @question %>
   </div>
-</div>
+</section>
+<% if @room.questions.count > 0 %>
+  <section class="fixed bottom-12 right-12 w-64 h-64 md:block hidden"
+        data-qr-code-generator-server-url-value=<%= room_url(@room) %>
+        data-controller="qr-code-generator">
+    <h4 class="text-sm font-bold uppercase text-slate-800 dark:text-slate-400 text-center">
+      Scan to Join
+    </h4>
+    <div class="border-2 border-gray-500 bg-white dark:bg-gray-900 border-spacing-1 rounded-2xl cursor-pointer" 
+         data-action="click->qr-code-generator#download" data-popover-target="popover-download">
+      <div class="flex justify-center items-center" data-qr-code-generator-target="container">
+        <div data-qr-code-generator-target="canvas"></div>
+      </div>
+    </div>
+    <div data-popover id="popover-download" role="tooltip" class="absolute z-10 invisible inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800">
+      <div class="px-3 py-2 bg-gray-100 border-b border-gray-200 rounded-t-lg dark:border-gray-600 dark:bg-gray-700">
+        <h3 class="font-semibold text-gray-900 dark:text-white">Download</h3>
+      </div>
+      <div class="px-3 py-2">
+        <p>Click the QR Code to download its SVG.</p>
+      </div>
+      <div data-popper-arrow></div>
+    </div>
+  </section>
+<% end %>

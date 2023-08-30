@@ -1,17 +1,19 @@
-<div class="mt-4 flex flex-col items-center">
+<section class="mt-4 flex flex-col items-center">
   <div id="question" data-controller="empty-state" class="w-full">
     <div class="flex flex-col w-full items-center p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
       <h5 class="text-5xl font-extrabold dark:text-white text-center">
-        You can engage with the speaker or the topic by asking questions or dropping a comment here.
+        You can engage with the speaker or the topic by asking questions or dropping a comment using the QR code below.
       </h5>
-      <div class="mt-12" data-qr-code-generator-short-code-value=<%= @room.event.short_code %>
-                         data-qr-code-generator-size-value=490
-                         data-controller="qr-code-generator">
-        <p class="text-2xl font-extrabold dark:text-white text-center">Join the conversation</p>
-        <div class="flex justify-center">
-          <div data-qr-code-generator-target="canvas"></div>
+      <div class="mt-10 w-96 h-96 md:block hidden mb-12"
+        data-qr-code-generator-server-url-value=<%= room_url(@room) %>
+        data-controller="qr-code-generator">
+        <div  
+         data-action="click->qr-code-generator#download">
+          <div class="flex justify-center items-center" data-qr-code-generator-target="container">
+            <div data-qr-code-generator-target="canvas"></div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+</section>
