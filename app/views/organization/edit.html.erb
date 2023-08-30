@@ -1,6 +1,10 @@
 <%# app/views/organization/edit.html.erb %>
 <%= turbo_frame_tag "settings_main" do %>
   <%= render partial: "settings/breadcrumb", locals: { sub1: "Organization" } %>
+  <%# Organization id %>
+  <section class="my-4 text-sm text-gray-900 dark:text-gray-300">
+    Org ID: <span class="font-medium"><%= @organization.id %></span>
+  </section>
   <%# Logo section %>
   <section class="my-4">
     <%= turbo_frame_tag "logo_frame" do %>
