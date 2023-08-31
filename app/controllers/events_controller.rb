@@ -7,7 +7,7 @@ class EventsController < ApplicationController
   before_action :authorize_event, only: [:show, :edit, :update, :stats, :export, :destroy]
 
   def index
-    @events = policy_scope(Event).includes(user: :profile).order(start_date: :desc)
+    @events = policy_scope(Event).order(start_date: :desc)
   end
 
   def new
