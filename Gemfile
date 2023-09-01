@@ -15,7 +15,7 @@ gem 'rails', '~> 7.0.7.2'
 gem 'sprockets-rails'
 
 # Use postgresql as the database for Active Record
-gem 'pg', '~> 1.4'
+gem 'pg', '~> 1.5.4'
 
 # Use the Puma web server [https://github.com/puma/puma]
 gem 'puma', '~> 6.3.0'
@@ -36,7 +36,7 @@ gem 'cssbundling-rails'
 gem 'jbuilder'
 
 # Faster JSON processing [https://github.com/ohler55/oj/blob/develop/pages/Rails.md]
-gem 'oj', '~> 3.16.0'
+gem 'oj', '~> 3.16.1'
 
 # Use Redis adapter to run Action Cable in production
 gem 'redis', '~> 5.0.5'
@@ -156,7 +156,7 @@ gem 'ruby-openai', '~> 5.1.0'
 gem 'pg_search', '~> 2.3.6'
 
 # Stripe (payment, subscription processing) [https://github.com/stripe/stripe-ruby]
-gem 'stripe', '~> 9.0.0'
+gem 'stripe', '~> 9.1.0'
 
 # To enable retry in Faraday v2.0+
 gem 'faraday-retry', '~> 2.2.0'
