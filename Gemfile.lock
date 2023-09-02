@@ -194,8 +194,8 @@ GEM
     ffi-compiler (1.0.1)
       ffi (>= 1.0.0)
       rake
-    globalid (1.1.0)
-      activesupport (>= 5.0)
+    globalid (1.2.0)
+      activesupport (>= 6.1)
     groupdate (6.3.0)
       activesupport (>= 6.1)
     hashie (5.0.0)
