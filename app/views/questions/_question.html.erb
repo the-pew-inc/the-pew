@@ -53,6 +53,9 @@
           <% end %>
         </div>
       </div>
+      <% if question.answer.present? %>
+        <%= render partial: "question_answers/answer", locals: {answer: question.answer} %>
+      <% end %>
       <%= render partial: "control_buttons", locals: {question: question} %>
     </div>
   <% end %>

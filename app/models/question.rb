@@ -52,7 +52,7 @@ class Question < ApplicationRecord
   belongs_to :room
   has_many   :votes, as: :votable, dependent: :destroy
 
-  has_one    :answer, dependent: :destroy
+  has_one :answer, class_name: "QuestionAnswer", dependent: :destroy
 
   # Self-reference
   # Used to nest questions // To be implemented
