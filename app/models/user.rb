@@ -64,6 +64,7 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :profile, allow_destroy: true
   has_many :events,          dependent: :destroy
   has_many :questions,       dependent: :destroy
+  has_many :answers,         dependent: :destroy
   has_many :votes,           dependent: :destroy
   has_many :polls,           dependent: :destroy
   has_many :poll_answers,    dependent: :destroy

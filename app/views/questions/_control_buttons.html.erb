@@ -32,5 +32,11 @@
                             { class: "bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full py-2 px-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" }
                             %>
     <% end %>
+    <% if !question.rejected? %>
+      <%= link_to question.answer.present? ? 'Update the answer' : 'Write an answer',
+        question.answer.present? ? edit_question_question_answer_path(question) : new_question_question_answer_path(question),
+            data: { turbo_frame: "answer_modal" },
+            class: "py-2 px-3 text-xs font-medium text-center text-white rounded-lg bg-blue-500 hover:bg-blue-600 dark:bg-blue-700 dark:hover:bg-blue-800" %>
+    <% end %>
   </div>
 <% end %>

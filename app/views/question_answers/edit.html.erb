@@ -1,0 +1,4 @@
+<%# app/views/question_answers/edit.html.erb %>
+<%= turbo_frame_tag 'answer_modal' do %>
+  <%= render 'form', title: "Edit the answer", question: @question, question_answer: @question_answer %>
+<% end %>

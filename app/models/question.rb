@@ -52,8 +52,10 @@ class Question < ApplicationRecord
   belongs_to :room
   has_many   :votes, as: :votable, dependent: :destroy
 
+  has_one :answer, class_name: "QuestionAnswer", dependent: :destroy
+
   # Self-reference
-  # Used to nest questions
+  # Used to nest questions // To be implemented
   belongs_to :parent, optional: true, class_name: "Question"
   has_many   :questions, foreign_key: :parent_id, dependent: :destroy
 
