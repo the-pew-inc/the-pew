@@ -1,14 +1,17 @@
 <%# app/views/question_answers/_answer.html.erb %>
-<div id="accordion-open" data-accordion="open">
-  <h2 id="accordion-open-heading-1">
-    <button type="button" class="flex items-center justify-between w-full p-5 font-medium text-left text-gray-500 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800" data-accordion-target="#accordion-open-body-1">
-      <span class="flex items-center"><svg class="w-5 h-5 mr-2 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg> Answer:</span>
+<div id="<%= 'accordion-collapse-' + dom_id(answer) %>" data-accordion="open" class="mt-2 mb-1">
+  <h2 id=<%= "accordion-open-heading-" + answer.id %>>
+    <button type="button" class="flex items-center justify-between w-full p-5 font-medium text-left text-gray-500 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800" data-accordion-target=<%= "#accordion-open-body-" + answer.id %>>
+      <span class="flex items-center">
+        <svg class="w-5 h-5 mr-2 shrink-0" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path clip-rule="evenodd" fill-rule="evenodd" d="M16.72 7.72a.75.75 0 011.06 0l3.75 3.75a.75.75 0 010 1.06l-3.75 3.75a.75.75 0 11-1.06-1.06l2.47-2.47H3a.75.75 0 010-1.5h16.19l-2.47-2.47a.75.75 0 010-1.06z"></path>
+        </svg> Answer:
+      </span>
     </button>
   </h2>
-  <div id="accordion-open-body-1" class="hidden" aria-labelledby="accordion-open-heading-1">
+  <div id=<%= "accordion-open-body-" + answer.id %> class="hidden" aria-labelledby=<%= "accordion-open-heading-" + answer.id %>>
     <div class="p-5 dark:bg-gray-900">
-      <p class="mb-2 text-gray-500 dark:text-gray-400">Flowbite is an open-source library of interactive components built on top of Tailwind CSS including buttons, dropdowns, modals, navbars, and more.</p>
-      <p class="text-gray-500 dark:text-gray-400">Check out this guide to learn how to <a href="/docs/getting-started/introduction/" class="text-blue-600 dark:text-blue-500 hover:underline">get started</a> and start developing websites even faster with components on top of Tailwind CSS.</p>
+      <p class="mb-2 text-gray-500 dark:text-gray-400"><%= answer.text_answer %></p>
     </div>
   </div>
 </div>

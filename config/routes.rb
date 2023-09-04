@@ -87,7 +87,11 @@ Rails.application.routes.draw do
   # Question routes
   resources :rooms do
     resources :questions, shallow: true
-  end
+  end 
+  # Question / Answer routes
+  resources :questions, only: [] do
+    resource :question_answer, only: [:new, :create, :edit, :update, :destroy]
+  end 
   get 'event/:pin',       to: 'events#event',  as: :join_event
   get 'event/:id/stats',  to: 'events#stats',  as: :event_stats
   get 'event/:id/export', to: 'events#export', as: :event_export

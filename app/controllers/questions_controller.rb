@@ -8,8 +8,7 @@ class QuestionsController < ApplicationController
   def index
     if @room.event.universal?
       @question = @room.questions.build
-      @questions = Question.questions_for_room(params[:room_id]).includes(:room)
-      render :layout => 'display'
+      @questions = Question.questions_for_room(params[:room_id]).includes([:room, :user, :answer])
     else
       # TODO: make it more real ;-) and move this logic to pundit
       redirect_to room_path, alert: "This event is private"
