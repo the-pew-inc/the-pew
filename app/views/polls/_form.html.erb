@@ -27,8 +27,8 @@
     </div>
   </div>
   <% if poll.persisted? %>
-    <%# Offer to copy event link %>
-    <div data-controller="clipboard" class="p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+    <%# Offer to copy poll link %>
+    <div data-controller="clipboard" class="p-2 mb-4 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
       <input type="hidden" value="<%= poll_url(@poll) %>" data-clipboard-target="source" readonly />
       <button data-action="clipboard#copy mouseenter->popper#show mouseleave->popper#hide" class="flex items-center">
         <div data-clipboard-target="copy">
