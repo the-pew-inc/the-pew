@@ -11,7 +11,11 @@
   </h2>
   <div id=<%= "accordion-open-body-" + answer.id %> class="hidden" aria-labelledby=<%= "accordion-open-heading-" + answer.id %>>
     <div class="p-5 dark:bg-gray-900">
-      <p class="mb-2 text-gray-500 dark:text-gray-400"><%= answer.text_answer %></p>
+      <div class="mb-2 text-gray-500 dark:text-gray-400">
+        <div class="trix-content">
+          <%= answer.text_answer %>
+        </div>
     </div>
   </div>
+</div>
 </div>
