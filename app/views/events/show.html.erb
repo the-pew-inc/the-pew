@@ -6,6 +6,13 @@
     </h1>
   </div>
 </section>
+<% if @event.public_description.present? %>
+  <section class="border rounded-lg dark:border-gray-400 mb-4">
+    <div class="mb-2 text-gray-500 dark:text-gray-400 p-4">
+      <%= @event.public_description %>
+    </div>
+  </section>
+<% end %>
 <%# List the rooms %>
 <section>
   <% @event.rooms_by_blocks.group_by { |room| room.start_date.to_date }.each do |date, rooms_on_date| %>
