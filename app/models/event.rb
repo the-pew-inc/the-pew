@@ -53,6 +53,7 @@ class Event < ApplicationRecord
   # Description (optional) / Used to extract topics and intends from questions by
   # offering a better context to openAI
   has_rich_text :description
+  has_rich_text :public_description # Description presented to the participants
 
   validates :name,       presence: true, length: { minimum: 3, maximum: 250 }
   validates :start_date, presence: true
