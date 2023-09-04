@@ -3,7 +3,8 @@ import { Controller } from "@hotwired/stimulus";
 // Connects to data-controller="clipboard"
 export default class extends Controller {
   static targets = ["source", "copy", "copied"];
-  copy() {
+  copy(e) {
+    e.preventDefault();
     navigator.clipboard.writeText(this.sourceTarget.value);
     this.copyTarget.classList.add("hidden");
     this.copiedTarget.classList.remove("hidden");

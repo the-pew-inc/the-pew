@@ -26,6 +26,25 @@
         placeholder: "Write text, embed links to share with the participants." %>
     </div>
   </div>
+  <% if poll.persisted? %>
+    <%# Offer to copy event link %>
+    <div data-controller="clipboard" class="p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+      <input type="hidden" value="<%= poll_url(@poll) %>" data-clipboard-target="source" readonly />
+      <button data-action="clipboard#copy mouseenter->popper#show mouseleave->popper#hide" class="flex items-center">
+        <div data-clipboard-target="copy">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500 dark:text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+          </svg>
+        </div>
+        <div data-clipboard-target="copied" class="hidden">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500 dark:text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+          </svg>
+        </div>
+        <span class="flex-1 ml-3 whitespace-nowrap">link to the Poll</span>
+      </button>
+    </div>
+  <% end %>
   <div class="mb-6 flex flex-col md:flex-row items-center justify-start space-x-2">
     <div>
       <%= form.label :duration, "Display duration", class: "block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" %>
