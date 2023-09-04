@@ -6,6 +6,13 @@
     <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white"><%= @room.event.name %></h1>
     <h2 class="text-3xl font-extrabold tracking-tight leading-none text-gray-900 md:text-4xl dark:text-white <%= @room.name == '__default__' ? 'invisible' : '' %>"><%= @room.name %></h2>
   </div>
+  <% if @room.public_description.present? %>
+    <div class="border rounded-lg dark:border-gray-400 mb-4">
+      <div class="mb-2 text-gray-500 dark:text-gray-400 p-4">
+        <%= @room.public_description %>
+      </div>
+    </div>
+  <% end %>
   <div id="question" data-controller="empty-state" class="w-full">
     <div data-empty-state-target="emptyState">
       <%= render "empty_state" %>
