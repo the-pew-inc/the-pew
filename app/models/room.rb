@@ -45,6 +45,7 @@ class Room < ApplicationRecord
   has_many :resource_invites, as: :invitable, dependent: :destroy
 
   has_rich_text :description
+  has_rich_text :public_description
   
   validates  :name, presence: true
 
