@@ -10,11 +10,14 @@ class QuestionAnswersController < ApplicationController
   end
 
   def create
-    @question_answer = @question.build_answer(question_answer_params)
+    @question_answer = @question.build_answer(question_answer_params.merge(user: current_user))
     if @question_answer.save
-      # redirect_to or render turbo_stream
+      # Broadcasting the updated question
+      Broadcasters::Questions::Updated.new(@question).call
+
+      redirect_to room_questions_path(@question.room)
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -23,15 +26,25 @@ class QuestionAnswersController < ApplicationController
 
   def update
     if @question_answer.update(question_answer_params)
-      # redirect_to or render turbo_stream
+      # Broadcasting the updated question
+      Broadcasters::Questions::Updated.new(@question).call
+
+      redirect_to room_questions_path(@question.room)
     else
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
-    @question_answer.destroy
-    # redirect_to or render turbo_stream
+    if @question_answer.destroy
+      # Broadcasting the updated question
+      Broadcasters::Questions::Updated.new(@question).call
+
+      flash[:notice] = "The answer was successfully deleted."
+      redirect_to room_questions_path(@question.room)
+    else
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   private

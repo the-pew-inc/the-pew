@@ -33,7 +33,7 @@
                             %>
     <% end %>
     <% if !question.rejected? %>
-      <%= link_to 'Manage answer',
+      <%= link_to question.answer.present? ? 'Update the answer' : 'Write an answer',
         question.answer.present? ? edit_question_question_answer_path(question) : new_question_question_answer_path(question),
             data: { turbo_frame: "answer_modal" },
             class: "py-2 px-3 text-xs font-medium text-center text-white rounded-lg bg-blue-500 hover:bg-blue-600 dark:bg-blue-700 dark:hover:bg-blue-800" %>
