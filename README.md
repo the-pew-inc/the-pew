@@ -25,8 +25,8 @@ Using openAI, THEPEW provides personalized recommendations that are tailored to 
 ## INSTALLATION
 ### PREREQUISITES
 - ruby (version 3.2 with YJIT)
-- rails (version 7.0.4)
-- postgresql (version 14 or above)
+- rails (version 7.0.7.2)
+- postgresql (version 15 or above)
 - mailcatcher
 - redis (version 6.2)
 - docker (used by postgres, redis and mailcatcher)
