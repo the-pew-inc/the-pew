@@ -6,14 +6,25 @@
     <%= form.text_field :title, required: true, class:"bg-gray-50 border border-gray-300 text-gray-900 text-base md:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
     <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">Keep it simple and below 250 characters 😎</p>
   </div>
-  <div class="mb-6">
-    <%= form.label :description, class: "block text-sm font-medium text-gray-900 dark:text-gray-300" %>
-    <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
-      Describe the poll in a few words.
-    </p>
-    <%= form.rich_text_area :description, 
+  <div class="mb-6 flex flex-col md:flex-row md:justify-between items-center md:space-x-2 lg:space-x-4 space-y-2">
+    <div>
+      <%= form.label :description, "AI Description", class: "block text-sm font-medium text-gray-900 dark:text-gray-300" %>
+      <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
+        (optional) Describe the poll, vote, etc. This information is only used by our AI to better extract topics and intend from your audience.
+      </p>
+      <%= form.rich_text_area :description, 
         class:"h-24 md:h-32 block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500", 
-        placeholder: "Add a short text describing the event. This can also be the agenda of a meeting, etc." %>
+        placeholder: "Add a short text describing the poll, vote. You can use structured text" %>
+    </div>
+    <div>
+      <%= form.label :public_description, "Public Description", class: "block text-sm font-medium text-gray-900 dark:text-gray-300" %>
+      <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
+        (optional) Describe the poll, vote to your audience, provide participants with more information about the poll or vote.
+      </p>
+      <%= form.rich_text_area :public_description, 
+        class:"h-24 md:h-32 block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500", 
+        placeholder: "Write text, embed links to share with the participants." %>
+    </div>
   </div>
   <div class="mb-6 flex flex-col md:flex-row items-center justify-start space-x-2">
     <div>

@@ -21,6 +21,13 @@
     </div>
   <% end %>
 </section>
+<% if @poll.public_description.present? %>
+  <section class="border rounded-lg dark:border-gray-400 mb-4">
+    <div class="mb-2 text-gray-500 dark:text-gray-400 p-4">
+      <%= @poll.public_description %>
+    </div>
+  </section>
+<% end %>
 <% if !PollParticipation.participated?(current_user, @poll) %>
   <section class="mx-auto flex flex-col" id="poll-submission">
     <% if @poll.num_votes || @poll.max_votes %>
