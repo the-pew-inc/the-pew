@@ -95,7 +95,7 @@ GEM
       method_source
       rack
       reverse_markdown
-    argon2 (2.2.0)
+    argon2 (2.3.0)
       ffi (~> 1.15)
       ffi-compiler (~> 1.0)
     ast (2.4.2)
@@ -491,7 +491,7 @@ DEPENDENCIES
   ahoy_matey
   annotate (~> 3.2.0)
   appmap (= 0.102.1)
-  argon2 (~> 2.2.0)
+  argon2 (~> 2.3.0)
   aws-sdk-s3
   bootsnap
   brakeman (~> 6.0.1)
