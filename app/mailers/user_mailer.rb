@@ -27,7 +27,7 @@ class UserMailer < ApplicationMailer
     )
   end
 
-  def password_change_confirmatiom(user_id)
+  def password_change_confirmation(user_id)
     @user = User.find(user_id)
     mail(
       to: @user.email,

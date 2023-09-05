@@ -148,6 +148,16 @@ class User < ApplicationRecord
     end
   end
 
+  # Send an email to confirm the password change to the user
+  def send_password_change_confirmation_email!
+    # If the user was invited, the user should not be able to bypass the invitation flow 
+    # by resetting their password, unless they have accepted the invitation what translated to
+    # accepted_invitation_on is different from nil
+    if !self.invited || self.accepted_invitation_on != nil
+      UserMailer.password_change_confirmation(self.id).deliver_later
+    end
+  end
+
   # Send a confirmation email to the user
   def send_confirmation_email!
     # If the user was invited, the user should not be able to bypass the invite flow 
