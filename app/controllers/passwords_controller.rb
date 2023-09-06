@@ -35,6 +35,7 @@ class PasswordsController < ApplicationController
     @user = User.find_signed(params[:password_reset_token], purpose: :reset_password)
     if @user
       if @user.update(password_params)
+        @user.send_password_change_confirmation_email!
         redirect_to(login_path, notice: 'You can now login using your new password.')
       else
         flash.now[:alert] = @user.errors.full_messages.to_sentence

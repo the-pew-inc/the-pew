@@ -40,6 +40,9 @@ application.register("invite-toggle", InviteToggleController)
 import MaxcharController from "./maxchar_controller"
 application.register("maxchar", MaxcharController)
 
+import ModalController from "./modal_controller"
+application.register("modal", ModalController)
+
 import ModeController from "./mode_controller"
 application.register("mode", ModeController)
 

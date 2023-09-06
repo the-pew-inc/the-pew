@@ -58,7 +58,7 @@ gem 'view_component'
 
 # User authentication
 # Use Argon2 to hash passwords [https://github.com/technion/ruby-argon2]
-gem 'argon2', '~> 2.2.0'
+gem 'argon2', '~> 2.3.0'
 
 # Export to Excel
 # [https://github.com/caxlsx/caxlsx_rails]

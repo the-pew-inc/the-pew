@@ -3,5 +3,8 @@
   <template>
     <%# You can customize this part as per your UI requirements %>
     <%= render partial: "/polls/poll_stats", formats: :html, locals: { poll: @poll, table_data: @table_data } %>
+    <% if @poll.add_option %>
+      <%= render partial: "/polls/add_user_option", formats: :html, locals: { poll: @poll } %>
+    <% end %>
   </template>
 </turbo-stream>

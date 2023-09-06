@@ -14,7 +14,7 @@ class PollParticipationsController < ApplicationController
         PollParticipation.create(user: current_user, poll: @poll)
 
         # Render for the current user
-        format.turbo_stream { render :success, locals: { add_option: @poll.add_option } }
+        format.turbo_stream { render :success }
       else
         format.turbo_stream { render :errors }
       end
