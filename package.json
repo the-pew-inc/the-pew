@@ -7,7 +7,7 @@
     "@hotwired/turbo-rails": "7.3.0",
     "@rails/actiontext": "7.0.7",
     "@rails/request.js": "0.0.8",
-    "@tailwindcss/typography": "0.5.9",
+    "@tailwindcss/typography": "0.5.10",
     "autoprefixer": "10.4.15",
     "chart.js": "4.4.0",
     "chartjs-plugin-datalabels": "2.2.0",
