@@ -1,5 +1,9 @@
 import { Controller } from "@hotwired/stimulus";
 
+// Description: turbo-modal controller is used to manage the modal created using turbo or turbo-frame
+// It is not used to manage modal generated using Flowbite or Flowbite type of UI such as the
+// one used by the poll user add option.
+
 // Connects to data-controller="turbo-modal"
 export default class extends Controller {
   static targets = ["modal"];
