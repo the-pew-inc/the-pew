@@ -61,7 +61,15 @@ class EventsController < ApplicationController
   end
 
   # GET /events/:id
-  def show; end
+  def show
+    # If there is only one default room, we redirect to that room.
+    # If there is more than one room or if the room has a different name than __default__
+    # we display the event show page
+    if @event.rooms.count == 1 && @event.rooms.first.name.downcase == "__default__"
+      redirect_to room_questions_path(@event.rooms.first)
+      return
+    end
+  end
 
   def edit
     @invited_users = fetch_invited_users(@event)
