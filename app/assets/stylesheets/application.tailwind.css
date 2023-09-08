@@ -18,7 +18,10 @@
 }
 
 /* Applying style to Trix using Tailwind Typograhy plugin */
-trix-editor { @apply prose max-w-none }
+trix-editor { 
+  @apply prose max-w-none;
+  overflow-y: auto !important;
+}
 
 /* Removing the attachment button from Trix */
 .trix-button-group--file-tools {
