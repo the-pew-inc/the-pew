@@ -3,7 +3,7 @@ class EventsController < ApplicationController
   
   before_action :authenticate_user!, only: %i[index edit destroy update new]
   before_action :redirect_if_unauthenticated, only: %i[index edit destroy update new]
-  before_action :set_event, except: %i[index new create event validate_pin]
+  before_action :set_event, except: %i[index new create event validate_pin user_stats]
   before_action :authorize_event, only: [:show, :edit, :update, :stats, :export, :destroy]
 
   def index
@@ -147,6 +147,34 @@ class EventsController < ApplicationController
       }
     end
   end
+
+  # GET /events/user_stats
+  def user_stats
+    # Stats for the events created by the user
+    @created_events_count = Event.where(user_id: current_user.id).count
+  
+    # Questions asked by the user in any event
+    @questions_asked_count = Question.where(user_id: current_user.id).count
+  
+    # Votes casted by the user for questions in any event
+    @votes_on_questions_count = Vote.joins("INNER JOIN questions ON votes.votable_id = questions.id")
+                                    .where("votes.votable_type = 'Question' AND questions.user_id = ?", current_user.id).count
+  
+    # Votes casted by the user for any votable type
+    @total_votes_casted_by_user = Vote.where(user_id: current_user.id).count
+  
+    # Event creation key dates
+    @first_event_date = current_user.events.order(:created_at).first&.created_at
+    @last_event_date = current_user.events.order(:created_at).last&.created_at
+  
+    # Key dates related to the user's participation in events (via questions & votes)
+    # @first_question_date = Question.where(user_id: current_user.id).order(:created_at).first&.created_at
+    # @last_question_date = Question.where(user_id: current_user.id).order(:created_at).last&.created_at
+  
+    # @first_vote_date = Vote.where(votable_type: 'Question', user_id: current_user.id).order(:created_at).first&.created_at
+    # @last_vote_date = Vote.where(votable_type: 'Question', user_id: current_user.id).order(:created_at).last&.created_at
+  end
+  
 
   # POST /
   def validate_pin

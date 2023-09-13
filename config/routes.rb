@@ -81,6 +81,7 @@ Rails.application.routes.draw do
   resources :imports, only: %i[new create index show]
 
   # Event routes
+  get 'events/user-stats', to: 'events#user_stats'
   resources :events do
     resources :rooms, shallow: true
   end
