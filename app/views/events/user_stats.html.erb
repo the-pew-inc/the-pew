@@ -1,13 +1,13 @@
-<%# app/views/polls/user_stats.html.erb %>
+<%# app/views/events/user_stats.html.erb %>
 <section class="mb-4">
   <h2 class="mb-4 text-xl font-bold tracking-tight leading-none text-gray-900 lg:mb-6 md:text-3xl xl:text-4xl dark:text-white">
-    Your polls: 
+    Your events: 
   </h2>
   <div class="block text-gray-700 dark:text-gray-400">
-    First poll created on: <%= @first_poll_date&.strftime("%B %d, %Y") %>
+    First event created on: <%= @first_event_date&.strftime("%B %d, %Y") %>
   </div>
   <div class="block text-gray-700 dark:text-gray-400 mb-2">
-    Last poll created on: <%= @last_poll_date&.strftime("%B %d, %Y") %>
+    Last event created on: <%= @last_event_date&.strftime("%B %d, %Y") %>
   </div>
   <div class="flex space-x-2 items-center justify-start">
     <div class="bg-gray-800 p-4 rounded w-52">
