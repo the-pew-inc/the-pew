@@ -165,6 +165,7 @@ class EventsController < ApplicationController
                                               
     # Stats for the events created by the user
     @created_events_count = user_event_ids.count
+
   
     # Questions asked by the user in any event
     @questions_asked_count = Question.where(user_id: current_user.id).count
