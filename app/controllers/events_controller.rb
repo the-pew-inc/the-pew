@@ -150,8 +150,21 @@ class EventsController < ApplicationController
 
   # GET /events/user_stats
   def user_stats
+    # Fetch IDs of events created by the user
+    user_event_ids = Event.where(user_id: current_user.id).pluck(:id)
+
+    # Fetch room IDs of rooms associated with the user-created events
+    room_ids_for_user_events = Room.where(event_id: user_event_ids).pluck(:id)
+
+    # Number of questions (not rejected) asked on events created by the user
+    questions_on_user_events = Question.where(room_id: room_ids_for_user_events).where.not(status: :rejected)
+    @questions_on_user_events_count = questions_on_user_events.count
+
+    # Number of votes collected by these questions
+    @votes_on_user_event_questions_count = Vote.where(votable: questions_on_user_events).count
+                                              
     # Stats for the events created by the user
-    @created_events_count = Event.where(user_id: current_user.id).count
+    @created_events_count = user_event_ids.count
   
     # Questions asked by the user in any event
     @questions_asked_count = Question.where(user_id: current_user.id).count
@@ -168,8 +181,8 @@ class EventsController < ApplicationController
     @last_event_date = current_user.events.order(:created_at).last&.created_at
   
     # Key dates related to the user's participation in events (via questions & votes)
-    # @first_question_date = Question.where(user_id: current_user.id).order(:created_at).first&.created_at
-    # @last_question_date = Question.where(user_id: current_user.id).order(:created_at).last&.created_at
+    @first_question_date = Question.where(user_id: current_user.id).order(:created_at).first&.created_at
+    @last_question_date = Question.where(user_id: current_user.id).order(:created_at).last&.created_at
   
     # @first_vote_date = Vote.where(votable_type: 'Question', user_id: current_user.id).order(:created_at).first&.created_at
     # @last_vote_date = Vote.where(votable_type: 'Question', user_id: current_user.id).order(:created_at).last&.created_at

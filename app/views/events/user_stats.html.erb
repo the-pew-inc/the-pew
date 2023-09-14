@@ -15,17 +15,17 @@
         <h3 class="text-gray-400 text-xl font-light">Created</h3>
       </div>
       <div class="text-white font-extrabold text-6xl py-3">
-        <%= @created_polls_count %>
+        <%= @created_events_count %>
       </div>
       <div class="flex flex-row justify-start items-center space-x-2">
       </div>
     </div>
     <div class="bg-gray-700 p-4 rounded w-52">
       <div class="flex flex-row justify-start items-center space-x-2">
-        <h3 class="text-gray-400 text-xl font-light">Total Participants</h3>
+        <h3 class="text-gray-400 text-xl font-light">Total Questions</h3>
       </div>
       <div class="text-white font-extrabold text-6xl py-3">
-        <%= @participation_count %>
+        <%= @questions_on_user_events_count %>
       </div>
       <div class="flex flex-row justify-start items-center space-x-2">
       </div>
@@ -35,7 +35,7 @@
         <h3 class="text-gray-400 text-xl font-light">Total Votes</h3>
       </div>
       <div class="text-white font-extrabold text-6xl py-3">
-        <%= @votes_count %>
+        <%= @votes_on_user_event_questions_count %>
       </div>
       <div class="flex flex-row justify-start items-center space-x-2">
       </div>
@@ -47,18 +47,18 @@
     Your participation: 
   </h2>
   <div class="block text-gray-700 dark:text-gray-400">
-    First vote for one of your polls: <%= @first_vote_date&.strftime("%B %d, %Y") %>
+    First question asked on: <%= @first_question_date&.strftime("%B %d, %Y") %>
   </div>
   <div class="block text-gray-700 dark:text-gray-400 mb-2">
-    Last vote for one of your polls: <%= @last_vote_date&.strftime("%B %d, %Y") %>
+    Last question asked on: <%= @last_question_date&.strftime("%B %d, %Y") %>
   </div>
   <div class="flex space-x-2 items-center justify-start">
     <div class="bg-gray-800 p-4 rounded w-52">
       <div class="flex flex-row justify-start items-center space-x-2">
-        <h3 class="text-gray-400 text-xl font-light">Participated</h3>
+        <h3 class="text-gray-400 text-xl font-light">Total Questions</h3>
       </div>
       <div class="text-white font-extrabold text-6xl py-3">
-        <%= @participated_polls.count %>
+        <%= @questions_asked_count %>
       </div>
       <div class="flex flex-row justify-start items-center space-x-2">
       </div>
@@ -68,48 +68,10 @@
         <h3 class="text-gray-400 text-xl font-light">Total Votes</h3>
       </div>
       <div class="text-white font-extrabold text-6xl py-3">
-        <%= @casted_votes_count %>
+        <%= @votes_on_questions_count %>
       </div>
       <div class="flex flex-row justify-start items-center space-x-2">
       </div>
     </div>
-  </div>
-</section>
-<section>
-  <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-        <tr>
-          <th scope="col" class="px-6 py-3">
-            Poll
-          </th>
-          <th scope="col" class="px-6 py-3">
-            Status
-          </th>
-          <th scope="col" class="px-6 py-3">
-            Voted on
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @participated_polls.each do |poll_participation| %>
-          <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-              <%= link_to poll_path(poll_participation.poll) do %>
-                <%= poll_participation.poll.title %>
-              <% end %>
-            </th>
-            <td class="px-6 py-4">
-              <span class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-blue-900 dark:text-blue-300">
-                <%= poll_participation.poll.status %>
-              </span>
-            </td>
-            <td class="px-6 py-4">
-              <%= poll_participation.created_at.strftime("%B %d, %Y") %>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
   </div>
 </section>
