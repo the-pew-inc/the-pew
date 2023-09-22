@@ -52,6 +52,76 @@ namespace :onboard do
     end_task
   end
 
+  # Usage:
+  #   Used to create a user, the user profile and make this user a member of an organization
+  #   - rake "onboard:create_organization_user[org_id, test@test.com, nickname]"
+  desc 'Create a user and associate this user with an existing organization'
+  task :create_organization_user, [:organization_id, :email, :nickname] => :environment do |_t, args|
+    begin
+      puts("[#{Time.now.utc}] Running create_organization_user :: INI")
+
+      organization = Organization.find(args[:organization_id])
+      unless organization
+        puts("[#{Time.now.utc}] Organization with ID #{args[:organization_id]} not found.")
+        end_task(-1)
+      end
+
+      user = User.find_or_initialize_by(email: args[:email])
+      user.profile ||= Profile.new # Create a profile if it doesn't exist
+      user.profile.nickname = args[:nickname]
+
+      if user.save
+        member = Member.find_or_initialize_by(user: user, organization: organization)
+        member.owner = false # You can set this to true if this user should be the owner
+        member.save
+        puts("[#{Time.now.utc}] User #{user.email} has been created and added to organization #{organization.name} as a member.")
+        puts("[#{Time.now.utc}] User #{user.email} ID is: #{user.id}")
+        end_task(0)
+      else
+        puts("[#{Time.now.utc}] Failed to create user. Errors: #{user.errors.full_messages.join(', ')}")
+        end_task(-1)
+      end
+    rescue => e
+      puts("[#{Time.now.utc}] An error occurred: #{e.message}")
+      end_task(-1)
+    end
+  end
+
+  # Usage:
+  #   Used to assign the admin role for a user who is already a member of an organization
+  #   - rake "onboard:make_org_admin[org_id, test@test.com]"
+  desc 'Make a user admin of an organization'
+  task :make_org_admin, [:organization_id, :email] => :environment do |_t, args|
+    begin
+      puts("[#{Time.now.utc}] Running make_org_admin :: INI")
+
+      organization = Organization.find(args[:organization_id])
+      user = User.find_by(email: args[:email])
+
+      unless organization
+        puts("[#{Time.now.utc}] Organization with ID #{args[:organization_id]} not found.")
+        end_task(-1)
+      end
+
+      unless user
+        puts("[#{Time.now.utc}] User with email #{args[:email]} not found.")
+        end_task(-1)
+      end
+
+      unless user.has_role?(:admin, organization)
+        user.add_role(:admin, organization)
+        puts("[#{Time.now.utc}] User #{user.email} is now an admin of organization #{organization.name}.")
+      else
+        puts("[#{Time.now.utc}] User #{user.email} is already an admin of organization #{organization.name}.")
+      end
+
+      end_task(0)
+    rescue => e
+      puts("An error occurred: #{e.message}")
+      end_task(-1)
+    end
+  end
+
   def end_task(status = 0)
     puts("[#{Time.now.utc}] Running create_first_user_and_org :: END")
     exit(status)
