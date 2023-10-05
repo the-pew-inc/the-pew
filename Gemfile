@@ -128,10 +128,10 @@ gem 'aws-sdk-s3', require: false
 
 # Octokig [https://github.com/octokit/octokit.rb]
 # Mostly used to import openAI prompts from GitHub repo using the import_prompts.rake task
-gem 'octokit', '~> 7.1.0'
+gem 'octokit', '~> 7.2.0'
 
 # Pagination [https://github.com/ddnexus/pagy]
-gem 'pagy', '~> 6.0.0'
+gem 'pagy', '~> 6.1.0'
 
 # Countries [https://github.com/countries/countries]
 gem 'countries', '~> 5.6.0', require: 'countries/global'
@@ -141,7 +141,7 @@ gem 'validate_url'
 
 # Tracking
 # Ahoy [https://github.com/ankane/ahoy]
-gem 'ahoy_matey'
+gem 'ahoy_matey', '~> 4.2.1'
 
 # Group date [https://github.com/ankane/groupdate]
 gem 'groupdate'
