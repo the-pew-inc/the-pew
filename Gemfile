@@ -134,7 +134,7 @@ gem 'octokit', '~> 7.2.0'
 gem 'pagy', '~> 6.1.0'
 
 # Countries [https://github.com/countries/countries]
-gem 'countries', '~> 5.6.0', require: 'countries/global'
+gem 'countries', '~> 5.7.0', require: 'countries/global'
 
 # Validate URL format [https://github.com/perfectline/validates_url]
 gem 'validate_url'
@@ -195,7 +195,7 @@ group :development do
   gem 'annotate', '~>3.2.0', require: false
 
   # Add Bullet to monitor and help fix N+1 DB queries
-  gem 'bullet'
+  gem 'bullet', '~> 7.1.1'
 
   # # # # # # # # # # # # # # # # # # # # # #
   # The following gems are added to         #

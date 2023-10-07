@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/faker-ruby/faker.git
-  revision: ea21d562d08111186dc62e5bae163101489c3dce
+  revision: 67e6511a15faddacfe3b2a210c112f1f1664f42b
   specs:
     faker (3.2.1)
       i18n (>= 1.8.11, < 2)
@@ -130,7 +130,7 @@ GEM
       msgpack (~> 1.2)
     brakeman (6.0.1)
     builder (3.2.4)
-    bullet (7.1.0)
+    bullet (7.1.1)
       activesupport (>= 3.0.0)
       uniform_notifier (~> 1.11)
     capistrano (3.17.3)
@@ -175,7 +175,7 @@ GEM
     chronic (0.10.2)
     concurrent-ruby (1.2.2)
     connection_pool (2.4.1)
-    countries (5.6.0)
+    countries (5.7.0)
       unaccent (~> 0.3)
     crass (1.0.6)
     cssbundling-rails (1.3.3)
@@ -515,7 +515,7 @@ DEPENDENCIES
   aws-sdk-s3
   bootsnap
   brakeman (~> 6.0.1)
-  bullet
+  bullet (~> 7.1.1)
   capistrano (~> 3.17)
   capistrano-bundler
   capistrano-rails (~> 1.6.3)
@@ -526,7 +526,7 @@ DEPENDENCIES
   caxlsx
   caxlsx_rails
   chartkick
-  countries (~> 5.6.0)
+  countries (~> 5.7.0)
   cssbundling-rails
   debug
   down (~> 5.0)
