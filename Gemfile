@@ -5,8 +5,7 @@ ruby '3.2.2'
 
 # IMPORTANT: This must be the first gem listed
 # Add support to appmap in development and test
-gem 'appmap', '0.102.1', :groups => [:development, :test]
-
+gem 'appmap', '0.102.1', groups: %i[development test]
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem 'rails', '~> 7.1.0'
@@ -24,10 +23,10 @@ gem 'puma', '~> 6.4.0'
 gem 'jsbundling-rails'
 
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
-gem 'turbo-rails'
+gem 'turbo-rails', '~> 1.5.0'
 
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
-gem 'stimulus-rails'
+gem 'stimulus-rails', '~> 1.3.0'
 
 # Bundle and process CSS [https://github.com/rails/cssbundling-rails]
 gem 'cssbundling-rails'
@@ -73,9 +72,9 @@ gem 'xsv'
 # Adding OAuth2 support [https://github.com/omniauth/omniauth]
 gem 'omniauth', '~> 2.1.0'
 # Adding Google Sign-in support
-gem 'omniauth-google-oauth2' , '~> 1.1.1'
+gem 'omniauth-google-oauth2', '~> 1.1.1'
 # Required when not using Devise
-gem 'omniauth-rails_csrf_protection' 
+gem 'omniauth-rails_csrf_protection'
 
 # Adding invisible_captcha [https://github.com/markets/invisible_captcha]
 gem 'invisible_captcha', '~> 2.1.0'
@@ -122,9 +121,9 @@ gem 'paper_trail', '~> 15.0.0'
 gem 'active_storage_validations', '~> 1.0.0'
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
+gem 'aws-sdk-s3', require: false
 gem 'image_processing', '~> 1.2'
 gem 'ruby-vips', '>= 2.1.0'
-gem 'aws-sdk-s3', require: false
 
 # Octokig [https://github.com/octokit/octokit.rb]
 # Mostly used to import openAI prompts from GitHub repo using the import_prompts.rake task
@@ -169,8 +168,7 @@ group :development, :test do
   gem 'debug', platforms: %i[mri mingw x64_mingw]
 
   # Faker, gem for generating fake data for testing [https://github.com/faker-ruby/faker]
-  gem 'faker', :git => 'https://github.com/faker-ruby/faker.git'
-  
+  gem 'faker', git: 'https://github.com/faker-ruby/faker.git'
 end
 
 group :development do
@@ -203,11 +201,11 @@ group :development do
   # Ocean.
   # [https://gorails.com/deploy/ubuntu/22.04]
   gem 'capistrano', '~> 3.17',                  require: false
+  gem 'capistrano3-puma', '~> 6.0.0.beta.1',    require: false
+  gem 'capistrano-bundler',                     require: false
   gem 'capistrano-rails', '~> 1.6.3',           require: false
   gem 'capistrano-rbenv', '~> 2.2.0',           require: false
-  gem 'capistrano-bundler',                     require: false
   gem 'capistrano-sidekiq', '~> 3.0.0.alpha.2', require: false
-  gem 'capistrano3-puma', '~> 6.0.0.beta.1',    require: false
 end
 
 group :test do
