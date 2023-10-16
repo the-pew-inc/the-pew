@@ -155,7 +155,7 @@ gem 'ruby-openai', '~> 5.1.0'
 gem 'pg_search', '~> 2.3.6'
 
 # Stripe (payment, subscription processing) [https://github.com/stripe/stripe-ruby]
-gem 'stripe', '~> 9.3.0'
+gem 'stripe', '~> 10.0.0'
 
 # To enable retry in Faraday v2.0+
 gem 'faraday-retry', '~> 2.2.0'
