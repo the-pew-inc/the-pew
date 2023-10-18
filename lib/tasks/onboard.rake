@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Description:
 # A set of functions used to manage account creation and account owner creation / invitation
 # IMPORTANT NOTICE: the organization and organization owner MUST NOT ALREADY EXIST in the
@@ -64,19 +66,44 @@ namespace :onboard do
     end
 
     user = User.find_or_initialize_by(email: args[:email])
-    user.profile ||= Profile.new # Create a profile if it doesn't exist
-    user.profile.nickname = args[:nickname]
+    # Check if the user is a new record (doesn't exist in the database)
+    if user.new_record?
+      # Create a new profile for the user
+      user.profile ||= Profile.new
+      user.profile.nickname = args[:nickname]
 
-    if user.save
+      # Set user attributes
+      user.email = args[:email]
+      user.invited_at = Time.current
+      user.invited = true
+
+      # Try to save the user
+      if user.save!
+        # User was successfully created, proceed to add to Member table
+        member = Member.find_or_initialize_by(user:, organization:)
+        member.owner = false # You can set this to true if this user should be the owner
+        member.save!
+
+        # Send invitation to the user
+        user.send_invite!
+
+        puts("[#{Time.now.utc}] User #{user.email} has been created and added to organization #{organization.name} as a member.")
+        puts("[#{Time.now.utc}] User #{user.email} ID is: #{user.id}")
+        end_task(0)
+      else
+        # User creation failed, handle errors
+        puts("[#{Time.now.utc}] Failed to create user. Errors: #{user.errors.full_messages.join(', ')}")
+        end_task(-1)
+      end
+    else
+      # User already exists, just add to Member table
       member = Member.find_or_initialize_by(user:, organization:)
       member.owner = false # You can set this to true if this user should be the owner
       member.save!
-      puts("[#{Time.now.utc}] User #{user.email} has been created and added to organization #{organization.name} as a member.")
+
+      puts("[#{Time.now.utc}] User #{user.email} already exists and has been added to organization #{organization.name} as a member.")
       puts("[#{Time.now.utc}] User #{user.email} ID is: #{user.id}")
       end_task(0)
-    else
-      puts("[#{Time.now.utc}] Failed to create user. Errors: #{user.errors.full_messages.join(', ')}")
-      end_task(-1)
     end
   rescue StandardError => e
     puts("[#{Time.now.utc}] An error occurred: #{e.message}")
