@@ -115,7 +115,7 @@ gem 'nokogiri', '~> 1.15.0'
 gem 'down', '~> 5.0'
 
 # Tracking changes using PaperTrail [https://github.com/paper-trail-gem/paper_trail]
-gem 'paper_trail', '~> 15.0.0'
+gem 'paper_trail', '~> 15.1.0'
 
 # Active storage validations [https://github.com/igorkasyanchuk/active_storage_validations]
 gem 'active_storage_validations', '~> 1.0.0'
