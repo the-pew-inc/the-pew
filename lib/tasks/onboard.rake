@@ -22,9 +22,9 @@ namespace :onboard do
 
     # Creating the organization
     @organization = Organization.new
-    @organization.name = args[:org_name]
+    @organization.name    = args[:org_name]
     @organization.website = args[:org_website]
-    @organization.domain = args[:domain]
+    @organization.domain  = args[:domain]
 
     if @organization.save!
       # Creating the owner

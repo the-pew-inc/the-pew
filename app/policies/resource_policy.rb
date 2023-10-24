@@ -6,11 +6,11 @@ class ResourcePolicy < ApplicationPolicy
   # As a user I can access the resources I created and I have been made admin on.
   def show?
     user_is_resource_creator_or_admin? ||
-    resource_is_universal? ||
-    (resource_is_restricted? && (user_belongs_to_organization? || user_invited_to_resource?)) ||
-    (resource_is_invite_only? && user_invited_to_resource?)
+      resource_is_universal? ||
+      (resource_is_restricted? && (user_belongs_to_organization? || user_invited_to_resource?)) ||
+      (resource_is_invite_only? && user_invited_to_resource?)
   end
-  
+
   # As a user I can delete the resources I created.
   def destroy?
     user_is_resource_creator?
@@ -33,7 +33,7 @@ class ResourcePolicy < ApplicationPolicy
   end
 
   private
-  
+
   def user_is_resource_creator_or_admin?
     user_is_resource_creator? || user_has_role?(:admin, record)
   end
@@ -45,7 +45,7 @@ class ResourcePolicy < ApplicationPolicy
   def user_has_role?(role, resource)
     user&.has_role?(role, resource)
   end
-  
+
   def user_belongs_to_organization?
     user&.organization_id == record.organization_id
   end
@@ -64,7 +64,7 @@ class ResourcePolicy < ApplicationPolicy
 
   def user_invited_to_resource?
     ResourceInvite.exists?(
-      invitable: record, 
+      invitable: record,
       email: user.email
     )
   end
@@ -82,7 +82,7 @@ class ResourcePolicy < ApplicationPolicy
       resources_created_by_user = scope.where(user_id: user.id)
 
       # Resources for which the user has been granted the admin role
-      roles = user.roles.where(name: "admin", resource_type: scope.name)
+      roles = user.roles.where(name: 'admin', resource_type: scope.name)
       resource_ids_user_is_admin_on = roles.map(&:resource_id)
       resources_user_is_admin_on = scope.where(id: resource_ids_user_is_admin_on)
 
