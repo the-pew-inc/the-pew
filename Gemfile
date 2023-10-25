@@ -118,7 +118,7 @@ gem 'down', '~> 5.0'
 gem 'paper_trail', '~> 15.1.0'
 
 # Active storage validations [https://github.com/igorkasyanchuk/active_storage_validations]
-gem 'active_storage_validations', '~> 1.0.0'
+gem 'active_storage_validations', '~> 1.1.0'
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 gem 'aws-sdk-s3', require: false
