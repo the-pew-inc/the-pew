@@ -62,7 +62,7 @@ gem 'argon2', '~> 2.3.0'
 # Export to Excel
 # [https://github.com/caxlsx/caxlsx_rails]
 # [https://dev.to/yarotheslav/export-from-database-table-to-excel-workbook-level-1-55jd]
-gem 'caxlsx'
+gem 'caxlsx', '~> 4.0.0'
 gem 'caxlsx_rails'
 
 # Parse Excel xlsx files
