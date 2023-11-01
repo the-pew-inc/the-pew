@@ -47,13 +47,13 @@ gem 'hiredis', '~> 0.6.3'
 # gem 'kredis'
 
 # Sidekiq [https://github.com/mperham/sidekiq]
-gem 'sidekiq', '~>7.1.0'
+gem 'sidekiq', '~>7.2.0'
 
 # Add Noticed to support notifications [https://github.com/excid3/noticed]
 gem 'noticed', '~> 1.5'
 
 # Adding support to View Component (better than partials ;-) ) [https://github.com/github/view_component]
-gem 'view_component'
+gem 'view_component', '~> 3.7.0'
 
 # User authentication
 # Use Argon2 to hash passwords [https://github.com/technion/ruby-argon2]
@@ -127,7 +127,7 @@ gem 'ruby-vips', '>= 2.1.0'
 
 # Octokig [https://github.com/octokit/octokit.rb]
 # Mostly used to import openAI prompts from GitHub repo using the import_prompts.rake task
-gem 'octokit', '~> 7.2.0'
+gem 'octokit', '~> 8.0.0'
 
 # Pagination [https://github.com/ddnexus/pagy]
 gem 'pagy', '~> 6.1.0'
@@ -149,7 +149,7 @@ gem 'groupdate'
 gem 'chartkick'
 
 # openAI [https://github.com/alexrudall/ruby-openai]
-gem 'ruby-openai', '~> 5.1.0'
+gem 'ruby-openai', '~> 5.2.0'
 
 # Adding pgsearch
 gem 'pg_search', '~> 2.3.6'
