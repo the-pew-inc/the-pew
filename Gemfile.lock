@@ -1,8 +1,8 @@
 GIT
   remote: https://github.com/faker-ruby/faker.git
-  revision: e8870fcff750a661157bebd790b16a51b4ec1cdc
+  revision: cf7110313a308a3e2cd346f62ce8c1997558e121
   specs:
-    faker (3.2.1)
+    faker (3.2.2)
       i18n (>= 1.8.11, < 2)
 
 GEM
@@ -108,8 +108,8 @@ GEM
       ffi-compiler (~> 1.0)
     ast (2.4.2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.843.0)
-    aws-sdk-core (3.185.2)
+    aws-partitions (1.845.0)
+    aws-sdk-core (3.186.0)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.651.0)
       aws-sigv4 (~> 1.5)
@@ -269,7 +269,7 @@ GEM
     multi_xml (0.6.0)
     multipart-post (2.3.0)
     mutex_m (0.1.2)
-    net-imap (0.4.3)
+    net-imap (0.4.4)
       date
       net-protocol
     net-pop (0.1.2)
@@ -458,7 +458,7 @@ GEM
     stimulus-rails (1.3.0)
       railties (>= 6.0.0)
     stringio (3.0.8)
-    stripe (10.0.0)
+    stripe (10.1.0)
     thor (1.3.0)
     timeout (0.4.0)
     turbo-rails (1.5.0)
@@ -568,7 +568,7 @@ DEPENDENCIES
   simplecov
   sprockets-rails
   stimulus-rails (~> 1.3.0)
-  stripe (~> 10.0.0)
+  stripe (~> 10.1.0)
   turbo-rails (~> 1.5.0)
   tzinfo-data
   validate_url
