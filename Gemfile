@@ -5,7 +5,7 @@ ruby '3.2.2'
 
 # IMPORTANT: This must be the first gem listed
 # Add support to appmap in development and test
-gem 'appmap', '0.102.1', groups: %i[development test]
+gem 'appmap', '0.102.2', groups: %i[development test]
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem 'rails', '~> 7.1.1'
@@ -149,7 +149,7 @@ gem 'groupdate'
 gem 'chartkick'
 
 # openAI [https://github.com/alexrudall/ruby-openai]
-gem 'ruby-openai', '~> 5.2.0'
+gem 'ruby-openai', '~> 6.0.0'
 
 # Adding pgsearch
 gem 'pg_search', '~> 2.3.6'
