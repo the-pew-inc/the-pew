@@ -50,6 +50,9 @@ Rails.application.routes.draw do
   # Food for Thought routes
   resources :food_for_thought, only: %i[show]
 
+  # Connectors
+  resources :connectors
+
   # Session routes
   post   'login',  to: 'sessions#create'
   get    'login',  to: 'sessions#new'
