@@ -5,7 +5,7 @@ ruby '3.2.2'
 
 # IMPORTANT: This must be the first gem listed
 # Add support to appmap in development and test
-gem 'appmap', '0.102.1', groups: %i[development test]
+gem 'appmap', '0.102.2', groups: %i[development test]
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem 'rails', '~> 7.1.1'
@@ -47,13 +47,13 @@ gem 'hiredis', '~> 0.6.3'
 # gem 'kredis'
 
 # Sidekiq [https://github.com/mperham/sidekiq]
-gem 'sidekiq', '~>7.1.0'
+gem 'sidekiq', '~>7.2.0'
 
 # Add Noticed to support notifications [https://github.com/excid3/noticed]
 gem 'noticed', '~> 1.5'
 
 # Adding support to View Component (better than partials ;-) ) [https://github.com/github/view_component]
-gem 'view_component'
+gem 'view_component', '~> 3.7.0'
 
 # User authentication
 # Use Argon2 to hash passwords [https://github.com/technion/ruby-argon2]
@@ -62,7 +62,7 @@ gem 'argon2', '~> 2.3.0'
 # Export to Excel
 # [https://github.com/caxlsx/caxlsx_rails]
 # [https://dev.to/yarotheslav/export-from-database-table-to-excel-workbook-level-1-55jd]
-gem 'caxlsx'
+gem 'caxlsx', '~> 4.0.0'
 gem 'caxlsx_rails'
 
 # Parse Excel xlsx files
@@ -103,7 +103,7 @@ gem 'meta-tags', '~> 2.19.0'
 gem 'sendgrid-actionmailer', '~> 3.2.0'
 
 # Monitoring - Honeybadger []
-gem 'honeybadger', '~> 5.0'
+gem 'honeybadger', '~> 5.3.0'
 
 # Use Sass to process CSS
 # gem "sassc-rails"
@@ -118,7 +118,7 @@ gem 'down', '~> 5.0'
 gem 'paper_trail', '~> 15.1.0'
 
 # Active storage validations [https://github.com/igorkasyanchuk/active_storage_validations]
-gem 'active_storage_validations', '~> 1.0.0'
+gem 'active_storage_validations', '~> 1.1.0'
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 gem 'aws-sdk-s3', require: false
@@ -127,10 +127,10 @@ gem 'ruby-vips', '>= 2.1.0'
 
 # Octokig [https://github.com/octokit/octokit.rb]
 # Mostly used to import openAI prompts from GitHub repo using the import_prompts.rake task
-gem 'octokit', '~> 7.2.0'
+gem 'octokit', '~> 8.0.0'
 
 # Pagination [https://github.com/ddnexus/pagy]
-gem 'pagy', '~> 6.1.0'
+gem 'pagy', '~> 6.2.0'
 
 # Countries [https://github.com/countries/countries]
 gem 'countries', '~> 5.7.0', require: 'countries/global'
@@ -149,13 +149,13 @@ gem 'groupdate'
 gem 'chartkick'
 
 # openAI [https://github.com/alexrudall/ruby-openai]
-gem 'ruby-openai', '~> 5.1.0'
+gem 'ruby-openai', '~> 6.2.0'
 
 # Adding pgsearch
 gem 'pg_search', '~> 2.3.6'
 
 # Stripe (payment, subscription processing) [https://github.com/stripe/stripe-ruby]
-gem 'stripe', '~> 10.0.0'
+gem 'stripe', '~> 10.1.0'
 
 # To enable retry in Faraday v2.0+
 gem 'faraday-retry', '~> 2.2.0'
