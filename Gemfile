@@ -53,7 +53,7 @@ gem 'sidekiq', '~>7.2.0'
 gem 'noticed', '~> 1.5'
 
 # Adding support to View Component (better than partials ;-) ) [https://github.com/github/view_component]
-gem 'view_component', '~> 3.7.0'
+gem 'view_component', '~> 3.8.0'
 
 # User authentication
 # Use Argon2 to hash passwords [https://github.com/technion/ruby-argon2]
@@ -118,7 +118,7 @@ gem 'down', '~> 5.0'
 gem 'paper_trail', '~> 15.1.0'
 
 # Active storage validations [https://github.com/igorkasyanchuk/active_storage_validations]
-gem 'active_storage_validations', '~> 1.1.0'
+gem 'active_storage_validations', '~> 1.1.3'
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 gem 'aws-sdk-s3', require: false
@@ -149,7 +149,7 @@ gem 'groupdate'
 gem 'chartkick'
 
 # openAI [https://github.com/alexrudall/ruby-openai]
-gem 'ruby-openai', '~> 6.2.0'
+gem 'ruby-openai', '~> 6.3.0'
 
 # Adding pgsearch
 gem 'pg_search', '~> 2.3.6'

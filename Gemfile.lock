@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/faker-ruby/faker.git
-  revision: 31d99d14c1e7d976e89f83c9496c0d97baa6aa3e
+  revision: 505a667f63f217d10dc19170dc9bef07ff7ab765
   specs:
     faker (3.2.2)
       i18n (>= 1.8.11, < 2)
@@ -57,7 +57,7 @@ GEM
       erubi (~> 1.11)
       rails-dom-testing (~> 2.2)
       rails-html-sanitizer (~> 1.6)
-    active_storage_validations (1.1.2)
+    active_storage_validations (1.1.3)
       activejob (>= 5.2.0)
       activemodel (>= 5.2.0)
       activestorage (>= 5.2.0)
@@ -108,21 +108,21 @@ GEM
       ffi (~> 1.15)
       ffi-compiler (~> 1.0)
     ast (2.4.2)
-    aws-eventstream (1.2.0)
-    aws-partitions (1.853.0)
-    aws-sdk-core (3.187.0)
+    aws-eventstream (1.3.0)
+    aws-partitions (1.859.0)
+    aws-sdk-core (3.188.0)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.651.0)
       aws-sigv4 (~> 1.5)
       jmespath (~> 1, >= 1.6.1)
-    aws-sdk-kms (1.72.0)
-      aws-sdk-core (~> 3, >= 3.184.0)
+    aws-sdk-kms (1.73.0)
+      aws-sdk-core (~> 3, >= 3.188.0)
       aws-sigv4 (~> 1.1)
-    aws-sdk-s3 (1.137.0)
-      aws-sdk-core (~> 3, >= 3.181.0)
+    aws-sdk-s3 (1.140.0)
+      aws-sdk-core (~> 3, >= 3.188.0)
       aws-sdk-kms (~> 1)
       aws-sigv4 (~> 1.6)
-    aws-sigv4 (1.6.1)
+    aws-sigv4 (1.7.0)
       aws-eventstream (~> 1, >= 1.0.2)
     base64 (0.2.0)
     bigdecimal (3.1.4)
@@ -193,8 +193,8 @@ GEM
     drb (2.2.0)
       ruby2_keywords
     erubi (1.12.0)
-    event_stream_parser (0.3.0)
-    faraday (2.7.11)
+    event_stream_parser (1.0.0)
+    faraday (2.7.12)
       base64
       faraday-net_http (>= 2.0, < 3.1)
       ruby2_keywords (>= 0.0.4)
@@ -231,7 +231,7 @@ GEM
     invisible_captcha (2.1.0)
       rails (>= 5.2)
     io-console (0.6.0)
-    irb (1.9.0)
+    irb (1.9.1)
       rdoc
       reline (>= 0.3.8)
     jbuilder (2.11.5)
@@ -269,7 +269,7 @@ GEM
     multi_xml (0.6.0)
     multipart-post (2.3.0)
     mutex_m (0.2.0)
-    net-imap (0.4.5)
+    net-imap (0.4.6)
       date
       net-protocol
     net-pop (0.1.2)
@@ -281,7 +281,7 @@ GEM
     net-smtp (0.4.0)
       net-protocol
     net-ssh (7.2.0)
-    nio4r (2.6.0)
+    nio4r (2.6.1)
     nokogiri (1.15.5-arm64-darwin)
       racc (~> 1.4)
     nokogiri (1.15.5-x86_64-linux)
@@ -404,12 +404,13 @@ GEM
       unicode-display_width (>= 2.4.0, < 3.0)
     rubocop-ast (1.30.0)
       parser (>= 3.2.1.0)
-    rubocop-rails (2.22.1)
+    rubocop-rails (2.22.2)
       activesupport (>= 4.2.0)
       rack (>= 1.1)
       rubocop (>= 1.33.0, < 2.0)
-    ruby-openai (6.2.0)
-      event_stream_parser (>= 0.3.0, < 1.0.0)
+      rubocop-ast (>= 1.30.0, < 2.0)
+    ruby-openai (6.3.0)
+      event_stream_parser (>= 0.3.0, < 2.0.0)
       faraday (>= 1)
       faraday-multipart (>= 1)
     ruby-progressbar (1.13.0)
@@ -457,7 +458,7 @@ GEM
       net-ssh (>= 2.8.0)
     stimulus-rails (1.3.0)
       railties (>= 6.0.0)
-    stringio (3.0.9)
+    stringio (3.1.0)
     stripe (10.1.0)
     thor (1.3.0)
     timeout (0.4.1)
@@ -474,7 +475,7 @@ GEM
       activemodel (>= 3.0.0)
       public_suffix
     version_gem (1.1.3)
-    view_component (3.7.0)
+    view_component (3.8.0)
       activesupport (>= 5.2.0, < 8.0)
       concurrent-ruby (~> 1.0)
       method_source (~> 1.0)
@@ -505,7 +506,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  active_storage_validations (~> 1.1.0)
+  active_storage_validations (~> 1.1.3)
   ahoy_matey (~> 4.2.1)
   annotate (~> 3.2.0)
   appmap (= 0.102.2)
@@ -557,7 +558,7 @@ DEPENDENCIES
   rolify (~> 6.0.0)
   rubocop (~> 1.50)
   rubocop-rails
-  ruby-openai (~> 6.2.0)
+  ruby-openai (~> 6.3.0)
   ruby-vips (>= 2.1.0)
   selenium-webdriver
   sendgrid-actionmailer (~> 3.2.0)
@@ -569,7 +570,7 @@ DEPENDENCIES
   turbo-rails (~> 1.5.0)
   tzinfo-data
   validate_url
-  view_component (~> 3.7.0)
+  view_component (~> 3.8.0)
   web-console
   webdrivers
   whenever (~> 1.0.0)
