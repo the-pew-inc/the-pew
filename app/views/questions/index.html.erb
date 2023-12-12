@@ -95,7 +95,7 @@
   </h4>
   <% if current_user&.id == @room.event.user_id %>
     <div class="bg-white dark:bg-gray-900 rounded-2xl cursor-pointer" 
-         data-action="click->qr-code-generator#download" data-popover-target="popover-download">
+         data-action="click->qr-code-generator#download" data-qr-code-generator-target="download">
       <div class="flex justify-center items-center" data-qr-code-generator-target="container">
         <div data-qr-code-generator-target="canvas"></div>
       </div>
