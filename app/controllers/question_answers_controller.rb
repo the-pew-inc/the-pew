@@ -3,11 +3,13 @@ class QuestionAnswersController < ApplicationController
   before_action :redirect_if_unauthenticated
 
   before_action :set_question
-  before_action :set_question_answer, only: [:edit, :update, :destroy]
+  before_action :set_question_answer, only: %i[edit update destroy]
 
   def new
     @question_answer = @question.build_answer
   end
+
+  def edit; end
 
   def create
     @question_answer = @question.build_answer(question_answer_params.merge(user: current_user))
@@ -15,13 +17,10 @@ class QuestionAnswersController < ApplicationController
       # Broadcasting the updated question
       Broadcasters::Questions::Updated.new(@question).call
 
-      redirect_to room_questions_path(@question.room)
+      redirect_to(room_questions_path(@question.room))
     else
-      render :new, status: :unprocessable_entity
+      render(:new, status: :unprocessable_entity)
     end
-  end
-
-  def edit
   end
 
   def update
@@ -29,9 +28,9 @@ class QuestionAnswersController < ApplicationController
       # Broadcasting the updated question
       Broadcasters::Questions::Updated.new(@question).call
 
-      redirect_to room_questions_path(@question.room)
+      redirect_to(room_questions_path(@question.room))
     else
-      render :edit, status: :unprocessable_entity
+      render(:edit, status: :unprocessable_entity)
     end
   end
 
@@ -40,10 +39,10 @@ class QuestionAnswersController < ApplicationController
       # Broadcasting the updated question
       Broadcasters::Questions::Updated.new(@question).call
 
-      flash[:notice] = "The answer was successfully deleted."
-      redirect_to room_questions_path(@question.room)
+      flash[:notice] = 'The answer was successfully deleted.'
+      redirect_to(room_questions_path(@question.room))
     else
-      render :edit, status: :unprocessable_entity
+      render(:edit, status: :unprocessable_entity)
     end
   end
 

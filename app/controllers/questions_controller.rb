@@ -1,21 +1,21 @@
 class QuestionsController < ApplicationController
-  before_action :authenticate_user!, only: %i[edit destroy update new]
-  
-  before_action :set_question, only: %i[show edit update destroy]
+  before_action :authenticate_user!, only: %i[destroy update new]
+
+  before_action :set_question, only: %i[show update destroy]
   before_action :set_room, only: %i[index new create]
 
   # GET /rooms/:room_id/questions
   def index
     @question = @room.questions.build
-    @questions = Question.questions_for_room(params[:room_id]).includes([:room, :user, :answer])
+    @questions = Question.questions_for_room(params[:room_id]).includes(%i[room user answer])
   end
 
   # GET /questions/1
-  def show 
-    if request.headers["turbo-frame"]
-      render partial: 'question', locals: { question: @question }
+  def show
+    if request.headers['turbo-frame']
+      render(partial: 'question', locals: { question: @question })
     else
-      render 'show'
+      render('show')
     end
   end
 
@@ -40,16 +40,15 @@ class QuestionsController < ApplicationController
         # Broadcasting the new question
         Broadcasters::Questions::Created.new(@question).call
 
-        format.turbo_stream 
+        format.turbo_stream
       else
-        format.html { render :new, status: :unprocessable_entity }
+        format.html { render(:new, status: :unprocessable_entity) }
       end
     end
   end
 
   # PATCH/PUT /questions/1
   def update
-
     respond_to do |format|
       if @question.update(update_question_params)
 
@@ -60,15 +59,17 @@ class QuestionsController < ApplicationController
           # 1. Look for any pre-existing question(s) in that room with the beinganswered status
           questions = Question.where(room_id: @question.room_id, status: :beinganswered).where.not(id: @question.id)
           if questions.count >= 1
-            #2. Reset all the previous question(s) with the being answered status
+            # 2. Reset all the previous question(s) with the being answered status
             for question in questions do
-              question.answered!            
+              question.answered!
             end
           end
         end
 
         if @question.rejected?
-          Message.create(user_id: @question.user_id, title: "Question Rejected", content: "Your question: #{@question.title} has been rejected with status #{@question.rejection_cause}", level: :alert)
+          Message.create(user_id: @question.user_id, title: 'Question Rejected',
+                         content: "Your question: #{@question.title} has been rejected with status #{@question.rejection_cause}", level: :alert
+          )
         end
 
         track
@@ -90,7 +91,7 @@ class QuestionsController < ApplicationController
     # TODO: admin should also be able to delete a question
     if @question.user_id != current_user.id
       flash[:alert] = 'You are not the owner of this question'
-      redirect_to room_questions_path(@question.room_id), status: :unauthorized
+      redirect_to(room_questions_path(@question.room_id), status: :unauthorized)
       return
     end
 
@@ -121,8 +122,8 @@ class QuestionsController < ApplicationController
     params.require(:question).permit(:title, :anonymous, :parent_id).with_defaults(user_id: current_user.id)
   end
 
-  def update_question_params 
-    # TODO control anonymous depending on a user
+  def update_question_params
+    # TODO: control anonymous depending on a user
     params.require(:question).permit(:status, :rejection_cause)
   end
 
@@ -130,16 +131,14 @@ class QuestionsController < ApplicationController
     question = {
       title: @question.title,
       status: @question.status,
-      event_id: @question.room.event_id, 
+      event_id: @question.room.event_id,
       event_nane: @question.room.event.name,
       room_id: @question.room_id,
       room_name: @question.room.name,
       user_id: @question.user_id # Private field. MUST NOT BE DISPLAYED ON NON USER'S REPORTS, DASHBOARDS, ETC.
     }
 
-    if @question.rejected? 
-      question[:rejection_cause] = @question.rejection_cause
-    end
+    question[:rejection_cause] = @question.rejection_cause if @question.rejected?
 
     # Hide the user (id and name)
     if @question.anonymous
@@ -150,6 +149,6 @@ class QuestionsController < ApplicationController
       question[:public_nickname] = @question.user.profile.nickname
     end
 
-    ahoy.track "question", question: question
+    ahoy.track('question', question:)
   end
 end

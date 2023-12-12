@@ -1,14 +1,10 @@
 class ResourceInvitesController < ApplicationController
   before_action :authenticate_user!
   before_action :redirect_if_unauthenticated
-  
-  def index
 
-  end
+  def index; end
 
-  def show
-    
-  end
+  def show; end
 
   def new
     @resource_invite = ResourceInvites.new
@@ -16,19 +12,10 @@ class ResourceInvitesController < ApplicationController
     @resource_invite.organization_id = current_user.organization.id
   end
 
-  def create
+  def edit; end
+  def create; end
 
-  end
+  def update; end
 
-  def edit
-
-  end
-
-  def update
-
-  end
-
-  def destroy
-
-  end
+  def destroy; end
 end

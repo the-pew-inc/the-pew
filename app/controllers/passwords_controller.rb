@@ -6,7 +6,16 @@ class PasswordsController < ApplicationController
   before_action :redirect_if_authenticated
 
   # Adding invisible_captcha
-  invisible_captcha only: [:create, :update]
+  invisible_captcha only: %i[create update]
+
+  def new; end
+
+  def edit
+    @user = User.find_signed(params[:password_reset_token], purpose: :reset_password)
+    return unless @user.nil?
+
+    redirect_to(new_password_path, alert: 'Invalid or expired token.')
+  end
 
   def create
     @user = User.find_by(email: params[:user][:email].strip.downcase)
@@ -21,15 +30,6 @@ class PasswordsController < ApplicationController
       redirect_to(login_path, notice: "If that user exists we've sent instructions to their email.")
     end
   end
-
-  def edit
-    @user = User.find_signed(params[:password_reset_token], purpose: :reset_password)
-    if @user.nil?
-      redirect_to(new_password_path, alert: 'Invalid or expired token.')
-    end
-  end
-
-  def new; end
 
   def update
     @user = User.find_signed(params[:password_reset_token], purpose: :reset_password)
