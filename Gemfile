@@ -103,7 +103,7 @@ gem 'meta-tags', '~> 2.19.0'
 gem 'sendgrid-actionmailer', '~> 3.2.0'
 
 # Monitoring - Honeybadger []
-gem 'honeybadger', '~> 5.3.0'
+gem 'honeybadger', '~> 5.4.0'
 
 # Use Sass to process CSS
 # gem "sassc-rails"
@@ -187,7 +187,7 @@ group :development do
 
   # Add support to Brakeman [https://github.com/presidentbeef/brakeman]
   # Vulnerability scanner
-  gem 'brakeman', '~> 6.0.1'
+  gem 'brakeman', '~> 6.1.0'
 
   # Add Model annotations [https://github.com/ctran/annotate_models]
   gem 'annotate', '~>3.2.0', require: false
