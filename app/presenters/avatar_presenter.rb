@@ -5,8 +5,9 @@ class AvatarPresenter
   def self.call(user, size = 8, font_size = 14)
     new(user, size, font_size).call
   end
-  
+
   attr_accessor :user
+
   def initialize(user, size, font_size)
     @user = user
     @size = size
@@ -27,8 +28,9 @@ class AvatarPresenter
     hash = Digest::MD5.hexdigest(email)
     http = Net::HTTP.new('www.gravatar.com', 80)
     http.read_timeout = 2
-    response = http.request_head("/avatar/#{hash}?default=http://gravatar.com/avatar")
-    response.code != '302' ? true : false
+    response = http.request_head("/avatar/#{hash}")
+    Rails.logger.debug { "Response from Gravatar: #{response.inspect}" }
+    response.code != '301'
   rescue StandardError, Timeout::Error
     false
   end
@@ -43,9 +45,9 @@ class AvatarPresenter
   def initials_element
     style = "background-color: #{avatar_color(initials.first)};"
     font_style = "font-size: #{@font_size}px;"
-    
-    content_tag :div, class: "rounded-full flex flex-shrink-0 items-center justify-center w-#{@size} h-#{@size}", style: style do
-      content_tag :div, initials, class: "font-mono font-bold text-gray-100", style: font_style
+
+    content_tag(:div, class: "rounded-full flex flex-shrink-0 items-center justify-center w-#{@size} h-#{@size}", style:) do
+      content_tag(:div, initials, class: 'font-mono font-bold text-gray-100', style: font_style)
     end
   end
 
@@ -54,7 +56,7 @@ class AvatarPresenter
   end
 
   def nickname
-    user.profile&.nickname || "👻"
+    user.profile&.nickname || '👻'
   end
 
   def initials
@@ -74,5 +76,4 @@ class AvatarPresenter
 
     colors[initials.first.to_s.downcase.ord - 97] || '#696969'
   end
-
 end
