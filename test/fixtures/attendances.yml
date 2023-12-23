@@ -29,3 +29,5 @@ one:
   event_id: 105e36bb-6163-4c09-8e7e-9f03e77d6e32
   room_id: 1
   start_time: <%= DateTime.now.utc %>
+  end_time: <%= 1.hour.from_now.utc %>
+  status: online
