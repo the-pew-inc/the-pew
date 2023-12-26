@@ -129,7 +129,8 @@ GEM
     bindex (0.8.1)
     bootsnap (1.17.0)
       msgpack (~> 1.2)
-    brakeman (6.1.0)
+    brakeman (6.1.1)
+      racc
     builder (3.2.4)
     bullet (7.1.4)
       activesupport (>= 3.0.0)
@@ -264,6 +265,7 @@ GEM
     method_source (1.0.0)
     mini_magick (4.12.0)
     mini_mime (1.1.5)
+    mini_portile2 (2.8.5)
     minitest (5.20.0)
     msgpack (1.7.2)
     multi_xml (0.6.0)
@@ -282,9 +284,8 @@ GEM
       net-protocol
     net-ssh (7.2.1)
     nio4r (2.7.0)
-    nokogiri (1.15.5-arm64-darwin)
-      racc (~> 1.4)
-    nokogiri (1.15.5-x86_64-linux)
+    nokogiri (1.15.5)
+      mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
     noticed (1.6.3)
       http (>= 4.0.0)
@@ -465,7 +466,7 @@ GEM
     stimulus-rails (1.3.0)
       railties (>= 6.0.0)
     stringio (3.1.0)
-    stripe (10.3.0)
+    stripe (10.4.0)
     thor (1.3.0)
     timeout (0.4.1)
     turbo-rails (1.5.0)
@@ -509,6 +510,7 @@ GEM
 
 PLATFORMS
   arm64-darwin-22
+  arm64-darwin-23
   x86_64-linux
 
 DEPENDENCIES
@@ -519,7 +521,7 @@ DEPENDENCIES
   argon2 (~> 2.3.0)
   aws-sdk-s3
   bootsnap
-  brakeman (~> 6.1.0)
+  brakeman (~> 6.1.1)
   bullet (~> 7.1.1)
   capistrano (~> 3.17)
   capistrano-bundler
@@ -574,7 +576,7 @@ DEPENDENCIES
   simplecov
   sprockets-rails
   stimulus-rails (~> 1.3.0)
-  stripe (~> 10.3.0)
+  stripe (~> 10.4.0)
   turbo-rails (~> 1.5.0)
   tzinfo-data
   validate_url
@@ -585,7 +587,7 @@ DEPENDENCIES
   xsv
 
 RUBY VERSION
-   ruby 3.2.2p53
+   ruby 3.3.0p0
 
 BUNDLED WITH
    2.5.3

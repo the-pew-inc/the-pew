@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.2.2'
+ruby '3.3.0'
 
 # IMPORTANT: This must be the first gem listed
 # Add support to appmap in development and test
@@ -155,7 +155,7 @@ gem 'ruby-openai', '~> 6.3.0'
 gem 'pg_search', '~> 2.3.6'
 
 # Stripe (payment, subscription processing) [https://github.com/stripe/stripe-ruby]
-gem 'stripe', '~> 10.3.0'
+gem 'stripe', '~> 10.4.0'
 
 # To enable retry in Faraday v2.0+
 gem 'faraday-retry', '~> 2.2.0'
@@ -192,7 +192,7 @@ group :development do
 
   # Add support to Brakeman [https://github.com/presidentbeef/brakeman]
   # Vulnerability scanner
-  gem 'brakeman', '~> 6.1.0'
+  gem 'brakeman', '~> 6.1.1'
 
   # Add Model annotations [https://github.com/ctran/annotate_models]
   gem 'annotate', '~>3.2.0', require: false
