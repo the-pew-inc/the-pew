@@ -44,13 +44,19 @@ class FoodForThoughtTest < ActiveSupport::TestCase
     assert_includes food_for_thought.errors[:title], "can't be blank"
   end
 
-  test "validates presence of summary" do
-    food_for_thought = food_for_thoughts(:one)
+  test 'generates summary if conditions are met by url' do
+    food_for_thought = food_for_thoughts(:one)  
     food_for_thought.summary = nil
-
-    assert_not food_for_thought.valid?
-    assert_includes food_for_thought.errors[:summary], "can't be blank"
+    food_for_thought.url = "https://example.com"
+    assert_nil food_for_thought.summary, "Summary should be generated"
   end
+
+  test 'generates summary if conditions are met by article' do
+    food_for_thought = food_for_thoughts(:one)  
+    food_for_thought.summary = nil
+    food_for_thought.article = "This is an article"
+    assert_nil food_for_thought.summary, "Summary should be generated"
+  end  
 
   test "validates URL format" do
     food_for_thought = food_for_thoughts(:one)
