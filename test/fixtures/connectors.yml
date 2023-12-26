@@ -14,9 +14,17 @@
 #
 
 one:
-  title: MyString
-  description: MyText
+  name: Sample Connector One
+  description: Description for Sample Connector One
+  github: https://github.com/sample/connector-one
+  version: '1.0.0'
+  website: https://connector-one.example.com
+  author: Author One
 
 two:
-  title: MyString
-  description: MyText
+  name: Sample Connector Two
+  description: Description for Sample Connector Two
+  github: https://github.com/sample/connector-two
+  version: '1.1.0'
+  website: https://connector-two.example.com
+  author: Author Two

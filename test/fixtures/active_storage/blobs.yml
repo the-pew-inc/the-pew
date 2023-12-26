@@ -1,0 +1,16 @@
+# test/fixtures/active_storage/blobs.yml
+
+jpg_blob:
+  <%= ActiveStorage::FixtureSet.blob(filename: "test_image.jpg", content_type: "image/jpeg") %>
+
+png_blob:
+  <%= ActiveStorage::FixtureSet.blob(filename: "test_image.png", content_type: "image/png") %>
+
+gif_blob:
+  <%= ActiveStorage::FixtureSet.blob(filename: "test_image.gif", content_type: "image/gif") %>
+
+pdf_blob:
+  <%= ActiveStorage::FixtureSet.blob(filename: "test_document.pdf", content_type: "application/pdf") %>
+
+oversized_blob:
+  <%= ActiveStorage::FixtureSet.blob(filename: "oversize_test_image.jpg", content_type: "image/jpeg") %>

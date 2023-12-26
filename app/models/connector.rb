@@ -28,8 +28,10 @@ class Connector < ApplicationRecord
   has_many_attached :screenshots
 
   # Validations
-  validates :name, presence: true
+  validates :name,    presence: true
+  validates :version, presence: { message: 'custom message for presence' }, allow_blank: false
+
   # validates :description, presence: true
-  validates :logo,  content_type: ['image/png', 'image/jpeg', 'image/jpg', 'image/gif'],
-                    size: { between: 1.kilobyte..5.megabytes, message: 'is not given between size' }
+  # validates :logo,  content_type: ['image/png', 'image/jpeg', 'image/jpg', 'image/gif'],
+  #                   size: { between: 1.kilobyte..5.megabytes, message: 'is not given between size' }
 end

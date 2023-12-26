@@ -12,9 +12,29 @@ class ActiveSupport::TestCase
 
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
   # fixtures :all
-  fixtures %w[users profiles organizations members active_sessions events rooms 
-    questions attendances messages notifications topics votes import_results roles 
-    polls poll_options prompts food_for_thoughts]
+  fixtures %w[
+  active_sessions
+  attendances
+  connectors
+  events
+  food_for_thoughts
+  import_results
+  members
+  messages
+  notifications
+  organizations
+  polls
+  poll_options
+  profiles
+  prompts
+  questions
+  roles
+  rooms
+  topics
+  users
+  votes
+]
+
 
   # Add more helper methods to be used by all tests here...
 
