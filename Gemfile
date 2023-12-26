@@ -217,7 +217,7 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem 'capybara'
   gem 'selenium-webdriver'
-  gem 'webdrivers'
+  # gem 'webdrivers'
 
   # Adding SimpleCov [https://github.com/simplecov-ruby/simplecov]
   # SimpleCov is a test coverage for Rails. Used by CodeClimate
