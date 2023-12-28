@@ -154,10 +154,10 @@
     json-nd "^1.0.0"
     stacktrace-parser "^0.1.10"
 
-"@honeybadger-io/js@6.7.2":
-  version "6.7.2"
-  resolved "https://registry.yarnpkg.com/@honeybadger-io/js/-/js-6.7.2.tgz#ac2ae6f507503d503e7c8911470169f4535bb663"
-  integrity sha512-DFv4Yh+gN6MBkKoOE4kQWIYRD1Ug2lRRcDNODkDKaNRd9svRj4gsX5373BR/7LZFP+CfZCwqqG3//YrpKD0uCw==
+"@honeybadger-io/js@6.8.0":
+  version "6.8.0"
+  resolved "https://registry.yarnpkg.com/@honeybadger-io/js/-/js-6.8.0.tgz#318e5e3425e49853b2428610ad252b43db768e9b"
+  integrity sha512-4l2m7eD+cPKCgFwSNMr3qAqkzV61Ww8DJ2YO3ctVGL2TotVxUOEQW6mo+qKbXGds6BiXs+e8V+AFv98WJevJoQ==
   dependencies:
     "@honeybadger-io/core" "^6.5.1"
     "@types/aws-lambda" "^8.10.89"
