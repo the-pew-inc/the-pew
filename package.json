@@ -2,7 +2,7 @@
   "name": "app",
   "private": "true",
   "dependencies": {
-    "@honeybadger-io/js": "6.8.0",
+    "@honeybadger-io/js": "6.8.1",
     "@hotwired/stimulus": "3.2.2",
     "@hotwired/turbo-rails": "7.3.0",
     "@rails/actiontext": "7.1.2",
@@ -12,7 +12,7 @@
     "chart.js": "4.4.1",
     "chartjs-plugin-datalabels": "2.2.0",
     "chartkick": "5.0.1",
-    "esbuild": "0.19.9",
+    "esbuild": "0.19.11",
     "flowbite": "2.2.1",
     "flowbite-datepicker": "1.2.6",
     "js-confetti": "0.12.0",
