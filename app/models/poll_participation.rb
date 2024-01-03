@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: poll_participations
@@ -33,6 +35,6 @@ class PollParticipation < ApplicationRecord
   #   PollParticipation.participated?(current_user, @poll)
   #   #=> true if the user has participated, false otherwise.
   def self.participated?(user, poll)
-    where(user: user, poll: poll).exists?
+    where(user:, poll:).exists?
   end
 end

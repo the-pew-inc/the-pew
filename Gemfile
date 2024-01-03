@@ -97,7 +97,7 @@ gem 'merit'
 # Add Meta Tags [https://github.com/kpumuk/meta-tags]
 # the main reason is to prevent stimulus controllers from being double loaded
 # Read [https://blog.corsego.com/double-loading-stimulus-controllers] for more details
-gem 'meta-tags', '~> 2.19.0'
+gem 'meta-tags', '~> 2.20.0'
 
 # Mailer - Sendgrid [https://github.com/sendgrid/sendgrid-ruby]
 gem 'sendgrid-actionmailer', '~> 3.2.0'

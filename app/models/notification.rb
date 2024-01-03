@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: notifications
@@ -23,7 +25,6 @@ class Notification < ApplicationRecord
   after_create_commit :broadcast_to_recipient
 
   def broadcast_to_recipient
-    # todo: add the code to refresh notifications on the navigation bar
+    # TODO: add the code to refresh notifications on the navigation bar
   end
-
 end

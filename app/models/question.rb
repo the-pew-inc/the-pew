@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: questions
@@ -52,11 +54,11 @@ class Question < ApplicationRecord
   belongs_to :room
   has_many   :votes, as: :votable, dependent: :destroy
 
-  has_one :answer, class_name: "QuestionAnswer", dependent: :destroy
+  has_one :answer, class_name: 'QuestionAnswer', dependent: :destroy
 
   # Self-reference
   # Used to nest questions // To be implemented
-  belongs_to :parent, optional: true, class_name: "Question"
+  belongs_to :parent, optional: true, class_name: 'Question'
   has_many   :questions, foreign_key: :parent_id, dependent: :destroy
 
   validates :title, presence: true, length: { minimum: 3, maximum: 250 }
@@ -85,44 +87,45 @@ class Question < ApplicationRecord
   }
 
   scope :questions_for_room, -> (room) { where('room_id = ? AND parent_id IS NULL', room) }
-  scope :approved_questions_for_room, -> (room) { where('room_id = ?', room).approved.or(where('room_id = ?', room).answered).or(where('room_id = ?', room).beinganswered) }
+  scope :approved_questions_for_room, lambda { |room|
+                                        where('room_id = ?', room).approved.or(where('room_id = ?', room).answered).or(where('room_id = ?', room).beinganswered)
+                                      }
   scope :asked_questions_for_room, -> (room) { where('room_id = ?', room).asked }
 
   # This is the sum of +1 and -1
   def vote_count
-    Vote.where(votable_id: self.id).sum(:choice)
+    Vote.where(votable_id: id).sum(:choice)
   end
 
   # This only sums the +1
   def up_votes
-    Vote.where(votable_id: self.id).up_vote.sum(:choice)
+    Vote.where(votable_id: id).up_vote.sum(:choice)
   end
 
   # This only sums the -1
   def down_votes
-    Vote.where(votable_id: self.id).down_vote.sum(:choice)
+    Vote.where(votable_id: id).down_vote.sum(:choice)
   end
 
   def name
     if anonymous
-      "User wished to remain anonymous"
+      'User wished to remain anonymous'
     else
-      "#{self.user.profile.nickname}"
+      "#{user.profile.nickname}"
     end
   end
 
   def email
     if anonymous
-      "User does not want to share their email"
+      'User does not want to share their email'
     else
-      "#{self.user.email}"
+      "#{user.email}"
     end
   end
 
   private
 
   def set_organization_id
-    self.organization_id = self.room.organization_id if self.organization_id.nil?
+    self.organization_id = room.organization_id if organization_id.nil?
   end
-
 end

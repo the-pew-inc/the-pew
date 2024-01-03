@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: resource_invites
@@ -39,7 +41,7 @@
 #
 class ResourceInvite < ApplicationRecord
   include PgSearch::Model
-  
+
   belongs_to :sender, class_name: 'User'
   belongs_to :recipient, class_name: 'User', optional: true
   belongs_to :invitable, polymorphic: true
@@ -58,7 +60,7 @@ class ResourceInvite < ApplicationRecord
   # FUNCTIONS:
 
   def token_valid?
-    self.expires_at > Time.now
+    expires_at > Time.now
   end
 
   private
@@ -67,5 +69,4 @@ class ResourceInvite < ApplicationRecord
     self.token ||= SecureRandom.uuid
     self.expires_at ||= 24.hours.from_now
   end
-
 end

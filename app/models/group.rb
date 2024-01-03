@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: groups
@@ -28,7 +30,7 @@ class Group < ApplicationRecord
 
   # enable rolify on the Event class
   resourcify
-  
+
   has_many :group_memberships
   has_many :users, through: :group_memberships
   has_many :resource_invites
@@ -39,5 +41,4 @@ class Group < ApplicationRecord
 
   # PG_SEARCH
   pg_search_scope :search, against: [:name]
-    
 end

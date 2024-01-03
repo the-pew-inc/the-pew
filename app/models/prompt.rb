@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: prompts
@@ -35,13 +37,12 @@ class Prompt < ApplicationRecord
   # @return [String] The message with placeholders replaced by corresponding parameter values
   def get_messages(params = {})
     replaced_messages = messages.dup
-  
+
     params.each do |key, value|
       escaped_value = value.to_s.gsub(/["\\]/, '\\\\\0')
       replaced_messages.gsub!("%{#{key}}", escaped_value)
     end
-  
-    replaced_messages
-  end  
 
+    replaced_messages
+  end
 end

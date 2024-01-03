@@ -109,7 +109,7 @@ GEM
       ffi-compiler (~> 1.0)
     ast (2.4.2)
     aws-eventstream (1.3.0)
-    aws-partitions (1.873.0)
+    aws-partitions (1.876.0)
     aws-sdk-core (3.190.1)
       aws-eventstream (~> 1, >= 1.3.0)
       aws-partitions (~> 1, >= 1.651.0)
@@ -260,8 +260,8 @@ GEM
     merit (4.0.3)
       ambry (~> 1.0.0)
       zeitwerk
-    meta-tags (2.19.0)
-      actionpack (>= 3.2.0, < 7.2)
+    meta-tags (2.20.0)
+      actionpack (>= 6.0.0, < 7.2)
     method_source (1.0.0)
     mini_magick (4.12.0)
     mini_mime (1.1.5)
@@ -544,7 +544,7 @@ DEPENDENCIES
   jbuilder
   jsbundling-rails
   merit
-  meta-tags (~> 2.19.0)
+  meta-tags (~> 2.20.0)
   nokogiri (~> 1.15.0)
   noticed (~> 1.5)
   octokit (~> 8.0.0)

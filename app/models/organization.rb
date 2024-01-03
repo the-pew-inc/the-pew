@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: organizations
@@ -26,7 +28,7 @@
 #  index_organizations_on_sso                 (sso)
 #  index_organizations_on_stripe_customer_id  (stripe_customer_id) UNIQUE
 #
-class Organization < ApplicationRecord  
+class Organization < ApplicationRecord
   # enable rolify on the Account class
   resourcify
 
@@ -40,11 +42,11 @@ class Organization < ApplicationRecord
 
   has_one  :subscription
 
-  has_many :events,    dependent: :destroy
+  has_many :events, dependent: :destroy
   has_many :members
   has_many :polls,     dependent: :destroy
   has_many :users,     through: :members
-  
+
   has_one_attached :logo
 
   has_rich_text    :description
@@ -61,23 +63,23 @@ class Organization < ApplicationRecord
                       length: { minimum: 3, maximum: 120 }
   validates :dns_txt, uniqueness: true, length: { is: 126 }, allow_nil: true
 
-  # Display the full dns text 
+  # Display the full dns text
   # This includes the prefix (27 characters) and the unique 126 character string stored in the database
   def full_dns_txt
-    prefix = "thepew-domain-verification=" # 27 characters
-    prefix + self.dns_txt
+    prefix = 'thepew-domain-verification=' # 27 characters
+    prefix + dns_txt
   end
 
   private
 
   # Generate a unique TXT entry
   def generate_dns_txt
-    self.dns_txt = random_unique_string if self.domain_changed?
+    self.dns_txt = random_unique_string if domain_changed?
   end
 
   # Generates a unique 126 character long and case sensitive string
   def random_unique_string
-    rus = ""
+    rus = ''
     loop do
       rus = SecureRandom.hex(63) # or whatever you chose like UUID tools
       break unless self.class.exists?(dns_txt: rus)
@@ -89,15 +91,14 @@ class Organization < ApplicationRecord
   # from the domain name
   # It is called before validating the model and only if the domain name has changed
   def clean_domain
-    self.domain = self.domain.gsub(/(http|https):\/\/|\/$/, '').gsub(/[\r\n\s]/, '')
+    self.domain = domain.gsub(%r{(http|https)://|/$}, '').gsub(/[\r\n\s]/, '')
   end
-
 
   # Remove trailing spaces and carriage returns
   # Remove all \n from the string
   def cleaning_strings
-    self.domain  = self.domain.strip.tr("\n","")  if !self.domain.nil?
-    self.name    = self.name.strip.tr("\n","")    if !self.name.nil?
-    self.website = self.website.strip.tr("\n","") if !self.website.nil?
+    self.domain  = domain.strip.tr("\n", '')  unless domain.nil?
+    self.name    = name.strip.tr("\n", '')    unless name.nil?
+    self.website = website.strip.tr("\n", '') unless website.nil?
   end
 end
