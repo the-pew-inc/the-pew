@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/faker-ruby/faker.git
-  revision: 245812bbce487bcee08d5f251c327546d87e6091
+  revision: 3e7fa64e372c1c8aba98f1865cad85c851669a53
   specs:
     faker (3.2.2)
       i18n (>= 1.8.11, < 2)
@@ -334,7 +334,7 @@ GEM
     psych (5.1.2)
       stringio
     public_suffix (5.0.4)
-    puma (6.4.0)
+    puma (6.4.1)
       nio4r (~> 2.0)
     pundit (2.3.1)
       activesupport (>= 3.0.0)
