@@ -159,10 +159,10 @@
     json-nd "^1.0.0"
     stacktrace-parser "^0.1.10"
 
-"@honeybadger-io/js@6.8.1":
-  version "6.8.1"
-  resolved "https://registry.yarnpkg.com/@honeybadger-io/js/-/js-6.8.1.tgz#d08f9f1bcb29323efd577ce502302a19b597bfd3"
-  integrity sha512-9aaTFoJH8yvSu6IIR8QAXDlC4yCwhiEPVExHsrzgfJwkbgcgNkejErSmrog6zNUVn9ZpO+yeOHbn0VIF8hUCsg==
+"@honeybadger-io/js@6.8.2":
+  version "6.8.2"
+  resolved "https://registry.yarnpkg.com/@honeybadger-io/js/-/js-6.8.2.tgz#bcfe97533d2d832224781417fc8273f8f0aa6e8e"
+  integrity sha512-MjJjtC3hsTmGkt/IIsx7V92tsonXwXWwmZE7tPim/pfLlBVAcbsJA3bG7npf5O77cDtdYTCr3QYqdURUHA9xTA==
   dependencies:
     "@honeybadger-io/core" "^6.5.1"
     "@types/aws-lambda" "^8.10.89"
