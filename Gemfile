@@ -53,7 +53,7 @@ gem 'sidekiq', '~>7.2.0'
 gem 'noticed', '~> 1.5'
 
 # Adding support to View Component (better than partials ;-) ) [https://github.com/github/view_component]
-gem 'view_component', '~> 3.8.0'
+gem 'view_component', '~> 3.9.0'
 
 # User authentication
 # Use Argon2 to hash passwords [https://github.com/technion/ruby-argon2]
@@ -155,7 +155,7 @@ gem 'ruby-openai', '~> 6.3.0'
 gem 'pg_search', '~> 2.3.6'
 
 # Stripe (payment, subscription processing) [https://github.com/stripe/stripe-ruby]
-gem 'stripe', '~> 10.4.0'
+gem 'stripe', '~> 10.5.0'
 
 # To enable retry in Faraday v2.0+
 gem 'faraday-retry', '~> 2.2.0'
