@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/faker-ruby/faker.git
-  revision: 858799bac4316b6936523d7b744a2113d54f4a3d
+  revision: c60afbda4ca793baa1fcc5463b293787f0706884
   specs:
     faker (3.2.2)
       i18n (>= 1.8.11, < 2)
@@ -324,7 +324,7 @@ GEM
       activerecord (>= 6.1)
       request_store (~> 1.4)
     parallel (1.24.0)
-    parser (3.3.0.0)
+    parser (3.3.0.1)
       ast (~> 2.4.1)
       racc
     pg (1.5.4)
