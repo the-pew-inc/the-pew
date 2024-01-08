@@ -239,7 +239,7 @@ GEM
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
     jmespath (1.6.2)
-    jsbundling-rails (1.2.1)
+    jsbundling-rails (1.2.2)
       railties (>= 6.0.0)
     json (2.7.1)
     jwt (2.7.1)
@@ -324,7 +324,7 @@ GEM
       activerecord (>= 6.1)
       request_store (~> 1.4)
     parallel (1.24.0)
-    parser (3.3.0.1)
+    parser (3.3.0.2)
       ast (~> 2.4.1)
       racc
     pg (1.5.4)
@@ -334,7 +334,7 @@ GEM
     psych (5.1.2)
       stringio
     public_suffix (5.0.4)
-    puma (6.4.1)
+    puma (6.4.2)
       nio4r (~> 2.0)
     pundit (2.3.1)
       activesupport (>= 3.0.0)
@@ -386,7 +386,7 @@ GEM
       redis-client (>= 0.17.0)
     redis-client (0.19.1)
       connection_pool
-    regexp_parser (2.8.3)
+    regexp_parser (2.9.0)
     reline (0.4.2)
       io-console (~> 0.5)
     request_store (1.5.1)
@@ -542,7 +542,7 @@ DEPENDENCIES
   image_processing (~> 1.2)
   invisible_captcha (~> 2.1.0)
   jbuilder
-  jsbundling-rails
+  jsbundling-rails (~> 1.2.2)
   merit
   meta-tags (~> 2.20.0)
   nokogiri (~> 1.15.0)
@@ -557,7 +557,7 @@ DEPENDENCIES
   paper_trail (~> 15.1.0)
   pg (~> 1.5.4)
   pg_search (~> 2.3.6)
-  puma (~> 6.4.0)
+  puma (~> 6.4.2)
   pundit
   rails (~> 7.1.1)
   redis (~> 5.0.5)
