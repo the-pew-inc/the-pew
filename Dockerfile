@@ -2,6 +2,7 @@ FROM ruby:3.3.0-alpine AS builder
 ENV RAILS_ENV=production
 
 ARG RAILS_MASTER_KEY
+ARG APP_ROLE=web
 
 # Add Alpine packages
 RUN apk add --no-cache --update \
@@ -38,7 +39,7 @@ ENV RAILS_ENV=production \
   NODE_ENV=production \
   RAILS_LOG_TO_STDOUT=true \
   RAILS_SERVE_STATIC_FILES=true \
-  EXECJS_RUNTIME=Disabled\
+  EXECJS_RUNTIME=Disabled \
   RUBY_YJIT_ENABLE=true
 
 ARG DATABASE_POOL \
@@ -81,6 +82,9 @@ EXPOSE 3000
 # Save timestamp of image building
 RUN date -u > BUILD_TIME
 
-CMD ["rails", "server", "-b", "0.0.0.0"]
-
-
+# Conditional CMD based on APP_ROLE
+CMD if [ "$APP_ROLE" = "web" ]; then \
+  rails server -b 0.0.0.0; \
+  else \
+  bundle exec sidekiq -e production -C config/sidekiq.yml; \
+  fi
