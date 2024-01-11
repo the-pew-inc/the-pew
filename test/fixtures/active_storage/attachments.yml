@@ -1,0 +1,26 @@
+# test/fixtures/active_storage/attachments.yml
+
+jpg_attachment:
+  name: logo
+  record: one (Connector)
+  blob: jpg_blob
+
+png_attachment:
+  name: logo
+  record: two (Connector)
+  blob: png_blob
+
+gif_attachment:
+  name: logo
+  record: three (Connector)
+  blob: gif_blob
+
+pdf_attachment:
+  name: logo
+  record: four (Connector)
+  blob: pdf_blob
+
+oversized_attachment:
+  name: logo
+  record: five (Connector)
+  blob: oversized_blob

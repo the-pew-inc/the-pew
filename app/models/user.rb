@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: users
@@ -38,16 +40,16 @@ class User < ApplicationRecord
   include PgSearch::Model
 
   rolify strict: true
-  
+
   # We do not save the password, but the password diget after generating it using Argon2
   attr_accessor :password
   attr_accessor :current_password
 
+  before_save   :downcase_email, if: :will_save_change_to_email?
+  before_save   :generate_password_digest
   # Callbacks
   after_create  :create_and_attach_to_organization
   after_create  :send_confirmation_email!
-  before_save   :downcase_email, if: :will_save_change_to_email?
-  before_save   :generate_password_digest
 
   # Mailer configuration
   MAILER_FROM_EMAIL = 'ThePew no-reply@thepew.io'
@@ -58,7 +60,7 @@ class User < ApplicationRecord
   has_many :notifications,   as: :recipient, dependent: :destroy # enable Noticed
   has_many :active_sessions, dependent: :destroy
   has_many :attendances,     dependent: :destroy
-  has_many :visits,          class_name: "Ahoy::Visit"
+  has_many :visits,          class_name: 'Ahoy::Visit'
   has_many :actions,         class_name: 'Ahoy::Event'
   has_one  :profile,         dependent: :destroy
   accepts_nested_attributes_for :profile, allow_destroy: true
@@ -72,7 +74,7 @@ class User < ApplicationRecord
 
   # Managing organization membership (one to many through Member)
   has_one  :member
-  has_one  :organization,    through: :member, required: false, dependent: :destroy
+  has_one  :organization, through: :member, required: false, dependent: :destroy
 
   # Groups
   has_many :group_memberships
@@ -95,16 +97,16 @@ class User < ApplicationRecord
 
   # PG_SEARCH
   pg_search_scope :search,
-    against: [:email],
-    associated_against: {
-      profile: [:nickname]
-    },
-    using: {
-      tsearch: {
-        prefix: true,
-        dictionary: 'simple'
-      }
-    }
+                  against: [:email],
+                  associated_against: {
+                    profile: [:nickname]
+                  },
+                  using: {
+                    tsearch: {
+                      prefix: true,
+                      dictionary: 'simple'
+                    }
+                  }
 
   ## Functions
 
@@ -139,46 +141,46 @@ class User < ApplicationRecord
 
   # Send a password reset email to the user
   def send_password_reset_email!
-    # If the user was invited, the user should not be able to bypass the invitation flow 
+    # If the user was invited, the user should not be able to bypass the invitation flow
     # by resetting their password, unless they have accepted the invitation what translated to
     # accepted_invitation_on is different from nil
-    if !self.invited || self.accepted_invitation_on != nil
-      password_reset_token = signed_id(purpose: :reset_password, expires_in: PASSWORD_RESET_TOKEN_EXPIRATION)
-      UserMailer.password_reset(self.id, password_reset_token).deliver_later
-    end
+    return unless !invited || !accepted_invitation_on.nil?
+
+    password_reset_token = signed_id(purpose: :reset_password, expires_in: PASSWORD_RESET_TOKEN_EXPIRATION)
+    UserMailer.password_reset(id, password_reset_token).deliver_later
   end
 
   # Send an email to confirm the password change to the user
   def send_password_change_confirmation_email!
-    # If the user was invited, the user should not be able to bypass the invitation flow 
+    # If the user was invited, the user should not be able to bypass the invitation flow
     # by resetting their password, unless they have accepted the invitation what translated to
     # accepted_invitation_on is different from nil
-    if !self.invited || self.accepted_invitation_on != nil
-      UserMailer.password_change_confirmation(self.id).deliver_later
-    end
+    return unless !invited || !accepted_invitation_on.nil?
+
+    UserMailer.password_change_confirmation(id).deliver_later
   end
 
   # Send a confirmation email to the user
   def send_confirmation_email!
-    # If the user was invited, the user should not be able to bypass the invite flow 
+    # If the user was invited, the user should not be able to bypass the invite flow
     # by accepting a confirmation email.
     # Users invited to join an organization are automatically confirmed as the invite to
     # join the organization plays the role of a confirmation email.
-    if !self.invited
-      confirmation_token = signed_id(purpose: :email_confirmation, expires_in: CONFIRMATION_TOKEN_EXPIRATION)
-      UserMailer.confirmation(self.id, confirmation_token).deliver_later
-    end
+    return if invited
+
+    confirmation_token = signed_id(purpose: :email_confirmation, expires_in: CONFIRMATION_TOKEN_EXPIRATION)
+    UserMailer.confirmation(id, confirmation_token).deliver_later
   end
 
   # Used to send an invite to join an Organization
   # Invitates are valid for 3 days
   def send_invite!
     invitation_token = signed_id(purpose: :invite, expires_in: 3.days)
-    UserMailer.invite(self.id, invitation_token).deliver_later
+    UserMailer.invite(id, invitation_token).deliver_later
   end
 
   def invited!
-    self.confirm!
+    confirm!
     update_columns(accepted_invitation_on: Time.current)
   end
 
@@ -212,19 +214,18 @@ class User < ApplicationRecord
   def create_and_attach_to_organization
     # Only attached a user to a new organization if this user is not invited to join an
     # existing organization
-    if !self.invited 
+    if !invited
       # Creating a default organization
-      @default_organization = Organization.create!({name: '__default__'})
+      @default_organization = Organization.create!({ name: '__default__' })
 
       # Attach user to the default account
-      @member = Member.new()
-      @member.user_id = self.id
+      @member = Member.new
+      @member.user_id = id
       @member.organization_id = @default_organization.id
       @member.owner = true
       @member.save
     else
-      #TODO Should return an error pointing to the invitation
+      # TODO: Should return an error pointing to the invitation
     end
   end
-  
 end

@@ -23,10 +23,46 @@
 #  fk_rails_...  (event_id => events.id)
 #  fk_rails_...  (user_id => users.id)
 #
+
 require 'test_helper'
 
 class AttendanceTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  def setup
+    @attendance = attendances(:one)
+  end
+
+  test 'should be valid' do
+    assert @attendance.valid?
+  end
+
+  test 'should require a user' do
+    @attendance.user = nil
+    assert_not @attendance.valid?
+  end
+
+  test 'should require an event' do
+    @attendance.event = nil
+    assert_not @attendance.valid?
+  end
+
+  test 'should require a room' do
+    @attendance.room = nil
+    assert_not @attendance.valid?
+  end
+
+  test 'should have a start time' do
+    @attendance.start_time = nil
+    assert_not @attendance.valid?
+  end
+
+  test 'can have an end time' do
+    @attendance.end_time = nil
+    assert @attendance.valid?
+  end
+
+  test 'should have a valid status' do
+    assert_includes Attendance.statuses.keys, @attendance.status
+  end
+
+  # Add more tests as necessary
 end

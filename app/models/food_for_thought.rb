@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: food_for_thoughts
@@ -44,14 +46,14 @@ class FoodForThought < ApplicationRecord
   #                            Value must be between 0.0 and 1.0
   # @return [Array<FoodForThought>] The randomly selected articles
   def self.random_selection(organization_id = nil, event_id = nil, sponsor_ratio = 0.0)
-    raise ArgumentError, 'sponsor_ratio must be between 0.0 and 1.0' unless (0.0..1.0).cover?(sponsor_ratio)
+    raise(ArgumentError, 'sponsor_ratio must be between 0.0 and 1.0') unless (0.0..1.0).cover?(sponsor_ratio)
 
-    raise ArgumentError, 'organization_id and event_id cannot both be present' if organization_id.present? && event_id.present?
+    raise(ArgumentError, 'organization_id and event_id cannot both be present') if organization_id.present? && event_id.present?
 
     articles = if event_id.present?
-                 where(event_id: event_id)
+                 where(event_id:)
                elsif organization_id.present?
-                 where(organization_id: organization_id)
+                 where(organization_id:)
                else
                  where(organization_id: nil, event_id: nil)
                end
@@ -83,9 +85,9 @@ class FoodForThought < ApplicationRecord
 
   # Validate that only one of URL or article is present
   def validate_url_and_article_presence
-    if url.present? && article.present?
-      errors.add(:base, 'URL and article cannot both be present')
-    end
+    return unless url.present? && article.present?
+
+    errors.add(:base, 'URL and article cannot both be present')
   end
 
   def should_generate_summary?
@@ -98,7 +100,7 @@ class FoodForThought < ApplicationRecord
       self.summary = article.body.to_plain_text.truncate(100)
     elsif url.present?
       # Extracting the URL summary via a Sidekiq Job
-      SummaryExtractionJob.perform_async(self.url, self.id)
+      SummaryExtractionJob.perform_async(url, id)
     end
   end
 
@@ -107,8 +109,8 @@ class FoodForThought < ApplicationRecord
   end
 
   def validate_sponsor_url_format
-    if sponsor_url.present? && !sponsor_url.starts_with?('https://')
-      errors.add(:sponsor_url, 'must be a valid HTTPS URL')
-    end
+    return unless sponsor_url.present? && !sponsor_url.starts_with?('https://')
+
+    errors.add(:sponsor_url, 'must be a valid HTTPS URL')
   end
 end

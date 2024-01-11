@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: profiles
@@ -23,7 +25,6 @@
 class Profile < ApplicationRecord
   include PgSearch::Model
 
-
   belongs_to :user
 
   # Tracking changes
@@ -31,20 +32,20 @@ class Profile < ApplicationRecord
 
   # PG_SEARCH
   pg_search_scope :search,
-    against: [:nickname],
-    using: {
-      tsearch: {
-        prefix: true,
-        dictionary: 'simple'
-      }
-    }
+                  against: [:nickname],
+                  using: {
+                    tsearch: {
+                      prefix: true,
+                      dictionary: 'simple'
+                    }
+                  }
 
   # Active Storage & Action Text
   has_rich_text    :bio
   has_one_attached :avatar do |attachable|
-    attachable.variant :thumb, resize: "100x100"
-    attachable.variant :medium, resize: "144x144"
-    attachable.variant :large, resize: "400x400"
+    attachable.variant(:thumb, resize: '100x100')
+    attachable.variant(:medium, resize: '144x144')
+    attachable.variant(:large, resize: '400x400')
   end
 
   validates :nickname, presence: true, length: { minimum: 3, maximum: 40 }

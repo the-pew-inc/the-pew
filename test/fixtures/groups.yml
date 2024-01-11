@@ -25,9 +25,13 @@
 #
 
 one:
-  name: MyString
-  description: MyText
+  id: 60322e8a-5b0a-4d3b-8e70-9abbe100e10b
+  user_id: 7c5e36bb-6163-4d07-8e7e-9f13e77d6e39
+  name: Group one
+  description: This is the first group
 
 two:
-  name: MyString
-  description: MyText
+  id: 6a322e8b-6b0a-4d3b-8e70-90ccea00e20b
+  user_id: 7c5e36bb-6163-4d07-8e7e-9f13e77d6e39
+  name: Group two
+  description: This is the second group

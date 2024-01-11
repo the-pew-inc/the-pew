@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: poll_options
@@ -38,24 +40,23 @@ class PollOption < ApplicationRecord
 
   enum status: {
     in_review: 0,
-    approved:  10,
-    flagged:   15,
-    rejected:  20
+    approved: 10,
+    flagged: 15,
+    rejected: 20
   }, _default: :in_review
 
   # This is the sum of +1 and -1
   def vote_count
-    Vote.where(votable_id: self.id, status: :approved).sum(:choice)
+    Vote.where(votable_id: id, status: :approved).sum(:choice)
   end
 
   # This only sums the +1
   def up_votes
-    Vote.where(votable_id: self.id, status: :approved).up_vote.sum(:choice)
+    Vote.where(votable_id: id, status: :approved).up_vote.sum(:choice)
   end
 
   # This only sums the -1
   def down_votes
-    Vote.where(votable_id: self.id, status: :approved).down_vote.sum(:choice)
+    Vote.where(votable_id: id, status: :approved).down_vote.sum(:choice)
   end
-
 end

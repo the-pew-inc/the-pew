@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: plans
@@ -22,6 +24,5 @@
 #  index_plans_on_stripe_product_id  (stripe_product_id) UNIQUE
 #
 class Plan < ApplicationRecord
-  
   validates :stripe_product_id, presence: true
 end

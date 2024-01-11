@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: rooms
@@ -46,8 +48,8 @@ class Room < ApplicationRecord
 
   has_rich_text :description
   has_rich_text :public_description
-  
-  validates  :name, presence: true
+
+  validates :name, presence: true
 
   # Universal: everyone can see questions, asking question requires an account
   # Restricted: seeing and asking questions require an account
@@ -56,22 +58,22 @@ class Room < ApplicationRecord
 
   # Return the number of approved, being answered or answered questions in this room
   def approved_question_count
-    self.questions.where(status: :approved).or(self.questions.where(status: :beinganswered)).or(self.questions.where(status: :answered)).count
+    questions.where(status: :approved).or(questions.where(status: :beinganswered)).or(questions.where(status: :answered)).count
   end
 
   # Return the number of questions with the status "asked" in this room
   def asked_question_count
-    self.questions.where(status: :asked).count
+    questions.where(status: :asked).count
   end
 
   private
 
   def set_organization_id
-    self.organization_id = self.event.organization_id if self.organization_id.nil?
+    self.organization_id = event.organization_id if organization_id.nil?
   end
 
   # Used in case the user is not passing an end_date
   def set_end_date
-    self.end_date = start_date if self.end_date.nil?
+    self.end_date = start_date if end_date.nil?
   end
 end

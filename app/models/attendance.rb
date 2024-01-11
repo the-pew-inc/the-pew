@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: attendances
@@ -28,13 +30,11 @@ class Attendance < ApplicationRecord
   belongs_to :event
   belongs_to :room
 
-  validates :user, presence: true
-  validates :event, presence: true
-  validates :room, presence: true
+  validates :start_time, presence: true
 
   enum status: {
     offline: 0,
     online: 10,
-    away: 20,
+    away: 20
   }
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: messages
@@ -31,5 +33,4 @@ class Message < ApplicationRecord
   def notify_user
     MessageNotification.with(message: self).deliver_later(user)
   end
-
 end

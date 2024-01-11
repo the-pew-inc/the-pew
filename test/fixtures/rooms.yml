@@ -34,6 +34,7 @@ one:
   allow_anonymous: false
   organization_id: 8c5e36bb-6163-4d07-8a7e-9f13e77d6e40
   start_date: <%= DateTime.now.utc %>
+  end_date: <%= DateTime.now.utc + 1.day %>
   created_at: <%= Time.current.utc %>
   updated_at: <%= Time.current.utc %>
 
@@ -44,5 +45,6 @@ two:
   allow_anonymous: true
   organization_id: 8c5e36bb-6163-4d07-8a7e-9f13e77d6e40
   start_date: <%= DateTime.now.utc %>
+  end_date: <%= DateTime.now.utc + 2.days %>
   created_at: <%= Time.current.utc %>
   updated_at: <%= Time.current.utc %>

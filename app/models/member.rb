@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: members
@@ -18,7 +20,7 @@
 class Member < ApplicationRecord
   # Tracking changes
   has_paper_trail
-  
+
   belongs_to :user
   belongs_to :organization
 end

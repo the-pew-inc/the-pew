@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.2.2'
+ruby '3.3.0'
 
 # IMPORTANT: This must be the first gem listed
 # Add support to appmap in development and test
@@ -17,16 +17,16 @@ gem 'sprockets-rails'
 gem 'pg', '~> 1.5.4'
 
 # Use the Puma web server [https://github.com/puma/puma]
-gem 'puma', '~> 6.4.0'
+gem 'puma', '~> 6.4.2'
 
 # Bundle and transpile JavaScript [https://github.com/rails/jsbundling-rails]
-gem 'jsbundling-rails'
+gem 'jsbundling-rails', '~> 1.2.2'
 
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
 gem 'turbo-rails', '~> 1.5.0'
 
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
-gem 'stimulus-rails', '~> 1.3.0'
+gem 'stimulus-rails', '~> 1.3.3'
 
 # Bundle and process CSS [https://github.com/rails/cssbundling-rails]
 gem 'cssbundling-rails'
@@ -53,7 +53,7 @@ gem 'sidekiq', '~>7.2.0'
 gem 'noticed', '~> 1.5'
 
 # Adding support to View Component (better than partials ;-) ) [https://github.com/github/view_component]
-gem 'view_component', '~> 3.8.0'
+gem 'view_component', '~> 3.10.0'
 
 # User authentication
 # Use Argon2 to hash passwords [https://github.com/technion/ruby-argon2]
@@ -97,7 +97,7 @@ gem 'merit'
 # Add Meta Tags [https://github.com/kpumuk/meta-tags]
 # the main reason is to prevent stimulus controllers from being double loaded
 # Read [https://blog.corsego.com/double-loading-stimulus-controllers] for more details
-gem 'meta-tags', '~> 2.19.0'
+gem 'meta-tags', '~> 2.20.0'
 
 # Mailer - Sendgrid [https://github.com/sendgrid/sendgrid-ruby]
 gem 'sendgrid-actionmailer', '~> 3.2.0'
@@ -130,7 +130,7 @@ gem 'ruby-vips', '>= 2.1.0'
 gem 'octokit', '~> 8.0.0'
 
 # Pagination [https://github.com/ddnexus/pagy]
-gem 'pagy', '~> 6.2.0'
+gem 'pagy', '~> 6.3.0'
 
 # Countries [https://github.com/countries/countries]
 gem 'countries', '~> 5.7.0', require: 'countries/global'
@@ -155,7 +155,7 @@ gem 'ruby-openai', '~> 6.3.0'
 gem 'pg_search', '~> 2.3.6'
 
 # Stripe (payment, subscription processing) [https://github.com/stripe/stripe-ruby]
-gem 'stripe', '~> 10.3.0'
+gem 'stripe', '~> 10.5.0'
 
 # To enable retry in Faraday v2.0+
 gem 'faraday-retry', '~> 2.2.0'
@@ -192,7 +192,7 @@ group :development do
 
   # Add support to Brakeman [https://github.com/presidentbeef/brakeman]
   # Vulnerability scanner
-  gem 'brakeman', '~> 6.1.0'
+  gem 'brakeman', '~> 6.1.1'
 
   # Add Model annotations [https://github.com/ctran/annotate_models]
   gem 'annotate', '~>3.2.0', require: false
@@ -217,7 +217,7 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem 'capybara'
   gem 'selenium-webdriver'
-  gem 'webdrivers'
+  # gem 'webdrivers'
 
   # Adding SimpleCov [https://github.com/simplecov-ruby/simplecov]
   # SimpleCov is a test coverage for Rails. Used by CodeClimate
