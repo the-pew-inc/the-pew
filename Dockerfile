@@ -16,7 +16,7 @@ COPY Gemfile* package.json yarn.lock esbuild.config.js ./
 # Add the Rails app
 ADD . /app
 
-RUN gem install --no-document --no-user-install rails -v 7.0.4 \
+RUN gem install --no-document --no-user-install rails -v 7.1.2 \
   && gem install --no-document --no-user-install bundler \
   && bundle config set deployment 'true' \
   && bundle config set --local without 'development test' \
