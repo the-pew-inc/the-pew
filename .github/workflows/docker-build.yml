@@ -1,7 +1,7 @@
 name: Build and Push Docker Image
 
 on:
-  pull_request:
+  push:
     branches:
       - main
 
@@ -22,10 +22,17 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Extract Version
+        id: version
+        run: |
+          MAJOR_MINOR=`cat VERSION` # Replace with your way to extract version
+          BUILD_NUMBER=${GITHUB_RUN_NUMBER} # Or use ${GITHUB_SHA::8} for commit SHA
+          echo "VERSION_TAG=${MAJOR_MINOR}.${BUILD_NUMBER}" >> $GITHUB_ENV
+
       - name: Build and Push Docker Image
         uses: docker/build-push-action@v2
         with:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ghcr.io/${{ github.repository_owner }}/your-image-name:latest
+          tags: ghcr.io/${{ github.repository_owner }}/your-image-name:${{ env.VERSION_TAG }}
