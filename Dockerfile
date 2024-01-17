@@ -21,6 +21,7 @@ RUN gem install --no-document --no-user-install rails -v 7.1.2 \
   && bundle config set deployment 'true' \
   && bundle config set --local without 'development test' \
   && bundle config set path 'vendor/bundle' \
+  && bundle lock --add-platform aarch64-linux-musl x86_64-linux \
   && bundle install -j4 --retry 3 \
   && yarn install \
   && bundle exec rake assets:precompile \
