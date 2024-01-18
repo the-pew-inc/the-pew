@@ -1,5 +1,6 @@
 FROM ruby:3.3.0-alpine AS builder
-ENV RAILS_ENV=production
+ENV RAILS_ENV=production\
+  DEFAULT_URL=demo.thepew.io
 
 ARG RAILS_MASTER_KEY 
 
