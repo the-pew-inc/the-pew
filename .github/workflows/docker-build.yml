@@ -13,6 +13,10 @@ jobs:
     runs-on: ubuntu-latest
     environment: docker-image-build
     steps:
+      - name: Set Image Name
+        id: image_name
+        run: echo "IMAGE_NAME=thepew" >> $GITHUB_ENV
+
       - name: Check Out Repository
         uses: actions/checkout@v3
 
@@ -29,9 +33,9 @@ jobs:
       - name: Extract Version
         id: version
         run: |
-          MAJOR_MINOR=`cat VERSION` # Replace with your way to extract version
-          BUILD_NUMBER=${GITHUB_RUN_NUMBER} # Or use ${GITHUB_SHA::8} for commit SHA
-          echo "VERSION_TAG=${MAJOR_MINOR}.${BUILD_NUMBER}" >> $GITHUB_ENV
+          MAJOR_MINOR=`cat VERSION`
+          SHORT_SHA=$(echo $GITHUB_SHA | cut -c 1-7)  # Extracts first 7 characters of the commit SHA
+          echo "VERSION_TAG=${MAJOR_MINOR}-${SHORT_SHA}" >> $GITHUB_ENV
 
       - name: Build and Push Docker Image
         uses: docker/build-push-action@v2
@@ -41,4 +45,4 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ghcr.io/${{ github.repository_owner }}/your-image-name:${{ env.VERSION_TAG }}
+          tags: ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{ env.VERSION_TAG }}
