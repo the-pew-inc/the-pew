@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/faker-ruby/faker.git
-  revision: 50146e0582d8af486d7fbe3c0ab833cdbe6e1eed
+  revision: d355cc3ed6767c118729039839e2d7666c49ee56
   specs:
     faker (3.2.3)
       i18n (>= 1.8.11, < 2)
@@ -125,7 +125,7 @@ GEM
     aws-sigv4 (1.8.0)
       aws-eventstream (~> 1, >= 1.0.2)
     base64 (0.2.0)
-    bigdecimal (3.1.5)
+    bigdecimal (3.1.6)
     bindex (0.8.1)
     bootsnap (1.17.1)
       msgpack (~> 1.2)
@@ -230,7 +230,7 @@ GEM
       ruby-vips (>= 2.0.17, < 3)
     invisible_captcha (2.1.0)
       rails (>= 5.2)
-    io-console (0.7.1)
+    io-console (0.7.2)
     irb (1.11.1)
       rdoc
       reline (>= 0.4.2)
@@ -265,7 +265,7 @@ GEM
     mini_magick (4.12.0)
     mini_mime (1.1.5)
     mini_portile2 (2.8.5)
-    minitest (5.21.1)
+    minitest (5.21.2)
     msgpack (1.7.2)
     multi_xml (0.6.0)
     multipart-post (2.3.0)
@@ -322,7 +322,7 @@ GEM
       omniauth (~> 2.0)
     online_migrations (0.11.1)
       activerecord (>= 6.1)
-    pagy (6.4.1)
+    pagy (6.4.2)
     paper_trail (15.1.0)
       activerecord (>= 6.1)
       request_store (~> 1.4)
@@ -559,7 +559,7 @@ DEPENDENCIES
   omniauth-google-oauth2 (~> 1.1.1)
   omniauth-rails_csrf_protection
   online_migrations (~> 0.11.0)
-  pagy (~> 6.4.1)
+  pagy (~> 6.4.2)
   paper_trail (~> 15.1.0)
   pg (~> 1.5.4)
   pg_search (~> 2.3.6)
