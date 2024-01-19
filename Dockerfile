@@ -71,8 +71,9 @@ RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 RUN apk add --no-cache --update \
   tzdata nodejs vips-dev ca-certificates \
   libffi-dev postgresql-client \
-  && bundle config set --local without 'development test' \
-  && bundle config set path 'vendor/bundle' \
+  # && bundle config set deployment 'true' \
+  # && bundle config set --local without 'development test' \
+  # && bundle config set path 'vendor/bundle' \
   && rm -rf /var/cache/apk/* /tmp/* /var/tmp/*
 
 RUN mkdir app
