@@ -10,11 +10,13 @@ RUN apk add --no-cache --update \
   postgresql-dev libffi-dev vips-dev tzdata \
   && mkdir app
 
+# Creating a user and group to run the app
+RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 WORKDIR /app
-COPY Gemfile* package.json yarn.lock esbuild.config.js ./
 
-# Add the Rails app
-ADD . /app
+# Copy all files in the current directory to /app in the image
+# and change ownership to appuser:appgroup
+COPY --chown=appuser:appgroup . .
 
 RUN gem install --no-document --no-user-install rails -v 7.1.3 \
   && gem install --no-document --no-user-install bundler \
@@ -62,6 +64,9 @@ ENV RAILS_ENV=production \
   SIDEKIQ_AUTH_PASSWORD= \
   SIDEKIQ_AUTH_USERNAME=
 
+# Create a group and user to run the app
+RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+
 # Add Alpine packages
 RUN apk add --no-cache --update \
   tzdata nodejs vips-dev ca-certificates \
@@ -73,8 +78,8 @@ RUN apk add --no-cache --update \
 RUN mkdir app
 
 # Copy app with gems from former build stage
-COPY --from=builder /usr/local/bundle/ /usr/local/bundle/
-COPY --from=builder /app /app
+COPY --from=builder --chown=appuser:appgroup /usr/local/bundle/ /usr/local/bundle/
+COPY --from=builder --chown=appuser:appgroup /app /app
 
 WORKDIR /app
 
@@ -82,6 +87,9 @@ EXPOSE 3000
 
 # Save timestamp of image building
 RUN date -u > BUILD_TIME
+
+# Run the app as appuser
+USER appuser
 
 # Conditional CMD based on APP_ROLE
 CMD if [ "$APP_ROLE" = "web" ]; then \
