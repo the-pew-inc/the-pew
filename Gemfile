@@ -20,7 +20,7 @@ gem 'pg', '~> 1.5.4'
 gem 'puma', '~> 6.4.2'
 
 # Bundle and transpile JavaScript [https://github.com/rails/jsbundling-rails]
-gem 'jsbundling-rails', '~> 1.2.2'
+gem 'jsbundling-rails', '~> 1.3.0'
 
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
 gem 'turbo-rails', '~> 1.5.0'
@@ -29,7 +29,7 @@ gem 'turbo-rails', '~> 1.5.0'
 gem 'stimulus-rails', '~> 1.3.3'
 
 # Bundle and process CSS [https://github.com/rails/cssbundling-rails]
-gem 'cssbundling-rails'
+gem 'cssbundling-rails', '~> 1.4.0'
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem 'jbuilder'
@@ -164,7 +164,7 @@ gem 'faraday-retry', '~> 2.2.0'
 gem 'whenever', '~> 1.0.0', require: false
 
 # Add support online_migration (a strong_migration on steroid) [https://github.com/fatkodima/online_migrations]
-gem 'online_migrations', '~> 0.11.0'
+gem 'online_migrations', '~> 0.13.0'
 # Adding Scenic to better support online_migration [https://github.com/scenic-views/scenic]
 gem 'scenic', '~> 1.7.0'
 
