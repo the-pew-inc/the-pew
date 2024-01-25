@@ -1,4 +1,4 @@
-# This defines the generci policies applies to a resource (Poll, Event, Room, Survey, etc.)
+# This defines the generic policies applies to a resource (Poll, Event, Room, Survey, etc.)
 # At the moment Event are not fully aligned with the new convention and may remain outside
 # of this generic policy.
 
@@ -18,11 +18,11 @@ class ResourcePolicy < ApplicationPolicy
 
   # As a user I can edit the resource I created or I have been made admin on.
   def update?
-    user_is_resource_creator_or_admin?
+    user_is_resource_creator_or_admin? && user_has_active_subscription?
   end
 
   def edit?
-    update?
+    update? && user_has_active_subscription?
   end
 
   # Depending on the resource the method may differ, but we need something generic to let a user list the resources the user created or is admin on.
@@ -30,6 +30,10 @@ class ResourcePolicy < ApplicationPolicy
   # For now, let's assume there's a common field named "user_id" on the resources that maps to the creator.
   def index?
     user_is_resource_creator_or_admin?
+  end
+
+  def new?
+    user_has_active_subscription?
   end
 
   private

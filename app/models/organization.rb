@@ -29,6 +29,8 @@
 #  index_organizations_on_stripe_customer_id  (stripe_customer_id) UNIQUE
 #
 class Organization < ApplicationRecord
+  include Subscribable
+
   # enable rolify on the Account class
   resourcify
 
@@ -42,8 +44,8 @@ class Organization < ApplicationRecord
 
   has_one  :subscription
 
-  has_many :events, dependent: :destroy
-  has_many :members
+  has_many :events,    dependent: :destroy
+  has_many :members,   dependent: :destroy
   has_many :polls,     dependent: :destroy
   has_many :users,     through: :members
 

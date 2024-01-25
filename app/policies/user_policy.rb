@@ -1,5 +1,4 @@
 class UserPolicy < ApplicationPolicy
-
   def index?
     admin_or_owner?
   end
@@ -38,7 +37,7 @@ class UserPolicy < ApplicationPolicy
     user.has_role?(:admin, record.organization)
   end
 
-  # Checking if the user (the one performing the action) is an owner of the organization 
+  # Checking if the user (the one performing the action) is an owner of the organization
   # that the record (the user being acted upon) belongs to
   def user_is_organization_owner?
     organization = record.organization

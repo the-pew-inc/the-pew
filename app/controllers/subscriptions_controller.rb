@@ -8,9 +8,9 @@ class SubscriptionsController < ApplicationController
   # GET /subscriptions
   def index
     @plans = Plan.where(active: true)
-    @starter    = @plans.find_by(label: 'starter')
-    @pro        = @plans.find_by(label: 'pro')
-    @enterprise = @plans.find_by(label: 'enterprise')
+    @starter    = @plans.find_by(label: 'Starter')
+    @pro        = @plans.find_by(label: 'Pro')
+    @enterprise = @plans.find_by(label: 'Enterprise')
   end
 
   def new

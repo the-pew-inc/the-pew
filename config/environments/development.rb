@@ -90,7 +90,7 @@ Rails.application.configure do
   # config.hosts = nil unless Rails.env.production?
   config.hosts << "127.0.0.1"
   config.hosts << "localhost"
-  config.hosts << "4fc0-98-42-90-152.ngrok-free.app"
+  config.hosts << "ef5d-67-170-203-242.ngrok-free.app"
 
   # Mailcatcher configuration
   config.action_mailer.delivery_method = :smtp

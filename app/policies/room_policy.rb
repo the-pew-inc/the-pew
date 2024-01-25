@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RoomPolicy < ResourcePolicy
   class Scope < Scope
     # NOTE: Be explicit about which records you allow access to!

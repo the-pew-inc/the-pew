@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class OrganizationPolicy < ApplicationPolicy
   def show?
     user_is_owner? || user.has_role?(:admin, record)
@@ -7,10 +9,10 @@ class OrganizationPolicy < ApplicationPolicy
     show?
   end
 
-  alias_method :edit?, :update?
+  alias edit? update?
 
   def manage_users?
-    user.has_role?(:admin, record) || user.member.owner?
+    (user.has_role?(:admin, record) || user.member.owner?) && user_has_active_subscription?
   end
 
   def upload_logo?
@@ -21,6 +23,6 @@ class OrganizationPolicy < ApplicationPolicy
   private
 
   def user_is_owner?
-    record.members.where(user: user, owner: true).exists?
+    record.members.where(user:, owner: true).exists?
   end
 end

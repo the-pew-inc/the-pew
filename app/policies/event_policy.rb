@@ -1,5 +1,6 @@
-class EventPolicy < ResourcePolicy
+# frozen_string_literal: true
 
+class EventPolicy < ResourcePolicy
   def stats?
     user_created_event? || user.has_role?(:admin, record)
   end
