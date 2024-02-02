@@ -9,8 +9,14 @@ namespace :stripe_sync do
   desc 'Synchronize plans from Stripe'
   task sync_plans: :environment do
     Stripe::Product.list(active: true).each do |stripe_product|
+      # puts '=== Product: '
+      # puts "#{stripe_product.inspect}"
+
       # Fetching plans associated with the product
       Stripe::Plan.list(product: stripe_product.id, active: true).each do |stripe_plan|
+        # puts '=== Plan: '
+        # puts "#{stripe_plan.inspect}"
+
         plan = Plan.find_or_initialize_by(stripe_product_id: stripe_product.id)
 
         stripe_price_mo_id = plan.stripe_price_mo || nil
