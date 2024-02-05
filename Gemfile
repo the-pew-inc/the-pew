@@ -77,7 +77,7 @@ gem 'omniauth-google-oauth2', '~> 1.1.1'
 gem 'omniauth-rails_csrf_protection'
 
 # Adding invisible_captcha [https://github.com/markets/invisible_captcha]
-gem 'invisible_captcha', '~> 2.1.0'
+gem 'invisible_captcha', '~> 2.2.0'
 
 # Adding Pundit to manage authorizations [https://github.com/varvet/pundit]
 gem 'pundit'
@@ -109,7 +109,7 @@ gem 'honeybadger', '~> 5.4.1'
 # gem "sassc-rails"
 
 # Nokogiri to parse HTML and more [https://github.com/sparklemotion/nokogiri]
-gem 'nokogiri', '~> 1.15.0'
+gem 'nokogiri', '~> 1.16.0'
 
 # Download
 gem 'down', '~> 5.0'
