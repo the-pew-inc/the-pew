@@ -17,12 +17,12 @@
     "flowbite": "2.2.1",
     "flowbite-datepicker": "1.2.6",
     "js-confetti": "0.12.0",
-    "postcss": "8.4.33",
+    "postcss": "8.4.34",
     "qr-code-styling": "1.6.0-rc.1",
     "stimulus-autocomplete": "3.1.0",
     "taggle": "1.15.0",
     "tailwindcss": "3.4.1",
-    "trix": "2.0.9"
+    "trix": "2.0.10"
   },
   "scripts": {
     "build-old": "node esbuild.config.js",
