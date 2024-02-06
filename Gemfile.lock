@@ -99,7 +99,7 @@ GEM
     annotate (3.2.0)
       activerecord (>= 3.2, < 8.0)
       rake (>= 10.4, < 14.0)
-    appmap (0.103.0)
+    appmap (1.0.0)
       activesupport
       method_source
       rack
@@ -265,7 +265,7 @@ GEM
     method_source (1.0.0)
     mini_magick (4.12.0)
     mini_mime (1.1.5)
-    minitest (5.21.2)
+    minitest (5.22.0)
     msgpack (1.7.2)
     multi_xml (0.6.0)
     multipart-post (2.3.0)
@@ -477,7 +477,7 @@ GEM
     stimulus-rails (1.3.3)
       railties (>= 6.0.0)
     stringio (3.1.0)
-    stripe (10.7.0)
+    stripe (10.7.1)
     thor (1.3.0)
     timeout (0.4.1)
     turbo-rails (1.5.0)
@@ -514,7 +514,7 @@ GEM
       nokogiri (~> 1.8)
     xsv (1.3.0)
       rubyzip (>= 1.3, < 3)
-    zeitwerk (2.6.12)
+    zeitwerk (2.6.13)
 
 PLATFORMS
   aarch64-linux-musl
@@ -526,7 +526,7 @@ DEPENDENCIES
   active_storage_validations (~> 1.1.3)
   ahoy_matey (~> 4.2.1)
   annotate (~> 3.2.0)
-  appmap (= 0.103.0)
+  appmap (= 1.0.0)
   argon2 (~> 2.3.0)
   aws-sdk-s3
   bootsnap
