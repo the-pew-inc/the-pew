@@ -23,7 +23,7 @@ gem 'puma', '~> 6.4.2'
 gem 'jsbundling-rails', '~> 1.3.0'
 
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
-gem 'turbo-rails', '~> 1.5.0'
+gem 'turbo-rails', '~> 2.0.0'
 
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
 gem 'stimulus-rails', '~> 1.3.3'
