@@ -4,7 +4,7 @@
   "dependencies": {
     "@honeybadger-io/js": "6.8.3",
     "@hotwired/stimulus": "3.2.2",
-    "@hotwired/turbo-rails": "8.0.0",
+    "@hotwired/turbo-rails": "8.0.1",
     "@rails/actiontext": "7.1.3",
     "@rails/activestorage": "7.1.3",
     "@rails/request.js": "0.0.9",
@@ -17,7 +17,7 @@
     "flowbite": "2.2.1",
     "flowbite-datepicker": "1.2.6",
     "js-confetti": "0.12.0",
-    "postcss": "8.4.34",
+    "postcss": "8.4.35",
     "qr-code-styling": "1.6.0-rc.1",
     "stimulus-autocomplete": "3.1.0",
     "taggle": "1.15.0",
