@@ -47,7 +47,7 @@ gem 'hiredis', '~> 0.6.3'
 # gem 'kredis'
 
 # Sidekiq [https://github.com/mperham/sidekiq]
-gem 'sidekiq', '~>7.2.0'
+gem 'sidekiq', '~>7.2.2'
 
 # Add Noticed to support notifications [https://github.com/excid3/noticed]
 gem 'noticed', '~> 1.5'
@@ -130,7 +130,7 @@ gem 'ruby-vips', '>= 2.1.0'
 gem 'octokit', '~> 8.1.0'
 
 # Pagination [https://github.com/ddnexus/pagy]
-gem 'pagy', '~> 6.4.2'
+gem 'pagy', '~> 7.0.1'
 
 # Countries [https://github.com/countries/countries]
 gem 'countries', '~> 5.7.0', require: 'countries/global'
@@ -155,7 +155,7 @@ gem 'ruby-openai', '~> 6.3.0'
 gem 'pg_search', '~> 2.3.6'
 
 # Stripe (payment, subscription processing) [https://github.com/stripe/stripe-ruby]
-gem 'stripe', '~> 10.8.0'
+gem 'stripe', '~> 10.9.0'
 
 # To enable retry in Faraday v2.0+
 gem 'faraday-retry', '~> 2.2.0'
