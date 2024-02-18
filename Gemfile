@@ -133,7 +133,7 @@ gem 'octokit', '~> 8.1.0'
 gem 'pagy', '~> 7.0.1'
 
 # Countries [https://github.com/countries/countries]
-gem 'countries', '~> 5.7.0', require: 'countries/global'
+gem 'countries', '~> 6.0.0', require: 'countries/global'
 
 # Validate URL format [https://github.com/perfectline/validates_url]
 gem 'validate_url'
