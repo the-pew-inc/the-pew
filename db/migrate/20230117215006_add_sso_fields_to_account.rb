@@ -1,4 +1,4 @@
-class AddSsoFieldsToAccount < ActiveRecord::Migration[7.0]
+class AddSsoFieldsToAccount < ActiveRecord::Migration[7.1]
   def change
     add_column :accounts, :domain,  :string
     add_column :accounts, :sso,     :boolean, null: false, default: false

@@ -1,4 +1,4 @@
-class CreatePolls < ActiveRecord::Migration[7.0]
+class CreatePolls < ActiveRecord::Migration[7.1]
   def change
     create_table :polls, id: :uuid do |t|
       t.references :organization, null: false, foreign_key: true, type: :uuid

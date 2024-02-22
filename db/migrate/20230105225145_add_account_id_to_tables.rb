@@ -1,4 +1,4 @@
-class AddAccountIdToTables < ActiveRecord::Migration[7.0]
+class AddAccountIdToTables < ActiveRecord::Migration[7.1]
   def up
     # Adding the organization_id column to Events, Rooms and Questions
     # Events

@@ -1,4 +1,4 @@
-class CreateVotes < ActiveRecord::Migration[7.0]
+class CreateVotes < ActiveRecord::Migration[7.1]
   def change
     create_table :votes do |t|
       t.belongs_to :user,     null: false, type: :uuid, foreign_key: true

@@ -1,4 +1,4 @@
-class RenameAccountModelToOrganization < ActiveRecord::Migration[7.0]
+class RenameAccountModelToOrganization < ActiveRecord::Migration[7.1]
   def up
 
     # Rename the accounts table to organizations ONLY if the old accounts table exists

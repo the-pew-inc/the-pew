@@ -1,4 +1,4 @@
-class CreateResourceInvites < ActiveRecord::Migration[7.0]
+class CreateResourceInvites < ActiveRecord::Migration[7.1]
   def change
     create_table :resource_invites, id: :uuid do |t|
       t.references :sender,       null: false, type: :uuid, index: true

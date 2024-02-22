@@ -1,4 +1,4 @@
-class CreateBadgesSashes < ActiveRecord::Migration[7.0]
+class CreateBadgesSashes < ActiveRecord::Migration[7.1]
   def self.up
     create_table :badges_sashes do |t|
       t.integer :badge_id, :sash_id

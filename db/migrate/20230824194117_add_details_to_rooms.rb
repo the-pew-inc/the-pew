@@ -1,4 +1,4 @@
-class AddDetailsToRooms < ActiveRecord::Migration[7.0]
+class AddDetailsToRooms < ActiveRecord::Migration[7.1]
   def up
     # Add the room_type column
     add_column :rooms, :room_type, :integer

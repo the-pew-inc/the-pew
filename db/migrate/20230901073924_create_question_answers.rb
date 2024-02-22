@@ -1,4 +1,4 @@
-class CreateQuestionAnswers < ActiveRecord::Migration[7.0]
+class CreateQuestionAnswers < ActiveRecord::Migration[7.1]
   def change
     create_table :question_answers, id: :uuid do |t|
       t.references :user,     null: false, foreign_key: true, type: :uuid

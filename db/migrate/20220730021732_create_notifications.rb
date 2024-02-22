@@ -1,4 +1,4 @@
-class CreateNotifications < ActiveRecord::Migration[7.0]
+class CreateNotifications < ActiveRecord::Migration[7.1]
   def change
     create_table :notifications, id: :uuid do |t|
       t.references :recipient, polymorphic: true, null: false

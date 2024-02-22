@@ -1,4 +1,4 @@
-class CreateMeritActivityLogs < ActiveRecord::Migration[7.0]
+class CreateMeritActivityLogs < ActiveRecord::Migration[7.1]
   def change
     create_table :merit_activity_logs do |t|
       t.integer  :action_id

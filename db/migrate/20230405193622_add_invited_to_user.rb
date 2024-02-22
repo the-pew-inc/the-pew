@@ -1,5 +1,5 @@
 # Add 3 fields to control how users are invited to join an organization
-class AddInvitedToUser < ActiveRecord::Migration[7.0]
+class AddInvitedToUser < ActiveRecord::Migration[7.1]
   def change
     add_column :users, :invited,    :boolean, null: false, default: false
     add_column :users, :invited_at, :timestamp
