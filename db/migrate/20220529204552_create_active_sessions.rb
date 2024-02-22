@@ -1,4 +1,4 @@
-class CreateActiveSessions < ActiveRecord::Migration[7.0]
+class CreateActiveSessions < ActiveRecord::Migration[7.1]
   def change
     create_table :active_sessions, id: :uuid do |t|
       t.references :user,            null: false, type: :uuid, foreign_key: {on_delete: :cascade}

@@ -1,4 +1,4 @@
-class CreateEvents < ActiveRecord::Migration[7.0]
+class CreateEvents < ActiveRecord::Migration[7.1]
   def change
     create_table :events, id: :uuid do |t|
       t.belongs_to :user,             null: false, type: :uuid, foreign_key: true 
