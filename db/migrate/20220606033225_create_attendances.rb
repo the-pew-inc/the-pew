@@ -1,4 +1,4 @@
-class CreateAttendances < ActiveRecord::Migration[7.0]
+class CreateAttendances < ActiveRecord::Migration[7.1]
   def change
     create_table :attendances, id: :uuid do |t|
       t.references :user,  null: false, type: :uuid, foreign_key: true
