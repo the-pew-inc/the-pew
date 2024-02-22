@@ -1,4 +1,4 @@
-class CreateQuestions < ActiveRecord::Migration[7.0]
+class CreateQuestions < ActiveRecord::Migration[7.1]
   def change
 
     # Create table without foreign key constraints
