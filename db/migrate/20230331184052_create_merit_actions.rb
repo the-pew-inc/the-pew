@@ -1,7 +1,7 @@
 class CreateMeritActions < ActiveRecord::Migration[7.1]
   def change
-    create_table :merit_actions do |t|
-      t.integer :user_id
+    create_table :merit_actions, id: :uuid do |t|
+      t.uuid :user_id
       t.string  :action_method
       t.integer :action_value
       t.boolean :had_errors, default: false

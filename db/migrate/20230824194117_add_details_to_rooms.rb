@@ -1,4 +1,5 @@
 class AddDetailsToRooms < ActiveRecord::Migration[7.1]
+  disable_ddl_transaction!
   def up
     # Add the room_type column
     add_column :rooms, :room_type, :integer

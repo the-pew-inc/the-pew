@@ -6,6 +6,7 @@ class CreateRooms < ActiveRecord::Migration[7.1]
       t.boolean    :always_on,       null: false, default: false
       t.boolean    :allow_anonymous, null: false, default: false
       t.datetime   :start_date,      null: false
+      t.integer    :room_type,       null: false, default: 10
 
       t.timestamps
     end
@@ -13,5 +14,6 @@ class CreateRooms < ActiveRecord::Migration[7.1]
     add_index :rooms, :always_on
     add_index :rooms, :allow_anonymous
     add_index :rooms, :start_date
+    add_index :rooms, :room_type
   end
 end
