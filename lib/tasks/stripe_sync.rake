@@ -6,6 +6,9 @@
 # A set of tasks to synchronize data from Stripe to the database.
 
 namespace :stripe_sync do
+
+  # Call rake stripe_sync:sync_plans
+  # to synchronize plans from Stripe
   desc 'Synchronize plans from Stripe'
   task sync_plans: :environment do
     Stripe::Product.list(active: true).each do |stripe_product|
