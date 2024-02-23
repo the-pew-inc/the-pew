@@ -17,7 +17,6 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (poll_id => polls.id)
 #  fk_rails_...  (user_id => users.id)
 #
 class PollParticipation < ApplicationRecord

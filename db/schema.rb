@@ -162,9 +162,9 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_13_231207) do
     t.index ["migration_name", "arguments"], name: "index_background_migrations_on_unique_configuration", unique: true
   end
 
-  create_table "badges_sashes", force: :cascade do |t|
-    t.integer "badge_id"
-    t.integer "sash_id"
+  create_table "badges_sashes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "badge_id"
+    t.uuid "sash_id"
     t.boolean "notified_user", default: false
     t.datetime "created_at"
     t.index ["badge_id", "sash_id"], name: "index_badges_sashes_on_badge_id_and_sash_id"
@@ -196,7 +196,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_13_231207) do
     t.string "short_code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.uuid "organization_id", null: false
+    t.uuid "organization_id"
     t.index ["allow_anonymous"], name: "index_events_on_allow_anonymous"
     t.index ["always_on"], name: "index_events_on_always_on"
     t.index ["event_type"], name: "index_events_on_event_type"
@@ -204,6 +204,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_13_231207) do
     t.index ["short_code"], name: "index_events_on_short_code"
     t.index ["status"], name: "index_events_on_status"
     t.index ["user_id"], name: "index_events_on_user_id"
+    t.check_constraint "organization_id IS NOT NULL", name: "events_organization_id_null"
   end
 
   create_table "food_for_thoughts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -263,17 +264,17 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_13_231207) do
 
   create_table "members", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "user_id", null: false
-    t.uuid "organization_id", null: false
+    t.uuid "account_id", null: false
     t.boolean "owner", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["organization_id"], name: "index_members_on_organization_id"
+    t.index ["account_id"], name: "index_members_on_account_id"
     t.index ["owner"], name: "index_members_on_owner"
     t.index ["user_id"], name: "index_members_on_user_id"
   end
 
-  create_table "merit_actions", force: :cascade do |t|
-    t.integer "user_id"
+  create_table "merit_actions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id"
     t.string "action_method"
     t.integer "action_value"
     t.boolean "had_errors", default: false
@@ -286,7 +287,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_13_231207) do
     t.index ["processed"], name: "index_merit_actions_on_processed"
   end
 
-  create_table "merit_activity_logs", force: :cascade do |t|
+  create_table "merit_activity_logs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.integer "action_id"
     t.string "related_change_type"
     t.integer "related_change_id"
@@ -295,15 +296,15 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_13_231207) do
   end
 
   create_table "merit_score_points", force: :cascade do |t|
-    t.bigint "score_id"
+    t.uuid "score_id"
     t.bigint "num_points", default: 0
     t.string "log"
     t.datetime "created_at"
     t.index ["score_id"], name: "index_merit_score_points_on_score_id"
   end
 
-  create_table "merit_scores", force: :cascade do |t|
-    t.bigint "sash_id"
+  create_table "merit_scores", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "sash_id"
     t.string "category", default: "default"
     t.index ["sash_id"], name: "index_merit_scores_on_sash_id"
   end
@@ -414,16 +415,18 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_13_231207) do
     t.integer "poll_type", null: false
     t.string "title", null: false
     t.integer "status", null: false
+    t.boolean "is_anonymous", default: false, null: false
     t.integer "num_answers"
     t.integer "max_answers"
     t.integer "num_votes"
     t.integer "max_votes"
     t.integer "duration"
     t.boolean "add_option", default: true, null: false
+    t.integer "participants", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "selectors", default: ["upvote", "downvote", "neutral"], array: true
-    t.boolean "is_anonymous", default: false, null: false
+    t.index ["is_anonymous"], name: "index_polls_on_is_anonymous"
     t.index ["organization_id"], name: "index_polls_on_organization_id"
     t.index ["poll_type"], name: "index_polls_on_poll_type"
     t.index ["selectors"], name: "index_polls_on_selectors"
@@ -472,13 +475,13 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_13_231207) do
     t.uuid "room_id", null: false
     t.string "title", null: false
     t.integer "status", default: 0, null: false
+    t.integer "tone", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "anonymous", default: false, null: false
     t.integer "rejection_cause"
     t.uuid "parent_id"
-    t.uuid "organization_id", null: false
-    t.integer "tone", default: 0, null: false
+    t.uuid "organization_id"
     t.jsonb "ai_response"
     t.string "keywords", default: [], array: true
     t.index ["anonymous"], name: "index_questions_on_anonymous"
@@ -491,6 +494,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_13_231207) do
     t.index ["user_id", "room_id"], name: "index_questions_on_user_id_and_room_id"
     t.index ["user_id", "status"], name: "index_questions_on_user_id_and_status"
     t.index ["user_id"], name: "index_questions_on_user_id"
+    t.check_constraint "organization_id IS NOT NULL", name: "questions_organization_id_null"
   end
 
   create_table "resource_invites", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -512,7 +516,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_13_231207) do
     t.index ["email"], name: "index_resource_invites_on_email"
     t.index ["group_id"], name: "index_resource_invites_on_group_id"
     t.index ["invitable_type", "invitable_id"], name: "index_resource_invites_on_invitable"
-    t.index ["invitable_type", "invitable_id"], name: "index_resource_invites_on_invitable_type_and_invitable_id"
     t.index ["organization_id"], name: "index_resource_invites_on_organization_id"
     t.index ["recipient_id"], name: "index_resource_invites_on_recipient_id"
     t.index ["sender_id"], name: "index_resource_invites_on_sender_id"
@@ -536,19 +539,21 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_13_231207) do
     t.boolean "always_on", default: false, null: false
     t.boolean "allow_anonymous", default: false, null: false
     t.datetime "start_date", null: false
+    t.integer "room_type", default: 10, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.uuid "organization_id", null: false
-    t.integer "room_type"
+    t.uuid "organization_id"
     t.datetime "end_date", null: false
     t.index ["allow_anonymous"], name: "index_rooms_on_allow_anonymous"
     t.index ["always_on"], name: "index_rooms_on_always_on"
     t.index ["event_id"], name: "index_rooms_on_event_id"
     t.index ["organization_id"], name: "index_rooms_on_organization_id"
+    t.index ["room_type"], name: "index_rooms_on_room_type"
     t.index ["start_date"], name: "index_rooms_on_start_date"
+    t.check_constraint "organization_id IS NOT NULL", name: "rooms_organization_id_null"
   end
 
-  create_table "sashes", force: :cascade do |t|
+  create_table "sashes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -606,7 +611,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_13_231207) do
     t.string "uid"
     t.string "provider"
     t.string "time_zone"
-    t.integer "sash_id"
+    t.uuid "sash_id"
     t.integer "level", default: 0
     t.boolean "invited", default: false, null: false
     t.datetime "invited_at", precision: nil
@@ -654,32 +659,21 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_13_231207) do
   add_foreign_key "active_sessions", "users", on_delete: :cascade
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "attendances", "events"
   add_foreign_key "attendances", "users"
   add_foreign_key "background_migration_jobs", "background_migrations", column: "migration_id", on_delete: :cascade
   add_foreign_key "events", "users"
-  add_foreign_key "group_memberships", "groups"
   add_foreign_key "group_memberships", "users"
-  add_foreign_key "groups", "organizations"
   add_foreign_key "groups", "users"
   add_foreign_key "import_results", "users"
   add_foreign_key "messages", "users"
-  add_foreign_key "poll_answers", "poll_options"
-  add_foreign_key "poll_answers", "polls"
   add_foreign_key "poll_answers", "users"
   add_foreign_key "poll_options", "polls"
-  add_foreign_key "poll_participations", "polls"
   add_foreign_key "poll_participations", "users"
   add_foreign_key "polls", "organizations"
-  add_foreign_key "polls", "users"
   add_foreign_key "profiles", "users"
-  add_foreign_key "question_answers", "questions"
   add_foreign_key "question_answers", "users"
-  add_foreign_key "questions", "rooms"
   add_foreign_key "questions", "users"
   add_foreign_key "resource_invites", "organizations"
-  add_foreign_key "resource_invites", "users", column: "recipient_id"
-  add_foreign_key "resource_invites", "users", column: "sender_id"
   add_foreign_key "rooms", "events"
   add_foreign_key "subscriptions", "organizations"
   add_foreign_key "votes", "users"

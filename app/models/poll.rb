@@ -12,6 +12,7 @@
 #  max_votes       :integer
 #  num_answers     :integer
 #  num_votes       :integer
+#  participants    :integer          default(0), not null
 #  poll_type       :integer          not null
 #  selectors       :string           default(["\"upvote\"", "\"downvote\"", "\"neutral\""]), is an Array
 #  status          :integer          not null
@@ -23,6 +24,7 @@
 #
 # Indexes
 #
+#  index_polls_on_is_anonymous     (is_anonymous)
 #  index_polls_on_organization_id  (organization_id)
 #  index_polls_on_poll_type        (poll_type)
 #  index_polls_on_selectors        (selectors)
@@ -32,7 +34,6 @@
 # Foreign Keys
 #
 #  fk_rails_...  (organization_id => organizations.id)
-#  fk_rails_...  (user_id => users.id)
 #
 class Poll < ApplicationRecord
   belongs_to :organization

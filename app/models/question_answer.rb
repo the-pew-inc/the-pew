@@ -17,7 +17,6 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (question_id => questions.id)
 #  fk_rails_...  (user_id => users.id)
 #
 class QuestionAnswer < ApplicationRecord

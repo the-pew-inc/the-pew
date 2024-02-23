@@ -14,7 +14,7 @@
 #  tone            :integer          default("undefined"), not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
-#  organization_id :uuid             not null
+#  organization_id :uuid
 #  parent_id       :uuid
 #  room_id         :uuid             not null
 #  user_id         :uuid             not null
@@ -34,7 +34,6 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (room_id => rooms.id)
 #  fk_rails_...  (user_id => users.id)
 #
 class Question < ApplicationRecord

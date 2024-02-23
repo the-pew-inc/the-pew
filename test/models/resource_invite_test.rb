@@ -21,21 +21,18 @@
 #
 # Indexes
 #
-#  index_resource_invites_on_email                            (email)
-#  index_resource_invites_on_group_id                         (group_id)
-#  index_resource_invites_on_invitable                        (invitable_type,invitable_id)
-#  index_resource_invites_on_invitable_type_and_invitable_id  (invitable_type,invitable_id)
-#  index_resource_invites_on_organization_id                  (organization_id)
-#  index_resource_invites_on_recipient_id                     (recipient_id)
-#  index_resource_invites_on_sender_id                        (sender_id)
-#  index_resource_invites_on_status                           (status)
-#  index_resource_invites_on_token                            (token) UNIQUE
+#  index_resource_invites_on_email            (email)
+#  index_resource_invites_on_group_id         (group_id)
+#  index_resource_invites_on_invitable        (invitable_type,invitable_id)
+#  index_resource_invites_on_organization_id  (organization_id)
+#  index_resource_invites_on_recipient_id     (recipient_id)
+#  index_resource_invites_on_sender_id        (sender_id)
+#  index_resource_invites_on_status           (status)
+#  index_resource_invites_on_token            (token) UNIQUE
 #
 # Foreign Keys
 #
 #  fk_rails_...  (organization_id => organizations.id)
-#  fk_rails_...  (recipient_id => users.id)
-#  fk_rails_...  (sender_id => users.id)
 #
 require "test_helper"
 
