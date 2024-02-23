@@ -4,7 +4,7 @@
   "dependencies": {
     "@honeybadger-io/js": "6.8.3",
     "@hotwired/stimulus": "3.2.2",
-    "@hotwired/turbo-rails": "7.3.0",
+    "@hotwired/turbo-rails": "8.0.3",
     "@rails/actiontext": "7.1.3",
     "@rails/activestorage": "7.1.3",
     "@rails/request.js": "0.0.9",
@@ -13,16 +13,16 @@
     "chart.js": "4.4.1",
     "chartjs-plugin-datalabels": "2.2.0",
     "chartkick": "5.0.1",
-    "esbuild": "0.19.11",
-    "flowbite": "2.2.1",
+    "esbuild": "0.20.0",
+    "flowbite": "2.3.0",
     "flowbite-datepicker": "1.2.6",
     "js-confetti": "0.12.0",
-    "postcss": "8.4.33",
+    "postcss": "8.4.35",
     "qr-code-styling": "1.6.0-rc.1",
     "stimulus-autocomplete": "3.1.0",
     "taggle": "1.15.0",
     "tailwindcss": "3.4.1",
-    "trix": "2.0.8"
+    "trix": "2.0.10"
   },
   "scripts": {
     "build-old": "node esbuild.config.js",

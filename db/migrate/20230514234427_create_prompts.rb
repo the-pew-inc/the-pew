@@ -1,4 +1,4 @@
-class CreatePrompts < ActiveRecord::Migration[7.0]
+class CreatePrompts < ActiveRecord::Migration[7.1]
   def change
     create_table :prompts, id: :uuid do |t|
       t.uuid    :organization_id

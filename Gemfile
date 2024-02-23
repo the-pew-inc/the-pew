@@ -5,7 +5,7 @@ ruby '3.3.0'
 
 # IMPORTANT: This must be the first gem listed
 # Add support to appmap in development and test
-gem 'appmap', '0.103.0', groups: %i[development test]
+gem 'appmap', '1.0.0', groups: %i[development test]
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem 'rails', '~> 7.1.3'
@@ -23,7 +23,7 @@ gem 'puma', '~> 6.4.2'
 gem 'jsbundling-rails', '~> 1.3.0'
 
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
-gem 'turbo-rails', '~> 1.5.0'
+gem 'turbo-rails', '~> 2.0.0'
 
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
 gem 'stimulus-rails', '~> 1.3.3'
@@ -38,7 +38,7 @@ gem 'jbuilder'
 gem 'oj', '~> 3.16.1'
 
 # Use Redis adapter to run Action Cable in production
-gem 'redis', '~> 5.0.5'
+gem 'redis', '~> 5.1.0'
 
 # To speed up caching in production
 gem 'hiredis', '~> 0.6.3'
@@ -47,13 +47,13 @@ gem 'hiredis', '~> 0.6.3'
 # gem 'kredis'
 
 # Sidekiq [https://github.com/mperham/sidekiq]
-gem 'sidekiq', '~>7.2.0'
+gem 'sidekiq', '~>7.2.2'
 
 # Add Noticed to support notifications [https://github.com/excid3/noticed]
 gem 'noticed', '~> 1.5'
 
 # Adding support to View Component (better than partials ;-) ) [https://github.com/github/view_component]
-gem 'view_component', '~> 3.10.0'
+gem 'view_component', '~> 3.11.0'
 
 # User authentication
 # Use Argon2 to hash passwords [https://github.com/technion/ruby-argon2]
@@ -77,7 +77,7 @@ gem 'omniauth-google-oauth2', '~> 1.1.1'
 gem 'omniauth-rails_csrf_protection'
 
 # Adding invisible_captcha [https://github.com/markets/invisible_captcha]
-gem 'invisible_captcha', '~> 2.1.0'
+gem 'invisible_captcha', '~> 2.2.0'
 
 # Adding Pundit to manage authorizations [https://github.com/varvet/pundit]
 gem 'pundit'
@@ -103,13 +103,13 @@ gem 'meta-tags', '~> 2.20.0'
 gem 'sendgrid-actionmailer', '~> 3.2.0'
 
 # Monitoring - Honeybadger []
-gem 'honeybadger', '~> 5.4.1'
+gem 'honeybadger', '~> 5.5.0'
 
 # Use Sass to process CSS
 # gem "sassc-rails"
 
 # Nokogiri to parse HTML and more [https://github.com/sparklemotion/nokogiri]
-gem 'nokogiri', '~> 1.15.0'
+gem 'nokogiri', '~> 1.16.0'
 
 # Download
 gem 'down', '~> 5.0'
@@ -127,13 +127,13 @@ gem 'ruby-vips', '>= 2.1.0'
 
 # Octokig [https://github.com/octokit/octokit.rb]
 # Mostly used to import openAI prompts from GitHub repo using the import_prompts.rake task
-gem 'octokit', '~> 8.0.0'
+gem 'octokit', '~> 8.1.0'
 
 # Pagination [https://github.com/ddnexus/pagy]
-gem 'pagy', '~> 6.4.2'
+gem 'pagy', '~> 7.0.1'
 
 # Countries [https://github.com/countries/countries]
-gem 'countries', '~> 5.7.0', require: 'countries/global'
+gem 'countries', '~> 6.0.0', require: 'countries/global'
 
 # Validate URL format [https://github.com/perfectline/validates_url]
 gem 'validate_url'
@@ -155,7 +155,7 @@ gem 'ruby-openai', '~> 6.3.0'
 gem 'pg_search', '~> 2.3.6'
 
 # Stripe (payment, subscription processing) [https://github.com/stripe/stripe-ruby]
-gem 'stripe', '~> 10.6.0'
+gem 'stripe', '~> 10.9.0'
 
 # To enable retry in Faraday v2.0+
 gem 'faraday-retry', '~> 2.2.0'
@@ -164,7 +164,7 @@ gem 'faraday-retry', '~> 2.2.0'
 gem 'whenever', '~> 1.0.0', require: false
 
 # Add support online_migration (a strong_migration on steroid) [https://github.com/fatkodima/online_migrations]
-gem 'online_migrations', '~> 0.13.0'
+gem 'online_migrations', '~> 0.14.0'
 # Adding Scenic to better support online_migration [https://github.com/scenic-views/scenic]
 gem 'scenic', '~> 1.7.0'
 

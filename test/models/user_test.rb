@@ -20,7 +20,7 @@
 #  uid                    :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
-#  sash_id                :integer
+#  sash_id                :uuid
 #
 # Indexes
 #

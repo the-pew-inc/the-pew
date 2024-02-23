@@ -1,7 +1,7 @@
-class CreateBadgesSashes < ActiveRecord::Migration[7.0]
+class CreateBadgesSashes < ActiveRecord::Migration[7.1]
   def self.up
-    create_table :badges_sashes do |t|
-      t.integer :badge_id, :sash_id
+    create_table :badges_sashes, id: :uuid do |t|
+      t.uuid :badge_id, :sash_id
       t.boolean :notified_user, default: false
       t.datetime :created_at
     end

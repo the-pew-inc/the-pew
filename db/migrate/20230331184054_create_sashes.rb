@@ -1,6 +1,6 @@
-class CreateSashes < ActiveRecord::Migration[7.0]
+class CreateSashes < ActiveRecord::Migration[7.1]
   def change
-    create_table :sashes do |t|
+    create_table :sashes, id: :uuid do |t|
       t.timestamps null: false
     end
   end

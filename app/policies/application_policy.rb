@@ -36,6 +36,10 @@ class ApplicationPolicy
     false
   end
 
+  def user_has_active_subscription?
+    user.organization.active_subscription?
+  end
+
   class Scope
     def initialize(user, scope)
       @user = user
@@ -43,7 +47,7 @@ class ApplicationPolicy
     end
 
     def resolve
-      raise NotImplementedError, "You must define #resolve in #{self.class}"
+      raise(NotImplementedError, "You must define #resolve in #{self.class}")
     end
 
     private

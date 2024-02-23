@@ -1,8 +1,8 @@
-class CreateAttendances < ActiveRecord::Migration[7.0]
+class CreateAttendances < ActiveRecord::Migration[7.1]
   def change
     create_table :attendances, id: :uuid do |t|
       t.references :user,  null: false, type: :uuid, foreign_key: true
-      t.references :event, null: false, type: :uuid, foreign_key: true
+      t.references :event, null: false, type: :uuid, foreign_key: false
       t.references :room
       t.integer    :status, null: false, default: 0
       t.datetime   :start_time, null: false
@@ -10,5 +10,12 @@ class CreateAttendances < ActiveRecord::Migration[7.0]
 
       t.timestamps
     end
+  end
+end
+
+# Add additional foreign keys at the end
+class AddForeignKeyFromAttendancesToEvents < ActiveRecord::Migration[7.1]
+  def change
+    add_foreign_key :attendances, :events
   end
 end

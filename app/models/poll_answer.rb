@@ -20,8 +20,6 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (poll_id => polls.id)
-#  fk_rails_...  (poll_option_id => poll_options.id)
 #  fk_rails_...  (user_id => users.id)
 #
 class PollAnswer < ApplicationRecord

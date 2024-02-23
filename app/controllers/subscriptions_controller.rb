@@ -8,9 +8,9 @@ class SubscriptionsController < ApplicationController
   # GET /subscriptions
   def index
     @plans = Plan.where(active: true)
-    @starter    = @plans.find_by(label: 'starter')
-    @pro        = @plans.find_by(label: 'pro')
-    @enterprise = @plans.find_by(label: 'enterprise')
+    @starter    = @plans.find_by(label: 'Starter')
+    @pro        = @plans.find_by(label: 'Pro')
+    @enterprise = @plans.find_by(label: 'Enterprise')
   end
 
   def new
@@ -85,7 +85,6 @@ class SubscriptionsController < ApplicationController
     organization = Organization.new
     organization.name    = organization_name
     organization.website = organization_website
-    organization.owner   = true
 
     unless organization.save
       user.destroy
@@ -97,6 +96,7 @@ class SubscriptionsController < ApplicationController
     member = Member.new
     member.organization_id = organization.id
     member.user_id         = user.id
+    member.owner           = true
     unless member.save
       user.destroy
       organization.destroy

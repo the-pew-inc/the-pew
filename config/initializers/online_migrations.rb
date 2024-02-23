@@ -10,6 +10,9 @@ OnlineMigrations.configure do |config|
   # Configure whether to perform checks when migrating down.
   config.check_down = false
 
+  # 
+  config.statement_timeout = 10.minutes
+
   # Configure custom error messages.
   # error_messages is a Hash with keys - error names and values - error messages.
   # config.error_messages[:remove_column] = "Your custom instructions"

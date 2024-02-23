@@ -1,4 +1,4 @@
-class CreateProfiles < ActiveRecord::Migration[7.0]
+class CreateProfiles < ActiveRecord::Migration[7.1]
   def change
     create_table :profiles, id: :uuid do |t|
       t.belongs_to :user,     null: false, foreign_key: true, type: :uuid

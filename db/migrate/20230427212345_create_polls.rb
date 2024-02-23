@@ -1,12 +1,14 @@
-class CreatePolls < ActiveRecord::Migration[7.0]
+class CreatePolls < ActiveRecord::Migration[7.1]
   def change
     create_table :polls, id: :uuid do |t|
       t.references :organization, null: false, foreign_key: true, type: :uuid
-      t.references :user,         null: false, foreign_key: true, type: :uuid
+      t.references :user,         null: false, foreign_key: false, type: :uuid
       t.integer    :poll_type,    null: false
       t.string     :title,        null: false
       t.integer    :status,       null: false
-      
+
+      t.boolean    :is_anonymous, null: false, default: false
+            
       # Rules: 
       # 1. if num_answers AND max_answers are nil or equal to 0: a user can answer for as many poll_option present in the poll
       # 2. if num_answers OR max_answers is > 0 then we apply the rule assigned to each of these parameter
@@ -33,5 +35,13 @@ class CreatePolls < ActiveRecord::Migration[7.0]
 
     add_index :polls, :poll_type
     add_index :polls, :status
+    add_index :polls, :is_anonymous
+  end
+end
+
+# Add additional foreign keys at the end
+class AddForeignKeyFromPollsToUsers < ActiveRecord::Migration[7.1]
+  def change
+    add_foreign_key :polls, :users
   end
 end

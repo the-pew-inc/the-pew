@@ -17,7 +17,6 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (group_id => groups.id)
 #  fk_rails_...  (user_id => users.id)
 #
 require "test_helper"

@@ -1,4 +1,4 @@
-class CreatePlans < ActiveRecord::Migration[7.0]
+class CreatePlans < ActiveRecord::Migration[7.1]
   def change
     create_table :plans, id: :uuid do |t|
       t.string     :stripe_product_id, null: false

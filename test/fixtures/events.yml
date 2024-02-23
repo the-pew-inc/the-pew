@@ -14,7 +14,7 @@
 #  status          :integer          default("draft"), not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
-#  organization_id :uuid             not null
+#  organization_id :uuid
 #  user_id         :uuid             not null
 #
 # Indexes

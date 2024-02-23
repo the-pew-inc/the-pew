@@ -18,7 +18,7 @@ class OrganizationController < ApplicationController
   def edit
     # TODO: add a condition for when a user is an admin for the account.
     # Current code only displays account information when the user is the owner
-    @organization.name = nil if @organization.name === '__default__'
+    @organization.name = nil if @organization.name == '__default__'
   end
 
   # PUT /organization/:id

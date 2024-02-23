@@ -9,12 +9,12 @@
 #  always_on       :boolean          default(FALSE), not null
 #  end_date        :datetime         not null
 #  name            :string           not null
-#  room_type       :integer
+#  room_type       :integer          default("universal"), not null
 #  start_date      :datetime         not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  event_id        :uuid             not null
-#  organization_id :uuid             not null
+#  organization_id :uuid
 #
 # Indexes
 #
@@ -22,6 +22,7 @@
 #  index_rooms_on_always_on        (always_on)
 #  index_rooms_on_event_id         (event_id)
 #  index_rooms_on_organization_id  (organization_id)
+#  index_rooms_on_room_type        (room_type)
 #  index_rooms_on_start_date       (start_date)
 #
 # Foreign Keys
