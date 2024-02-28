@@ -62,7 +62,7 @@ gem 'argon2', '~> 2.3.0'
 # Export to Excel
 # [https://github.com/caxlsx/caxlsx_rails]
 # [https://dev.to/yarotheslav/export-from-database-table-to-excel-workbook-level-1-55jd]
-gem 'caxlsx', '~> 4.0.0'
+gem 'caxlsx', '~> 4.1.0'
 gem 'caxlsx_rails'
 
 # Parse Excel xlsx files
@@ -155,7 +155,7 @@ gem 'ruby-openai', '~> 6.3.0'
 gem 'pg_search', '~> 2.3.6'
 
 # Stripe (payment, subscription processing) [https://github.com/stripe/stripe-ruby]
-gem 'stripe', '~> 10.9.0'
+gem 'stripe', '~> 10.10.0'
 
 # To enable retry in Faraday v2.0+
 gem 'faraday-retry', '~> 2.2.0'
