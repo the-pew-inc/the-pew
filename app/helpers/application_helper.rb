@@ -27,6 +27,11 @@ module ApplicationHelper
     user.organization_owner?(user.organization) || user.has_role?(:admin, user.organization)
   end
 
+  # Used to return the current user's organization id
+  # Use case: setting sidebar menu items
+  def organization_id
+    current_user.organization.id if user_signed_in?
+  end
 
   def resource_status(resource)
     if resource.draft?
@@ -55,7 +60,7 @@ module ApplicationHelper
     end
 
     # Default in case we do not cover this type
-    return '<span class="bg-gray-100 text-gray-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-gray-900 dark:text-gray-300">?</span>'.html_safe
+    '<span class="bg-gray-100 text-gray-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-gray-900 dark:text-gray-300">?</span>'.html_safe
   end
 
   def resource_type(resource)
@@ -75,8 +80,6 @@ module ApplicationHelper
     end
 
     # If non of the above, the user is active
-    return '<span class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-red-900 dark:text-red-300">error</span>'.html_safe
+    '<span class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-red-900 dark:text-red-300">error</span>'.html_safe
   end
-
-
 end
