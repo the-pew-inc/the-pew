@@ -40,10 +40,14 @@
       </div>
       <main class="flex-grow">
         <div class="pt-2 lg:max-w-7xl max-w-6xl px-1">
-          <%= yield %>
+          <div class="lg:flex">
+            <%= render partial: "layouts/settings_sidebar", locals: { organization_id: organization_id } %>
+            <div class="lg:mx-10">
+              <%= yield %>
+            </div>
+          </div>
         </div>
       </main>
-      <%= turbo_frame_tag :cookies_modal, src: cookies_path if session[:cookies_accepted].nil? %>
       <%= render "shared/footer" %>
     </div>
   </body>

@@ -19,6 +19,7 @@ class OrganizationController < ApplicationController
     # TODO: add a condition for when a user is an admin for the account.
     # Current code only displays account information when the user is the owner
     @organization.name = nil if @organization.name == '__default__'
+    render(layout: 'settings')
   end
 
   # PUT /organization/:id
@@ -28,9 +29,9 @@ class OrganizationController < ApplicationController
     end
 
     if @organization.update(update_organization_params)
-      render(:edit, status: :ok)
+      render(:edit, status: :ok, layout: 'settings')
     else
-      render(:edit, status: :unprocessable_entity)
+      render(:edit, status: :unprocessable_entity, layout: 'settings')
     end
   end
 

@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   before_action :redirect_if_authenticated, only: %i[create new]
 
   # Add invisible_captcha
-  invisible_captcha only: [:create, :update]
+  invisible_captcha only: %i[create update]
 
   # Add User Bulk Actions
   include UserBulkActions
@@ -14,15 +14,32 @@ class UsersController < ApplicationController
   # GET /organization/:id/users
   def index
     @organization = Organization.find(params[:organization_id])
-    authorize @organization, :manage_users?
-    @users = @organization.users.includes([:profile, :organization])
+    authorize(@organization, :manage_users?)
+    @users = @organization.users.includes(%i[profile organization])
+    render(layout: 'settings')
+  end
+
+  def new
+    @user = User.new
+    @user.build_profile
+    session[:user_return_to] = URI(request.referer || '').path
+  end
+
+  def edit
+    @user = User.find(params[:id])
+
+    # make sure the user is not the current user
+    not_owner and return
+
+    # retrieve the user's sessions
+    @active_sessions = @user.active_sessions.order(created_at: :desc)
   end
 
   def create
     @user = User.new(create_user_params)
 
     # Cannot register with an email that receieved an invitation to join an organization
-    user_was_invited? and return 
+    user_was_invited? and return
 
     if @user.save
       after_login_path = session[:user_return_to] || root_path
@@ -33,9 +50,34 @@ class UsersController < ApplicationController
     end
   end
 
+  def update
+    @user = User.find(params[:id])
+
+    # make sure the user is not the current user
+    not_owner and return
+
+    # default success message
+    msg = 'Account updated successfully.'
+
+    # If the user's account is locked, do nothing but warn them
+    is_locked and return
+
+    # If the user is changing their password, check that the current password is correct & that the user provides a new password
+    update_password and return
+
+    msg = user_updates_their_email(msg)
+
+    # Save the user's changes
+    if @user.update(update_user_params)
+      redirect_to(root_path, notice: msg)
+    else
+      render(:edit, status: :unprocessable_entity)
+    end
+  end
+
   def destroy
     @user = User.find(params[:id])
-    
+
     # make sure the user is not the current user
     not_owner and return
 
@@ -51,71 +93,30 @@ class UsersController < ApplicationController
   # Used by admin or organization owner to delete a user
   def delete_user
     @user = User.find(params[:id])
-    authorize @user
+    authorize(@user)
 
-    if @user && !is_organization_owner?
-      # Disconnect the user from all previous session
-      @user.active_sessions.destroy_all
+    return unless @user && !is_organization_owner?
 
-      # Keep the user's id for a short time
-      @user_clone = @user.clone
-      @organization = @user.organization
+    # Disconnect the user from all previous session
+    @user.active_sessions.destroy_all
 
-      # remove the user from the organization
-      member = Member.find_by(user_id: @user.id)
-      member.destroy
+    # Keep the user's id for a short time
+    @user_clone = @user.clone
+    @organization = @user.organization
 
-      # Delete the user
-      @user.destroy
+    # remove the user from the organization
+    member = Member.find_by(user_id: @user.id)
+    member.destroy
 
-      # Broadcast
-      Broadcasters::Users::Deleted.new(@user_clone, @organization).call
-    end
-  end
+    # Delete the user
+    @user.destroy
 
-  def edit
-    @user = User.find(params[:id])
-
-    # make sure the user is not the current user
-    not_owner and return
-
-    # retrieve the user's sessions
-    @active_sessions = @user.active_sessions.order(created_at: :desc)
-  end
-
-  def new
-    @user = User.new
-    @user.build_profile
-    session[:user_return_to] = URI(request.referer || '').path
-  end
-
-  def update
-    @user = User.find(params[:id])
-
-    # make sure the user is not the current user
-    not_owner and return
-
-    # default success message
-    msg = 'Account updated successfully.' 
-
-    # If the user's account is locked, do nothing but warn them
-    is_locked and return 
-      
-    # If the user is changing their password, check that the current password is correct & that the user provides a new password
-    update_password and return
-
-    msg = user_updates_their_email(msg)
-
-    # Save the user's changes
-    if @user.update(update_user_params)
-      redirect_to(root_path, notice: msg)
-    else
-      render(:edit, status: :unprocessable_entity)
-    end
+    # Broadcast
+    Broadcasters::Users::Deleted.new(@user_clone, @organization).call
   end
 
   def reset_password
-    # TODO make sure the user is an admin or the owner of the organization
+    # TODO: make sure the user is an admin or the owner of the organization
     @user = User.find(params[:id])
     if @user
       # Disconnect the user
@@ -126,10 +127,12 @@ class UsersController < ApplicationController
 
       # Send password reset email
       @user.send_password_reset_email!
-      flash.now[:success] = "We just sent reset instructions to ${@user.email}."
+      flash.now[:success] = 'We just sent reset instructions to ${@user.email}.'
       redirect_to(organization_users_path(@user.organization.id))
     else
-      redirect_to(organization_users_path(@user.organization.id), alert: 'Something went wrong. If this error persist, please contact your administrator.')
+      redirect_to(organization_users_path(@user.organization.id),
+                  alert: 'Something went wrong. If this error persist, please contact your administrator.'
+                 )
     end
   end
 
@@ -137,7 +140,7 @@ class UsersController < ApplicationController
   # This action is done by the user only from the profile section of the app
   def resend_confirmation
     @user = User.find(params[:id])
-    
+
     # Make sure the user is entitled to resend the confirmation email
     not_owner and return
 
@@ -154,39 +157,38 @@ class UsersController < ApplicationController
   # Method used to resend an invitation to join an organization to a user.
   def resend_invite
     @user = User.find(params[:id])
-    authorize @user
-    if @user && @user.invited && @user.accepted_invitation_on.nil?
-      @user.send_invite!
-    end
+    authorize(@user)
+    return unless @user && @user.invited && @user.accepted_invitation_on.nil?
+
+    @user.send_invite!
   end
 
   # Method used to toggle the blocked value for a given user
   def block
     @user = User.find(params[:id])
-    authorize @user
+    authorize(@user)
 
-    if @user
-      if @user.blocked
-        @user.unblock!
-        Broadcasters::Users::Updated.new(@user).call
-      else
-        @user.block!
-        Broadcasters::Users::Updated.new(@user).call
-      end
+    return unless @user
+
+    if @user.blocked
+      @user.unblock!
+      Broadcasters::Users::Updated.new(@user).call
+    else
+      @user.block!
+      Broadcasters::Users::Updated.new(@user).call
     end
   end
 
   # Method used by an admin or organization owner to reset the unlocked a given user
   def unlock
     @user = User.find(params[:id])
-    authorize @user
-    
-    if @user
-      if @user.locked
-        @user.unlock!
-        Broadcasters::Users::Updated.new(@user).call
-      end
-    end
+    authorize(@user)
+
+    return unless @user
+    return unless @user.locked
+
+    @user.unlock!
+    Broadcasters::Users::Updated.new(@user).call
   end
 
   private
@@ -205,27 +207,26 @@ class UsersController < ApplicationController
   # - make sure that the new and old passwords are not the same
   def update_password
     current_password = update_user_params[:password] if update_user_params[:password].present?
-    new_password = update_user_params[:current_password].present? ? update_user_params[:current_password] : nil
-    if current_password && new_password
-      # Make sure the current and new passwords are not the same
-      if current_password == new_password
-        flash.now[:alert] = 'New and current passwords must be different.'
-        render(:edit, status: :unprocessable_entity) and return true
-      end
+    new_password = update_user_params[:current_password].presence
+    return unless current_password && new_password
 
-      # Make sure the current password is correct
-      if !@user.authenticate(update_user_params[:current_password])
-        flash.now[:alert] = 'The information you provided to update your password is incorrect.'
-        render(:edit, status: :unprocessable_entity) and return true
-      end
+    # Make sure the current and new passwords are not the same
+    if current_password == new_password
+      flash.now[:alert] = 'New and current passwords must be different.'
+      render(:edit, status: :unprocessable_entity) and return true
     end
 
+    # Make sure the current password is correct
+    return if @user.authenticate(update_user_params[:current_password])
+
+    flash.now[:alert] = 'The information you provided to update your password is incorrect.'
+    render(:edit, status: :unprocessable_entity) and return true
   end
 
   def user_updates_their_email(msg)
     # If the user is updating their email, send a confirmation email and adavise them to check their email
     if update_user_params[:email].present? && update_user_params[:email] != @user.email
-      'Email & account updated successfully. Please check your mail for confirmation instructions.' 
+      'Email & account updated successfully. Please check your mail for confirmation instructions.'
     else
       msg
     end
@@ -233,31 +234,29 @@ class UsersController < ApplicationController
 
   # Make sure the user is not the current user
   def not_owner
-    if @user.id != current_user.id
-      flash.now[:alert] = 'You do not have permission to edit this user.'
-      render(:edit, status: :unprocessable_entity) and return true
-    end
+    return unless @user.id != current_user.id
+
+    flash.now[:alert] = 'You do not have permission to edit this user.'
+    render(:edit, status: :unprocessable_entity) and return true
   end
 
   def is_organization_owner?
     Member.find_by(user_id: @user.id, owner: true).nil? ? false : true
   end
 
-
   def is_locked
-    if @user.locked
-      flash.now[:alert] = 'Your account has been locked. Please contact your admin.'
-      render(:edit, status: :unprocessable_entity) and return true
-    end
+    return unless @user.locked
+
+    flash.now[:alert] = 'Your account has been locked. Please contact your admin.'
+    render(:edit, status: :unprocessable_entity) and return true
   end
 
   def user_was_invited?
     user = User.find_by(email: @user.email)
 
-    if user && user.invited && user.accepted_invitation_on.nil?
-      flash[:alert] = 'The email address you used has a pending invitation. Check your mailbox for an invite.'
-      redirect_to(root_path) and return true
-    end
-  end
+    return unless user && user.invited && user.accepted_invitation_on.nil?
 
+    flash[:alert] = 'The email address you used has a pending invitation. Check your mailbox for an invite.'
+    redirect_to(root_path) and return true
+  end
 end

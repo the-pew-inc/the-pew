@@ -4,10 +4,12 @@ class ImportsController < ApplicationController
 
   def index
     @import_results = current_user.import_results.order(created_at: :desc).limit(5)
+    render(layout: 'settings')
   end
 
   def show
     @import_result = current_user.import_results.find(params[:id])
+    render(layout: 'settings')
   end
 
   def new; end
