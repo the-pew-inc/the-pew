@@ -103,7 +103,7 @@ gem 'meta-tags', '~> 2.20.0'
 gem 'sendgrid-actionmailer', '~> 3.2.0'
 
 # Monitoring - Honeybadger []
-gem 'honeybadger', '~> 5.5.0'
+gem 'honeybadger', '~> 5.6.0'
 
 # Use Sass to process CSS
 # gem "sassc-rails"
@@ -155,7 +155,7 @@ gem 'ruby-openai', '~> 6.3.0'
 gem 'pg_search', '~> 2.3.6'
 
 # Stripe (payment, subscription processing) [https://github.com/stripe/stripe-ruby]
-gem 'stripe', '~> 10.10.0'
+gem 'stripe', '~> 10.11.0'
 
 # To enable retry in Faraday v2.0+
 gem 'faraday-retry', '~> 2.2.0'
