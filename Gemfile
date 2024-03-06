@@ -103,7 +103,7 @@ gem 'meta-tags', '~> 2.20.0'
 gem 'sendgrid-actionmailer', '~> 3.2.0'
 
 # Monitoring - Honeybadger []
-gem 'honeybadger', '~> 5.5.0'
+gem 'honeybadger', '~> 5.6.0'
 
 # Use Sass to process CSS
 # gem "sassc-rails"
