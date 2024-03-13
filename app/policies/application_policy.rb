@@ -37,7 +37,7 @@ class ApplicationPolicy
   end
 
   def user_has_active_subscription?
-    user.organization.active_subscription?
+    user.organization.subscription&.active?
   end
 
   class Scope

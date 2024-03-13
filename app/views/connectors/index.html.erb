@@ -1,6 +1,6 @@
 <!-- app/views/connectors/index.html.erb -->
 <%# Adding a blur when the user's organization has no valid subscription %>
-<% if !current_user.organization&.active_subscription? %>
+<% if !current_user.organization&.subscription&.active? %>
   <div class="overlay fixed inset-0 bg-black bg-opacity-50 z-40 flex items-center justify-center">
     <div class="mx-auto p-4 text-center bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
       <h5 class="mb-2 text-3xl font-bold text-gray-900 dark:text-white">Unlock Insights</h5>
@@ -125,15 +125,17 @@
     </div>
   </div>
 <% end %>
-<script>
-  // No need for DOMContentLoaded since this script can be at the bottom
-  document.body.classList.add('prevent-scroll'); // Optionally prevent scrolling when overlay is active
-</script>
-<style>
-  .blur {
-    filter: blur(8px);
-  }
-  .prevent-scroll {
-    overflow: hidden;
-  }
-</style>
+<% if !current_user.organization&.subscription&.active? %>
+  <script>
+    // No need for DOMContentLoaded since this script can be at the bottom
+    document.body.classList.add('prevent-scroll'); // Optionally prevent scrolling when overlay is active
+  </script>
+  <style>
+    .blur {
+      filter: blur(8px);
+    }
+    .prevent-scroll {
+      overflow: hidden;
+    }
+  </style>
+<% end %>

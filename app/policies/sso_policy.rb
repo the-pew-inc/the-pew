@@ -2,15 +2,16 @@
 
 # app/policies/sso_policy.rb
 
-class SsoPolicy
-  attr_reader :user, :organization
+class SsoPolicy < ApplicationPolicy
+  # attr_reader :user, :organization
 
-  def initialize(user, organization)
-    @user = user
-    @organization = organization
-  end
+  # def initialize(user, organization)
+  #   @user = user
+  #   @organization = organization
+  # end
 
   def allowed?
-    user.organization.active_subscription? && user.has_role?(:allowed_role, organization)
+    # user_has_active_subscription? && user.has_role?(:admin, record)
+    user_has_active_subscription?
   end
 end
