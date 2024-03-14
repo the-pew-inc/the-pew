@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_13_231207) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_14_164149) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -172,15 +172,44 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_13_231207) do
     t.index ["sash_id"], name: "index_badges_sashes_on_sash_id"
   end
 
+  create_table "connections", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "organization_id", null: false
+    t.uuid "user_id", null: false
+    t.uuid "connector_id", null: false
+    t.integer "throttle", default: 10, null: false
+    t.string "oauth_token"
+    t.string "refresh_token"
+    t.integer "status"
+    t.datetime "last_refreshed_at"
+    t.boolean "force_invalidation"
+    t.jsonb "errors", default: {}
+    t.jsonb "usage_limits", default: {}
+    t.jsonb "settings", default: {}
+    t.jsonb "usage", default: {}
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["connector_id"], name: "index_connections_on_connector_id"
+    t.index ["force_invalidation"], name: "index_connections_on_force_invalidation"
+    t.index ["organization_id"], name: "index_connections_on_organization_id"
+    t.index ["status"], name: "index_connections_on_status"
+    t.index ["user_id"], name: "index_connections_on_user_id"
+  end
+
   create_table "connectors", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
-    t.text "description"
+    t.string "redirect_url", null: false
     t.string "website"
     t.string "github"
     t.string "author"
     t.string "version", null: false
+    t.boolean "enabled", default: false, null: false
+    t.boolean "verified", default: false, null: false
+    t.jsonb "settings", default: {}, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["enabled"], name: "index_connectors_on_enabled"
+    t.index ["name"], name: "index_connectors_on_name", unique: true
+    t.index ["verified"], name: "index_connectors_on_verified"
   end
 
   create_table "events", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -661,6 +690,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_13_231207) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "attendances", "users"
   add_foreign_key "background_migration_jobs", "background_migrations", column: "migration_id", on_delete: :cascade
+  add_foreign_key "connections", "organizations"
   add_foreign_key "events", "users"
   add_foreign_key "group_memberships", "users"
   add_foreign_key "groups", "users"

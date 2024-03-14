@@ -42,12 +42,13 @@ class Organization < ApplicationRecord
   before_validation :clean_domain, if: :will_save_change_to_domain?
   before_validation :cleaning_strings
 
-  has_one  :subscription
+  has_one  :subscription, dependent: :destroy
 
-  has_many :events,    dependent: :destroy
-  has_many :members,   dependent: :destroy
-  has_many :polls,     dependent: :destroy
-  has_many :users,     through: :members
+  has_many :connections, dependent: :destroy
+  has_many :events,      dependent: :destroy
+  has_many :members,     dependent: :destroy
+  has_many :polls,       dependent: :destroy
+  has_many :users,       through: :members
 
   has_one_attached :logo
 

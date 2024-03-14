@@ -2,15 +2,24 @@
 #
 # Table name: connectors
 #
-#  id          :uuid             not null, primary key
-#  author      :string
-#  description :text
-#  github      :string
-#  name        :string           not null
-#  version     :string           not null
-#  website     :string
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
+#  id           :uuid             not null, primary key
+#  author       :string
+#  enabled      :boolean          default(FALSE), not null
+#  github       :string
+#  name         :string           not null
+#  redirect_url :string           not null
+#  settings     :jsonb            not null
+#  verified     :boolean          default(FALSE), not null
+#  version      :string           not null
+#  website      :string
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#
+# Indexes
+#
+#  index_connectors_on_enabled   (enabled)
+#  index_connectors_on_name      (name) UNIQUE
+#  index_connectors_on_verified  (verified)
 #
 
 require 'test_helper'
