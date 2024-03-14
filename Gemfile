@@ -49,6 +49,10 @@ gem 'hiredis', '~> 0.6.3'
 # Sidekiq [https://github.com/mperham/sidekiq]
 gem 'sidekiq', '~>7.2.2'
 
+# Connectors
+# Hubspot https://github.com/HubSpot/hubspot-api-ruby
+gem 'hubspot-api-client'
+
 # Add Noticed to support notifications [https://github.com/excid3/noticed]
 gem 'noticed', '~> 1.5'
 
@@ -103,7 +107,7 @@ gem 'meta-tags', '~> 2.20.0'
 gem 'sendgrid-actionmailer', '~> 3.2.0'
 
 # Monitoring - Honeybadger []
-gem 'honeybadger', '~> 5.6.0'
+gem 'honeybadger', '~> 5.7.0'
 
 # Use Sass to process CSS
 # gem "sassc-rails"
