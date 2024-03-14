@@ -11,8 +11,9 @@
 #  name         :string           not null
 #  redirect_url :string           not null
 #  settings     :jsonb            not null
+#  tags         :string           default([]), is an Array
 #  verified     :boolean          default(FALSE), not null
-#  version      :string           not null
+#  version      :string
 #  website      :string
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
@@ -21,6 +22,7 @@
 #
 #  index_connectors_on_enabled   (enabled)
 #  index_connectors_on_name      (name) UNIQUE
+#  index_connectors_on_tags      (tags) USING gin
 #  index_connectors_on_verified  (verified)
 #
 class Connector < ApplicationRecord

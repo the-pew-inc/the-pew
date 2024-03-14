@@ -93,43 +93,21 @@
       </div>
     </aside>
     <div class="p-4 flex-grow max-w-6xl mx-auto w-full">
-      <section id="documents">
-        <h3 class="text-gray-400 text-xl font-light mb-4">Documents</h3>
-        <div class="grid grid-cols-3 gap-4 mb-4">
-          <%= render partial: "connector", locals: { connector: Connector.new(name: "Hubspot", description: "CRM", version: "1.2.3"), installed: true } %>
-        </div>
-      </section>
-      <section id="communication">
-        <h3 class="text-gray-400 text-xl font-light mb-4">Communication</h3>
-        <div class="grid grid-cols-3 gap-4 mb-4">
-          <%= render partial: "connector", locals: { connector: Connector.new(name: "Microsoft Teams", description: "Collaboration", version: "1.2.3"), installed: false } %>
-          <%= render partial: "connector", locals: { connector: Connector.new(name: "Zoom", description: "Meetings", version: "1.2.3"), installed: true } %>
-          <%= render partial: "connector", locals: { connector: Connector.new(name: "Slack", description: "Chat", version: "1.2.3"), installed: true } %>
-        </div>
-      </section>
-      <section id="polls">
-        <h3 class="text-gray-400 text-xl font-light mb-4">Polls</h3>
-        <div class="grid grid-cols-3 gap-4 mb-4">
-          <%= render partial: "connector", locals: { connector: Connector.new(name: "Typeform", description: "Forms & Surveys", version: "1.2.3"), installed: false } %>
-          <%= render partial: "connector", locals: { connector: Connector.new(name: "Google Form", description: "Forms", version: "1.2.3"), installed: true } %>
-          <%= render partial: "connector", locals: { connector: Connector.new(name: "Mailchimp", description: "Mailing & Surveys", version: "1.2.3"), installed: false } %>
-          <%= render partial: "connector", locals: { connector: Connector.new(name: "Survey Monkey", description: "Surveys", version: "1.2.3"), installed: false } %>
-        </div>
-      </section>
-      <section id="surveys">
-        <h3 class="text-gray-400 text-xl font-light mb-4">Surveys</h3>
-        <div class="grid grid-cols-3 gap-4 mb-4">
-          <%= render partial: "connector", locals: { connector: Connector.new(name: "Typeform", description: "Forms & Surveys", version: "1.2.3"), installed: false } %>
-          <%= render partial: "connector", locals: { connector: Connector.new(name: "Google Form", description: "Forms", version: "1.2.3"), installed: true } %>
-          <%= render partial: "connector", locals: { connector: Connector.new(name: "Mailchimp", description: "Mailing & Surveys", version: "1.2.3"), installed: false } %>
-          <%= render partial: "connector", locals: { connector: Connector.new(name: "Survey Monkey", description: "Surveys", version: "1.2.3"), installed: false } %>
-        </div>
-      </section>
-      <section id="hr">
-        <h3 class="text-gray-400 text-xl font-light mb-4">HR</h3>
-        <div class="grid grid-cols-3 gap-4 mb-4">
-        </div>
-      </section>
+      <% # Check if @organization_connections is nil before attempting to map, default to an empty array if nil %>
+      <% installed_connector_ids = @organization_connections ? @organization_connections.map(&:connector_id).uniq : [] %>
+      <% # Use 'tags' instead of 'types' for categories %>
+      <% categories = @connectors.pluck(:tags).flatten.uniq %>
+      <% categories.each do |category| %>
+        <section id="<%= category.downcase %>">
+          <h3 class="text-gray-400 text-xl font-light mb-4"><%= category %></h3>
+          <div class="grid grid-cols-3 gap-4 mb-4">
+            <% @connectors.select { |c| c.tags.include?(category) }.each do |connector| %>
+              <% installed = installed_connector_ids.include?(connector.id) %>
+              <%= render partial: "connector", locals: { connector: connector, installed: installed } %>
+            <% end %>
+          </div>
+        </section>
+      <% end %>
     </div>
   </div>
 <% end %>

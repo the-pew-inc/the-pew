@@ -197,11 +197,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_14_164149) do
 
   create_table "connectors", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
+    t.string "tags", default: [], array: true
     t.string "redirect_url", null: false
     t.string "website"
     t.string "github"
     t.string "author"
-    t.string "version", null: false
+    t.string "version"
     t.boolean "enabled", default: false, null: false
     t.boolean "verified", default: false, null: false
     t.jsonb "settings", default: {}, null: false
@@ -209,6 +210,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_14_164149) do
     t.datetime "updated_at", null: false
     t.index ["enabled"], name: "index_connectors_on_enabled"
     t.index ["name"], name: "index_connectors_on_name", unique: true
+    t.index ["tags"], name: "index_connectors_on_tags", using: :gin
     t.index ["verified"], name: "index_connectors_on_verified"
   end
 
