@@ -10,7 +10,7 @@ class CreateConnections < ActiveRecord::Migration[7.1]
       t.integer    :status
       t.datetime   :last_refreshed_at
       t.boolean    :force_invalidation
-      t.jsonb      :errors, default: {}
+      t.jsonb      :error_msg, default: {}
       t.jsonb      :usage_limits, default: {}
       t.jsonb      :settings, default: {}
       t.jsonb      :usage, default: {}

@@ -159,7 +159,16 @@ Rails.application.routes.draw do
   namespace :webhooks do
     # Stripe
     resources :stripe, only: :create
+
+    # Nested namespace for connectors (Hubspot, Slack, Marketo, etc.)
+    namespace :connectors do
+      # Specific route for Hubspot
+      resources :hubspot, only: :index
+    end
   end
+
+  # Manage Connections
+  resources :connections, only: [:show, :edit, :update, :destroy]
 
   # Error pages
   match '/404', to: 'errors#not_found', via: :all

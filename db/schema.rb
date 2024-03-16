@@ -182,7 +182,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_14_164149) do
     t.integer "status"
     t.datetime "last_refreshed_at"
     t.boolean "force_invalidation"
-    t.jsonb "errors", default: {}
+    t.jsonb "error_msg", default: {}
     t.jsonb "usage_limits", default: {}
     t.jsonb "settings", default: {}
     t.jsonb "usage", default: {}
@@ -198,7 +198,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_14_164149) do
   create_table "connectors", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
     t.string "tags", default: [], array: true
-    t.string "redirect_url", null: false
+    t.string "install_url", null: false
     t.string "website"
     t.string "github"
     t.string "author"

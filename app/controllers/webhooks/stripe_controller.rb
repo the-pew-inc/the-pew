@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Webhooks::StripeController < ApplicationController
   skip_before_action :verify_authenticity_token
 
@@ -89,7 +91,7 @@ class Webhooks::StripeController < ApplicationController
     plan = Plan.find_or_initialize_by(stripe_product_id: stripe_plan.product)
     plan.update(
       label: stripe_plan.nickname,
-      price_mo: stripe_plan.amount / 100.0, # Assuming amount is in cents
+      price_mo: stripe_plan.amount / 100.0,
       active: stripe_plan.active
       # Add other attributes as needed
     )

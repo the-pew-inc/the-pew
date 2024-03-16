@@ -3,7 +3,7 @@
 # Table name: connections
 #
 #  id                 :uuid             not null, primary key
-#  errors             :jsonb
+#  error_msg          :jsonb
 #  force_invalidation :boolean
 #  last_refreshed_at  :datetime
 #  oauth_token        :string

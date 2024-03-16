@@ -6,6 +6,9 @@ class ConnectorsController < ApplicationController
   def index
     @connectors = Connector.where(enabled: true).order(:name)
 
-    @organzation_connections = current_user.organization.connections.where(enabled: true).order(:name)
+    organization_connections = current_user.organization.connections.active
+    # @installed_connector_ids = @organization_connections ? @organization_connections.map(&:connector_id).uniq : []
+    # Create a mapping of connector_id to Connection objects for easy retrieval
+    @connector_to_connection = organization_connections.index_by(&:connector_id)
   end
 end

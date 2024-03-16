@@ -3,7 +3,7 @@ class CreateConnectors < ActiveRecord::Migration[7.1]
     create_table :connectors, id: :uuid do |t|
       t.string  :name,         null: false
       t.string  :tags,         array: true, default: []
-      t.string  :redirect_url, null: false
+      t.string  :install_url,  null: false
       t.string  :website
       t.string  :github
       t.string  :author

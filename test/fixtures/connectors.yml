@@ -2,19 +2,19 @@
 #
 # Table name: connectors
 #
-#  id           :uuid             not null, primary key
-#  author       :string
-#  enabled      :boolean          default(FALSE), not null
-#  github       :string
-#  name         :string           not null
-#  redirect_url :string           not null
-#  settings     :jsonb            not null
-#  tags         :string           default([]), is an Array
-#  verified     :boolean          default(FALSE), not null
-#  version      :string
-#  website      :string
-#  created_at   :datetime         not null
-#  updated_at   :datetime         not null
+#  id          :uuid             not null, primary key
+#  author      :string
+#  enabled     :boolean          default(FALSE), not null
+#  github      :string
+#  install_url :string           not null
+#  name        :string           not null
+#  settings    :jsonb            not null
+#  tags        :string           default([]), is an Array
+#  verified    :boolean          default(FALSE), not null
+#  version     :string
+#  website     :string
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
 #
 # Indexes
 #
