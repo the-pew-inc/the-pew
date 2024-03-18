@@ -81,7 +81,7 @@ gem 'omniauth-google-oauth2', '~> 1.1.1'
 gem 'omniauth-rails_csrf_protection'
 
 # Adding invisible_captcha [https://github.com/markets/invisible_captcha]
-gem 'invisible_captcha', '~> 2.2.0'
+gem 'invisible_captcha', '~> 2.3.0'
 
 # Adding Pundit to manage authorizations [https://github.com/varvet/pundit]
 gem 'pundit'
