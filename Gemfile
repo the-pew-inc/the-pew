@@ -159,7 +159,7 @@ gem 'ruby-openai', '~> 6.3.0'
 gem 'pg_search', '~> 2.3.6'
 
 # Stripe (payment, subscription processing) [https://github.com/stripe/stripe-ruby]
-gem 'stripe', '~> 10.12.0'
+gem 'stripe', '~> 10.13.0'
 
 # To enable retry in Faraday v2.0+
 gem 'faraday-retry', '~> 2.2.0'
@@ -168,7 +168,7 @@ gem 'faraday-retry', '~> 2.2.0'
 gem 'whenever', '~> 1.0.0', require: false
 
 # Add support online_migration (a strong_migration on steroid) [https://github.com/fatkodima/online_migrations]
-gem 'online_migrations', '~> 0.14.0'
+gem 'online_migrations', '~> 0.15.0'
 # Adding Scenic to better support online_migration [https://github.com/scenic-views/scenic]
 gem 'scenic', '~> 1.7.0'
 
