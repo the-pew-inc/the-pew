@@ -51,7 +51,7 @@ gem 'sidekiq', '~>7.2.2'
 
 # Connectors
 # Hubspot https://github.com/HubSpot/hubspot-api-ruby
-gem 'hubspot-api-client'
+gem 'hubspot-api-client', '~> 18.0.0'
 
 # Add Noticed to support notifications [https://github.com/excid3/noticed]
 gem 'noticed', '~> 1.5'
@@ -168,9 +168,9 @@ gem 'faraday-retry', '~> 2.2.0'
 gem 'whenever', '~> 1.0.0', require: false
 
 # Add support online_migration (a strong_migration on steroid) [https://github.com/fatkodima/online_migrations]
-gem 'online_migrations', '~> 0.15.0'
+gem 'online_migrations', '~> 0.16.0'
 # Adding Scenic to better support online_migration [https://github.com/scenic-views/scenic]
-gem 'scenic', '~> 1.7.0'
+gem 'scenic', '~> 1.8.0'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
