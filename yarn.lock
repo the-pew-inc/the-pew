@@ -129,20 +129,20 @@
   resolved "https://registry.yarnpkg.com/@esbuild/win32-x64/-/win32-x64-0.20.0.tgz#2efddf82828aac85e64cef62482af61c29561bee"
   integrity sha512-NgJnesu1RtWihtTtXGFMU5YSE6JyyHPMxCwBZK7a6/8d31GuSo9l0Ss7w1Jw5QnKUawG6UEehs883kcXf5fYwg==
 
-"@honeybadger-io/core@^6.5.1":
-  version "6.5.1"
-  resolved "https://registry.yarnpkg.com/@honeybadger-io/core/-/core-6.5.1.tgz#4a54ff253aacae676a6bc9dd1606cd807ce93a61"
-  integrity sha512-E/cNkReUDH6dNvhskZ/U2yCwemQcwvMlxa5BwuuGuLOCtErEaI2AxsQg07ZJ6Z8fwTDiX6Iw995tDOz4UqE4Rw==
+"@honeybadger-io/core@^6.6.0":
+  version "6.6.0"
+  resolved "https://registry.yarnpkg.com/@honeybadger-io/core/-/core-6.6.0.tgz#a18782ffdb4b8bdc0c36076bd330fb6c6ada1060"
+  integrity sha512-B5X05huAsDs7NJOYm4bwHf2v0tMuTjBWLfumHH9DCblq8E1XrujlbbNkIdEHlzc01K9oAXuvsaBwVkE7G5+aLQ==
   dependencies:
     json-nd "^1.0.0"
     stacktrace-parser "^0.1.10"
 
-"@honeybadger-io/js@6.8.3":
-  version "6.8.3"
-  resolved "https://registry.yarnpkg.com/@honeybadger-io/js/-/js-6.8.3.tgz#9ac79f16e38f9e4ebb464ef7fff656ffbc485022"
-  integrity sha512-cS/WIX2tGZoAXQLkChGJcwsjkZydjdZQEiPWEusX10cbkPIi8r6fVPPQ0fB0vHvktMrA+WO9fpxi1/SSL39pHQ==
+"@honeybadger-io/js@6.9.0":
+  version "6.9.0"
+  resolved "https://registry.yarnpkg.com/@honeybadger-io/js/-/js-6.9.0.tgz#893025cc829c7e90fc16ce652db638149db58663"
+  integrity sha512-imDFeFCNWjjgXTyz3skdyZuG9fh2QBjmhEK4AAZyuaIhgUt7A05itKRhBSiOzkQ9iyZuwwZVX0+XwIS01ZIIkw==
   dependencies:
-    "@honeybadger-io/core" "^6.5.1"
+    "@honeybadger-io/core" "^6.6.0"
     "@types/aws-lambda" "^8.10.89"
     "@types/express" "^4.17.13"
 
@@ -258,10 +258,10 @@
   resolved "https://registry.yarnpkg.com/@rails/request.js/-/request.js-0.0.9.tgz#89e2a575405dc07eb8a9b3d2fe04289e1f057cd0"
   integrity sha512-VleYUyrA3rwKMvYnz7MI9Ada85Vekjb/WVz7NuGgDO24Y3Zy9FFSpDMQW+ea/tlftD+CdX/W/sUosRA9/HkDOQ==
 
-"@tailwindcss/typography@0.5.11":
-  version "0.5.11"
-  resolved "https://registry.yarnpkg.com/@tailwindcss/typography/-/typography-0.5.11.tgz#408ed44d6eec7703a8543a0e78f65b05619ca162"
-  integrity sha512-ahOULqBQGCdSqL3vMNjH1R5cU2gxTh059fJIKF2enHXE8c/s3yKGDSKZ1+4poCr7BZRREJS8n5cCFmwsW4Ok3A==
+"@tailwindcss/typography@0.5.12":
+  version "0.5.12"
+  resolved "https://registry.yarnpkg.com/@tailwindcss/typography/-/typography-0.5.12.tgz#c0532fd594427b7f4e8e38eff7bf272c63a1dca4"
+  integrity sha512-CNwpBpconcP7ppxmuq3qvaCxiRWnbhANpY/ruH4L5qs2GCiVDJXde/pjj2HWPV1+Q4G9+V/etrwUYopdcjAlyg==
   dependencies:
     lodash.castarray "^4.4.0"
     lodash.isplainobject "^4.0.6"
@@ -687,10 +687,10 @@ is-number@^7.0.0:
   resolved "https://registry.yarnpkg.com/is-number/-/is-number-7.0.0.tgz#7535345b896734d5f80c4d06c50955527a14f12b"
   integrity sha512-41Cifkg6e8TylSpdtTpeLVMqvSBEVzTttHvERD741+pnZ8ANv0004MRL43QKPDlK9cGvNp6NZWZUBlbGXYxxng==
 
-jiti@^1.19.1:
-  version "1.20.0"
-  resolved "https://registry.yarnpkg.com/jiti/-/jiti-1.20.0.tgz#2d823b5852ee8963585c8dd8b7992ffc1ae83b42"
-  integrity sha512-3TV69ZbrvV6U5DfQimop50jE9Dl6J8O1ja1dvBbMba/sZ3YBEQqJ2VZRoQPVnhlzjNtU1vaXRZVrVjU4qtm8yA==
+jiti@^1.21.0:
+  version "1.21.0"
+  resolved "https://registry.yarnpkg.com/jiti/-/jiti-1.21.0.tgz#7c97f8fe045724e136a397f7340475244156105d"
+  integrity sha512-gFqAIbuKyyso/3G2qhiO2OM6shY6EPP/R0+mkDbyspxKazh8BXDC5FiFsUjlczgdNz/vfra0da2y+aHrusLG/Q==
 
 js-confetti@0.12.0:
   version "0.12.0"
@@ -1005,10 +1005,10 @@ taggle@1.15.0:
   resolved "https://registry.yarnpkg.com/taggle/-/taggle-1.15.0.tgz#d2efb65872886ea199f39c19ddb4f30b5e205ae9"
   integrity sha512-NW/9NcXj8ZYk1kBojNB9svp4XvpnsS03ryyMLJ6BiHrbDtnL5x1Kf1ASlKsJvnp1bQNuulppo2xQtieu0Qh1yg==
 
-tailwindcss@3.4.1:
-  version "3.4.1"
-  resolved "https://registry.yarnpkg.com/tailwindcss/-/tailwindcss-3.4.1.tgz#f512ca5d1dd4c9503c7d3d28a968f1ad8f5c839d"
-  integrity sha512-qAYmXRfk3ENzuPBakNK0SRrUDipP8NQnEY6772uDhflcQz5EhRdD7JNZxyrFHVQNCwULPBn6FNPp9brpO7ctcA==
+tailwindcss@3.4.3:
+  version "3.4.3"
+  resolved "https://registry.yarnpkg.com/tailwindcss/-/tailwindcss-3.4.3.tgz#be48f5283df77dfced705451319a5dffb8621519"
+  integrity sha512-U7sxQk/n397Bmx4JHbJx/iSOOv5G+II3f1kpLpY2QeUv5DcPdcTsYLlusZfq1NthHS1c1cZoyFmmkex1rzke0A==
   dependencies:
     "@alloc/quick-lru" "^5.2.0"
     arg "^5.0.2"
@@ -1018,7 +1018,7 @@ tailwindcss@3.4.1:
     fast-glob "^3.3.0"
     glob-parent "^6.0.2"
     is-glob "^4.0.3"
-    jiti "^1.19.1"
+    jiti "^1.21.0"
     lilconfig "^2.1.0"
     micromatch "^4.0.5"
     normalize-path "^3.0.0"
@@ -1054,10 +1054,10 @@ to-regex-range@^5.0.1:
   dependencies:
     is-number "^7.0.0"
 
-trix@2.0.10:
-  version "2.0.10"
-  resolved "https://registry.yarnpkg.com/trix/-/trix-2.0.10.tgz#43f1ff7a94c42f708bd2bad3a2783147c0583698"
-  integrity sha512-a24w8rNVL+g9nDDdiDZwQVQ9AEWiXAmk9r0ZbwimczJi/xlaM+m0d6upAi0vysDNu0HsiYDFS1/VrR7HbX0Aig==
+trix@2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/trix/-/trix-2.1.0.tgz#da9daddded6ee0cb2ba5676246bb343e1d45eaab"
+  integrity sha512-TPhgGvIjM1VqcfoR/OQQERRlMDuEw7UBIoGroJGuiTmu5yqk5KqR29ZzPgGIoOJgsqoAgxGUCK92+CRJLoO43Q==
 
 ts-interface-checker@^0.1.9:
   version "0.1.13"
