@@ -134,7 +134,7 @@ gem 'ruby-vips', '>= 2.1.0'
 gem 'octokit', '~> 8.1.0'
 
 # Pagination [https://github.com/ddnexus/pagy]
-gem 'pagy', '~> 7.0.1'
+gem 'pagy', '~> 8.0.1'
 
 # Countries [https://github.com/countries/countries]
 gem 'countries', '~> 6.0.0', require: 'countries/global'
@@ -153,7 +153,7 @@ gem 'groupdate'
 gem 'chartkick'
 
 # openAI [https://github.com/alexrudall/ruby-openai]
-gem 'ruby-openai', '~> 6.3.0'
+gem 'ruby-openai', '~> 6.5.0'
 
 # Adding pgsearch
 gem 'pg_search', '~> 2.3.6'
