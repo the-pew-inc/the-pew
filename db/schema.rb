@@ -178,7 +178,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_14_164149) do
     t.uuid "connector_id", null: false
     t.integer "throttle", default: 10, null: false
     t.string "oauth_token"
+    t.string "access_token"
     t.string "refresh_token"
+    t.string "granted_scope", default: [], array: true
     t.integer "status"
     t.datetime "last_refreshed_at"
     t.boolean "force_invalidation"
@@ -186,10 +188,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_14_164149) do
     t.jsonb "usage_limits", default: {}
     t.jsonb "settings", default: {}
     t.jsonb "usage", default: {}
+    t.boolean "force_pull", default: false, null: false
+    t.boolean "is_being_pulled", default: false, null: false
+    t.datetime "token_expires_at", precision: nil
+    t.datetime "pull_start_at", precision: nil
+    t.datetime "last_pull_at", precision: nil
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["connector_id"], name: "index_connections_on_connector_id"
     t.index ["force_invalidation"], name: "index_connections_on_force_invalidation"
+    t.index ["force_pull"], name: "index_connections_on_force_pull"
+    t.index ["is_being_pulled"], name: "index_connections_on_is_being_pulled"
     t.index ["organization_id"], name: "index_connections_on_organization_id"
     t.index ["status"], name: "index_connections_on_status"
     t.index ["user_id"], name: "index_connections_on_user_id"
@@ -199,6 +208,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_14_164149) do
     t.string "name", null: false
     t.string "tags", default: [], array: true
     t.string "install_url", null: false
+    t.string "scope", default: [], array: true
+    t.string "optional_scope", default: [], array: true
     t.string "website"
     t.string "github"
     t.string "author"

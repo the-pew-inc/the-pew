@@ -25,13 +25,26 @@ class Webhooks::Connectors::HubspotController < ApplicationController
     connector_id = state_data['connector_id']
     user_id = state_data['user_id']
 
-    # The OAuth token returned by Hubspot
-    oauth_token = params[:code]
+    # The Autorization token returned by Hubspot
+    autorization_token = params[:code]
 
     # Save or update the connection
     connection = Connection.find_or_initialize_by(organization_id:, user_id:, connector_id:)
-    connection.oauth_token = oauth_token
-    # connection.refresh_token = refresh_token if refresh_token.present?
+
+    # Get the access and refresh tokens from HubSpot API and store it
+    api_client = Hubspot::Client.new(api_key: ENV.fetch('HUBSPOT_CLIENT_ID', nil))
+
+    api_response = api_client.oauth.tokens_api.create(
+      grant_type: 'authorization_code',
+      code: autorization_token,
+      redirect_uri: webhooks_connectors_hubspot_index_url(protocol: request.ssl? ? 'https' : 'http'),
+      client_id: ENV.fetch('HUBSPOT_CLIENT_ID', nil),
+      client_secret: ENV.fetch('HUBSPOT_CLIENT_SECRET', nil)
+    )
+    connection.access_token = api_response.access_token
+    connection.refresh_token = api_response.refresh_token
+
+    # Set last refresh time
     connection.last_refreshed_at = Time.current
 
     if connection.save

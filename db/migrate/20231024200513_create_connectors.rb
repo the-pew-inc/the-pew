@@ -4,6 +4,8 @@ class CreateConnectors < ActiveRecord::Migration[7.1]
       t.string  :name,         null: false
       t.string  :tags,         array: true, default: []
       t.string  :install_url,  null: false
+      t.string  :scope, array: true, default: []
+      t.string  :optional_scope, array: true, default: []
       t.string  :website
       t.string  :github
       t.string  :author
