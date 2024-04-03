@@ -137,10 +137,10 @@
     json-nd "^1.0.0"
     stacktrace-parser "^0.1.10"
 
-"@honeybadger-io/js@6.9.0":
-  version "6.9.0"
-  resolved "https://registry.yarnpkg.com/@honeybadger-io/js/-/js-6.9.0.tgz#893025cc829c7e90fc16ce652db638149db58663"
-  integrity sha512-imDFeFCNWjjgXTyz3skdyZuG9fh2QBjmhEK4AAZyuaIhgUt7A05itKRhBSiOzkQ9iyZuwwZVX0+XwIS01ZIIkw==
+"@honeybadger-io/js@6.9.1":
+  version "6.9.1"
+  resolved "https://registry.yarnpkg.com/@honeybadger-io/js/-/js-6.9.1.tgz#2a1fdc79b88e9afddd384a8e5b591bb827ce800a"
+  integrity sha512-uAJYQHpLlcyllQ+YcVy7GrsCJeMv6w73bkdiMJIR3Gv3COPpfhyGSbAa522hw79ZImJIJblTI/gUoo0pLWjr1w==
   dependencies:
     "@honeybadger-io/core" "^6.6.0"
     "@types/aws-lambda" "^8.10.89"
