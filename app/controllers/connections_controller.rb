@@ -28,8 +28,12 @@ class ConnectionsController < ApplicationController
   # DELETE /connections/:id
   # Used to remove an existing connection
   def destroy
-    if @connection.destroy
-      redirect_to(connectors_path, notice: 'Connector was successfully removed.')
+    if Hubspot::TokenHandler.revoke_token(@connection)
+      if @connection.destroy
+        redirect_to(connectors_path, notice: 'Connector was successfully removed.')
+      else
+        redirect_to(connectors_path, alert: 'Failed to remove connector.')
+      end
     else
       redirect_to(connectors_path, alert: 'Failed to remove connector.')
     end
