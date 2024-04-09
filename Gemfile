@@ -134,7 +134,7 @@ gem 'ruby-vips', '>= 2.1.0'
 gem 'octokit', '~> 8.1.0'
 
 # Pagination [https://github.com/ddnexus/pagy]
-gem 'pagy', '~> 8.0.1'
+gem 'pagy', '~> 8.1.0'
 
 # Countries [https://github.com/countries/countries]
 gem 'countries', '~> 6.0.0', require: 'countries/global'
