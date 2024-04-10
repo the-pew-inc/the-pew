@@ -113,7 +113,7 @@ gem 'honeybadger', '~> 5.8.0'
 # gem "sassc-rails"
 
 # Nokogiri to parse HTML and more [https://github.com/sparklemotion/nokogiri]
-gem 'nokogiri', '~> 1.16.0'
+gem 'nokogiri', '~> 1.16.4'
 
 # Download
 gem 'down', '~> 5.0'
@@ -159,7 +159,7 @@ gem 'ruby-openai', '~> 6.5.0'
 gem 'pg_search', '~> 2.3.6'
 
 # Stripe (payment, subscription processing) [https://github.com/stripe/stripe-ruby]
-gem 'stripe', '~> 10.13.0'
+gem 'stripe', '~> 10.15.0'
 
 # To enable retry in Faraday v2.0+
 gem 'faraday-retry', '~> 2.2.0'
