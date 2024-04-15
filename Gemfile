@@ -57,7 +57,7 @@ gem 'hubspot-api-client', '~> 18.0.0'
 gem 'noticed', '~> 1.5'
 
 # Adding support to View Component (better than partials ;-) ) [https://github.com/github/view_component]
-gem 'view_component', '~> 3.11.0'
+gem 'view_component', '~> 3.12.0'
 
 # User authentication
 # Use Argon2 to hash passwords [https://github.com/technion/ruby-argon2]
