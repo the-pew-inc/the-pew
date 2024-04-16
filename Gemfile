@@ -38,7 +38,7 @@ gem 'jbuilder'
 gem 'oj', '~> 3.16.1'
 
 # Use Redis adapter to run Action Cable in production
-gem 'redis', '~> 5.1.0'
+gem 'redis', '~> 5.2.0'
 
 # To speed up caching in production
 gem 'hiredis', '~> 0.6.3'
@@ -134,7 +134,7 @@ gem 'ruby-vips', '>= 2.1.0'
 gem 'octokit', '~> 8.1.0'
 
 # Pagination [https://github.com/ddnexus/pagy]
-gem 'pagy', '~> 8.1.0'
+gem 'pagy', '~> 8.2.0'
 
 # Countries [https://github.com/countries/countries]
 gem 'countries', '~> 6.0.0', require: 'countries/global'
@@ -159,7 +159,7 @@ gem 'ruby-openai', '~> 6.5.0'
 gem 'pg_search', '~> 2.3.6'
 
 # Stripe (payment, subscription processing) [https://github.com/stripe/stripe-ruby]
-gem 'stripe', '~> 11.0.0'
+gem 'stripe', '~> 11.1.0'
 
 # To enable retry in Faraday v2.0+
 gem 'faraday-retry', '~> 2.2.0'

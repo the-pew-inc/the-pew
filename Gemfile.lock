@@ -332,7 +332,7 @@ GEM
       omniauth (~> 2.0)
     online_migrations (0.16.1)
       activerecord (>= 6.1)
-    pagy (8.1.2)
+    pagy (8.2.0)
     paper_trail (15.1.0)
       activerecord (>= 6.1)
       request_store (~> 1.4)
@@ -396,12 +396,12 @@ GEM
     rake (13.2.1)
     rdoc (6.6.3.1)
       psych (>= 4.0.0)
-    redis (5.1.0)
-      redis-client (>= 0.17.0)
-    redis-client (0.22.0)
+    redis (5.2.0)
+      redis-client (>= 0.22.0)
+    redis-client (0.22.1)
       connection_pool
     regexp_parser (2.9.0)
-    reline (0.5.1)
+    reline (0.5.2)
       io-console (~> 0.5)
     request_store (1.6.0)
       rack (>= 1.4)
@@ -409,7 +409,7 @@ GEM
       nokogiri
     rexml (3.2.6)
     rolify (6.0.1)
-    rubocop (1.63.1)
+    rubocop (1.63.2)
       json (~> 2.3)
       language_server-protocol (>= 3.17.0)
       parallel (~> 1.10)
@@ -483,7 +483,7 @@ GEM
     stimulus-rails (1.3.3)
       railties (>= 6.0.0)
     stringio (3.1.0)
-    stripe (11.0.0)
+    stripe (11.1.0)
     thor (1.3.1)
     timeout (0.4.1)
     turbo-rails (2.0.5)
@@ -575,14 +575,14 @@ DEPENDENCIES
   omniauth-google-oauth2 (~> 1.1.1)
   omniauth-rails_csrf_protection
   online_migrations (~> 0.16.0)
-  pagy (~> 8.1.0)
+  pagy (~> 8.2.0)
   paper_trail (~> 15.1.0)
   pg (~> 1.5.4)
   pg_search (~> 2.3.6)
   puma (~> 6.4.2)
   pundit
   rails (~> 7.1.3)
-  redis (~> 5.1.0)
+  redis (~> 5.2.0)
   rolify (~> 6.0.0)
   rubocop (~> 1.63.0)
   rubocop-rails
@@ -595,7 +595,7 @@ DEPENDENCIES
   simplecov
   sprockets-rails
   stimulus-rails (~> 1.3.3)
-  stripe (~> 11.0.0)
+  stripe (~> 11.1.0)
   turbo-rails (~> 2.0.0)
   tzinfo-data
   validate_url
