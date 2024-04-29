@@ -134,7 +134,7 @@ gem 'ruby-vips', '>= 2.1.0'
 gem 'octokit', '~> 8.1.0'
 
 # Pagination [https://github.com/ddnexus/pagy]
-gem 'pagy', '~> 8.2.0'
+gem 'pagy', '~> 8.3.0'
 
 # Countries [https://github.com/countries/countries]
 gem 'countries', '~> 6.0.0', require: 'countries/global'
@@ -153,13 +153,13 @@ gem 'groupdate'
 gem 'chartkick'
 
 # openAI [https://github.com/alexrudall/ruby-openai]
-gem 'ruby-openai', '~> 6.5.0'
+gem 'ruby-openai', '~> 7.0.0'
 
 # Adding pgsearch
 gem 'pg_search', '~> 2.3.6'
 
 # Stripe (payment, subscription processing) [https://github.com/stripe/stripe-ruby]
-gem 'stripe', '~> 11.1.0'
+gem 'stripe', '~> 11.2.0'
 
 # To enable retry in Faraday v2.0+
 gem 'faraday-retry', '~> 2.2.0'
@@ -168,7 +168,7 @@ gem 'faraday-retry', '~> 2.2.0'
 gem 'whenever', '~> 1.0.0', require: false
 
 # Add support online_migration (a strong_migration on steroid) [https://github.com/fatkodima/online_migrations]
-gem 'online_migrations', '~> 0.16.0'
+gem 'online_migrations', '~> 0.17.0'
 # Adding Scenic to better support online_migration [https://github.com/scenic-views/scenic]
 gem 'scenic', '~> 1.8.0'
 
