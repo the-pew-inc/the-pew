@@ -107,7 +107,7 @@ gem 'meta-tags', '~> 2.21.0'
 gem 'sendgrid-actionmailer', '~> 3.2.0'
 
 # Monitoring - Honeybadger []
-gem 'honeybadger', '~> 5.8.0'
+gem 'honeybadger', '~> 5.10.0'
 
 # Use Sass to process CSS
 # gem "sassc-rails"
@@ -134,7 +134,7 @@ gem 'ruby-vips', '>= 2.1.0'
 gem 'octokit', '~> 8.1.0'
 
 # Pagination [https://github.com/ddnexus/pagy]
-gem 'pagy', '~> 8.3.0'
+gem 'pagy', '~> 8.4.0'
 
 # Countries [https://github.com/countries/countries]
 gem 'countries', '~> 6.0.0', require: 'countries/global'
@@ -159,7 +159,7 @@ gem 'ruby-openai', '~> 7.0.0'
 gem 'pg_search', '~> 2.3.6'
 
 # Stripe (payment, subscription processing) [https://github.com/stripe/stripe-ruby]
-gem 'stripe', '~> 11.2.0'
+gem 'stripe', '~> 11.4.0'
 
 # To enable retry in Faraday v2.0+
 gem 'faraday-retry', '~> 2.2.0'
@@ -168,7 +168,7 @@ gem 'faraday-retry', '~> 2.2.0'
 gem 'whenever', '~> 1.0.0', require: false
 
 # Add support online_migration (a strong_migration on steroid) [https://github.com/fatkodima/online_migrations]
-gem 'online_migrations', '~> 0.17.0'
+gem 'online_migrations', '~> 0.18.0'
 # Adding Scenic to better support online_migration [https://github.com/scenic-views/scenic]
 gem 'scenic', '~> 1.8.0'
 
