@@ -5,7 +5,7 @@ ruby '3.3.0'
 
 # IMPORTANT: This must be the first gem listed
 # Add support to appmap in development and test
-gem 'appmap', '1.0.0', groups: %i[development test]
+gem 'appmap', '1.1.0', groups: %i[development test]
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem 'rails', '~> 7.1.3'
@@ -159,7 +159,7 @@ gem 'ruby-openai', '~> 7.0.0'
 gem 'pg_search', '~> 2.3.6'
 
 # Stripe (payment, subscription processing) [https://github.com/stripe/stripe-ruby]
-gem 'stripe', '~> 11.4.0'
+gem 'stripe', '~> 11.5.0'
 
 # To enable retry in Faraday v2.0+
 gem 'faraday-retry', '~> 2.2.0'
